@@ -1,4 +1,4 @@
-# aLittleByte19
+# aLittleByte
 Organizzazione creata allo scopo di realizzare il progetto di Ingegneria del Software (SWE) per l'anno accademico 2025/26.
 
 | Nome Cognome | GitHub Username |
