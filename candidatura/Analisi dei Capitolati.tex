@@ -1,0 +1,143 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+
+\newcommand{\groupmail}{alittlebyte19@gmail.com}
+\newcommand{\grouplogo}{../assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Analisi dei Capitolati}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Analisi dei Capitolati}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Analisi dei Capitolati}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Angelica Gastaldello \\
+            Verificatori& \\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & \\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white}
+\begin{center}
+    {\footnotesize
+    \begin{tabularx}{\textwidth}{|p{1.8cm}|p{2.1cm}|X|p{2.4cm}|p{2.4cm}|p{2.4cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.0.1 & 07/03/2026 & Struttura del documento & Angelica Gastaldello & - & - \\
+        \hline
+    \end{tabularx}
+    }
+\end{center}
+
+\newpage
+
+\begin{center}
+    {\Large \textbf{Indice}}
+\end{center}
+
+\vspace{0.6cm}
+
+\noindent 1 Introduzione
+
+\noindent \hspace*{0.8cm}1.1 Finalita del documento
+
+\vspace{0.25cm}
+
+\noindent 2 Criteri utilizzati nella scelta
+
+\vspace{0.25cm}
+
+\noindent 3 Analisi Capitolato selezionato
+
+\noindent \hspace*{0.8cm}3.1 C5 - Nexum
+
+\vspace{0.25cm}
+
+\noindent 4 Analisi altri Capitolati
+
+\noindent \hspace*{0.8cm}4.1 C1 - Automated EN18031 Compliance Verification
+
+\noindent \hspace*{0.8cm}4.2 C2 - Code Guardian
+
+\noindent \hspace*{0.8cm}4.3 C4 - L’app che Protegge e Trasforma
+
+\noindent \hspace*{0.8cm}4.4 C6 - Second Brain
+
+\end{document}
