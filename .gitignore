@@ -1,0 +1,32 @@
+# per macos
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# editor vari
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# log e cache
+*.log
+tmp/
+temp/
+.cache/
+
+# per latex
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
