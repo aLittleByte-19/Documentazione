@@ -21,7 +21,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.1x'
+          python-version: '3.12'
 
       - name: Genera Albero HTML
         run: python scripts/update_index.py
