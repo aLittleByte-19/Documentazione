@@ -65,7 +65,6 @@ if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
 else:
     print(f"ERRORE: Marker non trovati! Start: {start_idx}, End: {end_idx}")
 
-# ... (resto del codice per l'aggiornamento della data)
 
 # Aggiorna la data
 now = datetime.now().strftime("%d/%m/%Y %H:%M")
