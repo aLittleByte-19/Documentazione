@@ -169,3 +169,28 @@ li::marker {
     margin-top: 50px;
     font-style: italic;
 }
+
+@media screen and (max-width: 850px) {
+    nav {
+        flex-direction: column; 
+        padding: 20px;
+        text-align: center;
+    }
+
+    #header-logo {
+        margin-right: 0; 
+        margin-bottom: 5px;
+    }
+
+    .nome-logo {
+        margin-top: 0;
+        margin-bottom: 15px; 
+    }
+
+    #nav-navigation {
+        margin-left: 0;
+        justify-content: center; 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+}
