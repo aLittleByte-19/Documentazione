@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
-\newcommand{\grouplogo}{../assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../assets/solo_logo.png}
+\newcommand{\grouplogo}{../../assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -96,10 +96,14 @@
 \rowcolors{2}{gray!8}{white}
 \begin{center}
     {\footnotesize
-    \begin{tabularx}{\textwidth}{|p{1.8cm}|p{2.1cm}|X|p{2.4cm}|p{2.4cm}|p{2.4cm}|}
+    \begin{tabularx}{\textwidth}{|p{1.4cm}|p{1.8cm}|X|p{2.4cm}|p{2.3cm}|p{2.3cm}|}
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.0.4 & 10/03/2026 & Terminato C1, iniziato C2 & Angelica Gastaldello & - & - \\
+        \hline
+        0.0.3 & 09/03/2026 & Iniziato C1 & Angelica Gastaldello & - & - \\
         \hline
         0.0.2 & 08/03/2026 & Introduzione e Criteri & Angelica Gastaldello & - & - \\
         \hline
@@ -120,6 +124,10 @@
 \tableofcontents
 
 \newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyfoot[R]{Analisi dei Capitolati\hspace{0.8em}\thepage}
 
 \section{Introduzione}
 \subsection{Finalità del documento}
@@ -157,7 +165,137 @@ L'applicazione dei criteri appena descritti è avvenuta attraverso una metodolog
 
 \section{Analisi altri Capitolati}
 \subsection{C1 - Automated EN18031 Compliance Verification}
+
+Il capitolato C1, proposto da Bluewind S.r.l., è stato inizialmente considerato dal gruppo per la sua aderenza a un tema attuale e rilevante: la conformità alla norma EN 18031, armonizzata rispetto alla direttiva RED per i dispositivi radio immessi nel mercato europeo.
+
+
+\subsubsection{Obiettivo}
+
+L'obiettivo del progetto è la realizzazione di un'applicazione in grado di supportare e automatizzare la verifica di conformità ai requisiti EN 18031 tramite esecuzione guidata di Decision Tree. Per ogni requisito analizzato, il sistema deve produrre un esito tra \textit{Pass}, \textit{Fail} e \textit{Not Applicable}, riducendo il carico di lavoro manuale e migliorando la tracciabilità delle decisioni.
+
+In termini operativi, il software deve guidare l'utente nell'attraversamento dei nodi decisionali (domande con risposta \textit{Yes/No}) fino al nodo terminale e registrare in modo coerente percorso seguito, motivazioni e risultato finale per ciascun requisito.
+
+\subsubsection{Caratteristiche funzionali principali}
+
+Il capitolato richiede in particolare:
+
+\begin{itemize}
+    \item importazione di documenti tecnici e file esterni descrittivi dei Decision Tree (ad esempio XML e JSON);
+    \item esecuzione interattiva degli alberi decisionali nel rispetto delle dipendenze gerarchiche tra requisiti;
+    \item visualizzazione aggregata dei risultati tramite dashboard;
+    \item possibilità di modifica e aggiornamento dei Decision Tree, con salvataggio in formati standard.
+\end{itemize}
+
+Oltre a queste funzionalità, il capitolato evidenzia anche l'esigenza di standardizzare la produzione della documentazione tecnica derivante dalla valutazione, così da rendere più semplice il riesame delle decisioni e il loro aggiornamento in caso di revisione normativa.
+
+Il caso studio proposto (macchina del caffè connessa via Wi-Fi con comunicazione MQTT) rende il contesto concreto e utile per validare il comportamento dell'applicazione sui requisiti ACM e AUM. La presenza di un dominio applicativo reale costituisce un punto di forza, poiché permette di testare il flusso end-to-end su uno scenario non artificiale.
+
+\subsubsection{Requisiti obbligatori e opzionali}
+
+Dal punto di vista della pianificazione, il capitolato presenta una distinzione chiara tra requisiti obbligatori e opzionali.
+
+Tra i requisiti obbligatori risultano centrali: importazione di formati standard, esecuzione automatizzata dei Decision Tree, rispetto delle dipendenze gerarchiche e dashboard di visualizzazione dei risultati.
+
+Tra i requisiti opzionali emergono invece funzionalità di maggiore valore aggiunto (editor integrato, esportazioni in più formati, giustificazione dei risultati, editor grafico avanzato), che possono incrementare qualità del prodotto ma anche complessità implementativa.
+
+Questa separazione è stata valutata positivamente dal gruppo perché facilita la definizione di una baseline minima e consente un'estensione incrementale del progetto.
+
+\subsubsection{Considerazioni tecnologiche}
+
+Il proponente non impone vincoli rigidi su stack, architettura o tipologia applicativa (desktop o web), lasciando libertà progettuale al team. L'unica preferenza esplicita riguarda l'uso di Python 3.x lato backend, preferibilmente con gestione del progetto tramite strumenti di packaging moderni.
+
+Questa flessibilità rappresenta contemporaneamente un vantaggio e un costo: da un lato permette al gruppo di scegliere soluzioni aderenti alle proprie competenze, dall'altro richiede una fase preliminare più ampia di analisi e confronto tecnico prima di convergere su un'architettura definitiva.
+
+\subsubsection{Incontro con il proponente}
+
+\subsubsection{Valutazione del gruppo}
+
+Durante la valutazione, il gruppo ha riconosciuto i punti di forza del capitolato: requisiti ben strutturati, dominio applicativo realistico e disponibilità del proponente a fornire supporto continuo sia da remoto sia in presenza.
+
+Sono stati inoltre considerati positivamente:
+
+\begin{itemize}
+    \item la chiarezza della traccia progettuale e dei criteri di completamento;
+    \item la presenza di un caso studio concreto per validare il prodotto;
+    \item la forte rilevanza industriale e normativa del problema affrontato.
+\end{itemize}
+
+Parallelamente, il gruppo ha individuato alcune criticità:
+
+\begin{itemize}
+    \item curva di apprendimento iniziale elevata legata all'interpretazione della norma;
+    \item forte dipendenza dalla corretta modellazione logica dei Decision Tree e delle loro gerarchie;
+    \item margine percepito più limitato, rispetto ad altri capitolati, in termini di sperimentazione creativa e ampiezza delle funzionalità innovative.
+\end{itemize}
+
+Nonostante ciò, il progetto non è stato selezionato come scelta finale. Le principali motivazioni sono state:
+
+\begin{itemize}
+    \item interesse complessivamente più limitato del team verso il dominio normativo rispetto ad altri capitolati;
+    \item percezione di un minor margine creativo e di estensione funzionale rispetto alle alternative considerate;
+    \item necessità di un investimento iniziale significativo nell'interpretazione della normativa, ritenuto meno allineato agli obiettivi formativi prioritari del gruppo.
+\end{itemize}
+
+In conclusione, il capitolato C1 è stato valutato come solido, ben definito e supportato da un proponente disponibile, ma complessivamente meno allineato alle preferenze tecniche e agli interessi progettuali del gruppo aLittleByte rispetto al capitolato poi selezionato.
+
 \subsection{C2 - Code Guardian}
+
+Il capitolato C2, proposto da Var Group S.p.A., presenta lo sviluppo di una piattaforma web orientata all'audit dei repository software, con particolare attenzione a qualità del codice, sicurezza e manutenibilità.
+
+\subsubsection{Obiettivo}
+
+L'obiettivo del progetto è realizzare un sistema modulare, basato su un'architettura ad agenti coordinati da un orchestratore centrale, in grado di analizzare repository GitHub e produrre report automatici sullo stato complessivo del progetto.
+
+La piattaforma deve non solo individuare criticità tecniche e di sicurezza, ma anche suggerire azioni correttive (\textit{remediation}) per migliorare progressivamente qualità, robustezza e mantenibilità del software analizzato.
+
+\subsubsection{Caratteristiche funzionali principali}
+
+Dal punto di vista funzionale, il capitolato richiede in particolare:
+
+\begin{itemize}
+    \item analisi automatica dei repository per identificare stack tecnologico, dipendenze e versioni utilizzate;
+    \item verifica della presenza e della qualità dei test, con attenzione alla copertura e all'affidabilità complessiva della suite;
+    \item audit di sicurezza orientato alle linee guida OWASP, con evidenziazione di vulnerabilità e configurazioni rischiose;
+    \item valutazione della qualità della documentazione tecnica (README, API docs, guide operative);
+    \item dashboard web per visualizzare stato generale, criticità e priorità di intervento.
+\end{itemize}
+
+Un elemento distintivo del capitolato è la componente di remediation: il sistema non si limita a segnalare problemi, ma propone interventi migliorativi concreti, favorendo un approccio operativo e continuo alla qualità del codice.
+
+\subsubsection{Requisiti obbligatori e opzionali}
+
+La documentazione propone un percorso strutturato che include attività iniziali di analisi e progettazione (raccolta requisiti, user story mapping, modellazione UML e schema dati), seguite dalla realizzazione di un MVP funzionante con demo e documentazione tecnica.
+
+Dal punto di vista del gruppo, questa impostazione è stata considerata positiva perché orientata a un processo realistico di sviluppo, ma al tempo stesso impegnativa in termini di organizzazione e carico progettuale.
+
+Tra le estensioni possibili, risultano particolarmente interessanti l'integrazione CI/CD più avanzata, l'analisi storica delle versioni, sistemi di ranking tra progetti e meccanismi interattivi di notifica e remediation.
+
+\subsubsection{Considerazioni tecnologiche}
+
+Il capitolato indica con chiarezza lo stack di riferimento: Node.js e Python per backend e orchestrazione, React.js per il frontend, MongoDB/PostgreSQL per la persistenza, GitHub Actions per l'automazione e AWS per l'infrastruttura cloud.
+
+La chiarezza tecnologica è stata valutata favorevolmente perché riduce l'ambiguità iniziale e consente una pianificazione più precisa. Tuttavia, l'eterogeneità dello stack richiede competenze distribuite su più aree (sviluppo web, automazione, cloud, sicurezza), aumentando la complessità complessiva del progetto.
+
+\subsubsection{Valutazione del gruppo}
+
+Il gruppo ha riconosciuto in C2 diversi punti di forza:
+
+\begin{itemize}
+    \item tema attuale e di forte utilità pratica nel contesto industriale;
+    \item architettura moderna e potenzialmente molto formativa;
+    \item obiettivi ben definiti e tecnologie chiaramente esplicitate.
+\end{itemize}
+
+Parallelamente, sono emerse alcune criticità rilevanti:
+
+\begin{itemize}
+    \item complessità tecnica elevata dovuta alla combinazione di multi-agente, sicurezza applicativa e integrazioni esterne;
+    \item carico consistente legato ai requisiti di qualità e validazione del software;
+    \item interesse complessivo del gruppo inferiore rispetto ad altri capitolati ritenuti più allineati alle preferenze progettuali condivise.
+\end{itemize}
+
+In conclusione, C2 è stato considerato un capitolato solido, moderno e professionalmente molto valido, ma non è stato scelto dal gruppo aLittleByte poiché valutato meno aderente all'equilibrio desiderato tra interesse, complessità e obiettivi formativi.
+
 \subsection{C4 - L'app che Protegge e Trasforma}
 \subsection{C6 - Second Brain}
 
