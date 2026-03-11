@@ -101,6 +101,8 @@
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline
+        0.0.5 & 11/03/2026 & Stesura analisi capitolati C4 e C6 & Diego Belluz & - & - \\
+        \hline
         0.0.4 & 10/03/2026 & Terminato C1, iniziato C2 & Angelica Gastaldello & - & - \\
         \hline
         0.0.3 & 09/03/2026 & Iniziato C1 & Angelica Gastaldello & - & - \\
@@ -112,7 +114,6 @@
     \end{tabularx}
     }
 \end{center}
-
 \newpage
 
 \begin{center} 
@@ -297,6 +298,107 @@ Parallelamente, sono emerse alcune criticità rilevanti:
 In conclusione, C2 è stato considerato un capitolato solido, moderno e professionalmente molto valido, ma non è stato scelto dal gruppo aLittleByte poiché valutato meno aderente all'equilibrio desiderato tra interesse, complessità e obiettivi formativi.
 
 \subsection{C4 - L'app che Protegge e Trasforma}
+
+Il capitolato C4, proposto da Miriade S.r.l., è stato preso in considerazione dal gruppo per il suo tema attualmente molto discusso e impattante: la violenza di genere e la necessità di mettere a disposizione delle persone un mezzo tangibile, affidabile e all'avanguardia in termini tecnologici per le attività di prevenzione e di sostegno alle vittime.
+
+\subsubsection{Obiettivi}
+
+L'obiettivo principale è fornire un'applicazione per sistemi operativi iOS e Android attiva, intelligente e sicura, in grado di riconoscere segnali di pericolo e offrire risorse concrete per l'autonomia e la sicurezza degli utenti. L’applicazione mobile, inoltre, deve essere un prodotto eticamente responsabile e ad impatto sociale positivo. In termini operativi, l’app deve identificare situazioni di rischio, inviare alert in modo discreto e garantire la totale privacy e sicurezza dell'utente, fornendo al contempo percorsi educativi e reti di supporto.
+
+\subsubsection{Requisiti funzionali principali e obbligatori}
+
+Le funzionalità principali richieste dall’azienda sono:
+\begin{itemize}
+    \item \textbf{Rilevamento e Alert:} il software aiuta l’utente ad individuare ``red flag'', ovvero comportamenti a rischio, tramite intelligenza artificiale con possibilità di inviare notifiche di allerta silenziose a reti di contatti fiduciari.
+    \item \textbf{Risorse e supporto:} l’app supporta l’utente legalmente e psicologicamente su come uscire da relazioni violente e accedere a una rete di servizi geolocalizzati, integrando servizi di invio rapido di richieste di aiuto a numeri di emergenza e centri antiviolenza.
+    \item \textbf{Funzionalità di Sicurezza Personalizzate:} modalità di personalizzazione dell’utente per nascondere l’app, creare un diario criptato e pianificare percorsi sicuri o di fuga con mappe interattive.
+    \item \textbf{Formazione e Prevenzione:} moduli educativi interattivi per sensibilizzare sul tema della violenza di genere.
+    \item \textbf{Community di Supporto:} uno spazio sicuro, con moderazione professionale, per la condivisione di esperienze e il supporto reciproco tra utenti.
+\end{itemize}
+
+\subsubsection{Requisiti funzionali opzionali}
+
+Le funzionalità opzionali che emergono sono:
+\begin{itemize}
+    \item integrazione con strumenti indossabili come smartwatch per inviare notifiche di allarme;
+    \item modalità di ``check-in'' periodico, che invia alert se non viene effettuato;
+    \item funzionalità di ``fuga rapida'', che attiva allarmi e registrazioni audio-video;
+    \item rilevamento ambientale, che analizza suoni e rumori associati a situazioni di pericolo;
+    \item gamification dei supporti educativi con punti e livelli;
+    \item supporto multilingue avanzato, che include anche lingue meno diffuse e dialetti;
+    \item report anonimo ad enti di ricerca per studi sulla violenza di genere;
+    \item integrazione con la legislazione vigente per fornire informazioni sulle leggi relative alla violenza di genere;
+    \item accessibilità per persone con disabilità visive, uditive o motorie.
+\end{itemize}
+
+\subsubsection{Considerazioni Tecnologiche}
+
+Il proponente fornisce indicazioni architetturali chiare. Per lo sviluppo mobile, si raccomanda vivamente l'adozione del framework \textbf{Flutter} al fine di ottimizzare i tempi di sviluppo e la manutenibilità sia su piattaforme iOS che Android. Per il Backend, si propone l'adozione di un'architettura \textbf{Serverless}, con hosting preferibilmente su \textbf{AWS}. La soluzione suggerita contempla l'impiego di Amazon API Gateway, AWS Lambda per l'implementazione dei microservizi, e l'utilizzo di database sia NoSQL (Amazon DynamoDB) che relazionali (Amazon RDS). È inoltre richiesta l'integrazione con Amazon SageMaker e Bedrock al fine di gestire i modelli di Machine Learning e l'analisi del linguaggio naturale.
+
+\subsubsection{Valutazione del gruppo}
+
+Durante la valutazione, il gruppo ha riconosciuto i punti di forza del capitolato: l’importanza sociale e la grande disponibilità del proponente. Sono stati inoltre considerati positivamente:
+\begin{itemize}
+    \item il supporto completo da parte dell’azienda: Miriade S.r.l. offre referenti di supporto durante tutto il ciclo di vita dello sviluppo software;
+    \item la possibilità di utilizzare un ambiente della suite ``Atlassian'' (Jira, Bitbucket) per facilitare lo sviluppo;
+    \item la formazione iniziale sulla prevenzione della violenza di genere e sul supporto alle vittime.
+\end{itemize}
+
+Nonostante ciò, il progetto non è stato selezionato. Le principali motivazioni sono state: la necessità di un investimento di tempo iniziale troppo gravoso per il gruppo, la preferenza del team verso domini meno critici dal punto di vista etico e le implementazioni troppo impegnative riguardanti la sicurezza dei dati. In conclusione, la valutazione ha rilevato una minore aderenza alle tempistiche accademiche e alle conoscenze tecnologiche del gruppo rispetto al capitolato scelto.
+
 \subsection{C6 - Second Brain}
+
+Il capitolato C6, proposto da Zucchetti S.p.A., è risultato un punto di interesse per il gruppo per il suo forte orientamento verso le tecnologie emergenti, in particolare l’integrazione di modelli \textbf{LLM (Large Language Models)} nel lavoro quotidiano.
+
+\subsubsection{Obiettivo}
+
+L’obiettivo consiste nel creare una Web App di un editor di testo basato sul linguaggio di Markup \textbf{Markdown} con integrazione di intelligenza artificiale. L’applicazione dovrà eseguire operazioni di riassunto, critica di testo, traduzione e riformulazione interagendo con gli LLM e dovrà supportare prompt che permettano di generare testi in modo automatico.
+
+\subsubsection{Requisiti funzionali principali e obbligatori}
+
+\begin{itemize}
+    \item Editing di testo in un'area che accetta testo e marcatori in formato Markdown;
+    \item visualizzazione grafica del testo applicando lo stile corrispondente ai marcatori;
+    \item accesso a un LLM che possa operare sul testo per intero o per parti;
+    \item implementazione di comandi base di riassunto, riscrittura e traduzione;
+    \item implementazione di comandi di critica basati sulla ``tecnica dei sei cappelli'' di Edward De Bono;
+    \item gestione di un prompt associato per generare testi in maniera automatica;
+    \item persistenza e lettura dei dati delle note in formato testuale.
+\end{itemize}
+
+\subsubsection{Requisiti funzionali opzionali}
+
+Zucchetti S.p.A. propone di sfruttare la potenza degli LLM tramite:
+\begin{itemize}
+    \item archivio delle note in un database server-side;
+    \item possibilità di recuperare e modificare una nota scritta in precedenza;
+    \item associazione delle note tramite link integrati nel markup;
+    \item utilizzo delle note collegate durante la creazione o modifica dei testi nell’editor.
+\end{itemize}
+
+\subsubsection{Considerazioni tecnologiche}
+
+Il proponente lascia ampia libertà nella scelta dello stack tecnologico, suggerendo l'uso di HTML5 per il frontend e librerie Open Source per il rendering. Per l'interazione con l'IA, viene fornito l'uso di API compatibili con lo standard OpenAI (Gemini, Mistral o Gemma). Qualora si desideri sviluppare il database, l'azienda propone la gestione delle chiamate HTTP tramite un backend che può essere realizzato in \textbf{Java} o \textbf{Python}.
+
+\subsubsection{Incontro con il proponente}
+
+Dall'incontro con il proponente sono emersi i seguenti chiarimenti:
+\begin{itemize}
+    \item \textbf{Frequenza incontri:} a discrezione del gruppo, previa organizzazione;
+    \item \textbf{Tecnologie:} scelta libera sui framework; per il backend è consigliato Java ma non è vincolante;
+    \item \textbf{Modelli LLM:} è possibile utilizzare modelli OpenAI o API key fornite per Gemini, Mistral o Gemma;
+    \item \textbf{Storage:} è consigliato l'uso di \textbf{PostgreSQL}, mentre è sconsigliato l'utilizzo di database NoSQL.
+\end{itemize}
+
+\subsubsection{Valutazione del gruppo}
+
+Il gruppo ha riconosciuto i seguenti punti di forza:
+\begin{itemize}
+    \item architettura flessibile con possibilità di progettazione libera;
+    \item disponibilità del proponente a garantire l'accesso diretto ai modelli LLM;
+    \item tempistiche di realizzazione ottimali grazie al focus sul prompt engineering.
+\end{itemize}
+
+I punti di debolezza risiedono nelle scarse specifiche vincolanti, che hanno ridotto l'interesse nello studio di nuovi framework frontend. In conclusione, il capitolato C6 è risultato un valido concorrente poiché ne permette la realizzazione in tempi ragionevoli, ma l’interesse generale non è stato sufficiente per la maggioranza dei membri rispetto al capitolato scelto.
 
 \end{document}
