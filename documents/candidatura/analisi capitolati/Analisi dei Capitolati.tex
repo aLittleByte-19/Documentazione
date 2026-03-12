@@ -74,7 +74,7 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Redattore   & Angelica Gastaldello \\
+            Redattori   & Angelica Gastaldello, Diego Belluz \\
             Verificatori& \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
             Data        & \\
@@ -101,7 +101,11 @@
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline
-        0.0.5 & 11/03/2026 & Stesura analisi capitolati C4 e C6 & Diego Belluz & - & - \\
+        0.0.7 & 12/03/2026 & Iniziato C5 & Angelica Gastaldello & - & - \\
+        \hline
+        0.0.6 & 11/03/2026 & Stesura analisi capitolato C6 & Diego Belluz & - & - \\
+        \hline
+        0.0.5 & 10/03/2026 & Stesura analisi capitolato C4 & Diego Belluz & - & - \\
         \hline
         0.0.4 & 10/03/2026 & Terminato C1, iniziato C2 & Angelica Gastaldello & - & - \\
         \hline
@@ -161,10 +165,93 @@ L'applicazione dei criteri appena descritti è avvenuta attraverso una metodolog
     \item \textbf{Colloqui con le aziende e decisione finale:} sulla base della scrematura iniziale, il gruppo ha organizzato degli incontri mirati con le aziende proponenti dei progetti verso cui si sentiva maggiormente orientato. Questi confronti diretti hanno permesso di verificare la disponibilità dei referenti e risolvere le ultime incertezze, guidando il team verso una decisione finale pienamente informata e concorde.
 \end{itemize}
 
-\section{Analisi Capitolato selezionato}
+\section{Analisi del capitolato selezionato}
 \subsection{C5 - Nexum}
 
-\section{Analisi altri Capitolati}
+Il capitolato C5, proposto da Eggon S.r.l., è stato selezionato dal gruppo per il suo forte equilibrio tra interesse tecnologico, valore formativo e aderenza a un contesto industriale concreto. La proposta si inserisce all'interno di \textit{NEXUM}, una piattaforma HR già esistente, e prevede l'estensione del prodotto con moduli basati su intelligenza artificiale generativa, automazione documentale e integrazione con i processi dei Consulenti del Lavoro.
+
+\subsubsection{Obiettivo}
+
+L'obiettivo del progetto è potenziare la piattaforma \textit{NEXUM} con funzionalità intelligenti e interoperabili, in grado di migliorare i processi HR e il dialogo tra aziende, dipendenti e studi dei Consulenti del Lavoro. In particolare, il capitolato individua due direttrici principali di sviluppo: un \textbf{AI Assistant Generativo} per la creazione di contenuti aziendali e un \textbf{AI Co-Pilot} per il trattamento, il riconoscimento e il dispaccio automatico dei documenti gestiti dai CdL.
+
+In termini operativi, il progetto richiede la realizzazione di componenti che non siano semplici prototipi isolati, ma moduli effettivamente integrabili nell'architettura esistente di \textit{NEXUM}. Il valore della proposta risiede proprio nella possibilità di lavorare su funzionalità orientate a bisogni aziendali reali, con attenzione sia agli aspetti applicativi sia a quelli di qualità, sicurezza e tracciabilità.
+
+\subsubsection{Caratteristiche funzionali principali}
+
+Dal punto di vista funzionale, il capitolato propone uno scenario ampio e ben strutturato. Un primo ambito riguarda l'\textbf{AI Assistant Generativo}, pensato per supportare gli utenti della dashboard amministrativa nella redazione di contenuti aziendali. Le funzionalità centrali comprendono:
+
+\begin{itemize}
+    \item generazione automatica di titolo, contenuto e immagine di copertina a partire da un prompt testuale;
+    \item personalizzazione del tono e dello stile comunicativo in base al contesto aziendale;
+    \item salvataggio e riuso dei prompt precedenti, con storico consultabile;
+    \item sistema di rating per valutare la qualità dei risultati prodotti dall'AI;
+    \item revisione, modifica manuale e pubblicazione del contenuto direttamente nella piattaforma;
+    \item raccolta di analytics e reportistica sull'utilizzo del modulo generativo.
+\end{itemize}
+
+Un secondo ambito riguarda invece l'\textbf{AI Co-Pilot per i Consulenti del Lavoro}, orientato all'automazione del flusso documentale. In questo caso il capitolato richiede:
+
+\begin{itemize}
+    \item caricamento di documenti nel repository CdL attraverso dashboard amministrativa;
+    \item classificazione automatica dei documenti tramite riconoscimento e OCR;
+    \item estrazione e riconoscimento dei destinatari mediante tecniche di matching e disambiguazione;
+    \item suddivisione di documenti massivi per singolo destinatario;
+    \item revisione \textit{human-in-the-loop} in caso di bassa confidenza o ambiguità;
+    \item generazione automatica della lista di distribuzione e del messaggio di dispaccio;
+    \item invio, tracciamento, prova di consegna, ricerca, audit e conservazione dei documenti;
+    \item gestione di ruoli, permessi, policy di retention e monitoraggio continuo della qualità AI.
+\end{itemize}
+
+Nel complesso, il capitolato si distingue per l'ampiezza del dominio coperto: non si limita a una singola funzionalità innovativa, ma combina AI generativa, OCR, workflow documentali, sicurezza, analytics e integrazione con processi amministrativi concreti. Questa varietà è stata percepita come uno dei principali punti di interesse del progetto, poiché consente di affrontare problematiche diverse ma tra loro coerenti.
+
+\subsubsection{Requisiti obbligatori e opzionali}
+
+Dal punto di vista della pianificazione, il capitolato non presenta una distinzione rigida tra requisiti obbligatori e opzionali analoga a quella osservabile in altri casi. La struttura è infatti organizzata soprattutto attorno a requisiti di business, casi d'uso, vincoli, criteri di accettazione e deliverable. Per il gruppo, ciò significa che il nucleo obbligatorio risulta particolarmente ampio e comprende sia la realizzazione dei due moduli principali sia la loro integrazione con l'ecosistema \textit{NEXUM}.
+
+Tra i requisiti da considerare essenziali rientrano:
+
+\begin{itemize}
+    \item integrazione con backend, frontend e database della piattaforma esistente;
+    \item disponibilità delle funzionalità su dashboard amministrativa e, dove previsto, su PWA;
+    \item implementazione dei principali casi d'uso dell'AI Assistant Generativo;
+    \item implementazione del flusso documentale dell'AI Co-Pilot, dal caricamento al dispatch;
+    \item presenza di meccanismi di audit trail, tracciabilità, ruoli e permessi;
+    \item produzione di deliverable concreti, demo funzionante e documentazione tecnica.
+\end{itemize}
+
+Più che veri requisiti opzionali, il capitolato introduce elementi di qualità e di maturità del prodotto che ne aumentano il valore complessivo, come metriche di performance, monitoraggio dei KPI, miglioramento continuo dei modelli AI, attenzione alla compliance e possibile evoluzione progressiva dei moduli. Questa impostazione è stata valutata positivamente perché favorisce una crescita incrementale del sistema, pur mantenendo obiettivi progettuali chiari e industrialmente rilevanti.
+
+\subsubsection{Considerazioni tecnologiche}
+
+Uno dei punti di forza del capitolato è la chiarezza dello stack tecnologico e architetturale. La documentazione indica infatti un ecosistema moderno e realistico, composto da \textbf{Angular} per la dashboard amministrativa, \textbf{Next.js} per la PWA, \textbf{Ruby on Rails} in modalità API-first per il backend, \textbf{PostgreSQL} per la persistenza, \textbf{Redis} e \textbf{Sidekiq} per code e processi asincroni, e un'infrastruttura \textbf{AWS} articolata su servizi come ECS Fargate, S3, CloudFront, Cognito, SQS, SES, CloudWatch, GuardDuty e WAF.
+
+Questa chiarezza tecnologica è stata valutata molto positivamente perché riduce l'ambiguità iniziale e rende più concreto il lavoro di analisi architetturale. Allo stesso tempo, la varietà delle tecnologie coinvolte aumenta la complessità del progetto: il gruppo deve confrontarsi con sviluppo web full stack, integrazione cloud, sicurezza, gestione documentale, servizi asincroni e componenti AI, il tutto in un contesto di prodotto reale e non puramente sperimentale.
+
+\subsubsection{Incontro con il proponente}
+
+\subsubsection{Valutazione del gruppo}
+
+Durante la valutazione, il gruppo ha riconosciuto nel capitolato C5 diversi punti di forza:
+
+\begin{itemize}
+    \item forte aderenza a un caso industriale reale, con possibilità di produrre risultati concretamente integrabili nel prodotto aziendale;
+    \item equilibrio tra innovazione e applicabilità pratica, grazie alla combinazione di AI generativa e automazione documentale;
+    \item chiarezza dei casi d'uso, dei vincoli, dei criteri di accettazione e dei deliverable attesi;
+    \item stack moderno e formativo, in grado di offrire esperienza su tecnologie attuali di mercato;
+    \item opportunità di lavorare secondo metodologie Agile e con strumenti professionali in un contesto collaborativo strutturato.
+\end{itemize}
+
+Parallelamente, il gruppo ha individuato alcune criticità:
+
+\begin{itemize}
+    \item ampiezza funzionale elevata, che richiede una pianificazione attenta per evitare dispersione dello sforzo;
+    \item complessità architetturale non trascurabile, dovuta al numero di servizi e integrazioni coinvolte;
+    \item necessità di affrontare temi delicati come sicurezza, GDPR, auditabilità e affidabilità dei sistemi AI.
+\end{itemize}
+
+Nonostante tali criticità, il gruppo ha ritenuto che C5 rappresentasse la scelta migliore. Il capitolato è stato valutato come quello più allineato agli obiettivi formativi e progettuali del team, poiché unisce interesse tecnologico, struttura chiara, rilevanza industriale e possibilità concreta di realizzare un prodotto di qualità entro i vincoli temporali del corso.
+
+\section{Analisi degli altri capitolati}
 \subsection{C1 - Automated EN18031 Compliance Verification}
 
 Il capitolato C1, proposto da Bluewind S.r.l., è stato inizialmente considerato dal gruppo per la sua aderenza a un tema attuale e rilevante: la conformità alla norma EN 18031, armonizzata rispetto alla direttiva RED per i dispositivi radio immessi nel mercato europeo.
@@ -195,9 +282,16 @@ Il caso studio proposto (macchina del caffè connessa via Wi-Fi con comunicazion
 
 Dal punto di vista della pianificazione, il capitolato presenta una distinzione chiara tra requisiti obbligatori e opzionali.
 
-Tra i requisiti obbligatori risultano centrali: importazione di formati standard, esecuzione automatizzata dei Decision Tree, rispetto delle dipendenze gerarchiche e dashboard di visualizzazione dei risultati.
+Tra i requisiti obbligatori risultano centrali l'importazione di formati standard, l'esecuzione automatizzata dei Decision Tree, il rispetto delle dipendenze gerarchiche e la presenza di una dashboard per la visualizzazione dei risultati. Si tratta di una base funzionale ben definita, orientata a garantire tracciabilità, correttezza del flusso decisionale e leggibilità degli esiti.
 
-Tra i requisiti opzionali emergono invece funzionalità di maggiore valore aggiunto (editor integrato, esportazioni in più formati, giustificazione dei risultati, editor grafico avanzato), che possono incrementare qualità del prodotto ma anche complessità implementativa.
+Tra i requisiti opzionali emergono invece funzionalità di maggiore valore aggiunto, che possono incrementare qualità del prodotto ma anche complessità implementativa:
+
+\begin{itemize}
+    \item editor integrato per la modifica dei Decision Tree;
+    \item esportazione dei risultati e dei dati in più formati;
+    \item giustificazione esplicita dei risultati ottenuti;
+    \item editor grafico avanzato per la modellazione degli alberi decisionali.
+\end{itemize}
 
 Questa separazione è stata valutata positivamente dal gruppo perché facilita la definizione di una baseline minima e consente un'estensione incrementale del progetto.
 
@@ -267,9 +361,16 @@ Un elemento distintivo del capitolato è la componente di remediation: il sistem
 
 La documentazione propone un percorso strutturato che include attività iniziali di analisi e progettazione (raccolta requisiti, user story mapping, modellazione UML e schema dati), seguite dalla realizzazione di un MVP funzionante con demo e documentazione tecnica.
 
-Dal punto di vista del gruppo, questa impostazione è stata considerata positiva perché orientata a un processo realistico di sviluppo, ma al tempo stesso impegnativa in termini di organizzazione e carico progettuale.
+Dal punto di vista del gruppo, questa impostazione è stata considerata positiva perché orientata a un processo realistico di sviluppo, ma al tempo stesso impegnativa in termini di organizzazione e carico progettuale. I requisiti obbligatori non si limitano infatti alle funzionalità applicative finali, ma comprendono anche una parte iniziale significativa di analisi, progettazione e documentazione.
 
-Tra le estensioni possibili, risultano particolarmente interessanti l'integrazione CI/CD più avanzata, l'analisi storica delle versioni, sistemi di ranking tra progetti e meccanismi interattivi di notifica e remediation.
+Tra le estensioni possibili, risultano particolarmente interessanti:
+
+\begin{itemize}
+    \item integrazione CI/CD più avanzata;
+    \item analisi storica delle versioni del repository;
+    \item sistemi di ranking e confronto tra progetti;
+    \item meccanismi interattivi di notifica e remediation.
+\end{itemize}
 
 \subsubsection{Considerazioni tecnologiche}
 
@@ -301,11 +402,11 @@ In conclusione, C2 è stato considerato un capitolato solido, moderno e professi
 
 Il capitolato C4, proposto da Miriade S.r.l., è stato preso in considerazione dal gruppo per il suo tema attualmente molto discusso e impattante: la violenza di genere e la necessità di mettere a disposizione delle persone un mezzo tangibile, affidabile e all'avanguardia in termini tecnologici per le attività di prevenzione e di sostegno alle vittime.
 
-\subsubsection{Obiettivi}
+\subsubsection{Obiettivo}
 
 L'obiettivo principale è fornire un'applicazione per sistemi operativi iOS e Android attiva, intelligente e sicura, in grado di riconoscere segnali di pericolo e offrire risorse concrete per l'autonomia e la sicurezza degli utenti. L’applicazione mobile, inoltre, deve essere un prodotto eticamente responsabile e ad impatto sociale positivo. In termini operativi, l’app deve identificare situazioni di rischio, inviare alert in modo discreto e garantire la totale privacy e sicurezza dell'utente, fornendo al contempo percorsi educativi e reti di supporto.
 
-\subsubsection{Requisiti funzionali principali e obbligatori}
+\subsubsection{Caratteristiche funzionali principali}
 
 Le funzionalità principali richieste dall’azienda sono:
 \begin{itemize}
@@ -316,22 +417,28 @@ Le funzionalità principali richieste dall’azienda sono:
     \item \textbf{Community di Supporto:} uno spazio sicuro, con moderazione professionale, per la condivisione di esperienze e il supporto reciproco tra utenti.
 \end{itemize}
 
-\subsubsection{Requisiti funzionali opzionali}
+Nel complesso, il capitolato delinea un prodotto mobile che non si limita alla gestione dell'emergenza, ma integra prevenzione, accompagnamento e autonomia personale. Il valore della proposta risiede proprio nell'unione tra componenti di riconoscimento del rischio, accesso immediato ai servizi territoriali e strumenti di protezione discreti, pensati per un contesto d'uso delicato e potenzialmente critico.
 
-Le funzionalità opzionali che emergono sono:
+\subsubsection{Requisiti obbligatori e opzionali}
+
+Dal punto di vista della pianificazione, i requisiti obbligatori comprendono il riconoscimento di segnali di rischio, l'invio di alert silenziosi, l'accesso a risorse di supporto geolocalizzate, la disponibilità di funzionalità di sicurezza personalizzate, la presenza di contenuti formativi e la creazione di uno spazio protetto di community. Si tratta quindi di una baseline già molto ampia, che combina aspetti applicativi, sociali e di protezione dei dati.
+
+Accanto a questo nucleo minimo, il capitolato propone diverse estensioni opzionali che aumentano la completezza del prodotto e ne rafforzano l'impatto pratico:
 \begin{itemize}
-    \item integrazione con strumenti indossabili come smartwatch per inviare notifiche di allarme;
-    \item modalità di ``check-in'' periodico, che invia alert se non viene effettuato;
-    \item funzionalità di ``fuga rapida'', che attiva allarmi e registrazioni audio-video;
-    \item rilevamento ambientale, che analizza suoni e rumori associati a situazioni di pericolo;
-    \item gamification dei supporti educativi con punti e livelli;
-    \item supporto multilingue avanzato, che include anche lingue meno diffuse e dialetti;
-    \item report anonimo ad enti di ricerca per studi sulla violenza di genere;
-    \item integrazione con la legislazione vigente per fornire informazioni sulle leggi relative alla violenza di genere;
-    \item accessibilità per persone con disabilità visive, uditive o motorie.
+    \item integrazione con dispositivi indossabili, come smartwatch, per inviare allarmi o registrare eventi in modo ancora più discreto e immediato;
+    \item modalità di ``check-in'' periodico, in cui il mancato riscontro dell'utente attiva automaticamente una segnalazione verso i contatti di emergenza;
+    \item funzionalità di ``fuga rapida'', con attivazione combinata di allarme, registrazione audio-video, invio posizione e messaggio predefinito;
+    \item rilevamento ambientale tramite analisi di suoni e rumori associati a situazioni di pericolo, previo consenso dell'utente;
+    \item gamification dei moduli educativi, con punti, livelli e ricompense per aumentare coinvolgimento ed efficacia preventiva;
+    \item supporto multilingue avanzato, esteso anche a lingue meno diffuse e dialetti;
+    \item reportistica anonima per enti di ricerca, con dati anonimizzati condivisibili solo previo consenso esplicito;
+    \item integrazione con la legislazione locale e internazionale, per fornire informazioni aggiornate e guide pratiche su come agire;
+    \item accessibilità avanzata per persone con disabilità visive, uditive o motorie.
 \end{itemize}
 
-\subsubsection{Considerazioni Tecnologiche}
+Questa distinzione è stata letta dal gruppo come segnale di un capitolato ricco ma impegnativo: le funzionalità opzionali non sono semplici rifiniture, bensì estensioni di grande valore che aumentano notevolmente ampiezza, responsabilità progettuale e complessità realizzativa.
+
+\subsubsection{Considerazioni tecnologiche}
 
 Il proponente fornisce indicazioni architetturali chiare. Per lo sviluppo mobile, si raccomanda vivamente l'adozione del framework \textbf{Flutter} al fine di ottimizzare i tempi di sviluppo e la manutenibilità sia su piattaforme iOS che Android. Per il Backend, si propone l'adozione di un'architettura \textbf{Serverless}, con hosting preferibilmente su \textbf{AWS}. La soluzione suggerita contempla l'impiego di Amazon API Gateway, AWS Lambda per l'implementazione dei microservizi, e l'utilizzo di database sia NoSQL (Amazon DynamoDB) che relazionali (Amazon RDS). È inoltre richiesta l'integrazione con Amazon SageMaker e Bedrock al fine di gestire i modelli di Machine Learning e l'analisi del linguaggio naturale.
 
@@ -354,7 +461,9 @@ Il capitolato C6, proposto da Zucchetti S.p.A., è risultato un punto di interes
 
 L’obiettivo consiste nel creare una Web App di un editor di testo basato sul linguaggio di Markup \textbf{Markdown} con integrazione di intelligenza artificiale. L’applicazione dovrà eseguire operazioni di riassunto, critica di testo, traduzione e riformulazione interagendo con gli LLM e dovrà supportare prompt che permettano di generare testi in modo automatico.
 
-\subsubsection{Requisiti funzionali principali e obbligatori}
+\subsubsection{Caratteristiche funzionali principali}
+
+Il nucleo obbligatorio del capitolato ruota attorno a un editor Markdown arricchito dalle capacità di un LLM, con l'obiettivo di supportare l'utente nella scrittura, nella rielaborazione e nella generazione di contenuti testuali. In particolare, la piattaforma deve consentire:
 
 \begin{itemize}
     \item Editing di testo in un'area che accetta testo e marcatori in formato Markdown;
@@ -366,15 +475,21 @@ L’obiettivo consiste nel creare una Web App di un editor di testo basato sul l
     \item persistenza e lettura dei dati delle note in formato testuale.
 \end{itemize}
 
-\subsubsection{Requisiti funzionali opzionali}
+Il capitolato chiarisce anche il significato operativo di queste funzioni: l'editor deve essere semplice e immediato, la preview deve rendere leggibile il risultato finale della scrittura in Markdown, mentre l'interazione con l'LLM deve poter avvenire sia sull'intero testo sia su sue porzioni selezionate. Particolare rilievo assume la progettazione dei prompt, soprattutto per le operazioni di critica e riscrittura, considerate il vero elemento di ricerca del progetto.
 
-Zucchetti S.p.A. propone di sfruttare la potenza degli LLM tramite:
+\subsubsection{Requisiti obbligatori e opzionali}
+
+I requisiti obbligatori comprendono quindi non solo la realizzazione dell'editor e della preview, ma anche l'integrazione di operazioni testuali fondamentali --- riassunto, riscrittura, traduzione, critica strutturata e generazione guidata da prompt --- oltre al salvataggio e recupero delle note in formato testuale. Il capitolato sottolinea inoltre che questi requisiti minimi devono essere sviluppati secondo una progressione chiara, passando da una fase iniziale di \textit{Proof of Concept} a un \textit{Minimum Viable Product} completo, con crescente attenzione a usabilità, robustezza e test automatici.
+
+Sul piano delle estensioni, Zucchetti S.p.A. propone di sfruttare ulteriormente la potenza degli LLM tramite:
 \begin{itemize}
     \item archivio delle note in un database server-side;
     \item possibilità di recuperare e modificare una nota scritta in precedenza;
     \item associazione delle note tramite link integrati nel markup;
     \item utilizzo delle note collegate durante la creazione o modifica dei testi nell’editor.
 \end{itemize}
+
+Questi requisiti opzionali introducono una vera componente di knowledge management: le note non restano documenti isolati, ma diventano una base informativa collegata e riusabile, capace di alimentare l'LLM con contesto aggiuntivo. È proprio questa estensione a dare pieno significato al nome ``Second Brain'', trasformando l'editor da semplice strumento di scrittura assistita a sistema di supporto alla riflessione e al recupero strutturato delle idee.
 
 \subsubsection{Considerazioni tecnologiche}
 
