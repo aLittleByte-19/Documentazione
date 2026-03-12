@@ -11,7 +11,6 @@ BUILD_DIR = '_site'
 TEMPLATE_PATH = os.path.join(SITE_SRC, 'index_template.html')
 
 # Cartelle e file da escludere dalla scansione e dal deploy finale
-# Non copiamo la logica del sito nel deploy finale (già usata per generare)
 EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
 
@@ -51,8 +50,13 @@ def build_html_tree(base_path, relative_path=""):
         sub_content = build_html_tree(base_path, os.path.join(relative_path, d))
         
         if sub_content.strip():
-            html_output += f'\n    <h{header_level}>{dir_title}</h{header_level}>\n'
+            # Implementazione cartelle collassabili
+            html_output += f'\n    <details class="dir-container">\n'
+            html_output += f'        <summary class="dir-title"><h{header_level}>{dir_title}</h{header_level}></summary>\n'
+            html_output += f'        <div class="dir-content">\n'
             html_output += sub_content
+            html_output += f'        </div>\n'
+            html_output += f'    </details>\n'
 
     return html_output
 

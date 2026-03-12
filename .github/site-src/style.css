@@ -1,10 +1,10 @@
-
 :root {
     --primary-blue: #153c5e; 
     --accent-gold: #b38b36; 
     --bg-gray: #f0f4f8;
     --text-dark: #2b3035;   
     --white: #ffffff;
+    --dir-open-bg: rgba(179, 139, 54, 0.05);
 }
 
 * {
@@ -90,20 +90,77 @@ h1 {
     font-size: 2.2rem;
 }
 
-h2 {
+h2, h3, h4, h5, h6 {
     color: var(--primary-blue);
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
+    margin: 0;
+    display: inline-block;
 }
 
-h3 {
-    color: var(--text-dark);
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.3rem; }
+
+
+.dir-container {
+    margin: 4px 0;
+    transition: background-color 0.3s ease;
 }
 
+.dir-title {
+    cursor: pointer;
+    list-style: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.dir-title:hover {
+    background-color: #f1f5f9;
+}
+
+.dir-container[open] > .dir-title {
+    background-color: var(--dir-open-bg);
+    font-weight: bold;
+}
+
+.dir-title::-webkit-details-marker {
+    display: none;
+}
+
+/* Icona Chevron */
+.dir-title::before {
+    content: "▶";
+    margin-right: 12px;
+    font-size: 0.7rem;
+    color: var(--accent-gold);
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+.dir-container[open] > .dir-title::before {
+    transform: rotate(90deg);
+}
+
+.dir-content {
+    padding-left: 25px;
+    border-left: 1px solid #e2e8f0;
+    margin-left: 18px;
+    margin-top: 2px;
+}
+
+/* Stile per i file */
+.doc p {
+    margin: 6px 0;
+    padding-left: 10px;
+}
+
+.doc p::before {
+    content: "➤";
+    margin-right: 8px;
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+}
 
 a {
     color: var(--primary-blue);
@@ -130,36 +187,6 @@ a[href$=".md"]:hover {
     color: var(--accent-gold);
     text-decoration-color: var(--accent-gold);
     background-color: rgba(179, 139, 54, 0.05);
-}
-
-.versione {
-    background-color: transparent; 
-    border: 2px solid #cbd5e1;    
-    color: #5b687b;                
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.80rem;            
-    margin-left: 10px;
-
-}
-
-.mail{
-    padding: 3px 8px;
-    color: var(--primary-blue);
-}
-
-ul {
-    margin-left: 20px;
-    margin-top: 10px;
-    list-style-type: square; 
-}
-
-li {
-    margin-bottom: 8px;
-}
-
-li::marker {
-    color: var(--accent-gold);
 }
 
 #last-update {
