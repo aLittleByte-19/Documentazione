@@ -5,7 +5,13 @@ on:
     branches:
       - main
     paths:
-      - 'documents/**'
+      - '**'
+      - '!assets/**'
+      - '!scripts/**'
+      - '!website/**'
+      - '!.github/**'
+      - '!index.html'
+      - '!prompt.tex'
       - 'scripts/update_index.py'
       - '.github/workflows/update-docs.yml'
   workflow_dispatch: 

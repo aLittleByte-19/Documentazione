@@ -2,19 +2,20 @@ import os
 import re
 from datetime import datetime
 
-DOCS_DIR = 'documents'
+DOCS_DIR = '.'
+EXCLUDE_DIRS = {'assets', 'scripts', 'website', '.github', '.git'}
 
 def build_html_tree(base_path, relative_path=""):
     html_output = ""
-    current_dir = os.path.join(base_path, relative_path)
+    current_dir = os.path.normpath(os.path.join(base_path, relative_path))
     
     if not os.path.exists(current_dir):
         return ""
 
-    # Ottieni cartelle e file, ignorando file nascosti
+    # Ottieni cartelle e file, ignorando file nascosti e cartelle escluse
     items = sorted([i for i in os.listdir(current_dir) if not i.startswith('.')])
     
-    dirs = [d for d in items if os.path.isdir(os.path.join(current_dir, d))]
+    dirs = [d for d in items if os.path.isdir(os.path.join(current_dir, d)) and d not in EXCLUDE_DIRS]
     files = [f for f in items if os.path.isfile(os.path.join(current_dir, f))]
 
     # 1. Stampa SOLO i file .pdf
@@ -22,7 +23,11 @@ def build_html_tree(base_path, relative_path=""):
     if valid_files:
         html_output += '    <div class="doc">\n'
         for f in valid_files:
-            file_path = os.path.join(DOCS_DIR, relative_path, f).replace('\\', '/')
+            # Costruisci il percorso relativo pulito
+            if relative_path:
+                file_path = os.path.join(relative_path, f).replace('\\', '/')
+            else:
+                file_path = f
             name_without_ext = os.path.splitext(f)[0]
             html_output += f'        <p><a href="{file_path}" target="_blank">{name_without_ext}</a></p>\n'
         html_output += '    </div>\n'
