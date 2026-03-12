@@ -1,0 +1,250 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Analisi dei Capitolati}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Dichiarazione Impegni}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Dichiarazione Impegni}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Angela Maule, Eleonora Bellet \\
+            Verificatori& \\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & \\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+\fancyfoot[R]{Dichiarazione Impegni\hspace{0.8em}}
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white}
+\begin{center}
+    {\footnotesize
+    \begin{tabularx}{\textwidth}{|l|l|X|p{2cm}|p{2cm}|p{2cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Ver.} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline 
+        1.2 & 2026-03-11 & Stesura sezione 3 (Preventivo costi) & Angela Maule & - & - \\
+        \hline 
+        1.1 & 2026-03-10 & Stesura sezione 2 (Impegno orario e Ruoli) & A. Maule, E. Bellet & - & - \\
+        \hline
+        1.0 & 2026-03-09 & Struttura del documento e Introduzione & Eleonora Bellet & - & - \\
+        \hline 
+    \end{tabularx}
+    }
+\end{center}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyfoot[R]{Dichiarazione Impegni\hspace{0.8em}\thepage}
+
+\begin{center} 
+    {\Large \textbf{Indice}}
+\end{center}
+
+\vspace{0.6cm}
+
+\tableofcontents
+
+\newpage
+
+\section{Introduzione}
+\subsection{Finalità del documento}
+
+Con il seguente documento, il gruppo aLittleByte (Gruppo 19) di Ingegneria del Software dichiara l'impegno orario preventivato per l'implementazione del capitolato C5 - Nexum, proposto da Eggon, confermando la propria candidatura per la sua realizzazione.
+Nel documento sono riportati: la descrizione dei ruoli previsti per lo svolgimento del progetto, il monte ore assegnato a ciascun componente e il preventivo economico totale.
+
+\section{Impegno orario e Ruoli}
+\subsection{Distribuzione ore per ruolo}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline
+\textbf{Componente} & \textbf{Re} & \textbf{Am} & \textbf{An} & \textbf{Pj} & \textbf{Pr} & \textbf{Ve} & \textbf{Totale} \\
+\hline
+Eleonora Bellet &8  &7  &8  &20  &23  &24  & \textbf{90} \\
+\hline
+Diego Belluz &8  &7  &9  &21  &23  &22  & \textbf{90} \\
+\hline
+Angelica Gastaldello &8  &7  &9  &21  &22  &23  & \textbf{90} \\
+\hline
+Vinicius Yuri Kaneda Fernandes &8  &8  &8  &20  &23  &23  & \textbf{90} \\
+\hline
+Angela Maule &8  &8  &8  &21  &23  &22 & \textbf{90} \\
+\hline
+Alex Oloni &8  &8  &9  &20  &23  &23  & \textbf{90} \\
+\hline
+Leonardo Soligo &8  &7  &9  &20  &23  &23  & \textbf{90} \\
+\hline
+\textbf{Totale Ore} & \textbf{56} & \textbf{51} & \textbf{60} & \textbf{143} & \textbf{160} & \textbf{160} & \textbf{630} \\
+\hline
+\end{tabular}
+\caption{Ore di ogni componente per ciascun ruolo}
+\label{tab:ore_componenti}
+\vspace{0.2cm}
+\footnotesize{\textbf{Legenda:} \textbf{Re}: Responsabile, \textbf{Am}: Amministratore, \textbf{An}: Analista, \textbf{Pj}: Progettista, \textbf{Pr}: Programmatore, \textbf{Ve}: Verificatore.}
+\end{table}
+\subsection{Analisi dei Ruoli}
+\subsubsection{Responsabile}
+Il responsabile coordina le attività e gestisce le comunicazioni con i docenti e l'azienda proponente (Eggon). Si occupa della pianificazione temporale, del monitoraggio dell'avanzamento, assicurandosi che la rotazione dei ruoli avvenga in modo corretto. Ha inoltre il compito di definire e far rispettare le \textit{Norme di Progetto} e le linee guida di sviluppo. È una figura presente durante l'intero ciclo di vita del software, ma il suo impegno è particolarmente intensivo nelle fasi iniziali, per poi diminuire progressivamente man mano che il team acquisisce autonomia operativa. Essendo il ruolo economicamente più oneroso, il suo monte ore è stato ottimizzato per garantire efficienza senza gravare eccessivamente sul preventivo finale.
+
+\subsubsection{Amministratore}
+Ha il compito di predisporre e preservare l'ecosistema tecnologico di supporto al team, garantendo la piena operatività delle infrastrutture IT e degli strumenti di collaborazione. Promuove l'efficienza del gruppo integrando processi automatizzati, come la validazione continua e l'esecuzione dei test. Trattandosi di una figura focalizzata in larga parte sul setup iniziale e sul monitoraggio dei sistemi, l'impegno orario a preventivo risulta tra i più contenuti dell'intero progetto.
+
+\subsubsection{Progettista}
+Ha il compito di definire l'architettura del sistema a partire dai requisiti concordati, selezionando le tecnologie più idonee per la sua realizzazione. Produce inoltre una documentazione chiara ed esaustiva, fondamentale per guidare i programmatori nella successiva fase di codifica. Poiché eventuali imprecisioni progettuali avrebbero gravi ripercussioni sull'intero sviluppo del prodotto, a questo ruolo è stato assegnato un monte ore particolarmente elevato per garantirne la massima cura.
+
+\subsubsection{Analista}
+La figura dell'analista è incaricata di studiare e analizzare i requisiti di sistema. Analizza a fondo il capitolato d'appalto, si confronta direttamente con il proponente e traduce le necessità emerse in chiare specifiche e modelli di casi d'uso. Il suo lavoro si concentra soprattutto all'avvio del progetto, ma resta un punto di riferimento fondamentale per adattare e far evolvere i requisiti durante tutto il processo di lavoro.
+
+\subsubsection{Verificatore}
+La figura del verificatore ha il compito di certificare la correttezza e la qualità del prodotto finale. È una presenza costante in ogni fase dello sviluppo, impegnata a validare i rilasci e a garantire che tutto il materiale prodotto rispetti i requisiti stabiliti. Le mansioni includono testing, revisione puntuale del codice e controllo di conformità della documentazione rispetto agli standard. 
+
+\subsubsection{Programmatore}
+Il programmatore è la figura operativa per eccellenza. Si occupa della stesura del codice in linea con gli standard di settore. Si fa carico di assemblare i componenti del sistema, documentarne il funzionamento e garantirne l'affidabilità fin dalle basi tramite i test unitari. Il suo intervento è richiesto in maniera continuativa per tutta la durata delle fasi di realizzazione e manutenzione.
+
+\subsection{Motivazione suddivisione oraria }
+Il preventivo orario complessivo di 630 ore è stato suddiviso assegnando a ciascun membro un impegno di 90 ore produttive. Per assicurare una crescita professionale completa, il gruppo ha pianificato una rotazione dei ruoli ogni due settimane ( DA SENTIRE AZIENDA per allinearsi in modo naturale agli sprint concordati con l'azienda proponente.)
+Osservando la distribuzione: il nucleo centrale del lavoro è stato posto sulle figure tecniche. In particolare, si è deciso di assegnare un peso esattamente identico alla stesura del codice (Programmatore, 160 ore) e al controllo qualità (Verificatore, 160 ore). Questa specularità nasce dalla volontà di non relegare il testing a una fase secondaria, ma di farlo procedere di pari passo con lo sviluppo.
+\\
+Una parte importante del preventivo (143 ore) è stata assegnata al Progettista. L'obiettivo è creare da subito una base solida: investire tempo in una buona architettura e in una documentazione chiara facilita il lavoro dei programmatori e riduce il rischio di dover correggere gravi errori in futuro.
+\\
+Di conseguenza, le ore per l'Analista (60), il Responsabile (56) e l'Amministratore (51) sono state mantenute volutamente più basse. Non si tratta di ruoli meno importanti, ma di una scelta per ottimizzare i costi: poiché il loro lavoro si concentra soprattutto all'inizio del progetto o in attività di controllo periodico, assegnare loro meno ore ci permette di contenere il preventivo e dedicare più risorse allo sviluppo vero e proprio del software.
+
+\section{Preventivo costi}
+
+\subsection{Costo per ruolo}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Ruolo} & \textbf{Costo Orario (€/h)} & \textbf{Ore} & \textbf{Costo (€)} \\
+\hline
+Responsabile & 30€/h &56h  &1.680€  \\
+\hline
+Amministratore & 20€/h &51h  &1.020€  \\
+\hline
+Analista & 25€/h &60h  &1.500€  \\
+\hline
+Progettista & 25€/h &143h  &3.575€  \\
+\hline
+Programmatore & 15€/h &160h  &2.400€  \\
+\hline
+Verificatore & 15€/h &160h  &2.400€  \\
+\hline
+\textbf{Totale} & & \textbf{630} & \textbf{12.575€} \\
+\hline
+\end{tabular}
+\caption{Riassunto dei costi derivanti dalle ore assegnate a ciascun ruolo}
+\label{tab:costi_ruoli}
+\end{table}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            8.9/Responsabile (56 ore),
+            8.1/Amministratore (51 ore),
+            9.5/Analista (60 ore),
+            22.7/Progettista (143 ore),
+            25.4/Programmatore (160 ore),
+            25.4/Verificatore (160 ore)
+        }
+    \end{tikzpicture}
+    \caption{Ripartizione in percentuale del monte ore totale}
+\end{figure}
+\subsection{Costo totale preventivato}
+Il costo totale previsto per la realizzazione del progetto è di 12.575€.
+\newpage
+\section{Mitigazione dei rischi}
+Per assicurarci di non superare il budget di 12.575€, il gruppo ha pianificato la gestione dei rischi concentrandosi sull'efficienza operativa. Come già citato in precedenza, la scelta di bilanciare esattamente le ore di programmazione e di verifica (160 ore ciascuna) serve a evitare che eventuali errori scoperti in ritardo portino a un aumento imprevisto dei costi nelle fasi finali del progetto.
+Inoltre, la rotazione dei ruoli ogni due settimane è supportata da un rigoroso obbligo di documentazione; grazie a ciò ogni membro del gruppo avrà le competenze necessarie per supportare gli altri durante i cambi di turno, garantendo che l'investimento orario rimanga produttivo e aderente al preventivo stabilito. Tale approccio mira a evitare ritardi nella consegna fissata finale del progetto e la necessità di aggiungere ore extra non preventivate.
+\section{Consegna}
+La data ultima per la consegna del progetto è fissata improrogabilmente al giorno 10 settembre 2026. 
+
+\end{document}

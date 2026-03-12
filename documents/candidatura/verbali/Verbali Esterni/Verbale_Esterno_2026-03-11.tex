@@ -1,0 +1,167 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../../assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../../assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale  2026-03-11}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale  2026-03-11}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Esterno - 2026-03-11}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Maule Angela \\
+            Verificatori& Diego Belluz\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        &  2026-03-11\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Google Meet \\[6pt]
+
+Orario (Inizio - Fine) & 10:00 -- 10:30 \\[6pt]
+
+Redattore &
+  A. Maule\\[6pt]
+
+Amministratore & 
+A. Gastaldello\\[6pt]
+
+Verificatore &
+D. Belluz\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  A. Gastaldello\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\[6pt]
+  
+\end{tabular}
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item  Chiedere al proponente Zucchetti di rispondere ad alcune 
+domande, segnando le risposte così da poterle successivamente analizzare.
+    \end{itemize}
+
+\section{Attività svolte}
+Di seguito vengono riportate le richieste da noi effettuate e le risposte date dall'azienda.
+
+\subsection{Modalità e frequenza degli incontri con l'azienda}
+Il referente aziendale ha chiarito che non vi sono scadenze o periodicità obbligatorie imposte dall'azienda per le revisioni. L'organizzazione degli incontri sarà dettata dalle necessità operative del gruppo. L'azienda garantisce la propria disponibilità per sessioni di allineamento, sia in presenza che in modalità telematica.
+
+\subsection{Tecnologie da utilizzare}
+Relativamente alle tecnologie da impiegare per lo sviluppo dei lati frontend e backend, l'azienda lascia agli studenti totale libertà. Sebbene l'infrastruttura aziendale si basi tradizionalmente su Java e Tomcat con frontend in HTML, CSS e JavaScript, il gruppo può optare per framework diversi, per esempio React, Angular, Python o Streamlit. La scelta delle tecnologie da utilizzare, pertanto, non è vincolata ai fini del progetto.
+
+\subsection{Utilizzo dei modelli AI}
+Sull'integrazione dei modelli di Intelligenza Artificiale, il referente ha confermato che l'azienda fornirà l'accesso tramite API ai propri server o a modelli basati su cloud. È stata tuttavia espressa una forte preferenza affinché gli studenti sperimentino l'esecuzione di modelli open source in locale, al fine di comprenderne appieno le potenzialità e testare i limiti hardware. A tal proposito, è stato suggerito l'utilizzo di applicativi come LM Studio, in grado di adattarsi dinamicamente alle risorse di sistema disponibili.
+
+\subsection{La tecnica dei "Sei Cappelli"}
+Durante la riunione è stato approfondito il tema dell'interazione con i modelli linguistici (LLM). Il referente ha sconsigliato l'utilizzo di prompt eccessivamente generici. Ha invece raccomandato di istruire l'IA in modo direttivo, forzandola ad assumere ruoli specifici. Affinché la tecnica dei "Sei Cappelli" sia efficace, è necessario utilizzare comandi mirati.
+
+\subsection{Difficoltà dei gruppi in passato}
+In riferimento alle difficoltà incontrate dai gruppi negli anni passati, è stato assicurato che non si sono verificate criticità di particolare entità, a eccezione di rari sovraccarichi dei server, prontamente risolti.
+
+\subsection{Gestione dei dati}
+Per le attuali esigenze del progetto è ritenuto sufficiente l'impiego del semplice file system. Qualora il gruppo optasse per l'implementazione di un database strutturato, il consiglio è di orientarsi su soluzioni relazionali come PostgreSQL o SQLite.
+
+\subsection{Comunicazione finale}
+Il referente ha richiesto di ricevere in tempi brevi una comunicazione ufficiale in merito alla decisione definitiva del gruppo sull'assunzione del progetto, così da permettere all'azienda di riassegnare l'incarico a un altro team qualora si decidesse di non proseguire la collaborazione.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit{Angela Maule} &  Redigere il verbale 2026-03-11 & \href{https://github.com/aLittleByte-19/Documentazione/issues/17}{\#17}\\
+    \hline
+        \textit{Tutti i partecipanti} & Analizzare le risposte date per capire se il capitolato è adatto a noi o meno. &\href{https://github.com/aLittleByte-19/Documentazione/issues/18}{\#18}\\
+    \hline
+    \end{tabular}
+    \label{tab:todo}
+\end{table}
+
+\end{document}
