@@ -1,0 +1,163 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale  2026-03-11}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale  2026-03-11}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Interno - 2026-03-16}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Angelica Gastaldello \\
+            Verificatori& Leonardo Soligo\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        &  2026-03-16\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Discord \\[6pt]
+
+Orario (Inizio - Fine) & 14.30 -- 15:45 \\[6pt]
+
+Redattore &
+  A. Gastaldello\\[6pt]
+
+Amministratore & 
+A. Gastaldello\\[6pt]
+
+Verificatore &
+L. Soligo\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  A. Gastaldello\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\[6pt]
+  
+\end{tabular}
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Domande per incontro col referente del Capitolato n.5.
+    \item Organizzazione interna e workflow su GitHub.
+    \item Aggiornamento stato documenti.
+    \end{itemize}
+
+\section{Attività svolte}
+\subsection{Raccolta domande per il referente del Capitolato n.5}
+A seguito di un'analisi individuale del Capitolato n.5, ciascun membro del gruppo ha raccolto osservazioni, dubbi e quesiti emersi durante la lettura. I contributi sono stati successivamente consolidati in un elenco condiviso, che costituirà la base delle richieste da sottoporre al referente del capitolato nel prossimo incontro.
+
+\subsection{Organizzazione interna e workflow su GitHub}
+Nel corso della riunione il gruppo ha definito i seguenti indirizzi operativi:
+\begin{itemize}
+    \item \textbf{Strategia di branching:} adozione di un branch dedicato per ciascun documento o attività, con l'obiettivo di evitare l'integrazione in main di contenuti non ancora validati.
+    \item \textbf{Gestione task (Kanban):} adozione delle board GitHub Projects per rappresentare in modo trasparente lo stato di avanzamento delle attività e facilitare il coordinamento interno.
+\end{itemize}
+Le decisioni sopra riportate risultano pienamente coerenti con il way of working del gruppo, in quanto rafforzano tracciabilità, qualità documentale e responsabilità condivisa, riducendo al contempo il rischio di errori e conflitti nelle fasi di integrazione.
+
+\subsection{Pianificazione dei prossimi passi su documentazione}
+Il gruppo ha suddiviso i prossimi passi tra attività di scrittura e attività di revisione dei documenti. Per ogni documento sono stati assegnati almeno un redattore e un verificatore, così da garantire avanzamento ordinato e controllo della qualità.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.2cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit{L. Soligo} & Creazione Kanban & \href{https://github.com/aLittleByte-19/Documentazione/issues/21}{\#21}\\
+    \hline
+        \textit{A. Gastaldello} & Redigere Verbale Interno 2026-03-16 & \href{https://github.com/aLittleByte-19/Documentazione/issues/22}{\#22}\\
+    \hline
+        \textit{A. Gastaldello e D. Belluz} & Aggiornare Analisi dei Capitolati dopo i colloqui & \href{https://github.com/aLittleByte-19/Documentazione/issues/23}{\#23}\\
+    \hline
+        \textit{A. Oloni, V. Y. Kaneda Fernandes, E. Bellet e A. Maule} & Approvazione documenti & \href{https://github.com/aLittleByte-19/Documentazione/issues/24}{\#24}, \href{https://github.com/aLittleByte-19/Documentazione/issues/25}{\#25}\\
+    \hline
+    \end{tabular}
+    \label{tab:todo}
+\end{table}
+
+\end{document}
