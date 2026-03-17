@@ -1,0 +1,156 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale  2026-03-16}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale  2026-03-16}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Esterno - 2026-03-16}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Maule Angela \\
+            Verificatori& Diego Belluz\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        &  2026-03-16\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Google Meet \\[6pt]
+
+Orario (Inizio - Fine) & 16:00 -- 16:30 \\[6pt]
+
+Redattore &
+  A. Maule\\[6pt]
+
+Amministratore & 
+A. Gastaldello\\[6pt]
+
+Verificatore &
+D. Belluz\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  A. Gastaldello\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\[6pt]
+  
+\end{tabular}
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item  Chiedere al proponente Eggon-Nexum di rispondere ad alcune 
+domande, segnando le risposte così da poterle successivamente analizzare.
+    \end{itemize}
+
+\section{Attività svolte}
+Di seguito vengono riportate le richieste da noi effettuate e le risposte date dall'azienda.
+\subsection{Pianificazione e incontri di allineamento}
+L'Azienda conferma la predilezione per gli incontri in modalità telematica. Adottando un approccio di tipo "cliente-fornitore", spetterà al team di sviluppo proporre un calendario periodico (es. riunioni bisettimanali) per rendicontare lo stato di avanzamento lavori.
+\subsection{Richiesta di delucidazioni sull'eventuale necessità di integrare l'applicativo con il software aziendale}
+È stato confermato che il progetto deve essere considerato come una prova tecnica a sé stante e del tutto autonoma. Per questo motivo, il software non dovrà essere collegato o inserito all'interno dei sistemi informatici che l'azienda sta già utilizzando.
+\subsection{Richiesta di indicazioni e di riferimenti tecnologici per lo sviluppo delle funzionalità basate su AI}
+L'Azienda suggerisce di operare all'interno dell'ecosistema Amazon Web Services (AWS), appoggiandosi a servizi quali AWS Bedrock o Comprehend. Si consiglia di sfruttare le documentazioni ufficiali e gli ambienti di test forniti.
+\subsection{Richiesta di approfondimento sui motivi che spingono a preferire l'utilizzo dell'Intelligenza Artificiale per l'estrazione dati}
+L'Azienda evidenzia che l'estrema eterogeneità dei formati documentali (es. buste paga generate da molteplici software gestionali) renderebbe lo sviluppo di logiche di codice eccessivamente complesso. L'utilizzo di modelli AI garantisce l'adattabilità necessaria per analizzare layout non standardizzati.
+\subsection{Scelta dello stack tecnologico}
+L'Azienda lascia totale autonomia decisionale al team di sviluppo. Si raccomanda di impiegare i linguaggi con cui il gruppo possiede maggiore padronanza (ad es. Python), al fine di minimizzare la curva di apprendimento e focalizzare le risorse sull'implementazione dell'AI.
+\subsection{Note finali}
+In chiusura, l'Azienda ha ribadito che l'approccio al progetto deve mantenere una connotazione formativa ed esplorativa. Le tempistiche e le attività da svolgere potranno essere soggetti a ricalibrazione in corso d'opera, al fine di garantire un flusso di lavoro sostenibile e senza eccessive pressioni.
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit{Angela Maule} &  Redigere il verbale 2026-03-16 & \href{https://github.com/aLittleByte-19/Documentazione/issues/19}{\#19}\\
+    \hline
+        \textit{Tutti i partecipanti} & Analisi dei chiarimenti emersi in riunione. & \href{https://github.com/aLittleByte-19/Documentazione/issues/20}{\#20}\\
+    \hline
+    \end{tabular}
+    \label{tab:todo}
+\end{table}
+\end{document}
