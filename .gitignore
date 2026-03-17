@@ -15,6 +15,7 @@
 tmp/
 temp/
 .cache/
+_site/
 
 # per latex
 *.aux
