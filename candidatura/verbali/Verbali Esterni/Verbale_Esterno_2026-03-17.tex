@@ -1,0 +1,162 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale  2026-03-17}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale  2026-03-17}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Esterno - 2026-03-17}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Maule Angela \\
+            Verificatori& Diego Belluz\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        &  2026-03-17\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Zoom \\[6pt]
+
+Orario (Inizio - Fine) & 16:30 -- 17:00 \\[6pt]
+
+Redattore &
+  A. Maule\\[6pt]
+
+Amministratore & 
+A. Gastaldello\\[6pt]
+
+Verificatore &
+D. Belluz\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  A. Gastaldello\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\[6pt]
+  
+\end{tabular}
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item  Chiedere al proponente Bluewind di rispondere ad alcune 
+domande, segnando le risposte così da poterle successivamente analizzare.
+    \end{itemize}
+
+\section{Attività svolte}
+Di seguito vengono riportate le richieste da noi effettuate e le risposte date dall'azienda.
+\subsection{Scelta delle tecnologie Frontend e Backend}
+L'azienda conferma massima flessibilità nella scelta dello stack tecnologico per il frontend. L'adozione di standard web di base o di framework JavaScript è a discrezione del team di sviluppo. L'indicazione di Python per il backend è motivata esclusivamente dalla maggiore competenza interna all'azienda, al fine di garantire un supporto tecnico più efficace in caso di necessità.
+\subsection{Gestione e Persistenza dei Dati}
+Non è necessario utilizzare un database. Poiché non si tratta di un'applicazione multi-utente e non c'è una grande mole di dati da gestire, il salvataggio delle informazioni in locale su file nel PC è una soluzione sufficiente.
+\subsection{Architettura degli Alberi Decisionali}
+Si raccomanda fortemente il caricamento dinamico degli alberi decisionali tramite l'importazione di file strutturati (es. JSON). Questo approccio garantisce una maggiore scalabilità e manutenibilità, consentendo futuri aggiornamenti senza richiedere interventi diretti sul codice sorgente.
+\subsection{Funzione dell'interfaccia grafica e Reportistica}
+L'azienda suggerisce di considerarla come una funzionalità aggiuntiva da implementare alla fine, una volta terminate le funzionalità base. L'idea sarebbe quella di poter salvare lo stato di avanzamento per riprenderlo in un secondo momento, oppure generare un report PDF finale riassuntivo.
+\subsection{Parametri tecnici dei dispositivi}
+L'azienda si impegna a fornire un set di dati di test (in formato JSON o XML) rappresentativo di un dispositivo tipo. Tale documento fungerà da base per collaudare le logiche degli alberi decisionali implementati.
+\subsection{Automazioni tecniche dei processi}
+Si conferma la presenza di una dipendenze gerarchiche tra i vari alberi decisionali. Il sistema dovrà essere dotato della logica necessaria per valutare l'applicabilità di un determinato iter in base alla tipologia di dispositivo analizzato, ignorando automaticamente i passaggi non pertinenti.
+\subsection{Difficoltà dei gruppi precedenti}
+Dal punto di vista tecnico non ci sono state grosse criticità, in quanto l'applicazione in sé non è molto complessa. La parte più critica e difficile solitamente riguarda l'inizio del progetto, ovvero lo studio, l'interpretazione dello standard di riferimento e la comprensione di come strutturare i requisiti degli alberi decisionali.
+\subsection{Frequenza degli incontri}
+Non c'è una cadenza fissa e obbligatoria. L'organizzazione dipenderà molto da quanto tempo il gruppo riuscirà a dedicare al progetto e dalle necessità contingenti. L'azienda fornirà contatti rapidi (email, Telegram) per dubbi veloci, mentre gli incontri (call) verranno fissati quando ci sarà un numero di domande più consistente o aggiornamenti importanti da mostrare.
+\newpage
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit{Angela Maule} &  Redigere il verbale 2026-03-17 & \href{https://github.com/aLittleByte-19/Documentazione/issues/30}{\#30}\\
+    \hline
+        \textit{Tutti i partecipanti} & Analizzare le risposte date per capire se il capitolato è adatto a noi o meno. &\href{https://github.com/aLittleByte-19/Documentazione/issues/31}{\#31}\\
+    \hline
+    \end{tabular}
+    \label{tab:todo}
+\end{table}
+
+\end{document}
