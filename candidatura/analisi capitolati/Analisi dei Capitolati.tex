@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
-\newcommand{\grouplogo}{../../../assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../../assets/solo_logo.png}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -75,9 +75,9 @@
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
             Redattori   & Angelica Gastaldello, Diego Belluz \\
-            Verificatori& \\
+            Verificatori& Leonardo Soligo, Eleonora Bellet\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & \\
+            Data        & 20/03/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -101,19 +101,25 @@
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline
-        0.0.7 & 12/03/2026 & Iniziato C5 & Angelica Gastaldello & - & - \\
+        1.0.0 & 20/03/2026 & Approvazione documento &  &  & Eleonora Bellet, Leonardo Soligo \\
         \hline
-        0.0.6 & 11/03/2026 & Stesura analisi capitolato C6 & Diego Belluz & - & - \\
+        0.6.2 & 19/03/2026 & Aggiunti link verbali & Angelica Gastaldello & Diego Belluz & - \\
         \hline
-        0.0.5 & 10/03/2026 & Stesura analisi capitolato C4 & Diego Belluz & - & - \\
+        0.6.1 & 18/03/2026 & Aggiornamento post-incontri con i proponenti & Angelica Gastaldello & Leonardo Soligo & - \\
         \hline
-        0.0.4 & 10/03/2026 & Terminato C1, iniziato C2 & Angelica Gastaldello & - & - \\
+        0.6.0 & 12/03/2026 & Stesura analisi C5 & Angelica Gastaldello & Leonardo Soligo & - \\
         \hline
-        0.0.3 & 09/03/2026 & Iniziato C1 & Angelica Gastaldello & - & - \\
+        0.5.0 & 11/03/2026 & Stesura analisi capitolato C6 & Diego Belluz & Eleonora Bellet & - \\
         \hline
-        0.0.2 & 08/03/2026 & Introduzione e Criteri & Angelica Gastaldello & - & - \\
+        0.4.0 & 10/03/2026 & Stesura analisi capitolato C4 & Diego Belluz & Eleonora Bellet & - \\
         \hline
-        0.0.1 & 07/03/2026 & Struttura del documento & Angelica Gastaldello & - & - \\
+        0.3.0 & 10/03/2026 & Stesura analisi C2 & Angelica Gastaldello & Leonardo Soligo & - \\
+        \hline
+        0.2.0 & 09/03/2026 & Stesura analisi C1 & Angelica Gastaldello & Leonardo Soligo & - \\
+        \hline
+        0.1.1 & 08/03/2026 & Introduzione e Criteri & Angelica Gastaldello & Eleonora Bellet & - \\
+        \hline
+        0.1.0 & 07/03/2026 & Struttura del documento & Angelica Gastaldello & Eleonora Bellet & - \\
         \hline
     \end{tabularx}
     }
@@ -229,6 +235,16 @@ Questa chiarezza tecnologica è stata valutata molto positivamente perché riduc
 
 \subsubsection{Incontro con il proponente}
 
+Dall'incontro con il proponente sono emersi i seguenti chiarimenti:
+\begin{itemize}
+    \item \textbf{Collaborazione:} incontri prevalentemente telematici, con cadenza periodica definita dal team;
+    \item \textbf{Perimetro del progetto:} sviluppo di una prova tecnica autonoma, senza integrazione diretta nei sistemi aziendali esistenti;
+    \item \textbf{Indicazioni tecnologiche:} consigliato ecosistema AWS (es. Bedrock/Comprehend), con piena libertà di stack e preferenza per tecnologie già note al gruppo;
+    \item \textbf{Approccio progettuale:} uso dell'AI motivato dall'eterogeneità documentale, con impostazione formativa e possibile ricalibrazione di tempi e attività.
+\end{itemize}
+
+Per ulteriori informazioni, consultare il \href{https://alittlebyte-19.github.io/Documentazione/candidatura/verbali/Verbali%20Esterni/Verbale_Esterno_2026-03-16.pdf}{\textcolor{blue}{\underline{verbale dell'incontro}}}.
+
 \subsubsection{Valutazione del gruppo}
 
 Durante la valutazione, il gruppo ha riconosciuto nel capitolato C5 diversi punti di forza:
@@ -249,7 +265,7 @@ Parallelamente, il gruppo ha individuato alcune criticità:
     \item necessità di affrontare temi delicati come sicurezza, GDPR, auditabilità e affidabilità dei sistemi AI.
 \end{itemize}
 
-Nonostante tali criticità, il gruppo ha ritenuto che C5 rappresentasse la scelta migliore. Il capitolato è stato valutato come quello più allineato agli obiettivi formativi e progettuali del team, poiché unisce interesse tecnologico, struttura chiara, rilevanza industriale e possibilità concreta di realizzare un prodotto di qualità entro i vincoli temporali del corso.
+Nonostante tali criticità, il gruppo ha individuato con convinzione nel capitolato C5 la scelta migliore. La decisione è maturata in modo solido e condiviso, poiché C5 è risultato il più allineato agli obiettivi formativi e progettuali del team: combina interesse tecnologico, struttura chiara, forte rilevanza industriale e una concreta sostenibilità realizzativa entro i vincoli temporali del corso.
 
 \section{Analisi degli altri capitolati}
 \subsection{C1 - Automated EN18031 Compliance Verification}
@@ -303,35 +319,34 @@ Questa flessibilità rappresenta contemporaneamente un vantaggio e un costo: da 
 
 \subsubsection{Incontro con il proponente}
 
-\subsubsection{Valutazione del gruppo}
-
-Durante la valutazione, il gruppo ha riconosciuto i punti di forza del capitolato: requisiti ben strutturati, dominio applicativo realistico e disponibilità del proponente a fornire supporto continuo sia da remoto sia in presenza.
-
-Sono stati inoltre considerati positivamente:
-
+Dall'incontro con il proponente sono emersi i seguenti chiarimenti:
 \begin{itemize}
-    \item la chiarezza della traccia progettuale e dei criteri di completamento;
-    \item la presenza di un caso studio concreto per validare il prodotto;
-    \item la forte rilevanza industriale e normativa del problema affrontato.
+    \item \textbf{Tecnologie:} piena libertà nello stack frontend; Python suggerito lato backend per facilitare il supporto aziendale;
+    \item \textbf{Persistenza dati:} database non obbligatorio, è accettato anche il salvataggio locale su file;
+    \item \textbf{Architettura:} consigliato caricamento dinamico degli alberi decisionali (JSON/XML) e gestione automatica delle dipendenze gerarchiche;
+    \item \textbf{Collaborazione:} incontri a richiesta, con contatti rapidi via email/Telegram e call quando necessario.
 \end{itemize}
 
-Parallelamente, il gruppo ha individuato alcune criticità:
+Per ulteriori informazioni, consultare il \href{https://alittlebyte-19.github.io/Documentazione/candidatura/verbali/Verbali%20Esterni/Verbale_Esterno_2026-03-17.pdf}{\textcolor{blue}{\underline{verbale dell'incontro}}}.
+
+\subsubsection{Valutazione del gruppo}
+
+Durante la valutazione, il gruppo ha riconosciuto i principali punti di forza del capitolato:
+
+\begin{itemize}
+    \item requisiti chiari e ben strutturati;
+    \item caso studio concreto e rilevanza industriale;
+    \item buona disponibilità del proponente al supporto.
+\end{itemize}
+
+Sono emerse però anche alcune criticità:
 
 \begin{itemize}
     \item curva di apprendimento iniziale elevata legata all'interpretazione della norma;
-    \item forte dipendenza dalla corretta modellazione logica dei Decision Tree e delle loro gerarchie;
-    \item margine percepito più limitato, rispetto ad altri capitolati, in termini di sperimentazione creativa e ampiezza delle funzionalità innovative.
+    \item minore margine creativo rispetto ad altri capitolati.
 \end{itemize}
 
-Nonostante ciò, il progetto non è stato selezionato come scelta finale. Le principali motivazioni sono state:
-
-\begin{itemize}
-    \item interesse complessivamente più limitato del team verso il dominio normativo rispetto ad altri capitolati;
-    \item percezione di un minor margine creativo e di estensione funzionale rispetto alle alternative considerate;
-    \item necessità di un investimento iniziale significativo nell'interpretazione della normativa, ritenuto meno allineato agli obiettivi formativi prioritari del gruppo.
-\end{itemize}
-
-In conclusione, il capitolato C1 è stato valutato come solido, ben definito e supportato da un proponente disponibile, ma complessivamente meno allineato alle preferenze tecniche e agli interessi progettuali del gruppo aLittleByte rispetto al capitolato poi selezionato.
+In conclusione, C1 è stato ritenuto solido e ben definito, ma non selezionato perché meno allineato agli interessi e agli obiettivi formativi del gruppo rispetto al capitolato scelto.
 
 \subsection{C2 - Code Guardian}
 
@@ -504,6 +519,8 @@ Dall'incontro con il proponente sono emersi i seguenti chiarimenti:
     \item \textbf{Modelli LLM:} è possibile utilizzare modelli OpenAI o API key fornite per Gemini, Mistral o Gemma;
     \item \textbf{Storage:} è consigliato l'uso di \textbf{PostgreSQL}, mentre è sconsigliato l'utilizzo di database NoSQL.
 \end{itemize}
+
+Per ulteriori informazioni, consultare il \href{https://alittlebyte-19.github.io/Documentazione/candidatura/verbali/Verbali%20Esterni/Verbale_Esterno_2026-03-11.pdf}{\textcolor{blue}{\underline{verbale dell'incontro}}}.
 
 \subsubsection{Valutazione del gruppo}
 
