@@ -13,8 +13,8 @@
 \usepackage{pgf-pie}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../../assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../../assets/solo_logo.png}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -77,9 +77,9 @@
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
             Redattore   & Angela Maule, Eleonora Bellet \\
-            Verificatori& \\
+            Verificatori & Alex Oloni, Vinicius Yuri Kaneda Fernandes \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & \\
+            Data        & 2026-03-19
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -101,13 +101,15 @@
     \begin{tabularx}{\textwidth}{|l|l|X|p{2cm}|p{2cm}|p{2cm}|}
         \hline
         \rowcolor{gray!20}
-        \textbf{Ver.} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+         \hline 
+        1.0.0 & 2026-03-19 & Approvazione documento & - & - & A. Oloni, V. Y. Kaneda Fernandes\\
         \hline 
-        1.2 & 2026-03-11 & Stesura sezione 3 (Preventivo costi) & Angela Maule & - & - \\
+        0.3.0 & 2026-03-17 & Stesura sezione 3 (Preventivo costi) & A. Maule & A. Oloni & - \\
         \hline 
-        1.1 & 2026-03-10 & Stesura sezione 2 (Impegno orario e Ruoli) & A. Maule, E. Bellet & - & - \\
+        0.2.0 & 2026-03-10 & Stesura sezione 2 (Impegno orario e Ruoli) & A. Maule, E. Bellet & V. Y. Kaneda Fernandes & - \\
         \hline
-        1.0 & 2026-03-09 & Struttura del documento e Introduzione & Eleonora Bellet & - & - \\
+        0.1.0 & 2026-03-09 & Struttura del documento e Introduzione & E. Bellet & A. Oloni & - \\
         \hline 
     \end{tabularx}
     }
@@ -131,7 +133,7 @@
 \section{Introduzione}
 \subsection{Finalità del documento}
 
-Con il seguente documento, il gruppo aLittleByte (Gruppo 19) di Ingegneria del Software dichiara l'impegno orario preventivato per l'implementazione del capitolato C5 - Nexum, proposto da Eggon, confermando la propria candidatura per la sua realizzazione.
+Con il seguente documento, il gruppo aLittleByte (Gruppo 19) di Ingegneria del Software dichiara l'impegno orario preventivato per l'implementazione del capitolato C5, proposto da Eggon-Nexum, confermando la propria candidatura per la sua realizzazione.
 Nel documento sono riportati: la descrizione dei ruoli previsti per lo svolgimento del progetto, il monte ore assegnato a ciascun componente e il preventivo economico totale.
 
 \section{Impegno orario e Ruoli}
@@ -167,7 +169,7 @@ Leonardo Soligo &8  &7  &9  &20  &23  &23  & \textbf{90} \\
 \end{table}
 \subsection{Analisi dei Ruoli}
 \subsubsection{Responsabile}
-Il responsabile coordina le attività e gestisce le comunicazioni con i docenti e l'azienda proponente (Eggon). Si occupa della pianificazione temporale, del monitoraggio dell'avanzamento, assicurandosi che la rotazione dei ruoli avvenga in modo corretto. Ha inoltre il compito di definire e far rispettare le \textit{Norme di Progetto} e le linee guida di sviluppo. È una figura presente durante l'intero ciclo di vita del software, ma il suo impegno è particolarmente intensivo nelle fasi iniziali, per poi diminuire progressivamente man mano che il team acquisisce autonomia operativa. Essendo il ruolo economicamente più oneroso, il suo monte ore è stato ottimizzato per garantire efficienza senza gravare eccessivamente sul preventivo finale.
+Il responsabile coordina le attività e gestisce le comunicazioni con i docenti e l'azienda proponente (Eggon-Nexum). Si occupa della pianificazione temporale, del monitoraggio dell'avanzamento, assicurandosi che la rotazione dei ruoli avvenga in modo corretto. Ha inoltre il compito di definire e far rispettare le \textit{Norme di Progetto} e le linee guida di sviluppo. È una figura presente durante l'intero ciclo di vita del software, ma il suo impegno è particolarmente intensivo nelle fasi iniziali, per poi diminuire progressivamente man mano che il team acquisisce autonomia operativa. Essendo il ruolo economicamente più oneroso, il suo monte ore è stato ottimizzato per garantire efficienza senza gravare eccessivamente sul preventivo finale.
 
 \subsubsection{Amministratore}
 Ha il compito di predisporre e preservare l'ecosistema tecnologico di supporto al team, garantendo la piena operatività delle infrastrutture IT e degli strumenti di collaborazione. Promuove l'efficienza del gruppo integrando processi automatizzati, come la validazione continua e l'esecuzione dei test. Trattandosi di una figura focalizzata in larga parte sul setup iniziale e sul monitoraggio dei sistemi, l'impegno orario a preventivo risulta tra i più contenuti dell'intero progetto.
@@ -185,7 +187,7 @@ La figura del verificatore ha il compito di certificare la correttezza e la qual
 Il programmatore è la figura operativa per eccellenza. Si occupa della stesura del codice in linea con gli standard di settore. Si fa carico di assemblare i componenti del sistema, documentarne il funzionamento e garantirne l'affidabilità fin dalle basi tramite i test unitari. Il suo intervento è richiesto in maniera continuativa per tutta la durata delle fasi di realizzazione e manutenzione.
 
 \subsection{Motivazione suddivisione oraria }
-Il preventivo orario complessivo di 630 ore è stato suddiviso assegnando a ciascun membro un impegno di 90 ore produttive. Per assicurare una crescita professionale completa, il gruppo ha pianificato una rotazione dei ruoli ogni due settimane ( DA SENTIRE AZIENDA per allinearsi in modo naturale agli sprint concordati con l'azienda proponente.)
+Il preventivo orario complessivo di 630 ore è stato suddiviso assegnando a ciascun membro un impegno di 90 ore produttive. Per assicurare una crescita professionale completa, il gruppo ha pianificato una rotazione dei ruoli ogni due settimane.
 Osservando la distribuzione: il nucleo centrale del lavoro è stato posto sulle figure tecniche. In particolare, si è deciso di assegnare un peso esattamente identico alla stesura del codice (Programmatore, 160 ore) e al controllo qualità (Verificatore, 160 ore). Questa specularità nasce dalla volontà di non relegare il testing a una fase secondaria, ma di farlo procedere di pari passo con lo sviluppo.
 \\
 Una parte importante del preventivo (143 ore) è stata assegnata al Progettista. L'obiettivo è creare da subito una base solida: investire tempo in una buona architettura e in una documentazione chiara facilita il lavoro dei programmatori e riduce il rischio di dover correggere gravi errori in futuro.

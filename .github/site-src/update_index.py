@@ -24,12 +24,36 @@ def build_html_tree(base_path, relative_path=""):
     # Ottieni cartelle e file, ignorando file nascosti e cartelle escluse
     items = sorted([i for i in os.listdir(current_dir) if not i.startswith('.')])
     
+    # Assicura che la Lettera di Presentazione sia in cima
+    for i, item in enumerate(items):
+        if "lettera di presentazione" in item.lower():
+            items.insert(0, items.pop(i))
+            break
+    
     dirs = [d for d in items if os.path.isdir(os.path.join(current_dir, d)) and d not in EXCLUDE_DIRS]
     files = [f for f in items if os.path.isfile(os.path.join(current_dir, f)) and f not in EXCLUDE_FILES]
 
     # 1. Stampa SOLO i file .pdf
     valid_files = [f for f in files if f.endswith('.pdf')]
     if valid_files:
+        def get_sort_key(filename):
+            # Cerca una data nel nome del file (es. 2026-03-16 o 2026_03_16)
+            date_match = re.search(r'(\d{4})[-_](\d{2})[-_](\d{2})', filename)
+            if date_match:
+                # Restituisce la data come stringa YYYYMMDD per l'ordinamento
+                return (date_match.group(1) + date_match.group(2) + date_match.group(3), filename)
+            # Fallback: data di modifica del file e nome
+            return (str(os.path.getmtime(os.path.join(current_dir, filename))), filename)
+
+        # Ordina i file in ordine decrescente (più recenti in alto)
+        valid_files.sort(key=get_sort_key, reverse=True)
+
+        # Assicura che la Lettera di Presentazione sia il primo file
+        for i, f in enumerate(valid_files):
+            if "lettera di presentazione" in f.lower():
+                valid_files.insert(0, valid_files.pop(i))
+                break
+        
         html_output += '    <div class="doc">\n'
         for f in valid_files:
             if relative_path:
