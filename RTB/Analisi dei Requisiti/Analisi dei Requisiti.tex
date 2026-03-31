@@ -117,10 +117,65 @@
 \fancyfoot[R]{Analisi dei Capitolati\hspace{0.8em}\thepage}
 
 \section{Introduzione}
+\subsection{Scopo del documento}
+Il presente documento di Analisi dei Requisiti ha l'obiettivo di descrivere in modo completo e strutturato i requisiti funzionali e non funzionali del sistema software progettato per il proponente Eggon S.r.l. .\\
+L'applicazione implementerà i moduli "AI Assistant Generativo" e "AI Co-Pilot per i Consulenti del Lavoro", permettendo di sperimentare le funzionalità previste in un ambiente controllato.\\
+Il documento descrive in dettaglio i casi d'uso del sistema, che rappresentano la base per l'individuazione dei requisiti, e include i diagrammi dei casi d'uso per rappresentare visivamente le interazioni tra gli attori e il sistema. \\
+I requisiti identificati costituiscono il riferimento per le attività di progettazione, sviluppo e collaudo dell'applicazione, garantendo coerenza con le esigenze del committente e con gli obiettivi formativi e tecnici del progetto. \\
+Il documento è destinato a sviluppatori, progettisti e stakeholder, fornendo una base condivisa per tutte le fasi del ciclo di vita del software.
+Il documento non tratta nel dettaglio le scelte implementative o tecnologiche di basso livello, le quali saranno affrontate nelle successive fasi di progettazione architetturale.
+
+\subsection{Sviluppo del documento}
+Il presente documento è stato redatto adottando un approccio incrementale, con l’obiettivo di consentire aggiornamenti e revisioni nel corso del progetto.\\
+La struttura e i contenuti sono stati definiti in modo da garantire flessibilità, permettendo di recepire eventuali modifiche derivanti dall’evoluzione dei requisiti o dal confronto con il committente.\\
+Il documento è pertanto soggetto a un processo di revisione continua, finalizzato a mantenerne coerenza, completezza e allineamento con gli obiettivi progettuali.
+
+\subsection{Riferimenti}
+\subsubsection{Riferimenti normativi}
+\begin{itemize}
+    \item \href{ https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato C5-Eggon}
+    \item \href{ https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}{Regolamento progetto Ingegneria del Software}
+    \item \href{URL}{Norme di progetto}
+\end{itemize}
+\subsubsection{Riferimenti informativi}
+\begin{itemize}
+    \item \href{URL}{Glossario}
+    \item INSERIRE SLIDE DI TULLIO O CARDIN
+\end{itemize}
 
 \section{Descrizione del prodotto}
 
 \section{Casi d'uso}
+\subsection{Introduzione}
+In questa sezione vengono descritti i Casi d'Uso (Use Cases) dell'applicazione. Essi definiscono le interazioni tra gli utenti e il sistema, chiarendo le funzionalità che il software deve offrire.\\
+Ogni caso d'uso è documentato attraverso un diagramma UML e una scheda testuale. Per garantire chiarezza e sintesi, le schede descrittive si concentreranno sugli elementi essenziali:
+\begin{itemize}
+    \item \textbf{Attrori primari}:L'utente umano o il sistema esterno che avvia attivamente il caso d'uso per raggiungere un obiettivo specifico.
+    \item \textbf{Attori secondari}:Sistemi terzi o entità coinvolte passivamente nel processo, richiamate dal sistema principale per completare l'operazione.
+    \item \textbf{Precondizioni}:Le condizioni e lo stato in cui il sistema deve obbligatoriamente trovarsi prima che il caso d'uso possa avere inizio.
+    \item \textbf{Postondizioni}:Il nuovo stato del sistema o dei dati una volta che il caso d'uso si è concluso con successo.
+    \item \textbf{Scenario principale}:La sequenza lineare e ottimale di interazioni tra attore e sistema, senza interruzioni o errori.
+    \item \textbf{Scenario alternativo}:I percorsi secondari che descrivono come il sistema gestisce eventuali errori, eccezioni o scelte diverse da parte dell'utente.
+    \item \textbf{Trigger}:L'evento specifico, che sia un'azione manuale o un segnale di sistema, che innesca l'esecuzione del caso d'uso.
+    \item \textbf{Estensioni}:Comportamenti opzionali o eccezionali che si aggiungono al flusso principale solo al verificarsi di determinate condizioni.
+    \item \textbf{Inclusioni}:Sotto-processi o altri casi d'uso richiamati obbligatoriamente per evitare di duplicare la descrizione di operazioni comuni.
+    \item \textbf{Generalizzazioni}:Una relazione in cui un caso d'uso specifico eredita e specializza le caratteristiche e il comportamento di un caso d'uso più generico.
+    \item \textbf{Sottocasi}:Scomposizione logica di un caso d'uso molto complesso in porzioni più piccole e gestibili, al fine di facilitarne la lettura.
+\end{itemize}
+\subsection{Attori primari}
+Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi esterni che interagiscono direttamente con l'applicazione. Sulla base dell'analisi dei processi aziendali e dei flussi operativi previsti, sono stati identificati i seguenti attori:
+\subsubsection{Utenti operativi}
+\begin{itemize}
+    \item \textbf{Amministartore}:Ha il compito di configurare l'ambiente standalone. Si occupa di assegnare i privilegi operativi ai vari account e di definire le policy globali dell'applicativo.
+    \item \textbf{Redattore}:È la figura aziendale delegata alla creazione delle comunicazioni interne. Interagisce in modo diretto con il Modulo AI Assistant per fornire i prompt di base, calibrare il tono di voce desiderato e confermare la bontà dei contenuti proposti dal sistema.
+    \item \textbf{Analista dati}: Supervisiona l'efficienza dell'applicativo. Accede alle sezioni analitiche per valutare le performance dell'intelligenza artificiale, esaminando i feedback forniti dagli operatori e le metriche di successo del riconoscimento documentale.
+    \item \textbf{Consulente del lavoro}:È l'utilizzatore primario del Modulo AI Co-Pilot. Il suo ruolo consiste nel caricare i lotti documentali (come i cedolini massivi), revisionare le estrazioni per correggere eventuali imperfezioni e validare le code di invio.
+\end{itemize}
+\subsubsection{Moduli esterni}
+\begin{itemize}
+    \item \textbf{AI Post Generator}:Il core di intelligenza artificiale che elabora le richieste del redattore. Agisce come attore di sistema restituendo i testi formattati, i titoli e le immagini per le comunicazioni aziendali.
+    \item \textbf{AI Analys}:Costituisce il nucleo elaborativo del modulo AI Co-Pilot. Prende in carico i lotti di file caricati dall'operatore ed esegue in autonomia le operazioni di classificazione documentale, estrazione del testo e associazione ai rispettivi destinatari.
+\end{itemize}
 
 
 \end{document}
