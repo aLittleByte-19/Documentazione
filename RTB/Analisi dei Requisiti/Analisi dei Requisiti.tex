@@ -101,7 +101,9 @@
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline
-        0.1.0 & 30/03/2026 & Struttura documento & Angelica Gastaldello & Angela Maule & \\
+        0.2.0 & 31/03/2026 & Descrizione del prodotto & Angelica Gastaldello & Angela Maule & -\\
+        \hline
+        0.1.0 & 30/03/2026 & Struttura documento & Angelica Gastaldello & Angela Maule & -\\
         \hline
     \end{tabularx}
     }
@@ -145,6 +147,61 @@ Il documento è pertanto soggetto a un processo di revisione continua, finalizza
 
 \section{Descrizione del prodotto}
 
+\subsection{Obiettivi del prodotto}
+
+L'obiettivo del progetto è potenziare i processi HR e documentali dei consulenti del lavoro con strumenti intelligenti mantenendo la soluzione autonoma rispetto ai canali NEXUM esistenti. In particolare il prodotto mira a:
+\begin{itemize}
+    \item migliorare l'efficienza della comunicazione aziendale tramite generazione assistita di contenuti coerenti con tono e stile dell'organizzazione;
+    \item ridurre tempi di gestione ed errori nella classificazione, suddivisione e distribuzione dei documenti massivi destinati ai dipendenti;
+    \item fornire workflow pienamente tracciabili, auditabili e conformi alle normative (sicurezza, ruoli, GDPR);
+    \item abilitare un'evoluzione data-driven dei moduli AI attraverso metriche di utilizzo, qualità e performance;
+    \item mantenere un'architettura modulare e scalabile che possa in futuro interoperare con l'ecosistema NEXUM senza dipenderne.
+\end{itemize}
+La soluzione viene realizzata come piattaforma stand-alone, concordata appositamente per operare in modo indipendente dai canali applicativi di NEXUM (dashboard amministrativa e PWA). Pur restando allineata alle linee guida tecnologiche del capitolato, la piattaforma mantiene un proprio ciclo di vita applicativo e integra solo i servizi necessari per l'elaborazione intelligente dei contenuti e dei documenti.
+
+
+\subsection{Funzionalità del prodotto}
+
+Il prodotto è articolato in due macro-componenti funzionali, supportate da servizi trasversali di gestione e monitoraggio.
+
+\paragraph{AI Assistant Generativo}
+\begin{itemize}
+    \item Generazione di titolo, corpo del testo e immagine di copertina a partire da prompt inseriti dall'utente.
+    \item Selezione guidata di tono e stile (formale, informale, neutro, empatico, tecnico) per calibrare i contenuti al registro aziendale.
+    \item Anteprima con possibilità di modifica manuale, rigenerazione o approvazione finale e salvataggio nello storico dei contenuti.
+    \item Catalogazione dei prompt con filtri, riuso e duplicazione rapida per mantenere coerenza editoriale.
+    \item Sistema di valutazione qualitativa (rating e feedback) e dashboard di analytics sull'utilizzo dello strumento.
+\end{itemize}
+
+\paragraph{AI Co-Pilot per Consulenti del Lavoro}
+\begin{itemize}
+    \item Upload singolo o massivo dei documenti nel repository dedicato con controlli su duplicati e formati supportati.
+    \item Riconoscimento tipologico tramite OCR e classificazione AI con popolamento automatico dei metadati principali.
+    \item Estrazione e associazione dei destinatari sfruttando algoritmi di entity resolution e gestione delle ambiguità.
+    \item Split automatico dei documenti multi-destinatario con tracciabilità tra originale e copie atomiche.
+    \item Revisione human-in-the-loop per casi a bassa confidenza, con log delle correzioni.
+    \item Composizione assistita della lista di dispaccio e dei messaggi di invio, compresi template riutilizzabili.
+    \item Tracciamento dell'invio, delle prove di consegna e delle letture, con gestione di retry e anomalie.
+    \item Ricerca avanzata, audit trail e policy di conservazione configurabili.
+    \item Gestione di ruoli, permessi e policy di sicurezza dedicate alla piattaforma.
+\end{itemize}
+
+\paragraph{Funzionalità trasversali}
+\begin{itemize}
+    \item Esecuzione asincrona delle operazioni time-consuming per garantire fluidità dell'interfaccia.
+    \item Raccolta centralizzata di log e metriche operative a supporto della governance e del miglioramento continuo dei modelli AI.
+    \item Configurazione dei parametri di qualità (soglie di confidenza, regole di split, template di messaggio) per ciascun tenant o cliente.
+\end{itemize}
+
+\subsection{Utenza di riferimento}
+
+Il prodotto si rivolge a più categorie di utenti, ciascuna con responsabilità specifiche nel ciclo di vita dei contenuti e dei documenti.
+\begin{itemize}
+    \item \textbf{Amministratori e HR Manager aziendali}: utilizzano l'AI Assistant Generativo per creare, revisionare e pubblicare comunicazioni interne coerenti con le linee guida editoriali.
+    \item \textbf{Operatori e referenti degli studi dei Consulenti del Lavoro}: presidiano l'AI Co-Pilot per caricare, riconoscere, suddividere e distribuire documenti ai destinatari corretti.
+    \item \textbf{Figure di controllo e governance}: monitorano metriche, audit trail, policy e qualità dei moduli AI per garantire conformità e miglioramento continuo.
+\end{itemize}
+
 \section{Casi d'uso}
 \subsection{Introduzione}
 In questa sezione vengono descritti i Casi d'Uso (Use Cases) dell'applicazione. Essi definiscono le interazioni tra gli utenti e il sistema, chiarendo le funzionalità che il software deve offrire.\\
@@ -176,6 +233,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item \textbf{AI Post Generator}:Il core di intelligenza artificiale che elabora le richieste del redattore. Agisce come attore di sistema restituendo i testi formattati, i titoli e le immagini per le comunicazioni aziendali.
     \item \textbf{AI Analys}:Costituisce il nucleo elaborativo del modulo AI Co-Pilot. Prende in carico i lotti di file caricati dall'operatore ed esegue in autonomia le operazioni di classificazione documentale, estrazione del testo e associazione ai rispettivi destinatari.
 \end{itemize}
+
+\subsubsection{AI Assistant Generativo}
+
+\subsubsection{AI Co-Pilot per Consulenti del Lavoro}
+
+\subsubsection{Governance e qualità}
 
 
 \end{document}
