@@ -9,6 +9,12 @@
 \usepackage[most]{tcolorbox}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{enumitem}
+
+\setcounter{secnumdepth}{4}   
+\setcounter{tocdepth}{4}     
+\renewcommand{\theparagraph}{\thesubsubsection.\arabic{paragraph}}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
 \newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
@@ -100,6 +106,14 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.4.2 & 9/04/2026 & UC-3 e UC-4 & Angela Maule & Angelica Gastaldello & - \\
+        \hline
+        0.4.1 &  3/04/2026 & UC-1 e UC-2 & Angela Maule & Angelica Gastaldello & - \\
+        \hline 
+        0.4.0 & 1/04/2026 & Inizio stesura Casi d'uso & Angela Maule & Angelica Gastaldello & - \\
+        \hline
+        0.3.0 & 31/03/2026 & Introduzione & Angela Maule & Angelica Gastaldello & - \\
         \hline
         0.2.0 & 31/03/2026 & Descrizione del prodotto & Angelica Gastaldello & Angela Maule & -\\
         \hline
@@ -223,7 +237,7 @@ Ogni caso d'uso è documentato attraverso un diagramma UML e una scheda testuale
 Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi esterni che interagiscono direttamente con l'applicazione. Sulla base dell'analisi dei processi aziendali e dei flussi operativi previsti, sono stati identificati i seguenti attori:
 \subsubsection{Utenti operativi}
 \begin{itemize}
-    \item \textbf{Amministartore}:Ha il compito di configurare l'ambiente standalone. Si occupa di assegnare i privilegi operativi ai vari account e di definire le policy globali dell'applicativo.
+    \item \textbf{Amministratore}:Ha il compito di configurare l'ambiente standalone. Si occupa di assegnare i privilegi operativi ai vari account e di definire le policy globali dell'applicativo.
     \item \textbf{Redattore}:È la figura aziendale delegata alla creazione delle comunicazioni interne. Interagisce in modo diretto con il Modulo AI Assistant per fornire i prompt di base, calibrare il tono di voce desiderato e confermare la bontà dei contenuti proposti dal sistema.
     \item \textbf{Analista dati}: Supervisiona l'efficienza dell'applicativo. Accede alle sezioni analitiche per valutare le performance dell'intelligenza artificiale, esaminando i feedback forniti dagli operatori e le metriche di successo del riconoscimento documentale.
     \item \textbf{Consulente del lavoro}:È l'utilizzatore primario del Modulo AI Co-Pilot. Il suo ruolo consiste nel caricare i lotti documentali (come i cedolini massivi), revisionare le estrazioni per correggere eventuali imperfezioni e validare le code di invio.
@@ -231,14 +245,289 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{Moduli esterni}
 \begin{itemize}
     \item \textbf{AI Post Generator}:Il core di intelligenza artificiale che elabora le richieste del redattore. Agisce come attore di sistema restituendo i testi formattati, i titoli e le immagini per le comunicazioni aziendali.
-    \item \textbf{AI Analys}:Costituisce il nucleo elaborativo del modulo AI Co-Pilot. Prende in carico i lotti di file caricati dall'operatore ed esegue in autonomia le operazioni di classificazione documentale, estrazione del testo e associazione ai rispettivi destinatari.
+    \item \textbf{AI Analyst}:Costituisce il nucleo elaborativo del modulo AI Co-Pilot. Prende in carico i lotti di file caricati dall'operatore ed esegue in autonomia le operazioni di classificazione documentale, estrazione del testo e associazione ai rispettivi destinatari.
 \end{itemize}
 
-\subsubsection{AI Assistant Generativo}
+\subsection{AI Assistant Generativo}
+\subsubsection{UC-1: Generazione del contenuto tramite AI}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attore Principale] Redattore
+    
+    \item[Attore Secondario] AI Post Generator
+    
+    \item[Pre-condizioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item Il sistema ha autenticato il Redattore e verificato i relativi permessi di accesso(DA PARLARNE).
+        \item Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo".
+    \end{itemize}
+    
+    \item[Post-condizioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item Il sistema mostra a schermo l'anteprima del contenuto generato (titolo, testo e immagine).
+        \item Il sistema ha allocato temporaneamente in memoria i dati della generazione.
+        \item Il sistema abilita le funzionalità di revisione e modifica manuale del testo.
+    \end{itemize}
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro e i moduli di configurazione.
+        \item Il Redattore compila il prompt testuale descrittivo (\textbf{UC-1.1}) e specifica i parametri di stile e tono di voce desiderati (\textbf{UC-1.2}).
+        \item Il Redattore conferma l'operazione per richiedere l'avvio della sintesi del contenuto.
+        \item Il sistema inoltra i parametri all'AI Post Generator, che elabora la richiesta e restituisce l'output finale per la successiva visualizzazione a schermo.
+    \end{enumerate}
+    
+    \item[Scenari Alternativi] 
+    \textbf{UC-1.1.E1 (Errore - Prompt non valido):} Qualora il Redattore tenti di procedere con un input vuoto o insufficiente, il sistema evidenzia l'area di inserimento e inibisce il comando di generazione.(DA PARLARNE)
+    
+    \item[Relazioni con altri Casi d'uso] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{UC-1.1}: Inserimento del prompt testuale.
+        \item \textbf{UC-1.2}: Selezione del tono e dello stile.
+    \end{itemize}
 
-\subsubsection{AI Co-Pilot per Consulenti del Lavoro}
+\end{description}
 
-\subsubsection{Governance e qualità}
+\paragraph{UC-1.1: Inserimento del prompt testuale}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il sistema mostra l'interfaccia di configurazione del modulo AI.
+    
+    \item[Post-condizioni] Il sistema ha acquisito il prompt in memoria.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il campo di input del prompt.
+        \item Il Redattore inserisce il testo descrittivo del contenuto.
+        \item Il sistema registra l'input e abilita i parametri stilistici.
+    \end{enumerate}
+  
+\end{description}
+
+\paragraph{UC-1.2: Selezione del tono e dello stile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il sistema ha acquisito il prompt (UC-1.1) e rende visibili i selettori per la personalizzazione.
+    
+    \item[Post-condizioni] Il sistema ha registrato le preferenze di tono e stile del contenuto.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il tono di voce desiderato tramite l'apposito menu.
+        \item Il Redattore seleziona lo stile grafico o editoriale del contenuto(DA PARLARNE).
+        \item Il sistema salva le impostazioni e abilita il comando di generazione finale.
+    \end{enumerate}
+    
+\end{description}
+\subsubsection{UC-2: Anteprima e revisione del contenuto}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attore Principale] Redattore
+    
+    \item[Attore Secondario] AI Post Generator
+    
+    \item[Pre-condizioni] Il sistema ha completato la generazione (UC-1) e mostra l'anteprima di titolo, testo e immagine.
+    
+    \item[Post-condizioni] Il sistema ha aggiornato il contenuto in base alle revisioni del Redattore.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore visualizza l'anteprima del risultato generato dall'AI.
+        \item Il Redattore utilizza l'editor per la modifica manuale del testo (\textbf{UC-2.1}).
+        \item Il Redattore valuta la possibilità di procedere con la rigenerazione del contenuto (\textbf{UC-2.2}).
+    \end{enumerate}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{UC-2.1}: Modifica manuale del testo.
+        \item \textbf{UC-2.2}: Rigenerazione del contenuto.
+    \end{itemize}
+
+\end{description}
+
+\paragraph{UC-2.1: Modifica manuale del testo}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il sistema presenta il testo generato all'interno di un editor interattivo.
+    
+    \item[Post-condizioni] Il sistema registra e visualizza le correzioni apportate manualmente.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona la parte di testo o il titolo da correggere.
+        \item Il Redattore inserisce le modifiche.
+        \item Il sistema salva temporaneamente le modifiche e aggiorna l'anteprima.
+    \end{enumerate}
+    
+\end{description}
+
+\paragraph{UC-2.2: Rigenerazione del contenuto}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore (Principale), AI Post Generator (Secondario)
+    
+    \item[Pre-condizioni] Il sistema visualizza il contenuto e abilita i comandi di rigenerazione.
+    
+    \item[Post-condizioni] Il sistema sostituisce la versione precedente con un nuovo output dell'AI in memoria.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore richiede una nuova variante (totale o di un singolo elemento).
+        \item Il sistema inoltra la richiesta all'AI Post Generator.
+        \item L'AI Post Generator produce una nuova versione del contenuto.
+        \item Il sistema aggiorna l'anteprima con il nuovo risultato ricevuto.
+    \end{enumerate}
+    
+\end{description}
+
+\subsubsection{UC-3: Approvazione e Pubblicazione}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attore Principale] Redattore
+    
+    \item[Pre-condizioni] Il sistema ha in memoria la versione finale e revisionata del contenuto (UC-2).
+    
+    \item[Post-condizioni] Il contenuto è stato archiviato come bozza oppure esportato/inoltrato con successo.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore decide di salvare il contenuto come bozza (\textbf{UC-3.1}).
+        \item Il Redattore approva il contenuto finale e procede con l'esportazione o l'inoltro (\textbf{UC-3.2}) via e-mail.
+    \end{enumerate}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{UC-3.1}: Salvataggio come bozza.
+        \item \textbf{UC-3.2}: Esportazione e inoltro del contenuto.
+    \end{itemize}
+
+\end{description}
+
+\paragraph{UC-3.1: Salvataggio in bozza}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il sistema mostra l'interfaccia di editing con il contenuto generato o modificato.
+    
+    \item[Post-condizioni] Il sistema ha salvato lo stato attuale del documento senza procedere alla pubblicazione.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona l'opzione "Salva come bozza".
+        \item Il sistema registra il contenuto nell'archivio.
+        \item Il sistema conferma a video l'avvenuto salvataggio.
+    \end{enumerate}
+    
+\end{description}
+
+\paragraph{UC-3.2: Esportazione e inoltro del contenuto}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha ultimato la revisione e confermato la validità del contenuto finale.
+    
+    \item[Post-condizioni] Il contenuto, completo del marcatore "Creato da AI Assistant", è stato esportato o inviato tramite e-mail.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il formato di esportazione (es. file PDF) o inserisce l'indirizzo/i per l'inoltro via e-mail.
+        \item Il sistema applica automaticamente al contenuto il marcatore "Creato da AI Assistant".
+        \item Il sistema genera il file finale o invia il messaggio tramite e-mail.
+        \item Il sistema notifica all'utente il completamento dell'operazione.
+    \end{enumerate}
+    \item[Scenari Alternativi] 
+    \textbf{UC-3.2.E1 (Errore - Indirizzo e-mail non valido):} Se il Redattore inserisce un indirizzo e-mail con formato non valido, il sistema interrompe l'azione, segnala l'errore e richiede l'inserimento corretto.
+    
+\end{description}
+
+\subsubsection{UC-4: Gestione Libreria Prompt e Storico}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attore Principale] Redattore
+    
+    \item[Pre-condizioni] Il sistema ha salvato in background i dati (prompt, tono, risultato e timestamp) delle generazioni passate.
+    
+    \item[Post-condizioni] Il sistema ha permesso la consultazione o il riutilizzo dei contenuti archiviati.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore accede allo "Storico Prompt" per cercare e filtrare le richieste passate (\textbf{UC-4.1}).
+        \item Il Redattore seleziona un vecchio prompt per avviarne una nuova generazione (\textbf{UC-4.2}).
+        \item Il Redattore contrassegna i risultati migliori come preferiti (\textbf{UC-4.3}).
+    \end{enumerate}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{UC-4.1}: Ricerca e filtraggio dello storico.
+        \item \textbf{UC-4.2}: Duplicazione e riutilizzo prompt.
+        \item \textbf{UC-4.3}: Gestione dei preferiti.
+    \end{itemize}
+
+\end{description}
+
+\paragraph{UC-4.1: Ricerca e filtraggio dello storico}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore visualizza l'elenco cronologico delle generazioni passate.
+    
+    \item[Post-condizioni] Il sistema mostra esclusivamente i contenuti corrispondenti ai criteri di ricerca.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore inserisce una parola chiave o seleziona un filtro (es. per tono o data).
+        \item Il sistema aggiorna dinamicamente la lista dei prompt visualizzati.
+    \end{enumerate}
+    
+\end{description}
+
+\paragraph{UC-4.2: Duplicazione e riutilizzo prompt}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha selezionato un prompt dallo storico o dai preferiti.
+    
+    \item[Post-condizioni] Il sistema apre una nuova sessione pre-compilata con i dati storici.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona la funzione "Riutilizza" su un elemento dello storico.
+        \item Il sistema carica il testo del prompt e i parametri di stile nell'interfaccia di generazione.
+        \item Il Redattore può modificare i dati o avviare la nuova generazione.
+    \end{enumerate}
+    
+\end{description}
+
+\paragraph{UC-4.3: Gestione dei preferiti}(DA PARLARNE)
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha selezionato un prompt o un risultato ritenuto rilevante.
+    
+    \item[Post-condizioni] L'elemento selezionato viene aggiunto o rimosso dalla lista dei preferiti.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore clicca sull'icona in corrispondenza del contenuto.
+        \item Il sistema inserisce l'elemento nella lista rapida dei preferiti.
+    \end{enumerate}
+    
+\end{description}
+
+\subsection{AI Co-Pilot per Consulenti del Lavoro}
+
+\subsection{Governance e qualità}
 
 
 \end{document}
