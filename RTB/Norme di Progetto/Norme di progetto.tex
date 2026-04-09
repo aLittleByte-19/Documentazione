@@ -1,0 +1,181 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte19@gmail.com}
+\newcommand{\grouplogo}{.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Norme di Progetto}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Norme di Progetto}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Norme di Progetto}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattori   & Eleonora Bellet, Diego Belluz \\
+            Verificatori& Leonardo Soligo, Angelica Gastaldello\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & -/-/2026 \\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white}
+\begin{center}
+    {\footnotesize
+    \begin{tabularx}{\textwidth}{|p{1.4cm}|p{1.8cm}|X|p{2.4cm}|p{2.3cm}|p{2.3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.3.0 & 4/04/2026 & Architettura dei processi & Diego Belluz & Eleonora Bellet & - \\
+        \hline
+        0.2.0 & 31/03/2026 & Scopo del documento e scopo del prodotto & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        0.1.0 & 31/03/2026 & Struttura del documento & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        
+    \end{tabularx}
+    }
+    
+\end{center}
+\newpage
+
+\begin{center} 
+    {\Large \textbf{Indice}}
+\end{center}
+
+\vspace{0.6cm}
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{4}
+\fancyfoot[R]{Norme di Progetto\hspace{0.8em}\thepage}
+
+\section{Introduzione}
+
+\subsection{Scopo del documento}
+Il presente documento ha l'obiettivo di definire e regolamentare il \textit{Way of Working (WoW)} adottato dal gruppo \textit{ALittleByte} per la realizzazione del progetto didattico. Al suo interno sono specificate le procedure operative, gli strumenti adottati e le regole di collaborazione interne al team, al fine di garantire un approccio strutturato, efficiente e tracciabile per l'intero ciclo di vita del progetto Nexum. 
+
+La stesura del seguente documento segue un approccio incrementale: le norme qui descritte verranno costantemente aggiornate e affinate nel tempo, supportando il miglioramento continuo dei processi organizzativi, di sviluppo e di supporto del gruppo.
+
+
+\subsection{Scopo del prodotto}
+Il prodotto da realizzare consiste in un'estensione innovativa per \textit{''Nexum"}, una piattaforma digitale sviluppata dall'azienda proponente \textit{Eggon}, dedicata alla comunicazione interna e alla gestione HR.
+Nello specifico, il progetto mira a potenziare l'ecosistema Nexum attraverso lo sviluppo e l'integrazione di due moduli basati sull'Intelligenza Artificiale:
+\begin{itemize}
+    \item \textbf{AI Assistant Generativo:} Un modulo dedicato agli utenti amministrativi (dashboard) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un prompt, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
+    \item \textbf{AI Co-Pilot per Consulenti del Lavoro (CdL):} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di OCR ed \textbf{Entity Resolution}, e automatizzare lo smistamento e il dispaccio massivo.
+\end{itemize}
+
+L'obiettivo finale è migliorare l'efficienza dei processi HR e semplificare l'interoperabilità tra le aziende e gli studi dei Consulenti del Lavoro. Per fare ciò il gruppo ALittleByte si impegna a completare il progetto entro la data fissata 10 Settembre 2026, con un costo totale di budget di 12.575 €. 
+
+Per ulteriori informazioni si rimanda al documento Analisi dei Requisiti. 
+
+
+\subsection{Glossario}
+
+Al fine di prevenire qualsiasi ambiguità linguistica o concettuale tra i membri del team e gli stakeholder, è stato redatto un documento separato denominato Glossario. Esso contiene la spiegazione puntuale di tutti i termini tecnici, di dominio (es. LLM, OCR, Dispaccio, ecc.) e degli acronimi utilizzati all'interno della documentazione di progetto.
+
+
+\subsection{Riferimenti}
+
+\subsubsection{Normativi}
+
+\subsubsection{Informativi}
+
+\section{Architettura dei processi}
+Per la realizzazione di un prodotto di qualità che soddisfi le esigenze del cliente e degli utenti, il gruppo aLittleByte ha deciso di adottare un'architettura specifica e suddividere i vari processi di costruzione del software in tre macro-aree:
+\begin{itemize}
+    \item Processi primari
+    \item Processi di supporto
+    \item Processi organizzativi
+\end{itemize}
+
+\subsection{Processi Primari}
+In questa sezione viene descritto come nasce il software. I processi primari indicano tutte quelle attività che sono direttamente coinvolte nella creazione del prodotto software, è possibile classificare i processi primari in:
+\begin{itemize}
+    \item Processi di fornitura 
+    \item Processi di sviluppo
+\end{itemize}
+
+\subsection{Processi di fornitura}
+I processi di fornitura comprendono tutte le attività preliminari che permettono di avviare lo sviluppo del progetto, in particolar modo la pianificazione: suddivisione del lavoro in fasi e milestone come rtb e pb, l’analisi: come vengono analizzati i capitolati, la stima: come si stimano vari costi e stime.
+
+
+\end{document}
