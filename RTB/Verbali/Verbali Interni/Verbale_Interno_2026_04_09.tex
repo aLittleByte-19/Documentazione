@@ -1,0 +1,169 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{Immagini/Logo_Progetto-ezgif.com-crop.png}
+\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-04-09}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+        \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale 2026-04-09}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Interno - 2026-04-09}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Alex Oloni \\
+            Verificatori & Angela Maule\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-04-09\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Discord \\[6pt]
+
+Orario (Inizio - Fine) & 15:00 -- 15:45 \\[6pt]
+
+Redattore &
+  A. Oloni\\[6pt]
+
+Amministratore & 
+A. Gastaldello\\[6pt]
+
+Verificatore &
+A. Maule\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\[6pt]
+
+Assenti e motivazione& 
+    A. Gastaldello - Impegni familiari\\&
+    V. Y. Kaneda Fernandes - Impegni Lavorativi\\[6pt]
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Progettazione e revisione del mockup interfaccia grafica
+    \item Aggiornamenti su documentazione, casi d'uso e glossario
+    \item Preparazione alla riunione con l'azienda e avanzamento lavoro
+    \end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Progettazione e revisione del mockup interfaccia grafica}
+\textbf{Alex Oloni} ha presentato una prima bozza del mockup dell'interfaccia, basata in parte su un lavoro precedente condiviso da Angelica.
+Riguardo il mockup, si è parlato di ricevere feedback per migliorare l'interfaccia, distinguendo le sezioni, modificando la tendina e l'icona in alto a sinistra. 
+\textbf{Leonardo Soligo} ha collaborato e pianificato di aggiungere ulteriori elementi. 
+Si è stabilito di continuare a lavorare sul mockup, raccogliere feedback interni da tutti i membri del gruppo e dall'azienda nella riunione futura per eventuali correzioni.
+\subsection{Aggiornamenti su documentazione, casi d'uso e glossario}
+Abbiamo discusso dell'avanzamento nella stesura dei casi d'uso, piano di qualifica, glossario e altre documentazioni necessarie per l'RTB. 
+È stata evidenziata la necessità di velocizzare il lavoro, distribuendo i compiti tra i membri. Si è discusso dell'importanza di coordinare i contributi e documentare progressivamente l'evoluzione del progetto. 
+
+\subsection{Preparazione alla riunione con l'azienda e avanzamento lavoro}
+Il team ha pianificato di fissare una riunione con l'azienda per chiedere chiarimenti sui dubbi riguardanti il mockup e i requisiti. 
+Si è concordata di proporre una riunione per la prossima settimana e si è ribadita l'importanza di proseguire i lavori autonomamente durante il fine settimana per avere materiali concreti da presentare. 
+È stata anche discussa la possibilità di condividere immagini del mockup nel gruppo per facilitare i feedback.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit {Alex Oloni e Leonardo Soligo} & Continuazione del Mock-up & \href{https://github.com/aLittleByte-19/Documentazione/issues/50}{\#50}\\
+    \hline
+        \textit{Angelica Gastaldello e Angela Maule} &  Continuazione Stesura Analisi dei Requisiti& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
+    \hline
+        \textit{Diego Belluz e Eleonora Bellet} &  Continuazione Stesura Norme di Progetto& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
+    \hline
+        \textit{Vinicius Yuri Kaneda Fernandes} & Continuazione Stesura Glossario & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
+    \hline
+        \textit{Alex Oloni} & Stesura Verbale Interno 09/04/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/60}{\#60}\\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
