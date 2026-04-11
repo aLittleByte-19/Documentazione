@@ -106,6 +106,10 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+         \hline
+        0.4.2 & 11/04/2026 & UC-6 & Angela Maule & Angelica Gastaldello & - \\
+        \hline
+        0.4.3 & 10/04/2026 & UC-5 & Angela Maule & Angelica Gastaldello & - \\
         \hline
         0.4.2 & 9/04/2026 & UC-3 e UC-4 & Angela Maule & Angelica Gastaldello & - \\
         \hline
@@ -696,6 +700,79 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
+
+Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}, ...
+
+\subsubsection{UC-CO-1: Upload del documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attore Principale] Consulente del lavoro
+    
+    \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema.
+    
+    \item[Pre-condizioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro si trova nella sezione dedicata all'upload del modulo AI Co-Pilot.
+    \end{itemize}
+    
+    \item[Post-condizioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item Il documento è correttamente archiviato nel sistema e pronto per l'estrazione dati.
+        \item Il sistema ha predisposto l'interfaccia di anteprima dei campi estratti.
+    \end{itemize}
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
+        \item Il Consulente del lavoro conferma l'operazione di caricamento.
+        \item Il sistema esegue i controlli di validità sul file (formato e univocità).
+        \item Il sistema archivia il documento e notifica il successo dell'operazione.
+        \item Il sistema avvia la visualizzazione dei campi estratti (\textbf{UC-CO-2}).
+    \end{enumerate}
+
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{3a. Documento duplicato:} Il sistema rileva che il file è già presente; l'upload viene interrotto e viene mostrato un messaggio di errore.
+        \item \textbf{3b. Formato non valido:} Il sistema rileva un formato non supportato; l'upload viene interrotto e viene mostrato un messaggio di errore.
+    \end{itemize}
+
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: \textbf{UC-CO-2}.
+    \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-CO-1.1}: \textit{Condizione:} Se il Consulente desidera classificare il documento per tipologia.
+            \item \textbf{UC-CO-1.2}: \textit{Condizione:} Se il Consulente desidera associare metadati temporali o aziendali prima del caricamento.
+        \end{itemize}
+    \end{itemize}
+
+\end{description}
+
+\paragraph{UC-CO-1.1: Selezione categoria documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha selezionato un file e desidera classificarlo.
+    \item[Post-condizioni] Al documento è associata una categoria specifica tra quelle disponibili.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro sceglie una categoria dall'elenco proposto dal sistema.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-1.2: Inserimento metadati documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha selezionato un file e desidera aggiungere informazioni di contesto.
+    \item[Post-condizioni] Al documento sono associati metadati relativi a periodo (mese/anno) e azienda.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro inserisce mese e anno di riferimento.
+        \item Il Consulente del lavoro specifica l'azienda di riferimento tramite ricerca o selezione.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-2: Visualizzazione e modifica dei campi estratti}
+
 
 \subsection{Governance e qualità}
 
