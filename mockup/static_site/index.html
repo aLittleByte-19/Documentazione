@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUM | Eggon Console</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <img class="brand-logo" src="eggon_logo_43542.jpeg" alt="Eggon logo">
+        <div>
+          <p class="eyebrow">Eggon</p>
+          <h1>NEXUM Console</h1>
+          <p class="brand-note">Operazioni</p>
+        </div>
+      </div>
+
+      <nav class="side-nav" aria-label="Navigazione applicativo">
+        <div class="nav-section">
+          <p class="nav-section-title">Panoramica</p>
+          <button class="nav-item active" data-view="overview" data-target="overview-status">Overview</button>
+          <button class="nav-subitem" data-view="overview" data-target="overview-status">Stato operativo</button>
+          <button class="nav-subitem" data-view="overview" data-target="overview-modules">Moduli</button>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-title">AI Assistant</p>
+          <button class="nav-item" data-view="assistant" data-target="assistant-compose">Assistant</button>
+          <button class="nav-subitem" data-view="assistant" data-target="assistant-compose">Composizione</button>
+          <button class="nav-subitem" data-view="assistant" data-target="assistant-review">Revisione</button>
+          <button class="nav-subitem" data-view="assistant" data-target="assistant-library">Storico prompt</button>
+          <button class="nav-subitem" data-view="assistant" data-target="assistant-feedback">Feedback</button>
+          <button class="nav-subitem" data-view="assistant" data-target="assistant-usage">Utilizzo</button>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-title">Co-Pilot CdL</p>
+          <button class="nav-item" data-view="copilot" data-target="copilot-upload">Co-Pilot</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-upload">Acquisizione</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-analysis">Analisi</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-recipients">Destinatari</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-dispatch">Distribuzione</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-quality">Qualità</button>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-title">Controllo</p>
+          <button class="nav-item" data-view="audit" data-target="audit-log">Invii e Audit</button>
+          <button class="nav-subitem" data-view="audit" data-target="audit-log">Audit trail</button>
+          <button class="nav-subitem" data-view="audit" data-target="audit-delivery">Consegna</button>
+          <button class="nav-subitem" data-view="audit" data-target="audit-roles">Ruoli</button>
+          <button class="nav-subitem" data-view="audit" data-target="audit-policy">Policy</button>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">NEXUM</p>
+          <h2 id="view-title">Overview operativa</h2>
+        </div>
+      </header>
+
+      <main class="view-stack">
+        <section class="view active" data-view="overview" aria-labelledby="view-title">
+          <article class="hero-card" id="overview-status">
+            <div>
+              <p class="eyebrow">Flusso unificato</p>
+              <h3>Un unico spazio per creare, controllare, inviare e tracciare.</h3>
+            </div>
+            <div class="hero-actions">
+              <button class="primary-button" data-jump="assistant" data-target="assistant-compose">Apri AI Assistant</button>
+              <button class="secondary-button" data-jump="copilot" data-target="copilot-upload">Apri Co-Pilot CdL</button>
+            </div>
+          </article>
+
+          <article class="panel compact-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Stato operativo</p>
+                <h3>Priorità correnti</h3>
+              </div>
+            </div>
+            <ul class="status-list">
+              <li><strong>6</strong><span>Bozze in revisione</span></li>
+              <li><strong>14</strong><span>Documenti da validare</span></li>
+              <li><strong>9</strong><span>Invii pronti</span></li>
+            </ul>
+          </article>
+
+          <article class="panel" id="overview-modules">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Moduli</p>
+                <h3>Copertura funzionale</h3>
+              </div>
+            </div>
+
+            <div class="summary-stack">
+              <div class="summary-card">
+                <div class="summary-head">
+                  <h4>AI Assistant Generativo</h4>
+                  <span class="panel-tag">Contenuti</span>
+                </div>
+                <ul class="feature-list">
+                  <li>Prompt, destinatario, tono, stile e canale.</li>
+                  <li>Generazione di titolo, testo e cover.</li>
+                  <li>Editor, traduzione, salvataggio bozza, email ed export.</li>
+                  <li>Storico prompt, duplicazione, riuso, preferiti e rating.</li>
+                </ul>
+              </div>
+
+              <div class="summary-card">
+                <div class="summary-head">
+                  <h4>AI Co-Pilot per i CdL</h4>
+                  <span class="panel-tag">Documenti</span>
+                </div>
+                <ul class="feature-list">
+                  <li>Upload con categoria, periodo, azienda e reparto.</li>
+                  <li>Controlli formato, duplicati, OCR e classificazione.</li>
+                  <li>Destinatari, split massivo, confidenza e conferma manuale.</li>
+                  <li>Messaggio automatico, invio, tracking, audit e qualità.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" data-view="assistant">
+          <article class="panel" id="assistant-compose">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Composizione</p>
+                <h3>Input del contenuto</h3>
+              </div>
+              <span class="panel-tag">Prompt</span>
+            </div>
+
+            <div class="field-stack">
+              <label class="field">
+                <span>Prompt</span>
+                <textarea id="prompt-input" rows="5">Comunica ai dipendenti il rilascio della nuova area documentale NEXUM con tono chiaro e rassicurante.</textarea>
+              </label>
+
+              <label class="field">
+                <span>Destinatario</span>
+                <select id="audience-select">
+                  <option>Tutti i dipendenti</option>
+                  <option>Manager e responsabili</option>
+                  <option>Team HR</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Tono</span>
+                <select id="tone-select">
+                  <option>Chiaro e diretto</option>
+                  <option>Più istituzionale</option>
+                  <option>Più sintetico</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Stile</span>
+                <select id="style-select">
+                  <option>Testo informativo</option>
+                  <option>Avviso operativo</option>
+                  <option>Aggiornamento breve</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Canale</span>
+                <select id="channel-select">
+                  <option>Email interna</option>
+                  <option>News portale</option>
+                  <option>Notifica rapida</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="chip-row">
+              <span class="chip active">Titolo</span>
+              <span class="chip active">Testo</span>
+              <span class="chip active">Cover</span>
+              <span class="chip">Traduzione</span>
+            </div>
+
+            <div class="button-row">
+              <button class="primary-button" id="generate-button">Genera bozza</button>
+              <button class="secondary-button">Salva prompt</button>
+            </div>
+          </article>
+
+          <article class="panel" id="assistant-review">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Revisione</p>
+                <h3>Output ed editor</h3>
+              </div>
+              <span class="panel-tag" id="assistant-status">Pronta</span>
+            </div>
+
+            <div class="editor-stack">
+              <div class="cover-placeholder">
+                <span>Cover generata</span>
+              </div>
+
+              <label class="field">
+                <span>Titolo</span>
+                <input id="generated-title-input" type="text" value="Nuova area documentale disponibile su NEXUM">
+              </label>
+
+              <label class="field">
+                <span>Testo</span>
+                <textarea id="generated-body-input" rows="5">Da oggi i documenti condivisi sono raccolti in uno spazio unico, più ordinato e più facile da consultare.</textarea>
+              </label>
+
+              <div class="meta-row">
+                <span id="meta-chars">124 caratteri</span>
+                <span id="meta-time">1 min lettura</span>
+                <span>Creato da AI Assistant</span>
+              </div>
+
+              <div class="button-row">
+                <button class="secondary-button">Rigenera</button>
+                <button class="secondary-button">Traduci</button>
+                <button class="secondary-button">Salva bozza</button>
+                <button class="secondary-button">Esporta</button>
+                <button class="secondary-button">Invia via email</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel" id="assistant-library">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Storico prompt</p>
+                <h3>Libreria e riuso</h3>
+              </div>
+            </div>
+
+            <ul class="history-list" id="prompt-history">
+              <li class="history-item">
+                <div class="history-main">
+                  <strong>Rilascio nuova area documentale</strong>
+                  <span>Canale: Email interna · Tono: Chiaro · Ultimo uso: oggi</span>
+                </div>
+                <div class="mini-actions">
+                  <span class="mini-pill active">Preferito</span>
+                  <span class="mini-pill">Duplica</span>
+                  <span class="mini-pill">Riusa</span>
+                </div>
+              </li>
+              <li class="history-item">
+                <div class="history-main">
+                  <strong>Promemoria consegna cedolini</strong>
+                  <span>Canale: Portale · Tono: Sintetico · Ultimo uso: ieri</span>
+                </div>
+                <div class="mini-actions">
+                  <span class="mini-pill">Duplica</span>
+                  <span class="mini-pill">Riusa</span>
+                </div>
+              </li>
+              <li class="history-item">
+                <div class="history-main">
+                  <strong>Aggiornamento procedura ferie</strong>
+                  <span>Canale: Email interna · Tono: Istituzionale · Ultimo uso: 3 giorni fa</span>
+                </div>
+                <div class="mini-actions">
+                  <span class="mini-pill active">Preferito</span>
+                  <span class="mini-pill">Riusa</span>
+                </div>
+              </li>
+              <li class="history-item">
+                <div class="history-main">
+                  <strong>Comunicazione nuove policy benefit</strong>
+                  <span>Canale: Portale · Tono: Chiaro · Ultimo uso: 1 settimana fa</span>
+                </div>
+                <div class="mini-actions">
+                  <span class="mini-pill">Duplica</span>
+                  <span class="mini-pill">Riusa</span>
+                </div>
+              </li>
+              <li class="history-item">
+                <div class="history-main">
+                  <strong>Messaggio onboarding nuovi assunti</strong>
+                  <span>Canale: Email interna · Tono: Accogliente · Ultimo uso: 2 settimane fa</span>
+                </div>
+                <div class="mini-actions">
+                  <span class="mini-pill">Duplica</span>
+                  <span class="mini-pill">Riusa</span>
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="panel" id="assistant-feedback">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Feedback</p>
+                <h3>Valutazione output</h3>
+              </div>
+            </div>
+
+            <div class="rating-row">
+              <button class="rating-button active">Utile</button>
+              <button class="rating-button">Da migliorare</button>
+            </div>
+
+            <label class="field">
+              <span>Commento</span>
+              <textarea rows="3">Testo chiaro, adatto al canale interno e quasi pronto all'invio.</textarea>
+            </label>
+          </article>
+
+          <article class="panel compact-panel" id="assistant-usage">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Utilizzo</p>
+                <h3>Metriche essenziali</h3>
+              </div>
+            </div>
+
+            <ul class="status-list">
+              <li><strong>38</strong><span>Contenuti generati nel mese</span></li>
+              <li><strong>11</strong><span>Prompt riutilizzati</span></li>
+              <li><strong>4,6</strong><span>Rating medio</span></li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="view" data-view="copilot">
+          <article class="panel" id="copilot-upload">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Acquisizione</p>
+                <h3>Caricamento documento</h3>
+              </div>
+              <span class="panel-tag">Step 1</span>
+            </div>
+
+            <div class="upload-box">
+              <strong>Trascina o seleziona un file</strong>
+              <p>PDF, ZIP o lotto mensile</p>
+            </div>
+
+            <div class="field-stack">
+              <label class="field">
+                <span>Categoria</span>
+                <select>
+                  <option>Cedolini</option>
+                  <option>Comunicazioni</option>
+                  <option>Contratti</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Mese / Anno</span>
+                <input type="text" value="04 / 2026">
+              </label>
+              <label class="field">
+                <span>Azienda</span>
+                <input type="text" value="Eggon">
+              </label>
+              <label class="field">
+                <span>Reparto</span>
+                <input type="text" value="HR Operations">
+              </label>
+            </div>
+
+            <ul class="compact-list">
+              <li><strong>Formato</strong><span>Valido</span></li>
+              <li><strong>Duplicati</strong><span>Nessuno rilevato</span></li>
+              <li><strong>Blocco file non validi</strong><span>Attivo</span></li>
+            </ul>
+          </article>
+
+          <article class="panel" id="copilot-analysis">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Analisi</p>
+                <h3>OCR, classificazione e correzioni</h3>
+              </div>
+              <span class="panel-tag">Step 2</span>
+            </div>
+
+            <ul class="analysis-list" id="analysis-status">
+              <li><strong>Stato OCR</strong><span>In attesa</span></li>
+              <li><strong>Tipo documento</strong><span>Non classificato</span></li>
+              <li><strong>Pagine con alert</strong><span>0</span></li>
+            </ul>
+
+            <div class="preview-sheet">
+              <p class="eyebrow">Anteprima documento</p>
+              <p class="preview-snippet" id="ocr-snippet">
+                I campi principali compariranno qui dopo l'analisi.
+              </p>
+            </div>
+
+            <div class="field-stack">
+              <label class="field">
+                <span>Nominativo</span>
+                <input type="text" value="Da confermare">
+              </label>
+              <label class="field">
+                <span>Matricola</span>
+                <input type="text" value="Da confermare">
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button class="primary-button" id="analyze-button">Analizza documento</button>
+              <button class="secondary-button">Conferma correzioni</button>
+            </div>
+          </article>
+
+          <article class="panel" id="copilot-recipients">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Destinatari</p>
+                <h3>Riconoscimento e split</h3>
+              </div>
+              <span class="panel-tag">Step 3</span>
+            </div>
+
+            <ul class="history-list" id="recipient-list">
+              <li class="history-item">
+                <div class="history-main">
+                  <strong>In attesa di analisi</strong>
+                  <span>Il sistema mostrerà confidenza e risultato dello split.</span>
+                </div>
+              </li>
+            </ul>
+
+            <ul class="compact-list">
+              <li><strong>Split automatico</strong><span>Pronto dopo analisi</span></li>
+              <li><strong>Conferma manuale</strong><span>Richiesta sotto soglia</span></li>
+            </ul>
+          </article>
+
+          <article class="panel" id="copilot-dispatch">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Distribuzione</p>
+                <h3>Messaggio e invio</h3>
+              </div>
+              <span class="panel-tag">Step 4</span>
+            </div>
+
+            <div class="dispatch-card">
+              <p class="dispatch-title">Messaggio automatico</p>
+              <p id="dispatch-message">
+                Il testo di accompagnamento verrà preparato dopo l'analisi.
+              </p>
+            </div>
+
+            <ul class="compact-list">
+              <li><strong>Canale</strong><span>Email / Portale</span></li>
+              <li><strong>Invio automatico</strong><span>Disponibile</span></li>
+              <li><strong>Prova di consegna</strong><span>Tracciata</span></li>
+            </ul>
+
+            <div class="button-row">
+              <button class="secondary-button">Conferma destinatari</button>
+              <button class="primary-button">Invia lotto</button>
+            </div>
+          </article>
+
+          <article class="panel compact-panel" id="copilot-quality">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Qualità</p>
+                <h3>Monitoraggio essenziale</h3>
+              </div>
+            </div>
+
+            <ul class="status-list">
+              <li><strong>97%</strong><span>Documenti classificati correttamente</span></li>
+              <li><strong>3</strong><span>Casi fermati per verifica umana</span></li>
+              <li><strong>2</strong><span>Correzioni OCR ancora aperte</span></li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="view" data-view="audit">
+          <article class="panel" id="audit-log">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Audit trail</p>
+                <h3>Ricerca operazioni</h3>
+              </div>
+            </div>
+
+            <label class="field">
+              <span>Cerca per dipendente, lotto o documento</span>
+              <input id="audit-search" type="text" placeholder="Es. Lotto cedolini aprile">
+            </label>
+
+            <ul class="log-list" id="audit-log-list">
+              <li><strong>Lotto aprile 2026</strong><span>Upload completato</span></li>
+              <li><strong>Cedolini retail</strong><span>OCR validato con intervento umano</span></li>
+              <li><strong>Comunicazione benefit</strong><span>Invio email completato</span></li>
+              <li><strong>Archivio legale</strong><span>Conservazione attiva</span></li>
+            </ul>
+          </article>
+
+          <article class="panel compact-panel" id="audit-delivery">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Consegna</p>
+                <h3>Distribuzione e lettura</h3>
+              </div>
+            </div>
+
+            <ul class="status-list">
+              <li><strong>96%</strong><span>Consegnati</span></li>
+              <li><strong>81%</strong><span>Letti</span></li>
+              <li><strong>100%</strong><span>Prove di consegna archiviate</span></li>
+            </ul>
+          </article>
+
+          <article class="panel" id="audit-roles">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Ruoli e accessi</p>
+                <h3>Governance</h3>
+              </div>
+            </div>
+
+            <div class="chip-row">
+              <span class="chip active">HR Manager</span>
+              <span class="chip active">Consulente del Lavoro</span>
+              <span class="chip">Operatore</span>
+            </div>
+
+            <ul class="compact-list">
+              <li><strong>Generazione contenuti</strong><span>HR Manager</span></li>
+              <li><strong>Validazione documentale</strong><span>CdL / Operatore</span></li>
+              <li><strong>Audit storico</strong><span>HR Manager / CdL</span></li>
+            </ul>
+          </article>
+
+          <article class="panel" id="audit-policy">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Policy</p>
+                <h3>Compliance e retention</h3>
+              </div>
+            </div>
+
+            <ul class="feature-list">
+              <li>Etichettatura AI sui contenuti generati.</li>
+              <li>Retention documentale e conservazione attiva.</li>
+              <li>Storico revisioni e modifiche operatore.</li>
+              <li>Presidi GDPR su accesso, log e visibilità dati.</li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
