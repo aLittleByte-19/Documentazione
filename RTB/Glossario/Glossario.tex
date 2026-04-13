@@ -102,6 +102,7 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        0.1.1 & 2026-04-12 & Aggiunta termini al documento & V. Y. Kaneda Fernandes & - & - \\
         0.1.0 & 2026-03-30 & Prima stesura del documento & V. Y. Kaneda Fernandes & - & - \\
         \hline 
     \end{tabularx}
@@ -121,22 +122,44 @@
 
 \section{A}
 
+\subsection{Agile SCRUM}
+Il metodo di lavoro usato dal team per sviluppare il software, basato su piccoli obiettivi da raggiungere in tempi brevi (solitamente ogni due settimane) invece di fare un unico grande progetto lungo mesi.
+
 \subsection{AI (Intelligenza Artificiale)}
 Tecnologie che permettono ai computer di fare cose che normalmente richiedono l'intelligenza umana, come imparare, analizzare dati o creare contenuti.
 
-\subsection{AI Generativa}
-Un tipo di intelligenza artificiale specializzata nel creare da sola nuovi testi, immagini o altri contenuti partendo da un semplice comando.
+\subsection{AI Analyst}
+Nucleo elaborativo del modulo AI Co-Pilot che esegue autonomamente classificazione documentale, OCR ed estrazione dati.
 
 \subsection{AI Co-Pilot}
 Un modulo di supporto automatico pensato per aiutare i Consulenti del Lavoro a gestire, riconoscere e distribuire i documenti in modo più veloce.
 
+\subsection{AI Generativa}
+Un tipo di intelligenza artificiale specializzata nel creare da sola nuovi testi, immagini o altri contenuti partendo da un semplice comando.
+
+\subsection{AI Post Generator}
+Modulo esterno (attore di sistema) che costituisce il nucleo di intelligenza artificiale per l'elaborazione di testi, titoli e immagini.
+
+\subsection{Amministratore}
+Figura responsabile della configurazione dell'ambiente standalone, della gestione dei privilegi degli account e della definizione delle policy globali.
+
+\subsection{Analista Dati}
+Figura che supervisiona l'efficienza del sistema, monitorando le performance dell'IA attraverso feedback e metriche di successo.
+
+\subsection{Attore}
+Ruolo ricoperto da un utente o da un sistema esterno che interagisce con l'applicazione (es. Amministratore, Redattore, Operatore CdL).
+
 \subsection{Audit Trail}
 Un registro che tiene traccia di tutte le operazioni fatte nel sistema, utile per controllare chi ha fatto cosa e quando.
 
-\subsection{Agile SCRUM}
-Il metodo di lavoro usato dal team per sviluppare il software, basato su piccoli obiettivi da raggiungere in tempi brevi (solitamente ogni due settimane) invece di fare un unico grande progetto lungo mesi.
 
 \section{C}
+
+\subsection{Caso d'Uso (UC)}
+Descrizione di un'interazione tra un attore e il sistema per raggiungere un obiettivo specifico, fondamentale per definire i requisiti.
+
+\subsection{Categoria documento}
+Classificazione specifica assegnata a un file caricato (es. cedolino, F24, contratto).
 
 \subsection{Cedolini Massivi}
 Un unico grande file che contiene le buste paga di tanti dipendenti diversi e che il sistema deve saper dividere correttamente per inviarle ai singoli interessati.
@@ -144,10 +167,16 @@ Un unico grande file che contiene le buste paga di tanti dipendenti diversi e ch
 \subsection{Confidenza (Confidence Score)}
 Un valore (spesso in percentuale) che indica quanto il sistema è sicuro che il riconoscimento automatico di un documento sia corretto.
 
-\subsection{Confidenzaltà dei Dati}
+\subsection{Confidenzialità dei Dati}
 Il principio fondamentale per cui solo le persone autorizzate possono accedere a determinate informazioni sensibili.
 
+\subsection{Consulente del Lavoro (CdL)}
+L'attore principale che utilizza il sistema per gestire documenti aziendali, classificandoli e associandovi metadati.
+
 \section{D}
+
+\subsection{Dashboard}
+Interfaccia grafica riassuntiva che permette di visualizzare statistiche di utilizzo, metriche di performance e monitoraggio dei dati.
 
 \subsection{Dashboard Amministrativa}
 La pagina di controllo riservata ai gestori del sistema, da cui si possono usare le funzioni di intelligenza artificiale e gestire i documenti.
@@ -160,6 +189,12 @@ Il processo automatico che invia i documenti ai destinatari finali attraverso l'
 \subsection{Entity Resolution}
 È il processo che permette al sistema di riconoscere correttamente a quale persona o azienda appartiene un dato, anche se le informazioni sono parziali o scritte in modo leggermente diverso.
 
+\subsection{Esecuzione Asincrona}
+Modalità di esecuzione di operazioni lunghe in background per non bloccare l'interfaccia utente.
+
+\subsection{Estensione}
+Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'estensione un comportamento opzionale.
+
 \section{G}
 
 \subsection{GDPR}
@@ -169,6 +204,11 @@ Il regolamento europeo che protegge la privacy e stabilisce come devono essere t
 
 \subsection{Human-in-the-Loop}
 Un approccio dove l'intelligenza artificiale fa il lavoro pesante, ma un essere umano interviene per controllare e correggere i risultati prima che diventino definitivi.
+
+\section{I}
+
+\subsection{Inclusione}
+Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'estensione un comportamento opzionale.
 
 \section{K}
 
@@ -180,6 +220,10 @@ Numeri o percentuali usati per misurare se il sistema sta funzionando bene (ad e
 \subsection{LLM (Large Language Model)}
 È il "motore" dell'intelligenza artificiale che è stato addestrato su enormi quantità di testo per capire e scrivere come un essere umano.
 
+\section{M}
+
+\subsection{Metadati (documento)}
+Informazioni di contesto associate a un file, come il periodo temporale (mese/anno) e l'azienda di riferimento.
 
 \section{N}
 
@@ -193,33 +237,64 @@ Una tecnologia che legge automaticamente il testo contenuto all'interno di immag
 
 \section{P}
 
+\subsection{Postcondizioni}
+Stato finale dei dati o del sistema dopo la conclusione con successo di un caso d'uso.
+
+\subsection{Precondizioni}
+Stato obbligatorio in cui deve trovarsi il sistema prima che un caso d'uso possa essere avviato.
+
 \subsection{Prompt}
 L'istruzione o il testo che scrivi all'intelligenza artificiale per dirle cosa deve generare (ad esempio: "Scrivi un messaggio di benvenuto").
 
 
 \section{R}
 
+\subsection{Rating}
+Sistema di valutazione (punteggio e commento) che l'utente può assegnare al contenuto generato dall'AI per monitorarne la qualità.
+
+\subsection{RBAC (ole-Based Access Control)}
+Un sistema di sicurezza che decide cosa può fare un utente in base al suo ruolo (ad esempio, un dipendente può solo vedere i suoi documenti, mentre un amministratore può caricarne di nuovi).
+
+\subsection{Redattore}
+Utente aziendale delegato alla creazione di comunicazioni interne tramite il modulo AI Assistant, responsabile della calibrazione del tono e della validazione dei contenuti.
+
 \subsection{Repository Documentale}
 Un archivio digitale dove vengono caricati e organizzati tutti i documenti (come i cedolini) prima di essere inviati ai dipendenti.
+
+\subsection{Requisito(Obbligatorio, Desiderabile, Opzionale)}
+Classificazione delle funzionalità del sistema in base alla loro priorità e necessità per il funzionamento del prodotto.
 
 \subsection{Retention Policy}
 La regola che stabilisce per quanto tempo un documento deve essere conservato nel sistema prima di essere cancellato definitivamente per motivi di privacy o spazio.
 
-\subsection{RBAC (ole-Based Access Control)}
-Un sistema di sicurezza che decide cosa può fare un utente in base al suo ruolo (ad esempio, un dipendente può solo vedere i suoi documenti, mentre un amministratore può caricarne di nuovi).
 
 \section{S}
 
 \subsection{Sandbox di Sviluppo}
 Un ambiente di prova isolato dove i programmatori possono testare nuove funzioni senza rischiare di rompere il sistema principale usato dagli utenti.
 
+\subsection{Scenario Alternativo}
+Percorso secondario che descrive la gestione di errori, eccezioni o scelte diverse dell'utente.
+
+\subsection{Scenario Principale}
+Sequenza ottimale e lineare di interazioni tra attore e sistema.
+
+\subsection{Split Automatico}
+Funzionalità che permette di suddividere documenti multi-destinatario (come i cedolini massivi) in singole "copie atomiche".
+
 \subsection{Sprint}
 Un periodo di tempo definito (nel caso di NEXUM è di 10 giorni lavorativi) in cui il team si concentra su un set specifico di compiti da completare.
+
+\subsection{Standalone}
+Caratteristica di un'applicazione che può funzionare in modo indipendente, senza essere integrata in altre piattaforme esistenti.
 
 \section{T}
 
 \subsection{Token API}
 Una sorta di "chiave digitale" segreta che permette a diversi programmi o servizi di parlare tra loro in modo sicuro.
+
+\subsection{Trigger}
+Evento o azione che innesca l'esecuzione di un caso d'uso.
 
 
 \section{V}
