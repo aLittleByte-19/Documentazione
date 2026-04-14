@@ -262,7 +262,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Pre-condizioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item Il sistema ha autenticato il Redattore e verificato i relativi permessi di accesso(DA PARLARNE).
         \item Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo".
     \end{itemize}
     
@@ -281,13 +280,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema inoltra i parametri all'AI Post Generator, che elabora la richiesta e restituisce l'output finale per la successiva visualizzazione a schermo.
     \end{enumerate}
 
-    \item[Scenari Alternativi] 
-    \textbf{UC-1.E1 (Errore - Servizio AI non disponibile):} Qualora il modulo AI Post Generator non risponda entro il tempo limite o restituisca un errore di connessione durante l'elaborazione, il sistema interrompe l'attesa, notifica al Redattore l'impossibilità temporanea di completare la generazione e suggerisce di riprovare.
+    \item[Scenari Alternativi]   \textbf{4a. Servizio AI non disponibile:} Il sistema rileva un errore di rete o un timeout in risposta dall'AI; l'operazione viene interrotta e viene mostrato un messaggio di errore.
+
     
-    \item[Relazioni con altri Casi d'uso] 
+    \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{UC-1.1}: Inserimento del prompt testuale.
-        \item \textbf{UC-1.2}: Selezione del tono e dello stile.
+        \item \textbf{Inclusioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-1.1}: Inserimento del prompt testuale.
+            \item \textbf{UC-1.2}: Selezione del tono e dello stile.
+        \end{itemize}
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-1.E1}: \textit{Condizione:} Se il modulo AI non risponde entro il tempo limite o risulta irraggiungibile.
+        \end{itemize}
     \end{itemize}
 
 \end{description}
@@ -309,10 +315,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     
     \item[Scenari Alternativi] 
-    \textbf{UC-1.1.E1 (Errore - Prompt non valido):} Qualora il Redattore tenti di procedere con un input vuoto o insufficiente, il sistema evidenzia l'area di inserimento e inibisce il comando di generazione.(DA PARLARNE)
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{2a. Prompt vuoto o non valido:} Il sistema rileva l'assenza di testo o il mancato raggiungimento dei caratteri minimi; interrompe l'operazione e richiede visivamente un inserimento valido.
+    \end{itemize}
     
-  
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-1.1.E1}: \textit{Condizione:} Se il Redattore tenta di confermare l'input lasciando il campo vuoto o con un testo insufficiente.
+        \end{itemize}
+    \end{itemize}
+
 \end{description}
+
 
 \paragraph{UC-1.2: Selezione del tono e dello stile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -326,11 +342,48 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona il tono di voce desiderato tramite l'apposito menu.
-        \item Il Redattore seleziona lo stile grafico o editoriale del contenuto(DA PARLARNE).
+        \item Il Redattore seleziona lo stile grafico o editoriale del contenuto.
         \item Il sistema salva le impostazioni e abilita il comando di generazione finale.
     \end{enumerate}
-    
+
 \end{description}
+
+\paragraph{UC-1.E1: Errore - Servizio AI non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore, AI Post Generator
+    
+    \item[Pre-condizioni] Il sistema ha inviato i parametri all'AI Post Generator (UC-1), ma si verifica un timeout o un errore di connessione.
+    
+    \item[Post-condizioni] Il sistema non genera alcun contenuto, mantenendo inalterato lo stato precedente dell'interfaccia.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva l'impossibilità temporanea di comunicare con il modulo AI.
+        \item Il sistema visualizza a schermo un messaggio di avviso notificando l'errore di rete.
+        \item Il sistema ripristina i comandi di invio per consentire al Redattore di effettuare un nuovo tentativo.
+    \end{enumerate}
+
+\end{description}
+
+\paragraph{UC-1.1.E1: Errore - Prompt non valido}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha tentato di confermare l'inserimento del prompt (UC-1.1), ma la stringa testuale fornita risulta vuota o insufficiente.
+    
+    \item[Post-condizioni] Il sistema non salva alcun parametro e mantiene il focus sull'area di inserimento.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema inibisce il passaggio alla fase successiva e disabilita il comando di generazione.
+        \item Il sistema evidenzia visivamente il campo di testo obbligatorio.
+        \item Il sistema richiede a schermo l'inserimento di un prompt testuale valido.
+    \end{enumerate}
+
+\end{description}
+
 \subsubsection{UC-2: Anteprima e revisione del contenuto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
@@ -351,8 +404,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{UC-2.1}: Modifica manuale del testo.
-        \item \textbf{UC-2.2}: Rigenerazione del contenuto.
+        \item \textbf{Inclusioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-2.1}: Modifica manuale del testo.
+            \item \textbf{UC-2.2}: Rigenerazione del contenuto.
+        \end{itemize}
     \end{itemize}
 
 \end{description}
@@ -372,8 +428,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore inserisce le modifiche.
         \item Il sistema salva temporaneamente le modifiche e aggiorna l'anteprima.
     \end{enumerate}
-    \item[Scenari Alternativi] 
-\textbf{UC-2.1.E1 (Errore - Contenuto vuoto):} Qualora il Redattore elimini completamente il testo del contenuto durante la modifica manuale e tenti di confermare, il sistema blocca il salvataggio temporaneo, segnala l'obbligatorietà del campo testo e ripristina l'ultima versione valida o richiede un nuovo inserimento.
+        \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{3a. Contenuto vuoto:} Il sistema rileva che il testo è stato completamente eliminato; l'operazione di salvataggio viene bloccata e viene notificato un avviso.
+    \end{itemize}
+    
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-2.1.E1}: \textit{Condizione:} Se il Redattore tenta di confermare la modifica lasciando l'editor privo di testo.
+        \end{itemize}
+    \end{itemize}
+
 \end{description}
 
 \paragraph{UC-2.2: Rigenerazione del contenuto}
@@ -395,6 +463,24 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
 \end{description}
 
+\paragraph{UC-2.1.E1: Errore - Contenuto vuoto}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo nell'editor e tenta di confermarne il salvataggio (UC-2.1).
+    
+    \item[Post-condizioni] Il sistema non applica le modifiche e mantiene la versione precedente.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema blocca l'aggiornamento dell'anteprima.
+        \item Il sistema segnala visivamente l'obbligatorietà del campo di testo.
+        \item Il sistema ripristina l'ultima versione valida del contenuto.
+    \end{enumerate}
+
+\end{description}
+
 \subsubsection{UC-3: Approvazione e Pubblicazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
@@ -412,8 +498,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{UC-3.1}: Salvataggio come bozza.
-        \item \textbf{UC-3.2}: Esportazione e inoltro del contenuto.
+        \item \textbf{Inclusioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-3.1}: Salvataggio come bozza.
+            \item \textbf{UC-3.2}: Esportazione e inoltro del contenuto.
+        \end{itemize}
     \end{itemize}
 
 \end{description}
@@ -434,6 +523,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema conferma a video l'avvenuto salvataggio.
     \end{enumerate}
     
+    
 \end{description}
 
 \paragraph{UC-3.2: Esportazione e inoltro del contenuto}
@@ -453,8 +543,36 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema notifica all'utente il completamento dell'operazione.
     \end{enumerate}
     \item[Scenari Alternativi] 
-    \textbf{UC-3.2.E1 (Errore - Indirizzo e-mail non valido):} Se il Redattore inserisce un indirizzo e-mail con formato non valido, il sistema interrompe l'azione, segnala l'errore e richiede l'inserimento corretto.
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{1a. Indirizzo e-mail non valido:} Il sistema rileva che l'indirizzo inserito non rispetta il formato standard (es. mancanza della chiocciola); l'inoltro viene bloccato e viene notificato un errore.
+    \end{itemize}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-3.2.E1}: \textit{Condizione:} Se il Redattore tenta di confermare l'inoltro con un indirizzo e-mail formalmente scorretto.
+        \end{itemize}
+    \end{itemize}
+
+\end{description}
+
+\paragraph{UC-3.2.E1: Errore - Indirizzo e-mail non valido}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha richiesto l'inoltro del contenuto (UC-3.2), ma la stringa inserita nel campo e-mail non è formalmente valida.
+    
+    \item[Post-condizioni] Il sistema blocca la procedura di invio e mantiene la schermata attiva per consentire la correzione.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema inibisce l'azione di invio.
+        \item Il sistema evidenzia visivamente il campo e-mail errato.
+        \item Il sistema richiede a schermo l'inserimento di un indirizzo di destinazione corretto.
+    \end{enumerate}
+
 \end{description}
 
 \subsubsection{UC-4: Gestione Libreria Prompt e Storico}
@@ -473,11 +591,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore contrassegna i risultati migliori come preferiti (\textbf{UC-4.3}).
     \end{enumerate}
 
-    \item[Relazioni] 
+\item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{UC-4.1}: Ricerca e filtraggio dello storico.
-        \item \textbf{UC-4.2}: Duplicazione e riutilizzo prompt.
-        \item \textbf{UC-4.3}: Gestione dei preferiti.
+        \item \textbf{Inclusioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-4.1}: Ricerca e filtraggio dello storico.
+            \item \textbf{UC-4.2}: Duplicazione e riutilizzo prompt.
+            \item \textbf{UC-4.3}: Gestione dei preferiti.
+        \end{itemize}
     \end{itemize}
 
 \end{description}
@@ -498,8 +619,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     
     \item[Scenari Alternativi] 
-    \textbf{UC-4.1.A1 (Nessun risultato trovato):} Qualora i filtri o le parole chiave inserite non producano alcuna corrispondenza nello storico, il sistema mostra un avviso visivo di "Nessun risultato" e mantiene attivi i comandi per azzerare i filtri o effettuare una nuova ricerca.
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{2a. Nessun risultato trovato:} Il sistema non rileva occorrenze corrispondenti ai criteri inseriti; la lista viene svuotata e viene mostrato un avviso.
+    \end{itemize}
 
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-4.1.A1}: \textit{Condizione:} Se i parametri di ricerca o i filtri applicati non producono alcun risultato.
+        \end{itemize}
+    \end{itemize}
 \end{description}
 
 \paragraph{UC-4.2: Duplicazione e riutilizzo prompt}
@@ -520,7 +650,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
 \end{description}
 
-\paragraph{UC-4.3: Gestione dei preferiti}(DA PARLARNE)
+\paragraph{UC-4.3: Gestione dei preferiti}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attori] Redattore
@@ -535,6 +665,24 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema inserisce l'elemento nella lista rapida dei preferiti.
     \end{enumerate}
     
+\end{description}
+
+\paragraph{UC-4.1.A1: Avviso - Nessun risultato trovato}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore ha applicato filtri o parole chiave (UC-4.1) che non hanno corrispondenze nel database.
+    
+    \item[Post-condizioni] Il sistema mantiene l'interfaccia di ricerca attiva permettendo il reset dei parametri.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza un messaggio informativo di "Nessun risultato trovato".
+        \item Il sistema suggerisce di modificare i termini di ricerca o di azzerare i filtri applicati.
+        \item Il sistema mantiene visibili i comandi di filtraggio per consentire una nuova operazione.
+    \end{enumerate}
+
 \end{description}
 
 \subsubsection{UC-5: Sistema di feedback e rating}
@@ -553,11 +701,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore conferma l'invio per la registrazione del feedback (\textbf{UC-5.3}).
     \end{enumerate}
 
-    \item[Relazioni] 
+\item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{UC-5.1}: Assegnazione del rating.
-        \item \textbf{UC-5.2}: Inserimento del commento testuale.
-        \item \textbf{UC-5.3}: Conferma e invio del feedback.
+        \item \textbf{Inclusioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-5.1}: Assegnazione del rating.
+            \item \textbf{UC-5.2}: Inserimento del commento testuale.
+            \item \textbf{UC-5.3}: Conferma e invio del feedback.
+        \end{itemize}
     \end{itemize}
 
 \end{description}
@@ -594,8 +745,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore digita il proprio commento.
     \end{enumerate}
     \item[Scenari Alternativi] 
-    \textbf{UC-5.2.E1 (Errore - Superamento limite caratteri):} Qualora il Redattore inserisca un testo che supera la lunghezza massima consentita, il sistema blocca l'inserimento di ulteriori caratteri e mostra un avviso visivo relativo al limite superato.
-    
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{2a. Superamento limite caratteri:} Il sistema rileva che il testo inserito eccede la lunghezza massima consentita; l'inserimento di ulteriori caratteri viene bloccato e viene notificato un avviso.
+    \end{itemize}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-5.2.E1}: \textit{Condizione:} Se il Redattore tenta di inserire un testo la cui lunghezza supera la soglia massima definita dal sistema.
+        \end{itemize}
+    \end{itemize}
 \end{description}
 
 \paragraph{UC-5.3: Conferma e invio del feedback}
@@ -614,9 +774,53 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema fornisce un messaggio visivo di avvenuta ricezione.
     \end{enumerate}
 
-    \item[Scenari Alternativi] 
-    \textbf{UC-5.3.E2 (Errore - Rating mancante):} Qualora il Redattore tenti di inviare il feedback senza aver assegnato un punteggio (UC-5.1), "il sistema interrompe l'operazione di salvataggio, segnala la mancanza della valutazione obbligatoria e invita il Redattore a selezionare un punteggio.
+ \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{1a. Rating mancante:} Il sistema rileva che non è stato assegnato alcun punteggio obbligatorio (UC-5.1); il salvataggio viene interrotto e viene richiesto un inserimento valido.
+    \end{itemize}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-5.3.E1}: \textit{Condizione:} Se il Redattore tenta di inviare il modulo senza aver precedentemente selezionato un punteggio (da 1 a 5 stelle).
+        \end{itemize}
+    \end{itemize}
+
+\end{description}
+\paragraph{UC-5.2.E1: Errore - Superamento limite caratteri}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore sta digitando un commento (UC-5.2) e raggiunge il limite massimo di caratteri consentito.
+    
+    \item[Post-condizioni] Il sistema preserva il testo fino al limite consentito e non accetta ulteriori input.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema inibisce la digitazione di nuovi caratteri all'interno del campo.
+        \item Il sistema mostra un avviso visivo (es. contatore in rosso) relativo al raggiungimento del limite massimo.
+    \end{enumerate}
+
+\end{description}
+
+\paragraph{UC-5.3.E1: Errore - Rating mancante}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Redattore
+    
+    \item[Pre-condizioni] Il Redattore seleziona il comando di invio (UC-5.3) mantenendo lo stato del rating (UC-5.1) vuoto o non selezionato.
+    
+    \item[Post-condizioni] Il sistema blocca la procedura di invio e mantiene il modulo attivo.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema interrompe l'operazione di salvataggio.
+        \item Il sistema evidenzia visivamente il campo della valutazione a stelle, segnalandone l'obbligatorietà.
+        \item Il sistema invita il Redattore a selezionare un punteggio prima di procedere.
+    \end{enumerate}
+
 \end{description}
 
 \subsubsection{UC-6: Dashboard metriche e monitoraggio}
@@ -635,11 +839,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item L'Analista dati richiede l'esportazione dei dati analitici per la condivisione (\textbf{UC-6.3}).
     \end{enumerate}
 
-    \item[Relazioni] 
+\item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{UC-6.1}: Visualizzazione statistiche di utilizzo.
-        \item \textbf{UC-6.2}: Monitoraggio del rating medio.
-        \item \textbf{UC-6.3}: Esportazione report periodici.
+        \item \textbf{Inclusioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-6.1}: Visualizzazione statistiche di utilizzo.
+            \item \textbf{UC-6.2}: Monitoraggio del rating medio.
+            \item \textbf{UC-6.3}: Esportazione report periodici.
+        \end{itemize}
     \end{itemize}
 
 \end{description}
@@ -695,10 +902,37 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 
     \item[Scenari Alternativi] 
-    \textbf{UC-6.3.E1 (Errore - Dati non disponibili):} Qualora l'Analista dati selezioni un periodo temporale privo di interazioni registrate, il sistema inibisce la generazione del documento e mostra un avviso di assenza dati.
-    
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{1a. Dati non disponibili:} Il sistema rileva l'assenza di interazioni per il periodo selezionato; la generazione del documento viene inibita e viene notificato un avviso.
+    \end{itemize}
+
+    \item[Relazioni] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: 
+        \begin{itemize}[leftmargin=*, nosep]
+            \item \textbf{UC-6.3.E1}: \textit{Condizione:} Se l'Analista dati tenta di esportare un report relativo a un periodo temporale privo di dati registrati.
+        \end{itemize}
+    \end{itemize}
+
 \end{description}
 
+\paragraph{UC-6.3.E1: Errore - Dati non disponibili}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    
+    \item[Attori] Analista dati
+    
+    \item[Pre-condizioni] L'Analista dati ha richiesto l'esportazione di un report (UC-6.3) specificando un arco temporale privo di interazioni.
+    
+    \item[Post-condizioni] Il sistema blocca la procedura di esportazione e mantiene invariati i parametri di selezione.
+    
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema inibisce la generazione e il download del documento.
+        \item Il sistema mostra un avviso a schermo relativo all'assenza di dati per il periodo richiesto.
+        \item Il sistema invita l'Analista dati a selezionare un arco temporale differente.
+    \end{enumerate}
+
+\end{description}
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
 Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}, ...
