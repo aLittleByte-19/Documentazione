@@ -1,0 +1,173 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{Immagini/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-04-13}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+        \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale 2026-04-13}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Interno - 2026-04-13}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Eleonora Bellet \\
+            Verificatori & Alex Oloni\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-04-13\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Discord \\[6pt]
+
+Orario (Inizio - Fine) & 15:00 -- 15:45 \\[6pt]
+
+Redattore &
+  E. Bellet\\[6pt]
+
+Amministratore & 
+A. Gastaldello\\[6pt]
+
+Verificatore &
+A. Oloni\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  E. Bellet\\&
+  A. Gastaldello\\&
+  A. Maule\\&
+  V. Y. Kaneda Fernandes\\[6pt]
+
+Assenti e motivazione& 
+    D. Belluz - Impegni familiari\\
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Analisi dei requisiti e organizzazione incontro con l'azienda
+    \item Sviluppo del mockup
+    \item Stesura documentazione
+    \end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Analisi dei requisiti e organizzazione incontro con l'azienda}
+\textbf{Angela Maule} e \textbf{Angelica Gastaldello} hanno completato la bozza dei casi d'uso legati all'assistant generativo. Per poter completare l'analisi dei requisiti, è emersa la necessità di richiedere alcuni chiarimenti all'azienda in merito ai documenti di prova e alle preferenze grafiche e tecniche. A tal fine, è stato concordato di pianificare una riunione con l'azienda per la prossima settimana. Il gruppo si impegnerà a raccogliere preventivamente una serie di domande da presentare per risolvere i dubbi emersi.
+
+\subsection{Sviluppo del mockup}
+\textbf{Leonardo Soligo} e \textbf{Alex Oloni} hanno realizzato un mockup iniziale in HTML e CSS, che è stato condiviso nel repository per facilitare modifiche rapide e raccogliere feedback. Si è discusso dell'importanza di validare l'interfaccia grafica internamente e con l'azienda, prima di passare a formati definitivi. È stato inoltre chiarito che la realizzazione del mockup e la stesura dell'analisi dei requisiti devono procedere in parallelo e in stretta sincronizzazione, affinché l'interfaccia rifletta in modo coerente le funzionalità da implementare. 
+
+\subsection{Stesura documentazione}
+Abbiamo affrontato il tema della rotazione dei ruoli, confermando che avverrà regolarmente ogni due settimane. Per tracciare in modo chiaro queste dinamiche, il gruppo ha concordato sull'utilità di iniziare subito la documentazione del piano di progetto, includendo tabelle specifiche per ciascun sprint con i ruoli e i compiti assegnati.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit {Alex Oloni e Leonardo Soligo} & Continuazione del Mock-up & \href{https://github.com/aLittleByte-19/Documentazione/issues/50}{\#50}\\
+    \hline
+        \textit{Angelica Gastaldello e Angela Maule} &  Continuazione Stesura Analisi dei Requisiti& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
+    \hline
+        \textit{Diego Belluz e Eleonora Bellet} &  Continuazione Stesura Norme di Progetto& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
+    \hline
+        \textit{Vinicius Yuri Kaneda Fernandes} & Continuazione Stesura Glossario & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
+    \hline
+        \textit{Vinicius Yuri Kaneda Fernandes} & Inizio Stesura Piano di Progetto &
+        \href{https://github.com/aLittleByte-19/Documentazione/issues/63}{\#63}\\
+    \hline
+        \textit{Angelica Gastaldello} & Scrittura email alla azienda & 
+        \href{https://github.com/aLittleByte-19/Documentazione/issues/65}{\#65}\\
+    \hline 
+        \textit{Tutti i pertecipanti} & Domande da porre alla azienda & 
+        \href{https://github.com/aLittleByte-19/Documentazione/issues/64}{\#64}\\
+    \hline
+        \textit{Eleonora Bellet} & Stesura Verbale Interno 13/04/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/62}{\#62}\\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
