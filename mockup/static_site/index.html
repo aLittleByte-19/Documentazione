@@ -11,9 +11,6 @@
     <aside class="sidebar">
       <div class="brand-block">
         <img class="brand-logo" src="eggon_logo_43542.png" alt="Eggon logo">
-        <div>
-          <h1>NEXUM Console</h1>
-        </div>
       </div>
 
       <nav class="side-nav" aria-label="Navigazione applicativo">
@@ -209,6 +206,7 @@
               <div class="meta-row">
                 <span id="meta-chars">124 caratteri</span>
                 <span id="meta-time">1 min lettura</span>
+                <span>Creato da AI Assistant</span>
                 <span id="assistant-status">Bozza pronta</span>
               </div>
 
@@ -243,6 +241,15 @@
                   Puoi inviare a una categoria, a una o più persone, oppure a entrambi.
                 </p>
               </div>
+
+              <label class="field compact-field">
+                <span>Formato esportazione</span>
+                <select id="export-format-select">
+                  <option>PDF</option>
+                  <option>DOCX</option>
+                  <option>HTML</option>
+                </select>
+              </label>
 
               <div class="button-row">
                 <button class="secondary-button" id="regenerate-button">Rigenera</button>
@@ -310,21 +317,30 @@
                   <strong>Rilascio nuova area documentale</strong>
                   <span>Email interna · Tono chiaro · oggi</span>
                 </div>
-                <button class="text-button" data-reuse-prompt="Comunica il rilascio della nuova area documentale NEXUM ai dipendenti.">Riusa</button>
+                <div class="history-actions">
+                  <button class="favorite-button active" type="button" data-favorite aria-label="Rimuovi dai preferiti" aria-pressed="true">★</button>
+                  <button class="text-button" data-reuse-prompt="Comunica il rilascio della nuova area documentale NEXUM ai dipendenti.">Riusa</button>
+                </div>
               </li>
               <li class="history-item" data-tags="portale sintetico">
                 <div class="history-main">
                   <strong>Promemoria consegna cedolini</strong>
                   <span>News portale · Tono sintetico · ieri</span>
                 </div>
-                <button class="text-button" data-reuse-prompt="Ricorda ai dipendenti dove consultare i cedolini del mese.">Riusa</button>
+                <div class="history-actions">
+                  <button class="favorite-button" type="button" data-favorite aria-label="Aggiungi ai preferiti" aria-pressed="false">★</button>
+                  <button class="text-button" data-reuse-prompt="Ricorda ai dipendenti dove consultare i cedolini del mese.">Riusa</button>
+                </div>
               </li>
               <li class="history-item" data-tags="email istituzionale">
                 <div class="history-main">
                   <strong>Aggiornamento procedura ferie</strong>
                   <span>Email interna · Tono istituzionale · 3 giorni fa</span>
                 </div>
-                <button class="text-button" data-reuse-prompt="Aggiorna i dipendenti sulla nuova procedura di richiesta ferie.">Riusa</button>
+                <div class="history-actions">
+                  <button class="favorite-button" type="button" data-favorite aria-label="Aggiungi ai preferiti" aria-pressed="false">★</button>
+                  <button class="text-button" data-reuse-prompt="Aggiorna i dipendenti sulla nuova procedura di richiesta ferie.">Riusa</button>
+                </div>
               </li>
             </ul>
 
@@ -344,6 +360,19 @@
               <li><strong>11</strong><span>Prompt riutilizzati</span></li>
               <li><strong>4,6</strong><span>Rating medio</span></li>
             </ul>
+
+            <div class="usage-feedback">
+              <p class="section-label">Feedback recenti</p>
+              <ul class="compact-list">
+                <li><strong>5/5</strong><span>Testo pronto senza correzioni rilevanti</span></li>
+                <li><strong>4/5</strong><span>Buona struttura, apertura da rendere più sintetica</span></li>
+              </ul>
+            </div>
+
+            <div class="button-row">
+              <button class="secondary-button" id="analytics-export-button">Esporta report</button>
+            </div>
+            <p class="status-message hidden" id="analytics-status"></p>
           </article>
         </section>
 

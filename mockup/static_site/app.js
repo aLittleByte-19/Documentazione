@@ -126,6 +126,7 @@ const savePromptButton = document.getElementById("save-prompt-button");
 const regenerateButton = document.getElementById("regenerate-button");
 const saveDraftButton = document.getElementById("save-draft-button");
 const exportButton = document.getElementById("export-button");
+const exportFormatSelect = document.getElementById("export-format-select");
 const sendButton = document.getElementById("send-button");
 const recipientCategorySelect = document.getElementById("recipient-category-select");
 const recipientEmailInput = document.getElementById("recipient-email-input");
@@ -139,6 +140,8 @@ const promptFilter = document.getElementById("prompt-filter");
 const promptEmpty = document.getElementById("prompt-empty");
 const metaChars = document.getElementById("meta-chars");
 const metaTime = document.getElementById("meta-time");
+const analyticsExportButton = document.getElementById("analytics-export-button");
+const analyticsStatus = document.getElementById("analytics-status");
 
 [
   "assistant-review",
@@ -219,6 +222,12 @@ function tagsFor(channel, tone, favorite = false) {
   return tags.join(" ");
 }
 
+function setFavoriteButtonState(button, favorite) {
+  button.classList.toggle("active", favorite);
+  button.setAttribute("aria-pressed", String(favorite));
+  button.setAttribute("aria-label", favorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti");
+}
+
 function appendHistoryItem(title, prompt, channel, tone, favorite = false) {
   if (!promptHistory) {
     return;
@@ -243,8 +252,19 @@ function appendHistoryItem(title, prompt, channel, tone, favorite = false) {
   action.dataset.reusePrompt = prompt;
   action.textContent = "Riusa";
 
+  const favoriteButton = document.createElement("button");
+  favoriteButton.className = "favorite-button";
+  favoriteButton.type = "button";
+  favoriteButton.dataset.favorite = "";
+  favoriteButton.textContent = "★";
+  setFavoriteButtonState(favoriteButton, favorite);
+
+  const actions = document.createElement("div");
+  actions.className = "history-actions";
+  actions.append(favoriteButton, action);
+
   main.append(strong, meta);
-  item.append(main, action);
+  item.append(main, actions);
   promptHistory.prepend(item);
   applyPromptFilters();
 }
@@ -321,7 +341,8 @@ saveDraftButton?.addEventListener("click", () => {
 });
 
 exportButton?.addEventListener("click", () => {
-  setText(assistantStatus, "Esportazione pronta");
+  const format = exportFormatSelect?.value || "PDF";
+  setText(assistantStatus, `${format} pronto per il download`);
 });
 
 function parseExplicitRecipients(value) {
@@ -394,6 +415,26 @@ promptSearch?.addEventListener("input", applyPromptFilters);
 promptFilter?.addEventListener("change", applyPromptFilters);
 
 promptHistory?.addEventListener("click", (event) => {
+  const favoriteButton = event.target.closest("[data-favorite]");
+  if (favoriteButton) {
+    const item = favoriteButton.closest(".history-item");
+    const tags = new Set((item?.dataset.tags || "").split(" ").filter(Boolean));
+    const favorite = favoriteButton.getAttribute("aria-pressed") !== "true";
+
+    if (favorite) {
+      tags.add("preferito");
+    } else {
+      tags.delete("preferito");
+    }
+
+    if (item) {
+      item.dataset.tags = Array.from(tags).join(" ");
+    }
+    setFavoriteButtonState(favoriteButton, favorite);
+    applyPromptFilters();
+    return;
+  }
+
   const button = event.target.closest("[data-reuse-prompt]");
   if (!button) {
     return;
@@ -406,10 +447,11 @@ promptHistory?.addEventListener("click", (event) => {
   goTo("assistant", "assistant-compose");
 });
 
-let selectedRating = 4;
+let selectedRating = 0;
 const ratingButtons = document.querySelectorAll("[data-rating]");
 const ratingSubmitButton = document.getElementById("rating-submit-button");
 const ratingNote = document.getElementById("rating-note");
+const ratingComment = document.getElementById("rating-comment");
 
 function updateRating(value) {
   selectedRating = value;
@@ -441,8 +483,26 @@ ratingButtons.forEach((button) => {
 updateRating(selectedRating);
 
 ratingSubmitButton?.addEventListener("click", () => {
-  setText(ratingNote, `Valutazione registrata: ${selectedRating} su 5.`);
+  if (selectedRating === 0) {
+    setText(ratingNote, "Seleziona una valutazione prima di inviare.");
+    ratingNote?.classList.remove("hidden");
+    return;
+  }
+
+  setText(ratingNote, "Grazie, feedback registrato.");
   ratingNote?.classList.remove("hidden");
+  ratingButtons.forEach((button) => {
+    button.disabled = true;
+  });
+  if (ratingComment) {
+    ratingComment.disabled = true;
+  }
+  ratingSubmitButton.disabled = true;
+});
+
+analyticsExportButton?.addEventListener("click", () => {
+  setText(analyticsStatus, "Report pronto per il download.");
+  analyticsStatus?.classList.remove("hidden");
 });
 
 const uploadBox = document.getElementById("upload-box");

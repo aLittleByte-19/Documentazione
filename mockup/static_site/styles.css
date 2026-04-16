@@ -295,7 +295,7 @@ img {
 
 .back-to-top {
   position: fixed;
-  right: 22px;
+  right: max(var(--workspace-pad), calc((100vw - var(--sidebar-width) - var(--workspace-max)) / 2 + var(--workspace-pad)));
   bottom: 22px;
   z-index: 50;
   display: grid;
@@ -525,7 +525,8 @@ img {
 .primary-button,
 .secondary-button,
 .rating-button,
-.text-button {
+.text-button,
+.favorite-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -557,6 +558,21 @@ img {
   background: transparent;
   color: var(--primary-deep);
   box-shadow: none;
+}
+
+.favorite-button {
+  width: 38px;
+  min-height: 38px;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  box-shadow: none;
+  font-size: 1.28rem;
+  line-height: 1;
+}
+
+.favorite-button.active {
+  color: var(--accent);
 }
 
 .rating-button {
@@ -592,7 +608,9 @@ img {
 }
 
 .text-button:hover,
-.text-button:focus-visible {
+.text-button:focus-visible,
+.favorite-button:hover,
+.favorite-button:focus-visible {
   background: rgba(47, 103, 143, 0.08);
   box-shadow: none;
   outline: none;
@@ -698,6 +716,18 @@ img {
   gap: 4px;
 }
 
+.history-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.usage-feedback {
+  display: grid;
+  gap: 10px;
+}
+
 .history-main strong {
   line-height: 1.3;
 }
@@ -783,7 +813,8 @@ img {
 }
 
 .empty-note,
-.inline-note {
+.inline-note,
+.section-label {
   margin: 0;
   padding: 12px 14px;
   border-radius: var(--radius);
@@ -799,6 +830,11 @@ img {
 .inline-note {
   background: var(--success-soft);
   color: var(--success-text);
+}
+
+.section-label {
+  padding: 0;
+  color: var(--text);
 }
 
 .hidden {
@@ -823,6 +859,10 @@ img {
   }
 
   .theme-toggle {
+    right: var(--workspace-pad);
+  }
+
+  .back-to-top {
     right: var(--workspace-pad);
   }
 }
@@ -866,6 +906,11 @@ img {
   .history-item {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .history-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 
   .compact-list span,
