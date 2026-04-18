@@ -767,68 +767,161 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
     
     \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema.
     
-    \item[Pre-condizioni] 
-    \begin{itemize}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro si trova nella sezione dedicata all'upload del modulo AI Co-Pilot.
-    \end{itemize}
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.
     
-    \item[Post-condizioni] 
-    \begin{itemize}[leftmargin=*, nosep]
-        \item Il documento è correttamente archiviato nel sistema e pronto per l'estrazione dati.
-        \item Il sistema ha predisposto l'interfaccia di anteprima dei campi estratti.
-    \end{itemize}
+    \item[Post-condizioni] Il documento è caricato nel sistema e avviato all'analisi AI.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
-        \item Il Consulente del lavoro conferma l'operazione di caricamento.
-        \item Il sistema esegue i controlli di validità sul file (formato e univocità).
-        \item Il sistema archivia il documento e notifica il successo dell'operazione.
-        \item Il sistema avvia la visualizzazione dei campi estratti (\textbf{UC-CO-2}).
+        \item Il Consulente del lavoro conferma il caricamento.
+        \item Il sistema verifica formato e duplicati.
+        \item Il sistema completa il caricamento, notifica l'esito positivo e avvia l'analisi AI del documento.
     \end{enumerate}
 
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{3a. Documento duplicato:} Il sistema rileva che il file è già presente; l'upload viene interrotto e viene mostrato un messaggio di errore.
-        \item \textbf{3b. Formato non valido:} Il sistema rileva un formato non supportato; l'upload viene interrotto e viene mostrato un messaggio di errore.
+        \item 3a. Documento duplicato: Il sistema rileva che il file è già presente; viene eseguito UC-CO-1.E1.
+        \item 3b. Formato non valido: Il sistema rileva un formato non supportato; viene eseguito UC-CO-1.E2.
     \end{itemize}
 
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: \textbf{UC-CO-2}.
-    \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-CO-1.1}: \textit{Condizione:} Se il Consulente desidera classificare il documento per tipologia.
-            \item \textbf{UC-CO-1.2}: \textit{Condizione:} Se il Consulente desidera associare metadati temporali o aziendali prima del caricamento.
-        \end{itemize}
+        \item \textbf{Generalizzazioni}: UC-CO-2.
+        \item \textbf{Estensioni}: UC-CO-1.E1, UC-CO-1.E2.
     \end{itemize}
 
 \end{description}
 
-\paragraph{UC-CO-1.1: Selezione categoria documento}
+\subsubsection{UC-CO-2: Upload documento con classificazione e metadati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha selezionato un file e desidera classificarlo.
-    \item[Post-condizioni] Al documento è associata una categoria specifica tra quelle disponibili.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro intende impostare manualmente classificazione e metadati durante l'upload.
+    \item[Post-condizioni] Il documento è caricato e analizzato dall'AI; classificazione e metadati inseriti manualmente non vengono ricalcolati dall'AI.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro sceglie una categoria dall'elenco proposto dal sistema.
+        \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
+        \item Il Consulente del lavoro seleziona la classificazione del documento.
+        \item Il Consulente del lavoro inserisce i metadati richiesti (es. mese, anno, azienda).
+        \item Il Consulente del lavoro conferma il caricamento.
+        \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 4a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito UC-CO-1.E1.
+        \item 4b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito UC-CO-1.E2.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-1.E1, UC-CO-1.E2.
+    \end{itemize}
+\end{description}
+
+
+\paragraph{UC-CO-1.E1: Gestione documento duplicato}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Sistema
+    \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
+    \item[Post-condizioni] Il documento non viene caricato e il sistema mantiene invariato lo stato dell'archivio.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema interrompe la procedura di caricamento del documento.
+        \item Il sistema mostra un messaggio di errore informando l'utente che il file è già presente.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-1.2: Inserimento metadati documento}
+\paragraph{UC-CO-1.E2: Gestione formato non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha selezionato un file e desidera aggiungere informazioni di contesto.
-    \item[Post-condizioni] Al documento sono associati metadati relativi a periodo (mese/anno) e azienda.
+    \item[Attori] Sistema
+    \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
+    \item[Post-condizioni] Il documento non viene caricato e il sistema richiede un nuovo file in formato valido.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro inserisce mese e anno di riferimento.
-        \item Il Consulente del lavoro specifica l'azienda di riferimento tramite ricerca o selezione.
+        \item Il sistema interrompe la procedura di caricamento del documento.
+        \item Il sistema mostra un messaggio di errore indicando i formati supportati.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-2: Visualizzazione e modifica dei campi estratti}
+
+\subsubsection{UC-CO-3: Dashboard metriche e monitoraggio AI Co-Pilot}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Analista dati
+    \item[Pre-condizioni] L'Analista dati è entrato nella sezione dedicata alle metriche del modulo AI Co-Pilot.
+    \item[Post-condizioni] L'Analista dati visualizza in dashboard i principali KPI del modulo AI Co-Pilot (volumi, accuratezza, confidenza, riconoscimento destinatari e tempi medi) e dispone delle informazioni necessarie per valutarne le prestazioni.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-CO-3.1}).
+        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-CO-3.2}).
+        \item Il sistema espone i documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-CO-3.3}).
+        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-CO-3.4}).
+        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-CO-3.5}).
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: UC-CO-3.1, UC-CO-3.2, UC-CO-3.3, UC-CO-3.4, UC-CO-3.5.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-3.1: Visualizzazione numero totale di documenti analizzati}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
+    \item[Post-condizioni] L'Analista dati visualizza il numero totale dei documenti analizzati dal modulo AI Co-Pilot.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza il numero totale complessivo di tutti i documenti processati dall'intelligenza artificiale.
+        \item L'Analista dati osserva l'indicatore relativo ai volumi di utilizzo.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-3.2: Visualizzazione percentuale di classificazioni corrette}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
+    \item[Post-condizioni] L'Analista dati visualizza la percentuale di classificazioni corrette effettuate automaticamente dall'AI.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza la percentuale complessiva di documenti classificati correttamente dall'AI sul totale analizzato, calcolata considerando solo i casi che non hanno richiesto alcun intervento manuale da parte degli operatori.
+        \item L'Analista dati osserva la metrica relativa all'accuratezza del sistema.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-3.3: Visualizzazione documenti sotto soglia di confidenza}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
+    \item[Post-condizioni] L'Analista dati visualizza numero e percentuale dei documenti con confidenza inferiore alla soglia prevista.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza il numero totale e la relativa percentuale dei documenti per i quali l'AI ha stimato una confidenza inferiore all'80\%, e che per questo motivo hanno richiesto una revisione umana.
+        \item L'Analista dati osserva le percentuali relative all'accuratezza del sistema.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-3.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
+    \item[Post-condizioni] L'Analista dati visualizza la percentuale di associazioni destinatario-anagrafica risolte automaticamente e correttamente dall'AI.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza la percentuale complessiva di documenti in cui l'associazione tra il destinatario e la sua anagrafica è stata risolta in modo automatico e corretto dall'AI.
+        \item L'Analista dati osserva il dato relativo allo smistamento dei file.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-3.5: Visualizzazione tempo medio di analisi dei documenti}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
+    \item[Post-condizioni] L'Analista dati visualizza il tempo medio necessario all'AI per completare l'analisi di un documento.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza il tempo medio impiegato dall'AI per elaborare interamente un documento caricato e restituirne l'analisi completa all'utente.
+        \item L'Analista dati osserva l'indicatore delle prestazioni di sistema.
+    \end{enumerate}
+\end{description}
+
 
 
 \subsection{Governance e qualità}
