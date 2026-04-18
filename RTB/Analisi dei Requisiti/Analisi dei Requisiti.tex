@@ -371,22 +371,25 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Pre-condizioni] Il sistema ha completato la generazione (UC-1) e mostra l'anteprima di titolo, testo e immagine nell'area di revisione.
     
-    \item[Post-condizioni] Il sistema ha aggiornato il contenuto in base alle scelte del Redattore, rendendolo pronto per il salvataggio o l'esportazione (UC-3).
+    \item[Post-condizioni] Il sistema ha aggiornato il contenuto in base alle scelte del Redattore, rendendolo pronto per il salvataggio o l'esportazione (UC-3), oppure ha rimosso la bozza corrente.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore visualizza l'anteprima del risultato generato dall'AI e le relative metriche.
         \item Il Redattore utilizza l'editor per la modifica manuale del testo o del titolo (\textbf{UC-2.1}).
+        \item Il Redattore sostituisce l'immagine di copertina suggerita dall'AI con un file locale (\textbf{UC-2.3}).
+        \item Il Redattore decide di scartare il contenuto generato eliminando la bozza corrente (\textbf{UC-2.4}).
         \item Il Redattore richiede la rigenerazione totale del contenuto (\textbf{UC-2.2}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-2.1, UC-2.2.
+        \item \textbf{Inclusioni}: UC-2.1, UC-2.2, UC-2.3, UC-2.4.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
             \item \textbf{UC-2.E1}: Errore - Contenuto vuoto. Condizione: se il Redattore tenta di confermare le modifiche dopo aver eliminato tutto il testo.
-            \item \textbf{UC-2.E2}: Errore - Fallimento modulo AI. Condizione: se si verifica un errore di rete durante la rigenerazione o traduzione.
+            \item \textbf{UC-2.E2}: Errore - Fallimento modulo AI. Condizione: se si verifica un errore di rete durante la rigenerazione.
+            \item \textbf{UC-2.E3}: Errore - Formato immagine non valido. Condizione: se l'immagine caricata per la sostituzione non è supportata o è troppo pesante.
         \end{itemize}
     \end{itemize}
 
@@ -418,6 +421,33 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
+\subsubsection{UC-2.3: Sostituzione dell'immagine di copertina}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema mostra l'anteprima del post con l'immagine suggerita dall'AI.
+    \item[Post-condizioni] L'immagine di copertina originale è stata sostituita con un file scelto dal Redattore.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona l'opzione di modifica immagine sull'anteprima.
+        \item Il Redattore carica un file immagine dal proprio dispositivo.
+        \item Il sistema convalida il file e aggiorna l'anteprima grafica del post.
+    \end{enumerate}
+\end{description} 
+
+\subsubsection{UC-2.4: Eliminazione della bozza generata}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema visualizza l'anteprima di un contenuto generato o in fase di modifica.
+    \item[Post-condizioni] Il sistema ha eliminato il contenuto dall'area di revisione e riportato l'utente alla schermata di configurazione iniziale (UC-1).
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando "Elimina".
+        \item Il sistema richiede una conferma per l'operazione di eliminazione definitiva.
+        \item Il Redattore conferma l'intenzione di eliminare la bozza.
+        \item Il sistema svuota l'editor.
+    \end{enumerate}
+\end{description}
+
 \paragraph{UC-2.E1: Errore - Contenuto vuoto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
@@ -439,6 +469,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva l'impossibilità di ottenere la nuova versione dall'AI Post Generator.
         \item Il sistema mostra un messaggio di errore tecnico e mantiene visibile la bozza su cui si stava lavorando.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-2.E3: Errore - Formato immagine non valido}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il Redattore tenta di caricare una nuova immagine (UC-2.3) che non rispetta i vincoli di sistema.
+    \item[Post-condizioni] Il sistema impedisce il caricamento e mantiene l'immagine precedente.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il file non è supportato o supera la dimensione massima.
+        \item Il sistema visualizza un messaggio di errore e richiede un file valido.
     \end{enumerate}
 \end{description}
 
@@ -686,22 +728,23 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Pre-condizioni] Il sistema ha registrato nel tempo i dati di utilizzo dell'Assistente AI e le valutazioni qualitative fornite dagli utenti.
     
-    \item[Post-condizioni] L'Analista dati ha consultato le metriche di performance a schermo e/o ha esportato il report analitico.
+    \item[Post-condizioni] L'Analista dati ha consultato le metriche, applicato filtri di visualizzazione e/o esportato il report analitico.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item L'Analista dati consulta le statistiche operative essenziali di utilizzo del sistema (\textbf{UC-6.1}).
         \item L'Analista dati valuta il livello qualitativo percepito tramite il rating medio (\textbf{UC-6.2}).
         \item L'Analista dati consulta i feedback testuali lasciati dai Redattori (\textbf{UC-6.3}).
-        \item L'Analista dati richiede l'esportazione dei dati analitici per la condivisione esterna (\textbf{UC-6.4}).
+        \item L'Analista dati filtra le metriche a schermo impostando parametri specifici (\textbf{UC-6.4}).
+        \item L'Analista dati richiede l'esportazione dei dati analitici per la condivisione esterna (\textbf{UC-6.5}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-6.1, UC-6.2, UC-6.3, UC-6.4.
+        \item \textbf{Inclusioni}: UC-6.1, UC-6.2, UC-6.3, UC-6.4, UC-6.5.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-6.E1}: Errore - Dati non disponibili (Condizione: se l'Analista dati tenta di esportare un report relativo a un periodo temporale privo di interazioni registrate).
+            \item \textbf{UC-6.E1}: Errore - Dati non disponibili (Condizione: se l'Analista tenta di esportare o filtrare un periodo/parametro privo di interazioni registrate).
         \end{itemize}
     \end{itemize}
 
@@ -743,16 +786,42 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.4: Esportazione report periodici}
+\subsubsection{UC-6.4: Filtraggio dei dati analitici} (DA PARLARNE)
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati sta visualizzando la dashboard delle metriche.
+    \item[Post-condizioni] Il sistema mostra i contatori, i grafici e la lista feedback aggiornati esclusivamente con i dati corrispondenti ai filtri applicati.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item L'Analista dati seleziona uno o più parametri dai menu di filtro.
+        \item Il sistema ricalcola dinamicamente tutte le metriche operative (UC-6.1) e il rating medio (UC-6.2).
+        \item Il sistema aggiorna l'interfaccia grafica mostrando i nuovi risultati.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-6.5: Esportazione report periodici}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] Il sistema espone i comandi di estrazione dati dalla dashboard.
     \item[Post-condizioni] Il sistema ha prodotto e fornito un documento riepilogativo scaricabile.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati seleziona l'arco temporale di interesse e clicca sul comando di esportazione. (DA PARLARNE)
+        \item L'Analista dati seleziona l'arco temporale di interesse e clicca sul comando di esportazione.
         \item Il sistema compila un file strutturato contenente le metriche aggregate.
         \item Il sistema rende disponibile il file per il download sul dispositivo dell'utente.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-6.E1: Errore - Dati non disponibili}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista dati applica filtri (UC-6.4) o richiede un'esportazione (UC-6.5) per una combinazione di parametri che non ha generato alcuna interazione nel sistema.
+    \item[Post-condizioni] Il sistema blocca l'esportazione, mantenendo attiva la schermata per consentire un nuovo inserimento.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva l'assenza di record nel database per i parametri o il periodo richiesto.
+        \item Il sistema mostra un avviso visivo di "Dati insufficienti o assenti".
+        \item Il sistema invita l'Analista dati a modificare o azzerare i filtri impostati.
     \end{enumerate}
 \end{description}
 
