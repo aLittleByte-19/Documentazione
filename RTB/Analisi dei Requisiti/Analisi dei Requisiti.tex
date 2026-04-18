@@ -339,7 +339,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.E1: Errore - Prompt mancante o insufficiente}
+\paragraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore tenta di avviare la generazione o il salvataggio con il campo prompt vuoto o contenente un testo inferiore alla soglia minima richiesta.
@@ -351,7 +351,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.E2: Errore - Fallimento modulo AI}
+\paragraph{UC-1.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema ha inviato i parametri al motore AI, ma si verifica un timeout o un errore di connessione.
@@ -418,7 +418,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.E1: Errore - Contenuto vuoto}
+\paragraph{UC-2.E1: Errore - Contenuto vuoto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo nell'editor e tenta di confermarne le modifiche.
@@ -430,7 +430,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.E2: Errore - Fallimento modulo AI}
+\paragraph{UC-2.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il Redattore ha richiesto una variante o una traduzione, ma si verifica un problema tecnico di rete o di API.
@@ -508,7 +508,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.E1: Errore - Indirizzo e-mail non valido}
+\paragraph{UC-3.E1: Errore - Indirizzo e-mail non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore richiede l'inoltro (UC-3.3) inserendo una stringa che viola le regole di convalida della posta elettronica.
@@ -584,7 +584,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.E1: Avviso - Nessun risultato trovato}
+\paragraph{UC-4.E1: Avviso - Nessun risultato trovato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha inserito filtri o parole chiave di ricerca.
@@ -654,7 +654,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.E1: Errore - Rating mancante}
+\paragraph{UC-5.E1: Errore - Rating mancante}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore seleziona il comando di invio mantenendo lo stato del rating vuoto (0 stelle).
@@ -667,7 +667,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.E2: Errore - Superamento limite caratteri}
+\paragraph{UC-5.E2: Errore - Superamento limite caratteri}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore sta digitando il commento (UC-5.2) e raggiunge il limite massimo di caratteri consentito dal database.
