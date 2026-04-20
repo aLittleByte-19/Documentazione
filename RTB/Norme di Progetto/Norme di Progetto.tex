@@ -1,0 +1,645 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte19@gmail.com}
+\newcommand{\grouplogo}{.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Norme di Progetto}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Norme di Progetto}
+
+    \setcounter{secnumdepth}{4}
+    \setcounter{tocdepth}{4}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Norme di Progetto}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattori   & Eleonora Bellet, Diego Belluz \\
+            Verificatori& Leonardo Soligo, Angelica Gastaldello\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & -/-/2026 \\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white}
+\begin{center}
+    {\footnotesize
+    \begin{tabularx}{\textwidth}{|p{1.4cm}|p{1.8cm}|X|p{2.4cm}|p{2.3cm}|p{2.3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline 
+        0.11.0 & 19/04/2026 & Tracciamento delle azioni, comunicazione, riunioni & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        0.10.0 & 18/04/2026 & Processi Organizzativi (Definizione e scopo, gestione degli sprint, ruoli) & Eleonora Bellet & Diego Belluz & - \\
+        \hline 
+        0.9.0 & 17/04/2026 & Validazione, Processo di Validazione, Processo di validazione & Eleonora Bellet & Diego Belluz & - \\
+        \hline 
+        0.8.0 & 16/04/2026 & Controllo della configurazione, Stato della configurazione, Attività di Verifica, Analisi Statica & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        0.7.0 & 14/04/2026 & Denominazione dei documenti, Produzione e Gestione della configurazione & Eleonora Bellet & Diego Belluz & - \\
+        \hline 
+        0.6.0 & 11/04/2026 & Processi di supporto (scopo, strumenti utilizzati, documenti prodotti, struttura dei documenti) & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        0.5.0 & 9/04/2026 & Processi di sviluppo & Diego Belluz & Eleonora Bellet & - \\
+        \hline
+        0.4.0 & 8/04/2026 & Processi di fornitura & Diego Belluz & Eleonora Bellet & - \\
+        \hline
+        0.3.0 & 4/04/2026 & Architettura dei processi & Diego Belluz & Eleonora Bellet & - \\
+        \hline
+        0.2.0 & 31/03/2026 & Scopo del documento e scopo del prodotto & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        0.1.0 & 31/03/2026 & Struttura del documento & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        
+    \end{tabularx}
+    }
+    
+\end{center}
+\newpage
+
+\begin{center} 
+    {\Large \textbf{Indice}}
+\end{center}
+
+\vspace{0.6cm}
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{4}
+\fancyfoot[R]{Norme di Progetto\hspace{0.8em}\thepage}
+
+\section{Introduzione}
+
+\subsection{Scopo del documento}
+Il presente documento ha l'obiettivo di definire e regolamentare il \textit{Way of Working (WoW)} adottato dal gruppo \textit{ALittleByte} per la realizzazione del progetto didattico. Al suo interno sono specificate le procedure operative, gli strumenti adottati e le regole di collaborazione interne al team, al fine di garantire un approccio strutturato, efficiente e tracciabile per l'intero ciclo di vita del progetto Nexum. 
+
+La stesura del seguente documento segue un approccio incrementale: le norme qui descritte verranno costantemente aggiornate e affinate nel tempo, supportando il miglioramento continuo dei processi organizzativi, di sviluppo e di supporto del gruppo.
+
+
+\subsection{Scopo del prodotto}
+Il prodotto da realizzare consiste in un'estensione innovativa per \textit{''Nexum"}, una piattaforma digitale sviluppata dall'azienda proponente \textit{Eggon}, dedicata alla comunicazione interna e alla gestione HR.
+Nello specifico, il progetto mira a potenziare l'ecosistema Nexum attraverso lo sviluppo e l'integrazione di due moduli basati sull'Intelligenza Artificiale:
+\begin{itemize}
+    \item \textbf{AI Assistant Generativo:} Un modulo dedicato agli utenti amministrativi (dashboard) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un prompt, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
+    \item \textbf{AI Co-Pilot per Consulenti del Lavoro (CdL):} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di OCR ed \textbf{Entity Resolution}, e automatizzare lo smistamento e il dispaccio massivo.
+\end{itemize}
+
+L'obiettivo finale è migliorare l'efficienza dei processi HR e semplificare l'interoperabilità tra le aziende e gli studi dei Consulenti del Lavoro. Per fare ciò il gruppo ALittleByte si impegna a completare il progetto entro la data fissata 10 Settembre 2026, con un costo totale di budget di 12.575 €. 
+
+Per ulteriori informazioni si rimanda al documento Analisi dei Requisiti. 
+
+
+\subsection{Glossario}
+
+Al fine di prevenire qualsiasi ambiguità linguistica o concettuale tra i membri del team e gli stakeholder, è stato redatto un documento separato denominato Glossario. Esso contiene la spiegazione puntuale di tutti i termini tecnici, di dominio (es. LLM, OCR, Dispaccio, ecc.) e degli acronimi utilizzati all'interno della documentazione di progetto.
+
+\newpage
+\subsection{Riferimenti}
+
+
+
+
+
+\subsubsection{Normativi}
+\begin{itemize}
+    \item \textbf{Regolamento del Progetto Didattico:} Anno accademico 2025/2026, Corso di Ingegneria del Software, Università di Padova
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}
+    \end{itemize}
+    
+    \item \textbf{Capitolato d'appalto C5:} Nexum - Eggon S.r.l.
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
+    \end{itemize}
+    
+\end{itemize}
+
+\subsubsection{Informativi}
+\begin{itemize}
+    \item \textbf{Glossario:}
+\end{itemize}
+\section{Architettura dei processi}
+Per la realizzazione di un prodotto di qualità che soddisfi le esigenze del cliente e degli utenti, il gruppo aLittleByte ha deciso di adottare un'architettura specifica e suddividere i vari processi di costruzione del software in tre macro-aree:
+\begin{itemize}
+    \item Processi primari
+    \item Processi di supporto
+    \item Processi organizzativi
+\end{itemize}
+
+\subsection{Processi Primari}
+In questa sezione viene descritto come nasce il software. I processi primari indicano tutte quelle attività che sono direttamente coinvolte nella creazione del prodotto software, è possibile classificare i processi primari in:
+\begin{itemize}
+    \item Processi di fornitura 
+    \item Processi di sviluppo
+\end{itemize}
+
+\subsubsection{Processi di fornitura}
+I processi di fornitura comprendono tutte le attività preliminari che permettono di avviare lo sviluppo del progetto, in particolar modo la pianificazione: suddivisione del lavoro in fasi e milestone come rtb e pb, l’analisi: come vengono analizzati i capitolati, la stima: come si stimano vari costi e stime.
+
+\paragraph{Scopo e obbiettivi}
+Il processo di fornitura definisce le procedure e le attività che il gruppo mette in atto per stabilire un accordo operativo con la proponente (\textit{Eggon}). L'obiettivo è trasformare le necessità espresse nel capitolato C5 in un insieme di requisiti tecnici e vincoli contrattuali ben definiti. In questa fase si stabiliscono le basi metodologiche del \textit{"Way of Working''} del team, garantendo che ogni attività sia pianificata, tracciabile e verificabile.
+
+\paragraph{Attività Operative}
+Il team si impegna nelle seguenti attività chiave:
+\begin{itemize}
+    \item \textbf{Analisi e Valutazione del Capitolato:} Studio critico della proposta C5 per identificare rischi tecnologici, opportunità di apprendimento e coerenza con le competenze del team.
+    \item \textbf{Stima e Pianificazione:} Definizione del budget (12.575€) e delle scadenze temporali (consegna finale entro il 10 settembre 2026), con la suddivisione del lavoro in cicli iterativi (Sprint).
+    \item \textbf{Negoziazione e Definizione dell’MVP:} Collaborazione con \textit{Eggon} per identificare il \textit{Minimum Viable Product}, garantendo che le funzionalità core (AI Assistant e Co-Pilot) siano prioritizzate correttamente.
+    \item \textbf{Accertamento della Qualità:} Definizione degli obiettivi di qualità per i processi e per il prodotto finale.
+\end{itemize}
+
+\paragraph{Documentazione Prodotta (Core della Fornitura)}
+La documentazione non è solo un onere burocratico, ma lo strumento principale per garantire la trasparenza verso i committenti e la coerenza interna. Di seguito sono elencati i documenti redatti e mantenuti dal team:
+\begin{itemize}
+    \item \textbf{Analisi dei Requisiti:} Documento cardine che formalizza le funzionalità del sistema. Include la modellazione degli attori (Redattore, Analista dati, Consulente del lavoro), la descrizione dei casi d'uso (UC) e la classificazione dei requisiti funzionali, qualitativi e di vincolo.
+    \item \textbf{Norme di Progetto:} Definiscono il regolamento interno del gruppo. Contengono gli standard di codifica, le procedure di gestione dei ticket su GitHub, le convenzioni di naming e le metodologie di lavoro adottate.
+    \item \textbf{Piano di Progetto:} Strumento di gestione manageriale che descrive l'allocazione delle risorse, l'analisi dei rischi e il preventivo economico. Viene aggiornato periodicamente con il consuntivo delle ore per monitorare lo stato del budget.
+    \item \textbf{Piano di Qualifica:} Specifica la strategia per garantire che il software sia privo di difetti critici. Definisce le metriche (es. \textit{Code Coverage} $\geq$ 80\%) e i test (unità, integrazione, sistema) necessari alla validazione.
+    \item \textbf{Glossario:} Raccolta di termini tecnici e acronimi per eliminare ambiguità terminologiche tra sviluppatori, committenti e utenti finali.
+    \item \textbf{Specifica Tecnica:} Documento di design che descrive l'architettura di sistema (modello C4), i diagrammi delle classi UML e i design pattern scelti per l'implementazione.
+    \item \textbf{Manuale Utente:}  Guida operativa destinata agli utenti finali per facilitare l'onboarding sulla piattaforma Nexum e spiegare l'utilizzo degli assistenti AI.
+    \item \textbf{Lettera di Candidatura e Presentazione:}  Documenti formali per l'ufficializzazione della partecipazione all'appalto e per la consegna dei vari rilasci (RTB e PB).
+    \item \textbf{Verbali (Interni ed Esterni):} Report che tracciano l'ordine del giorno, le discussioni e le decisioni prese durante le riunioni di team o con i referenti di Eggon.
+\end{itemize}
+
+\paragraph{Comunicazione e Strumenti di Supporto}
+Per la gestione dei processi di fornitura, il gruppo si avvale di:
+
+\begin{itemize}
+    \item \textbf{GitHub e GitLab:}  Per il versionamento della documentazione tramite \textit{Pull Request} e per l'integrazione con il codice preesistente.
+    \item \textbf{Comunicazione Ufficiale:} L'interfaccia con Eggon avviene tramite incontri bisettimanali e via email/Telegram per comunicazioni rapide.
+    \item \textbf{Tracciamento:} Ogni decisione rilevante viene convertita in una \textit{issue} su GitHub per garantirne l'assegnazione e il completamento.
+\end{itemize}
+
+\subsubsection{Processi di Sviluppo}
+Questa sezione codifica l'insieme delle pratiche ingegneristiche e operative indispensabili per costruire materialmente la piattaforma software stand-alone richiesta dal capitolato. L'obiettivo è tradurre i requisiti concordati in un applicativo funzionante e architetturalmente indipendente dal sistema originario (\textit{Nexum}), passando attraverso fasi rigorose di design, programmazione e collaudo.
+
+\paragraph{Attività Operative e Ciclo di Vita}
+Il ciclo di sviluppo per l'integrazione dei modelli di Intelligenza Artificiale richiede una sequenza logica di operazioni ingegneristiche specifiche:
+\begin{itemize}
+    \item \textbf{Analisi e Modellazione del Dominio:} Studio sistemistico per separare nettamente i flussi di lavoro aziendali (creazione contenuti) da quelli consulenziali (gestione documentale massiva).
+    \item \textbf{Progettazione Architetturale:} Definizione di un'infrastruttura \textit{stand-alone} che comunichi in modo asincrono con i moduli esterni di Intelligenza Artificiale (AI Post Generator e AI Analyst), per non bloccare l'interfaccia utente durante le operazioni \textit{time-consuming}.
+    \item \textbf{Sviluppo Modulare:} L'applicativo viene frammentato in macro-componenti indipendenti (es. modulo di rating/feedback, modulo di split documentale, dashboard analitica).
+    \item \textbf{Validazione "Human-in-the-loop":} Implementazione di flussi di sviluppo che prevedano sempre un passaggio di validazione umana per le operazioni AI a bassa confidenza (es. revisione dei destinatari estratti o modifica del testo generato).
+    \item \textbf{Collaudo e Rilascio:} Esecuzione di test formali sulle metriche di qualità (es. tempi di risposta, tasso di successo dell'AI) prima dell'approvazione finale.
+\end{itemize}
+
+\paragraph{Analisi e Tracciamento dei Requisiti}
+Fase nevralgica per la definizione del perimetro del prodotto. Per garantire chiarezza e tracciabilità, il team adotta standard di modellazione e nomenclatura precisi per attori e casi d'uso.
+
+\begin{itemize}
+    \item \textbf{Modellazione degli Attori:} Il sistema riconosce due categorie di attori per separare le responsabilità di business da quelle computazionali:
+    \begin{itemize}
+        \item \textit{Utenti Operativi (Primari):} Utenti umani che innescano le operazioni (Amministratore, Redattore, Analista dati, Consulente del lavoro).
+        \item \textit{Moduli Esterni (Secondari):} Entità di sistema chiamate in causa per completare l'operazione (AI Post Generator, AI Analyst).
+    \end{itemize}
+    \item \textbf{Nomenclatura dei Casi d'Uso (Use Case):} Il team adotta una convenzione basata sui prefissi per separare logicamente le aree dell'applicativo:
+    \begin{itemize}
+        \item UC-[Numero] identifica i casi d'uso relativi all'\textbf{AI Assistant Generativo} (es. \textit{UC-1}).
+        \item UC-CO-[Numero] identifica i casi d'uso relativi all'\textbf{AI Co-Pilot} (es. \textit{UC-CO-1}).
+        \item {} [Caso Padre].[Sottocaso] indica le scomposizioni logiche (es. \textit{UC-1.1} per un sottocaso di \textit{UC-1}).
+    \end{itemize}
+    \item \textbf{Struttura Descrittiva:} Ogni caso d'uso documentato deve presentare una scheda strutturata contenente: Attori coinvolti, Pre e Post-condizioni, Scenario Principale (sequenza ottimale numerata), Scenari Alternativi o di Errore (identificati con codici specifici come UC-1.E1), e Relazioni (Inclusioni, Estensioni).
+\end{itemize}
+
+\paragraph{Progettazione Architetturale}
+La progettazione traduce le specifiche in un'infrastruttura flessibile e scalabile.
+\begin{itemize}
+    \item \textbf{Disaccoppiamento e Asincronia:} Data la natura \textit{data-driven} e i tempi di latenza dell'AI, l'architettura deve garantire l'esecuzione asincrona delle operazioni pesanti (es. elaborazione OCR o entity resolution).
+    \item \textbf{Modellazione Visiva:} La struttura del codice viene rappresentata tramite diagrammi UML per la definizione dei casi d'uso e la struttura statica. Si adotta inoltre un approccio a componenti per isolare le funzionalità trasversali (raccolta log, gestione ruoli, telemetria).
+    \item \textbf{Sicurezza e Governance:} L'architettura deve supportare by-design workflow tracciabili (audit trail), separazione dei ruoli e policy di conservazione, fondamentali per trattare documenti sensibili come i cedolini.
+\end{itemize}
+
+\paragraph{Codifica}
+Questa è la fase di traduzione dei modelli architetturali in sorgente eseguibile.
+\begin{itemize}
+    \item \textbf{Modularità e Riuso:} Suddivisione del codice in moduli con responsabilità singola (es. libreria dei prompt separata dal motore di generazione). Applicazione di pattern architetturali per evitare dipendenze dirette e favorire la manutenibilità.
+    \item \textbf{Gestione degli Errori e Resilienza:} mplementazione di meccanismi robusti per la gestione di anomalie, retry di rete e fallback nel caso in cui i servizi AI esterni non siano temporaneamente disponibili (come mappato negli scenari alternativi dei casi d'uso).
+    \item \textbf{Tracciabilità e Qualità:} Versionamento continuo del codice, revisione tra pari (\textit{Code Review}) e test automatizzati per validare non solo le logiche applicative, ma anche l'integrazione corretta dei parametri (tono, stile, metadati) passati ai core di intelligenza artificiale.
+
+\end{itemize}
+\subsection{Processi di supporto}
+I processi di supporto comprendono tutte le attività, i metodi e gli strumenti che non sono direttamente legati alla scrittura del codice, ma che risultano indispensabili per sostenere i processi primari di sviluppo e fornitura. Per il nostro team, definire questi processi significa stabilire delle regole di base condivise, necessarie per collaborare in modo efficiente ed evitare disorganizzazione durante le varie fasi del progetto didattico. Ciò ci permette, a livello pratico, di garantire la tracciabilità di ogni decisione tecnica e organizzativa presa dal gruppo e di assicurare che tutto il materiale prodotto (documenti, codice, issue) sia costantemente coerente, aggiornato e facilmente accessibile a tutti i membri del team e al committente.
+
+\subsubsection{Documentazione}
+
+\paragraph{Scopo}
+Lo scopo del processo di documentazione è stabilire regole e metodologie pratiche per la creazione, la gestione e l'aggiornamento continuo dei documenti di progetto. Per il nostro gruppo, impegnarci a produrre materiale che si mantenga costantemente chiaro, accessibile e aggiornato ci permette di agevolare e rendere trasparente la comunicazione interna tra i membri del gruppo. Inoltre, una repository ben strutturata facilita notevolmente il confronto e l'allineamento con gli stakeholder esterni e l'azienda \textit{Eggon}. Questo approccio rigoroso garantisce un'accurata tracciabilità delle decisioni organizzative e progettuali prese nel corso dello sviluppo, assicurando al contempo che l'intero progetto venga gestito in piena conformità agli standard di qualità che ci siamo prefissati di rispettare.
+
+\paragraph{Strumenti Utilizzati}
+Per gestire in modo efficiente la stesura, la revisione e il versionamento della documentazione, il gruppo \textit{aLittleByte} ha scelto di utilizzare i seguenti strumenti:
+\begin{itemize}
+    \item \textbf{GitHub:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e pull request per garantire che ogni modifica venga revisionata in modo asincrono da un altro membro prima di essere integrata nella versione definitiva. Utilizziamo inoltre le issue per pianificare e monitorare le attività legate alla documentazione.
+    \item \textbf{Latex:} Scelto per la stesura di tutti i documenti tecnici e formali. Questo strumento ci garantisce un'impaginazione professionale, rigorosa e visivamente uniforme in tutto il progetto, grazie all'impiego di template e stili predefiniti condivisi all'interno del gruppo.
+\end{itemize}
+
+\paragraph{Documenti Prodotti}
+I documenti ufficiali previsti per il progetto, i quali saranno costantemente aggiornati e mantenuti sotto controllo di versione all'interno del repository, sono i seguenti: 
+\begin{itemize}
+    \item \textbf{Analisi dei requisiti:} Il documento in cui vengono estrapolati, classificati e descritti tutti i requisiti del sistema (funzionali e non), i casi d'uso individuati e i rispettivi criteri per l'accettazione finale.
+    \item \textbf{Norme di progetto:} Il documento in esame, avente lo scopo di codificare il nostro Way of Working, illustrando nel dettaglio le metodologie operative, gli strumenti scelti e le regole di collaborazione interne al team.
+    \item \textbf{Piano di progetto:} Il piano strategico che scandisce le tempistiche di sviluppo, regola l'allocazione delle risorse umane ed economiche e pianifica le varie fasi di avanzamento del lavoro.
+    \item \textbf{Piano di qualifica:} Il documento volto a fissare le direttive per l'assicurazione della qualità. Al suo interno vengono delineate le metriche di valutazione e le procedure di testing, con l'obiettivo specifico di garantire una copertura del codice non inferiore all'80\%.
+    \item \textbf{Glossario:} Uno strumento di supporto testuale che definisce in modo inequivocabile la terminologia specifica, tecnica e di dominio, oltre agli acronimi impiegati in tutta la documentazione.
+    \item \textbf{Lettera di Presentazione:} La documentazione formale di accompagnamento, debitamente firmata, necessaria per certificare e presentare ufficialmente il RTB al committente.
+    \item \textbf{Verbali:} I Verbali (interni ed esterni) tengono traccia degli incontri e delle decisioni sia tra i membri del gruppo e che tra il gruppo e la proponente.
+\end{itemize}
+
+\paragraph{Struttura dei documenti}
+Tutti i documenti (eccetto i verbali e i diari di bordo) hanno la seguente struttura generale: 
+\begin{itemize}
+    \item \textbf{Copertina:} Riporta il logo, l'indirizzo email del gruppo, il titolo del documento, il nome del gruppo e i metadati essenziali (redattori, verificatori, destinatari e data).
+    \item \textbf{Registro delle modifiche:} Tabella posta all'inizio del file per il tracciamento delle versioni. Per ogni aggiornamento indica: numero di versione, data, descrizione della modifica, redattore e approvatore/verificatore.
+    \item \textbf{Indice:} Elenco gerarchico dei contenuti con rinvii numerici alle pagine, per favorire una navigazione rapida e mirata.
+    \item \textbf{Introduzione:} Contiente lo scopo del documento, glossario e riferimenti. 
+    \item \textbf{Contenuto:} Corpo centrale del testo organizzato in sezioni e sottosezioni numerate (es. 1, 1.1), redatto in stile chiaro e esecutivo.
+\end{itemize}
+
+\paragraph{Struttura dei verbali}
+\begin{itemize}
+    \item \textbf{Copertina:} Riporta gli elementi visivi e identificativi del gruppo, il titolo (specificando se verbale interno o esterno e la data), i ruoli assunti per la stesura (redattore e verificatore) e l'elenco dei destinatari.
+    \item \textbf{Indice:} Elenco cliccabile delle sezioni per facilitare la navigazione del documento.
+    \item \textbf{Informazioni generali:} Tabella riassuntiva contenente i dettagli logistici dell'incontro: luogo o piattaforma utilizzata (Discord), orario di inizio e fine, e l'elenco puntuale dei partecipanti.
+    \item \textbf{Ordine del giorno:} Elenco sintetico degli argomenti pianificati e discussi durante la riunione.
+    \item \textbf{Attività svolte:} Resoconto testuale, suddiviso in sottoparagrafi, che descrive in modo oggettivo le discussioni affrontate, le problematiche analizzate e le decisioni prese per ciascun punto all'ordine del giorno.
+    \item \textbf{To-Do List:} Sezione conclusiva dedicata al tracciamento delle azioni da intraprendere (task) a seguito della riunione, utili per assegnare le responsabilità future, collegate alle rispettive issues. 
+\end{itemize}
+
+\paragraph{Struttura dei diari di bordo}
+da completare
+
+\paragraph{Denominazione dei documenti}
+
+Il gruppo \textit{aLittleByte} ha adottato una rigorosa politica di denominazione univoca per tutta la documentazione. Tale scelta metodologica è volta a preservare l'uniformità del repository e a ottimizzare le procedure di ricerca e consultazione dei file.
+
+\begin{itemize}
+    \item \textbf{Verbali:} I verbali hanno la seguente denominazione: \\
+    \\
+    \centerline{\texttt{<Tipo>.<Data>}} \\
+    Dove \texttt{<Tipo>} rappresenta: 
+    \begin{itemize}
+        \item \textbf{Verbale\_Interno}
+        \item \textbf{Verbale\_Esterno}
+    \end{itemize}
+    Mentre \texttt{<Data>} è la data della riunione scritta nel formato \texttt{AAAA/MM/GG}. Ad esempio, \texttt{Verbale\_Interno\_2026\_04\_13.pdf} rappresenta il verbale interno del giorno 13/04/2026.
+    \\
+    
+    \item \textbf{Diari di Bordo:} I diari di bordo hanno la seguente denominazione: da completare
+    
+    \item \textbf{Documenti:} I restanti documenti ufficiali seguono una convenzione di denominazione esplicita basata sul loro contenuto, come ad esempio \textit{Norme di Progetto.pdf} o \textit{Analisi dei Requisiti.pdf}. 
+\end{itemize}
+
+\paragraph{Produzione}
+Il ciclo di vita di ogni documento prodotto dal team è regolato da una procedura strutturata, volta a massimizzare la qualità, l'uniformità e la tracciabilità delle informazioni. Il processo si articola nelle seguenti fasi:
+
+\begin{itemize}
+    \item \textbf{Pianificazione:} In corrispondenza delle scadenze di progetto, il gruppo stabilisce quali documenti produrre o aggiornare. Per ogni compito vengono designati un redattore e un verificatore, scelti nel rispetto dei ruoli previsti dal \textit{Way of Working} e garantendo l'assenza di conflitti d'interesse.
+    
+    \item \textbf{Creazione del branch:} Prima di iniziare la stesura, viene aperto un \textit{branch} dedicato nel repository GitHub. Il gruppo \textit{aLittleByte} ha stabilito di creare un ramo separato per ogni singolo file, inclusi i verbali e i diari di bordo, al fine di garantire una gestione granulare delle modifiche e un isolamento totale del lavoro rispetto al ramo principale.
+    
+    \item \textbf{Redazione:} Il redattore incaricato sviluppa il contenuto seguendo i template e le direttive stilistiche definite nelle presenti Norme di Progetto. La scrittura avviene tramite gli strumenti appropriati (ad esempio \textit{LaTeX}), assicurando un output professionale e coerente.
+    
+    \item \textbf{Revisione:} Terminata la stesura, il documento viene sottoposto a una verifica asincrona. Il verificatore analizza il file tramite una \textit{pull request} su GitHub, segnalando eventuali correzioni necessarie o suggerimenti direttamente nei commenti della piattaforma.
+    
+    \item \textbf{Integrazione e Approvazione:} Una volta superata la revisione e ottenuta l'approvazione formale dal Responsabile, il contenuto viene integrato nel \textit{branch main} del repository. In questa fase viene consolidata la versione finale nel registro delle modifiche.
+
+\end{itemize}
+
+\subsubsection{Gestione della configurazione}
+Il processo di Gestione della Configurazione ha l'obiettivo di tracciare, organizzare e controllare in modo sistematico l'evoluzione di tutti gli artefatti di progetto (codice sorgente, documentazione, script). Adottare questo processo permette al gruppo \textit{aLittleByte} di prevenire conflitti, recuperare versioni precedenti in caso di errore e garantire che ogni rilascio sia coerente e verificabile.
+
+\paragraph{Strumenti utilizzati}
+Al fine di implementare correttamente tale processo, il gruppo ha selezionato i seguenti strumenti tecnici:
+\begin{itemize}
+    \item \textbf{Git:} Software per il controllo di versione distribuito che permette di monitorare ogni variazione apportata ai file sorgente e alla documentazione.
+    \item \textbf{GitHub:} Servizio di hosting basato su cloud utilizzato per la gestione centralizzata del repository. Viene impiegato non solo per l'archiviazione, ma anche per la pianificazione operativa tramite le \textit{Issue} e per la revisione del lavoro attraverso le \textit{Pull Request}.
+\end{itemize}
+
+\paragraph{Controllo della configurazione}
+
+Il controllo della configurazione è l'attività preposta alla gestione, tracciabilità e autorizzazione di qualsiasi proposta di modifica del progetto. Per tracciare in modo controllato tutte le modifiche, che vengono approvate o meno, il gruppo \textit{aLittleByte} sfrutta le funzionalità native di GitHub, strutturando il processo attraverso l'uso rigoroso di \textit{Issue} e \textit{Pull Request}:
+
+\begin{itemize}
+    \item \textbf{Issue:} Ogni singola attività (che si tratti della stesura di un documento, dello sviluppo di una funzionalità, della correzione di un errore o anche semplicemente contattare l'azienda) deve essere preventivamente tracciata tramite l'apertura di un'\textit{Issue}. Quest'ultima viene assegnata a uno o più membri incaricati di portarla a termine. Per facilitarne la classificazione, ogni \textit{Issue} è identificata da una nomenclatura univoca (ad esempio per la stesura dei documenti viene usato il tag \textit{documentazione}).
+    
+    \item \textbf{Pull Request:} Rappresenta il meccanismo esclusivo per l'integrazione di qualsiasi modifica all'interno del repository. Al fine di mantenere un elevato standard qualitativo e prevenire errori, il team ha stabilito che nessun componente è autorizzato a effettuare modifiche dirette sul ramo principale (\texttt{main}). Perciò ogni integrazione deve necessariamente passare per una \textit{Pull Request}, la quale richiede obbligatoriamente un processo di revisione incrociata e può essere inserita nel main solo a seguito di almeno una revisione positiva da parte di altri membri del gruppo. 
+\end{itemize}
+
+\paragraph{Registrazione stato di configurazione}
+Ogni documento presenta un \textit{Registro delle modifiche} (eccetto i verbali) per tenere traccia di tutte le modifiche svolte. Il sistema du versionamento è il seguente: \\
+
+\centerline{\textbf{X.Y.Z}}
+
+Dove: 
+\begin{itemize}
+    \item \textbf{X:} Subisce un incremento solo quando il file viene approvato dal membro del gruppo incaricato del ruolo di approvatore;
+    \item \textbf{Y:} Indica un avanzamento significativo, come l'aggiunta di interi capitoli o moduli software che hanno superato positivamente la fase di verifica.
+    \item \textbf{Z:} Rappresenta modifiche di dettaglio, correzioni di refusi o aggiornamenti minimi eseguiti durante la stesura o lo sviluppo.
+\end{itemize}
+
+\subsubsection{Qualifica}
+
+\paragraph{Verifica}
+
+Le attività di verifica hanno lo scopo di garantire l'assenza di difetti e la totale aderenza di ogni componente prodotta (sia essa documentale o codice sorgente) rispetto alle specifiche e ai vincoli stabiliti. Applicando i principi dell'Ingegneria del Software, questa pratica metodologica mira a soddisfare la seguente domanda: \textit{''Did I build the system right?''}.
+
+L'intera reportistica riguardante i controlli effettuati, i parametri misurati e gli esiti dei collaudi è raccolta e analizzata all'interno del \textbf{Piano di Qualifica}. 
+
+\paragraph{Attività di Verifica}
+
+La verifica interviene nelle singole fasi del nostro progetto, con lo scopo di assicurarci che il lavoro appena svolto non abbia introdotto errori. In termini pratici, questa attività serve a controllare che il risultato ottenuto alla fine di una determinata fase sia sempre coerente con le informazioni e i requisiti che avevamo in partenza.
+
+In questa prima parte del lavoro, il gruppo \textit{aLittleByte} si è dedicato principalmente alla verifica della documentazione. Tramite revisioni incrociate tra i membri, ci siamo assicurati che i contenuti fossero corretti e che i testi rispettassero le regole grammaticali, sintattiche e di formattazione che ci siamo dati nelle presenti Norme di Progetto.
+
+Per quanto riguarda invece la verifica del codice sorgente e del prodotto software, ce ne occuperemo nel dettaglio una volta superata la revisione \textit{RTB}. In ogni caso, tutte le decisioni prese, i metodi di controllo utilizzati e i risultati di queste verifiche verranno sempre riportati in modo esaustivo nel documento \textbf{Piano di Qualifica}.
+
+\paragraph{Analisi Statica}
+L'analisi statica è una tecnica di verifica che viene applicata all'oggetto di studio senza richiederne l'esecuzione. Questo approccio ci permette di individuare anomalie e difetti fin dalle primissime fasi del ciclo di vita del software, ben prima che la scrittura del codice sia ultimata.
+
+Questo tipo di analisi può avvenire tramite metodi formali o, più comunemente nel nostro caso, attraverso tecniche di lettura. Il nostro team adotta principalmente due metodologie:
+
+\begin{itemize}
+    \item \textbf{Walkthrough:} Consiste in una revisione estensiva e senza preconcetti. Il verificatore analizza il prodotto passo dopo passo, simulandone mentalmente la logica e verificando che le regole prestabilite siano rispettate. È un approccio molto approfondito ma dispendioso in termini di tempo, e richiede un intervento interamente manuale.
+    
+    \item \textbf{Inspection:} Si tratta di un controllo mirato e guidato dall'esperienza. Il verificatore sa già quali sono le criticità più comuni e utilizza delle liste di controllo (\textit{checklist}) specifiche per scovarle. Pur essendo meno estesa del \textit{walkthrough}, l'ispezione è più rapida e permette di standardizzare la ricerca dei difetti.
+\end{itemize}
+
+Al termine di ogni controllo, le attività svolte e i problemi riscontrati vengono opportunamente documentati. Gli errori vengono discussi in modo costruttivo tra il verificatore e l'autore del documento (o del codice); tuttavia, l'applicazione materiale delle correzioni rimane sempre di competenza dell'autore originale, al fine di garantire coerenza e responsabilità. Tutto ciò viene documentato all'interno della \textit{Pull Request}, che in caso di errori non viene approvata, e nel relativo documento. 
+
+\paragraph{Analisi Dinamica}
+da completare
+
+\paragraph{Test Di Unità}
+da completare
+
+\paragraph{Test di Regressione}
+da completare
+
+\paragraph{Test di Integrazione}
+da completare
+
+\subsection{Validazione}
+La validazione rappresenta il processo finale che conferma in modo definitivo che le caratteristiche del prodotto software siano pienamente conformi ai bisogni dell'utilizzo finale e agli obiettivi d'uso previsti. L'obiettivo principale è rispondere al quesito: \textit{''Did I build the right system?''} 
+
+Mentre la verifica analizza la correttezza tecnica dell'esecuzione, la validazione si sposta sul piano dell'efficacia, garantendo che le funzionalità sviluppate siano effettivamente idonee a risolvere le problematiche operative individuate e siano allineate con le aspettative del committente.
+
+\paragraph{Processo di Validazione}
+Il gruppo \textit{aLittleByte} ha provveduto a raccogliere, analizzare e formalizzare tutte le necessità espresse dall'azienda proponente \textit{Eggon} all'interno del documento di \textit{Analisi dei Requisiti}. Questa operazione di classificazione è fondamentale per garantire un tracciamento rigoroso delle specifiche e per predisporre i futuri test di accettazione, i quali avranno il compito di accertare che il prodotto software sviluppato rispecchi le richieste del committente.
+
+Gli esiti derivanti da queste procedure di validazione saranno riportati e discussi in modo esaustivo nel \textit{Piano di Qualifica}, all'interno della specifica sezione dedicata ai Test di Accettazione.
+
+Si precisa che, in concomitanza con la pubblicazione dei documenti per l'\textit{RTB}, il progetto si trova in una fase antecedente alla codifica e al collaudo del software. Per tale ragione, lo stato di avanzamento dei test riporterà la dicitura temporanea ''Non Implementato''. I dati e i risultati effettivi dei test verranno integrati in questa sezione solamente in vista della consegna della \textit{PB}.
+
+\subsection{Processi Organizzativi}
+
+\subsubsection{Descrizione e scopo}
+
+In conformità con le direttive tracciate dallo standard ISO/IEC 12207:1997, il processo di gestione comprende l'insieme delle pratiche e delle metodologie necessarie a governare l'intero ciclo di vita del progetto. Lo scopo primario è assicurare il successo dello sviluppo del prodotto software, garantendo che gli obiettivi prefissati vengano raggiunti nel rigoroso rispetto dei vincoli di costo, delle tempistiche stimate e dei requisiti concordati con il proponente.
+
+Per concretizzare tali obiettivi, l'organizzazione del gruppo \textit{aLittleByte} si basa su:
+
+\begin{itemize}
+    \item \textbf{Pianificazione:} delle attività da svolgere, della definizione delle scadenze e della suddivisionazione dettagliata delle mansioni.
+    
+    \item \textbf{Monitoraggio e controllo:} Supervisione costante dello stato di avanzamento dei lavori
+    
+    \item \textbf{Prevenzione e gestione dei rischi:} Identificazione delle potenziali criticità tecnologiche o organizzative, unita all'adozione di protocolli strutturati per governare le modifiche e per prevenire i possibili imprevisti.
+    
+    \item \textbf{Interventi correttivi:} Prontezza e reattività nell'intervenire qualora le metriche di controllo evidenzino deviazioni significative rispetto al Piano di Progetto.
+    
+    \item \textbf{Organizzazione del team:} Assegnazione trasparente di ruoli e responsabilità ai membri del gruppo, garantendo al contempo il mantenimento di canali di comunicazione efficaci.
+\end{itemize}
+
+In definitiva, l'applicazione metodica di questi processi garantisce al team di mantenere un progetto solido e tracciabile, costituendo il fondamento necessario per assumere decisioni strategiche in qualsiasi momento dello sviluppo.
+
+\subsubsection{Gestione degli sprint}
+
+Come già citato in precedenza, il gruppo ha deciso di adottare un approccio iterativo, suddividendo il ciclo di vita del progetto in sprint della durata fissa di due settimane. In concomitanza con l'avvio di ogni nuovo sprint, il team provvede alla rotazione e all'assegnazione dei ruoli che ciascun membro dovrà ricoprire per l'intera durata dello sprint.
+
+L'organizzazione di ogni singola iterazione è scandita da una riunione, organizzata nel seguente modo:
+
+\begin{itemize}
+    \item \textbf{Pianificazione:} Il team seleziona gli obiettivi operativi da raggiungere, scompone il lavoro in \textit{task} gestibili e li assegna ai vari componenti, cercando di bilanciare equamente i carichi di lavoro.
+    
+    \item \textbf{Sprint Review:} Si analizza lo sprint appena concluso per la verifica concreta dei risultati prodotti. Costituisce l'occasione per valutare il lavoro completato, discutere le criticità tecniche emerse e misurare l'avanzamento effettivo rispetto al piano generale.
+    
+    \item \textbf{Sprint Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo.
+\end{itemize}
+
+\subsubsection{Ruoli}
+
+\paragraph{Responsabile}
+Il membro che assume il ruolo di Responsabile agisce come vero e proprio \textit{Project Manager} del gruppo. Ha la responsabilità di coordinare il lavoro del team, pianificare le iterazioni di sviluppo, ottimizzare l'uso delle risorse e fungere da referente principale per le comunicazioni ufficiali con l'azienda proponente e il corpo docente.
+
+Dal punto di vista strettamente operativo, il Responsabile si fa carico di distribuire e assegnare i compiti (tramite le \textit{Issue}) ai vari componenti del gruppo. Inoltre, è sua competenza diretta la stesura e il costante aggiornamento dei seguenti documenti:
+
+\begin{itemize}
+    \item \textbf{Verbali (Interni ed Esterni)}
+    \item \textbf{Diario di Bordo}
+    \item \textbf{Piano di Progetto}
+    \item \textbf{Piano di Qualifica}
+\end{itemize}
+
+\paragraph{Amministratore}
+L'Amministratore rappresenta la figura di supporto metodologico e tecnologico del team. Il suo scopo principale è definire, ottimizzare e mantenere sempre operativi i processi e gli strumenti di lavoro, assicurando che l'intero gruppo possa procedere con le attività in modo fluido e senza impedimenti di natura tecnica o organizzativa. 
+
+Oltre a monitorare le scadenze amministrative e a fornire supporto costante ai colleghi, l'Amministratore si fa carico delle seguenti responsabilità operative:
+
+\begin{itemize}
+    \item \textbf{Gestione degli ambienti di lavoro}
+    
+    \item \textbf{Manutenzione degli strumenti:} Supervisionare e aggiornare periodicamente i software e i canali adottati dal gruppo per la comunicazione e la collaborazione asincrona.
+    
+    \item \textbf{Controllo della configurazione:} Garantire la corretta e rigorosa applicazione delle procedure di versionamento per tutti i file e i documenti prodotti dal team.
+    
+    \item \textbf{Norme di Progetto:} Curare la stesura, la revisione e il continuo aggiornamento del presente documento (\textit{Norme di Progetto}), assicurandosi che le regole interne e il \textit{Way of Working} siano sempre allineati alle reali necessità del gruppo.
+\end{itemize}
+
+\paragraph{Progettista}
+
+Il Progettista è la mente tecnica dietro alla struttura del prodotto software. Il suo compito principale è ideare l'architettura del sistema, assicurandosi che sia in grado di soddisfare tutti i requisiti (sia funzionali che di qualità) concordati con il proponente. Lavora a stretto contatto con il resto del gruppo per trasformare le richieste astratte in soluzioni pratiche, efficienti e facili da mantenere nel tempo.
+
+Nello specifico, chi ricopre questo ruolo ha la responsabilità di:
+
+\begin{itemize}
+    \item Valutare e decidere quali linguaggi, \textit{framework} e strumenti tecnici sono più idonei per la realizzazione del progetto.
+    
+    \item \textbf{Disegnare l'architettura:} Definire come sarà strutturato il sistema a livello generale, individuando i macro-componenti e il modo in cui dovranno comunicare tra loro.
+    
+    \item Supervisionare il lavoro di stesura del codice, assicurandosi che l'implementazione pratica rispetti le specifiche tecniche e non si allontani dall'idea progettuale di partenza.
+\end{itemize}
+
+\paragraph{Analista}
+
+L'Analista rappresenta il punto di incontro tra le esigenze dell'azienda proponente e il lavoro tecnico del team di sviluppo. Il suo compito principale è comprendere a fondo il problema, raccogliere le richieste e trasformarle in regole chiare, complete e ben definite, evitando qualsiasi ambiguità. In pratica, lavora per assicurarsi che tutti sappiano esattamente \textit{cosa} deve essere costruito, prima ancora di decidere \textit{come} farlo.
+
+Nello specifico, chi ricopre questo ruolo si fa carico di:
+
+\begin{itemize}
+    \item \textbf{Stesura dell'Analisi dei Requisiti:} Redigere e mantenere costantemente aggiornato il documento che cataloga tutti i casi d'uso e le specifiche del progetto.
+    
+    \item \textbf{Gestione dei dubbi e delle modifiche:} Interfacciarsi direttamente con il proponente per risolvere eventuali incertezze, chiedere chiarimenti o concordare variazioni ai requisiti iniziali.
+    
+    \item \textbf{Supporto al team:} Collaborare con i progettisti e i programmatori per garantire che le specifiche scritte vengano interpretate nel modo corretto e implementate senza deviare dagli obiettivi concordati.
+\end{itemize}
+
+\paragraph{Programmatore}
+
+Il Programmatore è la figura operativa che materialmente "dà vita" al prodotto software. Il suo compito principale è tradurre l'architettura e le specifiche pensate dal Progettista in codice reale e funzionante. Lavora con l'obiettivo di produrre un software non solo corretto, ma anche pulito, efficiente e facile da mantenere o aggiornare in futuro.
+
+Nello specifico, chi ricopre questo ruolo si fa carico di:
+
+\begin{itemize}
+    \item \textbf{Stesura del codice:} Scrivere il codice sorgente rispettando rigorosamente le norme stilistiche e gli standard di qualità definiti dal gruppo.
+    
+    \item \textbf{Testing e collaudo preliminare:} Sviluppare ed eseguire i test per verificare che le singole porzioni di codice si comportino come previsto e garantiscano un'elevata affidabilità.
+    
+    \item \textbf{Risoluzione dei problemi:} Lavorare a stretto contatto con il resto del team per individuare i difetti, correggere i \textit{bug} tecnici e implementare nuove funzionalità in modo armonico e coerente con il resto del sistema.
+\end{itemize}
+
+\paragraph{Verificatore}
+
+Il Verificatore è il "garante della qualità" all'interno del team. Il suo compito è assicurarsi che ogni elemento prodotto, dal singolo documento di testo fino al codice finale, rispetti fedelmente i requisiti stabiliti e gli standard prefissati.
+
+Nello specifico, chi ricopre questo ruolo si fa carico di:
+
+\begin{itemize}
+    \item \textbf{Revisione documentale:} Leggere e controllare i documenti redatti dagli altri membri del team (tramite le \textit{Pull Request}), assicurandosi che siano corretti, completi e privi di ambiguità.
+    
+    \item \textbf{Esecuzione dei collaudi:} Pianificare e condurre le varie fasi di \textit{test} sul software (come i collaudi funzionali, di integrazione e di sistema) per verificare il corretto comportamento delle funzionalità.
+    
+    \item \textbf{Segnalazione e tracciamento:} Registrare accuratamente i risultati delle verifiche, segnalando al più presto i difetti o le non conformità agli sviluppatori o agli analisti per permetterne la correzione.
+    
+    \item \textbf{Miglioramento continuo:} Individuare eventuali punti critici o inefficienze nel modo in cui il team lavora, proponendo soluzioni pratiche per ottimizzare i processi operativi e di sviluppo.
+\end{itemize}
+
+\subsubsection{Tracciamento delle Ore}
+da completare
+
+\subsubsection{Tracciamento delle Azioni}
+
+Tutte le decisioni operative e le attività da svolgere vengono accuratamente registrate nei verbali, sia a seguito degli incontri interni al gruppo, sia dopo i colloqui esterni con il proponente. Al termine di ogni riunione, il membro designato si occupa di stilare il documento riassuntivo. Le attività da svolgere vengono riportate in fondo al documento nella relativa tabella \textbf{To-Do List}.
+
+Per passare dalla teoria alla pratica, ogni compito definito nel verbale viene immediatamente trasformato in un'apposita \textit{Issue} sulla piattaforma GitHub e assegnato al membro o ai membri incaricati. Per garantire una tracciabilità totale, all'interno del verbale stesso viene sempre inserito il collegamento ipertestuale diretto alla \textit{Issue} di riferimento. 
+
+Qualora il componente assegnato dovesse riscontrare difficoltà o avere dubbi sull'attività da svolgere, può utilizzare la sezione commenti della singola \textit{Issue} per chiedere delucidazioni al resto del team. Questo approccio ci permette di mantenere le discussioni tecniche ordinate, trasparenti e sempre contestualizzate rispetto al problema specifico da risolvere.
+
+\subsubsection{Comunicazione}
+\paragraph{Comunicazioni Interne}
+Le comunicazioni interne avvengono tramite: 
+\begin{itemize}
+    \item \textbf{WhatsApp:} Viene utilizzato per le comunicazioni rapide e coordinamento tra i membri del gruppo.
+    \item \textbf{Discussioni GitHub:} Viene utilizzato per discussioni all'interno delle \textit{Issue} e delle \textit{Pull Request}, per garantire il tracciamento delle decisioni. Sono utili in quanto permettono di comunicare solo con i membri del gruppo relativi alla discussione. 
+\end{itemize}
+
+\paragraph{Comunicazioni Esterne}
+
+Per interagire con l'azienda proponente e con il corpo docente, il gruppo ha definito dei canali di comunicazione specifici, differenziati in base al livello di formalità e all'urgenza della richiesta:
+
+\begin{itemize}
+    \item \textbf{E-mail:} Rappresenta il canale ufficiale per le comunicazioni formali, l'invio della documentazione e gli aggiornamenti periodici sullo stato di avanzamento del progetto. Tutte le comunicazioni via posta elettronica vengono gestite tramite l'indirizzo ufficiale del gruppo (\url{alittlebyte.swe@gmail.com}).
+    
+    \item \textbf{Telegram:} Impiegato per scambi di messaggi rapidi, chiarimenti immediati e per il coordinamento logistico direttamente con il referente dell'azienda proponente.
+\end{itemize}
+
+\subsubsection{Riunioni}
+
+\paragraph{Riunioni Interne}
+Gli incontri interni del gruppo \textit{aLittleByte} sono pianificati in modo metodico per mantenere un coordinamento efficace e assicurare un avanzamento costante del progetto. Il team ha strutturato i propri momenti di confronto secondo queste modalità:
+
+\begin{itemize}
+    \item \textbf{Incontro settimanale:} Di norma, il gruppo si riunisce una volta alla settimana (indicativamente il lunedì). Questo momento di allineamento serve per fare il punto della situazione, organizzare i \textit{task} per i giorni successivi e cercare soluzioni condivise agli ostacoli emersi durante il lavoro individuale.
+    
+    \item \textbf{Riunioni straordinarie:} Oltre all'appuntamento fisso, qualora sorgano urgenze, \textit{bug} bloccanti o si debbano prendere decisioni tecniche complesse, i membri interessati possono convocare agilmente degli incontri.
+    
+    \item \textbf{Luoghi e piattaforme:} Per comodità organizzativa e per ottimizzare i tempi, le riunioni si svolgono prevalentemente online utilizzando i canali vocali della piattaforma \textbf{Discord}.
+    
+    \item \textbf{Verbalizzazione:} A garanzia della massima trasparenza operativa, al termine di ogni incontro viene redatto un Verbale Interno.
+\end{itemize}
+
+\paragraph{Riunioni Esterne}
+
+I colloqui con l'azienda proponente sono essenziali per garantire il continuo allineamento sugli obiettivi e raccogliere \textit{feedback} sul lavoro svolto.
+Tutte le sedute si tengono in via telematica sfruttando la piattaforma \textbf{Google Meet}. A conclusione di ogni colloquio, il team si occupa di redigere un Verbale Esterno formale che riepiloga puntualmente le tematiche affrontate, le decisioni prese e le future azioni concordate. Tale documento viene infine inoltrato al referente aziendale per un controllo incrociato e, previa conferma di aderenza con quanto discusso, sottoposto alla sua firma per approvazione definitiva.
+
+\section{Qualita del Software}
+
+\end{document}
