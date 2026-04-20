@@ -827,7 +827,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
-Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}, ...
+Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}, \textbf{UC-CO-4}, \textbf{UC-CO-5}, \textbf{UC-CO-A}, ...
 
 \subsubsection{UC-CO-1: Upload del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -862,6 +862,30 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
 
 \end{description}
 
+\paragraph{UC-CO-1.E1: Gestione documento duplicato}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Sistema
+    \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
+    \item[Post-condizioni] Il documento non viene caricato e il sistema mantiene invariato lo stato dell'archivio.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema interrompe la procedura di caricamento del documento.
+        \item Il sistema mostra un messaggio di errore informando l'utente che il file è già presente.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-1.E2: Gestione formato non valido}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Sistema
+    \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
+    \item[Post-condizioni] Il documento non viene caricato e il sistema richiede un nuovo file in formato valido.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema interrompe la procedura di caricamento del documento.
+        \item Il sistema mostra un messaggio di errore indicando i formati supportati.
+    \end{enumerate}
+\end{description}
+
 \subsubsection{UC-CO-2: Upload documento con classificazione e metadati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -887,51 +911,293 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
 \end{description}
 
 
-\paragraph{UC-CO-1.E1: Gestione documento duplicato}
+\subsubsection{UC-CO-3: Visualizzazione storico documenti analizzati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Sistema
-    \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
-    \item[Post-condizioni] Il documento non viene caricato e il sistema mantiene invariato lo stato dell'archivio.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha accesso al modulo AI Co-Pilot e apre la sezione "Storico documenti".
+    \item[Post-condizioni] Il sistema mostra l'elenco dei documenti analizzati e permette la consultazione del dettaglio del singolo elemento selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema interrompe la procedura di caricamento del documento.
-        \item Il sistema mostra un messaggio di errore informando l'utente che il file è già presente.
+        \item Il Consulente del lavoro accede alla sezione "Storico documenti analizzati".
+        \item Il sistema recupera e visualizza la lista cronologica dei documenti analizzati dall'AI Co-Pilot.
+        \item Il Consulente del lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-CO-5}).
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: UC-CO-5.
+        \item \textbf{Generalizzazioni}: UC-CO-4.
+        \item \textbf{Estensioni}: UC-CO-3.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-4: Visualizzazione documenti analizzati filtrata}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il sistema mostra un sottoinsieme dello storico coerente con i filtri applicati.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro imposta uno o più filtri tra i proposti.
+        \item Il sistema aggiorna la lista mostrando solo i documenti che soddisfano i criteri selezionati.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: UC-CO-5.
+        \item \textbf{Estensioni}: UC-CO-3.E1.
+    \end{itemize}
+\end{description}
+
+\paragraph{UC-CO-3.E1: Nessun elemento individuato}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
+    \item[Post-condizioni] Il sistema mantiene attiva la schermata dello storico e informa l'utente dell'assenza di elementi.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che non c'è alcun elemento individuato.
+        \item Il sistema visualizza un avviso di storico vuoto e propone di modificare o azzerare eventuali filtri.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-1.E2: Gestione formato non valido}
+\subsubsection{UC-CO-5: Visualizzazione singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Sistema
-    \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
-    \item[Post-condizioni] Il documento non viene caricato e il sistema richiede un nuovo file in formato valido.
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Lo storico contiene almeno un documento e il Consulente del lavoro ha selezionato una riga della lista.
+    \item[Post-condizioni] Il sistema mostra il dettaglio del documento selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema interrompe la procedura di caricamento del documento.
-        \item Il sistema mostra un messaggio di errore indicando i formati supportati.
+        \item Il Consulente del lavoro seleziona un documento dall'elenco dello storico.
+        \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
+        \item Il sistema mostra il documento originale (\textbf{UC-CO-5.1}).
+        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-CO-5.2}), azienda (\textbf{UC-CO-5.3}), nome del file (\textbf{UC-CO-5.4}), data del documento (\textbf{UC-CO-5.5}), numero di pagine (\textbf{UC-CO-5.6}), tipologia del documento (\textbf{UC-CO-5.7}), breve descrizione del documento (\textbf{UC-CO-5.8}).
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: UC-CO-5.1, UC-CO-5.2, UC-CO-5.3, UC-CO-5.4, UC-CO-5.5, UC-CO-5.6, UC-CO-5.7, UC-CO-5.8.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-5.1: Visualizzazione documento originale}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-CO-5).
+    \item[Post-condizioni] Il sistema mostra la preview del documento originale nel pannello sinistro della vista di dettaglio.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema carica il file originale associato al record selezionato.
+        \item Il sistema visualizza il documento in anteprima nel pannello dedicato.
     \end{enumerate}
 \end{description}
 
+\subsubsection{UC-CO-5.2: Visualizzazione nome e cognome del dipendente}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo nome e cognome del dipendente.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti il nome e cognome del dipendente associato al documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.2.E1.
+    \end{itemize}
+\end{description}
 
-\subsubsection{UC-CO-3: Dashboard metriche e monitoraggio AI Co-Pilot}
+\subsubsection{UC-CO-5.3: Visualizzazione azienda}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo azienda.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti l'azienda associata al documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.3.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-5.4: Visualizzazione nome del file}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo nome del file.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti il nome del file del documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.4.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-5.5: Visualizzazione data del documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo data del documento.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti la data del documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.5.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-5.6: Visualizzazione numero di pagine}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo numero di pagine.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti il numero di pagine del documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.6.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-5.7: Visualizzazione tipologia del documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo tipologia del documento.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti la tipologia del documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.7.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-5.8: Visualizzazione breve descrizione del documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo breve descrizione del documento.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti la breve descrizione del documento.
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.8.E1.
+    \end{itemize}
+\end{description}
+
+\paragraph{UC-CO-5.2.E1: Nome e cognome del dipendente non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-CO-5.2) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo nome e cognome del dipendente non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo nome e cognome del dipendente non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-5.3.E1: Azienda non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-CO-5.3) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo azienda non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo azienda non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-5.4.E1: Nome del file non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome del file (UC-CO-5.4) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo nome del file non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo nome del file non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-5.5.E1: Data del documento non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-CO-5.5) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo data del documento non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo data del documento non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-5.6.E1: Numero di pagine non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo numero di pagine (UC-CO-5.6) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo numero di pagine non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo numero di pagine non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-5.7.E1: Tipologia del documento non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-CO-5.7) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo tipologia del documento non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo tipologia del documento non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-CO-5.8.E1: Breve descrizione del documento non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-CO-5.8) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo breve descrizione del documento non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo breve descrizione del documento non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-A: Dashboard metriche e monitoraggio AI Co-Pilot}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati è entrato nella sezione dedicata alle metriche del modulo AI Co-Pilot.
     \item[Post-condizioni] L'Analista dati visualizza in dashboard i principali KPI del modulo AI Co-Pilot (volumi, accuratezza, confidenza, riconoscimento destinatari e tempi medi) e dispone delle informazioni necessarie per valutarne le prestazioni.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-CO-3.1}).
-        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-CO-3.2}).
-        \item Il sistema espone i documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-CO-3.3}).
-        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-CO-3.4}).
-        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-CO-3.5}).
+        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-CO-A.1}).
+        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-CO-A.2}).
+        \item Il sistema espone i documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-CO-A.3}).
+        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-CO-A.4}).
+        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-CO-A.5}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-3.1, UC-CO-3.2, UC-CO-3.3, UC-CO-3.4, UC-CO-3.5.
+        \item \textbf{Inclusioni}: UC-CO-A.1, UC-CO-A.2, UC-CO-A.3, UC-CO-A.4, UC-CO-A.5.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-3.1: Visualizzazione numero totale di documenti analizzati}
+\subsubsection{UC-CO-A.1: Visualizzazione numero totale di documenti analizzati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -943,7 +1209,7 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-3.2: Visualizzazione percentuale di classificazioni corrette}
+\subsubsection{UC-CO-A.2: Visualizzazione percentuale di classificazioni corrette}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -955,7 +1221,7 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-3.3: Visualizzazione documenti sotto soglia di confidenza}
+\subsubsection{UC-CO-A.3: Visualizzazione documenti sotto soglia di confidenza}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -967,7 +1233,7 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-3.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+\subsubsection{UC-CO-A.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -979,7 +1245,7 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-3.5: Visualizzazione tempo medio di analisi dei documenti}
+\subsubsection{UC-CO-A.5: Visualizzazione tempo medio di analisi dei documenti}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -992,8 +1258,6 @@ Convenzione di numerazione: \textbf{UC-CO-1}, \textbf{UC-CO-2}, \textbf{UC-CO-3}
 \end{description}
 
 
-
-\subsection{Governance e qualità}
 
 
 \end{document}
