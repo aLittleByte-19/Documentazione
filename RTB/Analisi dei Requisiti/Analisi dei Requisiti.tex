@@ -831,6 +831,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Consulente del lavoro
+    \item[Attore Secondario] AI Analyst
     
     \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema.
     
@@ -862,7 +863,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-CO-1.E1: Gestione documento duplicato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Sistema
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
     \item[Post-condizioni] Il documento non viene caricato e il sistema mantiene invariato lo stato dell'archivio.
     \item[Scenario Principale]
@@ -874,7 +875,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-CO-1.E2: Gestione formato non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Sistema
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
     \item[Post-condizioni] Il documento non viene caricato e il sistema richiede un nuovo file in formato valido.
     \item[Scenario Principale]
@@ -887,6 +888,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-CO-2: Upload documento con classificazione e metadati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
+    \item[Attore Secondario] AI Analyst
     \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema impostando manualmente classificazione e metadati.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.   
     \item[Post-condizioni] Il documento è caricato e analizzato dall'AI; classificazione e metadati inseriti manualmente non vengono ricalcolati mentre viene già eseguito lo split (del documento in sotto-documenti per destinatario).
@@ -914,6 +916,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-CO-3: Visualizzazione storico documenti analizzati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende consultare lo storico dei documenti analizzati nel modulo AI Co-Pilot.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nel modulo AI Co-Pilot e apre la sezione "Storico documenti".
     \item[Post-condizioni] Il sistema mostra l'elenco dei documenti analizzati e permette la consultazione del dettaglio del singolo elemento selezionato.
     \item[Scenario Principale]
@@ -937,6 +940,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-CO-4: Visualizzazione documenti analizzati filtrata}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il sistema mostra un sottoinsieme dello storico coerente con i filtri applicati.
     \item[Scenario Principale]
@@ -970,6 +974,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-CO-5: Visualizzazione singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende consultare il dettaglio di un documento selezionato dallo storico.
     \item[Pre-condizioni] Lo storico contiene almeno un documento e il Consulente del lavoro ha selezionato una riga della lista.
     \item[Post-condizioni] Il sistema mostra il dettaglio del documento selezionato.
     \item[Scenario Principale]
@@ -1190,6 +1195,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-CO-6: Modifica del singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende modificare uno o più campi editabili del documento selezionato.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del singolo documento (UC-CO-5).
     \item[Post-condizioni] Il sistema salva le modifiche apportate ai campi editabili del documento selezionato.
     \item[Scenario Principale]
@@ -1325,6 +1331,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-CO-A: Dashboard metriche e monitoraggio AI Co-Pilot}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
+    \item[Trigger] L'Analista dati intende consultare la dashboard delle metriche del modulo AI Co-Pilot.
     \item[Pre-condizioni] L'Analista dati è entrato nella sezione dedicata alle metriche del modulo AI Co-Pilot.
     \item[Post-condizioni] L'Analista dati visualizza in dashboard i principali KPI del modulo AI Co-Pilot (volumi, accuratezza, confidenza, riconoscimento destinatari e tempi medi) e dispone delle informazioni necessarie per valutarne le prestazioni.
     \item[Scenario Principale]
