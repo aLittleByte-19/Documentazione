@@ -1,0 +1,158 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale  2026-04-20}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale  2026-04-20}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Esterno - 2026-04-20}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Maule Angela \\
+            Verificatori& Eleonora Bellet\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        &  2026-04-20\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Google Meet \\[6pt]
+
+Orario (Inizio - Fine) & 16:00 -- 16:30 \\[6pt]
+
+Redattore &
+A. Maule\\[6pt]
+
+Amministratore & 
+A. Oloni\\[6pt]
+
+Verificatore &
+E. Bellet\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  V. Y. Kaneda Fernandes\\ &
+  A. Gastaldello\\ &
+  E. Bellet\\ & 
+  D. Belluz\\ &
+  A. Maule\\[6pt]
+
+  Partecipanti Esterni &
+  Luca Iuzzolino\\ &
+  GianPaolo Ferrarin\\ [6pt]
+
+\end{tabular}
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item  Presentazione e revisione della bozza del mockup dell'interfaccia grafica.
+    \item Chiarimenti sui requisiti di estrazione dati e perimetro del progetto.
+    \end{itemize}
+
+\section{Attività svolte}
+Di seguito vengono riportate le richieste da noi effettuate, i materiali presentati e le risposte date dall'azienda.
+\subsection{Documenti di prova ed estrazione dati}
+Il gruppo ha richiesto all'azienda di poter visionare dei documenti di prova (es. cedolini o buste paga) per capire con precisione quali campi l'AI Copilot dovrà estrarre. Il referente ha suggerito di cercare autonomamente dei "fac-simile di busta paga" su internet, poiché i formati standard reperibili online sono sufficienti per i test. L'azienda si impegna inoltre a fornire ulteriore documentazione tecnica inoltrandola sul gruppo Telegram condiviso.
+\subsection{Organizzazione e priorità di sviluppo}
+È stato chiesto all'azienda quali funzionalità dovessero avere la priorità nello sviluppo. Il referente ha chiarito che il gruppo deve agire in totale autonomia, ponendosi come "fornitore" nei confronti dell'azienda. Di conseguenza, la gestione delle priorità dei task e la pianificazione degli sviluppi sono interamente a discrezione del team.
+\subsection{Autenticazione e gestione utenti}
+Sono stati richiesti chiarimenti in merito alla necessità di implementare un sistema di login e di gestione degli utenti. L'azienda ha precisato che il progetto trattandosi di un di un Proof of Concept (PoC) destinato a integrarsi ipoteticamente nella piattaforma Nexum, lo sviluppo di sistemi di autenticazione e di gestione dei ruoli utente è del tutto escluso dai requisiti tecnici richiesti.
+\subsection{Revisione mockup dell'interfaccia grafica}
+Il gruppo ha condiviso lo schermo per presentare un mockup in HTML dell'applicativo . L'azienda ha apprezzato il lavoro visivo. Per quanto riguarda lo "storico" nella parte di AI Assistant, è stato concordato che, trattandosi di un PoC, sarà sufficiente mostrare solo gli ultimi tre documenti elaborati. Il referente ha infine ribadito che l'obiettivo primario non è la perfezione della User Experience o del design, ma il corretto funzionamento delle logiche e delle funzionalità dell'Intelligenza Artificiale.
+\newpage
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit{Angela Maule} & Redigere il verbale 2026-04-20 & \href{https://github.com/aLittleByte-19/Documentazione/issues/67}{\#67}\\
+    \hline
+        \textit{Angelica Gastaldello} & Reperire online fac-simile di buste paga &\href{https://github.com/aLittleByte-19/Documentazione/issues/68}{\#68}\\
+    \hline
+    \end{tabular}
+    \label{tab:todo}
+\end{table}
+
+\end{document}
