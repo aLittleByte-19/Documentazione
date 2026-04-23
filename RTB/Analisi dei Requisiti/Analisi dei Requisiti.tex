@@ -983,11 +983,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
         \item Il sistema mostra il documento originale splittato relativo al dipendente selezionato (\textbf{UC-CO-5.1}).
         \item Il sistema mostra il documento originale non splittato (\textbf{UC-CO-5.2}).
-        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-CO-5.3}), azienda (\textbf{UC-CO-5.4}), nome del file (\textbf{UC-CO-5.5}), data del documento (\textbf{UC-CO-5.6}), numero di pagine (\textbf{UC-CO-5.7}), tipologia del documento (\textbf{UC-CO-5.8}), breve descrizione del documento (\textbf{UC-CO-5.9}).
+        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-CO-5.3}), azienda (\textbf{UC-CO-5.4}), nome del file (\textbf{UC-CO-5.5}), data del documento (\textbf{UC-CO-5.6}), numero di pagine (\textbf{UC-CO-5.7}), tipologia del documento (\textbf{UC-CO-5.8}), breve descrizione del documento (\textbf{UC-CO-5.9}), confidenza in percentuale (\textbf{UC-CO-5.10}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-5.1, UC-CO-5.2, UC-CO-5.3, UC-CO-5.4, UC-CO-5.5, UC-CO-5.6, UC-CO-5.7, UC-CO-5.8, UC-CO-5.9.
+        \item \textbf{Inclusioni}: UC-CO-5.1, UC-CO-5.2, UC-CO-5.3, UC-CO-5.4, UC-CO-5.5, UC-CO-5.6, UC-CO-5.7, UC-CO-5.8, UC-CO-5.9, UC-CO-5.10.
     \end{itemize}
 \end{description}
 
@@ -1132,6 +1132,25 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
+\subsubsection{UC-CO-5.10: Visualizzazione confidenza in percentuale per documento}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo confidenza in percentuale.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti la confidenza in percentuale (da 0 a 100\%) che indica l'affidabilità dei dati estratti dall'AI per il documento analizzato.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 1a. Confidenza non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.10.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-CO-5.10.E1.
+    \end{itemize}
+\end{description}
+
 \paragraph{UC-CO-5.3.E1: Nome e cognome del dipendente non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
@@ -1192,6 +1211,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
+\paragraph{UC-CO-5.10.E1: Confidenza non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-CO-5.10) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo confidenza non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo confidenza non è disponibile.
+        \item Il sistema visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
+
 \subsubsection{UC-CO-6: Modifica del singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
@@ -1226,14 +1257,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro inserisce il nuovo valore nel campo nome e cognome.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Nome e cognome vuoto al salvataggio: il Consulente del lavoro conferma lasciando il campo vuoto; viene eseguito UC-CO-6.E1.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-6.E1.
-    \end{itemize}
 \end{description}
 
 \subsubsection{UC-CO-6.2: Modifica azienda}
@@ -1246,14 +1269,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro inserisce il nuovo valore nel campo azienda.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Azienda vuota al salvataggio: il Consulente del lavoro conferma lasciando il campo vuoto; viene eseguito UC-CO-6.E1.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-6.E1.
-    \end{itemize}
 \end{description}
 
 \subsubsection{UC-CO-6.3: Modifica data del documento}
@@ -1266,14 +1281,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro inserisce o seleziona il nuovo valore nel campo data del documento.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Data vuota al salvataggio: il Consulente del lavoro conferma lasciando il campo vuoto; viene eseguito UC-CO-6.E1.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-6.E1.
-    \end{itemize}
 \end{description}
 
 \subsubsection{UC-CO-6.4: Modifica tipologia del documento}
@@ -1286,14 +1293,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro seleziona o inserisce il nuovo valore nel campo tipologia del documento.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Tipologia vuota al salvataggio: il Consulente del lavoro conferma senza un valore valido; viene eseguito UC-CO-6.E1.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-6.E1.
-    \end{itemize}
 \end{description}
 
 \subsubsection{UC-CO-6.5: Modifica breve descrizione del documento}
@@ -1306,25 +1305,131 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro inserisce il nuovo valore nel campo breve descrizione del documento.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Breve descrizione vuota al salvataggio: il Consulente del lavoro conferma lasciando il campo vuoto; viene eseguito UC-CO-6.E1.
-    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-7: Generazione contenuto per l'invio}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-CO-5), il Consulente del lavoro seleziona il comando di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-CO-5).
+    \item[Post-condizioni] Il sistema invia il documento allegato al destinatario selezionato, utilizzando oggetto e testo confermati dal Consulente del lavoro.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro clicca il tasto "Invia" dalla vista di dettaglio del documento.
+        \item Il sistema apre la sezione di generazione per l'invio e allega automaticamente il documento che era in visualizzazione.
+        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-CO-7.1}).
+        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-CO-7.2}).
+        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-CO-7.3}).
+        \item Il Consulente del lavoro conferma l'invio e il sistema esegue la spedizione del messaggio (\textbf{UC-CO-7.4}).
+    \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-6.E1.
+        \item \textbf{Inclusioni}: UC-CO-7.1, UC-CO-7.2, UC-CO-7.3, UC-CO-7.4.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-CO-6.E1: Campo modifica vuoto al salvataggio}
+\subsubsection{UC-CO-7.1: Visualizzazione del destinatario}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta modificando uno dei campi previsti (nome e cognome, azienda, data del documento, tipologia del documento, breve descrizione del documento) in UC-CO-6.1, UC-CO-6.2, UC-CO-6.3, UC-CO-6.4 o UC-CO-6.5 e conferma il salvataggio lasciando il campo vuoto.
-    \item[Post-condizioni] Il sistema ripristina il valore precedente del campo lasciato vuoto e mantiene aperta la vista di dettaglio.
+    \item[Pre-condizioni] Il sistema dispone del nome e cognome estratti dal documento selezionato.
+    \item[Post-condizioni] Il Consulente del lavoro visualizza il destinatario proposto nel campo dedicato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva che il campo modificato è vuoto al momento del salvataggio.
-        \item Il sistema annulla l'aggiornamento del campo e ripristina il valore precedente.
+        \item Il sistema propone il destinatario sulla base dei dati estratti dal documento.
+        \item Il Consulente del lavoro visualizza il valore del campo destinatario.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-7.2: Visualizzazione dell'oggetto}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha accesso ai metadati principali del documento selezionato.
+    \item[Post-condizioni] Il Consulente del lavoro visualizza l'oggetto proposto nel campo dedicato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema propone un oggetto coerente con il documento in invio.
+        \item Il Consulente del lavoro visualizza il valore del campo oggetto.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-7.3: Visualizzazione del testo}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha accesso ai dati estratti dal documento selezionato.
+    \item[Post-condizioni] Il Consulente del lavoro visualizza il testo proposto nel campo dedicato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema propone un testo di accompagnamento del documento allegato.
+        \item Il Consulente del lavoro visualizza il valore del campo testo.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-7.4: Conferma e invio del messaggio}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha confermato destinatario, oggetto e testo nella schermata di invio.
+    \item[Post-condizioni] Il sistema invia il messaggio con il documento allegato e notifica l'esito dell'operazione.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona l'invio definitivo del messaggio.
+        \item Il sistema acquisisce i campi confermati e il documento allegato dalla schermata di invio.
+        \item Il sistema invia il messaggio al destinatario indicato.
+        \item Il sistema notifica al Consulente del lavoro l'esito dell'invio.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-8: Modifica contenuto generato per l'invio}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende personalizzare la bozza di invio generata automaticamente (UC-CO-7).
+    \item[Pre-condizioni] Il sistema ha già predisposto la bozza di invio con destinatario, oggetto e testo.
+    \item[Post-condizioni] Il sistema aggiorna i campi destinatario, oggetto e testo secondo le modifiche del Consulente del lavoro, rendendoli disponibili per l'invio in UC-CO-7.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro modifica il destinatario proposto dal sistema (\textbf{UC-CO-8.1}).
+        \item Il Consulente del lavoro modifica l'oggetto proposto dal sistema (\textbf{UC-CO-8.2}).
+        \item Il Consulente del lavoro modifica il testo proposto dal sistema (\textbf{UC-CO-8.3}).
+        \item Il Consulente del lavoro conferma i campi aggiornati e ritorna al flusso di invio (UC-CO-7).
+    \end{enumerate}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: UC-CO-8.1, UC-CO-8.2, UC-CO-8.3.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-CO-8.1: Modifica del destinatario}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema mostra un destinatario precompilato nella bozza di invio.
+    \item[Post-condizioni] Il campo destinatario contiene il valore aggiornato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro sostituisce o integra il destinatario proposto.
+        \item Il sistema aggiorna il campo destinatario nella bozza.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-8.2: Modifica dell'oggetto}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema mostra un oggetto precompilato nella bozza di invio.
+    \item[Post-condizioni] Il campo oggetto contiene il valore aggiornato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro modifica l'oggetto del messaggio.
+        \item Il sistema aggiorna il campo oggetto nella bozza.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-CO-8.3: Modifica del testo}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema mostra un testo precompilato nella bozza di invio.
+    \item[Post-condizioni] Il campo testo contiene il valore aggiornato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro modifica il testo del messaggio.
+        \item Il sistema aggiorna il campo testo nella bozza.
     \end{enumerate}
 \end{description}
 
