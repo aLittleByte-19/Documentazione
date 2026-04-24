@@ -287,47 +287,62 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 
 \end{description}
-\subsubsection{UC-1.1: Compilazione del prompt descrittivo}
+\paragraph{UC-1.1: Compilazione del prompt descrittivo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema è in attesa dei dati di input testuali.
-    \item[Post-condizioni]  Il testo del prompt è stato registrato ed è pronto per l'elaborazione.
-    \item[Scenario Principale] 1.Il Redattore seleziona l'apposito campo di testo e vi inserisce la descrizione del contenuto desiderato.
+    \item[Post-condizioni] Il testo del prompt è stato registrato ed è pronto per l'elaborazione.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona l'apposito campo di testo e vi inserisce la descrizione del contenuto desiderato.
+    \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.2: Selezione del tono comunicativo}
+\paragraph{UC-1.2: Selezione del tono comunicativo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco dei toni utilizzabili.
     \item[Post-condizioni] Il parametro relativo al tono di voce è stato impostato.
-    \item[Scenario Principale] 1. Il Redattore sceglie il tono del messaggio tramite il relativo menu a tendina.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore sceglie il tono del messaggio tramite il relativo menu a tendina.
+    \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.3: Selezione dello stile editoriale}
+\paragraph{UC-1.3: Selezione dello stile editoriale}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco degli stili di scrittura supportati.
     \item[Post-condizioni] Il parametro relativo allo stile è stato impostato.
-    \item[Scenario Principale] 1. Il Redattore indica lo stile desiderato tramite l'apposito menu di scelta.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore indica lo stile desiderato tramite l'apposito menu di scelta.
+    \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.4: Selezione del pubblico di riferimento}
+\paragraph{UC-1.4: Selezione del pubblico di riferimento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra le categorie di destinatari previste.
     \item[Post-condizioni] Il sistema registra a quale tipologia di pubblico è rivolto il contenuto.
-    \item[Scenario Principale] 1. Il Redattore seleziona il target di riferimento dall'elenco proposto.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il target di riferimento dall'elenco proposto.
+    \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.5: Selezione del canale di comunicazione}
+\paragraph{UC-1.5: Selezione del canale di comunicazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra le piattaforme di destinazione configurate.
     \item[Post-condizioni] Il sistema registra il canale scelto per la futura pubblicazione.
-    \item[Scenario Principale] 1. Il Redattore indica la piattaforma tramite il comando dedicato.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore indica la piattaforma tramite il comando dedicato.
+    \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.6: Salvataggio della configurazione del prompt}
+\paragraph{UC-1.6: Salvataggio della configurazione del prompt}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato uno o più parametri nell'interfaccia di composizione.
@@ -342,12 +357,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \paragraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore tenta di avviare la generazione o il salvataggio con il campo prompt vuoto o contenente un testo inferiore alla soglia minima richiesta.
+    \item[Pre-condizioni] Il Redattore tenta di avviare la generazione o il salvataggio con il campo prompt vuoto.
     \item[Post-condizioni] Il sistema segnala l'errore e interrompe l'operazione di generazione.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva che l'input testuale è assente o non possiede una lunghezza sufficiente per garantire un output qualitativamente valido.
-        \item Il sistema inibisce l'invio della richiesta e visualizza un messaggio di avviso, invitando l'utente a inserire maggiori dettagli.
+        \item Il sistema rileva che l'input testuale è assente.
+        \item Il sistema inibisce l'invio della richiesta e visualizza un messaggio di avviso.
     \end{enumerate}
 \end{description}
 
