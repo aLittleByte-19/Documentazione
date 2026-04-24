@@ -12,8 +12,8 @@
 \usepackage{float}
 \usepackage{enumitem}
 
-\setcounter{secnumdepth}{4}   
-\setcounter{tocdepth}{4}     
+\setcounter{secnumdepth}{5}   
+\setcounter{tocdepth}{5}     
 \renewcommand{\theparagraph}{\thesubsubsection.\arabic{paragraph}}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
@@ -287,7 +287,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 
 \end{description}
-\subsubsection{UC-1.1: Compilazione del prompt descrittivo}
+\paragraph{UC-1.1: Compilazione del prompt descrittivo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema è in attesa dei dati di input testuali.
@@ -298,7 +298,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.2: Selezione del tono comunicativo}
+\paragraph{UC-1.2: Selezione del tono comunicativo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco dei toni utilizzabili.
@@ -309,7 +309,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.3: Selezione dello stile editoriale}
+\paragraph{UC-1.3: Selezione dello stile editoriale}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco degli stili di scrittura supportati.
@@ -320,7 +320,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.4: Selezione del pubblico di riferimento}
+\paragraph{UC-1.4: Selezione del pubblico di riferimento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra le categorie di destinatari previste.
@@ -331,7 +331,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.5: Selezione del canale di comunicazione}
+\paragraph{UC-1.5: Selezione del canale di comunicazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra le piattaforme di destinazione configurate.
@@ -342,7 +342,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-1.6: Salvataggio della configurazione del prompt}
+\paragraph{UC-1.6: Salvataggio della configurazione del prompt}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato uno o più parametri nell'interfaccia di composizione.
@@ -354,7 +354,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
+\subparagraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore tenta di avviare la generazione o il salvataggio con il campo prompt vuoto.
@@ -366,7 +366,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.E2: Errore - Fallimento modulo AI}
+\subparagraph{UC-1.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema ha inviato i parametri al motore AI, ma si verifica un timeout o un errore di connessione.
@@ -413,7 +413,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \end{description}
 
-\subsubsection{UC-2.1: Visualizzazione del titolo generato}
+\paragraph{UC-2.1: Visualizzazione del titolo generato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
@@ -424,7 +424,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.2: Visualizzazione del testo generato}
+\paragraph{UC-2.2: Visualizzazione del testo generato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
@@ -435,7 +435,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.3: Visualizzazione dell'immagine di copertina}
+\paragraph{UC-2.3: Visualizzazione dell'immagine di copertina}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
@@ -446,7 +446,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.4: Modifica manuale del titolo}
+\paragraph{UC-2.4: Modifica manuale del titolo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema presenta il titolo in un campo di testo interattivo.
@@ -459,7 +459,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.5: Modifica manuale del testo}
+\paragraph{UC-2.5: Modifica manuale del testo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema presenta il testo all'interno di un editor interattivo dotato di contatore.
@@ -472,7 +472,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.6: Sostituzione dell'immagine di copertina}
+\paragraph{UC-2.6: Sostituzione dell'immagine di copertina}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra l'anteprima dell'immagine suggerita.
@@ -485,7 +485,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.7: Rigenerazione del contenuto}
+\paragraph{UC-2.7: Rigenerazione del contenuto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema visualizza il contenuto e abilita il comando di rigenerazione.
@@ -497,7 +497,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.8: Eliminazione della bozza generata}
+\paragraph{UC-2.8: Eliminazione della bozza generata}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema visualizza l'anteprima della bozza corrente.
@@ -511,7 +511,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.E1: Errore - Contenuto vuoto}
+\subparagraph{UC-2.E1: Errore - Contenuto vuoto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo o il titolo nell'editor e tenta di confermarne le modifiche.
@@ -523,7 +523,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.E2: Errore - Fallimento modulo AI}
+\subparagraph{UC-2.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il Redattore ha richiesto una variante (rigenerazione), ma si verifica un problema tecnico di rete o di API.
@@ -535,7 +535,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.E3: Errore - Formato immagine non valido}
+\subparagraph{UC-2.E3: Errore - Formato immagine non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore tenta di caricare una nuova immagine che non rispetta i vincoli di sistema.
@@ -575,7 +575,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \end{description}
 
-\subsubsection{UC-3.1: Visualizzazione delle opzioni di finalizzazione}
+\paragraph{UC-3.1: Visualizzazione delle opzioni di finalizzazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema ha validato l'ultimo output della fase di revisione.
@@ -586,7 +586,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.2: Salvataggio in bozza}
+\paragraph{UC-3.2: Salvataggio in bozza}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
@@ -598,7 +598,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.3: Esportazione del contenuto}
+\paragraph{UC-3.3: Esportazione del contenuto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
@@ -610,7 +610,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.4: Inoltro tramite e-mail}
+\paragraph{UC-3.4: Inoltro tramite e-mail}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone il campo per l'inserimento dell'indirizzo del destinatario.
@@ -623,7 +623,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.E1: Errore - Indirizzo e-mail non valido}
+\subparagraph{UC-3.E1: Errore - Indirizzo e-mail non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore richiede l'inoltro inserendo un indirizzo sintatticamente errato.
@@ -663,7 +663,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \end{description}
 
-\subsubsection{UC-4.1: Visualizzazione elenco generazioni passate}
+\paragraph{UC-4.1: Visualizzazione elenco generazioni passate}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore si trova nella sezione dedicata alla libreria.
@@ -674,7 +674,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.2: Ricerca e filtraggio dello storico}
+\paragraph{UC-4.2: Ricerca e filtraggio dello storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore visualizza l'elenco cronologico.
@@ -686,7 +686,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.3: Caricamento e riutilizzo prompt}
+\paragraph{UC-4.3: Caricamento e riutilizzo prompt}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha individuato un elemento d'interesse nella libreria.
@@ -698,7 +698,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.4: Gestione dei preferiti}
+\paragraph{UC-4.4: Gestione dei preferiti}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore visualizza l'elenco dei contenuti.
@@ -710,7 +710,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.E1: Avviso - Nessun risultato trovato}
+\subparagraph{UC-4.E1: Avviso - Nessun risultato trovato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha inserito criteri di ricerca che non producono risultati.
@@ -751,7 +751,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \end{description}
 
-\subsubsection{UC-5.1: Visualizzazione del modulo di valutazione}
+\paragraph{UC-5.1: Visualizzazione del modulo di valutazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema ha esposto a schermo il contenuto generato o in fase di revisione.
@@ -762,7 +762,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.2: Assegnazione del rating}
+\paragraph{UC-5.2: Assegnazione del rating}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone il selettore grafico di valutazione.
@@ -774,7 +774,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.3: Inserimento del commento testuale}
+\paragraph{UC-5.3: Inserimento del commento testuale}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone il campo di testo opzionale per la motivazione del voto.
@@ -786,7 +786,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.4: Invio della valutazione}
+\paragraph{UC-5.4: Invio della valutazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato i dati obbligatori del modulo (rating).
@@ -799,7 +799,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.E1: Errore - Rating mancante}
+\subparagraph{UC-5.E1: Errore - Rating mancante}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore seleziona il comando di invio mantenendo lo stato del rating vuoto (0 su 5).
@@ -812,7 +812,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.E2: Errore - Superamento limite caratteri}
+\subparagraph{UC-5.E2: Errore - Superamento limite caratteri}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore sta digitando il commento e raggiunge il limite massimo di caratteri consentito dal sistema.
@@ -854,7 +854,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \end{description}
 
-\subsubsection{UC-6.1: Visualizzazione panoramica della dashboard}
+\paragraph{UC-6.1: Visualizzazione panoramica della dashboard}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati accede all'area analitica del sistema.
@@ -865,7 +865,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.2: Visualizzazione statistiche di utilizzo}
+\paragraph{UC-6.2: Visualizzazione statistiche di utilizzo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard.
@@ -876,7 +876,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.3: Monitoraggio del rating medio}
+\paragraph{UC-6.3: Monitoraggio del rating medio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] Sono presenti nel sistema feedback numerici espressi dai Redattori (UC-5).
@@ -887,7 +887,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.4: Consultazione dei feedback testuali}
+\paragraph{UC-6.4: Consultazione dei feedback testuali}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] Sono presenti nel sistema commenti testuali associati alle valutazioni.
@@ -898,7 +898,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.5: Filtraggio dei dati analitici}
+\paragraph{UC-6.5: Filtraggio dei dati analitici}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati visualizza i dati all'interno della dashboard.
@@ -910,7 +910,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.6: Esportazione report analitico}
+\paragraph{UC-6.6: Esportazione report analitico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] Il sistema espone i comandi di esportazione dati.
@@ -922,7 +922,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.E1: Errore - Dati non disponibili}
+\subparagraph{UC-6.E1: Errore - Dati non disponibili}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista applica filtri o richiede esportazioni per parametri privi di interazioni registrate.
@@ -936,7 +936,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
-\subsubsection{UC-CO-1: Upload del documento}
+\subsubsection{UC-7: Upload del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Consulente del lavoro
@@ -958,19 +958,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Documento duplicato: Il sistema rileva che il file è già presente; viene eseguito UC-CO-1.E1.
-        \item 3b. Formato non valido: Il sistema rileva un formato non supportato; viene eseguito UC-CO-1.E2.
+        \item 3a. Documento duplicato: Il sistema rileva che il file è già presente; viene eseguito UC-7.E1.
+        \item 3b. Formato non valido: Il sistema rileva un formato non supportato; viene eseguito UC-7.E2.
     \end{itemize}
 
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Generalizzazioni}: UC-CO-2.
-        \item \textbf{Estensioni}: UC-CO-1.E1, UC-CO-1.E2.
+        \item \textbf{Generalizzazioni}: UC-8.
+        \item \textbf{Estensioni}: UC-7.E1, UC-7.E2.
     \end{itemize}
 
 \end{description}
 
-\paragraph{UC-CO-1.E1: Gestione documento duplicato}
+\subparagraph{UC-7.E1: Gestione documento duplicato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
@@ -982,7 +982,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-1.E2: Gestione formato non valido}
+\subparagraph{UC-7.E2: Gestione formato non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
@@ -994,7 +994,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-2: Upload documento con classificazione e metadati}
+\subsubsection{UC-8: Upload documento con classificazione e metadati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Attore Secondario] AI Analyst
@@ -1006,23 +1006,23 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
         \item Il Consulente del lavoro seleziona la classificazione del documento.
-        \item Il Consulente del lavoro inserisce i metadati richiesti (es. mese, anno, azienda).
+        \item Il Consulente del lavoro inserisce i metadati richiesti (mese, anno, azienda).
         \item Il Consulente del lavoro conferma il caricamento dopodichè il sistema verfica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 4a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito UC-CO-1.E1.
-        \item 4b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito UC-CO-1.E2.
+        \item 4a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito UC-7.E1.
+        \item 4b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito UC-7.E2.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-1.E1, UC-CO-1.E2.
+        \item \textbf{Estensioni}: UC-7.E1, UC-7.E2.
     \end{itemize}
 \end{description}
 
 
-\subsubsection{UC-CO-3: Visualizzazione storico documenti analizzati}
+\subsubsection{UC-9: Visualizzazione storico documenti analizzati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende consultare lo storico dei documenti analizzati nel modulo AI Co-Pilot.
@@ -1031,44 +1031,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro accede alla sezione "Storico documenti analizzati".
-        \item Il sistema recupera e visualizza la lista cronologica dei documenti analizzati dall'AI Co-Pilot.
-        \item Il Consulente del lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-CO-5}).
+        \item Il sistema recupera e visualizza di default i documenti più recentemente analizzati, ordinati secondo l'ordine di richiesta di analisi (dal più recente al meno recente).
+        \item Il Consulente del lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-15}).
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti corrispondenti nello storico; viene eseguito UC-CO-3.E1.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti corrispondenti nello storico; viene eseguito UC-9.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-5.
-        \item \textbf{Generalizzazioni}: UC-CO-4.
-        \item \textbf{Estensioni}: UC-CO-3.E1.
+        \item \textbf{Inclusioni}: UC-15.
+        \item \textbf{Generalizzazioni}: UC-10,
+        \item \textbf{Estensioni}: UC-9.E1.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-4: Visualizzazione documenti analizzati filtrata}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il sistema mostra un sottoinsieme dello storico coerente con i filtri applicati.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro imposta uno o più filtri tra i proposti.
-        \item Il sistema aggiorna la lista mostrando solo i documenti che soddisfano i criteri selezionati.
-    \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con i filtri impostati; viene eseguito UC-CO-3.E1.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-5.
-        \item \textbf{Estensioni}: UC-CO-3.E1.
-    \end{itemize}
-\end{description}
-
-\paragraph{UC-CO-3.E1: Nessun elemento individuato}
+\subparagraph{UC-9.E1: Nessun elemento individuato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
@@ -1076,11 +1054,117 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che non c'è alcun elemento individuato.
-        \item Il sistema visualizza un avviso di storico vuoto e propone di o di caricare nuovi documenti o di azzerare eventuali filtri.
+        \item Il sistema visualizza un avviso di storico vuoto e propone di caricare nuovi documenti o di azzerare eventuali filtri.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-5: Visualizzazione singolo documento dallo storico}
+\subsubsection{UC-10: Visualizzazione storico con filtri}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il sistema mostra un sottoinsieme dello storico coerente con i filtri applicati.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-11}), stato invio (\textbf{UC-12}), confidenza rispetto a soglia (\textbf{UC-13}), mese e anno (\textbf{UC-14}).
+        \item Il sistema aggiorna la lista mostrando solo i documenti che soddisfano i criteri selezionati.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con i filtri impostati; viene eseguito UC-9.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Generalizzazioni}: UC-11, UC-12, UC-13, UC-14.
+        \item \textbf{Estensioni}: UC-9.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-11: Filtro storico con barra di ricerca}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Post-condizioni] Il sistema mostra solo i documenti che corrispondono al testo inserito nella barra di ricerca.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro inserisce un testo nella barra di ricerca unica.
+        \item Il sistema filtra lo storico confrontando il testo con i campi nome e cognome del dipendente e azienda.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con la ricerca; viene eseguito UC-9.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-9.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-12: Filtro storico per stato invio}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende visualizzare solo documenti inviati o non inviati.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Post-condizioni] Il sistema mostra solo i documenti che rispettano lo stato invio selezionato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona il filtro di stato invio scegliendo tra "Inviato" e "Non inviato".
+        \item Il sistema aggiorna la lista mostrando i documenti coerenti con lo stato selezionato.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il filtro selezionato; viene eseguito UC-9.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-9.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-13: Filtro storico per confidenza}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende filtrare lo storico in base alla confidenza dei dati estratti rispetto a una soglia.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Post-condizioni] Il sistema mostra solo i documenti con confidenza maggiore o minore della soglia impostata.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro imposta una soglia di confidenza e seleziona il criterio (maggiore di soglia o minore di soglia).
+        \item Il sistema aggiorna la lista mostrando i documenti che rispettano il criterio scelto.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il filtro impostato; viene eseguito UC-9.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-9.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-14: Filtro storico per mese e anno}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende visualizzare i documenti relativi a uno specifico mese e anno.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Post-condizioni] Il sistema mostra solo i documenti riferiti al mese e all'anno selezionati.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona mese e anno nel filtro temporale.
+        \item Il sistema aggiorna la lista mostrando i documenti compatibili con il periodo selezionato.
+    \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il periodo selezionato; viene eseguito UC-9.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-9.E1.
+    \end{itemize}
+\end{description}
+
+\subsubsection{UC-15: Visualizzazione singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende consultare il dettaglio di un documento selezionato dallo storico.
@@ -1090,20 +1174,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona un documento dall'elenco dello storico.
         \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
-        \item Il sistema mostra il documento originale splittato relativo al dipendente selezionato (\textbf{UC-CO-5.1}).
-        \item Il sistema mostra il documento originale non splittato (\textbf{UC-CO-5.2}).
-        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-CO-5.3}), azienda (\textbf{UC-CO-5.4}), nome del file (\textbf{UC-CO-5.5}), data del documento (\textbf{UC-CO-5.6}), numero di pagine (\textbf{UC-CO-5.7}), tipologia del documento (\textbf{UC-CO-5.8}), breve descrizione del documento (\textbf{UC-CO-5.9}), confidenza in percentuale (\textbf{UC-CO-5.10}).
+        \item Il sistema mostra il documento originale splittato relativo al dipendente selezionato (\textbf{UC-15.1}).
+        \item Il sistema mostra il documento originale non splittato (\textbf{UC-15.2}).
+        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-15.3}), azienda (\textbf{UC-15.4}), nome del file (\textbf{UC-15.5}), data del documento (\textbf{UC-15.6}), numero di pagine (\textbf{UC-15.7}), tipologia del documento (\textbf{UC-15.8}), breve descrizione del documento (\textbf{UC-15.9}), confidenza in percentuale (\textbf{UC-15.10}), stato di invio del documento (\textbf{UC-15.11}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-5.1, UC-CO-5.2, UC-CO-5.3, UC-CO-5.4, UC-CO-5.5, UC-CO-5.6, UC-CO-5.7, UC-CO-5.8, UC-CO-5.9, UC-CO-5.10.
+        \item \textbf{Inclusioni}: UC-15.1, UC-15.2, UC-15.3, UC-15.4, UC-15.5, UC-15.6, UC-15.7, UC-15.8, UC-15.9, UC-15.10, UC-15.11.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-5.1: Visualizzazione documento originale splittato}
+\paragraph{UC-15.1: Visualizzazione documento originale splittato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-CO-5).
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-15).
     \item[Post-condizioni] Il sistema mostra la preview del documento originale splittato (parte relativa a un singolo dipendente) nel pannello sinistro della vista di dettaglio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1112,10 +1196,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-5.2: Visualizzazione documento originale non splittato}
+\paragraph{UC-15.2: Visualizzazione documento originale non splittato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-CO-5).
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-15).
     \item[Post-condizioni] Il sistema mostra la preview del documento originale completo (non splittato) nel pannello sinistro della vista di dettaglio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1124,7 +1208,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-5.3: Visualizzazione nome e cognome del dipendente}
+\paragraph{UC-15.3: Visualizzazione nome e cognome del dipendente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1135,15 +1219,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Nome e cognome non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.3.E1.
+        \item 1a. Nome e cognome non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.3.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-5.3.E1.
+        \item \textbf{Estensioni}: UC-15.3.E1.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-5.4: Visualizzazione azienda}
+\paragraph{UC-15.4: Visualizzazione azienda}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1154,15 +1238,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Azienda non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.4.E1.
+        \item 1a. Azienda non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.4.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-5.4.E1.
+        \item \textbf{Estensioni}: UC-15.4.E1.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-5.5: Visualizzazione nome del file}
+\paragraph{UC-15.5: Visualizzazione nome del file}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1173,7 +1257,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-5.6: Visualizzazione data del documento}
+\paragraph{UC-15.6: Visualizzazione data del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1184,15 +1268,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Data del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.6.E1.
+        \item 1a. Data del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.6.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-5.6.E1.
+        \item \textbf{Estensioni}: UC-15.6.E1.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-5.7: Visualizzazione numero di pagine}
+\paragraph{UC-15.7: Visualizzazione numero di pagine}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1203,7 +1287,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-5.8: Visualizzazione tipologia del documento}
+\paragraph{UC-15.8: Visualizzazione tipologia del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1214,15 +1298,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Tipologia del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.8.E1.
+        \item 1a. Tipologia del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.8.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-5.8.E1.
+        \item \textbf{Estensioni}: UC-15.8.E1.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-5.9: Visualizzazione breve descrizione del documento}
+\paragraph{UC-15.9: Visualizzazione breve descrizione del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1233,15 +1317,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Breve descrizione non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.9.E1.
+        \item 1a. Breve descrizione non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.9.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-5.9.E1.
+        \item \textbf{Estensioni}: UC-15.9.E1.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-5.10: Visualizzazione confidenza in percentuale per documento}
+\paragraph{UC-15.10: Visualizzazione confidenza in percentuale per documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
@@ -1252,18 +1336,29 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Confidenza non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-CO-5.10.E1.
+        \item 1a. Confidenza non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.10.E1.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-CO-5.10.E1.
+        \item \textbf{Estensioni}: UC-15.10.E1.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-CO-5.3.E1: Nome e cognome del dipendente non disponibile}
+\paragraph{UC-15.11: Visualizzazione stato invio documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-CO-5.3) e il dato non è disponibile.
+    \item[Pre-condizioni] Il sistema dispone delle informazioni di stato invio del documento selezionato.
+    \item[Post-condizioni] Il sistema mostra se il documento è stato inviato oppure no.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza nel pannello dati estratti lo stato di invio del documento con un valore tra "Inviato" e "Non inviato".
+    \end{enumerate}
+\end{description}
+
+\subparagraph{UC-15.3.E1: Nome e cognome del dipendente non disponibile}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-15.3) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo nome e cognome del dipendente non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1272,10 +1367,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-5.4.E1: Azienda non disponibile}
+\subparagraph{UC-15.4.E1: Azienda non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-CO-5.4) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-15.4) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo azienda non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1284,10 +1379,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-5.6.E1: Data del documento non disponibile}
+\subparagraph{UC-15.6.E1: Data del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-CO-5.6) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-15.6) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo data del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1296,10 +1391,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-5.8.E1: Tipologia del documento non disponibile}
+\subparagraph{UC-15.8.E1: Tipologia del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-CO-5.8) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-15.8) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo tipologia del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1308,10 +1403,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-5.9.E1: Breve descrizione del documento non disponibile}
+\subparagraph{UC-15.9.E1: Breve descrizione del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-CO-5.9) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-15.9) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo breve descrizione del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1320,10 +1415,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-CO-5.10.E1: Confidenza non disponibile}
+\subparagraph{UC-15.10.E1: Confidenza non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-CO-5.10) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-15.10) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo confidenza non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1332,34 +1427,34 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-6: Modifica del singolo documento dallo storico}
+\subsubsection{UC-16: Modifica del singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende modificare uno o più campi editabili del documento selezionato.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del singolo documento (UC-CO-5).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del singolo documento (UC-15).
     \item[Post-condizioni] Il sistema salva le modifiche apportate ai campi editabili del documento selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona l'azione di modifica del documento.
         \item Il sistema abilita la modalità di modifica dei campi consentiti.
-        \item Il Consulente del lavoro modifica nome e cognome del dipendente (\textbf{UC-CO-6.1}).
-        \item Il Consulente del lavoro modifica azienda (\textbf{UC-CO-6.2}).
-        \item Il Consulente del lavoro modifica data del documento (\textbf{UC-CO-6.3}).
-        \item Il Consulente del lavoro modifica tipologia del documento (\textbf{UC-CO-6.4}).
-        \item Il Consulente del lavoro modifica breve descrizione del documento (\textbf{UC-CO-6.5}).
+        \item Il Consulente del lavoro modifica nome e cognome del dipendente (\textbf{UC-16.1}).
+        \item Il Consulente del lavoro modifica azienda (\textbf{UC-16.2}).
+        \item Il Consulente del lavoro modifica data del documento (\textbf{UC-16.3}).
+        \item Il Consulente del lavoro modifica tipologia del documento (\textbf{UC-16.4}).
+        \item Il Consulente del lavoro modifica breve descrizione del documento (\textbf{UC-16.5}).
         \item Il Consulente del lavoro conferma il salvataggio.
         \item Il sistema valida i dati inseriti e salva le modifiche.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-6.1, UC-CO-6.2, UC-CO-6.3, UC-CO-6.4, UC-CO-6.5.
+        \item \textbf{Inclusioni}: UC-16.1, UC-16.2, UC-16.3, UC-16.4, UC-16.5.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-6.1: Modifica nome e cognome del dipendente}
+\paragraph{UC-16.1: Modifica nome e cognome del dipendente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-CO-6).
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo nome e cognome del dipendente.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1368,10 +1463,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-6.2: Modifica azienda}
+\paragraph{UC-16.2: Modifica azienda}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-CO-6).
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo azienda.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1380,10 +1475,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-6.3: Modifica data del documento}
+\paragraph{UC-16.3: Modifica data del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-CO-6).
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo data del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1392,10 +1487,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-6.4: Modifica tipologia del documento}
+\paragraph{UC-16.4: Modifica tipologia del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-CO-6).
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo tipologia del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1404,10 +1499,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-6.5: Modifica breve descrizione del documento}
+\paragraph{UC-16.5: Modifica breve descrizione del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-CO-6).
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo breve descrizione del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1416,28 +1511,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-7: Generazione contenuto per l'invio}
+\subsubsection{UC-17: Generazione contenuto per l'invio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-CO-5), il Consulente del lavoro seleziona il comando di invio.
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-CO-5).
+    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-15), il Consulente del lavoro seleziona il comando di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-15).
     \item[Post-condizioni] Il sistema invia il documento allegato al destinatario selezionato, utilizzando oggetto e testo confermati dal Consulente del lavoro.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro clicca il tasto "Invia" dalla vista di dettaglio del documento.
         \item Il sistema apre la sezione di generazione per l'invio e allega automaticamente il documento che era in visualizzazione.
-        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-CO-7.1}).
-        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-CO-7.2}).
-        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-CO-7.3}).
-        \item Il Consulente del lavoro conferma l'invio e il sistema esegue la spedizione del messaggio (\textbf{UC-CO-7.4}).
+        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-17.1}).
+        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-17.2}).
+        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-17.3}).
+        \item Il Consulente del lavoro conferma l'invio e il sistema esegue la spedizione del messaggio (\textbf{UC-17.4}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-7.1, UC-CO-7.2, UC-CO-7.3, UC-CO-7.4.
+        \item \textbf{Inclusioni}: UC-17.1, UC-17.2, UC-17.3, UC-17.4.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-7.1: Visualizzazione del destinatario}
+\paragraph{UC-17.1: Visualizzazione del destinatario}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema dispone del nome e cognome estratti dal documento selezionato.
@@ -1449,7 +1544,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-7.2: Visualizzazione dell'oggetto}
+\paragraph{UC-17.2: Visualizzazione dell'oggetto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha accesso ai metadati principali del documento selezionato.
@@ -1461,7 +1556,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-7.3: Visualizzazione del testo}
+\paragraph{UC-17.3: Visualizzazione del testo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha accesso ai dati estratti dal documento selezionato.
@@ -1473,7 +1568,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-7.4: Conferma e invio del messaggio}
+\paragraph{UC-17.4: Conferma e invio del messaggio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro ha confermato destinatario, oggetto e testo nella schermata di invio.
@@ -1487,26 +1582,26 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-8: Modifica contenuto generato per l'invio}
+\subsubsection{UC-18: Modifica contenuto generato per l'invio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro intende personalizzare la bozza di invio generata automaticamente (UC-CO-7).
+    \item[Trigger] Il Consulente del lavoro intende personalizzare la bozza di invio generata automaticamente (UC-17).
     \item[Pre-condizioni] Il sistema ha già predisposto la bozza di invio con destinatario, oggetto e testo.
-    \item[Post-condizioni] Il sistema aggiorna i campi destinatario, oggetto e testo secondo le modifiche del Consulente del lavoro, rendendoli disponibili per l'invio in UC-CO-7.
+    \item[Post-condizioni] Il sistema aggiorna i campi destinatario, oggetto e testo secondo le modifiche del Consulente del lavoro, rendendoli disponibili per l'invio in UC-17.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro modifica il destinatario proposto dal sistema (\textbf{UC-CO-8.1}).
-        \item Il Consulente del lavoro modifica l'oggetto proposto dal sistema (\textbf{UC-CO-8.2}).
-        \item Il Consulente del lavoro modifica il testo proposto dal sistema (\textbf{UC-CO-8.3}).
-        \item Il Consulente del lavoro conferma i campi aggiornati e ritorna al flusso di invio (UC-CO-7).
+        \item Il Consulente del lavoro modifica il destinatario proposto dal sistema (\textbf{UC-18.1}).
+        \item Il Consulente del lavoro modifica l'oggetto proposto dal sistema (\textbf{UC-18.2}).
+        \item Il Consulente del lavoro modifica il testo proposto dal sistema (\textbf{UC-18.3}).
+        \item Il Consulente del lavoro conferma i campi aggiornati e ritorna al flusso di invio (UC-17).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-8.1, UC-CO-8.2, UC-CO-8.3.
+        \item \textbf{Inclusioni}: UC-18.1, UC-18.2, UC-18.3.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-8.1: Modifica del destinatario}
+\paragraph{UC-18.1: Modifica del destinatario}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema mostra un destinatario precompilato nella bozza di invio.
@@ -1518,7 +1613,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-8.2: Modifica dell'oggetto}
+\paragraph{UC-18.2: Modifica dell'oggetto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema mostra un oggetto precompilato nella bozza di invio.
@@ -1530,7 +1625,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-8.3: Modifica del testo}
+\paragraph{UC-18.3: Modifica del testo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il sistema mostra un testo precompilato nella bozza di invio.
@@ -1542,27 +1637,27 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-A: Dashboard metriche e monitoraggio AI Co-Pilot}
+\subsubsection{UC-19: Dashboard metriche e monitoraggio AI Co-Pilot}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Trigger] L'Analista dati intende consultare la dashboard delle metriche del modulo AI Co-Pilot.
     \item[Pre-condizioni] L'Analista dati è entrato nella sezione dedicata alle metriche del modulo AI Co-Pilot.
-    \item[Post-condizioni] L'Analista dati visualizza in dashboard i principali KPI del modulo AI Co-Pilot (volumi, accuratezza, confidenza, riconoscimento destinatari e tempi medi) e dispone delle informazioni necessarie per valutarne le prestazioni.
+    \item[Post-condizioni] L'Analista dati ha visualizzato in dashboard i principali KPI del modulo AI Co-Pilot.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-CO-A.1}).
-        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-CO-A.2}).
-        \item Il sistema espone i documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-CO-A.3}).
-        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-CO-A.4}).
-        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-CO-A.5}).
+        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-19.1}).
+        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-19.2}).
+        \item Il sistema espone la percentuale d   i documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-19.3}).
+        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-19.4}).
+        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-19.5}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-CO-A.1, UC-CO-A.2, UC-CO-A.3, UC-CO-A.4, UC-CO-A.5.
+        \item \textbf{Inclusioni}: UC-19.1, UC-19.2, UC-19.3, UC-19.4, UC-19.5.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-CO-A.1: Visualizzazione numero totale di documenti analizzati}
+\paragraph{UC-19.1: Visualizzazione numero totale di documenti analizzati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -1574,7 +1669,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-A.2: Visualizzazione percentuale di classificazioni corrette}
+\paragraph{UC-19.2: Visualizzazione percentuale di classificazioni corrette}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -1586,7 +1681,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-A.3: Visualizzazione documenti sotto soglia di confidenza}
+\paragraph{UC-19.3: Visualizzazione documenti sotto soglia di confidenza}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -1598,7 +1693,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-A.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+\paragraph{UC-19.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
@@ -1610,7 +1705,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-CO-A.5: Visualizzazione tempo medio di analisi dei documenti}
+\paragraph{UC-19.5: Visualizzazione tempo medio di analisi dei documenti}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
