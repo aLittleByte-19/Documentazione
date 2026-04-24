@@ -15,10 +15,12 @@
 \usepackage{booktabs}
 \usepackage{xcolor}  
 \usepackage{float}
+\usepackage{hyperref}
+\usepackage{titlesec}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -28,6 +30,8 @@
     headheight=331pt,
     includeheadfoot
 }
+
+
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -79,8 +83,9 @@
         left=8pt, right=8pt, top=8pt, bottom=8pt
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Stato       & In Corso \\
             Gruppo      & aLittleByte (gruppo 19) \\
-            Redattore   & V. Y. Kaneda Fernandes \\
+            Redattore   & V. Y. Kaneda Fernandes, A.Oloni \\
             Verificatori &  \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
             Data        & 2026-04-13
@@ -97,21 +102,26 @@
 \end{center}
 
 \vspace{0.35cm}
-
 \renewcommand{\arraystretch}{1.35}
 \rowcolors{2}{gray!8}{white}
-\begin{center}
-    {\footnotesize
-    \begin{tabularx}{\textwidth}{|l|l|X|p{2cm}|p{2cm}|p{2cm}|}
+\begin{table}[h]
+\centering
+    \footnotesize
+    \begin{tabularx}{\textwidth}{|l|l|X|p{2cm}|p{2.5cm}|p{2.5cm}|}
         \hline
         \rowcolor{gray!20}
-        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
-        0.1.0 & 2026-04-13 & Prima stesura del documento & V. Y. Kaneda Fernandes & - & - \\
-        \hline 
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} \\
+        0.1.0 & 2026-04-13 & Prima stesura del documento & V. Y. Kaneda Fernandes & A. Oloni \\
+        \hline
+        0.2.0 & 2026-04-14 & Stesura del primo periodo & V. Y. Kaneda Fernandes & A. Oloni\\
+        \hline
+        0.3.0 & 2026-04-21 & Aggiunta delle sezioni: \textbf{\hyperref[sec:scopo_del_documento]{§1.2}, \hyperref[sec:glossario]{§1.3}, \hyperref[sec:riferimenti]{§1.4}, \hyperref[sec:analisi_dei_rischi]{§2}, \hyperref[sec:modello_di_sviluppo]{§3}}, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & A. Oloni & V. Y. Kaneda Fernandes \\
+        \hline
+        0.3.1 & 2026-04-23 & Stesura delle sezioni \textbf{\hyperref[sec:introduzione]{§1}} e \textbf{\hyperref[sec:analisi_dei_rischi]{§2}} & A. Oloni & V. Y. Kaneda Fernandes \\
+        \hline
     \end{tabularx}
-    }
-\end{center}
-
+    \caption{Registro delle Modifiche}
+\end{table}
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -123,9 +133,329 @@
 \newpage
 
 \section{Introduzione}
+\label{sec:introduzione}
 
-\subsection{Informazioni}
-Il Piano di Progetto è la guida operativa che descrive il lavoro fatto e quello ancora da svolgere, fungendo da bussola per monitorare se i tempi reali rispettano le previsioni e per individuare in anticipo eventuali rischi. Poiché è impossibile prevedere ogni dettaglio fin dall'inizio, il documento non è statico ma viene aggiornato continuamente: si preferisce infatti una pianificazione flessibile che aggiunge dettagli un po' alla volta man mano che il lavoro procede, rendendolo uno strumento dinamico capace di adattarsi ai cambiamenti e alle nuove informazioni raccolte lungo il percorso.
+\subsection{Scopo del documento}
+\label{sec:scopo_del_documento}
+Il Piano di Progetto è un documento di estrema importanza, nella quale vengono fissati in maniera chiara e coincisa gli obiettivi, la progettazione, l'esecuzione ed il controllo delle attività del progetto,
+ fungendo quindi da bussola per allineare il lavoro in svolgimento verso un'unico obiettivo comune.
+Inoltre questo documento specifica anche la suddivisione del lavoro, la stima dei costi di realizzazione, le risorse necessarie e i vari rischi con la loro conseguente mitigazione,
+dati necessari per il compimento dei traguardi stabiliti ed evitare costi ed espansioni non controllate.
+
+
+\subsection{Scopo del prodotto}
+\label{sec:scopo_del_prodotto}
+Il prodotto da realizzare consiste in un'estensione innovativa per \textit{''Nexum"}, una piattaforma digitale sviluppata dall'azienda proponente \textit{Eggon}, dedicata alla comunicazione interna e alla gestione HR.
+Nello specifico, il progetto mira a potenziare l'ecosistema Nexum attraverso lo sviluppo e l'integrazione di due moduli basati sull'Intelligenza Artificiale:
+\begin{itemize}
+    \item \textbf{AI Assistant Generativo:} Un modulo dedicato agli utenti amministrativi (dashboard) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un prompt, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
+    \item \textbf{AI Co-Pilot per Consulenti del Lavoro (CdL):} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di OCR ed \textbf{Entity Resolution}, e automatizzare lo smistamento e il dispaccio massivo.
+\end{itemize}
+
+L'obiettivo finale è migliorare l'efficienza dei processi HR e semplificare l'interoperabilità tra le aziende e gli studi dei Consulenti del Lavoro.
+
+\subsection{Glossario}
+\label{sec:glossario}
+Per questioni di ordine e di chiarezza dei concetti utilizzati, si è deciso di redarre un \textit{Glossario}, nel quale viene contenuta
+tutta la terminologia e la specifica dei termini che possono risultare confusionari, tecnici o semplicemente ambigui.
+\subsection{Riferimenti}
+\label{sec:riferimenti}
+
+
+\section{Analisi dei Rischi}
+\label{sec:analisi_dei_rischi}
+L'\textbf{Analisi dei Requisiti} è una sezione fondamentale di questo documento, nella quale vengono individuati e specificati tutti i vari rischi
+nella quale si può incorrere, che potrebbero compromettere, a seconda della gravità, il completo svolgimento delle attività ed il successo dell'iniziativa.
+L'identificazione di codesti rischi e definire tecniche di mitigazione adatte, va così quindi a ridurre eventi imprevisti che possono svilupparsi durante 
+il continuo sviluppo del progetto, agevolando quindi il controllo dei costi, il rispetto delle scadenza prefissate ed una maggiore fluidità nel lavoro.
+Il processo di gestione dei rischi si divide in cinque fasi:
+\begin{itemize}
+    \item \textbf{Identificazione}: Questa fase consiste nell'individuare le varie zone di rischio, quale area di competenza viene impattata ed il fattore scatenante.
+    In esso viene creato un elenco/inventario per far si che venga creata una mappatura completa sui vari rischi che possono compromettere il progetto.
+    \item \textbf{Analisi}: Valutazione dettagliata e approfondita dei rischi, per valutarne la probabilità e la gravità che ne consegue se il rischio si applica.
+    Analizzando i vari rischi, si può così optare per strategie più efficaci e funzionali per il trattamento di essi
+    \item \textbf{Valutazione}: Consiste nella specifica delle criticità, in ordine di importanza, per poi proporre la mitigazione necessaria e più adatta per quel determinato rischio,
+    Grazie a ciò, si ha un'idea più chiara su quali minacce concentrarsi maggiormente, ottimizzando i tempi e l'uso di risorse.
+    \item \textbf{Gestione}: Implica l'utilizzo di mezzi e tecniche come misure preventive per evitare l'insorgere dei rischi, utilizzando proprio le mitigazioni.
+    Quindi si specifica che, dopo le fasi precedenti, si procede ad eseguire azioni concrete con l'obiettivo di bloccare i vari contrattempi che possono nascere.
+    \item \textbf{Monitoraggio e Revisione}: Dopo aver implementato le varie mitigazioni, il periodo che sussegue consiste nel controllo periodico e regolare delle soluzioni proposte e messe in atto,
+    per far si che le soluzioni adottate siano efficienti e coprano le problematiche che nascono, oltre a modificare la strategia se nuove difficoltà si presentano.
+\end{itemize}
+
+Queste fasi elencate devono essere attuate costantemente durante tutto il periodo di vita del progetto, per far si di avere efficenza a livello di tempi e di costi.
+Per identificare meglio questi rischi, si è deciso di utilizzare un formato nel quale viene specificata la zona di interesse e l'importanza del rischio:
+\begin{center}
+    \textbf{R[Tipo][Numero]}
+\end{center}
+Nella quale \textbf{Tipo} indica la categoria in cui rientra il rischio, che si divide in tre sezioni:
+\begin{itemize}
+    \item \textbf{T}: Tecnologico
+    \item \textbf{O}: Operativo
+    \item \textbf{P}: Personale, singolare ad ogni membro del gruppo
+\end{itemize}
+\newpage
+\subsection{RT: Rischi legati alle Tecnologie}
+\subsubsection{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+Nel Capitolato C5 \textbf{\textit{'Nexum'}} richiede varie tecnologie richieste dall'azienda proponente che escono dal nostro campo di competenza che abbiamo sviluppato durante
+il periodo di Università, andando ad imparare tecnologie nel quale i membri non hanno confidenza e padronanza.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT1 \\
+
+Probabilità & Molto Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & L'apprendimento e l'utilizzo con minima sicurezza dei nuovi linguaggi e tecnologie proposte, comporterà sicuramente ad un rallentamento nel raggiungimento degli obiettivi del progetto,
+portando tutto il gruppo a concentrarsi ed adattarsi alle nuove risorse proposte. \\
+
+Mitigazione & È indispensabile che ogni membro, sia singolarmente che a gruppi, dedichi un periodo di tempo per imparare ed esplorare le nuove tecnologie, per far si che vengano utilizzate nel modo più efficiente possibile all'interno del capitolato.
+Ogni membro del gruppo si dedicherà nella ricerca di varia documentazione per l'apprendimento delle nuove tecnologie e le varie best practices.\\
+\end{tabular}
+\caption{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+\end{table}
+\newpage
+
+\subsubsection{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+Avendo già difficoltà non indifferenti con l'apprendimento delle nuove tecnologie, se le risorse e la documentazione risultano insufficienti o carenti, 
+il processo di studio diventa ancora più complesso, principalmente per le tecnologie non note a nessun membro del team, oltre ad adattarle al progetto.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT2 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze &  Senza documentazione adatta o carente, questo rischio causa rallentamenti, per l'apprendimento e la comprensione dei linguaggi, e ritardi nello sviluppo del codice e nella fase di debugging \\
+
+Mitigazione & Si può richiedere all'azienda proponente di proporci qualche spunto o documentazione necessaria per imparare le nuove tecnologie, oppure si possono
+trovare dei compromessi sull'utilizzo delle tecnologie, utilizzando delle soluzioni alternative meno complicate e con la documentazione più completa possibile\\
+\end{tabular}
+\caption{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+\end{table}
+
+\newpage
+\subsubsection{RT3: Perdita di file o danneggiamento di essi}
+C'è la possibilità che i file vengano danneggiati o vengono cancellati per errori software, hardware o per errori umani.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT3: Perdita di file o danneggiamento di essi}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT3 \\
+
+Probabilità & Bassa\\
+
+Pericolosità & Media\\
+
+Conseguenze & Perdere i documenti necessari causa un rallentamento non oscurabile al proseguimento del progetto, dovendo rimediare all'errore con la ricostruzione dei file mancanti\\
+
+Mitigazione & Si adotta una soluzione nella quale viene utilizzato un sistema per il salvataggio dei file robusto ed affidabile, con salvataggio del lavoro graduale ed incrementale. 
+Fare ciò garantisce sicurezza ed integrità dei documenti di lavoro, facilitandone anche il recupero in caso di perdita. \\
+\end{tabular}
+\caption{RT3: Perdita di file o danneggiamento di essi}
+\end{table}
+
+\subsection{RO: Rischi legati all'Organizzazione del gruppo}
+\subsubsection{RO1: Mancanza di comunicazione chiara e completa}
+La comunicazione all'interno del gruppo può essere insufficientemente esaustiva o chiara, portando ad errori di comprensione, malintesi 
+e disallineamenti sulle attività pianificate
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO1: Mancanza di comunicazione chiara e completa}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO1 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Può causare gravi errori nello sviluppo, portare a rallentamenti e ritardi consistenti per rimediare alle mancanze o duplicazioni delle attività.
+Oltre al malumore generale causato nel gruppo, comporta a probabili errori nel prodotto finale, peggiorando la qualità dello stesso.\\
+
+Mitigazione & Si pubblica un resoconto chiaro e coinciso delle mansioni che si devono portare a termine, ognuno col proprio destinatario, e discutendo in maniera costante
+con gli altri membri attraverso i vari canali di comunicazione (WhatsApp, Telegram, Discord). Si organizzano riunioni periodiche per portare agli altri membri il riassunto
+dettagliato del proprio lavoro durante il periodo di sprint, discutendo inoltre delle prossime milestone che si vogliono raggiungere, fissando poi in maniera esaustiva le varie mansioni di ogni singolo membro.\\
+\end{tabular}
+\caption{RO1: Mancanza di comunicazione chiara e completa}
+\end{table}
+
+
+
+\subsubsection{RO2: Confusione sulla gestione delle responsabilità}
+La mancata chiarezza sui ruoli affidati durante il periodo può portare a confusione sulle proprie attività, sovrapposizioni e lacune in settori che richiedono maggiore attenzione.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO2: Confusione sulla gestione delle responsabilità}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO2 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & GG\\
+
+Mitigazione & GG\\
+\end{tabular}
+\caption{RO2: Confusione sulla gestione delle responsabilità}
+\end{table}
+
+\subsubsection{RO3: Gestione del tempo e delle scadenze}
+La mancanza di organizzazione del tempo e delle varie scadenze indicate per il compimento del progetto, come la sottovalutazione degli impegni o scadenze irrealizzabili, possono portare a ritardi che
+possono compromettere il risultato finale, oltre a causare slittamenti nelle scadenze.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO3: Gestione del tempo e delle scadenze}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO3 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La sottovalutazione dei propri impegni può portare a rimandare il lavoro a cui si è stati affidati, causando slittamenti non indifferenti riguardo le scadenze.
+Inoltre la proposizione di pianificazioni irrealizzabili, portano a svolgere le attività in maniera sbrigativa, portando ad una qualità peggiore del prodotto finale. \\
+
+Mitigazione & Ogni membro del gruppo deve organizzarsi affinchè i vari compiti che gli vengono assegnati siano compatibili e siano realizzabili. Il Responsabile deve
+essere inoltre avvisato tempestivamente se ci sono difficoltà nel rispettare le scadenze, cercando di darsi una mano in maniera reciproca. Infine, devono essere svolte riunioni 
+periodiche, affinchè ogni difficoltà emersa possa essere resa nota a tutti i membri e così adattarsi di conseguenza.\\
+\end{tabular}
+\caption{RO3: Gestione del tempo e delle scadenze}
+\end{table}
+
+\subsubsection{RO4: Mancata o carenza di comunicazione col proponente}
+La comunicazione con l'azienda proponente è fondamentale per far si che il prodotto finale sia in linea con le richieste, se questa viene a mancare
+o le risposte non sono abbastanza tempestive, possono causare ritardi e fraintendimenti su questioni tecnologiche ed organizzative.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO4: Mancata o carenza di comunicazione col proponente}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO4 \\
+
+Probabilità & Media\\
+
+Pericolosità & Media\\
+
+Conseguenze & Ritardi a causa di incertezze su domande a livello tecnico ed organizzativo. Probabile disallineamento tra la richiesta del proponente
+ed il prodotto del team\\
+Mitigazione & Ogni qualvolta ci sono dubbi di rilievo, è opportuno interpellare il proponente tramite i mezzi di comunicazione da loro fornitoci. Se il problema persiste,
+si contatta il committente per un colloquio. È inoltre importante fare una documentazione chiara e precisa sui verbali esterni.\\
+\end{tabular}
+\caption{RO4: Mancata o carenza di comunicazione col proponente}
+\end{table}
+
+\subsection{RP: Rischi personali legati ai singoli membri}
+\subsubsection{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+Il mancato svolgimento dei propri impegni per problemi di salute, accademici o personali possono compromettere la continuità del progetto.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RP1 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La riduzione del tempo impiegato al progetto porta ad un rallentamento delle varie attività. Procrastinazione e mancanza di organizzazione dei propri impegni,
+i quali comportano problemi nella pianificazione delle varie attività. Eventi imprevisti come malattia o emergenze, oppure situazioni lavorative per alcuni membri, sicuramente 
+incidono notevolmente sul tempo di termine del progetto, allungando i tempi delle scadenze ed influenzando le capacità del gruppo.\\
+
+Mitigazione & Pianificare in maniera chiara e realizzabile i propri impegni sul progetto, mettendoli in linea con i propri impegni personali ed accademici.
+Prevedere del tempo extra in caso di eventi imprevisti. Comunicare in maniera tempestiva o, in caso di impegni accademici e lavorativi, a priori con un buon margine di tempo, al Responsabile del Progetto, affinchè si abbia maggior margine
+di manovra per una miglior disposizione delle responsabilità e di redistribuzione delle attività ai membri del gruppo, con effetto immediato o nel prossimo sprint, in caso in cui 
+non si vuole sovraccaricare di lavoro il team. \\
+\end{tabular}
+\caption{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+\end{table}
+
+\subsubsection{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+Se viene svolto un lavoro che non coincide con le specifiche del capitolato oppure non si adempie al lavoro svolto, ci sono dei rischi sul tempo e sui costi.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RP2 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Perdita di interesse del proponente, costi e tempi maggiori rispetto a quelli dichiarati per rimediare al problema creatosi e malumori
+all'interno del gruppo, perdendo così coesione fra i vari membri del gruppo.\\
+
+Mitigazione & Comunicazione continua fra i membri del gruppo. Adozione di una gestione chiara e rigorosa sul progetto, per evitare sbavature. Comunicazione periodica col cliente, affinchè il lavoro
+sia in linea con gli impegni dichiarati\\
+\end{tabular}
+\caption{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+\end{table}
+
+
+
+\section{Modello di Sviluppo}
+\label{sec:modello_di_sviluppo}
+
 
 \section{Pianificazione}
 \subsection{Sprint 1}
@@ -150,6 +480,7 @@ Il Piano di Progetto è la guida operativa che descrive il lavoro fatto e quello
 \caption{Preventivo ore per componente - Sprint 1}
 \label{tab:preventivo-sprint1}
 \vspace{2mm}
+
 \begin{tabular}{llcc}
 \toprule
 \textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Previste} & \textbf{Costo Previsto} \\
@@ -184,6 +515,7 @@ Leonardo Soligo & Programmatore & 8 & -- \\
 V.Y. Kaneda Fernandes & Analista & 8 & -- \\
 \bottomrule
 \end{tabular}
+\caption{Consuntivo ore per componente - Sprint 1}
 \end{table}
 
 \vspace{0.5cm} 
