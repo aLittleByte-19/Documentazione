@@ -260,20 +260,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Secondario] AI Post Generator
     
-    \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo"..
+    \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo".
     
     \item[Post-condizioni] Il sistema mostra l'anteprima del contenuto generato (comprendente titolo, testo e immagine di copertina) e abilita le funzionalità di revisione.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro e i moduli di configurazione.
+       \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro e i moduli di configurazione.
         \item Il Redattore compila il campo relativo al prompt testuale (\textbf{UC-1.1}).
         \item Il Redattore imposta il tono desiderato (\textbf{UC-1.2}).
         \item Il Redattore imposta lo stile editoriale (\textbf{UC-1.3}).
         \item Il Redattore specifica il pubblico di riferimento (\textbf{UC-1.4}).
         \item Il Redattore specifica la piattaforma di destinazione (\textbf{UC-1.5}).
         \item Il Redattore conferma l'avvio della generazione cliccando sul comando "Genera bozza".
-        \item Il sistema invia i parametri all'AI Post Generator, che restituisce titolo, testo e immagine coerenti con gli input.
+        \item Il sistema visualizza a schermo l'anteprima del contenuto generato, comprendente titolo, testo e immagine di copertina (\textbf{UC-2})
     \end{enumerate}
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
@@ -287,7 +287,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 
 \end{description}
-\paragraph{UC-1.1: Compilazione del prompt descrittivo}
+\subsubsection{UC-1.1: Compilazione del prompt descrittivo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema è in attesa dei dati di input testuali.
@@ -298,7 +298,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.2: Selezione del tono comunicativo}
+\subsubsection{UC-1.2: Selezione del tono comunicativo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco dei toni utilizzabili.
@@ -309,7 +309,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.3: Selezione dello stile editoriale}
+\subsubsection{UC-1.3: Selezione dello stile editoriale}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco degli stili di scrittura supportati.
@@ -320,7 +320,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.4: Selezione del pubblico di riferimento}
+\subsubsection{UC-1.4: Selezione del pubblico di riferimento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra le categorie di destinatari previste.
@@ -331,7 +331,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.5: Selezione del canale di comunicazione}
+\subsubsection{UC-1.5: Selezione del canale di comunicazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il sistema mostra le piattaforme di destinazione configurate.
@@ -342,7 +342,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.6: Salvataggio della configurazione del prompt}
+\subsubsection{UC-1.6: Salvataggio della configurazione del prompt}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato uno o più parametri nell'interfaccia di composizione.
@@ -390,453 +390,547 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore visualizza l'anteprima del risultato generato dall'AI e le relative metriche.
-        \item Il Redattore utilizza l'editor per la modifica manuale del testo o del titolo (\textbf{UC-2.1}).
-        \item Il Redattore sostituisce l'immagine di copertina suggerita dall'AI con un file locale (\textbf{UC-2.3}).
-        \item Il Redattore decide di scartare il contenuto generato eliminando la bozza corrente (\textbf{UC-2.4}).
-        \item Il Redattore richiede la rigenerazione totale del contenuto (\textbf{UC-2.2}).
+        \item Il Redattore visualizza l'anteprima del titolo (\textbf{UC-2.1}).
+        \item Il Redattore visualizza l'anteprima del testo (\textbf{UC-2.2}).
+        \item Il Redattore visualizza l'anteprima dell'immagine (\textbf{UC-2.3}).
+        \item Il Redattore modifica manualmente il titolo (\textbf{UC-2.4}).
+        \item Il Redattore modifica manualmente il testo (\textbf{UC-2.5}).
+        \item Il Redattore sostituisce l'immagine di copertina suggerita con un file locale (\textbf{UC-2.6}).
+        \item Il Redattore richiede la rigenerazione totale del contenuto (\textbf{UC-2.7}).
+        \item Il Redattore decide di scartare il contenuto generato eliminando la bozza corrente (\textbf{UC-2.8}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-2.1, UC-2.2, UC-2.3, UC-2.4.
+        \item \textbf{Inclusioni}: UC-2.1, UC-2.2, UC-2.3, UC-2.4, UC-2.5, UC-2.6, UC-2.7, UC-2.8.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-2.E1}: Errore - Contenuto vuoto. Condizione: se il Redattore tenta di confermare le modifiche dopo aver eliminato tutto il testo.
-            \item \textbf{UC-2.E2}: Errore - Fallimento modulo AI. Condizione: se si verifica un errore di rete durante la rigenerazione.
+            \item \textbf{UC-2.E1}: Errore - Contenuto vuoto. Condizione: se il Redattore tenta di confermare le modifiche dopo aver eliminato tutto il testo o il titolo.
+            \item \textbf{UC-2.E2}: Errore - Fallimento modulo AI. Condizione: se si verifica un errore di rete o timeout durante la richiesta di rigenerazione.
             \item \textbf{UC-2.E3}: Errore - Formato immagine non valido. Condizione: se l'immagine caricata per la sostituzione non è supportata o è troppo pesante.
         \end{itemize}
     \end{itemize}
 
 \end{description}
 
-\subsubsection{UC-2.1: Modifica manuale tramite editor}
+\subsubsection{UC-2.1: Visualizzazione del titolo generato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema presenta i campi del titolo e del testo all'interno di un editor interattivo dotato di contatore di caratteri.
-    \item[Post-condizioni] Il sistema recepisce e visualizza le correzioni apportate manualmente, aggiornando le metriche di lettura.
+    \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
+    \item[Post-condizioni] Il Redattore ha visualizzato il titolo suggerito.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il campo del titolo o la porzione di testo da correggere.
-        \item Il Redattore digita le modifiche desiderate controllando il numero di caratteri.
-        \item Il sistema aggiorna l'anteprima a schermo in tempo reale.
+        \item Il sistema espone a schermo il titolo elaborato all'interno dell'apposito campo testuale.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.2: Rigenerazione del contenuto}
+\subsubsection{UC-2.2: Visualizzazione del testo generato}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
+    \item[Post-condizioni] Il Redattore ha visualizzato il corpo del testo suggerito.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema presenta il contenuto testuale all'interno dell'interfaccia di editing.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-2.3: Visualizzazione dell'immagine di copertina}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
+    \item[Post-condizioni] Il Redattore ha visualizzato l'immagine suggerita.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza l'anteprima grafica dell'immagine di copertina.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-2.4: Modifica manuale del titolo}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema presenta il titolo in un campo di testo interattivo.
+    \item[Post-condizioni] Il sistema recepisce e visualizza le correzioni apportate.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il campo del titolo.
+        \item Il Redattore apporta le modifiche testuali.
+        \item Il sistema aggiorna il titolo.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-2.5: Modifica manuale del testo}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema presenta il testo all'interno di un editor interattivo dotato di contatore.
+    \item[Post-condizioni] Il sistema recepisce e visualizza le correzioni.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona la porzione di testo da correggere.
+        \item Il Redattore digita le modifiche desiderate.
+        \item Il sistema aggiorna l'anteprima a schermo.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-2.6: Sostituzione dell'immagine di copertina}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema mostra l'anteprima dell'immagine suggerita.
+    \item[Post-condizioni] L'immagine di copertina originale è stata sostituita con un file scelto dal Redattore.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona l'opzione di modifica immagine.
+        \item Il Redattore carica un file immagine dal proprio dispositivo.
+        \item Il sistema convalida il file e aggiorna l'anteprima grafica del post.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-2.7: Rigenerazione del contenuto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema visualizza il contenuto e abilita il comando di rigenerazione.
     \item[Post-condizioni] Il sistema sostituisce l'output precedente con la nuova variante elaborata.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore richiede una nuova variante testuale all'AI tramite l'apposito comando.
-        \item Il sistema inoltra la richiesta all'AI Post Generator, che elabora la nuova versione.
-        \item Il sistema aggiorna l'anteprima mostrando il nuovo risultato.
+        \item Il Redattore richiede una nuova variante tramite l'apposito comando.
+        \item Il sistema visualizza a schermo il nuovo risultato generato.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-2.3: Sostituzione dell'immagine di copertina}
+\subsubsection{UC-2.8: Eliminazione della bozza generata}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema mostra l'anteprima del post con l'immagine suggerita dall'AI.
-    \item[Post-condizioni] L'immagine di copertina originale è stata sostituita con un file scelto dal Redattore.
+    \item[Pre-condizioni] Il sistema visualizza l'anteprima della bozza corrente.
+    \item[Post-condizioni] Il sistema ha eliminato il contenuto e svuotato l'area di lavoro.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona l'opzione di modifica immagine sull'anteprima.
-        \item Il Redattore carica un file immagine dal proprio dispositivo.
-        \item Il sistema convalida il file e aggiorna l'anteprima grafica del post.
-    \end{enumerate}
-\end{description} 
-
-\subsubsection{UC-2.4: Eliminazione della bozza generata}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema visualizza l'anteprima di un contenuto generato o in fase di modifica.
-    \item[Post-condizioni] Il sistema ha eliminato il contenuto dall'area di revisione e riportato l'utente alla schermata di configurazione iniziale (UC-1).
-    \item[Scenario Principale] 
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il comando "Elimina".
-        \item Il sistema richiede una conferma per l'operazione di eliminazione definitiva.
-        \item Il Redattore conferma l'intenzione di eliminare la bozza.
-        \item Il sistema svuota l'editor.
+        \item Il Redattore seleziona il comando di eliminazione definitiva.
+        \item Il sistema richiede una conferma per l'operazione.
+        \item Il Redattore conferma l'intenzione di scartare la bozza.
+        \item Il sistema riporta l'utente alla schermata di configurazione iniziale.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-2.E1: Errore - Contenuto vuoto}
+\subsubsection{UC-2.E1: Errore - Contenuto vuoto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo nell'editor e tenta di confermarne le modifiche.
+    \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo o il titolo nell'editor e tenta di confermarne le modifiche.
     \item[Post-condizioni] Il sistema non applica le modifiche, mantenendo la versione precedente.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva che il campo di testo è stato completamente svuotato.
+        \item Il sistema rileva che un campo obbligatorio è stato completamente svuotato.
         \item Il sistema blocca l'aggiornamento, segnala l'obbligatorietà del campo e ripristina l'ultima versione valida.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-2.E2: Errore - Fallimento modulo AI}
+\subsubsection{UC-2.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
-    \item[Pre-condizioni] Il Redattore ha richiesto una variante o una traduzione, ma si verifica un problema tecnico di rete o di API.
+    \item[Pre-condizioni] Il Redattore ha richiesto una variante (rigenerazione), ma si verifica un problema tecnico di rete o di API.
     \item[Post-condizioni] Il sistema notifica il fallimento e preserva l'ultimo contenuto valido a schermo.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva l'impossibilità di ottenere la nuova versione dall'AI Post Generator.
+        \item Il sistema rileva l'impossibilità di ottenere la nuova versione.
         \item Il sistema mostra un messaggio di errore tecnico e mantiene visibile la bozza su cui si stava lavorando.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-2.E3: Errore - Formato immagine non valido}
+\subsubsection{UC-2.E3: Errore - Formato immagine non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore tenta di caricare una nuova immagine (UC-2.3) che non rispetta i vincoli di sistema.
+    \item[Pre-condizioni] Il Redattore tenta di caricare una nuova immagine che non rispetta i vincoli di sistema.
     \item[Post-condizioni] Il sistema impedisce il caricamento e mantiene l'immagine precedente.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva che il file non è supportato o supera la dimensione massima.
-        \item Il sistema visualizza un messaggio di errore e richiede un file valido.
+        \item Il sistema rileva che il file non è supportato o supera la dimensione massima consentita.
+        \item Il sistema visualizza un messaggio di errore e richiede l'inserimento di un file valido.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3: Approvazione e pubblicazione del contenuto}
+\subsubsection{UC-3: Approvazione e finalizzazione del contenuto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
     
     \item[Pre-condizioni] Il contenuto revisionato (UC-2) è pronto e presenta il marcatore di trasparenza "Creato da AI Assistant".
     
-    \item[Post-condizioni] Il sistema ha archiviato il documento come bozza oppure lo ha esportato/inoltrato con successo.
+    \item[Post-condizioni] Il sistema ha archiviato il documento come bozza oppure lo ha esportato o inoltrato con successo.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore archivia il documento corrente selezionando il salvataggio in bozza (\textbf{UC-3.1}).
-        \item Il Redattore scarica il file selezionando il comando di esportazione (\textbf{UC-3.2}).
-        \item Il Redattore distribuisce il documento selezionando l'inoltro tramite posta elettronica (\textbf{UC-3.3}).
+        \item Il Redattore visualizza le opzioni di finalizzazione disponibili (\textbf{UC-3.1}).
+        \item Il Redattore archivia il documento selezionando il salvataggio in bozza (\textbf{UC-3.2}).
+        \item Il Redattore scarica il file selezionando il comando di esportazione (\textbf{UC-3.3}).
+        \item Il Redattore distribuisce il contenuto selezionando l'inoltro tramite posta elettronica (\textbf{UC-3.4}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-3.1, UC-3.2, UC-3.3.
+        \item \textbf{Inclusioni}: UC-3.1, UC-3.2, UC-3.3, UC-3.4.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-3.E1}: Errore - Indirizzo e-mail non valido (Condizione: se il Redattore tenta l'inoltro inserendo una casella di posta con formato non standard).
+            \item \textbf{UC-3.E1}: Errore - Indirizzo e-mail non valido.
         \end{itemize}
     \end{itemize}
 
 \end{description}
 
-\subsubsection{UC-3.1: Salvataggio in bozza}
+\subsubsection{UC-3.1: Visualizzazione delle opzioni di finalizzazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema mostra l'interfaccia di revisione con l'ultimo output validato.
-    \item[Post-condizioni] Il sistema ha memorizzato lo stato attuale del documento nell'archivio interno.
+    \item[Pre-condizioni] Il sistema ha validato l'ultimo output della fase di revisione.
+    \item[Post-condizioni] Il sistema espone i comandi di gestione finale del documento.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona l'opzione "Salva bozza".
-        \item Il sistema registra i dati nel database senza pubblicarli esternamente.
-        \item Il sistema conferma a video l'avvenuto salvataggio.
+        \item Il sistema rende visibili i comandi per il salvataggio in bozza, l'esportazione locale e l'invio telematico.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.2: Esportazione del contenuto}
+\subsubsection{UC-3.2: Salvataggio in bozza}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore ha confermato la validità del testo finale.
-    \item[Post-condizioni] Il sistema ha elaborato e reso scaricabile il documento comprensivo del marcatore AI.
+    \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
+    \item[Post-condizioni] Il sistema ha memorizzato lo stato attuale del documento nell'area personale del Redattore.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il comando "Esporta" e indica il formato desiderato.
-        \item Il sistema genera il file finale includendo il marcatore automatico di trasparenza.
-        \item Il sistema avvia il download sul dispositivo dell'utente.
+        \item Il Redattore seleziona l'opzione di salvataggio in bozza.
+        \item Il sistema conferma a video l'avvenuta archiviazione del contenuto.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-3.3: Inoltro tramite e-mail(DA PARLARNE)}
+\subsubsection{UC-3.3: Esportazione del contenuto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema espone il campo di testo per l'inserimento del destinatario.
-    \item[Post-condizioni] Il contenuto è stato inoltrato all'indirizzo specificato.
+    \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
+    \item[Post-condizioni] Il sistema ha generato un file scaricabile comprensivo del marcatore di trasparenza.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona "Invia via email" e compila l'indirizzo di destinazione.
-        \item Il sistema predispone il messaggio includendo il marcatore AI.
-        \item Il sistema invia il messaggio di posta elettronica e notifica il successo dell'operazione.
+        \item Il Redattore seleziona il comando di esportazione e indica il formato desiderato.
+        \item Il sistema avvia il download del documento sul dispositivo dell'utente.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-3.E1: Errore - Indirizzo e-mail non valido}
+\subsubsection{UC-3.4: Inoltro tramite e-mail}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore richiede l'inoltro (UC-3.3) inserendo una stringa che viola le regole di convalida della posta elettronica.
-    \item[Post-condizioni] Il sistema blocca la procedura di invio e mantiene la schermata attiva.
+    \item[Pre-condizioni] Il sistema espone il campo per l'inserimento dell'indirizzo del destinatario.
+    \item[Post-condizioni] Il contenuto è stato trasmesso con successo all'indirizzo specificato.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema intercetta un formato e-mail non valido prima dell'inoltro.
-        \item Il sistema inibisce l'azione, evidenzia il campo testuale errato e richiede l'inserimento di un indirizzo corretto.
+        \item Il Redattore seleziona l'opzione di invio e inserisce l'indirizzo e-mail di destinazione.
+        \item Il sistema trasmette il messaggio includendo il marcatore automatico di trasparenza.
+        \item Il sistema notifica il successo dell'operazione.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4: Gestione Libreria Prompt e Storico}
+\subsubsection{UC-3.E1: Errore - Indirizzo e-mail non valido}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il Redattore richiede l'inoltro inserendo un indirizzo sintatticamente errato.
+    \item[Post-condizioni] Il sistema blocca la procedura di invio e segnala l'anomalia.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema intercetta il formato e-mail non valido.
+        \item Il sistema evidenzia il campo errato e richiede l'inserimento di un indirizzo corretto.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-4: Gestione libreria prompt e storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
     
-    \item[Pre-condizioni] Il sistema ha salvato in background i dati (prompt, tono, risultato e timestamp) delle generazioni passate e l'utente accede alla sezione "Storico/Libreria".
+    \item[Pre-condizioni] Il Redattore accede alla sezione "Storico/Libreria" dell'applicativo.
     
-    \item[Post-condizioni] Il sistema ha permesso la consultazione, il filtraggio o il riutilizzo dei contenuti archiviati.
+    \item[Post-condizioni] Il sistema ha permesso la consultazione, la ricerca o il riutilizzo dei parametri di generazione archiviati.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore ricerca o filtra le generazioni passate all'interno dello storico (\textbf{UC-4.1}).
-        \item Il Redattore seleziona un vecchio prompt per avviarne una nuova generazione (\textbf{UC-4.2}).
-        \item Il Redattore contrassegna i risultati o i prompt migliori come preferiti (\textbf{UC-4.3}).
+        \item Il Redattore visualizza l'elenco cronologico delle generazioni passate (\textbf{UC-4.1}).
+        \item Il Redattore effettua una ricerca o applica filtri ai contenuti (\textbf{UC-4.2}).
+        \item Il Redattore seleziona un prompt salvato per riutilizzarne i parametri (\textbf{UC-4.3}).
+        \item Il Redattore gestisce i contenuti preferiti tramite bookmark (\textbf{UC-4.4}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-4.1, UC-4.2, UC-4.3.
+        \item \textbf{Inclusioni}: UC-4.1, UC-4.2, UC-4.3, UC-4.4.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-4.E1}: Avviso - Nessun risultato trovato. Condizione: se la ricerca o l'applicazione dei filtri non produce occorrenze nel database.
+            \item \textbf{UC-4.E1}: Avviso - Nessun risultato trovato.
         \end{itemize}
     \end{itemize}
 
 \end{description}
 
-\subsubsection{UC-4.1: Ricerca e filtraggio dello storico}
+\subsubsection{UC-4.1: Visualizzazione elenco generazioni passate}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore visualizza l'elenco cronologico delle generazioni passate.
-    \item[Post-condizioni] Il sistema mostra esclusivamente i contenuti corrispondenti ai criteri di ricerca impostati.
+    \item[Pre-condizioni] Il Redattore si trova nella sezione dedicata alla libreria.
+    \item[Post-condizioni] Il sistema espone la lista dei prompt e dei risultati precedentemente generati.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore inserisce una parola chiave o seleziona un filtro (es. per tono o data).
-        \item Il sistema aggiorna dinamicamente la lista dei prompt e dei risultati visualizzati a schermo.
+        \item Il sistema mostra l'elenco in ordine cronologico decrescente, includendo anteprima del prompt, tono e data.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.2: Duplicazione e riutilizzo prompt}
+\subsubsection{UC-4.2: Ricerca e filtraggio dello storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore ha individuato un prompt all'interno dello storico o dei preferiti.
-    \item[Post-condizioni] Il sistema apre l'interfaccia di composizione pre-compilata con i dati storici selezionati.
+    \item[Pre-condizioni] Il Redattore visualizza l'elenco cronologico.
+    \item[Post-condizioni] Il sistema aggiorna la lista in base ai criteri inseriti.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona la funzione "Riutilizza" su un elemento dell'elenco.
-        \item Il sistema carica il testo del prompt e i relativi parametri (tono, stile, destinatario) nell'interfaccia di generazione (UC-1).
+        \item Il Redattore inserisce una parola chiave nel campo di ricerca o seleziona un filtro (tono, stile o data).
+        \item Il sistema aggiorna dinamicamente i contenuti visualizzati a schermo.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-4.3: Gestione dei preferiti (Bookmark)}
+\subsubsection{UC-4.3: Caricamento e riutilizzo prompt}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore sta visualizzando l'elenco dei contenuti nello Storico.
-    \item[Post-condizioni] L'elemento selezionato è aggiunto (o rimosso se già presente) dai preferiti.
+    \item[Pre-condizioni] Il Redattore ha individuato un elemento d'interesse nella libreria.
+    \item[Post-condizioni] Il sistema predispone l'interfaccia di generazione con i dati selezionati.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore clicca sull'icona dei preferiti in corrispondenza del contenuto.
-        \item Il sistema aggiorna lo stato dell'elemento.
-        \item Il sistema modifica il colore dell'icona per fornire un feedback visivo immediato dell'avvenuta operazione.
+        \item Il Redattore seleziona il comando di riutilizzo su un elemento.
+        \item Il sistema riporta l'utente alla schermata di configurazione (UC-1) pre-compilando automaticamente tutti i campi.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-4.E1: Avviso - Nessun risultato trovato}
+\subsubsection{UC-4.4: Gestione dei preferiti}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore ha inserito filtri o parole chiave di ricerca.
-    \item[Post-condizioni] Il sistema mantiene l'interfaccia attiva per consentire la modifica o il reset dei parametri di ricerca.
+    \item[Pre-condizioni] Il Redattore visualizza l'elenco dei contenuti.
+    \item[Post-condizioni] Il sistema aggiorna lo stato di preferenza dell'elemento selezionato.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva che i criteri inseriti non hanno corrispondenze nel database.
-        \item Il sistema svuota l'elenco dei risultati e visualizza il messaggio "Nessun risultato trovato".
-        \item Il sistema fornisce i comandi per azzerare i filtri o modificare la query.(DA PARLARNE)
+        \item Il Redattore seleziona l'icona dedicata per contrassegnare l'elemento come preferito o per rimuoverlo.
+        \item Il sistema fornisce un feedback visivo immediato (cambio colore o icona).
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5: Sistema di feedback e rating}
+\subsubsection{UC-4.E1: Avviso - Nessun risultato trovato}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il Redattore ha inserito criteri di ricerca che non producono risultati.
+    \item[Post-condizioni] Il sistema segnala l'assenza di elementi e permette di azzerare i criteri.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza il messaggio "Nessun risultato trovato".
+        \item Il sistema offre un comando rapido per rimuovere i filtri applicati.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-5: Sistema di valutazione e feedback}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
     
-    \item[Pre-condizioni] 
-    \begin{itemize}[leftmargin=*, nosep]
-        \item Il sistema ha completato la generazione dell'output (UC-1).
-        \item Il sistema attiva e rende visibile il modulo di valutazione a stelle.
-    \end{itemize}
+    \item[Pre-condizioni] Il sistema ha completato la generazione dell'output (UC-1) e abilita le funzionalità di raccolta feedback.
     
-    \item[Post-condizioni] Il feedback (punteggio ed eventuale commento) è archiviato nel sistema e vincolato alla generazione corrente per fini statistici.
+    \item[Post-condizioni] Il feedback (punteggio ed eventuale commento) è archiviato nel sistema.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore assegna un punteggio di gradimento tramite il selettore a stelle (\textbf{UC-5.1}).
-        \item Il Redattore inserisce una nota testuale opzionale per dettagliare il feedback (\textbf{UC-5.2}).
-        \item Il Redattore conferma l'invio della valutazione.
-        \item Il sistema registra i dati e visualizza un messaggio di ringraziamento, disabilitando ulteriori modifiche al rating.
+        \item Il Redattore visualizza il modulo di valutazione a schermo (\textbf{UC-5.1}).
+        \item Il Redattore assegna un punteggio di gradimento tramite il selettore grafico (\textbf{UC-5.2}).
+        \item Il Redattore inserisce una nota testuale opzionale per dettagliare il feedback (\textbf{UC-5.3}).
+        \item Il Redattore conferma l'invio della valutazione (\textbf{UC-5.4}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-5.1, UC-5.2.
+        \item \textbf{Inclusioni}: UC-5.1, UC-5.2, UC-5.3, UC-5.4.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-5.E1}: Errore - Punteggio mancante. Condizione: se l'utente tenta l'invio senza aver selezionato almeno una stella.
-            \item \textbf{UC-5.E2}: Errore - Commento troppo lungo. Condizione: se il testo inserito supera il limite di caratteri.
+            \item \textbf{UC-5.E1}: Errore - Rating mancante. Condizione: se l'utente tenta l'invio senza aver selezionato alcun punteggio.
+            \item \textbf{UC-5.E2}: Errore - Superamento limite caratteri. Condizione: se il testo del commento supera la lunghezza massima consentita.
         \end{itemize}
     \end{itemize}
 
 \end{description}
 
-\subsubsection{UC-5.1: Assegnazione del rating}
+\subsubsection{UC-5.1: Visualizzazione del modulo di valutazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema espone l'interfaccia di valutazione a stelle (da 1 a 5).
+    \item[Pre-condizioni] Il sistema ha esposto a schermo il contenuto generato o in fase di revisione.
+    \item[Post-condizioni] Il Redattore visualizza l'interfaccia dedicata alla raccolta del feedback.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rende visibile il modulo comprendente il selettore di rating e il campo testuale opzionale.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-5.2: Assegnazione del rating}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il sistema espone il selettore grafico di valutazione.
     \item[Post-condizioni] Il sistema ha registrato temporaneamente il punteggio selezionato.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il punteggio desiderato cliccando sul numero di stelle corrispondente.
-        \item Il sistema evidenzia graficamente la selezione effettuata (es. colorando le stelle).
+        \item Il Redattore seleziona il punteggio desiderato interagendo con il selettore.
+        \item Il sistema evidenzia graficamente la selezione effettuata per fornire un feedback visivo.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-5.2: Inserimento del commento testuale}
+\subsubsection{UC-5.3: Inserimento del commento testuale}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema espone un campo di testo opzionale per la motivazione del voto.
+    \item[Pre-condizioni] Il sistema espone il campo di testo opzionale per la motivazione del voto.
     \item[Post-condizioni] Il sistema ha registrato temporaneamente il testo inserito.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona l'area di input testuale.
-        \item Il Redattore digita il proprio commento o suggerimento qualitativo.
+        \item Il Redattore inserisce il proprio commento o suggerimento qualitativo.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-5.E1: Errore - Rating mancante}
+\subsubsection{UC-5.4: Invio della valutazione}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore seleziona il comando di invio mantenendo lo stato del rating vuoto (0 stelle).
+    \item[Pre-condizioni] Il Redattore ha compilato i dati obbligatori del modulo (rating).
+    \item[Post-condizioni] La valutazione è stata acquisita dal sistema e il modulo è disabilitato.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando di invio del feedback.
+        \item Il sistema conferma l'acquisizione dei dati visualizzando un messaggio di ringraziamento.
+        \item Il sistema disabilita ulteriori modifiche al modulo di valutazione corrente.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-5.E1: Errore - Rating mancante}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Redattore
+    \item[Pre-condizioni] Il Redattore seleziona il comando di invio mantenendo lo stato del rating vuoto (0 su 5).
     \item[Post-condizioni] Il sistema blocca la procedura di invio e mantiene il modulo attivo.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema interrompe l'operazione di salvataggio.
-        \item Il sistema evidenzia visivamente il selettore a stelle, segnalandone l'obbligatorietà.
-        \item Il sistema invita il Redattore a selezionare un punteggio (da 1 a 5) prima di procedere.
+        \item Il sistema evidenzia visivamente il selettore del punteggio, segnalandone l'obbligatorietà.
+        \item Il sistema invita il Redattore a selezionare un valore prima di procedere.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-5.E2: Errore - Superamento limite caratteri}
+\subsubsection{UC-5.E2: Errore - Superamento limite caratteri}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
-    \item[Pre-condizioni] Il Redattore sta digitando il commento (UC-5.2) e raggiunge il limite massimo di caratteri consentito dal database.
+    \item[Pre-condizioni] Il Redattore sta digitando il commento e raggiunge il limite massimo di caratteri consentito dal sistema.
     \item[Post-condizioni] Il sistema preserva il testo fino al limite e non accetta ulteriori input.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema inibisce la digitazione di nuovi caratteri all'interno del campo.
-        \item Il sistema mostra un avviso visivo relativo al raggiungimento del limite massimo.
+        \item Il sistema mostra un avviso visivo relativo al raggiungimento della lunghezza massima.
     \end{enumerate}
-\end{description}
+\end{description} 
 
 \subsubsection{UC-6: Dashboard metriche e monitoraggio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Analista dati
     
-    \item[Pre-condizioni] Il sistema ha registrato nel tempo i dati di utilizzo dell'Assistente AI e le valutazioni qualitative fornite dagli utenti.
+    \item[Pre-condizioni] Il sistema ha archiviato i dati di utilizzo dell'Assistente AI e le valutazioni qualitative degli utenti.
     
-    \item[Post-condizioni] L'Analista dati ha consultato le metriche, applicato filtri di visualizzazione e/o esportato il report analitico.
+    \item[Post-condizioni] L'Analista dati ha consultato le metriche e ha avuto la possibilità di filtrare o esportare i dati analitici.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati consulta le statistiche operative essenziali di utilizzo del sistema (\textbf{UC-6.1}).
-        \item L'Analista dati valuta il livello qualitativo percepito tramite il rating medio (\textbf{UC-6.2}).
-        \item L'Analista dati consulta i feedback testuali lasciati dai Redattori (\textbf{UC-6.3}).
-        \item L'Analista dati filtra le metriche a schermo impostando parametri specifici (\textbf{UC-6.4}).
-        \item L'Analista dati richiede l'esportazione dei dati analitici per la condivisione esterna (\textbf{UC-6.5}).
+        \item L'Analista dati accede alla dashboard e visualizza la panoramica delle metriche (\textbf{UC-6.1}).
+        \item L'Analista dati consulta le statistiche operative di utilizzo (\textbf{UC-6.2}).
+        \item L'Analista dati monitora il livello di rating medio (\textbf{UC-6.3}).
+        \item L'Analista dati consulta la lista dei feedback testuali (\textbf{UC-6.4}).
+        \item L'Analista dati applica filtri dinamici ai dati visualizzati (\textbf{UC-6.5}).
+        \item L'Analista dati richiede l'esportazione del report analitico (\textbf{UC-6.6}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-6.1, UC-6.2, UC-6.3, UC-6.4, UC-6.5.
+        \item \textbf{Inclusioni}: UC-6.1, UC-6.2, UC-6.3, UC-6.4, UC-6.5, UC-6.6.
         \item \textbf{Estensioni}: 
         \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-6.E1}: Errore - Dati non disponibili (Condizione: se l'Analista tenta di esportare o filtrare un periodo/parametro privo di interazioni registrate).
+            \item \textbf{UC-6.E1}: Errore - Dati non disponibili.
         \end{itemize}
     \end{itemize}
 
 \end{description}
 
-\subsubsection{UC-6.1: Visualizzazione statistiche di utilizzo}
+\subsubsection{UC-6.1: Visualizzazione panoramica della dashboard}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
-    \item[Pre-condizioni] Il sistema ha elaborato i dati relativi all'operatività del modulo AI.
-    \item[Post-condizioni] Il sistema mostra a schermo l'aggregazione delle metriche essenziali.
+    \item[Pre-condizioni] L'Analista dati accede all'area analitica del sistema.
+    \item[Post-condizioni] Il sistema espone l'interfaccia riepilogativa delle metriche.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati accede alla sezione "Utilizzo" (DA PARLARNE).
-        \item Il sistema elabora e visualizza i contatori aggiornati (es. numero totale di contenuti generati e prompt riutilizzati).
+        \item Il sistema presenta a schermo l'interfaccia di monitoraggio con i principali indicatori di performance dell'AI Assistant.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.2: Monitoraggio del rating medio}
+\subsubsection{UC-6.2: Visualizzazione statistiche di utilizzo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
-    \item[Pre-condizioni] I Redattori hanno espresso dei feedback numerici (UC-5) sui contenuti generati.
-    \item[Post-condizioni] Il sistema mostra il valore medio complessivo della qualità percepita.
+    \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard.
+    \item[Post-condizioni] Il sistema mostra i contatori operativi aggiornati.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati osserva la sezione dedicata all'efficacia del modello.
-        \item Il sistema calcola e visualizza la media aritmetica delle valutazioni espresse a stelle (es. 4.6/5) per misurare l'effettiva utilità dell'AI.
+        \item Il sistema visualizza i dati quantitativi relativi all'utilizzo (numero di contenuti generati e prompt salvati).
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.3: Consultazione dei feedback testuali}
+\subsubsection{UC-6.3: Monitoraggio del rating medio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
-    \item[Pre-condizioni] Esistono dei feedback nello storico che includono note testuali (UC-5.2).
-    \item[Post-condizioni] L'Analista dati ha visualizzato i commenti associati ai punteggi per comprendere le motivazioni del rating.
+    \item[Pre-condizioni] Sono presenti nel sistema feedback numerici espressi dai Redattori (UC-5).
+    \item[Post-condizioni] Il sistema mostra l'indicatore della qualità percepita.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati seleziona il dettaglio dei feedback dalla dashboard.
-        \item Il sistema mostra una lista dei commenti inseriti dai Redattori.
+        \item Il sistema visualizza il valore medio delle valutazioni a stelle ricevute per misurare l'efficacia dell'AI.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.4: Filtraggio dei dati analitici} (DA PARLARNE)
+\subsubsection{UC-6.4: Consultazione dei feedback testuali}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
-    \item[Pre-condizioni] L'Analista dati sta visualizzando la dashboard delle metriche.
-    \item[Post-condizioni] Il sistema mostra i contatori, i grafici e la lista feedback aggiornati esclusivamente con i dati corrispondenti ai filtri applicati.
+    \item[Pre-condizioni] Sono presenti nel sistema commenti testuali associati alle valutazioni.
+    \item[Post-condizioni] L'Analista dati ha consultato le note qualitative dei Redattori.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati seleziona uno o più parametri dai menu di filtro.
-        \item Il sistema ricalcola dinamicamente tutte le metriche operative (UC-6.1) e il rating medio (UC-6.2).
-        \item Il sistema aggiorna l'interfaccia grafica mostrando i nuovi risultati.
+        \item Il sistema visualizza direttamente nella dashboard la lista dei feedback più recenti, comprensivi di punteggio a stelle e commento testuale.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-6.5: Esportazione report periodici}
+\subsubsection{UC-6.5: Filtraggio dei dati analitici}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
-    \item[Pre-condizioni] Il sistema espone i comandi di estrazione dati dalla dashboard.
-    \item[Post-condizioni] Il sistema ha prodotto e fornito un documento riepilogativo scaricabile.
+    \item[Pre-condizioni] L'Analista dati visualizza i dati all'interno della dashboard.
+    \item[Post-condizioni] Il sistema aggiorna la visualizzazione in base ai parametri selezionati.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati seleziona l'arco temporale di interesse e clicca sul comando di esportazione.
-        \item Il sistema compila un file strutturato contenente le metriche aggregate.
-        \item Il sistema rende disponibile il file per il download sul dispositivo dell'utente.
+        \item L'Analista dati imposta parametri specifici.
+        \item Il sistema aggiorna istantaneamente la visualizzazione in base ai criteri scelti.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-6.E1: Errore - Dati non disponibili}
+\subsubsection{UC-6.6: Esportazione report analitico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
-    \item[Pre-condizioni] L'Analista dati applica filtri (UC-6.4) o richiede un'esportazione (UC-6.5) per una combinazione di parametri che non ha generato alcuna interazione nel sistema.
-    \item[Post-condizioni] Il sistema blocca l'esportazione, mantenendo attiva la schermata per consentire un nuovo inserimento.
+    \item[Pre-condizioni] Il sistema espone i comandi di esportazione dati.
+    \item[Post-condizioni] Il sistema ha fornito un file scaricabile localmente.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva l'assenza di record nel database per i parametri o il periodo richiesto.
-        \item Il sistema mostra un avviso visivo di "Dati insufficienti o assenti".
-        \item Il sistema invita l'Analista dati a modificare o azzerare i filtri impostati.
+        \item L'Analista dati seleziona il comando di esportazione.
+        \item Il sistema avvia il download del documento riepilogativo sul dispositivo dell'utente.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-6.E1: Errore - Dati non disponibili}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attori] Analista dati
+    \item[Pre-condizioni] L'Analista applica filtri o richiede esportazioni per parametri privi di interazioni registrate.
+    \item[Post-condizioni] Il sistema segnala l'assenza di dati e permette di modificare i criteri.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema segnala l'impossibilità di procedere a causa della mancanza di dati per il periodo o i filtri selezionati.
+        \item Il sistema visualizza un messaggio di avviso e invita l'Analista a modificare i parametri di ricerca.
     \end{enumerate}
 \end{description}
 
