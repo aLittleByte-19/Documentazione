@@ -17,10 +17,11 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{tabularx}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{assets/solo_logo.png}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -114,6 +115,8 @@
         0.1.0 & 2026-04-13 & Prima stesura del documento & V. Y. Kaneda Fernandes & A. Oloni \\
         \hline
         0.2.0 & 2026-04-14 & Stesura del primo periodo & V. Y. Kaneda Fernandes & A. Oloni\\
+        \hline
+        0.2.1 & 2026-04-20 & Stesura del secondo periodo & V. Y. Kaneda Fernandes & A. Oloni\\
         \hline
         0.3.0 & 2026-04-21 & Aggiunta delle sezioni: \textbf{\hyperref[sec:scopo_del_documento]{§1.2}, \hyperref[sec:glossario]{§1.3}, \hyperref[sec:riferimenti]{§1.4}, \hyperref[sec:analisi_dei_rischi]{§2}, \hyperref[sec:modello_di_sviluppo]{§3}}, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & A. Oloni & V. Y. Kaneda Fernandes \\
         \hline
@@ -460,19 +463,25 @@ sia in linea con gli impegni dichiarati\\
 \section{Pianificazione}
 \subsection{Sprint 1}
 
+
 \textbf{Inizio:} 06/04/2026 \\
 \textbf{Fine prevista:} 13/04/2026 \\
 \textbf{Fine reale:} 13/04/2026 \\
 \textbf{Giorni di ritardo:} 0 \\
+\textbf{Quadro generale e attività previste:}\\
+Questo primo sprint è mirato a dare l'avvio alla documentazione necessaria per il progetto.\\
 
 \noindent Attività svolte:
 \begin{itemize}
-    \item Inizio stesura Analisi dei requisiti
-    \item Inizio stesura Norme di Progetto
+    \item Inizio stesura dell'Analisi dei requisiti
+    \item Inizio stesura delle Norme di Progetto
     \item Creazione Mockup
-    \item Inizio stesura Glossario
+    \item Inizio stesura del Glossario
+    \item Redazione Verbale Interno 09/04/2026
     \item Redazione Verbale Interno 13/04/2026
 \end{itemize}
+
+
 
 
 \begin{table}[H]
@@ -480,21 +489,22 @@ sia in linea con gli impegni dichiarati\\
 \caption{Preventivo ore per componente - Sprint 1}
 \label{tab:preventivo-sprint1}
 \vspace{2mm}
-
 \begin{tabular}{llcc}
 \toprule
 \textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Previste} & \textbf{Costo Previsto} \\
 \midrule
-Eleonora Bellet & Analista & 8 & -- \\
-Diego Belluz & Analista & 8 & -- \\
-Angela Maule & Analista & 8 & -- \\
-Angelica Gastaldello & Responsabile & 8 & -- \\
-Alex Oloni & Programmatore & 8 & -- \\
-Leonardo Soligo & Programmatore & 8 & -- \\
-V.Y. Kaneda Fernandes & Analista & 8 & -- \\
+Eleonora Bellet & Analista & 4 & 100€ \\
+Diego Belluz & Verificatore & 10 & 150€ \\
+Angela Maule & Analista & 4 & 100€ \\
+Angelica Gastaldello & Amministratore & 8 & 160€ \\
+Alex Oloni & Responsabile & 8 & 240€ \\
+Leonardo Soligo & Analista & 6 & 150€ \\
+V.Y. Kaneda Fernandes & Analista & 4 & 100€ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+
 
 
 \begin{table}[H]
@@ -506,20 +516,22 @@ V.Y. Kaneda Fernandes & Analista & 8 & -- \\
 \toprule
 \textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Effettive} & \textbf{Differenza} \\
 \midrule
-Eleonora Bellet & Analista & 8 & -- \\
-Diego Belluz & Analista & 8 & -- \\
-Angela Maule & Analista & 8 & -- \\
-Angelica Gastaldello & Responsabile & 8 & -- \\
-Alex Oloni & Programmatore & 8 & -- \\
-Leonardo Soligo & Programmatore & 8 & -- \\
-V.Y. Kaneda Fernandes & Analista & 8 & -- \\
+Eleonora Bellet & Analista & 4 & -- \\
+Diego Belluz & Verificatore & 9 & -1 \\
+Angela Maule & Analista & 4 & -- \\
+Angelica Gastaldello & Amministratore & 8 & -- \\
+Alex Oloni & Responsabile & 8 & -- \\
+Leonardo Soligo & Analista & 5 & -1 \\
+V.Y. Kaneda Fernandes & Analista & 4 & -- \\
 \bottomrule
 \end{tabular}
-\caption{Consuntivo ore per componente - Sprint 1}
 \end{table}
 
-\vspace{0.5cm} 
+
+\vspace{0.5cm}
 \noindent\textbf{Aggiornamento delle risorse rimanenti}
+
+
 
 
 \begin{table}[H]
@@ -531,15 +543,141 @@ V.Y. Kaneda Fernandes & Analista & 8 & -- \\
 \toprule
 \textbf{Ruolo} & \textbf{Costo/h} & \textbf{Ore Usate} & \textbf{Spesa} & \textbf{Ore residue} & \textbf{Budget residuo}\\
 \midrule
-Responsabile & -- & -- & -- & -- & -- \\
-Amministratore & -- & -- & -- & -- & -- \\
-Analista & -- & -- & -- & -- & -- \\
-Progettista & -- & -- & -- & -- & -- \\
-Programmatore & -- & -- & -- & -- & -- \\
-Verificatore & -- & -- & -- & -- & -- \\
+Responsabile & 30€/h & 8 & 240€ & 48 & 1440€ \\
+Amministratore & 20€/h & 8 & 160€ & 43 & 860€ \\
+Analista & 25€/h & 17 & 425€ & 43 & 1075€ \\
+Progettista & 25€/h & -- & -- & -- & 3575€ \\
+Programmatore & 15€/h & -- & -- & -- & 2400€ \\
+Verificatore & 15€/h & 9 & 135€ & 151 & 2265€ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{table}[H]
+\centering
+\caption{Rischi incontrati durante lo Sprint 1}
+\label{tab:rischi-Incontrati}
+\vspace{2mm}
+\begin{tabularx}{\textwidth}{X X} 
+\toprule
+\textbf{Rischio} & \textbf{Motivo}\\
+\midrule
+RT1: Complessità nell'apprendimento delle nuove tecnologie & Rischio che si è verificato a causa della mancata esperienza\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\newpage
+
+
+\subsection{Sprint 2}
+
+
+\textbf{Inizio:} 13/04/2026 \\
+\textbf{Fine prevista:} 20/04/2026 \\
+\textbf{Fine reale:} 20/04/2026 \\
+\textbf{Giorni di ritardo:} 0 \\
+\textbf{Quadro generale e attività previste:}\\
+Questo secondo sprint è mirato a dare continuazione alla documentazione richiesta per il progetto.\\
+
+
+\noindent Attività svolte:
+\begin{itemize}
+    \item Continuazione della stesura dell'Analisi dei requisiti
+    \item Continuazione della stesura delle Norme di Progetto
+    \item Continuazione del Mockup
+    \item Continuazione della stesura del Glossario
+    \item Redazione Verbale Esterno 20/04/2026
+\end{itemize}
+
+
+
+
+\begin{table}[H]
+\centering
+\caption{Preventivo ore per componente - Sprint 1}
+\label{tab:preventivo-sprint1}
+\vspace{2mm}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Previste} & \textbf{Costo Previsto} \\
+\midrule
+Eleonora Bellet & Verificatore & 9 & 135€ \\
+Diego Belluz & Analista e Responsabile & 5 + 4 & 125€ + 120€ \\
+Angela Maule & Analista & 4 & 100€ \\
+Angelica Gastaldello & Verificatore & 9 & 135€ \\
+Alex Oloni & Amministratore & 6 & 120€ \\
+Leonardo Soligo & Analista & 4 & 100€ \\
+V.Y. Kaneda Fernandes & Analista & 4 & 100€ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+\begin{table}[H]
+\centering
+\caption{Consuntivo ore per componente - Sprint 1}
+\label{tab:consuntivo-sprint1}
+\vspace{2mm}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Effettive} & \textbf{Differenza} \\
+\midrule
+Eleonora Bellet & Verificatore & 9 & -- \\
+Diego Belluz & Analista e Responsabile & 4 + 4 & -1 \\
+Angela Maule & Analista & 4 & -- \\
+Angelica Gastaldello & Verificatore & 9 & -- \\
+Alex Oloni & Amministratore & 6 & -- \\
+Leonardo Soligo & Analista & 4 & -- \\
+V.Y. Kaneda Fernandes & Analista & 4 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\vspace{0.5cm}
+\noindent\textbf{Aggiornamento delle risorse rimanenti}
+
+
+
+
+\begin{table}[H]
+\centering
+\caption{Riepilogo costi e budget rimanente - Sprint 1}
+\label{tab:risorse-rimanenti}
+\vspace{2mm}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Ruolo} & \textbf{Costo/h} & \textbf{Ore Usate} & \textbf{Spesa} & \textbf{Ore residue} & \textbf{Budget residuo}\\
+\midrule
+Responsabile & 30€/h & 4 & 120€ & 44 & 1320€ \\
+Amministratore & 20€/h & 6 & 120€ & 37 & 740€ \\
+Analista & 25€/h & 16 & 400€ & 27 & 675€ \\
+Progettista & 25€/h & -- & -- & -- & 3575€ \\
+Programmatore & 15€/h & -- & -- & -- & 2400€ \\
+Verificatore & 15€/h & 18 & 270€ & 133 & 1995€ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Rischi incontrati durante lo Sprint 2}
+\label{tab:rischi-Incontrati}
+\vspace{2mm}
+\begin{tabularx}{\textwidth}{X X} 
+\toprule
+\textbf{Rischio} & \textbf{Motivo}\\
+\midrule
+-- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
 
 
 \end{document}
