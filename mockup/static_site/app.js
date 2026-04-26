@@ -1,8 +1,7 @@
 const views = {
   overview: "Overview operativa",
   assistant: "AI Assistant Generativo",
-  copilot: "AI Co-Pilot per i CdL",
-  audit: "Analisi invii"
+  copilot: "AI Co-Pilot per i CdL"
 };
 
 const mainNavItems = document.querySelectorAll(".nav-item");
@@ -15,6 +14,10 @@ const storedTheme = window.localStorage.getItem("nexum-theme");
 const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 let currentTheme = storedTheme || (systemPrefersDark ? "dark" : "light");
 let currentView = "overview";
+
+function isVisibleNode(node) {
+  return Boolean(node) && !node.classList.contains("is-hidden");
+}
 
 function setText(node, value) {
   if (node) {
@@ -36,6 +39,23 @@ function setModelValue(node, value) {
   node.value = value;
   node.dataset.modelValue = value;
   node.closest(".field")?.classList.remove("has-manual-correction");
+}
+
+function renderMetricList(list, values) {
+  if (!list) {
+    return;
+  }
+
+  list.replaceChildren();
+  values.forEach(([value, label]) => {
+    const item = document.createElement("li");
+    const strong = document.createElement("strong");
+    const span = document.createElement("span");
+    strong.textContent = value;
+    span.textContent = label;
+    item.append(strong, span);
+    list.append(item);
+  });
 }
 
 function applyTheme(theme) {
@@ -61,9 +81,9 @@ function updateBackToTopVisibility() {
 
 function syncSubnavWithScroll() {
   const activeTargets = Array.from(subNavItems)
-    .filter((button) => button.dataset.view === currentView)
+    .filter((button) => button.dataset.view === currentView && isVisibleNode(button))
     .map((button) => document.getElementById(button.dataset.target))
-    .filter(Boolean);
+    .filter((target) => isVisibleNode(target));
 
   if (activeTargets.length === 0) {
     activateSubnav("workspace-top");
@@ -202,12 +222,15 @@ const metaChars = document.getElementById("meta-chars");
 const metaTime = document.getElementById("meta-time");
 const analyticsExportButton = document.getElementById("analytics-export-button");
 const analyticsStatus = document.getElementById("analytics-status");
+const assistantMetricPeriod = document.getElementById("assistant-metric-period");
+const assistantMetricChannel = document.getElementById("assistant-metric-channel");
+const assistantMetricList = document.getElementById("assistant-metric-list");
+const assistantFeedbackList = document.getElementById("assistant-feedback-list");
 
 [
   "assistant-review",
   "assistant-feedback",
-  "copilot-analysis",
-  "copilot-dispatch"
+  "copilot-analysis"
 ].forEach((stepId) => setStepLocked(stepId, true));
 
 function topicFromPrompt(prompt) {
@@ -718,85 +741,162 @@ analyticsExportButton?.addEventListener("click", () => {
   analyticsStatus?.classList.remove("hidden");
 });
 
+function updateAssistantAnalytics() {
+  const period = assistantMetricPeriod?.value || "Ultimi 30 giorni";
+  const channel = assistantMetricChannel?.value || "Tutti";
+  const shortPeriod = period === "Ultimi 7 giorni";
+  const currentMonth = period === "Mese corrente";
+  const channelFactor = channel === "Tutti" ? 1 : channel === "Notifica rapida" ? 0.38 : 0.62;
+  const generated = Math.round((shortPeriod ? 14 : currentMonth ? 31 : 38) * channelFactor);
+  const reused = Math.max(2, Math.round((shortPeriod ? 4 : currentMonth ? 9 : 11) * channelFactor));
+  const rating = channel === "Notifica rapida" ? "4,4" : channel === "News portale" ? "4,7" : "4,6";
+
+  renderMetricList(assistantMetricList, [
+    [String(generated), "Contenuti generati"],
+    [String(reused), "Prompt riutilizzati"],
+    [rating, "Rating medio"],
+    [period, "Filtro temporale attivo"]
+  ]);
+
+  renderMetricList(assistantFeedbackList, [
+    ["5/5", channel === "Tutti" ? "Testo pronto senza correzioni rilevanti" : `Output efficace per ${channel.toLowerCase()}`],
+    ["4/5", shortPeriod ? "Richieste più sintetiche nei prompt recenti" : "Buona struttura, apertura da rendere più sintetica"]
+  ]);
+}
+
+assistantMetricPeriod?.addEventListener("change", updateAssistantAnalytics);
+assistantMetricChannel?.addEventListener("change", updateAssistantAnalytics);
+updateAssistantAnalytics();
+
 const uploadBox = document.getElementById("upload-box");
 const uploadState = document.getElementById("upload-state");
 const detectedConfidence = document.getElementById("detected-confidence");
 const confidenceHint = document.getElementById("confidence-hint");
-const ocrEmployeeInput = document.getElementById("ocr-employee-input");
-const ocrTypeInput = document.getElementById("ocr-type-input");
-const ocrCompanyInput = document.getElementById("ocr-company-input");
-const ocrFileInput = document.getElementById("ocr-file-input");
-const ocrDateInput = document.getElementById("ocr-date-input");
-const ocrPagesInput = document.getElementById("ocr-pages-input");
-const ocrDescriptionInput = document.getElementById("ocr-description-input");
-const ocrSnippet = document.getElementById("ocr-snippet");
 const analysisNote = document.getElementById("analysis-note");
 const editingContext = document.getElementById("editing-context");
 const recipientList = document.getElementById("recipient-list");
 const splitState = document.getElementById("split-state");
-const dispatchMessage = document.getElementById("dispatch-message");
 const dispatchReady = document.getElementById("dispatch-ready");
-const dispatchButton = document.getElementById("dispatch-button");
 const dispatchStatus = document.getElementById("dispatch-status");
+const copilotMetricPeriod = document.getElementById("copilot-metric-period");
+const copilotMetricStatus = document.getElementById("copilot-metric-status");
+const copilotMetricList = document.getElementById("copilot-metric-list");
 const documentSearch = document.getElementById("document-search");
-const documentFilter = document.getElementById("document-filter");
+const documentDeliveryFilter = document.getElementById("document-delivery-filter");
+const documentConfidenceMode = document.getElementById("document-confidence-mode");
+const documentConfidenceThreshold = document.getElementById("document-confidence-threshold");
+const documentMonthFilter = document.getElementById("document-month-filter");
+const documentYearFilter = document.getElementById("document-year-filter");
 const documentHistory = document.getElementById("document-history");
 const documentEmpty = document.getElementById("document-empty");
+const documentSummaryList = document.getElementById("document-summary-list");
+const documentPageInfo = document.getElementById("document-page-info");
+const documentPrevButton = document.getElementById("document-prev-button");
+const documentNextButton = document.getElementById("document-next-button");
+const copilotAnalysisSection = document.getElementById("copilot-analysis");
+const copilotDetailSection = document.getElementById("copilot-detail");
+const detailTitle = document.getElementById("detail-title");
 const detailPreviewTitle = document.getElementById("detail-preview-title");
 const detailPreviewMeta = document.getElementById("detail-preview-meta");
-const detailEmployee = document.getElementById("detail-employee");
-const detailCompany = document.getElementById("detail-company");
-const detailFile = document.getElementById("detail-file");
-const detailDate = document.getElementById("detail-date");
-const detailPages = document.getElementById("detail-pages");
-const detailType = document.getElementById("detail-type");
-const detailDescription = document.getElementById("detail-description");
-const detailConfidence = document.getElementById("detail-confidence");
-const detailRepository = document.getElementById("detail-repository");
 const detailPreviewLines = document.getElementById("detail-preview-lines");
-const detailRecipientList = document.getElementById("detail-recipient-list");
-const detailDeliveryList = document.getElementById("detail-delivery-list");
-const detailOcrText = document.getElementById("detail-ocr-text");
-const detailAuditList = document.getElementById("detail-audit-list");
-let currentAnalysisDocumentId = "cedolini-aprile-2026";
+const detailEmployeeInput = document.getElementById("detail-employee-input");
+const detailCompanyInput = document.getElementById("detail-company-input");
+const detailFileInput = document.getElementById("detail-file-input");
+const detailDateInput = document.getElementById("detail-date-input");
+const detailPagesInput = document.getElementById("detail-pages-input");
+const detailTypeInput = document.getElementById("detail-type-input");
+const detailDescriptionInput = document.getElementById("detail-description-input");
+const detailConfidenceInput = document.getElementById("detail-confidence-input");
+const detailDeliveryStatusInput = document.getElementById("detail-delivery-status-input");
+const detailEditButton = document.getElementById("detail-edit-button");
+const detailSaveButton = document.getElementById("detail-save-button");
+const detailCancelButton = document.getElementById("detail-cancel-button");
+const detailSendButton = document.getElementById("detail-send-button");
+const detailStatusMessage = document.getElementById("detail-status-message");
+const detailSendDraft = document.getElementById("detail-send-draft");
+const sendRecipientInput = document.getElementById("send-recipient-input");
+const sendSubjectInput = document.getElementById("send-subject-input");
+const sendBodyInput = document.getElementById("send-body-input");
+const sendConfirmButton = document.getElementById("send-confirm-button");
+const sendCancelButton = document.getElementById("send-cancel-button");
+const sendStatusMessage = document.getElementById("send-status-message");
+let currentAnalysisDocumentId = "cedolino-giulia-conti";
 let activeDocumentId = currentAnalysisDocumentId;
+let detailPreviewMode = "original";
+let hasFocusedCopilotDocument = false;
+let currentDocumentPage = 1;
+const documentPageSize = 6;
 
 const documentDetails = {
-  "cedolini-aprile-2026": {
-    title: "Lotto cedolini aprile 2026",
-    employee: "Giulia Conti",
+  "cedolino-marco-rinaldi": {
+    title: "Cedolino mensile - Marco Rinaldi",
+    batchId: "cedolini-aprile-2026",
+    sourceTitle: "Lotto cedolini aprile 2026",
+    employee: "Marco Rinaldi",
     company: "Eggon S.r.l.",
     file: "cedolini-aprile-2026.pdf",
     date: "30/04/2026",
-    pages: "3",
+    pages: "1",
     type: "Cedolino mensile",
-    description: "Cedolini mensili con split per singolo dipendente.",
-    confidence: "82%",
-    repository: "Repository CdL / payroll",
-    upload: "21/04/2026, 10:42",
-    channel: "Email / Portale",
-    deliveryStatus: "In verifica",
-    proof: "Prova di consegna non ancora generata",
-    ocr: "Riga paga aprile 2026, intestazione Eggon S.r.l., destinatario Giulia Conti, competenza 30/04/2026.",
-    corrections: "Nessuna correzione manuale salvata",
+    description: "Cedolino mensile estratto dal lotto di aprile.",
+    confidence: "98%",
+    deliveryStatus: "Non inviato",
     previewLines: [
       "Pagina 1: Marco Rinaldi - cedolino mensile",
       "Pagina 2: Elena Ferri - cedolino mensile",
       "Pagina 3: Giulia Conti - confidenza destinatario 82%"
     ],
     recipients: [
-      { name: "Marco Rinaldi", page: "pagina 1", confidence: 98, status: "confirmed" },
-      { name: "Elena Ferri", page: "pagina 2", confidence: 95, status: "confirmed" },
-      { name: "Giulia Conti", page: "pagina 3", confidence: 82, status: "needs-review" }
+      { name: "Marco Rinaldi", page: "pagina 1", confidence: 98, status: "confirmed", documentId: "cedolino-marco-rinaldi" }
+    ]
+  },
+  "cedolino-elena-ferri": {
+    title: "Cedolino mensile - Elena Ferri",
+    batchId: "cedolini-aprile-2026",
+    sourceTitle: "Lotto cedolini aprile 2026",
+    employee: "Elena Ferri",
+    company: "Eggon S.r.l.",
+    file: "cedolini-aprile-2026.pdf",
+    date: "30/04/2026",
+    pages: "1",
+    type: "Cedolino mensile",
+    description: "Cedolino mensile estratto dal lotto di aprile.",
+    confidence: "95%",
+    deliveryStatus: "Non inviato",
+    previewLines: [
+      "Pagina 1: Marco Rinaldi - cedolino mensile",
+      "Pagina 2: Elena Ferri - cedolino mensile",
+      "Pagina 3: Giulia Conti - confidenza destinatario 82%"
     ],
-    audit: [
-      "Upload completato e duplicati non rilevati",
-      "OCR e classificazione completati",
-      "Una associazione destinatario sotto soglia"
+    recipients: [
+      { name: "Elena Ferri", page: "pagina 2", confidence: 95, status: "confirmed", documentId: "cedolino-elena-ferri" }
+    ]
+  },
+  "cedolino-giulia-conti": {
+    title: "Cedolino mensile - Giulia Conti",
+    batchId: "cedolini-aprile-2026",
+    sourceTitle: "Lotto cedolini aprile 2026",
+    employee: "Giulia Conti",
+    company: "Eggon S.r.l.",
+    file: "cedolini-aprile-2026.pdf",
+    date: "30/04/2026",
+    pages: "1",
+    type: "Cedolino mensile",
+    description: "Cedolino mensile estratto dal lotto di aprile.",
+    confidence: "82%",
+    deliveryStatus: "Non inviato",
+    previewLines: [
+      "Pagina 1: Marco Rinaldi - cedolino mensile",
+      "Pagina 2: Elena Ferri - cedolino mensile",
+      "Pagina 3: Giulia Conti - confidenza destinatario 82%"
+    ],
+    recipients: [
+      { name: "Giulia Conti", page: "pagina 3", confidence: 82, status: "needs-review", documentId: "cedolino-giulia-conti" }
     ]
   },
   "contratto-onboarding": {
-    title: "Contratto onboarding",
+    title: "Contratto onboarding - Luca Bianchi",
+    batchId: "contratto-onboarding",
     employee: "Luca Bianchi",
     company: "Nexum Labs",
     file: "onboarding-luca-bianchi.pdf",
@@ -805,29 +905,19 @@ const documentDetails = {
     type: "Contratto",
     description: "Contratto di assunzione con allegati amministrativi.",
     confidence: "96%",
-    repository: "Repository CdL / contratti",
-    upload: "12/04/2026, 15:18",
-    channel: "Portale",
-    deliveryStatus: "Confermato",
-    proof: "Metadati confermati, invio non richiesto",
-    ocr: "Contratto di assunzione intestato a Luca Bianchi, azienda Nexum Labs, firma e allegati amministrativi presenti.",
-    corrections: "Nessuna correzione manuale",
+    deliveryStatus: "Non inviato",
     previewLines: [
       "Pagina 1: dati anagrafici e azienda",
       "Pagine 2-6: clausole contrattuali",
       "Pagine 7-8: allegati amministrativi"
     ],
     recipients: [
-      { name: "Luca Bianchi", page: "documento completo", confidence: 96, status: "confirmed" }
-    ],
-    audit: [
-      "Documento caricato nel repository",
-      "Classificazione contratto confermata",
-      "Metadati disponibili nello storico"
+      { name: "Luca Bianchi", page: "documento completo", confidence: 96, status: "confirmed", documentId: "contratto-onboarding" }
     ]
   },
   "comunicazione-benefit": {
-    title: "Comunicazione benefit",
+    title: "Comunicazione benefit - Dipendenti sede centrale",
+    batchId: "comunicazione-benefit",
     employee: "Dipendenti sede centrale",
     company: "Eggon S.r.l.",
     file: "benefit-marzo-2026.pdf",
@@ -836,44 +926,127 @@ const documentDetails = {
     type: "Comunicazione HR",
     description: "Comunicazione interna sui benefit aziendali.",
     confidence: "98%",
-    repository: "Repository HR / comunicazioni",
-    upload: "25/03/2026, 09:05",
-    channel: "Email interna",
     deliveryStatus: "Inviato",
-    proof: "Prova di consegna archiviata",
-    ocr: "Comunicazione interna sui benefit di marzo 2026 rivolta ai dipendenti della sede centrale Eggon.",
-    corrections: "Nessuna correzione manuale",
     previewLines: [
       "Pagina 1: riepilogo benefit",
       "Pagina 2: istruzioni di accesso al portale"
     ],
     recipients: [
-      { name: "Dipendenti sede centrale", page: "documento completo", confidence: 98, status: "sent" }
+      { name: "Dipendenti sede centrale", page: "documento completo", confidence: 98, status: "sent", documentId: "comunicazione-benefit" }
+    ]
+  },
+  "cedolino-sara-martini": {
+    title: "Cedolino mensile - Sara Martini",
+    batchId: "cedolini-aprile-2026-b",
+    employee: "Sara Martini",
+    company: "Eggon S.r.l.",
+    file: "cedolini-aprile-2026-b.pdf",
+    date: "30/04/2026",
+    pages: "1",
+    type: "Cedolino mensile",
+    description: "Cedolino mensile estratto dal secondo lotto di aprile.",
+    confidence: "91%",
+    deliveryStatus: "Non inviato",
+    previewLines: [
+      "Pagina 1: Sara Martini - cedolino mensile",
+      "Pagina 2: Paolo Greco - cedolino mensile",
+      "Pagina 3: Nadia Costa - confidenza destinatario 76%"
     ],
-    audit: [
-      "Classificazione comunicazione HR completata",
-      "Invio email registrato",
-      "Prova di consegna archiviata"
+    recipients: [
+      { name: "Sara Martini", page: "pagina 1", confidence: 91, status: "confirmed", documentId: "cedolino-sara-martini" }
+    ]
+  },
+  "cedolino-paolo-greco": {
+    title: "Cedolino mensile - Paolo Greco",
+    batchId: "cedolini-aprile-2026-b",
+    employee: "Paolo Greco",
+    company: "Eggon S.r.l.",
+    file: "cedolini-aprile-2026-b.pdf",
+    date: "30/04/2026",
+    pages: "1",
+    type: "Cedolino mensile",
+    description: "Cedolino mensile estratto dal secondo lotto di aprile.",
+    confidence: "93%",
+    deliveryStatus: "Inviato",
+    previewLines: [
+      "Pagina 1: Sara Martini - cedolino mensile",
+      "Pagina 2: Paolo Greco - cedolino mensile",
+      "Pagina 3: Nadia Costa - confidenza destinatario 76%"
+    ],
+    recipients: [
+      { name: "Paolo Greco", page: "pagina 2", confidence: 93, status: "sent", documentId: "cedolino-paolo-greco" }
+    ]
+  },
+  "cedolino-nadia-costa": {
+    title: "Cedolino mensile - Nadia Costa",
+    batchId: "cedolini-aprile-2026-b",
+    employee: "Nadia Costa",
+    company: "Eggon S.r.l.",
+    file: "cedolini-aprile-2026-b.pdf",
+    date: "30/04/2026",
+    pages: "1",
+    type: "Cedolino mensile",
+    description: "Cedolino mensile estratto dal secondo lotto di aprile.",
+    confidence: "76%",
+    deliveryStatus: "Non inviato",
+    previewLines: [
+      "Pagina 1: Sara Martini - cedolino mensile",
+      "Pagina 2: Paolo Greco - cedolino mensile",
+      "Pagina 3: Nadia Costa - confidenza destinatario 76%"
+    ],
+    recipients: [
+      { name: "Nadia Costa", page: "pagina 3", confidence: 76, status: "needs-review", documentId: "cedolino-nadia-costa" }
+    ]
+  },
+  "contratto-maria-neri": {
+    title: "Contratto onboarding - Maria Neri",
+    batchId: "contratto-maria-neri",
+    employee: "Maria Neri",
+    company: "Nexum Labs",
+    file: "onboarding-maria-neri.pdf",
+    date: "18/04/2026",
+    pages: "7",
+    type: "Contratto",
+    description: "Contratto di assunzione con allegati amministrativi.",
+    confidence: "94%",
+    deliveryStatus: "Non inviato",
+    previewLines: [
+      "Pagina 1: dati anagrafici e azienda",
+      "Pagine 2-6: condizioni contrattuali",
+      "Pagina 7: allegato amministrativo"
+    ],
+    recipients: [
+      { name: "Maria Neri", page: "documento completo", confidence: 94, status: "confirmed", documentId: "contratto-maria-neri" }
+    ]
+  },
+  "comunicazione-welfare": {
+    title: "Comunicazione welfare - Team HR",
+    batchId: "comunicazione-welfare",
+    employee: "Team HR",
+    company: "Eggon S.r.l.",
+    file: "welfare-aprile-2026.pdf",
+    date: "05/04/2026",
+    pages: "2",
+    type: "Comunicazione HR",
+    description: "Comunicazione interna sul piano welfare aggiornato.",
+    confidence: "97%",
+    deliveryStatus: "Inviato",
+    previewLines: [
+      "Pagina 1: riepilogo piano welfare",
+      "Pagina 2: modalita di accesso"
+    ],
+    recipients: [
+      { name: "Team HR", page: "documento completo", confidence: 97, status: "sent", documentId: "comunicazione-welfare" }
     ]
   }
 };
-
-const ocrInputs = [
-  ocrEmployeeInput,
-  ocrCompanyInput,
-  ocrFileInput,
-  ocrDateInput,
-  ocrPagesInput,
-  ocrTypeInput,
-  ocrDescriptionInput
-];
 
 const copilotRun = {
   processed: false,
   recipients: []
 };
 
-let selectedRecipientId = "current-document-recipient";
+let selectedRecipientId = "giulia-conti";
 
 let currentDocumentState = {
   label: "Da verificare",
@@ -882,9 +1055,52 @@ let currentDocumentState = {
   stateTags: "verifica bassa-confidenza"
 };
 
-function createRecipient(name, confidence, page, status, note) {
+function isDocumentSent(detail) {
+  return detail?.deliveryStatus === "Inviato" || (detail?.recipients || []).some((recipient) => recipient.status === "sent");
+}
+
+function displayDeliveryStatus(detail) {
+  return isDocumentSent(detail) ? "Inviato" : "Non inviato";
+}
+
+function confidenceNumber(detail) {
+  const parsed = Number.parseInt(String(detail?.confidence || "").replace("%", ""), 10);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function dateParts(detail) {
+  const match = String(detail?.date || "").match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  return {
+    month: match?.[2] || "",
+    year: match?.[3] || ""
+  };
+}
+
+function syncCopilotFlowVisibility() {
+  const visible = hasFocusedCopilotDocument;
+  copilotAnalysisSection?.classList.toggle("is-hidden", !visible);
+
+  subNavItems.forEach((button) => {
+    if (button.dataset.view !== "copilot") {
+      return;
+    }
+
+    if (button.dataset.target === "copilot-analysis") {
+      button.classList.toggle("is-hidden", !visible);
+    }
+  });
+
+  if (!visible) {
+    activateSubnav(currentView === "copilot" ? "copilot-upload" : "workspace-top");
+  } else {
+    syncSubnavWithScroll();
+  }
+}
+
+function createRecipient(name, confidence, page, status, note, documentId) {
   return {
     id: name.toLowerCase().replace(/\s+/g, "-"),
+    documentId,
     name,
     confidence,
     page,
@@ -893,10 +1109,37 @@ function createRecipient(name, confidence, page, status, note) {
   };
 }
 
+function getBatchDocumentIds(documentId) {
+  const batchId = documentDetails[documentId]?.batchId || documentId;
+  return Object.keys(documentDetails).filter((id) => (documentDetails[id].batchId || id) === batchId);
+}
+
+function recipientFromDetail(documentId) {
+  const detail = documentDetails[documentId];
+  const sourceRecipient = detail?.recipients?.[0];
+
+  return createRecipient(
+    detail?.employee || "Non disponibile",
+    sourceRecipient?.confidence || confidenceNumber(detail),
+    sourceRecipient?.page || "documento completo",
+    sourceRecipient?.status || (isDocumentSent(detail) ? "sent" : "confirmed"),
+    sourceRecipient?.status === "needs-review"
+      ? "Richiede conferma operatore"
+      : sourceRecipient?.status === "sent" || isDocumentSent(detail)
+        ? "Invio già tracciato"
+        : "Confermato da OCR",
+    documentId
+  );
+}
+
+function getCurrentRecipientDetailId() {
+  return getCurrentRecipient()?.documentId || currentAnalysisDocumentId;
+}
+
 function documentStateFromDetail(detail) {
   const recipients = detail.recipients || [];
   const hasReview = recipients.some((recipient) => recipient.status === "needs-review");
-  const hasSent = detail.deliveryStatus === "Inviato" || recipients.some((recipient) => recipient.status === "sent");
+  const hasSent = isDocumentSent(detail);
 
   if (hasSent) {
     return {
@@ -924,16 +1167,14 @@ function documentStateFromDetail(detail) {
   };
 }
 
-function resetCopilotRecipients(currentName = documentDetails[currentAnalysisDocumentId].employee) {
-  selectedRecipientId = "current-document-recipient";
+function resetCopilotRecipients() {
   copilotRun.recipients = [
-    createRecipient("Marco Rinaldi", 98, "pagina 1", "confirmed", "Destinatario rilevato nello stesso lotto"),
-    createRecipient("Elena Ferri", 95, "pagina 2", "confirmed", "Destinatario rilevato nello stesso lotto"),
-    {
-      ...createRecipient(currentName, 82, "pagina 3", "needs-review", "Documento corrente, dati modificabili sopra"),
-      id: "current-document-recipient"
-    }
+    createRecipient("Marco Rinaldi", 98, "pagina 1", "confirmed", "Destinatario rilevato nello stesso lotto", "cedolino-marco-rinaldi"),
+    createRecipient("Elena Ferri", 95, "pagina 2", "confirmed", "Destinatario rilevato nello stesso lotto", "cedolino-elena-ferri"),
+    createRecipient("Giulia Conti", 82, "pagina 3", "needs-review", "Richiede conferma operatore", "cedolino-giulia-conti")
   ];
+  selectedRecipientId = "giulia-conti";
+  currentAnalysisDocumentId = "cedolino-giulia-conti";
 }
 
 function getCurrentRecipient() {
@@ -945,100 +1186,81 @@ function syncRecipientsIntoDocument() {
     return;
   }
 
-  documentDetails[currentAnalysisDocumentId].recipients = copilotRun.recipients.map((recipient) => ({
-    name: recipient.name,
-    page: recipient.page,
-    confidence: recipient.confidence,
-    status: recipient.status
-  }));
-  documentDetails[currentAnalysisDocumentId].previewLines = copilotRun.recipients.map((recipient) => (
+  const previewLines = copilotRun.recipients.map((recipient) => (
     `${recipient.page}: ${recipient.name} - confidenza ${recipient.confidence}%`
   ));
+
+  copilotRun.recipients.forEach((recipient) => {
+    const detail = documentDetails[recipient.documentId];
+    if (!detail) {
+      return;
+    }
+
+    detail.employee = recipient.name;
+    detail.confidence = `${recipient.confidence}%`;
+    detail.deliveryStatus = recipient.status === "sent" ? "Inviato" : "Non inviato";
+    detail.previewLines = previewLines;
+    detail.recipients = [{
+      name: recipient.name,
+      page: recipient.page,
+      confidence: recipient.confidence,
+      status: recipient.status,
+      documentId: recipient.documentId
+    }];
+  });
 }
 
 function updateEditingContext() {
   const recipient = getCurrentRecipient();
   if (!recipient) {
-    setText(editingContext, "Dopo lo split potrai scegliere qualunque destinatario e correggere i dati associati.");
+    setText(editingContext, "Dopo lo split potrai scegliere qualunque destinatario e aprire il relativo dettaglio invio.");
     return;
   }
 
   const state = recipient.status === "confirmed" ? "confermato da OCR" : "da confermare";
   setText(
     editingContext,
-    `Stai modificando ${recipient.name} (${recipient.page}, ${state}). Usa "Modifica" su un'altra riga per correggere anche un destinatario già confermato.`
+    `Invio selezionato: ${recipient.name} (${recipient.page}, ${state}). Apri il dettaglio per correggere i campi OCR consentiti.`
   );
 }
 
-function setOcrValue(input, value) {
-  setModelValue(input, value);
-}
-
-function updateManualCorrectionState(input) {
-  if (!input || typeof input.dataset.modelValue !== "string") {
-    return false;
-  }
-
-  const changed = input.value.trim() !== input.dataset.modelValue.trim();
-  input.closest(".field")?.classList.toggle("has-manual-correction", changed);
-  return changed;
-}
-
-function countManualCorrections() {
-  return ocrInputs.filter((input) => updateManualCorrectionState(input)).length;
-}
-
-function getDocumentValues() {
-  return {
-    employee: ocrEmployeeInput?.value || "Non disponibile",
-    company: ocrCompanyInput?.value || "Non disponibile",
-    file: ocrFileInput?.value || "Non disponibile",
-    date: ocrDateInput?.value || "Non disponibile",
-    pages: ocrPagesInput?.value || "Non disponibile",
-    type: ocrTypeInput?.value || "Non disponibile",
-    description: ocrDescriptionInput?.value || "Non disponibile"
-  };
-}
-
-function buildCurrentDocumentTags() {
-  const detail = documentDetails[currentAnalysisDocumentId];
+function buildDocumentTags(documentId, state) {
+  const detail = documentDetails[documentId];
   return [
-    currentDocumentState.stateTags,
-    countManualCorrections() > 0 ? "modificato correzione manuale" : "",
+    state.stateTags,
     detail.type,
     detail.company,
     detail.employee,
     detail.file,
-    detail.date
+    detail.date,
+    displayDeliveryStatus(detail).toLowerCase().replace(" ", "-"),
+    `confidenza-${confidenceNumber(detail)}`
   ]
     .join(" ")
     .toLowerCase();
 }
 
-function updateCurrentDocumentCard() {
-  const item = document.querySelector(`[data-document-id="${currentAnalysisDocumentId}"]`);
+function updateDocumentCard(documentId, state = documentStateFromDetail(documentDetails[documentId])) {
+  const item = document.querySelector(`[data-document-id="${documentId}"]`);
   const status = item?.querySelector("[data-document-status]");
   const summary = item?.querySelector("[data-document-summary]");
   const meta = item?.querySelector(".document-meta");
-  const detail = documentDetails[currentAnalysisDocumentId];
+  const detail = documentDetails[documentId];
   if (!item || !status || !detail) {
     return;
   }
 
-  item.dataset.tags = buildCurrentDocumentTags();
-  item.classList.toggle("needs-review", currentDocumentState.itemClass === "needs-review");
-  item.classList.toggle("confirmed", currentDocumentState.itemClass === "confirmed");
-  item.classList.toggle("sent", currentDocumentState.statusClass === "sent");
-  status.textContent = currentDocumentState.label;
-  status.className = currentDocumentState.statusClass
-    ? `document-status ${currentDocumentState.statusClass}`
+  item.dataset.tags = buildDocumentTags(documentId, state);
+  item.classList.toggle("needs-review", state.itemClass === "needs-review");
+  item.classList.toggle("confirmed", state.itemClass === "confirmed");
+  item.classList.toggle("sent", state.statusClass === "sent");
+  status.textContent = state.label;
+  status.className = state.statusClass
+    ? `document-status ${state.statusClass}`
     : "document-status";
 
   if (summary) {
-    const recipientCount = documentDetails[currentAnalysisDocumentId].recipients?.length || 0;
-    summary.textContent = recipientCount > 1
-      ? `${detail.type} · ${detail.company} · ${recipientCount} destinatari · selezionato ${detail.employee}`
-      : `${detail.type} · ${detail.company} · ${detail.employee} · confidenza ${detail.confidence || "82%"}`;
+    summary.textContent = `${detail.employee} · ${detail.company} · confidenza ${detail.confidence || "Non disponibile"}`;
   }
 
   if (meta) {
@@ -1046,23 +1268,255 @@ function updateCurrentDocumentCard() {
     [
       `File: ${detail.file}`,
       `Data: ${detail.date}`,
-      `Pagine: ${detail.pages}`
+      detail.pages === "1" ? "Pagina singola" : `Pagine: ${detail.pages}`
     ].forEach((value) => {
       const itemMeta = document.createElement("span");
       itemMeta.textContent = value;
       meta.append(itemMeta);
     });
   }
-
-  applyDocumentFilters();
 }
 
-function updateOcrTextPreview() {
-  const detail = documentDetails[currentAnalysisDocumentId];
-  setText(
-    ocrSnippet,
-    `Testo riconosciuto: ${detail.type} intestato a ${detail.employee}, azienda ${detail.company}, documento ${detail.file} del ${detail.date}.`
+function updateCurrentDocumentCard() {
+  updateDocumentCard(currentAnalysisDocumentId, currentDocumentState);
+}
+
+function updateAllDocumentCards() {
+  applyDocumentFilters({ keepPage: true });
+}
+
+const detailEditableInputs = [
+  detailEmployeeInput,
+  detailCompanyInput,
+  detailDateInput,
+  detailTypeInput,
+  detailDescriptionInput
+];
+
+const detailReadonlyInputs = [
+  detailFileInput,
+  detailPagesInput,
+  detailConfidenceInput,
+  detailDeliveryStatusInput
+];
+
+function setDetailEditMode(editing) {
+  detailEditableInputs.forEach((input) => {
+    if (input) {
+      input.readOnly = !editing;
+      input.disabled = !editing;
+      input.tabIndex = editing ? 0 : -1;
+    }
+  });
+  detailReadonlyInputs.forEach((input) => {
+    if (input) {
+      input.readOnly = true;
+      input.disabled = true;
+      input.tabIndex = -1;
+    }
+  });
+  document.querySelector(".document-inspector")?.classList.toggle("is-editing", editing);
+  detailEditButton?.classList.toggle("hidden", editing);
+  detailSaveButton?.classList.toggle("hidden", !editing);
+  detailCancelButton?.classList.toggle("hidden", !editing);
+}
+
+function setDetailValues(detail) {
+  const inspector = document.querySelector(".document-inspector");
+  inspector?.classList.toggle("confidence-low", confidenceNumber(detail) < 90);
+  inspector?.classList.toggle("confidence-high", confidenceNumber(detail) >= 90);
+
+  setText(detailTitle, detail.title);
+  setValue(detailEmployeeInput, detail.employee);
+  setValue(detailCompanyInput, detail.company);
+  setValue(detailFileInput, detail.file);
+  setValue(detailDateInput, detail.date);
+  setValue(detailPagesInput, detail.pages);
+  setValue(detailTypeInput, detail.type);
+  setValue(detailDescriptionInput, detail.description);
+  setValue(detailConfidenceInput, detail.confidence || "Non disponibile");
+  setValue(detailDeliveryStatusInput, displayDeliveryStatus(detail));
+}
+
+function renderDetailPreview(detail) {
+  setText(detailPreviewTitle, detail.title);
+  const pageText = detail.pages === "1" ? "1 pagina" : `${detail.pages} pagine`;
+  setText(detailPreviewMeta, `${detail.file} · ${pageText}`);
+
+  document.querySelectorAll("[data-detail-preview]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.detailPreview === detailPreviewMode);
+  });
+
+  const recipients = detail.recipients || [];
+  const selectedRecipient = recipients.find((recipient) => recipient.name === detail.employee) || recipients[0];
+  const splitLines = selectedRecipient
+    ? [`${selectedRecipient.page}: ${selectedRecipient.name} - ${detail.type}`]
+    : [detail.previewLines?.[0]].filter(Boolean);
+  const fullLines = detail.previewLines?.length ? detail.previewLines : splitLines;
+  const lines = detailPreviewMode === "split"
+      ? splitLines
+      : fullLines;
+
+  if (!detailPreviewLines) {
+    return;
+  }
+
+  detailPreviewLines.replaceChildren();
+  detailPreviewLines.classList.toggle("pdf-preview-mode", detailPreviewMode === "original");
+
+  if (detailPreviewMode === "original") {
+    const frame = document.createElement("div");
+    frame.className = "pdf-placeholder-frame";
+
+    const chrome = document.createElement("div");
+    chrome.className = "pdf-placeholder-chrome";
+
+    const title = document.createElement("strong");
+    title.textContent = "Anteprima PDF originale";
+
+    const hint = document.createElement("span");
+    hint.textContent = "Viewer integrato previsto";
+
+    const body = document.createElement("div");
+    body.className = "pdf-placeholder-body";
+    body.textContent = `${detail.file} - apertura del documento originale direttamente nell'applicativo.`;
+
+    chrome.append(title, hint);
+    frame.append(chrome, body);
+    detailPreviewLines.append(frame);
+    return;
+  }
+
+  (lines.length ? lines : ["Anteprima non disponibile"]).forEach((line) => {
+    const item = document.createElement("span");
+    item.textContent = line;
+    detailPreviewLines.append(item);
+  });
+}
+
+function updateDocumentDetail(documentId = activeDocumentId) {
+  const detail = documentDetails[documentId];
+  if (!detail || !copilotDetailSection) {
+    return;
+  }
+
+  activeDocumentId = documentId;
+  setDetailValues(detail);
+  renderDetailPreview(detail);
+  setDetailEditMode(false);
+  documentHistory?.querySelectorAll("[data-document-detail]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.documentDetail === documentId);
+  });
+}
+
+function hideSendDraft() {
+  detailSendDraft?.classList.add("is-hidden");
+}
+
+function buildSendDraft(detail) {
+  setValue(sendRecipientInput, detail.employee);
+  setValue(sendSubjectInput, `${detail.type} disponibile`);
+  setValue(
+    sendBodyInput,
+    `Gentile ${detail.employee},\n\nil documento "${detail.type}" del ${detail.date} è disponibile in allegato.\n\nCordiali saluti.`
   );
+  setText(sendStatusMessage, "Il documento selezionato viene allegato automaticamente.");
+  detailSendDraft?.classList.remove("is-hidden");
+}
+
+function showDocumentDetail(documentId, { openSend = false } = {}) {
+  copilotDetailSection?.classList.remove("is-hidden");
+  detailPreviewMode = "original";
+  updateDocumentDetail(documentId);
+
+  if (openSend) {
+    buildSendDraft(documentDetails[documentId]);
+  } else {
+    hideSendDraft();
+  }
+
+  setText(detailStatusMessage, "Seleziona Modifica per correggere i campi consentiti dall'ADR.");
+  goTo("copilot", "copilot-detail");
+}
+
+function saveDetailChanges() {
+  const detail = documentDetails[activeDocumentId];
+  if (!detail) {
+    return;
+  }
+
+  detail.employee = detailEmployeeInput?.value.trim() || "Non disponibile";
+  detail.company = detailCompanyInput?.value.trim() || "Non disponibile";
+  detail.date = detailDateInput?.value.trim() || "Non disponibile";
+  detail.type = detailTypeInput?.value.trim() || "Non disponibile";
+  detail.description = detailDescriptionInput?.value.trim() || "Non disponibile";
+
+  const recipient = copilotRun.recipients.find((item) => item.documentId === activeDocumentId);
+  if (recipient) {
+    recipient.name = detail.employee;
+    recipient.status = recipient.status === "sent" ? "sent" : "confirmed";
+    recipient.note = "Dati confermati dall'operatore";
+    selectedRecipientId = recipient.id;
+    currentAnalysisDocumentId = activeDocumentId;
+  }
+
+  detail.recipients = [{
+    ...(detail.recipients?.[0] || {}),
+    name: detail.employee,
+    status: recipient?.status || detail.recipients?.[0]?.status || "confirmed",
+    documentId: activeDocumentId
+  }];
+  detail.deliveryStatus = detail.recipients[0].status === "sent" ? "Inviato" : "Non inviato";
+
+  syncRecipientsIntoDocument();
+  updateAllDocumentCards();
+  updateDocumentDetail(activeDocumentId);
+  renderRecipientList();
+  updateSplitAndDispatchState();
+  setText(detailStatusMessage, "Modifiche salvate sui campi editabili. L'invio selezionato è pronto.");
+}
+
+function confirmDetailSend() {
+  const detail = documentDetails[activeDocumentId];
+  const recipient = sendRecipientInput?.value.trim() || "";
+  const subject = sendSubjectInput?.value.trim() || "";
+  const body = sendBodyInput?.value.trim() || "";
+
+  if (!detail || !recipient || !subject || !body) {
+    setText(sendStatusMessage, "Destinatario, oggetto e testo sono obbligatori prima dell'invio.");
+    return;
+  }
+
+  detail.deliveryStatus = "Inviato";
+  detail.recipients = (detail.recipients || []).map((item) => ({
+    ...item,
+    status: "sent",
+    documentId: activeDocumentId
+  }));
+
+  const runRecipient = copilotRun.recipients.find((item) => item.documentId === activeDocumentId);
+  if (runRecipient) {
+    runRecipient.status = "sent";
+    runRecipient.note = "Invio confermato dall'operatore";
+    selectedRecipientId = runRecipient.id;
+    currentAnalysisDocumentId = activeDocumentId;
+    currentDocumentState = {
+      label: "Inviato",
+      statusClass: "sent",
+      itemClass: "",
+      stateTags: `inviato ${detail.type} ${detail.company} ${detail.employee}`
+    };
+    syncRecipientsIntoDocument();
+    renderRecipientList();
+    updateSplitAndDispatchState();
+  }
+
+  hideSendDraft();
+  setText(sendStatusMessage, "Invio completato.");
+  setText(detailStatusMessage, "Invio completato. Stato invio aggiornato.");
+  updateAllDocumentCards();
+  updateDocumentDetail(activeDocumentId);
+  updateCopilotAnalytics();
 }
 
 function renderRecipientList() {
@@ -1087,21 +1541,7 @@ function renderRecipientList() {
     const detail = document.createElement("span");
     detail.textContent = `${recipient.note} · ${recipient.page}`;
 
-    const meta = document.createElement("div");
-    meta.className = "recipient-meta";
-
-    const confidence = document.createElement("span");
-    confidence.textContent = `Confidenza ${recipient.confidence}%`;
-
-    const status = document.createElement("span");
-    status.textContent = recipient.status === "needs-review"
-      ? "Conferma richiesta"
-      : recipient.status === "sent"
-        ? "Inviato"
-        : "Confermato";
-
-    meta.append(confidence, status);
-    main.append(name, detail, meta);
+    main.append(name, detail);
     item.append(main);
 
     const actions = document.createElement("div");
@@ -1111,7 +1551,7 @@ function renderRecipientList() {
     editButton.className = "text-button";
     editButton.type = "button";
     editButton.dataset.editRecipient = recipient.id;
-    editButton.textContent = "Modifica";
+    editButton.textContent = "Apri dettaglio";
     actions.append(editButton);
 
     if (recipient.status === "needs-review") {
@@ -1143,12 +1583,9 @@ function updateSplitAndDispatchState() {
   const needsReview = copilotRun.recipients.filter((recipient) => recipient.status === "needs-review").length;
   const sent = copilotRun.recipients.filter((recipient) => recipient.status === "sent").length;
   const confirmed = total - needsReview;
-  const manualCorrections = countManualCorrections();
-  const correctionText = manualCorrections === 1
-    ? "1 correzione manuale salvata"
-    : `${manualCorrections} correzioni manuali salvate`;
+  const selectedRecipient = getCurrentRecipient();
 
-  setText(splitState, `${total} documenti generati, ${needsReview} da verificare`);
+  setText(splitState, `${total} invii generati, ${needsReview} da verificare`);
   setText(
     dispatchReady,
     sent === total && total > 0
@@ -1159,224 +1596,173 @@ function updateSplitAndDispatchState() {
   );
 
   if (sent === total && total > 0) {
-    unlockSteps(["copilot-dispatch"]);
-    setText(confidenceHint, "Documento già inviato");
-    setText(dispatchStatus, "Invio già completato. Le prove sono nello storico documenti.");
-    if (dispatchButton) {
-      dispatchButton.disabled = true;
-      dispatchButton.textContent = "Documenti inviati";
-    }
+    setText(confidenceHint, "Invii completati");
+    setText(dispatchStatus, "Tutti gli invii generati dallo split risultano completati.");
     return;
   }
 
   if (needsReview > 0) {
-    setStepLocked("copilot-dispatch", true);
-    setText(confidenceHint, manualCorrections > 0 ? `${correctionText}; conferma richiesta` : "Verifica richiesta sui dati sotto soglia");
-    setText(dispatchStatus, "Conferma i casi segnalati prima di inviare tutto il lotto.");
-    if (dispatchButton) {
-      dispatchButton.disabled = true;
-      dispatchButton.textContent = "Invia documenti confermati";
-    }
-    return;
-  }
-
-  unlockSteps(["copilot-dispatch"]);
-  setText(confidenceHint, manualCorrections > 0 ? correctionText : "Tutti i destinatari confermati");
-  setText(dispatchStatus, "Lotto pronto per l'invio.");
-  if (dispatchButton) {
-    dispatchButton.disabled = false;
-    dispatchButton.textContent = "Invia documenti confermati";
-  }
-}
-
-function markCurrentRecipientForReview() {
-  if (!copilotRun.processed) {
-    return;
-  }
-
-  const recipient = getCurrentRecipient();
-  if (!recipient) {
-    return;
-  }
-
-  recipient.status = "needs-review";
-  recipient.note = "Nome aggiornato dai campi OCR";
-  currentDocumentState = {
-    label: "Da verificare",
-    statusClass: "",
-    itemClass: "needs-review",
-    stateTags: "verifica bassa-confidenza modificato"
-  };
-  updateCurrentDocumentCard();
-}
-
-function syncOcrSummary({ recipientChanged = false } = {}) {
-  documentDetails[currentAnalysisDocumentId] = {
-    ...documentDetails[currentAnalysisDocumentId],
-    ...getDocumentValues()
-  };
-
-  const currentRecipient = getCurrentRecipient();
-  if (currentRecipient) {
-    currentRecipient.name = documentDetails[currentAnalysisDocumentId].employee;
-    documentDetails[currentAnalysisDocumentId].confidence = `${currentRecipient.confidence}%`;
-  }
-
-  if (recipientChanged) {
-    markCurrentRecipientForReview();
-  }
-
-  const manualCorrections = countManualCorrections();
-  documentDetails[currentAnalysisDocumentId].corrections = manualCorrections > 0
-    ? `${manualCorrections} correzioni manuali salvate dall'operatore`
-    : "Nessuna correzione manuale salvata";
-  syncRecipientsIntoDocument();
-  updateOcrTextPreview();
-  if (copilotRun.processed) {
-    const detail = documentDetails[currentAnalysisDocumentId];
-    setText(dispatchMessage, `Oggetto: ${detail.type} disponibile. Il documento per ${detail.employee} è pronto nell'area riservata.`);
-  }
-  updateCurrentDocumentCard();
-  renderRecipientList();
-  updateEditingContext();
-  updateSplitAndDispatchState();
-
-  if (activeDocumentId === currentAnalysisDocumentId) {
-    updateDocumentDetail(activeDocumentId);
-  }
-}
-
-ocrInputs.forEach((input) => {
-  input?.addEventListener("input", () => {
-    updateManualCorrectionState(input);
-    syncOcrSummary({ recipientChanged: input === ocrEmployeeInput });
-    const manualCorrections = countManualCorrections();
-    const fieldText = manualCorrections === 1 ? "campo" : "campi";
+    setText(confidenceHint, "Verifica richiesta su almeno un invio");
     setText(
-      analysisNote,
-      manualCorrections > 0
-        ? `Correzione manuale registrata su ${manualCorrections} ${fieldText}. Le modifiche aggiornano destinatari, storico e invio.`
-        : "I dati sono tornati all'estrazione originale del modello."
+      dispatchStatus,
+      selectedRecipient?.status === "needs-review"
+        ? "Apri il dettaglio dell'invio selezionato per controllare i dati OCR e procedere."
+        : "Puoi aprire il dettaglio dell'invio selezionato; resta almeno un altro destinatario da verificare."
     );
-  });
-});
-
-function updateDocumentDetail(documentId) {
-  const detail = documentDetails[documentId];
-  if (!detail) {
     return;
   }
 
-  activeDocumentId = documentId;
-  documentHistory?.querySelectorAll("[data-document-detail]").forEach((button) => {
-    button.classList.toggle("active", button.dataset.documentDetail === documentId);
-  });
-  setText(detailPreviewTitle, detail.title);
-  setText(detailPreviewMeta, `${detail.file} · ${detail.pages} pagine`);
-  setText(detailEmployee, detail.employee);
-  setText(detailCompany, detail.company);
-  setText(detailFile, detail.file);
-  setText(detailDate, detail.date);
-  setText(detailPages, detail.pages);
-  setText(detailType, detail.type);
-  setText(detailDescription, detail.description);
-  setText(detailConfidence, detail.confidence || "Non disponibile");
-  setText(detailRepository, detail.repository || "Non disponibile");
-  setText(detailOcrText, detail.ocr || "Testo OCR non disponibile.");
-
-  if (detailPreviewLines) {
-    detailPreviewLines.replaceChildren();
-    (detail.previewLines || []).forEach((line) => {
-      const item = document.createElement("span");
-      item.textContent = line;
-      detailPreviewLines.append(item);
-    });
-  }
-
-  if (detailRecipientList) {
-    detailRecipientList.replaceChildren();
-    (detail.recipients || []).forEach((recipient) => {
-      const item = document.createElement("li");
-      item.className = `history-item ${
-        recipient.status === "needs-review" ? "needs-review" : recipient.status === "sent" ? "sent" : "confirmed"
-      }`;
-
-      const main = document.createElement("div");
-      main.className = "history-main";
-      const name = document.createElement("strong");
-      name.textContent = recipient.name;
-      const meta = document.createElement("span");
-      meta.textContent = `${recipient.page} · confidenza ${recipient.confidence}%`;
-      main.append(name, meta);
-
-      const status = document.createElement("span");
-      status.className = `document-status ${
-        recipient.status === "needs-review" ? "" : recipient.status === "sent" ? "sent" : "confirmed"
-      }`;
-      status.textContent = recipient.status === "needs-review"
-        ? "Da verificare"
-        : recipient.status === "sent"
-          ? "Inviato"
-          : "Confermato";
-      item.append(main, status);
-      detailRecipientList.append(item);
-    });
-  }
-
-  if (detailDeliveryList) {
-    detailDeliveryList.replaceChildren();
-    [
-      ["Stato", detail.deliveryStatus || "Non disponibile"],
-      ["Canale", detail.channel || "Non disponibile"],
-      ["Caricamento", detail.upload || "Non disponibile"],
-      ["Prova", detail.proof || "Non disponibile"]
-    ].forEach(([label, value]) => {
-      const item = document.createElement("li");
-      const strong = document.createElement("strong");
-      const span = document.createElement("span");
-      strong.textContent = label;
-      span.textContent = value;
-      item.append(strong, span);
-      detailDeliveryList.append(item);
-    });
-  }
-
-  if (detailAuditList) {
-    detailAuditList.replaceChildren();
-    [detail.corrections, ...(detail.audit || [])].filter(Boolean).forEach((value) => {
-      const item = document.createElement("li");
-      const strong = document.createElement("strong");
-      const span = document.createElement("span");
-      strong.textContent = value === detail.corrections ? "Correzioni" : "Evento";
-      span.textContent = value;
-      item.append(strong, span);
-      detailAuditList.append(item);
-    });
-  }
+  setText(confidenceHint, "Tutti i destinatari confermati");
+  setText(dispatchStatus, "Apri il dettaglio dell'invio selezionato per confermare destinatario, oggetto e testo.");
 }
 
-function applyDocumentFilters() {
+function updateCopilotAnalytics() {
+  const period = copilotMetricPeriod?.value || "Ultimi 30 giorni";
+  const status = copilotMetricStatus?.value || "Tutti";
+  const allEntries = Object.values(documentDetails);
+  const visibleEntries = allEntries.filter((detail) => {
+    if (status === "Inviato") {
+      return displayDeliveryStatus(detail) === "Inviato";
+    }
+
+    if (status === "Non inviato") {
+      return displayDeliveryStatus(detail) !== "Inviato";
+    }
+
+    if (status === "Sotto soglia") {
+      return confidenceNumber(detail) < 90;
+    }
+
+    return true;
+  });
+  const periodFactor = period === "Ultimi 7 giorni" ? 0.42 : period === "Mese corrente" ? 0.78 : 1;
+  const analyzed = Math.max(visibleEntries.length, Math.round(184 * periodFactor * (visibleEntries.length / allEntries.length)));
+  const belowThreshold = visibleEntries.filter((detail) => confidenceNumber(detail) < 90).length;
+  const sentEntries = visibleEntries.filter((detail) => displayDeliveryStatus(detail) === "Inviato").length;
+  const correctRate = status === "Sotto soglia" ? "88%" : status === "Inviato" ? "99%" : "97%";
+  const recipientRate = sentEntries > 0 && sentEntries === visibleEntries.length ? "96%" : "94%";
+  const averageTime = period === "Ultimi 7 giorni" ? "16 sec" : "18 sec";
+
+  renderMetricList(copilotMetricList, [
+    [String(analyzed), "Documenti analizzati"],
+    [correctRate, "Classificazioni corrette"],
+    [String(Math.max(belowThreshold, status === "Sotto soglia" ? 1 : 0)), "Documenti sotto soglia di confidenza"],
+    [recipientRate, "Destinatari riconosciuti automaticamente"],
+    [averageTime, "Tempo medio analisi"]
+  ]);
+}
+
+function getFilteredDocumentIds() {
+  const query = (documentSearch?.value || "").trim().toLowerCase();
+  const deliveryFilter = documentDeliveryFilter?.value || "";
+  const confidenceMode = documentConfidenceMode?.value || "";
+  const parsedThreshold = Number.parseInt(documentConfidenceThreshold?.value || "80", 10);
+  const threshold = Number.isFinite(parsedThreshold) ? parsedThreshold : 80;
+  const monthFilter = documentMonthFilter?.value || "";
+  const yearFilter = documentYearFilter?.value || "";
+
+  return Object.keys(documentDetails).filter((documentId) => {
+    const detail = documentDetails[documentId];
+    const searchableText = `${detail.title} ${detail.employee} ${detail.company} ${detail.file} ${detail.type}`.toLowerCase();
+    const deliveryStatus = displayDeliveryStatus(detail) === "Inviato" ? "inviato" : "non-inviato";
+    const confidence = confidenceNumber(detail);
+    const parts = dateParts(detail);
+    const matchesQuery = !query || searchableText.includes(query);
+    const matchesDelivery = !deliveryFilter || deliveryStatus === deliveryFilter;
+    const matchesConfidence = !confidenceMode
+      || (confidenceMode === "lt" && confidence < threshold)
+      || (confidenceMode === "gte" && confidence >= threshold);
+    const matchesMonth = !monthFilter || parts.month === monthFilter;
+    const matchesYear = !yearFilter || parts.year === yearFilter;
+    return matchesQuery && matchesDelivery && matchesConfidence && matchesMonth && matchesYear;
+  });
+}
+
+function updateDocumentSummary(filteredIds) {
+  const details = filteredIds.map((documentId) => documentDetails[documentId]);
+  const review = details.filter((detail) => detail.recipients?.some((recipient) => recipient.status === "needs-review")).length;
+  const sent = details.filter((detail) => displayDeliveryStatus(detail) === "Inviato").length;
+  const ready = details.length - review - sent;
+
+  renderMetricList(documentSummaryList, [
+    [String(details.length), "Risultati filtrati"],
+    [String(review), "Da verificare"],
+    [String(Math.max(ready, 0)), "Pronti per invio"],
+    [String(sent), "Inviati"]
+  ]);
+}
+
+function renderDocumentHistory(filteredIds) {
   if (!documentHistory) {
     return;
   }
 
-  const query = (documentSearch?.value || "").trim().toLowerCase();
-  const filter = documentFilter?.value || "";
-  let visibleCount = 0;
+  const pageCount = Math.max(1, Math.ceil(filteredIds.length / documentPageSize));
+  currentDocumentPage = Math.min(Math.max(currentDocumentPage, 1), pageCount);
+  const pageStart = (currentDocumentPage - 1) * documentPageSize;
+  const pageIds = filteredIds.slice(pageStart, pageStart + documentPageSize);
 
-  documentHistory.querySelectorAll(".document-item").forEach((item) => {
-    const text = `${item.textContent} ${item.dataset.tags || ""}`.toLowerCase();
-    const tags = item.dataset.tags || "";
-    const matchesQuery = !query || text.includes(query);
-    const matchesFilter = !filter || tags.includes(filter);
-    const visible = matchesQuery && matchesFilter;
-    item.classList.toggle("hidden", !visible);
-    if (visible) {
-      visibleCount += 1;
-    }
+  documentHistory.replaceChildren();
+  pageIds.forEach((documentId) => {
+    const detail = documentDetails[documentId];
+    const state = documentStateFromDetail(detail);
+    const row = document.createElement("li");
+    row.className = `document-row document-item ${state.itemClass || state.statusClass || ""}`;
+    row.dataset.documentId = documentId;
+
+    const recipient = document.createElement("span");
+    recipient.className = "document-cell-main";
+    recipient.innerHTML = `<strong>${detail.employee}</strong><small>${detail.company}</small>`;
+
+    const type = document.createElement("span");
+    type.textContent = detail.type;
+
+    const file = document.createElement("span");
+    file.className = "document-cell-file";
+    file.textContent = detail.file;
+
+    const date = document.createElement("span");
+    date.textContent = detail.date;
+
+    const confidence = document.createElement("span");
+    confidence.textContent = detail.confidence || "Non disponibile";
+
+    const status = document.createElement("span");
+    status.className = state.statusClass ? `document-status ${state.statusClass}` : "document-status";
+    status.textContent = state.label;
+
+    const actions = document.createElement("span");
+    actions.className = "history-actions";
+
+    const detailButton = document.createElement("button");
+    detailButton.className = "text-button";
+    detailButton.type = "button";
+    detailButton.dataset.documentDetail = documentId;
+    detailButton.textContent = "Consulta";
+
+    actions.append(detailButton);
+    row.append(recipient, type, file, date, confidence, status, actions);
+    documentHistory.append(row);
   });
 
-  documentEmpty?.classList.toggle("hidden", visibleCount > 0);
+  setText(documentPageInfo, `Pagina ${currentDocumentPage} di ${pageCount} - ${filteredIds.length} risultati`);
+  if (documentPrevButton) {
+    documentPrevButton.disabled = currentDocumentPage <= 1;
+  }
+  if (documentNextButton) {
+    documentNextButton.disabled = currentDocumentPage >= pageCount;
+  }
+}
+
+function applyDocumentFilters({ keepPage = false } = {}) {
+  if (!keepPage) {
+    currentDocumentPage = 1;
+  }
+
+  const filteredIds = getFilteredDocumentIds();
+  updateDocumentSummary(filteredIds);
+  renderDocumentHistory(filteredIds);
+  documentEmpty?.classList.toggle("hidden", filteredIds.length > 0);
 }
 
 function setCurrentDocumentState(label, tags, statusClass, itemClass) {
@@ -1395,66 +1781,49 @@ function loadDocumentIntoFlow(documentId) {
     return;
   }
 
+  hasFocusedCopilotDocument = true;
+  syncCopilotFlowVisibility();
   currentAnalysisDocumentId = documentId;
-  activeDocumentId = documentId;
   copilotRun.processed = true;
-  copilotRun.recipients = (detail.recipients || []).map((recipient, index) => ({
-    id: index === 0 && (detail.recipients || []).length === 1
-      ? "current-document-recipient"
-      : `${documentId}-recipient-${index}`,
-    name: recipient.name,
-    confidence: recipient.confidence,
-    page: recipient.page,
-    status: recipient.status,
-    note: recipient.status === "needs-review"
-      ? "Richiede conferma operatore"
-      : recipient.status === "sent"
-        ? "Invio già tracciato"
-        : "Confermato da OCR"
-  }));
-
-  const recipientToEdit = copilotRun.recipients.find((recipient) => recipient.status === "needs-review")
+  copilotRun.recipients = getBatchDocumentIds(documentId).map(recipientFromDetail);
+  const selectedRecipient = copilotRun.recipients.find((recipient) => recipient.documentId === documentId)
+    || copilotRun.recipients.find((recipient) => recipient.status === "needs-review")
     || copilotRun.recipients[0];
-  selectedRecipientId = recipientToEdit?.id || "current-document-recipient";
+  selectedRecipientId = selectedRecipient?.id || "";
+  currentAnalysisDocumentId = selectedRecipient?.documentId || documentId;
 
-  setOcrValue(ocrEmployeeInput, recipientToEdit?.name || detail.employee);
-  setOcrValue(ocrCompanyInput, detail.company);
-  setOcrValue(ocrFileInput, detail.file);
-  setOcrValue(ocrDateInput, detail.date);
-  setOcrValue(ocrPagesInput, detail.pages);
-  setOcrValue(ocrTypeInput, detail.type);
-  setOcrValue(ocrDescriptionInput, detail.description);
-  setText(uploadState, `Documento ripreso: ${detail.title}`);
-  setText(detectedConfidence, detail.confidence || "--");
+  const selectedDetail = documentDetails[currentAnalysisDocumentId] || detail;
+  setText(uploadState, `Invio ripreso: ${selectedDetail.title}`);
+  setText(detectedConfidence, String(copilotRun.recipients.length));
+  setText(confidenceHint, "Entry del lotto disponibili");
 
-  currentDocumentState = documentStateFromDetail(detail);
+  currentDocumentState = documentStateFromDetail(selectedDetail);
   unlockSteps(["copilot-analysis"]);
   renderRecipientList();
-  updateOcrTextPreview();
-  updateCurrentDocumentCard();
+  updateAllDocumentCards();
   updateSplitAndDispatchState();
-  updateDocumentDetail(documentId);
-  setText(analysisNote, "Dati parziali ricaricati dallo storico. Puoi correggere, confermare e proseguire il flusso.");
+  setText(analysisNote, "Invio ricaricato dallo storico. Apri il dettaglio per correggere i campi OCR o procedere all'invio.");
+  if (!copilotDetailSection?.classList.contains("is-hidden")) {
+    updateDocumentDetail(currentAnalysisDocumentId);
+  }
   goTo("copilot", "copilot-analysis");
 }
 
 function fillCopilotResults() {
   uploadBox?.classList.remove("processing");
+  hasFocusedCopilotDocument = true;
+  syncCopilotFlowVisibility();
   unlockSteps(["copilot-analysis"]);
   copilotRun.processed = true;
+  currentAnalysisDocumentId = "cedolino-giulia-conti";
+  documentDetails[currentAnalysisDocumentId].deliveryStatus = "Non inviato";
   setText(uploadState, "Documento analizzato");
-  setText(detectedConfidence, "94%");
-  setText(confidenceHint, "Verifica richiesta sul destinatario sotto soglia");
-  setOcrValue(ocrEmployeeInput, "Giulia Conti");
-  setOcrValue(ocrCompanyInput, "Eggon S.r.l.");
-  setOcrValue(ocrFileInput, "cedolini-aprile-2026.pdf");
-  setOcrValue(ocrDateInput, "30/04/2026");
-  setOcrValue(ocrPagesInput, "3");
-  setOcrValue(ocrTypeInput, "Cedolino mensile");
-  setOcrValue(ocrDescriptionInput, "Cedolini mensili con split per singolo dipendente.");
-  resetCopilotRecipients(ocrEmployeeInput?.value || "Giulia Conti");
-  syncOcrSummary();
-  setText(analysisNote, "Il modello ha compilato i dati. Puoi modificarli; il destinatario con confidenza bassa va confermato.");
+  setText(detectedConfidence, "3");
+  setText(confidenceHint, "Entry generate; verifica richiesta");
+  resetCopilotRecipients();
+  syncRecipientsIntoDocument();
+  updateAllDocumentCards();
+  setText(analysisNote, "Il modello ha creato le entry per singolo destinatario. Apri il dettaglio dell'invio da correggere o conferma i casi sotto soglia.");
 
   setCurrentDocumentState(
     "Da verificare",
@@ -1465,29 +1834,21 @@ function fillCopilotResults() {
   syncRecipientsIntoDocument();
   renderRecipientList();
   updateSplitAndDispatchState();
-  updateDocumentDetail(currentAnalysisDocumentId);
   goTo("copilot", "copilot-analysis");
+  updateCopilotAnalytics();
 }
 
 function processUpload() {
-  currentAnalysisDocumentId = "cedolini-aprile-2026";
-  activeDocumentId = currentAnalysisDocumentId;
+  hasFocusedCopilotDocument = true;
+  syncCopilotFlowVisibility();
+  currentAnalysisDocumentId = "cedolino-giulia-conti";
   uploadBox?.classList.add("processing");
   copilotRun.processed = false;
   copilotRun.recipients = [];
   setStepLocked("copilot-analysis", true);
-  setStepLocked("copilot-dispatch", true);
   setText(uploadState, "Analisi automatica in corso");
   setText(detectedConfidence, "In corso");
   setText(confidenceHint, "OCR e classificazione in elaborazione");
-  setOcrValue(ocrEmployeeInput, "Analisi in corso");
-  setOcrValue(ocrCompanyInput, "Analisi in corso");
-  setOcrValue(ocrFileInput, "Analisi in corso");
-  setOcrValue(ocrDateInput, "Analisi in corso");
-  setOcrValue(ocrPagesInput, "Analisi in corso");
-  setOcrValue(ocrTypeInput, "Analisi in corso");
-  setOcrValue(ocrDescriptionInput, "Analisi in corso");
-  setText(ocrSnippet, "Lettura del testo, classificazione e split del lotto in corso.");
   if (recipientList) {
     recipientList.innerHTML = `
       <li class="history-item">
@@ -1499,13 +1860,10 @@ function processUpload() {
     `;
   }
   setText(splitState, "Analisi in corso");
-  setText(analysisNote, "Analisi automatica in corso. I campi saranno modificabili appena termina l'estrazione.");
+  setText(dispatchReady, "Analisi in corso");
+  setText(analysisNote, "Analisi automatica in corso. Le entry di invio saranno disponibili appena termina lo split.");
   setText(editingContext, "Analisi in corso: i destinatari verranno selezionabili dopo lo split.");
   setText(dispatchStatus, "Attendi il completamento dell'analisi.");
-  if (dispatchButton) {
-    dispatchButton.disabled = true;
-    dispatchButton.textContent = "Invia documenti confermati";
-  }
 
   window.setTimeout(fillCopilotResults, 500);
 }
@@ -1521,15 +1879,12 @@ recipientList?.addEventListener("click", (event) => {
     }
 
     selectedRecipientId = recipient.id;
-    setOcrValue(ocrEmployeeInput, recipient.name);
-    documentDetails[currentAnalysisDocumentId].employee = recipient.name;
-    documentDetails[currentAnalysisDocumentId].confidence = `${recipient.confidence}%`;
+    currentAnalysisDocumentId = recipient.documentId;
     renderRecipientList();
-    updateOcrTextPreview();
-    updateCurrentDocumentCard();
-    updateDocumentDetail(currentAnalysisDocumentId);
-    setText(analysisNote, `Destinatario selezionato: ${recipient.name}. Modifica il nome nel campo OCR se l'associazione non è corretta.`);
-    goTo("copilot", "copilot-analysis");
+    updateAllDocumentCards();
+    updateSplitAndDispatchState();
+    setText(analysisNote, `Invio selezionato: ${recipient.name}. Il dettaglio contiene i soli campi OCR modificabili dall'ADR.`);
+    showDocumentDetail(recipient.documentId);
     return;
   }
 
@@ -1542,9 +1897,8 @@ recipientList?.addEventListener("click", (event) => {
   if (recipient) {
     selectedRecipientId = recipient.id;
     recipient.status = "confirmed";
-    recipient.note = recipient.id === "current-document-recipient"
-      ? "Destinatario confermato dall'operatore"
-      : recipient.note;
+    currentAnalysisDocumentId = recipient.documentId;
+    recipient.note = "Destinatario confermato dall'operatore";
   }
 
   syncRecipientsIntoDocument();
@@ -1560,156 +1914,73 @@ recipientList?.addEventListener("click", (event) => {
     const detail = documentDetails[currentAnalysisDocumentId];
     setCurrentDocumentState(
       "Confermato",
-      `confermato ${detail.type} ${detail.company} ${detail.employee}${countManualCorrections() > 0 ? " modificato manualmente" : ""}`,
+      `confermato ${detail.type} ${detail.company} ${detail.employee}`,
       "confirmed",
       "confirmed"
     );
   }
   renderRecipientList();
   updateSplitAndDispatchState();
-  updateDocumentDetail(currentAnalysisDocumentId);
-});
-
-dispatchButton?.addEventListener("click", () => {
-  const detail = documentDetails[currentAnalysisDocumentId];
-  const confirmedCount = copilotRun.recipients.filter((recipient) => recipient.status === "confirmed").length;
-  setText(dispatchStatus, "Invio registrato. Prove di consegna disponibili nel dettaglio documento.");
-  copilotRun.recipients.forEach((recipient) => {
-    if (recipient.status === "confirmed") {
-      recipient.status = "sent";
-    }
-  });
-  detail.deliveryStatus = "Inviato";
-  detail.proof = `Prova di consegna archiviata per ${confirmedCount} documenti`;
-  detail.audit = [
-    `Invio completato per ${confirmedCount} documenti`,
-    "Prova di consegna archiviata",
-    ...(detail.audit || [])
-  ];
-  if (dispatchButton) {
-    dispatchButton.disabled = true;
-    dispatchButton.textContent = "Documenti inviati";
-  }
-  setCurrentDocumentState(
-    "Inviato",
-    `inviato ${detail.type} ${detail.company} ${detail.employee}${countManualCorrections() > 0 ? " modificato manualmente" : ""}`,
-    "sent",
-    ""
-  );
-  syncRecipientsIntoDocument();
-  renderRecipientList();
-  updateDocumentDetail(currentAnalysisDocumentId);
-  goTo("copilot", "copilot-documents");
+  updateCopilotAnalytics();
 });
 
 documentSearch?.addEventListener("input", applyDocumentFilters);
-documentFilter?.addEventListener("change", applyDocumentFilters);
+documentDeliveryFilter?.addEventListener("change", applyDocumentFilters);
+documentConfidenceMode?.addEventListener("change", applyDocumentFilters);
+documentConfidenceThreshold?.addEventListener("input", applyDocumentFilters);
+documentMonthFilter?.addEventListener("change", applyDocumentFilters);
+documentYearFilter?.addEventListener("change", applyDocumentFilters);
+copilotMetricPeriod?.addEventListener("change", updateCopilotAnalytics);
+copilotMetricStatus?.addEventListener("change", updateCopilotAnalytics);
+documentPrevButton?.addEventListener("click", () => {
+  currentDocumentPage -= 1;
+  applyDocumentFilters({ keepPage: true });
+});
+documentNextButton?.addEventListener("click", () => {
+  currentDocumentPage += 1;
+  applyDocumentFilters({ keepPage: true });
+});
 documentHistory?.addEventListener("click", (event) => {
-  const resumeButton = event.target.closest("[data-resume-document]");
-  if (resumeButton) {
-    loadDocumentIntoFlow(resumeButton.dataset.resumeDocument);
+  const detailButton = event.target.closest("[data-document-detail]");
+  if (detailButton) {
+    showDocumentDetail(detailButton.dataset.documentDetail);
     return;
   }
-
-  const button = event.target.closest("[data-document-detail]");
-  if (!button) {
-    return;
-  }
-
-  updateDocumentDetail(button.dataset.documentDetail);
 });
 
-document.querySelectorAll("[data-document-tab]").forEach((button) => {
+document.querySelectorAll("[data-detail-preview]").forEach((button) => {
   button.addEventListener("click", () => {
-    const tab = button.dataset.documentTab;
-    document.querySelectorAll("[data-document-tab]").forEach((tabButton) => {
-      tabButton.classList.toggle("active", tabButton === button);
-    });
-    document.querySelectorAll("[data-document-panel]").forEach((panel) => {
-      panel.classList.toggle("active", panel.dataset.documentPanel === tab);
-    });
+    detailPreviewMode = button.dataset.detailPreview;
+    renderDetailPreview(documentDetails[activeDocumentId]);
   });
 });
+
+detailEditButton?.addEventListener("click", () => {
+  setDetailEditMode(true);
+  hideSendDraft();
+  setText(detailStatusMessage, "Puoi modificare nome e cognome, azienda, data documento, tipologia e breve descrizione.");
+});
+
+detailCancelButton?.addEventListener("click", () => {
+  updateDocumentDetail(activeDocumentId);
+  setText(detailStatusMessage, "Modifica annullata.");
+});
+
+detailSaveButton?.addEventListener("click", saveDetailChanges);
+
+detailSendButton?.addEventListener("click", () => {
+  setDetailEditMode(false);
+  buildSendDraft(documentDetails[activeDocumentId]);
+});
+
+sendCancelButton?.addEventListener("click", () => {
+  hideSendDraft();
+  setText(detailStatusMessage, "Invio annullato. Il documento resta non inviato.");
+});
+
+sendConfirmButton?.addEventListener("click", confirmDetailSend);
+
 applyDocumentFilters();
-updateDocumentDetail(activeDocumentId);
-
-const auditSearch = document.getElementById("audit-search");
-const auditLog = document.getElementById("audit-log-list");
-const deliveryPeriod = document.getElementById("delivery-period");
-const deliveryChannelFilter = document.getElementById("delivery-channel-filter");
-const deliveryKpiList = document.getElementById("delivery-kpi-list");
-
-function prependAuditItem(title, detail) {
-  if (!auditLog) {
-    return;
-  }
-
-  const item = document.createElement("li");
-  const strong = document.createElement("strong");
-  const span = document.createElement("span");
-  strong.textContent = title;
-  span.textContent = detail;
-  item.append(strong, span);
-  auditLog.prepend(item);
-}
-
-auditSearch?.addEventListener("input", () => {
-  const query = auditSearch.value.trim().toLowerCase();
-
-  auditLog?.querySelectorAll("li").forEach((item) => {
-    const visible = item.textContent.toLowerCase().includes(query);
-    item.classList.toggle("hidden", !visible);
-  });
-});
-
-function updateDeliveryAnalytics() {
-  const period = deliveryPeriod?.value || "Ultimi 30 giorni";
-  const channel = deliveryChannelFilter?.value || "Tutti";
-  const isShortPeriod = period === "Ultimi 7 giorni";
-  const isEmail = channel === "Email";
-  const isPortal = channel === "Portale";
-  const completed = isShortPeriod ? 38 : isPortal ? 24 : isEmail ? 118 : 142;
-  const delivered = isPortal ? "91%" : "97%";
-  const read = isPortal ? "86%" : isEmail ? "83%" : "81%";
-  const retries = isPortal ? 1 : isEmail ? 1 : 2;
-
-  if (deliveryKpiList) {
-    const values = [
-      [completed, "Invii completati"],
-      [delivered, "Consegnati"],
-      [read, "Letture confermate"],
-      [retries, "Retry aperti"]
-    ];
-    deliveryKpiList.replaceChildren();
-    values.forEach(([value, label]) => {
-      const item = document.createElement("li");
-      const strong = document.createElement("strong");
-      const span = document.createElement("span");
-      strong.textContent = value;
-      span.textContent = label;
-      item.append(strong, span);
-      deliveryKpiList.append(item);
-    });
-  }
-
-  if (auditLog) {
-    auditLog.replaceChildren();
-    [
-      `${channel}: ${completed} invii nel periodo ${period.toLowerCase()}`,
-      `Consegna media ${delivered}, lettura media ${read}`,
-      `${retries} retry aperti, prove di consegna archiviate automaticamente`
-    ].forEach((value, index) => {
-      const item = document.createElement("li");
-      const strong = document.createElement("strong");
-      const span = document.createElement("span");
-      strong.textContent = index === 0 ? "Volume" : index === 1 ? "Qualità" : "Operatività";
-      span.textContent = value;
-      item.append(strong, span);
-      auditLog.append(item);
-    });
-  }
-}
-
-deliveryPeriod?.addEventListener("change", updateDeliveryAnalytics);
-deliveryChannelFilter?.addEventListener("change", updateDeliveryAnalytics);
-updateDeliveryAnalytics();
+updateAllDocumentCards();
+updateCopilotAnalytics();
+syncCopilotFlowVisibility();

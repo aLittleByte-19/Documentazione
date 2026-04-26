@@ -26,23 +26,16 @@
           <button class="nav-subitem" data-view="assistant" data-target="assistant-compose">Generazione</button>
           <button class="nav-subitem" data-view="assistant" data-target="assistant-feedback">Qualità</button>
           <button class="nav-subitem" data-view="assistant" data-target="assistant-library">Storico prompt</button>
-          <button class="nav-subitem" data-view="assistant" data-target="assistant-usage">Monitoraggio</button>
+          <button class="nav-subitem" data-view="assistant" data-target="assistant-usage">Metriche</button>
         </div>
 
         <div class="nav-section">
           <p class="nav-section-title">Co-Pilot CdL</p>
           <button class="nav-item" data-view="copilot" data-target="workspace-top">Co-Pilot</button>
           <button class="nav-subitem" data-view="copilot" data-target="copilot-upload">Caricamento</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-documents">Storico invii</button>
           <button class="nav-subitem" data-view="copilot" data-target="copilot-analysis">Esiti AI</button>
-          <button class="nav-subitem" data-view="copilot" data-target="copilot-dispatch">Riepilogo e invio</button>
-          <button class="nav-subitem" data-view="copilot" data-target="copilot-documents">Storico documenti</button>
-        </div>
-
-        <div class="nav-section">
-          <p class="nav-section-title">Controllo</p>
-          <button class="nav-item" data-view="audit" data-target="workspace-top">Analisi invii</button>
-          <button class="nav-subitem" data-view="audit" data-target="audit-log">Metriche</button>
-          <button class="nav-subitem" data-view="audit" data-target="audit-policy">Regole</button>
+          <button class="nav-subitem" data-view="copilot" data-target="copilot-quality">Metriche</button>
         </div>
       </nav>
     </aside>
@@ -94,8 +87,8 @@
                 <span>Carica un documento o un lotto. OCR e classificazione rilevano metadati, destinatari e split; l'operatore verifica solo le anomalie.</span>
               </li>
               <li>
-                <strong>Audit e policy</strong>
-                <span>Consulta invii, prove di consegna, log operativi, ruoli e regole di conservazione.</span>
+                <strong>Metriche operative</strong>
+                <span>Monitora utilizzo, qualità e performance direttamente nelle pagine dei due strumenti.</span>
               </li>
             </ul>
           </article>
@@ -109,7 +102,7 @@
             </div>
             <ul class="status-list">
               <li><strong>6</strong><span>Bozze da rivedere</span></li>
-              <li><strong>3</strong><span>Documenti con anomalie</span></li>
+              <li><strong>3</strong><span>Invii con anomalie</span></li>
               <li><strong>9</strong><span>Invii pronti</span></li>
             </ul>
           </article>
@@ -354,12 +347,32 @@
           <article class="panel compact-panel" id="assistant-usage">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Monitoraggio</p>
-                <h3>Metriche utili</h3>
+                <p class="eyebrow">Metriche</p>
+                <h3>Metriche AI Assistant</h3>
               </div>
             </div>
 
-            <ul class="status-list">
+            <div class="filter-row metrics-filter-row">
+              <label class="field">
+                <span>Periodo</span>
+                <select id="assistant-metric-period">
+                  <option>Ultimi 30 giorni</option>
+                  <option>Ultimi 7 giorni</option>
+                  <option>Mese corrente</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Canale</span>
+                <select id="assistant-metric-channel">
+                  <option>Tutti</option>
+                  <option>Email interna</option>
+                  <option>News portale</option>
+                  <option>Notifica rapida</option>
+                </select>
+              </label>
+            </div>
+
+            <ul class="status-list" id="assistant-metric-list">
               <li><strong>38</strong><span>Contenuti generati nel mese</span></li>
               <li><strong>11</strong><span>Prompt riutilizzati</span></li>
               <li><strong>4,6</strong><span>Rating medio</span></li>
@@ -367,7 +380,7 @@
 
             <div class="usage-feedback">
               <p class="section-label">Feedback recenti</p>
-              <ul class="compact-list">
+              <ul class="compact-list" id="assistant-feedback-list">
                 <li><strong>5/5</strong><span>Testo pronto senza correzioni rilevanti</span></li>
                 <li><strong>4/5</strong><span>Buona struttura, apertura da rendere più sintetica</span></li>
               </ul>
@@ -390,7 +403,7 @@
             </div>
 
             <p class="panel-note">
-              Non devi indicare categoria, periodo o azienda: il modello li rileva dopo il caricamento.
+              Il modello rileva automaticamente i campi del documento dopo il caricamento. L'utente può correggere manualmente i soli campi modificabili nella verifica.
             </p>
 
             <button class="upload-box" id="upload-box" type="button">
@@ -404,18 +417,224 @@
             </ul>
           </article>
 
-          <article class="panel flow-step locked" id="copilot-analysis" data-step="copilot-analysis" aria-disabled="true">
+          <article class="panel" id="copilot-documents">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Storico invii</p>
+                <h3>Consulta gli invii</h3>
+              </div>
+            </div>
+
+            <p class="panel-note">
+              Archivio delle entry di invio generate dal modello. Ogni record rappresenta un destinatario e resta filtrabile senza trasformare la pagina in una lista infinita.
+            </p>
+
+            <ul class="status-list compact-kpi-list" id="document-summary-list">
+              <li><strong>0</strong><span>Risultati filtrati</span></li>
+              <li><strong>0</strong><span>Da verificare</span></li>
+              <li><strong>0</strong><span>Pronti per invio</span></li>
+              <li><strong>0</strong><span>Inviati</span></li>
+            </ul>
+
+            <div class="filter-row document-filter-grid">
+              <label class="field">
+                <span>Ricerca</span>
+                <input id="document-search" type="text" placeholder="Destinatario, azienda o file">
+              </label>
+              <label class="field">
+                <span>Stato invio</span>
+                <select id="document-delivery-filter">
+                  <option value="">Tutti</option>
+                  <option value="inviato">Inviati</option>
+                  <option value="non-inviato">Non inviati</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Confidenza</span>
+                <select id="document-confidence-mode">
+                  <option value="">Qualsiasi</option>
+                  <option value="lt">Minore di soglia</option>
+                  <option value="gte">Maggiore o uguale a soglia</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Soglia</span>
+                <input id="document-confidence-threshold" type="number" min="0" max="100" value="80">
+              </label>
+              <label class="field">
+                <span>Mese</span>
+                <select id="document-month-filter">
+                  <option value="">Tutti</option>
+                  <option value="03">Marzo</option>
+                  <option value="04">Aprile</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Anno</span>
+                <select id="document-year-filter">
+                  <option value="">Tutti</option>
+                  <option value="2026">2026</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="document-table" role="table" aria-label="Storico invii">
+              <div class="document-row document-row-head" role="row">
+                <span>Destinatario</span>
+                <span>Documento</span>
+                <span>File</span>
+                <span>Data</span>
+                <span>Conf.</span>
+                <span>Stato</span>
+                <span>Azioni</span>
+              </div>
+              <ul class="document-history" id="document-history"></ul>
+            </div>
+
+            <div class="pagination-row">
+              <span id="document-page-info">Pagina 1 di 1</span>
+              <div class="button-row">
+                <button class="secondary-button" id="document-prev-button" type="button">Precedenti</button>
+                <button class="secondary-button" id="document-next-button" type="button">Successivi</button>
+              </div>
+            </div>
+
+            <p class="empty-note hidden" id="document-empty">Nessun invio trovato.</p>
+          </article>
+
+          <article class="panel is-hidden" id="copilot-detail">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Dettaglio invio</p>
+                <h3 id="detail-title">Invio selezionato</h3>
+              </div>
+              <div class="button-row">
+                <button class="secondary-button" id="detail-edit-button" type="button">Modifica</button>
+                <button class="secondary-button hidden" id="detail-cancel-button" type="button">Annulla</button>
+                <button class="primary-button hidden" id="detail-save-button" type="button">Salva modifiche</button>
+              </div>
+            </div>
+
+            <div class="document-detail-grid">
+              <div class="document-preview">
+                <div class="preview-mode-row" role="tablist" aria-label="Anteprima documento">
+                  <button class="text-button active" type="button" data-detail-preview="original">Originale</button>
+                  <button class="text-button" type="button" data-detail-preview="split">Splittato</button>
+                  <button class="text-button" type="button" data-detail-preview="full">Completo</button>
+                </div>
+                <p class="eyebrow">Documento per destinatario</p>
+                <strong id="detail-preview-title">Documento</strong>
+                <span id="detail-preview-meta">Nome file e pagine</span>
+                <div class="document-preview-lines" id="detail-preview-lines"></div>
+              </div>
+
+              <div class="extracted-card document-inspector">
+                <div class="inspector-heading">
+                  <p class="section-label">Dati estratti dall'OCR</p>
+                  <div class="field-legend" aria-label="Legenda campi">
+                    <span><i class="legend-dot editable-dot"></i>Modificabile</span>
+                    <span><i class="legend-dot locked-dot"></i>Sola lettura</span>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <label class="field editable-field">
+                    <span>Nome e cognome</span>
+                    <input id="detail-employee-input" type="text" readonly>
+                  </label>
+
+                  <label class="field editable-field">
+                    <span>Azienda</span>
+                    <input id="detail-company-input" type="text" readonly>
+                  </label>
+
+                  <label class="field locked-field">
+                    <span>Nome file</span>
+                    <input id="detail-file-input" type="text" readonly>
+                  </label>
+
+                  <label class="field editable-field">
+                    <span>Data documento</span>
+                    <input id="detail-date-input" type="text" readonly>
+                  </label>
+
+                  <label class="field locked-field">
+                    <span>Numero pagine</span>
+                    <input id="detail-pages-input" type="text" readonly>
+                  </label>
+
+                  <label class="field editable-field">
+                    <span>Tipologia documento</span>
+                    <input id="detail-type-input" type="text" readonly>
+                  </label>
+
+                  <label class="field locked-field">
+                    <span>Confidenza</span>
+                    <input id="detail-confidence-input" type="text" readonly>
+                  </label>
+
+                  <label class="field locked-field">
+                    <span>Stato invio</span>
+                    <input id="detail-delivery-status-input" type="text" readonly>
+                  </label>
+
+                  <label class="field editable-field full-field">
+                    <span>Breve descrizione</span>
+                    <textarea id="detail-description-input" rows="3" readonly></textarea>
+                  </label>
+                </div>
+
+                <div class="button-row">
+                  <button class="primary-button" id="detail-send-button" type="button">Invia</button>
+                </div>
+                <p class="status-message" id="detail-status-message">Seleziona Modifica per correggere i campi consentiti dall'ADR.</p>
+              </div>
+            </div>
+
+            <div class="send-draft is-hidden" id="detail-send-draft">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Invio documento</p>
+                  <h3>Contenuto generato per l'invio</h3>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span>Destinatario</span>
+                  <input id="send-recipient-input" type="text">
+                </label>
+
+                <label class="field">
+                  <span>Oggetto</span>
+                  <input id="send-subject-input" type="text">
+                </label>
+
+                <label class="field full-field">
+                  <span>Testo</span>
+                  <textarea id="send-body-input" rows="4"></textarea>
+                </label>
+              </div>
+
+              <div class="button-row">
+                <button class="secondary-button" id="send-cancel-button" type="button">Annulla invio</button>
+                <button class="primary-button" id="send-confirm-button" type="button">Conferma invio</button>
+              </div>
+              <p class="status-message" id="send-status-message">Il documento del destinatario selezionato viene allegato automaticamente.</p>
+            </div>
+          </article>
+
+          <article class="panel flow-step locked is-hidden" id="copilot-analysis" data-step="copilot-analysis" aria-disabled="true">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Esiti AI</p>
-                <h3>Dati rilevati dal modello</h3>
+                <h3>Destinatari rilevati dal modello</h3>
               </div>
             </div>
 
             <div class="analysis-toolbar">
               <div>
-                <p class="section-label">Rilevamento automatico</p>
-                <p class="status-message">Prima verifica destinatari e confidenza, poi correggi i dati del documento selezionato.</p>
+                <p class="section-label">Split automatico</p>
+                <p class="status-message">Controlla le entry generate e apri il dettaglio dell'invio da correggere o completare.</p>
               </div>
               <div class="confidence-card">
                 <strong id="detected-confidence">--</strong>
@@ -424,19 +643,19 @@
             </div>
 
             <p class="editing-context" id="editing-context">
-              Dopo lo split potrai scegliere qualunque destinatario e correggere i dati associati.
+              Dopo lo split potrai scegliere qualunque destinatario e aprire il relativo dettaglio invio.
             </p>
 
             <div class="recipient-review-block">
               <div class="panel-heading">
                 <div>
                   <p class="eyebrow">Destinatari rilevati</p>
-                  <h3>Associazioni e confidenza</h3>
+                  <h3>Entry di invio</h3>
                 </div>
               </div>
 
               <p class="panel-note">
-                Seleziona un destinatario per vedere e correggere i dati estratti. Anche i casi confermati automaticamente possono essere modificati.
+                Ogni riga corrisponde a un destinatario. I dati OCR e il contenuto di invio sono centralizzati nel relativo dettaglio.
               </p>
 
               <ul class="history-list" id="recipient-list">
@@ -449,309 +668,49 @@
               </ul>
             </div>
 
-            <div class="detected-fields">
-              <div class="form-grid">
-                <label class="field">
-                  <span>Nome e cognome</span>
-                  <input id="ocr-employee-input" type="text" value="Da rilevare">
-                </label>
-
-                <label class="field">
-                  <span>Azienda</span>
-                  <input id="ocr-company-input" type="text" value="Da rilevare">
-                </label>
-
-                <label class="field">
-                  <span>Nome file</span>
-                  <input id="ocr-file-input" type="text" value="Da rilevare">
-                </label>
-
-                <label class="field">
-                  <span>Data documento</span>
-                  <input id="ocr-date-input" type="text" value="Da rilevare">
-                </label>
-
-                <label class="field">
-                  <span>Numero pagine</span>
-                  <input id="ocr-pages-input" type="text" value="Da rilevare">
-                </label>
-
-                <label class="field">
-                  <span>Tipologia documento</span>
-                  <input id="ocr-type-input" type="text" value="Da rilevare">
-                </label>
-
-                <label class="field full-field">
-                  <span>Breve descrizione</span>
-                  <textarea id="ocr-description-input" rows="3">Da rilevare</textarea>
-                </label>
-              </div>
-              <p class="status-message">
-                La correzione manuale è sempre disponibile; gli esiti sotto soglia richiedono una verifica più attenta.
-              </p>
-            </div>
-
-            <div class="preview-sheet ocr-text-box">
-              <div class="ocr-text-heading">
-                <p class="eyebrow">Testo riconosciuto</p>
-                <span>Estratto OCR</span>
-              </div>
-              <p class="preview-snippet" id="ocr-snippet">
-                Dopo il caricamento comparirà un estratto del testo letto dal documento.
-              </p>
-            </div>
-
-            <p class="inline-note" id="analysis-note">Carica un documento per visualizzare i dati rilevati.</p>
-          </article>
-
-          <article class="panel flow-step locked" id="copilot-dispatch" data-step="copilot-dispatch" aria-disabled="true">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Riepilogo</p>
-                <h3>Split e invio</h3>
-              </div>
-            </div>
-
-            <p class="panel-note">
-              Controlla lo stato del lotto e procedi all'invio quando tutti i destinatari sono confermati.
-            </p>
-
             <ul class="compact-list">
               <li><strong>Split automatico</strong><span id="split-state">In attesa del documento</span></li>
-              <li><strong>Correzione manuale</strong><span>Sempre disponibile; conferma richiesta sui casi dubbi</span></li>
+              <li><strong>Invii pronti</strong><span id="dispatch-ready">0</span></li>
             </ul>
+            <p class="status-message" id="dispatch-status">Completa l'analisi prima di aprire il dettaglio.</p>
 
-            <div class="dispatch-card">
-              <p class="dispatch-title">Messaggio automatico</p>
-              <p id="dispatch-message">
-                Il testo di accompagnamento verrà preparato dopo l'analisi.
-              </p>
-            </div>
-
-            <ul class="compact-list">
-              <li><strong>Documenti pronti</strong><span id="dispatch-ready">0</span></li>
-              <li><strong>Canale</strong><span id="dispatch-channel">Email / Portale</span></li>
-              <li><strong>Prova di consegna</strong><span>Tracciata nel dettaglio documento</span></li>
-            </ul>
-
-            <div class="button-row">
-              <button class="primary-button" id="dispatch-button" disabled>Invia documenti confermati</button>
-            </div>
-            <p class="status-message" id="dispatch-status">Completa l'analisi prima dell'invio.</p>
+            <p class="inline-note" id="analysis-note">Carica un documento per visualizzare i dati rilevati.</p>
           </article>
 
           <article class="panel compact-panel" id="copilot-quality">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Qualità</p>
-                <h3>Controlli essenziali</h3>
+                <p class="eyebrow">Metriche Co-Pilot</p>
+                <h3>Qualità e performance OCR</h3>
               </div>
             </div>
 
-            <ul class="status-list">
-              <li><strong>184</strong><span>Documenti analizzati</span></li>
-              <li><strong>97%</strong><span>Classificazioni corrette</span></li>
-              <li><strong>3</strong><span>Sotto soglia di confidenza</span></li>
-              <li><strong>94%</strong><span>Destinatari riconosciuti</span></li>
-              <li><strong>18 sec</strong><span>Tempo medio analisi</span></li>
-            </ul>
-          </article>
-
-          <article class="panel" id="copilot-documents">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Storico documenti</p>
-                <h3>Consulta e riprendi un documento</h3>
-              </div>
-            </div>
-
-            <p class="panel-note">
-              Archivio dei documenti processati dal modello. Puoi consultarne il dettaglio o riprendere il flusso dal punto in cui era rimasto.
-            </p>
-
-            <div class="filter-row">
-              <label class="field">
-                <span>Ricerca</span>
-                <input id="document-search" type="text" placeholder="Documento, azienda o destinatario">
-              </label>
-              <label class="field">
-                <span>Filtro</span>
-                <select id="document-filter">
-                  <option value="">Tutti</option>
-                  <option value="verifica">Da verificare</option>
-                  <option value="confermato">Confermati</option>
-                  <option value="inviato">Inviati</option>
-                  <option value="bassa-confidenza">Confidenza bassa</option>
-                  <option value="modificato">Correzioni manuali</option>
-                </select>
-              </label>
-            </div>
-
-            <ul class="history-list document-history" id="document-history">
-              <li class="history-item document-item needs-review" data-document-id="cedolini-aprile-2026" data-tags="verifica bassa-confidenza cedolino aprile 2026 eggon giulia conti">
-                <div class="history-main">
-                  <strong>Lotto cedolini aprile 2026</strong>
-                  <span data-document-summary>Cedolino mensile · Eggon S.r.l. · 3 destinatari · selezionato Giulia Conti</span>
-                  <div class="document-meta">
-                    <span>File: cedolini-aprile-2026.pdf</span>
-                    <span>Data: 30/04/2026</span>
-                    <span>Pagine: 3</span>
-                  </div>
-                </div>
-                <div class="history-actions">
-                  <span class="document-status" data-document-status>Da verificare</span>
-                  <button class="text-button" type="button" data-document-detail="cedolini-aprile-2026">Consulta</button>
-                  <button class="text-button" type="button" data-resume-document="cedolini-aprile-2026">Riprendi</button>
-                </div>
-              </li>
-
-              <li class="history-item document-item confirmed" data-document-id="contratto-onboarding" data-tags="confermato contratto onboarding nexum labs aprile 2026 luca bianchi">
-                <div class="history-main">
-                  <strong>Contratto onboarding</strong>
-                  <span data-document-summary>Contratto · Nexum Labs · Luca Bianchi · confidenza 96%</span>
-                  <div class="document-meta">
-                    <span>File: onboarding-luca-bianchi.pdf</span>
-                    <span>Data: 12/04/2026</span>
-                    <span>Metadati confermati</span>
-                  </div>
-                </div>
-                <div class="history-actions">
-                  <span class="document-status confirmed" data-document-status>Confermato</span>
-                  <button class="text-button" type="button" data-document-detail="contratto-onboarding">Consulta</button>
-                  <button class="text-button" type="button" data-resume-document="contratto-onboarding">Riprendi</button>
-                </div>
-              </li>
-
-              <li class="history-item document-item sent" data-document-id="comunicazione-benefit" data-tags="inviato comunicazione benefit eggon marzo 2026 dipendenti">
-                <div class="history-main">
-                  <strong>Comunicazione benefit</strong>
-                  <span data-document-summary>Comunicazione HR · Eggon S.r.l. · Dipendenti sede centrale · confidenza 98%</span>
-                  <div class="document-meta">
-                    <span>File: benefit-marzo-2026.pdf</span>
-                    <span>Data: 25/03/2026</span>
-                    <span>Consegna tracciata</span>
-                  </div>
-                </div>
-                <div class="history-actions">
-                  <span class="document-status sent" data-document-status>Inviato</span>
-                  <button class="text-button" type="button" data-document-detail="comunicazione-benefit">Consulta</button>
-                  <button class="text-button" type="button" data-resume-document="comunicazione-benefit">Riprendi</button>
-                </div>
-              </li>
-            </ul>
-
-            <p class="empty-note hidden" id="document-empty">Nessun documento trovato.</p>
-
-            <div class="document-detail" id="document-detail">
-              <div class="document-preview">
-                <p class="eyebrow">Documento originale</p>
-                <strong id="detail-preview-title">Lotto cedolini aprile 2026</strong>
-                <span id="detail-preview-meta">cedolini-aprile-2026.pdf · 3 pagine</span>
-                <div class="document-preview-lines" id="detail-preview-lines"></div>
-              </div>
-
-              <div class="extracted-card document-inspector">
-                <div class="inspector-tabs" role="tablist" aria-label="Dettaglio documento">
-                  <button class="text-button active" type="button" data-document-tab="data">Dati</button>
-                  <button class="text-button" type="button" data-document-tab="recipients">Destinatari</button>
-                  <button class="text-button" type="button" data-document-tab="delivery">Invio</button>
-                  <button class="text-button" type="button" data-document-tab="audit">Audit</button>
-                </div>
-
-                <div class="inspector-panel active" data-document-panel="data">
-                  <p class="section-label">Dati estratti</p>
-                  <ul class="analysis-list">
-                    <li><strong>Nome e cognome</strong><span id="detail-employee">Giulia Conti</span></li>
-                    <li><strong>Azienda</strong><span id="detail-company">Eggon S.r.l.</span></li>
-                    <li><strong>Nome file</strong><span id="detail-file">cedolini-aprile-2026.pdf</span></li>
-                    <li><strong>Data documento</strong><span id="detail-date">30/04/2026</span></li>
-                    <li><strong>Numero pagine</strong><span id="detail-pages">3</span></li>
-                    <li><strong>Tipologia</strong><span id="detail-type">Cedolino mensile</span></li>
-                    <li><strong>Descrizione</strong><span id="detail-description">Cedolini mensili con split per singolo dipendente.</span></li>
-                    <li><strong>Confidenza minima</strong><span id="detail-confidence">82%</span></li>
-                    <li><strong>Repository</strong><span id="detail-repository">Repository CdL / payroll</span></li>
-                  </ul>
-                </div>
-
-                <div class="inspector-panel" data-document-panel="recipients">
-                  <p class="section-label">Destinatari e split</p>
-                  <ul class="history-list detail-list" id="detail-recipient-list"></ul>
-                </div>
-
-                <div class="inspector-panel" data-document-panel="delivery">
-                  <p class="section-label">Invio e consegna</p>
-                  <ul class="analysis-list" id="detail-delivery-list"></ul>
-                </div>
-
-                <div class="inspector-panel" data-document-panel="audit">
-                  <p class="section-label">OCR, correzioni e audit</p>
-                  <p class="preview-snippet" id="detail-ocr-text"></p>
-                  <ul class="log-list" id="detail-audit-list"></ul>
-                </div>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section class="view" data-view="audit">
-          <article class="panel" id="audit-log">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Analisi invii</p>
-                <h3>Andamento e qualità delle consegne</h3>
-              </div>
-            </div>
-
-            <p class="panel-note">
-              Questa vista mostra solo dati aggregati sugli invii. Il dettaglio dei singoli documenti resta nello Storico documenti.
-            </p>
-
-            <div class="filter-row">
+            <div class="filter-row metrics-filter-row">
               <label class="field">
                 <span>Periodo</span>
-                <select id="delivery-period">
+                <select id="copilot-metric-period">
                   <option>Ultimi 30 giorni</option>
                   <option>Ultimi 7 giorni</option>
                   <option>Mese corrente</option>
                 </select>
               </label>
               <label class="field">
-                <span>Canale</span>
-                <select id="delivery-channel-filter">
+                <span>Stato</span>
+                <select id="copilot-metric-status">
                   <option>Tutti</option>
-                  <option>Email</option>
-                  <option>Portale</option>
+                  <option>Inviato</option>
+                  <option>Non inviato</option>
+                  <option>Sotto soglia</option>
                 </select>
               </label>
             </div>
 
-            <ul class="status-list" id="delivery-kpi-list">
-              <li><strong>142</strong><span>Invii completati</span></li>
-              <li><strong>96%</strong><span>Consegnati</span></li>
-              <li><strong>81%</strong><span>Letture confermate</span></li>
-              <li><strong>2</strong><span>Retry aperti</span></li>
-            </ul>
-
-            <ul class="log-list" id="audit-log-list">
-              <li><strong>Email</strong><span>118 invii, 97% consegna, 83% lettura</span></li>
-              <li><strong>Portale</strong><span>24 pubblicazioni, 91% consultazione entro 48 ore</span></li>
-              <li><strong>Retry</strong><span>2 code in osservazione, nessun blocco critico</span></li>
-            </ul>
-          </article>
-
-          <article class="panel" id="audit-policy">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Regole</p>
-                <h3>Accessi, conservazione e conformità</h3>
-              </div>
-            </div>
-
-            <ul class="compact-list">
-              <li><strong>Ruoli</strong><span>HR Manager, CdL, Operatore, Auditor</span></li>
-              <li><strong>Contenuti AI</strong><span>Marcatura automatica e storico revisioni</span></li>
-              <li><strong>Documenti</strong><span>Accesso per ruolo, log e conservazione</span></li>
-              <li><strong>GDPR</strong><span>Visibilità limitata e mascheramento dati quando richiesto</span></li>
+            <ul class="status-list" id="copilot-metric-list">
+              <li><strong>184</strong><span>Documenti analizzati</span></li>
+              <li><strong>97%</strong><span>Classificazioni corrette</span></li>
+              <li><strong>3</strong><span>Sotto soglia di confidenza</span></li>
+              <li><strong>94%</strong><span>Destinatari riconosciuti</span></li>
+              <li><strong>18 sec</strong><span>Tempo medio analisi</span></li>
             </ul>
           </article>
         </section>
