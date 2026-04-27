@@ -34,7 +34,6 @@
           <button class="nav-item" data-view="copilot" data-target="workspace-top">Co-Pilot</button>
           <button class="nav-subitem" data-view="copilot" data-target="copilot-upload">Caricamento</button>
           <button class="nav-subitem" data-view="copilot" data-target="copilot-documents">Storico invii</button>
-          <button class="nav-subitem" data-view="copilot" data-target="copilot-analysis">Esiti AI</button>
           <button class="nav-subitem" data-view="copilot" data-target="copilot-quality">Metriche</button>
         </div>
       </nav>
@@ -374,9 +373,29 @@
 
             <ul class="status-list" id="assistant-metric-list">
               <li><strong>38</strong><span>Contenuti generati nel mese</span></li>
-              <li><strong>11</strong><span>Prompt riutilizzati</span></li>
+              <li><strong>11</strong><span>Prompt salvati</span></li>
               <li><strong>4,6</strong><span>Rating medio</span></li>
             </ul>
+
+            <div class="metrics-detail-grid">
+              <div class="metric-block">
+                <p class="section-label">Utilizzo operativo</p>
+                <ul class="compact-list" id="assistant-usage-breakdown">
+                  <li><strong>Email interna</strong><span>18 contenuti</span></li>
+                  <li><strong>News portale</strong><span>12 contenuti</span></li>
+                  <li><strong>Notifica rapida</strong><span>8 contenuti</span></li>
+                </ul>
+              </div>
+
+              <div class="metric-block">
+                <p class="section-label">Qualità percepita</p>
+                <ul class="compact-list" id="assistant-rating-breakdown">
+                  <li><strong>5 stelle</strong><span>22 feedback</span></li>
+                  <li><strong>4 stelle</strong><span>13 feedback</span></li>
+                  <li><strong>Da rivedere</strong><span>3 feedback</span></li>
+                </ul>
+              </div>
+            </div>
 
             <div class="usage-feedback">
               <p class="section-label">Feedback recenti</p>
@@ -414,6 +433,7 @@
             <ul class="compact-list">
               <li><strong>Stato</strong><span id="upload-state">In attesa di caricamento</span></li>
               <li><strong>Controlli automatici</strong><span>Formato e duplicati</span></li>
+              <li><strong>Output</strong><span id="upload-output">Le entry di invio compariranno nello storico sottostante.</span></li>
             </ul>
           </article>
 
@@ -476,6 +496,19 @@
                   <option value="2026">2026</option>
                 </select>
               </label>
+              <label class="field">
+                <span>Righe</span>
+                <select id="document-page-size-select">
+                  <option value="6">6 righe</option>
+                  <option value="10">10 righe</option>
+                  <option value="20">20 righe</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="filter-action-row">
+              <button class="secondary-button" id="document-reset-filters" type="button">Azzera filtri</button>
+              <span id="document-filter-status">Filtri predefiniti: tutti gli invii, soglia 80%.</span>
             </div>
 
             <div class="document-table" role="table" aria-label="Storico invii">
@@ -623,60 +656,6 @@
             </div>
           </article>
 
-          <article class="panel flow-step locked is-hidden" id="copilot-analysis" data-step="copilot-analysis" aria-disabled="true">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Esiti AI</p>
-                <h3>Destinatari rilevati dal modello</h3>
-              </div>
-            </div>
-
-            <div class="analysis-toolbar">
-              <div>
-                <p class="section-label">Split automatico</p>
-                <p class="status-message">Controlla le entry generate e apri il dettaglio dell'invio da correggere o completare.</p>
-              </div>
-              <div class="confidence-card">
-                <strong id="detected-confidence">--</strong>
-                <span id="confidence-hint">In attesa di analisi</span>
-              </div>
-            </div>
-
-            <p class="editing-context" id="editing-context">
-              Dopo lo split potrai scegliere qualunque destinatario e aprire il relativo dettaglio invio.
-            </p>
-
-            <div class="recipient-review-block">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">Destinatari rilevati</p>
-                  <h3>Entry di invio</h3>
-                </div>
-              </div>
-
-              <p class="panel-note">
-                Ogni riga corrisponde a un destinatario. I dati OCR e il contenuto di invio sono centralizzati nel relativo dettaglio.
-              </p>
-
-              <ul class="history-list" id="recipient-list">
-                <li class="history-item">
-                  <div class="history-main">
-                    <strong>In attesa del documento</strong>
-                    <span>Il sistema mostrerà destinatari, confidenza e pagine da verificare.</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <ul class="compact-list">
-              <li><strong>Split automatico</strong><span id="split-state">In attesa del documento</span></li>
-              <li><strong>Invii pronti</strong><span id="dispatch-ready">0</span></li>
-            </ul>
-            <p class="status-message" id="dispatch-status">Completa l'analisi prima di aprire il dettaglio.</p>
-
-            <p class="inline-note" id="analysis-note">Carica un documento per visualizzare i dati rilevati.</p>
-          </article>
-
           <article class="panel compact-panel" id="copilot-quality">
             <div class="panel-heading">
               <div>
@@ -708,10 +687,35 @@
             <ul class="status-list" id="copilot-metric-list">
               <li><strong>184</strong><span>Documenti analizzati</span></li>
               <li><strong>97%</strong><span>Classificazioni corrette</span></li>
-              <li><strong>3</strong><span>Sotto soglia di confidenza</span></li>
+              <li><strong>37 (20%)</strong><span>Sotto soglia di confidenza</span></li>
               <li><strong>94%</strong><span>Destinatari riconosciuti</span></li>
               <li><strong>18 sec</strong><span>Tempo medio analisi</span></li>
             </ul>
+
+            <div class="metrics-detail-grid">
+              <div class="metric-block">
+                <p class="section-label">Volumi e stato invii</p>
+                <ul class="compact-list" id="copilot-document-breakdown">
+                  <li><strong>184</strong><span>Documenti nel periodo</span></li>
+                  <li><strong>32</strong><span>Invii già completati</span></li>
+                  <li><strong>152</strong><span>Invii non completati</span></li>
+                </ul>
+              </div>
+
+              <div class="metric-block">
+                <p class="section-label">Qualità OCR</p>
+                <ul class="compact-list" id="copilot-quality-breakdown">
+                  <li><strong>80%</strong><span>Soglia di revisione umana</span></li>
+                  <li><strong>37 (20%)</strong><span>Documenti sotto soglia</span></li>
+                  <li><strong>18 sec</strong><span>Tempo medio per documento</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button class="secondary-button" id="copilot-export-button" type="button">Esporta report</button>
+            </div>
+            <p class="status-message hidden" id="copilot-export-status"></p>
           </article>
         </section>
       </main>

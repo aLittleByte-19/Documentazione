@@ -435,19 +435,9 @@ img {
 }
 
 .panel-note,
-.status-message,
-.editing-context {
+.status-message {
   margin: 0;
   line-height: 1.55;
-}
-
-.editing-context {
-  padding: 12px 14px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  background: var(--surface-muted);
-  color: var(--muted);
-  font-weight: 700;
 }
 
 .field-stack,
@@ -464,7 +454,7 @@ img {
 }
 
 .document-filter-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .full-field {
@@ -492,15 +482,6 @@ img {
 #recipient-email-input {
   height: 48px;
   min-height: 48px;
-}
-
-.recipient-review-block {
-  display: grid;
-  gap: 12px;
-  padding: 16px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  background: var(--surface-muted);
 }
 
 .field {
@@ -575,44 +556,6 @@ img {
 
 #recipient-email-input {
   resize: none;
-}
-
-.analysis-toolbar {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  background: var(--surface-muted);
-}
-
-.analysis-toolbar .status-message {
-  margin-top: 4px;
-}
-
-.confidence-card {
-  display: grid;
-  align-content: center;
-  justify-items: end;
-  min-width: 220px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.confidence-card strong {
-  color: var(--primary-deep);
-  font-size: 1.2rem;
-}
-
-.confidence-card span {
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-align: right;
 }
 
 .field.has-manual-correction input,
@@ -852,6 +795,33 @@ img {
   gap: 10px;
 }
 
+.metrics-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.metric-block {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+}
+
+.metric-block .compact-list li {
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--border-soft);
+  border-radius: 0;
+  background: transparent;
+}
+
+.metric-block .compact-list li:last-child {
+  border-bottom: 0;
+}
+
 .document-history {
   gap: 12px;
   margin: 0;
@@ -872,13 +842,25 @@ img {
 }
 
 .document-row {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(150px, 1.35fr) minmax(120px, 1fr) minmax(150px, 1.25fr) minmax(92px, 0.7fr) minmax(72px, 0.55fr) minmax(108px, 0.75fr) minmax(94px, 0.65fr);
   align-items: center;
   gap: 12px;
-  padding: 12px 14px 12px 10px;
-  border-left: 4px solid transparent;
+  padding: 12px 14px 12px 18px;
   border-bottom: 1px solid var(--border-soft);
+}
+
+.document-table .document-history .document-row {
+  min-height: 72px;
+}
+
+.document-row::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: transparent;
 }
 
 .document-row:last-child {
@@ -904,16 +886,38 @@ img {
   font-size: 0.88rem;
 }
 
-.document-row.needs-review {
-  border-left-color: #d99a3f;
+.document-row.needs-review::before {
+  background: #d99a3f;
 }
 
-.document-row.confirmed {
-  border-left-color: #6bb58a;
+.document-row.confirmed::before {
+  background: #6bb58a;
 }
 
-.document-row.sent {
-  border-left-color: var(--border-strong);
+.document-row.sent::before {
+  background: var(--border-strong);
+}
+
+.document-row-placeholder {
+  pointer-events: none;
+}
+
+.document-row-placeholder > * {
+  visibility: hidden;
+}
+
+.document-row-placeholder::before {
+  display: none;
+}
+
+.filter-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
 }
 
 .pagination-row {
@@ -1376,6 +1380,7 @@ img {
   .status-list,
   .document-filter-grid,
   .compact-kpi-list,
+  .metrics-detail-grid,
   .document-detail-grid {
     grid-template-columns: 1fr;
   }
@@ -1389,22 +1394,10 @@ img {
   }
 
   .pagination-row,
+  .filter-action-row,
   .inspector-heading {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .analysis-toolbar {
-    flex-direction: column;
-  }
-
-  .confidence-card {
-    min-width: 0;
-    justify-items: start;
-  }
-
-  .confidence-card span {
-    text-align: left;
   }
 
   .compact-list li,

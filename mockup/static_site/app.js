@@ -58,6 +58,28 @@ function renderMetricList(list, values) {
   });
 }
 
+function metricRowsText(list) {
+  return Array.from(list?.querySelectorAll("li") || [])
+    .map((item) => {
+      const value = item.querySelector("strong")?.textContent || "";
+      const label = item.querySelector("span")?.textContent || "";
+      return `${label}: ${value}`;
+    })
+    .join("\n");
+}
+
+function downloadTextReport(filename, content) {
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
 function applyTheme(theme) {
   currentTheme = theme;
   document.documentElement.dataset.theme = theme;
@@ -225,12 +247,13 @@ const analyticsStatus = document.getElementById("analytics-status");
 const assistantMetricPeriod = document.getElementById("assistant-metric-period");
 const assistantMetricChannel = document.getElementById("assistant-metric-channel");
 const assistantMetricList = document.getElementById("assistant-metric-list");
+const assistantUsageBreakdown = document.getElementById("assistant-usage-breakdown");
+const assistantRatingBreakdown = document.getElementById("assistant-rating-breakdown");
 const assistantFeedbackList = document.getElementById("assistant-feedback-list");
 
 [
   "assistant-review",
-  "assistant-feedback",
-  "copilot-analysis"
+  "assistant-feedback"
 ].forEach((stepId) => setStepLocked(stepId, true));
 
 function topicFromPrompt(prompt) {
@@ -737,7 +760,28 @@ ratingSubmitButton?.addEventListener("click", () => {
 });
 
 analyticsExportButton?.addEventListener("click", () => {
-  setText(analyticsStatus, "Report pronto per il download.");
+  const period = assistantMetricPeriod?.value || "Ultimi 30 giorni";
+  const channel = assistantMetricChannel?.value || "Tutti";
+  downloadTextReport(
+    "report-metriche-assistant.txt",
+    [
+      "Report metriche AI Assistant",
+      `Periodo: ${period}`,
+      `Canale: ${channel}`,
+      "",
+      metricRowsText(assistantMetricList),
+      "",
+      "Utilizzo operativo",
+      metricRowsText(assistantUsageBreakdown),
+      "",
+      "Qualita percepita",
+      metricRowsText(assistantRatingBreakdown),
+      "",
+      "Feedback recenti",
+      metricRowsText(assistantFeedbackList)
+    ].join("\n")
+  );
+  setText(analyticsStatus, `Report Assistant scaricato (${period}, canale: ${channel}).`);
   analyticsStatus?.classList.remove("hidden");
 });
 
@@ -746,16 +790,41 @@ function updateAssistantAnalytics() {
   const channel = assistantMetricChannel?.value || "Tutti";
   const shortPeriod = period === "Ultimi 7 giorni";
   const currentMonth = period === "Mese corrente";
-  const channelFactor = channel === "Tutti" ? 1 : channel === "Notifica rapida" ? 0.38 : 0.62;
-  const generated = Math.round((shortPeriod ? 14 : currentMonth ? 31 : 38) * channelFactor);
-  const reused = Math.max(2, Math.round((shortPeriod ? 4 : currentMonth ? 9 : 11) * channelFactor));
+  const baseGenerated = shortPeriod ? 14 : currentMonth ? 31 : 38;
+  const baseSaved = shortPeriod ? 5 : currentMonth ? 10 : 13;
+  const channelShare = {
+    "Email interna": 0.48,
+    "News portale": 0.32,
+    "Notifica rapida": 0.2
+  };
+  const channelFactor = channel === "Tutti" ? 1 : channelShare[channel] || 1;
+  const generated = Math.max(1, Math.round(baseGenerated * channelFactor));
+  const saved = Math.max(1, Math.round(baseSaved * channelFactor));
   const rating = channel === "Notifica rapida" ? "4,4" : channel === "News portale" ? "4,7" : "4,6";
+  const feedbackTotal = Math.max(2, Math.round((shortPeriod ? 9 : currentMonth ? 24 : 31) * channelFactor));
+  const dailyAverage = Math.max(1, Math.round(generated / (shortPeriod ? 7 : 30)));
 
   renderMetricList(assistantMetricList, [
     [String(generated), "Contenuti generati"],
-    [String(reused), "Prompt riutilizzati"],
+    [String(saved), "Prompt salvati"],
     [rating, "Rating medio"],
-    [period, "Filtro temporale attivo"]
+    [String(feedbackTotal), "Feedback raccolti"]
+  ]);
+
+  const channelRows = channel === "Tutti"
+    ? Object.entries(channelShare).map(([name, share]) => [name, `${Math.max(1, Math.round(baseGenerated * share))} contenuti`])
+    : [
+      [channel, `${generated} contenuti`],
+      ["Prompt salvati", `${saved} configurazioni`],
+      ["Media giornaliera", `${dailyAverage} contenuti/giorno`]
+    ];
+
+  renderMetricList(assistantUsageBreakdown, channelRows);
+
+  renderMetricList(assistantRatingBreakdown, [
+    ["5 stelle", `${Math.max(1, Math.round(feedbackTotal * 0.58))} feedback`],
+    ["4 stelle", `${Math.max(1, Math.round(feedbackTotal * 0.34))} feedback`],
+    ["3 stelle o meno", `${Math.max(0, feedbackTotal - Math.round(feedbackTotal * 0.58) - Math.round(feedbackTotal * 0.34))} feedback`]
   ]);
 
   renderMetricList(assistantFeedbackList, [
@@ -770,30 +839,29 @@ updateAssistantAnalytics();
 
 const uploadBox = document.getElementById("upload-box");
 const uploadState = document.getElementById("upload-state");
-const detectedConfidence = document.getElementById("detected-confidence");
-const confidenceHint = document.getElementById("confidence-hint");
-const analysisNote = document.getElementById("analysis-note");
-const editingContext = document.getElementById("editing-context");
-const recipientList = document.getElementById("recipient-list");
-const splitState = document.getElementById("split-state");
-const dispatchReady = document.getElementById("dispatch-ready");
-const dispatchStatus = document.getElementById("dispatch-status");
+const uploadOutput = document.getElementById("upload-output");
 const copilotMetricPeriod = document.getElementById("copilot-metric-period");
 const copilotMetricStatus = document.getElementById("copilot-metric-status");
 const copilotMetricList = document.getElementById("copilot-metric-list");
+const copilotDocumentBreakdown = document.getElementById("copilot-document-breakdown");
+const copilotQualityBreakdown = document.getElementById("copilot-quality-breakdown");
+const copilotExportButton = document.getElementById("copilot-export-button");
+const copilotExportStatus = document.getElementById("copilot-export-status");
 const documentSearch = document.getElementById("document-search");
 const documentDeliveryFilter = document.getElementById("document-delivery-filter");
 const documentConfidenceMode = document.getElementById("document-confidence-mode");
 const documentConfidenceThreshold = document.getElementById("document-confidence-threshold");
 const documentMonthFilter = document.getElementById("document-month-filter");
 const documentYearFilter = document.getElementById("document-year-filter");
+const documentPageSizeSelect = document.getElementById("document-page-size-select");
+const documentResetFilters = document.getElementById("document-reset-filters");
+const documentFilterStatus = document.getElementById("document-filter-status");
 const documentHistory = document.getElementById("document-history");
 const documentEmpty = document.getElementById("document-empty");
 const documentSummaryList = document.getElementById("document-summary-list");
 const documentPageInfo = document.getElementById("document-page-info");
 const documentPrevButton = document.getElementById("document-prev-button");
 const documentNextButton = document.getElementById("document-next-button");
-const copilotAnalysisSection = document.getElementById("copilot-analysis");
 const copilotDetailSection = document.getElementById("copilot-detail");
 const detailTitle = document.getElementById("detail-title");
 const detailPreviewTitle = document.getElementById("detail-preview-title");
@@ -823,9 +891,9 @@ const sendStatusMessage = document.getElementById("send-status-message");
 let currentAnalysisDocumentId = "cedolino-giulia-conti";
 let activeDocumentId = currentAnalysisDocumentId;
 let detailPreviewMode = "original";
-let hasFocusedCopilotDocument = false;
 let currentDocumentPage = 1;
-const documentPageSize = 6;
+let documentPageSize = 6;
+const confidenceReviewThreshold = 80;
 
 const documentDetails = {
   "cedolino-marco-rinaldi": {
@@ -844,7 +912,7 @@ const documentDetails = {
     previewLines: [
       "Pagina 1: Marco Rinaldi - cedolino mensile",
       "Pagina 2: Elena Ferri - cedolino mensile",
-      "Pagina 3: Giulia Conti - confidenza destinatario 82%"
+      "Pagina 3: Giulia Conti - confidenza destinatario 78%"
     ],
     recipients: [
       { name: "Marco Rinaldi", page: "pagina 1", confidence: 98, status: "confirmed", documentId: "cedolino-marco-rinaldi" }
@@ -866,7 +934,7 @@ const documentDetails = {
     previewLines: [
       "Pagina 1: Marco Rinaldi - cedolino mensile",
       "Pagina 2: Elena Ferri - cedolino mensile",
-      "Pagina 3: Giulia Conti - confidenza destinatario 82%"
+      "Pagina 3: Giulia Conti - confidenza destinatario 78%"
     ],
     recipients: [
       { name: "Elena Ferri", page: "pagina 2", confidence: 95, status: "confirmed", documentId: "cedolino-elena-ferri" }
@@ -883,15 +951,15 @@ const documentDetails = {
     pages: "1",
     type: "Cedolino mensile",
     description: "Cedolino mensile estratto dal lotto di aprile.",
-    confidence: "82%",
+    confidence: "78%",
     deliveryStatus: "Non inviato",
     previewLines: [
       "Pagina 1: Marco Rinaldi - cedolino mensile",
       "Pagina 2: Elena Ferri - cedolino mensile",
-      "Pagina 3: Giulia Conti - confidenza destinatario 82%"
+      "Pagina 3: Giulia Conti - confidenza destinatario 78%"
     ],
     recipients: [
-      { name: "Giulia Conti", page: "pagina 3", confidence: 82, status: "needs-review", documentId: "cedolino-giulia-conti" }
+      { name: "Giulia Conti", page: "pagina 3", confidence: 78, status: "needs-review", documentId: "cedolino-giulia-conti" }
     ]
   },
   "contratto-onboarding": {
@@ -1076,27 +1144,6 @@ function dateParts(detail) {
   };
 }
 
-function syncCopilotFlowVisibility() {
-  const visible = hasFocusedCopilotDocument;
-  copilotAnalysisSection?.classList.toggle("is-hidden", !visible);
-
-  subNavItems.forEach((button) => {
-    if (button.dataset.view !== "copilot") {
-      return;
-    }
-
-    if (button.dataset.target === "copilot-analysis") {
-      button.classList.toggle("is-hidden", !visible);
-    }
-  });
-
-  if (!visible) {
-    activateSubnav(currentView === "copilot" ? "copilot-upload" : "workspace-top");
-  } else {
-    syncSubnavWithScroll();
-  }
-}
-
 function createRecipient(name, confidence, page, status, note, documentId) {
   return {
     id: name.toLowerCase().replace(/\s+/g, "-"),
@@ -1130,10 +1177,6 @@ function recipientFromDetail(documentId) {
         : "Confermato da OCR",
     documentId
   );
-}
-
-function getCurrentRecipientDetailId() {
-  return getCurrentRecipient()?.documentId || currentAnalysisDocumentId;
 }
 
 function documentStateFromDetail(detail) {
@@ -1171,14 +1214,10 @@ function resetCopilotRecipients() {
   copilotRun.recipients = [
     createRecipient("Marco Rinaldi", 98, "pagina 1", "confirmed", "Destinatario rilevato nello stesso lotto", "cedolino-marco-rinaldi"),
     createRecipient("Elena Ferri", 95, "pagina 2", "confirmed", "Destinatario rilevato nello stesso lotto", "cedolino-elena-ferri"),
-    createRecipient("Giulia Conti", 82, "pagina 3", "needs-review", "Richiede conferma operatore", "cedolino-giulia-conti")
+    createRecipient("Giulia Conti", 78, "pagina 3", "needs-review", "Richiede conferma operatore", "cedolino-giulia-conti")
   ];
   selectedRecipientId = "giulia-conti";
   currentAnalysisDocumentId = "cedolino-giulia-conti";
-}
-
-function getCurrentRecipient() {
-  return copilotRun.recipients.find((recipient) => recipient.id === selectedRecipientId);
 }
 
 function syncRecipientsIntoDocument() {
@@ -1208,20 +1247,6 @@ function syncRecipientsIntoDocument() {
       documentId: recipient.documentId
     }];
   });
-}
-
-function updateEditingContext() {
-  const recipient = getCurrentRecipient();
-  if (!recipient) {
-    setText(editingContext, "Dopo lo split potrai scegliere qualunque destinatario e aprire il relativo dettaglio invio.");
-    return;
-  }
-
-  const state = recipient.status === "confirmed" ? "confermato da OCR" : "da confermare";
-  setText(
-    editingContext,
-    `Invio selezionato: ${recipient.name} (${recipient.page}, ${state}). Apri il dettaglio per correggere i campi OCR consentiti.`
-  );
 }
 
 function buildDocumentTags(documentId, state) {
@@ -1323,8 +1348,8 @@ function setDetailEditMode(editing) {
 
 function setDetailValues(detail) {
   const inspector = document.querySelector(".document-inspector");
-  inspector?.classList.toggle("confidence-low", confidenceNumber(detail) < 90);
-  inspector?.classList.toggle("confidence-high", confidenceNumber(detail) >= 90);
+  inspector?.classList.toggle("confidence-low", confidenceNumber(detail) < confidenceReviewThreshold);
+  inspector?.classList.toggle("confidence-high", confidenceNumber(detail) >= confidenceReviewThreshold);
 
   setText(detailTitle, detail.title);
   setValue(detailEmployeeInput, detail.employee);
@@ -1471,8 +1496,6 @@ function saveDetailChanges() {
   syncRecipientsIntoDocument();
   updateAllDocumentCards();
   updateDocumentDetail(activeDocumentId);
-  renderRecipientList();
-  updateSplitAndDispatchState();
   setText(detailStatusMessage, "Modifiche salvate sui campi editabili. L'invio selezionato è pronto.");
 }
 
@@ -1507,8 +1530,6 @@ function confirmDetailSend() {
       stateTags: `inviato ${detail.type} ${detail.company} ${detail.employee}`
     };
     syncRecipientsIntoDocument();
-    renderRecipientList();
-    updateSplitAndDispatchState();
   }
 
   hideSendDraft();
@@ -1517,103 +1538,6 @@ function confirmDetailSend() {
   updateAllDocumentCards();
   updateDocumentDetail(activeDocumentId);
   updateCopilotAnalytics();
-}
-
-function renderRecipientList() {
-  if (!recipientList || copilotRun.recipients.length === 0) {
-    return;
-  }
-
-  recipientList.replaceChildren();
-  copilotRun.recipients.forEach((recipient) => {
-    const item = document.createElement("li");
-    item.className = `history-item ${
-      recipient.status === "needs-review" ? "needs-review" : recipient.status === "sent" ? "sent" : "confirmed"
-    }`;
-    item.classList.toggle("selected", recipient.id === selectedRecipientId);
-
-    const main = document.createElement("div");
-    main.className = "history-main";
-
-    const name = document.createElement("strong");
-    name.textContent = recipient.name;
-
-    const detail = document.createElement("span");
-    detail.textContent = `${recipient.note} · ${recipient.page}`;
-
-    main.append(name, detail);
-    item.append(main);
-
-    const actions = document.createElement("div");
-    actions.className = "history-actions";
-
-    const editButton = document.createElement("button");
-    editButton.className = "text-button";
-    editButton.type = "button";
-    editButton.dataset.editRecipient = recipient.id;
-    editButton.textContent = "Apri dettaglio";
-    actions.append(editButton);
-
-    if (recipient.status === "needs-review") {
-      const button = document.createElement("button");
-      button.className = "text-button";
-      button.type = "button";
-      button.dataset.confirmRecipient = recipient.id;
-      button.textContent = "Conferma";
-      actions.append(button);
-    } else {
-      const badge = document.createElement("span");
-      badge.className = `document-status ${recipient.status === "sent" ? "sent" : "confirmed"}`;
-      badge.textContent = recipient.status === "sent" ? "Inviato" : "OK";
-      actions.append(badge);
-    }
-
-    item.append(actions);
-    recipientList.append(item);
-  });
-  updateEditingContext();
-}
-
-function updateSplitAndDispatchState() {
-  if (!copilotRun.processed) {
-    return;
-  }
-
-  const total = copilotRun.recipients.length;
-  const needsReview = copilotRun.recipients.filter((recipient) => recipient.status === "needs-review").length;
-  const sent = copilotRun.recipients.filter((recipient) => recipient.status === "sent").length;
-  const confirmed = total - needsReview;
-  const selectedRecipient = getCurrentRecipient();
-
-  setText(splitState, `${total} invii generati, ${needsReview} da verificare`);
-  setText(
-    dispatchReady,
-    sent === total && total > 0
-      ? `${total} inviati`
-      : needsReview > 0
-        ? `${confirmed} confermati, ${needsReview} in verifica`
-        : `${total} confermati`
-  );
-
-  if (sent === total && total > 0) {
-    setText(confidenceHint, "Invii completati");
-    setText(dispatchStatus, "Tutti gli invii generati dallo split risultano completati.");
-    return;
-  }
-
-  if (needsReview > 0) {
-    setText(confidenceHint, "Verifica richiesta su almeno un invio");
-    setText(
-      dispatchStatus,
-      selectedRecipient?.status === "needs-review"
-        ? "Apri il dettaglio dell'invio selezionato per controllare i dati OCR e procedere."
-        : "Puoi aprire il dettaglio dell'invio selezionato; resta almeno un altro destinatario da verificare."
-    );
-    return;
-  }
-
-  setText(confidenceHint, "Tutti i destinatari confermati");
-  setText(dispatchStatus, "Apri il dettaglio dell'invio selezionato per confermare destinatario, oggetto e testo.");
 }
 
 function updateCopilotAnalytics() {
@@ -1630,15 +1554,22 @@ function updateCopilotAnalytics() {
     }
 
     if (status === "Sotto soglia") {
-      return confidenceNumber(detail) < 90;
+      return confidenceNumber(detail) < confidenceReviewThreshold;
     }
 
     return true;
   });
   const periodFactor = period === "Ultimi 7 giorni" ? 0.42 : period === "Mese corrente" ? 0.78 : 1;
   const analyzed = Math.max(visibleEntries.length, Math.round(184 * periodFactor * (visibleEntries.length / allEntries.length)));
-  const belowThreshold = visibleEntries.filter((detail) => confidenceNumber(detail) < 90).length;
+  const belowVisible = visibleEntries.filter((detail) => confidenceNumber(detail) < confidenceReviewThreshold).length;
+  const belowShare = visibleEntries.length ? Math.round((belowVisible / visibleEntries.length) * 100) : 0;
+  const belowAnalyzed = Math.round((analyzed * belowShare) / 100);
   const sentEntries = visibleEntries.filter((detail) => displayDeliveryStatus(detail) === "Inviato").length;
+  const nonSentEntries = visibleEntries.length - sentEntries;
+  const reviewEntries = visibleEntries.filter((detail) => (
+    confidenceNumber(detail) < confidenceReviewThreshold
+    || detail.recipients?.some((recipient) => recipient.status === "needs-review")
+  )).length;
   const correctRate = status === "Sotto soglia" ? "88%" : status === "Inviato" ? "99%" : "97%";
   const recipientRate = sentEntries > 0 && sentEntries === visibleEntries.length ? "96%" : "94%";
   const averageTime = period === "Ultimi 7 giorni" ? "16 sec" : "18 sec";
@@ -1646,9 +1577,23 @@ function updateCopilotAnalytics() {
   renderMetricList(copilotMetricList, [
     [String(analyzed), "Documenti analizzati"],
     [correctRate, "Classificazioni corrette"],
-    [String(Math.max(belowThreshold, status === "Sotto soglia" ? 1 : 0)), "Documenti sotto soglia di confidenza"],
+    [`${belowAnalyzed} (${belowShare}%)`, "Documenti sotto soglia di confidenza"],
     [recipientRate, "Destinatari riconosciuti automaticamente"],
     [averageTime, "Tempo medio analisi"]
+  ]);
+
+  renderMetricList(copilotDocumentBreakdown, [
+    [String(visibleEntries.length), "Invii nel filtro metriche"],
+    [String(sentEntries), "Invii completati"],
+    [String(nonSentEntries), "Invii non completati"],
+    [String(reviewEntries), "Revisioni umane richieste"]
+  ]);
+
+  renderMetricList(copilotQualityBreakdown, [
+    [`${confidenceReviewThreshold}%`, "Soglia di revisione umana"],
+    [`${belowAnalyzed} (${belowShare}%)`, "Documenti sotto soglia"],
+    [recipientRate, "Destinatari riconosciuti automaticamente"],
+    [averageTime, "Tempo medio per documento"]
   ]);
 }
 
@@ -1656,8 +1601,8 @@ function getFilteredDocumentIds() {
   const query = (documentSearch?.value || "").trim().toLowerCase();
   const deliveryFilter = documentDeliveryFilter?.value || "";
   const confidenceMode = documentConfidenceMode?.value || "";
-  const parsedThreshold = Number.parseInt(documentConfidenceThreshold?.value || "80", 10);
-  const threshold = Number.isFinite(parsedThreshold) ? parsedThreshold : 80;
+  const parsedThreshold = Number.parseInt(documentConfidenceThreshold?.value || String(confidenceReviewThreshold), 10);
+  const threshold = Number.isFinite(parsedThreshold) ? parsedThreshold : confidenceReviewThreshold;
   const monthFilter = documentMonthFilter?.value || "";
   const yearFilter = documentYearFilter?.value || "";
 
@@ -1676,6 +1621,30 @@ function getFilteredDocumentIds() {
     const matchesYear = !yearFilter || parts.year === yearFilter;
     return matchesQuery && matchesDelivery && matchesConfidence && matchesMonth && matchesYear;
   });
+}
+
+function updateDocumentFilterStatus(filteredIds) {
+  const deliveryFilter = documentDeliveryFilter?.selectedOptions?.[0]?.textContent || "Tutti";
+  const confidenceMode = documentConfidenceMode?.selectedOptions?.[0]?.textContent || "Qualsiasi";
+  const threshold = documentConfidenceThreshold?.value || String(confidenceReviewThreshold);
+  const month = documentMonthFilter?.selectedOptions?.[0]?.textContent || "Tutti";
+  const year = documentYearFilter?.selectedOptions?.[0]?.textContent || "Tutti";
+  const confidenceText = confidenceMode === "Qualsiasi" ? confidenceMode : `${confidenceMode} ${threshold}%`;
+  const periodText = month === "Tutti" && year === "Tutti" ? "Tutti" : `${month} ${year}`;
+
+  setText(
+    documentFilterStatus,
+    `${filteredIds.length} invii trovati - stato: ${deliveryFilter}, confidenza: ${confidenceText}, periodo: ${periodText}.`
+  );
+}
+
+function resetDocumentFilters() {
+  setValue(documentSearch, "");
+  setValue(documentDeliveryFilter, "");
+  setValue(documentConfidenceMode, "");
+  setValue(documentConfidenceThreshold, String(confidenceReviewThreshold));
+  setValue(documentMonthFilter, "");
+  setValue(documentYearFilter, "");
 }
 
 function updateDocumentSummary(filteredIds) {
@@ -1745,6 +1714,18 @@ function renderDocumentHistory(filteredIds) {
     documentHistory.append(row);
   });
 
+  for (let index = pageIds.length; index < documentPageSize; index += 1) {
+    const placeholder = document.createElement("li");
+    placeholder.className = "document-row document-row-placeholder";
+    placeholder.setAttribute("aria-hidden", "true");
+    for (let column = 0; column < 7; column += 1) {
+      const cell = document.createElement("span");
+      cell.textContent = "\u00a0";
+      placeholder.append(cell);
+    }
+    documentHistory.append(placeholder);
+  }
+
   setText(documentPageInfo, `Pagina ${currentDocumentPage} di ${pageCount} - ${filteredIds.length} risultati`);
   if (documentPrevButton) {
     documentPrevButton.disabled = currentDocumentPage <= 1;
@@ -1761,6 +1742,7 @@ function applyDocumentFilters({ keepPage = false } = {}) {
 
   const filteredIds = getFilteredDocumentIds();
   updateDocumentSummary(filteredIds);
+  updateDocumentFilterStatus(filteredIds);
   renderDocumentHistory(filteredIds);
   documentEmpty?.classList.toggle("hidden", filteredIds.length > 0);
 }
@@ -1781,8 +1763,6 @@ function loadDocumentIntoFlow(documentId) {
     return;
   }
 
-  hasFocusedCopilotDocument = true;
-  syncCopilotFlowVisibility();
   currentAnalysisDocumentId = documentId;
   copilotRun.processed = true;
   copilotRun.recipients = getBatchDocumentIds(documentId).map(recipientFromDetail);
@@ -1793,37 +1773,28 @@ function loadDocumentIntoFlow(documentId) {
   currentAnalysisDocumentId = selectedRecipient?.documentId || documentId;
 
   const selectedDetail = documentDetails[currentAnalysisDocumentId] || detail;
-  setText(uploadState, `Invio ripreso: ${selectedDetail.title}`);
-  setText(detectedConfidence, String(copilotRun.recipients.length));
-  setText(confidenceHint, "Entry del lotto disponibili");
+  setText(uploadState, `Invio selezionato: ${selectedDetail.title}`);
+  setText(uploadOutput, `${copilotRun.recipients.length} entry disponibili nello storico invii.`);
 
   currentDocumentState = documentStateFromDetail(selectedDetail);
-  unlockSteps(["copilot-analysis"]);
-  renderRecipientList();
   updateAllDocumentCards();
-  updateSplitAndDispatchState();
-  setText(analysisNote, "Invio ricaricato dallo storico. Apri il dettaglio per correggere i campi OCR o procedere all'invio.");
   if (!copilotDetailSection?.classList.contains("is-hidden")) {
     updateDocumentDetail(currentAnalysisDocumentId);
   }
-  goTo("copilot", "copilot-analysis");
+  goTo("copilot", "copilot-documents");
 }
 
 function fillCopilotResults() {
   uploadBox?.classList.remove("processing");
-  hasFocusedCopilotDocument = true;
-  syncCopilotFlowVisibility();
-  unlockSteps(["copilot-analysis"]);
   copilotRun.processed = true;
   currentAnalysisDocumentId = "cedolino-giulia-conti";
   documentDetails[currentAnalysisDocumentId].deliveryStatus = "Non inviato";
   setText(uploadState, "Documento analizzato");
-  setText(detectedConfidence, "3");
-  setText(confidenceHint, "Entry generate; verifica richiesta");
+  setText(uploadOutput, "3 entry di invio generate e visibili nello storico.");
   resetCopilotRecipients();
   syncRecipientsIntoDocument();
-  updateAllDocumentCards();
-  setText(analysisNote, "Il modello ha creato le entry per singolo destinatario. Apri il dettaglio dell'invio da correggere o conferma i casi sotto soglia.");
+  resetDocumentFilters();
+  applyDocumentFilters();
 
   setCurrentDocumentState(
     "Da verificare",
@@ -1832,97 +1803,22 @@ function fillCopilotResults() {
     "needs-review"
   );
   syncRecipientsIntoDocument();
-  renderRecipientList();
-  updateSplitAndDispatchState();
-  goTo("copilot", "copilot-analysis");
+  goTo("copilot", "copilot-documents");
   updateCopilotAnalytics();
 }
 
 function processUpload() {
-  hasFocusedCopilotDocument = true;
-  syncCopilotFlowVisibility();
   currentAnalysisDocumentId = "cedolino-giulia-conti";
   uploadBox?.classList.add("processing");
   copilotRun.processed = false;
   copilotRun.recipients = [];
-  setStepLocked("copilot-analysis", true);
   setText(uploadState, "Analisi automatica in corso");
-  setText(detectedConfidence, "In corso");
-  setText(confidenceHint, "OCR e classificazione in elaborazione");
-  if (recipientList) {
-    recipientList.innerHTML = `
-      <li class="history-item">
-        <div class="history-main">
-          <strong>Analisi in corso</strong>
-          <span>I destinatari verranno mostrati dopo lo split automatico.</span>
-        </div>
-      </li>
-    `;
-  }
-  setText(splitState, "Analisi in corso");
-  setText(dispatchReady, "Analisi in corso");
-  setText(analysisNote, "Analisi automatica in corso. Le entry di invio saranno disponibili appena termina lo split.");
-  setText(editingContext, "Analisi in corso: i destinatari verranno selezionabili dopo lo split.");
-  setText(dispatchStatus, "Attendi il completamento dell'analisi.");
+  setText(uploadOutput, "OCR, classificazione e split in corso. Lo storico si aggiorna a fine analisi.");
 
   window.setTimeout(fillCopilotResults, 500);
 }
 
 uploadBox?.addEventListener("click", processUpload);
-
-recipientList?.addEventListener("click", (event) => {
-  const editButton = event.target.closest("[data-edit-recipient]");
-  if (editButton) {
-    const recipient = copilotRun.recipients.find((item) => item.id === editButton.dataset.editRecipient);
-    if (!recipient) {
-      return;
-    }
-
-    selectedRecipientId = recipient.id;
-    currentAnalysisDocumentId = recipient.documentId;
-    renderRecipientList();
-    updateAllDocumentCards();
-    updateSplitAndDispatchState();
-    setText(analysisNote, `Invio selezionato: ${recipient.name}. Il dettaglio contiene i soli campi OCR modificabili dall'ADR.`);
-    showDocumentDetail(recipient.documentId);
-    return;
-  }
-
-  const button = event.target.closest("[data-confirm-recipient]");
-  if (!button) {
-    return;
-  }
-
-  const recipient = copilotRun.recipients.find((item) => item.id === button.dataset.confirmRecipient);
-  if (recipient) {
-    selectedRecipientId = recipient.id;
-    recipient.status = "confirmed";
-    currentAnalysisDocumentId = recipient.documentId;
-    recipient.note = "Destinatario confermato dall'operatore";
-  }
-
-  syncRecipientsIntoDocument();
-  if (copilotRun.recipients.some((item) => item.status === "needs-review")) {
-    const detail = documentDetails[currentAnalysisDocumentId];
-    setCurrentDocumentState(
-      "Da verificare",
-      `verifica bassa-confidenza ${detail.type} ${detail.company} ${detail.employee}`,
-      "",
-      "needs-review"
-    );
-  } else {
-    const detail = documentDetails[currentAnalysisDocumentId];
-    setCurrentDocumentState(
-      "Confermato",
-      `confermato ${detail.type} ${detail.company} ${detail.employee}`,
-      "confirmed",
-      "confirmed"
-    );
-  }
-  renderRecipientList();
-  updateSplitAndDispatchState();
-  updateCopilotAnalytics();
-});
 
 documentSearch?.addEventListener("input", applyDocumentFilters);
 documentDeliveryFilter?.addEventListener("change", applyDocumentFilters);
@@ -1930,8 +1826,39 @@ documentConfidenceMode?.addEventListener("change", applyDocumentFilters);
 documentConfidenceThreshold?.addEventListener("input", applyDocumentFilters);
 documentMonthFilter?.addEventListener("change", applyDocumentFilters);
 documentYearFilter?.addEventListener("change", applyDocumentFilters);
+documentPageSizeSelect?.addEventListener("change", () => {
+  const nextSize = Number.parseInt(documentPageSizeSelect.value, 10);
+  documentPageSize = Number.isFinite(nextSize) ? nextSize : 6;
+  applyDocumentFilters();
+});
+documentResetFilters?.addEventListener("click", () => {
+  resetDocumentFilters();
+  applyDocumentFilters();
+});
 copilotMetricPeriod?.addEventListener("change", updateCopilotAnalytics);
 copilotMetricStatus?.addEventListener("change", updateCopilotAnalytics);
+copilotExportButton?.addEventListener("click", () => {
+  const period = copilotMetricPeriod?.value || "Ultimi 30 giorni";
+  const status = copilotMetricStatus?.value || "Tutti";
+  downloadTextReport(
+    "report-metriche-copilot.txt",
+    [
+      "Report metriche AI Co-Pilot",
+      `Periodo: ${period}`,
+      `Stato: ${status}`,
+      "",
+      metricRowsText(copilotMetricList),
+      "",
+      "Volumi e stato invii",
+      metricRowsText(copilotDocumentBreakdown),
+      "",
+      "Qualita OCR",
+      metricRowsText(copilotQualityBreakdown)
+    ].join("\n")
+  );
+  setText(copilotExportStatus, `Report Co-Pilot scaricato (${period}, stato: ${status}).`);
+  copilotExportStatus?.classList.remove("hidden");
+});
 documentPrevButton?.addEventListener("click", () => {
   currentDocumentPage -= 1;
   applyDocumentFilters({ keepPage: true });
@@ -1983,4 +1910,3 @@ sendConfirmButton?.addEventListener("click", confirmDetailSend);
 applyDocumentFilters();
 updateAllDocumentCards();
 updateCopilotAnalytics();
-syncCopilotFlowVisibility();
