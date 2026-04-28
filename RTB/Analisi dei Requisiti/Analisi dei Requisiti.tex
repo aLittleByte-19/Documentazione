@@ -260,6 +260,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Secondario] AI Post Generator
     
+    \item[Trigger] Il Redattore seleziona la funzione di creazione di un nuovo contenuto supportato dall'AI.
+    
     \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo".
     
     \item[Post-condizioni] Il sistema mostra l'anteprima del contenuto generato (comprendente titolo, testo e immagine di copertina) e abilita le funzionalità di revisione.
@@ -275,15 +277,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore conferma l'avvio della generazione cliccando sul comando "Genera bozza".
         \item Il sistema visualizza a schermo l'anteprima del contenuto generato, comprendente titolo, testo e immagine di copertina (\textbf{UC-2})
     \end{enumerate}
+\item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{7a. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
+        \item \textbf{7b. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
+    \end{itemize}
+
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3, UC-1.4, UC-1.5.
-        \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-1.6}: Salvataggio della configurazione del prompt. Condizione: se il Redattore clicca sul comando "Salva prompt".
-            \item \textbf{UC-1.E1}: Errore - Prompt mancante o insufficiente. Condizione: se l'utente tenta la generazione lasciando il campo vuoto o inserendo un testo non sufficiente per l'elaborazione.
-            \item \textbf{UC-1.E2}: Errore - Fallimento modulo AI. Condizione: se il motore di generazione restituisce un errore di timeout o di rete.
-        \end{itemize}
+        \item \textbf{Estensioni}: UC-1.6, UC-1.E1, UC-1.E2.
     \end{itemize}
 
 \end{description}
@@ -354,7 +357,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
+\paragraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore tenta di avviare la generazione o il salvataggio con il campo prompt vuoto.
@@ -366,7 +369,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-1.E2: Errore - Fallimento modulo AI}
+\paragraph{UC-1.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema ha inviato i parametri al motore AI, ma si verifica un timeout o un errore di connessione.
@@ -384,6 +387,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Attore Principale] Redattore
     \item[Attore Secondario] AI Post Generator
     
+    \item[Trigger] Il Redattore analizza la bozza appena generata per controllarne la qualità ed eventualmente apportare modifiche.
+    
     \item[Pre-condizioni] Il sistema ha completato la generazione (UC-1) e mostra l'anteprima di titolo, testo e immagine nell'area di revisione.
     
     \item[Post-condizioni] Il sistema ha aggiornato il contenuto in base alle scelte del Redattore, rendendolo pronto per il salvataggio o l'esportazione (UC-3), oppure ha rimosso la bozza corrente.
@@ -400,15 +405,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore decide di scartare il contenuto generato eliminando la bozza corrente (\textbf{UC-2.8}).
     \end{enumerate}
 
+    \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{4a/5a. Contenuto vuoto}: Il sistema rileva che il Redattore ha confermato le modifiche dopo aver svuotato completamente il campo del titolo o del testo; viene eseguito \textbf{UC-2.E1}.
+        \item \textbf{6a. Formato immagine non valido}: Il sistema rileva che il file caricato non è supportato o supera i limiti di dimensione; viene eseguito \textbf{UC-2.E3}.
+        \item \textbf{7a. Fallimento modulo AI}: Il sistema rileva un errore di rete o di API durante la richiesta di una nuova variante; viene eseguito \textbf{UC-2.E2}.
+    \end{itemize}
+
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-2.1, UC-2.2, UC-2.3, UC-2.4, UC-2.5, UC-2.6, UC-2.7, UC-2.8.
-        \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-2.E1}: Errore - Contenuto vuoto. Condizione: se il Redattore tenta di confermare le modifiche dopo aver eliminato tutto il testo o il titolo.
-            \item \textbf{UC-2.E2}: Errore - Fallimento modulo AI. Condizione: se si verifica un errore di rete o timeout durante la richiesta di rigenerazione.
-            \item \textbf{UC-2.E3}: Errore - Formato immagine non valido. Condizione: se l'immagine caricata per la sostituzione non è supportata o è troppo pesante.
-        \end{itemize}
+        \item \textbf{Estensioni}: UC-2.E1, UC-2.E2, UC-2.E3.
     \end{itemize}
 
 \end{description}
@@ -511,7 +518,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-2.E1: Errore - Contenuto vuoto}
+\paragraph{UC-2.E1: Errore - Contenuto vuoto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo o il titolo nell'editor e tenta di confermarne le modifiche.
@@ -523,7 +530,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-2.E2: Errore - Fallimento modulo AI}
+\paragraph{UC-2.E2: Errore - Fallimento modulo AI}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore, AI Post Generator
     \item[Pre-condizioni] Il Redattore ha richiesto una variante (rigenerazione), ma si verifica un problema tecnico di rete o di API.
@@ -535,7 +542,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-2.E3: Errore - Formato immagine non valido}
+\paragraph{UC-2.E3: Errore - Formato immagine non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore tenta di caricare una nuova immagine che non rispetta i vincoli di sistema.
@@ -552,6 +559,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Principale] Redattore
     
+    \item[Trigger] Il Redattore ha concluso la fase di revisione e intende archiviare, esportare o condividere il documento.
+
     \item[Pre-condizioni] Il contenuto revisionato (UC-2) è pronto e presenta il marcatore di trasparenza "Creato da AI Assistant".
     
     \item[Post-condizioni] Il sistema ha archiviato il documento come bozza oppure lo ha esportato o inoltrato con successo.
@@ -564,13 +573,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore distribuisce il contenuto selezionando l'inoltro tramite posta elettronica (\textbf{UC-3.4}).
     \end{enumerate}
 
+    \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{4a. Indirizzo e-mail non valido}: Il sistema rileva che l'indirizzo inserito per l'inoltro non rispetta il formato standard; viene eseguito \textbf{UC-3.E1}.
+    \end{itemize}
+
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-3.1, UC-3.2, UC-3.3, UC-3.4.
-        \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-3.E1}: Errore - Indirizzo e-mail non valido.
-        \end{itemize}
+        \item \textbf{Estensioni}: UC-3.E1.
     \end{itemize}
 
 \end{description}
@@ -623,7 +634,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-3.E1: Errore - Indirizzo e-mail non valido}
+\paragraph{UC-3.E1: Errore - Indirizzo e-mail non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore richiede l'inoltro inserendo un indirizzo sintatticamente errato.
@@ -640,6 +651,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Principale] Redattore
     
+\item[Trigger] Il Redattore intende consultare, filtrare o riutilizzare i prompt archiviati nelle sessioni precedenti.
+
     \item[Pre-condizioni] Il Redattore accede alla sezione "Storico/Libreria" dell'applicativo.
     
     \item[Post-condizioni] Il sistema ha permesso la consultazione, la ricerca o il riutilizzo dei parametri di generazione archiviati.
@@ -652,13 +665,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore gestisce i contenuti preferiti tramite bookmark (\textbf{UC-4.4}).
     \end{enumerate}
 
+    \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{2a. Nessun risultato trovato}: Il sistema rileva che i criteri di ricerca o i filtri applicati non producono alcuna corrispondenza; viene eseguito \textbf{UC-4.E1}.
+    \end{itemize}
+
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-4.1, UC-4.2, UC-4.3, UC-4.4.
-        \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-4.E1}: Avviso - Nessun risultato trovato.
-        \end{itemize}
+        \item \textbf{Estensioni}: UC-4.E1.
     \end{itemize}
 
 \end{description}
@@ -710,7 +725,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-4.E1: Avviso - Nessun risultato trovato}
+\paragraph{UC-4.E1: Avviso - Nessun risultato trovato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha inserito criteri di ricerca che non producono risultati.
@@ -727,6 +742,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Principale] Redattore
     
+\item[Trigger] Il Redattore intende fornire un riscontro qualitativo sulla bozza generata dall'intelligenza artificiale.
+
     \item[Pre-condizioni] Il sistema ha completato la generazione dell'output (UC-1) e abilita le funzionalità di raccolta feedback.
     
     \item[Post-condizioni] Il feedback (punteggio ed eventuale commento) è archiviato nel sistema.
@@ -739,14 +756,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore conferma l'invio della valutazione (\textbf{UC-5.4}).
     \end{enumerate}
 
+    \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{3a. Superamento limite caratteri}: Il sistema rileva che il testo inserito nel commento eccede la lunghezza massima consentita; viene eseguito \textbf{UC-5.E2}.
+        \item \textbf{4a. Rating mancante}: Il sistema rileva che il Redattore tenta di inviare il modulo senza aver selezionato un punteggio obbligatorio; viene eseguito \textbf{UC-5.E1}.
+    \end{itemize}
+
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-5.1, UC-5.2, UC-5.3, UC-5.4.
-        \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-5.E1}: Errore - Rating mancante. Condizione: se l'utente tenta l'invio senza aver selezionato alcun punteggio.
-            \item \textbf{UC-5.E2}: Errore - Superamento limite caratteri. Condizione: se il testo del commento supera la lunghezza massima consentita.
-        \end{itemize}
+        \item \textbf{Estensioni}: UC-5.E1, UC-5.E2.
     \end{itemize}
 
 \end{description}
@@ -799,7 +818,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-5.E1: Errore - Rating mancante}
+\paragraph{UC-5.E1: Errore - Rating mancante}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore seleziona il comando di invio mantenendo lo stato del rating vuoto (0 su 5).
@@ -812,7 +831,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-5.E2: Errore - Superamento limite caratteri}
+\paragraph{UC-5.E2: Errore - Superamento limite caratteri}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore sta digitando il commento e raggiunge il limite massimo di caratteri consentito dal sistema.
@@ -829,6 +848,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Principale] Analista dati
     
+    \item[Trigger] L'Analista dati accede all'area analitica per monitorare le performance e l'utilizzo dell'AI Assistant.
+
     \item[Pre-condizioni] Il sistema ha archiviato i dati di utilizzo dell'Assistente AI e le valutazioni qualitative degli utenti.
     
     \item[Post-condizioni] L'Analista dati ha consultato le metriche e ha avuto la possibilità di filtrare o esportare i dati analitici.
@@ -843,13 +864,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item L'Analista dati richiede l'esportazione del report analitico (\textbf{UC-6.6}).
     \end{enumerate}
 
+    \item[Scenari Alternativi] 
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{5a/6a. Dati non disponibili}: Il sistema rileva l'assenza di record corrispondenti ai filtri applicati o alla richiesta di esportazione; viene eseguito \textbf{UC-6.E1}.
+    \end{itemize}
+
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-6.1, UC-6.2, UC-6.3, UC-6.4, UC-6.5, UC-6.6.
-        \item \textbf{Estensioni}: 
-        \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{UC-6.E1}: Errore - Dati non disponibili.
-        \end{itemize}
+        \item \textbf{Estensioni}: UC-6.E1.
     \end{itemize}
 
 \end{description}
@@ -922,7 +945,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-6.E1: Errore - Dati non disponibili}
+\paragraph{UC-6.E1: Errore - Dati non disponibili}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Analista dati
     \item[Pre-condizioni] L'Analista applica filtri o richiede esportazioni per parametri privi di interazioni registrate.
@@ -970,7 +993,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \end{description}
 
-\subparagraph{UC-7.E1: Gestione documento duplicato}
+\paragraph{UC-7.E1: Gestione documento duplicato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
@@ -982,7 +1005,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-7.E2: Gestione formato non valido}
+\paragraph{UC-7.E2: Gestione formato non valido}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
@@ -1046,7 +1069,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subparagraph{UC-9.E1: Nessun elemento individuato}
+\paragraph{UC-9.E1: Nessun elemento individuato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
@@ -1355,7 +1378,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-15.3.E1: Nome e cognome del dipendente non disponibile}
+\paragraph{UC-15.3.E1: Nome e cognome del dipendente non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-15.3) e il dato non è disponibile.
@@ -1367,7 +1390,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-15.4.E1: Azienda non disponibile}
+\paragraph{UC-15.4.E1: Azienda non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-15.4) e il dato non è disponibile.
@@ -1379,7 +1402,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-15.6.E1: Data del documento non disponibile}
+\paragraph{UC-15.6.E1: Data del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-15.6) e il dato non è disponibile.
@@ -1391,7 +1414,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-15.8.E1: Tipologia del documento non disponibile}
+\paragraph{UC-15.8.E1: Tipologia del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-15.8) e il dato non è disponibile.
@@ -1403,7 +1426,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-15.9.E1: Breve descrizione del documento non disponibile}
+\paragraph{UC-15.9.E1: Breve descrizione del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-15.9) e il dato non è disponibile.
@@ -1415,7 +1438,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subparagraph{UC-15.10.E1: Confidenza non disponibile}
+\paragraph{UC-15.10.E1: Confidenza non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-15.10) e il dato non è disponibile.
