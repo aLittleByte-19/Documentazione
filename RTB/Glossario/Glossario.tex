@@ -102,7 +102,8 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
-        0.3.0 & 2026-04-22 & Aggiunta di alcuni termini al documento & V. Y. Kaneda Fernandes & - & - \\
+        0.2.2 & 2026-04-27 & Aggiunta di alcuni termini delle Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
+        0.2.1 & 2026-04-22 & Aggiunta di alcuni termini della Analisi dei Requisiti& V. Y. Kaneda Fernandes & - & - \\
         0.2.0 & 2026-04-12 & Aggiunta termini al documento & V. Y. Kaneda Fernandes & - & - \\
         0.1.0 & 2026-03-30 & Prima stesura del documento & V. Y. Kaneda Fernandes & - & - \\
         \hline 
@@ -147,8 +148,23 @@ Modulo esterno (attore di sistema) che costituisce il nucleo di intelligenza art
 \subsection{Amministratore}
 Figura responsabile della configurazione dell'ambiente standalone, della gestione dei privilegi degli account e della definizione delle policy globali.
 
+\subsection{Analisi Dinamica}
+Attività di verifica del codice eseguita durante la sua esecuzione.
+
+\subsection{Analisi Statica}
+Attività di verifica del codice eseguita senza la sua esecuzione.
+
+\subsection{Analista}
+Ruolo incaricato dell'analisi dei requisiti e del dominio.
+
 \subsection{Analista Dati}
 Figura che supervisiona l'efficienza del sistema, monitorando le performance dell'IA attraverso feedback e metriche di successo.
+
+\subsection{Approcio Incrementale}
+Metodo di stesura e sviluppo in cui le norme e il prodotto vengono costantemente aggiornati e affinati nel tempo.
+
+\subsection{Asincronia (Comunicazione asincrona)}
+Modalità di comunicazione tra moduli che permette di non bloccare l'interfaccia utente durante operazioni lunghe.
 
 \subsection{Attore}
 Ruolo ricoperto da un utente o da un sistema esterno che interagisce con l'applicazione (es. Amministratore, Redattore, Operatore CdL).
@@ -156,8 +172,15 @@ Ruolo ricoperto da un utente o da un sistema esterno che interagisce con l'appli
 \subsection{Audit Trail}
 Un registro che tiene traccia di tutte le operazioni fatte nel sistema, utile per controllare chi ha fatto cosa e quando.
 
+\section{B}
+
+\subsection{Branch (Ramo)}
+Ramificazione separata del codice sorgente che permette lo sviluppo isolato di funzionalità o documenti.
 
 \section{C}
+
+\subsection{Capitolato}
+Documento tecnico fornito dal proponente (nel vostro caso il "Capitolato C5") che definisce i requisiti, le tecnologie richieste e gli obiettivi del prodotto software.
 
 \subsection{Caso d'Uso (UC)}
 Descrizione di un'interazione tra un attore e il sistema per raggiungere un obiettivo specifico, fondamentale per definire i requisiti.
@@ -168,6 +191,15 @@ Classificazione specifica assegnata a un file caricato (es. cedolino, F24, contr
 \subsection{Cedolini Massivi}
 Un unico grande file che contiene le buste paga di tanti dipendenti diversi e che il sistema deve saper dividere correttamente per inviarle ai singoli interessati.
 
+\subsection{Ciclo Iterativo}
+Suddivisione del lavoro in periodi ricorrenti per la gestione dello sviluppo.
+
+\subsection{Code Coverage}
+Metrica che indica la percentuale di codice sorgente eseguita durante i test automatizzati (fissata ad almeno l'80\% nel progetto).
+
+\subsection{Code Review}
+Revisione del codice effettuata tra pari per garantirne la qualità e la tracciabilità.
+
 \subsection{Confidenza (Confidence Score)}
 Un valore (spesso in percentuale) che indica quanto il sistema è sicuro che il riconoscimento automatico di un documento sia corretto.
 
@@ -176,6 +208,9 @@ Il principio fondamentale per cui solo le persone autorizzate possono accedere a
 
 \subsection{Consulente del Lavoro (CdL)}
 L'attore principale che utilizza il sistema per gestire documenti aziendali, classificandoli e associandovi metadati.
+
+\subsection{Consuntivo}
+Rendiconto finale delle ore effettivamente impiegate e dei costi realmente sostenuti al termine di un periodo di lavoro, da confrontare con il preventivo.
 
 \subsection{Copie Atomiche}
 Il risultato dello "split" di un documento massivo; sono le singole parti destinate ai singoli dipendenti.
@@ -187,6 +222,18 @@ Interfaccia grafica riassuntiva che permette di visualizzare statistiche di util
 
 \subsection{Dashboard Amministrativa}
 La pagina di controllo riservata ai gestori del sistema, da cui si possono usare le funzioni di intelligenza artificiale e gestire i documenti.
+
+\subsection{Design Pattern}
+Soluzioni progettuali consolidate utilizzate per risolvere problemi comuni di progettazione software.
+
+\subsection{Diagramma dele classi UML}
+Rappresentazione grafica della struttura statica del sistema attraverso le classi e le loro relazioni.
+
+\subsection{Diari di Bordo}
+Documenti utilizzati per il tracciamento giornaliero o settimanale delle attività del team.
+
+\subsection{Disaccoppiamento}
+Pratica di progettazione volta a ridurre le dipendenze dirette tra moduli per favorire la manutenibilità.
 
 \subsection{Dispaccio (Dispatch)}
 Il processo automatico che invia i documenti ai destinatari finali attraverso l'app, l'email o la PEC.
@@ -207,6 +254,12 @@ Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'
 \subsection{GDPR}
 Il regolamento europeo che protegge la privacy e stabilisce come devono essere trattati i dati personali.
 
+\subsection{Git}
+Software per il controllo di versione distribuito.
+
+\subsection{GitHub/GitLab}
+Piattaforme web per l'hosting e la gestione collaborativa dei repository tramite Pull Request e Issue.
+
 \section{H}
 
 \subsection{HR Manager}
@@ -220,12 +273,21 @@ Un approccio dove l'intelligenza artificiale fa il lavoro pesante, ma un essere 
 \subsection{Inclusione}
 Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'estensione un comportamento opzionale.
 
+\subsection{Incrementale}
+Approccio di sviluppo in cui le norme e il prodotto vengono costantemente aggiornati e affinati nel tempo.
+
+\subsection{Issue}
+Strumento per pianificare, assegnare e monitorare task o problemi all'interno del repository.
+
 \section{K}
 
 \subsection{KPI (Key Performance Indicator)}
 Numeri o percentuali usati per misurare se il sistema sta funzionando bene (ad esempio, quante buste paga vengono riconosciute correttamente al primo colpo).
 
 \section{L}
+
+\subsection{Latex}
+Linguaggio di composizione tipografica usato per la stesura di documenti professionali e uniformi.
 
 \subsection{Lista di Dispaccio}
 Elenco organizzato dei destinatari e dei messaggi pronti per l'invio dopo l'analisi AI.
@@ -241,6 +303,24 @@ Insieme di file (come i cedolini massivi) caricati simultaneamente nel sistema p
 \subsection{Metadati (documento)}
 Informazioni di contesto associate a un file, come il periodo temporale (mese/anno) e l'azienda di riferimento.
 
+\subsection{Milestone}
+Traguardo significativo o punto di controllo nel cronoprogramma di progetto che segna il completamento di una fase importante.
+
+\subsection{Mitigazione (dei rischi)}
+Insieme di azioni e strategie concrete messe in atto per ridurre la probabilità che un rischio si verifichi o per limitarne l'impatto negativo sul progetto.
+
+\subsection{Mockup}
+Rappresentazione grafica o prototipo a bassa fedeltà dell'interfaccia utente, utile per visualizzare il design del prodotto prima dello sviluppo.
+
+\subsection{Modello C4}
+Modello di design utilizzato per descrivere l'architettura del sistema.
+
+\subsection{Modularità}
+Suddivisione del codice in componenti indipendenti con responsabilità singole.
+
+\subsection{MVP (Minimum Viable Product)}
+Versione del prodotto con le funzionalità minime necessarie per essere rilasciato e testato.
+
 \section{N}
 
 \subsection{Nexum}
@@ -253,14 +333,32 @@ Una tecnologia che legge automaticamente il testo contenuto all'interno di immag
 
 \section{P}
 
+\subsection{PB (Product Baseline)}
+Fase del progetto che identifica la linea di base del prodotto finale.
+
+\subsection{Pianificazione}
+Attività di definizione della sequenza di compiti, scadenze e assegnazione delle responsabilità per il raggiungimento degli obiettivi.
+
 \subsection{Postcondizioni}
 Stato finale dei dati o del sistema dopo la conclusione con successo di un caso d'uso.
 
 \subsection{Precondizioni}
 Stato obbligatorio in cui deve trovarsi il sistema prima che un caso d'uso possa essere avviato.
 
+\subsection{Preventivo}
+Stima economica e temporale delle risorse e delle ore necessarie per il completamento delle attività di uno Sprint.
+
+\subsection{Progettista}
+Ruolo responsabile del design e dell'architettura del sistema.
+
+\subsection{Programmatore}
+Ruolo responsabile della codifica e implementazione del software.
+
 \subsection{Prompt}
 L'istruzione o il testo che scrivi all'intelligenza artificiale per dirle cosa deve generare (ad esempio: "Scrivi un messaggio di benvenuto").
+
+\subsection{Pull Request}
+Richiesta di revisione e integrazione di modifiche da un branch a un altro su GitHub.
 
 
 \section{R}
@@ -274,14 +372,32 @@ Un sistema di sicurezza che decide cosa può fare un utente in base al suo ruolo
 \subsection{Redattore}
 Utente aziendale delegato alla creazione di comunicazioni interne tramite il modulo AI Assistant, responsabile della calibrazione del tono e della validazione dei contenuti.
 
+\subsection{Responsabile}
+Ruolo incaricato di approvare formalmente i contenuti e coordinare il team.
+
 \subsection{Repository Documentale}
 Un archivio digitale dove vengono caricati e organizzati tutti i documenti (come i cedolini) prima di essere inviati ai dipendenti.
 
 \subsection{Requisito(Obbligatorio, Desiderabile, Opzionale)}
 Classificazione delle funzionalità del sistema in base alla loro priorità e necessità per il funzionamento del prodotto.
 
+\subsection{Resilienza}
+Capacità del sistema di gestire errori e anomalie (es. retry di rete) mantenendo il funzionamento.
+
 \subsection{Retention Policy}
 La regola che stabilisce per quanto tempo un documento deve essere conservato nel sistema prima di essere cancellato definitivamente per motivi di privacy o spazio.
+
+\subsection{RO (Rischio Operativo/Organizzativo)}
+Categoria di rischi legati alla gestione del gruppo, alla comunicazione interna e all'organizzazione del tempo.
+
+\subsection{RP (Rischio Personale)}
+Categoria di rischi legati a problematiche individuali dei membri del team (salute, impegni accademici o lavorativi).
+
+\subsection{RT (Rischio Tecnologico)}
+Categoria di rischi legati alla complessità, all'apprendimento o al malfunzionamento delle tecnologie e degli strumenti utilizzati.
+
+\subsection{RTB (Requirements and Technology Baseline)}
+Fase del progetto che identifica una linea di base per i requisiti e le tecnologie.
 
 
 \section{S}
@@ -309,6 +425,15 @@ Come per il Tono Comunicativo: Parametri di configurazione (es. formale, empatic
 
 \section{T}
 
+\subsection{Test di Integrazione}
+Test volti a verificare che i vari moduli del sistema funzionino correttamente quando combinati.
+
+\subsection{Test di Regressione}
+Test eseguiti per assicurarsi che nuove modifiche non abbiano introdotto errori in funzionalità precedentemente funzionanti.
+
+\subsection{Test di Unità}
+Test volti a verificare il corretto funzionamento di singole parti (unità) di codice.
+
 \subsection{Tono Comunicativo}
 Parametri di configurazione (es. formale, empatico, tecnico) che calibrano il registro dell'AI Assistant.
 
@@ -321,10 +446,22 @@ Evento o azione che innesca l'esecuzione di un caso d'uso.
 
 \section{V}
 
+\subsection{Verbale Esterno}
+Documento che attesta i punti discussi e gli accordi presi durante gli incontri con l'azienda proponente (Eggon).
+
+\subsection{Verbale Interno}
+Documento formale che riassume gli esiti, le decisioni e le attività pianificate durante le riunioni tra i soli membri del team.
+
+\subsection{Verificatore}
+Ruolo incaricato di revisionare i documenti e il codice prodotti dagli altri membri.
+
 \subsection{Versioning}
 È il sistema che tiene traccia delle diverse versioni di un documento o di un codice, permettendo di vedere cosa è cambiato nel tempo.
 
 \section{W}
+
+\subsection{Way of Working (WoW)}
+Insieme di procedure operative, strumenti e regole di collaborazione adottate dal team.
 
 \subsection{Workflow}
 Indica la sequenza automatica di passaggi che un documento deve seguire, dal momento in cui viene caricato a quando viene inviato.
