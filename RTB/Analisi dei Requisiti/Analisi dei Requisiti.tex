@@ -1047,7 +1047,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-9.E1: Nessun elemento individuato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
     \item[Post-condizioni] Il sistema mantiene attiva la schermata dello storico e informa l'utente dell'assenza di elementi.
     \item[Scenario Principale]
@@ -1059,7 +1059,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-10: Visualizzazione storico con filtri}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il sistema mostra un sottoinsieme dello storico coerente con i filtri applicati.
@@ -1081,7 +1081,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-11: Filtro storico con barra di ricerca}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
     \item[Post-condizioni] Il sistema mostra solo i documenti che corrispondono al testo inserito nella barra di ricerca.
@@ -1102,7 +1102,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-12: Filtro storico per stato invio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende visualizzare solo documenti inviati o non inviati.
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
     \item[Post-condizioni] Il sistema mostra solo i documenti che rispettano lo stato invio selezionato.
@@ -1123,7 +1123,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-13: Filtro storico per confidenza}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende filtrare lo storico in base alla confidenza dei dati estratti rispetto a una soglia.
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
     \item[Post-condizioni] Il sistema mostra solo i documenti con confidenza maggiore o minore della soglia impostata.
@@ -1144,7 +1144,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-14: Filtro storico per mese e anno}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende visualizzare i documenti relativi a uno specifico mese e anno.
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
     \item[Post-condizioni] Il sistema mostra solo i documenti riferiti al mese e all'anno selezionati.
@@ -1165,7 +1165,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-15: Visualizzazione singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende consultare il dettaglio di un documento selezionato dallo storico.
     \item[Pre-condizioni] Lo storico contiene almeno un documento e il Consulente del lavoro ha selezionato una riga della lista.
     \item[Post-condizioni] Il sistema mostra il dettaglio del documento selezionato.
@@ -1185,7 +1185,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.1: Visualizzazione documento originale splittato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-15).
     \item[Post-condizioni] Il sistema mostra la preview del documento originale splittato (parte relativa a un singolo dipendente) nel pannello sinistro della vista di dettaglio.
     \item[Scenario Principale]
@@ -1197,7 +1197,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.2: Visualizzazione documento originale non splittato}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-15).
     \item[Post-condizioni] Il sistema mostra la preview del documento originale completo (non splittato) nel pannello sinistro della vista di dettaglio.
     \item[Scenario Principale]
@@ -1209,7 +1209,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.3: Visualizzazione nome e cognome del dipendente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo nome e cognome del dipendente.
     \item[Scenario Principale]
@@ -1228,7 +1228,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.4: Visualizzazione azienda}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo azienda.
     \item[Scenario Principale]
@@ -1247,7 +1247,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.5: Visualizzazione nome del file}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo nome del file.
     \item[Scenario Principale]
@@ -1258,7 +1258,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.6: Visualizzazione data del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo data del documento.
     \item[Scenario Principale]
@@ -1277,7 +1277,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.7: Visualizzazione numero di pagine}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo numero di pagine.
     \item[Scenario Principale]
@@ -1288,7 +1288,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.8: Visualizzazione tipologia del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo tipologia del documento.
     \item[Scenario Principale]
@@ -1307,7 +1307,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.9: Visualizzazione breve descrizione del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo breve descrizione del documento.
     \item[Scenario Principale]
@@ -1326,7 +1326,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.10: Visualizzazione confidenza in percentuale per documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
     \item[Post-condizioni] Il sistema mostra il valore del campo confidenza in percentuale.
     \item[Scenario Principale]
@@ -1345,7 +1345,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.11: Visualizzazione stato invio documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema dispone delle informazioni di stato invio del documento selezionato.
     \item[Post-condizioni] Il sistema mostra se il documento è stato inviato oppure no.
     \item[Scenario Principale]
@@ -1356,7 +1356,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.3.E1: Nome e cognome del dipendente non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-15.3) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo nome e cognome del dipendente non è valorizzato.
     \item[Scenario Principale]
@@ -1368,7 +1368,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.4.E1: Azienda non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-15.4) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo azienda non è valorizzato.
     \item[Scenario Principale]
@@ -1380,7 +1380,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.6.E1: Data del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-15.6) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo data del documento non è valorizzato.
     \item[Scenario Principale]
@@ -1392,7 +1392,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.8.E1: Tipologia del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-15.8) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo tipologia del documento non è valorizzato.
     \item[Scenario Principale]
@@ -1404,7 +1404,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.9.E1: Breve descrizione del documento non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-15.9) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo breve descrizione del documento non è valorizzato.
     \item[Scenario Principale]
@@ -1416,7 +1416,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-15.10.E1: Confidenza non disponibile}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-15.10) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo confidenza non è valorizzato.
     \item[Scenario Principale]
@@ -1428,7 +1428,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-16: Modifica del singolo documento dallo storico}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende modificare uno o più campi editabili del documento selezionato.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del singolo documento (UC-15).
     \item[Post-condizioni] Il sistema salva le modifiche apportate ai campi editabili del documento selezionato.
@@ -1452,7 +1452,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-16.1: Modifica nome e cognome del dipendente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo nome e cognome del dipendente.
     \item[Scenario Principale]
@@ -1464,7 +1464,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-16.2: Modifica azienda}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo azienda.
     \item[Scenario Principale]
@@ -1476,7 +1476,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-16.3: Modifica data del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo data del documento.
     \item[Scenario Principale]
@@ -1488,7 +1488,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-16.4: Modifica tipologia del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo tipologia del documento.
     \item[Scenario Principale]
@@ -1500,7 +1500,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-16.5: Modifica breve descrizione del documento}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
     \item[Post-condizioni] Il sistema aggiorna il valore del campo breve descrizione del documento.
     \item[Scenario Principale]
@@ -1512,7 +1512,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-17: Generazione contenuto per l'invio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
+    \item[Attore Secondario] AI Analyst
     \item[Trigger] Dopo la visualizzazione del singolo documento (UC-15), il Consulente del lavoro seleziona il comando di invio.
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-15).
     \item[Post-condizioni] Il sistema invia il documento allegato al destinatario selezionato, utilizzando oggetto e testo confermati dal Consulente del lavoro.
@@ -1533,7 +1534,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-17.1: Visualizzazione del destinatario}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
+    \item[Attore Secondario] AI Analyst
     \item[Pre-condizioni] Il sistema dispone del nome e cognome estratti dal documento selezionato.
     \item[Post-condizioni] Il Consulente del lavoro visualizza il destinatario proposto nel campo dedicato.
     \item[Scenario Principale]
@@ -1545,7 +1547,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-17.2: Visualizzazione dell'oggetto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
+    \item[Attore Secondario] AI Analyst
     \item[Pre-condizioni] Il sistema ha accesso ai metadati principali del documento selezionato.
     \item[Post-condizioni] Il Consulente del lavoro visualizza l'oggetto proposto nel campo dedicato.
     \item[Scenario Principale]
@@ -1557,7 +1560,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-17.3: Visualizzazione del testo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
+    \item[Attore Secondario] AI Analyst
     \item[Pre-condizioni] Il sistema ha accesso ai dati estratti dal documento selezionato.
     \item[Post-condizioni] Il Consulente del lavoro visualizza il testo proposto nel campo dedicato.
     \item[Scenario Principale]
@@ -1569,7 +1573,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-17.4: Conferma e invio del messaggio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro ha confermato destinatario, oggetto e testo nella schermata di invio.
     \item[Post-condizioni] Il sistema invia il messaggio con il documento allegato e notifica l'esito dell'operazione.
     \item[Scenario Principale]
@@ -1583,7 +1587,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-18: Modifica contenuto generato per l'invio}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende personalizzare la bozza di invio generata automaticamente (UC-17).
     \item[Pre-condizioni] Il sistema ha già predisposto la bozza di invio con destinatario, oggetto e testo.
     \item[Post-condizioni] Il sistema aggiorna i campi destinatario, oggetto e testo secondo le modifiche del Consulente del lavoro, rendendoli disponibili per l'invio in UC-17.
@@ -1602,7 +1606,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-18.1: Modifica del destinatario}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema mostra un destinatario precompilato nella bozza di invio.
     \item[Post-condizioni] Il campo destinatario contiene il valore aggiornato.
     \item[Scenario Principale]
@@ -1614,7 +1618,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-18.2: Modifica dell'oggetto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema mostra un oggetto precompilato nella bozza di invio.
     \item[Post-condizioni] Il campo oggetto contiene il valore aggiornato.
     \item[Scenario Principale]
@@ -1626,7 +1630,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-18.3: Modifica del testo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Consulente del lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema mostra un testo precompilato nella bozza di invio.
     \item[Post-condizioni] Il campo testo contiene il valore aggiornato.
     \item[Scenario Principale]
@@ -1658,7 +1662,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-19.1: Visualizzazione numero totale di documenti analizzati}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Analista dati
+    \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
     \item[Post-condizioni] L'Analista dati visualizza il numero totale dei documenti analizzati dal modulo AI Co-Pilot.
     \item[Scenario Principale]
@@ -1670,7 +1674,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-19.2: Visualizzazione percentuale di classificazioni corrette}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Analista dati
+    \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
     \item[Post-condizioni] L'Analista dati visualizza la percentuale di classificazioni corrette effettuate automaticamente dall'AI.
     \item[Scenario Principale]
@@ -1682,7 +1686,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-19.3: Visualizzazione documenti sotto soglia di confidenza}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Analista dati
+    \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
     \item[Post-condizioni] L'Analista dati visualizza numero e percentuale dei documenti con confidenza inferiore alla soglia prevista.
     \item[Scenario Principale]
@@ -1694,7 +1698,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-19.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Analista dati
+    \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
     \item[Post-condizioni] L'Analista dati visualizza la percentuale di associazioni destinatario-anagrafica risolte automaticamente e correttamente dall'AI.
     \item[Scenario Principale]
@@ -1706,7 +1710,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-19.5: Visualizzazione tempo medio di analisi dei documenti}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Analista dati
+    \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard delle metriche.
     \item[Post-condizioni] L'Analista dati visualizza il tempo medio necessario all'AI per completare l'analisi di un documento.
     \item[Scenario Principale]
