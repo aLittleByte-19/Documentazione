@@ -272,8 +272,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore compila il campo relativo al prompt testuale (\textbf{UC-1.1}).
         \item Il Redattore imposta il tono desiderato (\textbf{UC-1.2}).
         \item Il Redattore imposta lo stile editoriale (\textbf{UC-1.3}).
-        \item Il Redattore specifica il pubblico di riferimento (\textbf{UC-1.4}).
-        \item Il Redattore specifica la piattaforma di destinazione (\textbf{UC-1.5}).
         \item Il Redattore conferma l'avvio della generazione cliccando sul comando "Genera bozza".
         \item Il sistema visualizza a schermo l'anteprima del contenuto generato, comprendente titolo, testo e immagine di copertina (\textbf{UC-2})
     \end{enumerate}
@@ -285,8 +283,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3, UC-1.4, UC-1.5.
-        \item \textbf{Estensioni}: UC-1.6, UC-1.E1, UC-1.E2.
+        \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3.
+        \item \textbf{Estensioni}: UC-1.4, UC-1.E1, UC-1.E2.
     \end{itemize}
 
 \end{description}
@@ -323,29 +321,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-1.4: Selezione del pubblico di riferimento}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema mostra le categorie di destinatari previste.
-    \item[Post-condizioni] Il sistema registra a quale tipologia di pubblico è rivolto il contenuto.
-    \item[Scenario Principale] 
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il target di riferimento dall'elenco proposto.
-    \end{enumerate}
-\end{description}
-
-\paragraph{UC-1.5: Selezione del canale di comunicazione}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attori] Redattore
-    \item[Pre-condizioni] Il sistema mostra le piattaforme di destinazione configurate.
-    \item[Post-condizioni] Il sistema registra il canale scelto per la futura pubblicazione.
-    \item[Scenario Principale] 
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore indica la piattaforma tramite il comando dedicato.
-    \end{enumerate}
-\end{description}
-
-\paragraph{UC-1.6: Salvataggio della configurazione del prompt}
+\paragraph{UC-1.4: Salvataggio della configurazione del prompt}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attori] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato uno o più parametri nell'interfaccia di composizione.
