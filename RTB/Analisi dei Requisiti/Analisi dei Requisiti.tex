@@ -225,17 +225,17 @@ Il prodotto si rivolge a più categorie di utenti, ciascuna con responsabilità 
 In questa sezione vengono descritti i Casi d'Uso (Use Cases) dell'applicazione. Essi definiscono le interazioni tra gli utenti e il sistema, chiarendo le funzionalità che il software deve offrire.\\
 Ogni caso d'uso è documentato attraverso un diagramma UML e una scheda testuale. Per garantire chiarezza e sintesi, le schede descrittive si concentreranno sugli elementi essenziali:
 \begin{itemize}
-    \item \textbf{Attrori primari}:L'utente umano o il sistema esterno che avvia attivamente il caso d'uso per raggiungere un obiettivo specifico.
-    \item \textbf{Attori secondari}:Sistemi terzi o entità coinvolte passivamente nel processo, richiamate dal sistema principale per completare l'operazione.
-    \item \textbf{Precondizioni}:Le condizioni e lo stato in cui il sistema deve obbligatoriamente trovarsi prima che il caso d'uso possa avere inizio.
-    \item \textbf{Postondizioni}:Il nuovo stato del sistema o dei dati una volta che il caso d'uso si è concluso con successo.
-    \item \textbf{Scenario principale}:La sequenza lineare e ottimale di interazioni tra attore e sistema, senza interruzioni o errori.
-    \item \textbf{Scenario alternativo}:I percorsi secondari che descrivono come il sistema gestisce eventuali errori, eccezioni o scelte diverse da parte dell'utente.
-    \item \textbf{Trigger}:L'evento specifico, che sia un'azione manuale o un segnale di sistema, che innesca l'esecuzione del caso d'uso.
-    \item \textbf{Estensioni}:Comportamenti opzionali o eccezionali che si aggiungono al flusso principale solo al verificarsi di determinate condizioni.
-    \item \textbf{Inclusioni}:Sotto-processi o altri casi d'uso richiamati obbligatoriamente per evitare di duplicare la descrizione di operazioni comuni.
-    \item \textbf{Generalizzazioni}:Una relazione in cui un caso d'uso specifico eredita e specializza le caratteristiche e il comportamento di un caso d'uso più generico.
-    \item \textbf{Sottocasi}:Scomposizione logica di un caso d'uso molto complesso in porzioni più piccole e gestibili, al fine di facilitarne la lettura.
+    \item \textbf{Attori primari}: L'utente umano o il sistema esterno che avvia attivamente il caso d'uso per raggiungere un obiettivo specifico.
+    \item \textbf{Attori secondari}: Sistemi terzi o entità coinvolte passivamente nel processo, richiamate dal sistema principale per completare l'operazione.
+    \item \textbf{Precondizioni}: Le condizioni e lo stato in cui il sistema deve obbligatoriamente trovarsi prima che il caso d'uso possa avere inizio.
+    \item \textbf{Postondizioni}: Il nuovo stato del sistema o dei dati una volta che il caso d'uso si è concluso con successo.
+    \item \textbf{Scenario principale}: La sequenza lineare e ottimale di interazioni tra attore e sistema, senza interruzioni o errori.
+    \item \textbf{Scenario alternativo}: I percorsi secondari che descrivono come il sistema gestisce eventuali errori, eccezioni o scelte diverse da parte dell'utente.
+    \item \textbf{Trigger}: L'evento specifico, che sia un'azione manuale o un segnale di sistema, che innesca l'esecuzione del caso d'uso.
+    \item \textbf{Estensioni}: Comportamenti opzionali o eccezionali che si aggiungono al flusso principale solo al verificarsi di determinate condizioni.
+    \item \textbf{Inclusioni}: Sotto-processi o altri casi d'uso richiamati obbligatoriamente per evitare di duplicare la descrizione di operazioni comuni.
+    \item \textbf{Generalizzazioni}: Una relazione in cui un caso d'uso specifico eredita e specializza le caratteristiche e il comportamento di un caso d'uso più generico.
+    \item \textbf{Sottocasi}: Scomposizione logica di un caso d'uso molto complesso in porzioni più piccole e gestibili, al fine di facilitarne la lettura.
 \end{itemize}
 \subsection{Attori primari}
 Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi esterni che interagiscono direttamente con l'applicazione. Sulla base dell'analisi dei processi aziendali e dei flussi operativi previsti, sono stati identificati i seguenti attori:
@@ -1535,7 +1535,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \paragraph{UC-17.1: Visualizzazione del destinatario}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Attore Secondario] AI Analyst
+    
     \item[Pre-condizioni] Il sistema dispone del nome e cognome estratti dal documento selezionato.
     \item[Post-condizioni] Il Consulente del lavoro visualizza il destinatario proposto nel campo dedicato.
     \item[Scenario Principale]
@@ -1548,7 +1548,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \paragraph{UC-17.2: Visualizzazione dell'oggetto}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Attore Secondario] AI Analyst
+   
     \item[Pre-condizioni] Il sistema ha accesso ai metadati principali del documento selezionato.
     \item[Post-condizioni] Il Consulente del lavoro visualizza l'oggetto proposto nel campo dedicato.
     \item[Scenario Principale]
@@ -1561,7 +1561,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \paragraph{UC-17.3: Visualizzazione del testo}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Attore Secondario] AI Analyst
+   
     \item[Pre-condizioni] Il sistema ha accesso ai dati estratti dal documento selezionato.
     \item[Post-condizioni] Il Consulente del lavoro visualizza il testo proposto nel campo dedicato.
     \item[Scenario Principale]
