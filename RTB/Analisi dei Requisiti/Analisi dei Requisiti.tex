@@ -945,7 +945,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.
     
-    \item[Post-condizioni] Il documento è caricato e analizzato dall'AI; classificazione e metadati inseriti manualmente non vengono ricalcolati mentre viene già eseguito lo split (del documento in sotto-documenti per destinatario).
+    \item[Post-condizioni] Il documento è caricato e analizzato dall'AI (estrazione metadati, classificazione e split in sotto-documenti per destinatario).
    
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1006,7 +1006,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
         \item Il Consulente del lavoro seleziona la classificazione del documento.
         \item Il Consulente del lavoro inserisce i metadati richiesti (mese, anno, azienda).
-        \item Il Consulente del lavoro conferma il caricamento dopodichè il sistema verfica formato e duplicati.
+        \item Il Consulente del lavoro conferma il caricamento dopodichè il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
@@ -1040,7 +1040,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-15.
-        \item \textbf{Generalizzazioni}: UC-10,
+        \item \textbf{Generalizzazioni}: UC-10.
         \item \textbf{Estensioni}: UC-9.E1.
     \end{itemize}
 \end{description}
@@ -1083,7 +1083,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il sistema mostra solo i documenti che corrispondono al testo inserito nella barra di ricerca.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1104,7 +1104,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende visualizzare solo documenti inviati o non inviati.
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il sistema mostra solo i documenti che rispettano lo stato invio selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1125,7 +1125,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende filtrare lo storico in base alla confidenza dei dati estratti rispetto a una soglia.
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il sistema mostra solo i documenti con confidenza maggiore o minore della soglia impostata.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1146,7 +1146,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende visualizzare i documenti relativi a uno specifico mese e anno.
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando lo storico di default (UC-10).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il sistema mostra solo i documenti riferiti al mese e all'anno selezionati.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1650,7 +1650,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-19.1}).
         \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-19.2}).
-        \item Il sistema espone la percentuale d   i documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-19.3}).
+        \item Il sistema espone la percentuale di documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-19.3}).
         \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-19.4}).
         \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-19.5}).
     \end{enumerate}
