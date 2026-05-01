@@ -225,10 +225,10 @@ Il prodotto si rivolge a più categorie di utenti, ciascuna con responsabilità 
 In questa sezione vengono descritti i Casi d'Uso (Use Cases) dell'applicazione. Essi definiscono le interazioni tra gli utenti e il sistema, chiarendo le funzionalità che il software deve offrire.\\
 Ogni caso d'uso è documentato attraverso un diagramma UML e una scheda testuale. Per garantire chiarezza e sintesi, le schede descrittive si concentreranno sugli elementi essenziali:
 \begin{itemize}
-    \item \textbf{Attrori primari}:L'utente umano o il sistema esterno che avvia attivamente il caso d'uso per raggiungere un obiettivo specifico.
+    \item \textbf{Attori primari}:L'utente umano o il sistema esterno che avvia attivamente il caso d'uso per raggiungere un obiettivo specifico.
     \item \textbf{Attori secondari}:Sistemi terzi o entità coinvolte passivamente nel processo, richiamate dal sistema principale per completare l'operazione.
     \item \textbf{Precondizioni}:Le condizioni e lo stato in cui il sistema deve obbligatoriamente trovarsi prima che il caso d'uso possa avere inizio.
-    \item \textbf{Postondizioni}:Il nuovo stato del sistema o dei dati una volta che il caso d'uso si è concluso con successo.
+    \item \textbf{Postcondizioni}:Il nuovo stato del sistema o dei dati una volta che il caso d'uso si è concluso con successo.
     \item \textbf{Scenario principale}:La sequenza lineare e ottimale di interazioni tra attore e sistema, senza interruzioni o errori.
     \item \textbf{Scenario alternativo}:I percorsi secondari che descrivono come il sistema gestisce eventuali errori, eccezioni o scelte diverse da parte dell'utente.
     \item \textbf{Trigger}:L'evento specifico, che sia un'azione manuale o un segnale di sistema, che innesca l'esecuzione del caso d'uso.
@@ -255,10 +255,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsection{AI Assistant Generativo}
 \subsubsection{UC-1: Generazione del contenuto tramite AI}
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{diagrammi_use_case/UC-1.png}
-\end{center}
+    \includegraphics[width=1.15\textwidth]{diagrammi_use_case/UC-1.png}
+    \caption{Diagramma del caso d'uso UC-1: Generazione del contenuto tramite AI}
+    \label{fig:uc-1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
@@ -296,11 +298,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.1: Compilazione del prompt descrittivo}
-
-\begin{center}
+\mbox{}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-1.1: Compilazione del prompt descrittivo}
+    \label{fig:uc-1.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema è in attesa dei dati di input testuali.
@@ -312,11 +316,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.2: Selezione del tono comunicativo}
-
-\begin{center}
+\mbox{}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-1.2: Selezione del tono comunicativo}
+    \label{fig:uc-1.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco dei toni utilizzabili.
@@ -328,11 +334,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.3: Selezione dello stile editoriale}
-
-\begin{center}
+\mbox{}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.3.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-1.3: Selezione dello stile editoriale}
+    \label{fig:uc-1.3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema espone l'elenco degli stili di scrittura supportati.
@@ -344,11 +352,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.4: Salvataggio della configurazione del prompt}
-
-\begin{center}
+\mbox{}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.4.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-1.4: Salvataggio della configurazione del prompt}
+    \label{fig:uc-1.4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato uno o più parametri nell'interfaccia di composizione.
@@ -370,11 +380,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
-
-\begin{center}
+\mbox{}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.E1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-1.E1: Errore per prompt mancante o insufficiente}
+    \label{fig:uc-1.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore tenta di avviare la generazione o il salvataggio con il campo prompt vuoto.
@@ -387,11 +399,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.E2: Errore - Fallimento modulo AI}
-
-\begin{center}
+\mbox{}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-1.E2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-1.E2: Errore per fallimento del modulo AI}
+    \label{fig:uc-1.e2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema ha inviato i parametri al motore AI, ma si verifica un timeout o un errore di connessione.
@@ -405,12 +419,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-2: Anteprima e revisione del contenuto}
 
-\begin{center}
+\mbox{} \\
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/UC-2.png}
-\end{center}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    
+    \caption{Diagramma del caso d'uso UC-2: Anteprima e revisione del contenuto}
+    \label{fig:uc-2}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]    
     \item[Attore Principale] Redattore
     \item[Attore Secondario] AI Post Generator
     
@@ -441,10 +457,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-2.1: Visualizzazione del titolo generato}
 
-\begin{center}
+\mbox{} \\
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.1: Visualizzazione del titolo generato}
+    \label{fig:uc-2.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
@@ -457,10 +477,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-2.2: Visualizzazione del testo generato}
 
-\begin{center}
+\mbox{} \\
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.2: Visualizzazione del testo generato}
+    \label{fig:uc-2.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
@@ -472,11 +496,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.3: Visualizzazione dell'immagine di copertina}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.3.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.3: Visualizzazione dell'immagine di copertina}
+    \label{fig:uc-2.3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema ha predisposto i dati generati.
@@ -488,11 +515,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.4: Modifica manuale del titolo}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.4.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.4: Modifica manuale del titolo}
+    \label{fig:uc-2.4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema presenta il titolo in un campo di testo interattivo.
@@ -516,10 +546,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-2.5: Modifica manuale del testo}
 
-\begin{center}
+\mbox{} \\
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-2.5.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.5: Modifica manuale del testo}
+    \label{fig:uc-2.5}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema presenta il testo all'interno di un editor interattivo dotato di contatore.
@@ -542,16 +576,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.6: Sostituzione dell'immagine di copertina}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-2.6.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.6: Sostituzione dell'immagine di copertina}
+    \label{fig:uc-2.6}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema mostra l'anteprima dell'immagine suggerita.
     \item[Post-condizioni] L'immagine di copertina originale è stata sostituita con un file scelto dal Redattore.
-    \item[Scenario Principale] s
+    \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona l'opzione di modifica immagine.
         \item Il Redattore carica un file immagine dal proprio dispositivo.
@@ -569,11 +606,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.7: Rigenerazione del contenuto}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.7.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.7: Rigenerazione del contenuto}
+    \label{fig:uc-2.7}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore, AI Post Generator
     \item[Pre-condizioni] Il sistema visualizza il contenuto e abilita il comando di rigenerazione.
@@ -595,11 +635,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.8: Eliminazione della bozza generata}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-2.8.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.8: Eliminazione della bozza generata}
+    \label{fig:uc-2.8}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema visualizza l'anteprima della bozza corrente.
@@ -614,11 +657,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.E1: Errore - Contenuto vuoto}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-2.E1.png}
-\end{center}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.E1.png}
+    \caption{Diagramma del caso d'uso UC-2.E1: Errore per contenuto vuoto}
+    \label{fig:uc-2.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore ha eliminato tutto il testo o il titolo nell'editor e tenta di confermarne le modifiche.
@@ -631,11 +677,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.E2: Errore - Fallimento modulo AI}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.E2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-2.E2: Errore per fallimento modulo AI}
+    \label{fig:uc-2.e2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore, AI Post Generator
     \item[Pre-condizioni] Il Redattore ha richiesto una variante (rigenerazione), ma si verifica un problema tecnico di rete o di API.
@@ -648,11 +697,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-2.E3: Errore - Formato immagine non valido}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{diagrammi_use_case/UC-2.E3.png}
-\end{center}
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-2.E3.png}
+    \caption{Diagramma del caso d'uso UC-2.E3: Errore per formato immagine non valido}
+    \label{fig:uc-2.e3}
+\end{figure}s
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore tenta di caricare una nuova immagine che non rispetta i vincoli di sistema.
@@ -665,11 +717,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-3: Approvazione e finalizzazione del contenuto}
-
-\begin{center}
+\mbox{} \\
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/UC-3.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-3: Approvazione e finalizzazione del contenuto}
+    \label{fig:uc-3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
@@ -696,11 +750,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-3.1: Visualizzazione delle opzioni di finalizzazione}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-3.1: Visualizzazione delle opzioni di finalizzazione}
+    \label{fig:uc-3.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema ha validato l'ultimo output della fase di revisione.
@@ -712,11 +769,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-3.2: Salvataggio in bozza}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-3.2: Salvataggio in bozza}
+    \label{fig:uc-3.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
@@ -729,11 +789,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-3.3: Esportazione del contenuto}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.3.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-3.3: Esportazione del contenuto}
+    \label{fig:uc-3.3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
@@ -746,11 +809,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-3.4: Inoltro tramite e-mail}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-3.4.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-3.4: Inoltro tramite e-mail}
+    \label{fig:uc-3.4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema espone il campo per l'inserimento dell'indirizzo del destinatario.
@@ -773,11 +839,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-3.E1: Errore - Indirizzo e-mail non valido}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.E1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-3.E1: Errore per indirizzo e-mail non valido}
+    \label{fig:uc-3.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore richiede l'inoltro inserendo un indirizzo sintatticamente errato.
@@ -790,11 +859,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-4: Gestione libreria prompt e storico}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/UC-4.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-4: Gestione libreria prompt e storico}
+    \label{fig:uc-4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
@@ -820,11 +892,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-4.1: Visualizzazione elenco generazioni passate}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-4.1: Visualizzazione elenco generazioni passate}
+    \label{fig:uc-4.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore si trova nella sezione dedicata alla libreria.
@@ -836,11 +911,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-4.2: Ricerca e filtraggio dello storico}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-4.2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-4.2: Ricerca e filtraggio dello storico}
+    \label{fig:uc-4.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore visualizza l'elenco cronologico.
@@ -862,11 +940,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-4.3: Caricamento e riutilizzo prompt}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.3.png}
-\end{center}
+    \includegraphics[width=0.45\textwidth]{diagrammi_use_case/UC-4.3.png}
+    \caption{Diagramma del caso d'uso UC-4.3: Caricamento e riutilizzo prompt}
+    \label{fig:uc-4.3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore ha individuato un elemento d'interesse nella libreria.
@@ -879,11 +960,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-4.4: Gestione dei preferiti}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-4.4.png}
-\end{center}
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.4.png}
+    \caption{Diagramma del caso d'uso UC-4.4: Gestione dei preferiti}
+    \label{fig:uc-4.4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore visualizza l'elenco dei contenuti.
@@ -896,11 +980,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-4.E1: Avviso - Nessun risultato trovato}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.E1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-4.E1: Avviso per nessun risultato trovato}
+    \label{fig:uc-4.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore ha inserito criteri di ricerca che non producono risultati.
@@ -1320,7 +1407,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
         \item Il Consulente del lavoro seleziona la classificazione del documento.
         \item Il Consulente del lavoro inserisce i metadati richiesti (mese, anno, azienda).
-        \item Il Consulente del lavoro conferma il caricamento dopodichè il sistema verifica formato e duplicati.
+        \item Il Consulente del lavoro conferma il caricamento dopodiche il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
