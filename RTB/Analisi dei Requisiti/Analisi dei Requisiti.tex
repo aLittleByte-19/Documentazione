@@ -134,7 +134,7 @@
 
 \pagenumbering{arabic}
 \setcounter{page}{4}
-\fancyfoot[R]{Analisi dei Capitolati\hspace{0.8em}\thepage}
+\fancyfoot[R]{Analisi dei Requisiti\hspace{0.8em}\thepage}
 
 \section{Introduzione}
 \subsection{Scopo del documento}
@@ -207,8 +207,8 @@ Il prodotto è articolato in due macro-componenti funzionali, supportate da serv
 \paragraph{Funzionalità trasversali}
 \begin{itemize}
     \item Esecuzione asincrona delle operazioni time-consuming per garantire fluidità dell'interfaccia.
-    \item Raccolta centralizzata di log e metriche operative a supporto della governance e del miglioramento continuo dei modelli AI.
-    \item Configurazione dei parametri di qualità (soglie di confidenza, regole di split, template di messaggio) per ciascun tenant o cliente.
+    \item Raccolta centralizzata di metriche operative a supporto della governance e del miglioramento continuo dei modelli AI.
+    \item Configurazione dei parametri di qualità (soglie di confidenza, regole di split, template di messaggio).
 \end{itemize}
 
 \subsection{Utenza di riferimento}
@@ -285,8 +285,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \item[Scenari Alternativi] 
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{5a. Salvataggio della configurazione}: Il Redattore decide di memorizzare i parametri inseriti invece di procedere con la generazione; viene eseguito \textbf{UC-1.4}.
-        \item \textbf{5a. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
-        \item \textbf{5b. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
+        \item \textbf{5b. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
+        \item \textbf{5c. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
     \end{itemize}
 
     \item[Relazioni] 
@@ -1320,7 +1320,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_7.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_7.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
@@ -1359,7 +1359,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_7.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_7.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1376,7 +1376,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_7.E2.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_7.E2.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1393,7 +1393,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_8.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_8.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1407,7 +1407,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
         \item Il Consulente del lavoro seleziona la classificazione del documento.
         \item Il Consulente del lavoro inserisce i metadati richiesti (mese, anno, azienda).
-        \item Il Consulente del lavoro conferma il caricamento dopodiche il sistema verifica formato e duplicati.
+        \item Il Consulente del lavoro conferma il caricamento dopodiché il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
@@ -1426,7 +1426,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_9.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_9.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1455,7 +1455,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_9.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_9.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1472,7 +1472,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_10.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/uc_10.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1499,7 +1499,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_11.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_11.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1525,7 +1525,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_12.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_12.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1551,7 +1551,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_13.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_13.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1577,7 +1577,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_14.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_14.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1603,7 +1603,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1628,7 +1628,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1645,7 +1645,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.2.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.2.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1662,7 +1662,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.3.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.3.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1686,7 +1686,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.4.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.4.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1710,7 +1710,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.5.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.5.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1726,7 +1726,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.6.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.6.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1750,7 +1750,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.7.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.7.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1766,7 +1766,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.8.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.8.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1790,7 +1790,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.9.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.9.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1814,7 +1814,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.10.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.10.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1838,7 +1838,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.11.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.11.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1854,7 +1854,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.3.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.3.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1871,7 +1871,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.4.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.4.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1888,7 +1888,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.6.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.6.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1905,7 +1905,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.8.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.8.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1922,7 +1922,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.9.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.9.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1939,7 +1939,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_15.10.E1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.10.E1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1956,7 +1956,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1985,7 +1985,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2002,7 +2002,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.2.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.2.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2019,7 +2019,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.3.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.3.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2036,7 +2036,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.4.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.4.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2053,7 +2053,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.5.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.5.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2070,7 +2070,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_17.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_17.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2096,7 +2096,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_17.1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_17.1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2113,7 +2113,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_17.2.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_17.2.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2130,7 +2130,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_17.3.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_17.3.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2147,7 +2147,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_17.4.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_17.4.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2166,7 +2166,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_18.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_18.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2190,7 +2190,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_18.1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_18.1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2207,7 +2207,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_18.2.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_18.2.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2224,7 +2224,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_18.3.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_18.3.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2241,7 +2241,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_19.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_19.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2266,7 +2266,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_19.1.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_19.1.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2283,7 +2283,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_19.2.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_19.2.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2300,7 +2300,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_19.3.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_19.3.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2317,7 +2317,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_19.4.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_19.4.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2334,7 +2334,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{center}
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_19.5.png}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_19.5.png}
 \end{center}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
