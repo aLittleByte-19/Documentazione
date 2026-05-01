@@ -102,6 +102,7 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        0.2.3 & 2026-05-01 & Aggiunti termini dell'analisi dei requisiti & Diego Belluz & - & - \\
         0.2.2 & 2026-04-27 & Aggiunta di alcuni termini delle Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
         0.2.1 & 2026-04-22 & Aggiunta di alcuni termini della Analisi dei Requisiti& V. Y. Kaneda Fernandes & - & - \\
         0.2.0 & 2026-04-12 & Aggiunta termini al documento & V. Y. Kaneda Fernandes & - & - \\
@@ -169,10 +170,22 @@ Modalità di comunicazione tra moduli che permette di non bloccare l'interfaccia
 \subsection{Attore}
 Ruolo ricoperto da un utente o da un sistema esterno che interagisce con l'applicazione (es. Amministratore, Redattore, Operatore CdL).
 
+\subsection{Attore Primario}
+L'utente umano o il sistema esterno che avvia attivamente e volontariamente un caso d'uso per raggiungere un obiettivo specifico.
+
+\subsection{Attore Secondario}
+Entità o sistema terzo coinvolto passivamente nel processo, che viene richiamato dal sistema principale per supportare o completare un'operazione.
+
 \subsection{Audit Trail}
 Un registro che tiene traccia di tutte le operazioni fatte nel sistema, utile per controllare chi ha fatto cosa e quando.
 
 \section{B}
+
+\subsection{Bookmark}
+Funzionalità dell'interfaccia che permette all'utente di contrassegnare e salvare i propri contenuti o prompt preferiti, al fine di recuperarli rapidamente nello storico.
+
+\subsection{Bozza (Draft)}
+Stato temporaneo di un documento o di un contenuto testuale salvato nel sistema prima della sua validazione, approvazione o invio definitivo.
 
 \subsection{Branch (Ramo)}
 Ramificazione separata del codice sorgente che permette lo sviluppo isolato di funzionalità o documenti.
@@ -200,6 +213,9 @@ Metrica che indica la percentuale di codice sorgente eseguita durante i test aut
 \subsection{Code Review}
 Revisione del codice effettuata tra pari per garantirne la qualità e la tracciabilità.
 
+\subsection{Committente (o Proponente)}
+L'azienda, l'ente o la persona che ha commissionato il progetto software fornendo il capitolato iniziale (in questo caso, Eggon S.r.l.).
+
 \subsection{Confidenza (Confidence Score)}
 Un valore (spesso in percentuale) che indica quanto il sistema è sicuro che il riconoscimento automatico di un documento sia corretto.
 
@@ -222,6 +238,9 @@ Interfaccia grafica riassuntiva che permette di visualizzare statistiche di util
 
 \subsection{Dashboard Amministrativa}
 La pagina di controllo riservata ai gestori del sistema, da cui si possono usare le funzioni di intelligenza artificiale e gestire i documenti.
+
+\subsection{Data-driven}
+Approccio decisionale e di sviluppo basato sull'analisi di dati oggettivi (come le metriche di utilizzo e i feedback quantitativi) per guidare l'evoluzione dei modelli AI e del sistema.
 
 \subsection{Design Pattern}
 Soluzioni progettuali consolidate utilizzate per risolvere problemi comuni di progettazione software.
@@ -249,10 +268,18 @@ Modalità di esecuzione di operazioni lunghe in background per non bloccare l'in
 \subsection{Estensione}
 Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'estensione un comportamento opzionale.
 
+\section{F}
+
+\subsection{Filtro dinamico}
+Strumento dell'interfaccia grafica che aggiorna istantaneamente i dati visualizzati a schermo in base ai parametri selezionati dall'utente, senza necessità di ricaricare la pagina.
+
 \section{G}
 
 \subsection{GDPR}
 Il regolamento europeo che protegge la privacy e stabilisce come devono essere trattati i dati personali.
+
+\subsection{Generalizzazione (Casi d'Uso)}
+Relazione UML in cui un caso d'uso specifico (figlio) eredita e specializza i comportamenti, le precondizioni e le postcondizioni di un caso d'uso più generico (padre).
 
 \subsection{Git}
 Software per il controllo di versione distribuito.
@@ -289,6 +316,9 @@ Numeri o percentuali usati per misurare se il sistema sta funzionando bene (ad e
 \subsection{Latex}
 Linguaggio di composizione tipografica usato per la stesura di documenti professionali e uniformi.
 
+\subsection{Layout affiancato}
+Disposizione dell'interfaccia utente che divide lo schermo in due pannelli visibili contemporaneamente (ad esempio, per mostrare il documento originale a sinistra e i dati estratti a destra).
+
 \subsection{Lista di Dispaccio}
 Elenco organizzato dei destinatari e dei messaggi pronti per l'invio dopo l'analisi AI.
 
@@ -299,6 +329,9 @@ Elenco organizzato dei destinatari e dei messaggi pronti per l'invio dopo l'anal
 Insieme di file (come i cedolini massivi) caricati simultaneamente nel sistema per l'elaborazione.
 
 \section{M}
+
+\subsection{Marcatore di trasparenza}
+Un'etichetta o dicitura esplicita (ad esempio "Creato da AI Assistant") inserita in modo automatico nei contenuti esportati o inoltrati, al fine di dichiarare chiaramente che il testo è stato generato tramite intelligenza artificiale.
 
 \subsection{Metadati (documento)}
 Informazioni di contesto associate a un file, come il periodo temporale (mese/anno) e l'azienda di riferimento.
@@ -360,6 +393,8 @@ L'istruzione o il testo che scrivi all'intelligenza artificiale per dirle cosa d
 \subsection{Pull Request}
 Richiesta di revisione e integrazione di modifiche da un branch a un altro su GitHub.
 
+\subsection{PWA (Progressive Web App)}
+Applicazione web sviluppata per offrire un'esperienza utente, funzionalità e prestazioni del tutto simili a quelle di un'applicazione nativa (mobile o desktop), pur essendo accessibile tramite browser.
 
 \section{R}
 
@@ -380,6 +415,12 @@ Un archivio digitale dove vengono caricati e organizzati tutti i documenti (come
 
 \subsection{Requisito(Obbligatorio, Desiderabile, Opzionale)}
 Classificazione delle funzionalità del sistema in base alla loro priorità e necessità per il funzionamento del prodotto.
+
+\subsection{Requisito Funzionale}
+Caratteristica che descrive un'azione specifica o un comportamento che il software deve essere in grado di eseguire (es. "Il sistema deve permettere l'upload di file PDF").
+
+\subsection{Requisito Non Funzionale}
+Vincolo qualitativo o prestazionale che definisce come il sistema deve operare (es. tempi di risposta, standard di sicurezza, usabilità).
 
 \subsection{Resilienza}
 Capacità del sistema di gestire errori e anomalie (es. retry di rete) mantenendo il funzionamento.
@@ -411,11 +452,20 @@ Percorso secondario che descrive la gestione di errori, eccezioni o scelte diver
 \subsection{Scenario Principale}
 Sequenza ottimale e lineare di interazioni tra attore e sistema.
 
+\subsection{Soglia di Confidenza}
+Il valore percentuale limite (fissato ad esempio all'80\%) di sicurezza richiesto all'AI: se la precisione stimata per un dato scende sotto questo limite, viene richiesto l'intervento manuale (Human-in-the-loop).
+
+\subsection{Sottocaso}
+Scomposizione logica e strutturale di un caso d'uso complesso in porzioni più piccole e gestibili, utilizzata per facilitare la lettura, la comprensione e la manutenzione del documento dei requisiti.
+
 \subsection{Split Automatico}
 Funzionalità che permette di suddividere documenti multi-destinatario (come i cedolini massivi) in singole "copie atomiche".
 
 \subsection{Sprint}
 Un periodo di tempo definito (nel caso di NEXUM è di 10 giorni lavorativi) in cui il team si concentra su un set specifico di compiti da completare.
+
+\subsection{Stakeholder}
+Qualsiasi individuo, gruppo o organizzazione che ha un interesse diretto nel progetto, che è coinvolto nel suo ciclo di vita o che può essere influenzato dai suoi risultati (es. committente Eggon, docenti, utenti finali).
 
 \subsection{Standalone}
 Caratteristica di un'applicazione che può funzionare in modo indipendente, senza essere integrata in altre piattaforme esistenti.
@@ -424,6 +474,9 @@ Caratteristica di un'applicazione che può funzionare in modo indipendente, senz
 Come per il Tono Comunicativo: Parametri di configurazione (es. formale, empatico, tecnico) che calibrano il registro dell'AI Assistant.
 
 \section{T}
+
+\subsection{Tenant}
+Un'istanza isolata e dedicata a un singolo cliente o organizzazione all'interno della piattaforma software. Ogni tenant possiede configurazioni, parametri di qualità e dati separati dagli altri.
 
 \subsection{Test di Integrazione}
 Test volti a verificare che i vari moduli del sistema funzionino correttamente quando combinati.
@@ -434,11 +487,14 @@ Test eseguiti per assicurarsi che nuove modifiche non abbiano introdotto errori 
 \subsection{Test di Unità}
 Test volti a verificare il corretto funzionamento di singole parti (unità) di codice.
 
-\subsection{Tono Comunicativo}
-Parametri di configurazione (es. formale, empatico, tecnico) che calibrano il registro dell'AI Assistant.
+\subsection{Timeout}
+Interruzione forzata di un'operazione che si verifica quando un servizio o un modulo (come il motore di generazione AI) non risponde alla richiesta entro un tempo massimo prestabilito.
 
 \subsection{Token API}
 Una sorta di "chiave digitale" segreta che permette a diversi programmi o servizi di parlare tra loro in modo sicuro.
+
+\subsection{Tono Comunicativo}
+Parametri di configurazione (es. formale, empatico, tecnico) che calibrano il registro dell'AI Assistant.
 
 \subsection{Trigger}
 Evento o azione che innesca l'esecuzione di un caso d'uso.
