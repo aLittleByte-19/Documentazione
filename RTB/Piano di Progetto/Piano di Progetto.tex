@@ -4,7 +4,8 @@
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage{geometry}
-\usepackage{tabularx}
+\usepackage{tabularx} % Per l'ambiente tabularx (tabelle)
+\usepackage{calc} % Sempre per le tabelle
 \usepackage[table]{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage{fancyhdr}
@@ -17,11 +18,16 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{titlesec}
-\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{colortbl}
+\usepackage{eurosym}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec} % Per la definizione di nuove suddivisioni e sottosezioni, come subsubsubsection
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -31,6 +37,56 @@
     headheight=331pt,
     includeheadfoot
 }
+
+\newcommand{\slice}[4]{
+  \pgfmathparse{0.5*#1+0.5*#2}
+  \let\midangle\pgfmathresult
+
+  \draw[thick,fill=black!10] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+
+  \node[label=\midangle:#4] at (\midangle:1) {};
+
+  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
+  \let\temp\pgfmathresult
+  \pgfmathparse{max(\temp,-0.5) + 0.8}
+  \let\innerpos\pgfmathresult
+  \node at (\midangle:\innerpos) {#3};
+}
+
+% Creazione del nuovo comando subsubsubsection
+
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+%\def\toclevel@paragraph{6}
+\def\toclevel@subparagraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
 
 
 
@@ -116,11 +172,15 @@
         \hline
         0.2.0 & 2026-04-14 & Stesura del primo periodo & V. Y. Kaneda Fernandes & A. Oloni\\
         \hline
-        0.2.1 & 2026-04-20 & Stesura del secondo periodo & V. Y. Kaneda Fernandes & A. Oloni\\
-        \hline
         0.3.0 & 2026-04-21 & Aggiunta delle sezioni: \textbf{\hyperref[sec:scopo_del_documento]{§1.2}, \hyperref[sec:glossario]{§1.3}, \hyperref[sec:riferimenti]{§1.4}, \hyperref[sec:analisi_dei_rischi]{§2}, \hyperref[sec:modello_di_sviluppo]{§3}}, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & A. Oloni & V. Y. Kaneda Fernandes \\
         \hline
         0.3.1 & 2026-04-23 & Stesura delle sezioni \textbf{\hyperref[sec:introduzione]{§1}} e \textbf{\hyperref[sec:analisi_dei_rischi]{§2}} & A. Oloni & V. Y. Kaneda Fernandes \\
+        \hline
+        0.3.2 & 2026-04-26 & Stesura della sezione \textbf{\hyperref[sec:modello_di_sviluppo]{§3}} & A.Oloni & V. Y. Kaneda Fernandes \\
+        \hline
+        0.3.3 & 2026-04-29 & Inizio stesura della sezione \textbf{\hyperref[sec:pianificazione]{§4}} & A.Oloni & V. Y. Kaneda Fernandes e E. Bellet\\
+        \hline
+        0.4.0 & 2026-04-30 & Aggiunta di specifiche nel Primo Periodo e Stesura del Secondo Periodo & A.Oloni & V. Y. Kaneda Fernandes e E. Bellet\\
         \hline
     \end{tabularx}
     \caption{Registro delle Modifiche}
@@ -132,6 +192,8 @@
 \newpage
 
 \tableofcontents
+\listoftables
+\listoffigures
 
 \newpage
 
@@ -163,11 +225,24 @@ Per questioni di ordine e di chiarezza dei concetti utilizzati, si è deciso di 
 tutta la terminologia e la specifica dei termini che possono risultare confusionari, tecnici o semplicemente ambigui.
 \subsection{Riferimenti}
 \label{sec:riferimenti}
+\subsubsection{Riferimenti normativi}
+\begin{itemize}
+    \item Norme di Progetto
+    \item Capitolato C5: \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{\textit{\textbf{'Nexum'}}}
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}{Regolamento Progetto Didattico}
+\end{itemize}
+\subsubsection{Riferimenti informativi}
+\begin{itemize}
+    \item Glossario
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf}{T2: Ciclo di Vita del Software}
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T03.pdf}{T3: Modelli di sviluppo Software}
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf}{T4: Gestione di Progetto}
+\end{itemize}
 
 
 \section{Analisi dei Rischi}
 \label{sec:analisi_dei_rischi}
-L'\textbf{Analisi dei Requisiti} è una sezione fondamentale di questo documento, nella quale vengono individuati e specificati tutti i vari rischi
+L'\textbf{Analisi dei Rischi} è una sezione fondamentale di questo documento, nella quale vengono individuati e specificati tutti i vari rischi
 nella quale si può incorrere, che potrebbero compromettere, a seconda della gravità, il completo svolgimento delle attività ed il successo dell'iniziativa.
 L'identificazione di codesti rischi e definire tecniche di mitigazione adatte, va così quindi a ridurre eventi imprevisti che possono svilupparsi durante 
 il continuo sviluppo del progetto, agevolando quindi il controllo dei costi, il rispetto delle scadenza prefissate ed una maggiore fluidità nel lavoro.
@@ -188,7 +263,7 @@ Il processo di gestione dei rischi si divide in cinque fasi:
 Queste fasi elencate devono essere attuate costantemente durante tutto il periodo di vita del progetto, per far si di avere efficenza a livello di tempi e di costi.
 Per identificare meglio questi rischi, si è deciso di utilizzare un formato nel quale viene specificata la zona di interesse e l'importanza del rischio:
 \begin{center}
-    \textbf{R[Tipo][Numero]}
+    \textbf{R[Tipo][Indice]}
 \end{center}
 Nella quale \textbf{Tipo} indica la categoria in cui rientra il rischio, che si divide in tre sezioni:
 \begin{itemize}
@@ -196,6 +271,8 @@ Nella quale \textbf{Tipo} indica la categoria in cui rientra il rischio, che si 
     \item \textbf{O}: Operativo
     \item \textbf{P}: Personale, singolare ad ogni membro del gruppo
 \end{itemize}
+L'\textbf{\textit{Indice}} indica l'ordine dei rischi su ogni categoria, in cui abbiamo deciso di metterli in ordine di Probabilità e Pericolosità.
+
 \newpage
 \subsection{RT: Rischi legati alle Tecnologie}
 \subsubsection{RT1: Complessità nell'apprendimento delle nuove tecnologie}
@@ -280,6 +357,7 @@ Fare ciò garantisce sicurezza ed integrità dei documenti di lavoro, facilitand
 \end{tabular}
 \caption{RT3: Perdita di file o danneggiamento di essi}
 \end{table}
+\newpage
 
 \subsection{RO: Rischi legati all'Organizzazione del gruppo}
 \subsubsection{RO1: Mancanza di comunicazione chiara e completa}
@@ -311,7 +389,7 @@ dettagliato del proprio lavoro durante il periodo di sprint, discutendo inoltre 
 \end{tabular}
 \caption{RO1: Mancanza di comunicazione chiara e completa}
 \end{table}
-
+\newpage
 
 
 \subsubsection{RO2: Confusione sulla gestione delle responsabilità}
@@ -338,6 +416,7 @@ Mitigazione & GG\\
 \end{tabular}
 \caption{RO2: Confusione sulla gestione delle responsabilità}
 \end{table}
+\newpage
 
 \subsubsection{RO3: Gestione del tempo e delle scadenze}
 La mancanza di organizzazione del tempo e delle varie scadenze indicate per il compimento del progetto, come la sottovalutazione degli impegni o scadenze irrealizzabili, possono portare a ritardi che
@@ -367,6 +446,7 @@ periodiche, affinchè ogni difficoltà emersa possa essere resa nota a tutti i m
 \end{tabular}
 \caption{RO3: Gestione del tempo e delle scadenze}
 \end{table}
+\newpage
 
 \subsubsection{RO4: Mancata o carenza di comunicazione col proponente}
 La comunicazione con l'azienda proponente è fondamentale per far si che il prodotto finale sia in linea con le richieste, se questa viene a mancare
@@ -394,6 +474,8 @@ si contatta il committente per un colloquio. È inoltre importante fare una docu
 \end{tabular}
 \caption{RO4: Mancata o carenza di comunicazione col proponente}
 \end{table}
+
+\newpage
 
 \subsection{RP: Rischi personali legati ai singoli membri}
 \subsubsection{RP1: Mancato o insufficiente svolgimento dei propri impegni}
@@ -426,6 +508,8 @@ non si vuole sovraccaricare di lavoro il team. \\
 \caption{RP1: Mancato o insufficiente svolgimento dei propri impegni}
 \end{table}
 
+\newpage
+
 \subsubsection{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
 Se viene svolto un lavoro che non coincide con le specifiche del capitolato oppure non si adempie al lavoro svolto, ci sono dei rischi sul tempo e sui costi.
 \vspace{0.5cm}
@@ -454,230 +538,424 @@ sia in linea con gli impegni dichiarati\\
 \caption{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
 \end{table}
 
+\newpage
 
 
 \section{Modello di Sviluppo}
 \label{sec:modello_di_sviluppo}
+Affinchè lo svolgimento del Capitolato \textit{C5: 'Nexum'} venga svolto in maniera efficiente ed in linea con le scadenze, il team ha deciso
+di utilizzare un modello di sviluppo \href{https://agilemanifesto.org/}{\textbf{\textit{Agile}}} per la capacità di adattamento a cambiamenti improvvisi o naturali, oltre all'approccio incrementale ed iterativo, grazie al quale, con questi brevi cicli chiamati \textit{Sprint},
+offre una capacità maggiore di controllo e di miglioramento del software. Oltre a ciò, offre una continua contrattazione e dialogo col cliente, individuando problemi o modifiche necessarie in tempi brevi,
+andando ad influire positivamente sul rispetto delle scadenze e dei costi di sviluppo.
+\subsection{Fasi del Progetto}
+Le fasi del progetto si dividono in tre macro sezioni, nelle quali ognuna di esse ha obiettivi specifici e diversificati:
+\begin{itemize}
+    \item \textbf{Candidatura}: Questo è il periodo preliminare e precedente all'inizio dell'RTB, nella quale vengono studiati e valutati i vari
+    capitolati proposti dalle varie aziende proponenti.
+    \item \textbf{RTB \textit{(Requirements and Technology Baseline)}}: Questa fase avviene dopo l'aggiudicazione dell'appalto. In questa fase, il gruppo si concentra sull'apprendimento delle basi tecnologie richieste per lo sviluppo del software.
+    \item \textbf{PB: \textit{(Product Baseline)}}: In questo ultimo periodo, viene elaborato e sviluppato il prodotto software.
+\end{itemize}
 
-
+\subsection{Adozione del framework SCRUM al progetto}
+Il team ha utilizzato SCRUM in questo progetto accademico per avere maggiore efficienza operativa ed un continuo riscontro con gli altri membri del gruppo.
+Il ciclo di lavoro viene diviso in Sprint, e in esso vengono eseguiti:
+\begin{itemize}
+    \item \textbf{Sprint Planning}: All'inizio del nuovo Sprint, il gruppo decide le varie mansioni e attività da svolgere emerse, producendo uno \textit{Sprint Backlog}.
+    \item \textbf{Meeting Sicrono}: Il team si riunisce in riunione su un'apposita applicazione in chiamata per discutere delle attività da svolgere
+    durante lo Sprint in apertura, specificando le varie priorità ed importanza, oltre alle risorse che andranno impiegate.
+    \item \textbf{Sprint Review e Retrospective}: Al termine dello Sprint, si svolge una riunione sulla revisione dell'operato del team rispetto agli obiettivi
+    fissati per il periodo, e si fanno delle considerazioni su vari aspetti per un miglioramento futuro della produttività.
+\end{itemize}
 \section{Pianificazione}
-\subsection{Sprint 1}
+\label{sec:pianificazione}
+\subsection{Calendario Revisioni del Progetto}
+In questa sezione vengono illustrati le date previste per le revisioni del progetto e del suo conseguente avanzamento, definite in base alla quantità di lavoro da svolgere
+e alle scadenze del corso.
+\subsubsection{Date Avanzamento Progetto - Prima Stesura 29/04/2026}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Revisione} & \textbf{Data Stimata}\\
+    \hline
+    \textit{Requirements and Technology Baseline - RTB} & 2026/??/??\\
+    \hline
+    \textit{Product Baseline - PB} & 2026/09/10\\
+    \hline
+    \end{tabularx}
+    \caption{Calendario Avanzamento Progetto - Prima Stesura}
+\end{table}
+\subsection{Periodo preliminare studio Capitolati (Pre-RTB)}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine} & \textbf{Data Aggiudicazione Appalto}\\
+    \hline
+    06/03/2026 & 24/03/2026 & 26/03/2026\\
+    \hline
+    \end{tabularx}
+    \caption{Periodo pre-RTB}
+\end{table}
 
+\subsubsection{Attività}
+\label{sec:prertb_attivita}
+Nella fase preliminare, con tutti i membri del team, si ha una discussione sull'opzione più interessante e fattibile a livello di tempi e costi.
+Durante questa fase, il team prepara i documenti necessari per la candidatura e, conseguentemente, l'aggiudicazione dell'appalto, oltre ad un primo brainstorming sulle varie
+task del capitolato scelto.
+\subsubsection{Costruzione Candidatura}
+\label{sec:costruzione_candidatura}
+Nel periodo iniziale, il team \textit{aLittleByte} si è concentrato nella costruzione di una linea guida, per avere una coesione e comprensione reciproca sul lavoro da svolgere,
+con l'obiettivo comune di eseguire un lavoro efficiente e preciso.
+Nella fase a seguire, ogni membro ha contribuito nella stesura delle \textit{Norme di Progetto}, analizzando i vari capitolati proposti dalle aziende proponenti e condividendo
+con tutti i propri interessi, dubbi ed incertezze su ogni capitolato. Dopo aver trovato i capitolati di maggior interesse e fattibilità, il team ha fissato dei colloqui con le aziende,
+per esporre le domande emerse durante le riunioni interne e maggiori specifiche organizzative e tecnologiche.
+Parallelamente vengono svolte altre mansioni minori ma comunque essenziali, come la scelta del nome del gruppo, il logo, la creazione sia di una mail di riferimento che di una repository su
+GitHub dove andranno inseriti i vari file da presentare per la candidatura.
 
-\textbf{Inizio:} 06/04/2026 \\
-\textbf{Fine prevista:} 13/04/2026 \\
-\textbf{Fine reale:} 13/04/2026 \\
-\textbf{Giorni di ritardo:} 0 \\
-\textbf{Quadro generale e attività previste:}\\
-Questo primo sprint è mirato a dare l'avvio alla documentazione necessaria per il progetto.\\
-
-\noindent Attività svolte:
+\subsection{Requirements and Technology Baseline - RTB}
+\label{sec:RTB}
+\subsubsection{Obiettivi}
+Durante questa fase, il team si impegna a redarre tutti i documenti necessari, ossia:
 \begin{itemize}
-    \item Inizio stesura dell'Analisi dei requisiti
-    \item Inizio stesura delle Norme di Progetto
-    \item Creazione Mockup
-    \item Inizio stesura del Glossario
-    \item Redazione Verbale Interno 09/04/2026
-    \item Redazione Verbale Interno 13/04/2026
+    \item \textit{Norme di Progetto}
+    \item \textit{Analisi dei Requisiti}
+    \item \textit{Piano di Progetto}
+    \item \textit{Piano di Qualifica}
+    \item \textit{Glossario}
 \end{itemize}
+affinchè si abbia una chiara comprensione del capitolato scelto, e in certe situazioni si richiede all'azienda proponente incontri per un maggior riscontro sulle scelte attuate e su
+eventuali compromessi tecnologici. Inoltre, tramite le scelte effettuate, verrà sviluppato un \textit{Proof of Concept}, ossia un prototipo funzionale in cui vengono inseriti i vari obiettivi indicati e le 
+varie attività che deve svolgere, per valutarne quindi la complessità, fattibilità tecnologica e per avere un esempio tangibile delle varie soluzioni proposte.
+Quindi i punti chiave in questa \textit{Requirements and Technology Baseline} sono essenzialmente:
+\begin{itemize}
+    \item \textbf{Stesura Documentazione}: Il gruppo si suddivide la creazione e la stesura della documentazione necessaria allo sviluppo del prodotto
+    \item \textbf{Analisi}: Al proponente vengono richiesti incontri per un maggiore riscontro sullo sviluppo del Proof of Concept, affinchè si evitino ambiguità e si trovino compromessi o soluzioni migliori
+    \item \textbf{Sviluppo del \textit{Proof of Concept}}: Viene quindi iniziato a sviluppare un prototipo del prodotto, per testarne funzionalità, attività e complessità.
+\end{itemize}
+\subsubsection{Periodi}
+\subsubsubsection{Primo Periodo}
+\label{sec:rtb_primoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    30/03/2026 & 12/04/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Durante il primo Sprint, il team subito dopo l'aggiudicazione del capitolato, ci siamo concentrati sulla comprensione completa e più approfondita della documentazione, ed a richiedere 
+all'azienda dei consigli riguardo le varie tecnologie. Parallelamente, il gruppo ha analizzato i vari \textit{casi d'uso} presenti ed iniziato la stesura del documento \textit{Analisi dei Requisiti}, seguita dalle \textit{Norme di Progetto},
+una prima bozza del \textit{Glossario}, del \textit{Piano di Qualifica} e del \textit{Piano di Progetto}. Inoltre, si è iniziato a costruire un mock-up il quale verrà usato come principale riferimento dello sviluppo.\\
+\noindent\textbf{Considerazioni (Sprint Review e Retrospective)}\\
+Il team ha rispettato le scadenze e gli obiettivi impostati per il primo periodo di lavoro. La stesura dei documenti sta procedendo a ritmi notevoli. Nella costruzione del mock-up, ci sono stati diversi disguidi organizzativi
+e tecnologici, ma il team è riuscito a risolvere il problema in tempi brevi.
 
 
 
+\subsubsubsection{Secondo Periodo}
+Durante il secondo Sprint, il team ha continuato la stesura dei documenti, principalmente si è discusso per la stesura del Glossario e del Piano di Progetto. Il mock-up è stato concluso, il quale verrà presentato all'azienda proponente durante lo Sprint successivo,
+tramite una riunione concordata. Viene inoltre continuata la stesura del documento \textit{Analisi dei Requisiti}, continuando a stilare i vari casi d'uso riscontrati. L'obiettivo principale è stato l'allineamento dei documenti, affinchè ci siano minori incomprensioni.
+
+\label{sec:rtb_secondoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    13/03/2026 & 26/04/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+\subsubsubsection{Terzo Periodo}
+\label{sec:rtb_terzoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    27/03/2026 & 10/05/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+\section{Preventivo e Consuntivo dei Periodi}
+\label{sec:preventivo_e_consuntivo}
+\subsection{Primo Periodo: Sprint 30/03/2026 - 12/04/2026}
+\label{sec:pec_primoperiodo}
+Durante il primo Sprint abbiamo iniziato a raggruppare tutte le idee ed obiettivi per incominciare l'RTB \textit{(Requirement and Technology Baseline)},
+dando quindi inizio alla stesura dei primi documenti utili come \textit{Norme di Progetto}, \textit{Glossario}, \textit{Analisi dei Requisiti} e \textit{Piano di Qualifica}.\\
+
+\vspace{0.5em}
 
 \begin{table}[H]
 \centering
-\caption{Preventivo ore per componente - Sprint 1}
 \label{tab:preventivo-sprint1}
 \vspace{2mm}
-\begin{tabular}{llcc}
-\toprule
-\textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Previste} & \textbf{Costo Previsto} \\
-\midrule
-Eleonora Bellet & Analista & 4 & 100€ \\
-Diego Belluz & Verificatore & 10 & 150€ \\
-Angela Maule & Analista & 4 & 100€ \\
-Angelica Gastaldello & Amministratore & 8 & 160€ \\
-Alex Oloni & Responsabile & 8 & 240€ \\
-Leonardo Soligo & Analista & 6 & 150€ \\
-V.Y. Kaneda Fernandes & Analista & 4 & 100€ \\
-\bottomrule
+
+\begin{center}
+    
+\noindent\textbf{Preventivo}
+\end{center}
+
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Eleonora Bellet & - & - & -- & - & - & - & -\\
+Diego Belluz & - & - & -- & - & - & - & -\\
+Angela Maule & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & -- & - & - & - & -\\
+Leonardo Soligo & - & - & -- & - & - & - & -\\
+V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & - & - & -- & - & - & - & -\\
+\hline
 \end{tabular}
+\caption{Preventivo ore per componente - Primo Sprint}
 \end{table}
 
-
-
+\begin{center}
+    
+\noindent\textbf{Consuntivo}
+\end{center}
 
 \begin{table}[H]
 \centering
-\caption{Consuntivo ore per componente - Sprint 1}
-\label{tab:consuntivo-sprint1}
 \vspace{2mm}
-\begin{tabular}{llcc}
-\toprule
-\textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Effettive} & \textbf{Differenza} \\
-\midrule
-Eleonora Bellet & Analista & 4 & -- \\
-Diego Belluz & Verificatore & 9 & -1 \\
-Angela Maule & Analista & 4 & -- \\
-Angelica Gastaldello & Amministratore & 8 & -- \\
-Alex Oloni & Responsabile & 8 & -- \\
-Leonardo Soligo & Analista & 5 & -1 \\
-V.Y. Kaneda Fernandes & Analista & 4 & -- \\
-\bottomrule
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Eleonora Bellet & - & - & - & - & - & - & -\\
+Diego Belluz & - & - & - & - & - & - & -\\
+Angela Maule & - & - & - & - & - & - & -\\
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & - & - & - & - & -\\
+Leonardo Soligo & - & - & -- & - & - & - & -\\
+V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & - & - & - & - & - & - & -\\
+\hline
 \end{tabular}
+\caption{Consuntivo ore per componente - Primo Sprint}
 \end{table}
-
 
 \vspace{0.5cm}
-\noindent\textbf{Aggiornamento delle risorse rimanenti}
-
-
-
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
 
 \begin{table}[H]
 \centering
-\caption{Riepilogo costi e budget rimanente - Sprint 1}
 \label{tab:risorse-rimanenti}
 \vspace{2mm}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Ruolo} & \textbf{Costo/h} & \textbf{Ore Usate} & \textbf{Spesa} & \textbf{Ore residue} & \textbf{Budget residuo}\\
-\midrule
-Responsabile & 30€/h & 8 & 240€ & 48 & 1440€ \\
-Amministratore & 20€/h & 8 & 160€ & 43 & 860€ \\
-Analista & 25€/h & 17 & 425€ & 43 & 1075€ \\
-Progettista & 25€/h & -- & -- & -- & 3575€ \\
-Programmatore & 15€/h & -- & -- & -- & 2400€ \\
-Verificatore & 15€/h & 9 & 135€ & 151 & 2265€ \\
-\bottomrule
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & \euro & \euro & \euro & \euro & \euro & \euro & \cellcolor{yellow!50} dad \euro  \\
+\hline
 \end{tabular}
+\caption{Riepilogo costi e budget rimanente - Sprint 1}
 \end{table}
+
+\subsection{Secondo Periodo: Sprint 13/04/2026 - 26/04/2026}
+\label{sec:pec_secondoperiodo}
+
+\vspace{0.5em}
 
 \begin{table}[H]
 \centering
-\caption{Rischi incontrati durante lo Sprint 1}
-\label{tab:rischi-Incontrati}
 \vspace{2mm}
-\begin{tabularx}{\textwidth}{X X} 
-\toprule
-\textbf{Rischio} & \textbf{Motivo}\\
-\midrule
-RT1: Complessità nell'apprendimento delle nuove tecnologie & Rischio che si è verificato a causa della mancata esperienza\\
-\bottomrule
-\end{tabularx}
+
+\begin{center}
+    
+\noindent\textbf{Preventivo}
+\end{center}
+
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Eleonora Bellet & - & - & -- & - & - & - & -\\
+Diego Belluz & - & - & -- & - & - & - & -\\
+Angela Maule & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & -- & - & - & - & -\\
+Leonardo Soligo & - & - & -- & - & - & - & -\\
+V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & - & - & -- & - & - & - & -\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Secondo Sprint}
 \end{table}
 
-
-\newpage
-
-
-\subsection{Sprint 2}
-
-
-\textbf{Inizio:} 13/04/2026 \\
-\textbf{Fine prevista:} 20/04/2026 \\
-\textbf{Fine reale:} 20/04/2026 \\
-\textbf{Giorni di ritardo:} 0 \\
-\textbf{Quadro generale e attività previste:}\\
-Questo secondo sprint è mirato a dare continuazione alla documentazione richiesta per il progetto.\\
-
-
-\noindent Attività svolte:
-\begin{itemize}
-    \item Continuazione della stesura dell'Analisi dei requisiti
-    \item Continuazione della stesura delle Norme di Progetto
-    \item Continuazione del Mockup
-    \item Continuazione della stesura del Glossario
-    \item Redazione Verbale Esterno 20/04/2026
-\end{itemize}
-
-
-
+\begin{center}
+    
+\noindent\textbf{Consuntivo}
+\end{center}
 
 \begin{table}[H]
 \centering
-\caption{Preventivo ore per componente - Sprint 1}
-\label{tab:preventivo-sprint1}
 \vspace{2mm}
-\begin{tabular}{llcc}
-\toprule
-\textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Previste} & \textbf{Costo Previsto} \\
-\midrule
-Eleonora Bellet & Verificatore & 9 & 135€ \\
-Diego Belluz & Analista e Responsabile & 5 + 4 & 125€ + 120€ \\
-Angela Maule & Analista & 4 & 100€ \\
-Angelica Gastaldello & Verificatore & 9 & 135€ \\
-Alex Oloni & Amministratore & 6 & 120€ \\
-Leonardo Soligo & Analista & 4 & 100€ \\
-V.Y. Kaneda Fernandes & Analista & 4 & 100€ \\
-\bottomrule
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Eleonora Bellet & - & - & - & - & - & - & -\\
+Diego Belluz & - & - & - & - & - & - & -\\
+Angela Maule & - & - & - & - & - & - & -\\
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & - & - & - & - & -\\
+Leonardo Soligo & - & - & -- & - & - & - & -\\
+V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & - & - & - & - & - & - & -\\
+\hline
 \end{tabular}
+\caption{Consuntivo ore per componente - Secondo Sprint}
 \end{table}
-
-
-
-
-\begin{table}[H]
-\centering
-\caption{Consuntivo ore per componente - Sprint 1}
-\label{tab:consuntivo-sprint1}
-\vspace{2mm}
-\begin{tabular}{llcc}
-\toprule
-\textbf{Componente del Team} & \textbf{Ruolo} & \textbf{Ore Effettive} & \textbf{Differenza} \\
-\midrule
-Eleonora Bellet & Verificatore & 9 & -- \\
-Diego Belluz & Analista e Responsabile & 4 + 4 & -1 \\
-Angela Maule & Analista & 4 & -- \\
-Angelica Gastaldello & Verificatore & 9 & -- \\
-Alex Oloni & Amministratore & 6 & -- \\
-Leonardo Soligo & Analista & 4 & -- \\
-V.Y. Kaneda Fernandes & Analista & 4 & -- \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 
 \vspace{0.5cm}
-\noindent\textbf{Aggiornamento delle risorse rimanenti}
-
-
-
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
 
 \begin{table}[H]
 \centering
-\caption{Riepilogo costi e budget rimanente - Sprint 1}
-\label{tab:risorse-rimanenti}
 \vspace{2mm}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Ruolo} & \textbf{Costo/h} & \textbf{Ore Usate} & \textbf{Spesa} & \textbf{Ore residue} & \textbf{Budget residuo}\\
-\midrule
-Responsabile & 30€/h & 4 & 120€ & 44 & 1320€ \\
-Amministratore & 20€/h & 6 & 120€ & 37 & 740€ \\
-Analista & 25€/h & 16 & 400€ & 27 & 675€ \\
-Progettista & 25€/h & -- & -- & -- & 3575€ \\
-Programmatore & 15€/h & -- & -- & -- & 2400€ \\
-Verificatore & 15€/h & 18 & 270€ & 133 & 1995€ \\
-\bottomrule
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & \euro & \euro & \euro & \euro & \euro & \euro & \cellcolor{yellow!50} dad \euro  \\
+\hline
 \end{tabular}
+\caption{Riepilogo costi e budget rimanente - Secondo Sprint}
 \end{table}
+
+\subsection{Terzo Periodo: Sprint 27/04/2026 - 10/05/2026}
+\label{sec:pec_terzoperiodo}
+
+\vspace{0.5em}
 
 \begin{table}[H]
 \centering
-\caption{Rischi incontrati durante lo Sprint 2}
-\label{tab:rischi-Incontrati}
 \vspace{2mm}
-\begin{tabularx}{\textwidth}{X X} 
-\toprule
-\textbf{Rischio} & \textbf{Motivo}\\
-\midrule
--- & --\\
-\bottomrule
-\end{tabularx}
+
+\begin{center}
+    
+\noindent\textbf{Preventivo}
+\end{center}
+
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Eleonora Bellet & - & - & -- & - & - & - & -\\
+Diego Belluz & - & - & -- & - & - & - & -\\
+Angela Maule & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & -- & - & - & - & -\\
+Leonardo Soligo & - & - & -- & - & - & - & -\\
+V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & - & - & -- & - & - & - & -\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Terzo Sprint}
 \end{table}
 
-\newpage
+\begin{center}
+    
+\noindent\textbf{Consuntivo}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Eleonora Bellet & - & - & - & - & - & - & -\\
+Diego Belluz & - & - & - & - & - & - & -\\
+Angela Maule & - & - & - & - & - & - & -\\
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & - & - & - & - & -\\
+Leonardo Soligo & - & - & -- & - & - & - & -\\
+V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & - & - & - & - & - & - & -\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Terzo Sprint}
+\end{table}
+
+\vspace{0.5cm}
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & \euro & \euro & \euro & \euro & \euro & \euro & \cellcolor{yellow!50} dad \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Terzo Sprint}
+\end{table}
 
 
 \end{document}
