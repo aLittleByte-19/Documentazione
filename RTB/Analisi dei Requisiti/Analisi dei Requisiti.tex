@@ -1001,10 +1001,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-5: Sistema di valutazione e feedback}
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/UC-5.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-5: Sistema di valutazione e feedback}
+    \label{fig:uc-5}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
@@ -1030,11 +1032,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-5.1: Visualizzazione del modulo di valutazione}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-5.1: Visualizzazione del modulo di valutazione}
+    \label{fig:uc-5.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema ha esposto a schermo il contenuto generato o in fase di revisione.
@@ -1046,11 +1051,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-5.2: Assegnazione del rating}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-5.2.png}
-\end{center}
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.2.png}
+    \caption{Diagramma del caso d'uso UC-5.2: Assegnazione del rating}
+    \label{fig:uc-5.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema espone il selettore grafico di valutazione.
@@ -1063,11 +1071,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-5.3: Inserimento del commento testuale}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-5.3.png}
-\end{center}
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.3.png}
+    \caption{Diagramma del caso d'uso UC-5.3: Inserimento del commento testuale}
+    \label{fig:uc-5.3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema espone il campo di testo opzionale per la motivazione del voto.
@@ -1089,11 +1100,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-5.4: Invio della valutazione}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-5.4png.png}
-\end{center}
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.4.png}
+    \caption{Diagramma del caso d'uso UC-5.4: Invio della valutazione}
+    \label{fig:uc-5.4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato i dati obbligatori del modulo (rating).
@@ -1116,11 +1130,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-5.E1: Errore - Rating mancante}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-5.E1.png}
-\end{center}
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.E1.png}
+    \caption{Diagramma del caso d'uso UC-5.E1: Errore per rating mancante}
+    \label{fig:uc-5.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore seleziona il comando di invio mantenendo lo stato del rating vuoto (0 su 5).
@@ -1134,11 +1151,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-5.E2: Errore - Superamento limite caratteri}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.E2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-5.E2: Errore per superamento limite caratteri}
+    \label{fig:uc-5.e2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore sta digitando il commento e raggiunge il limite massimo di caratteri consentito dal sistema.
@@ -1151,13 +1171,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description} 
 
 \subsubsection{UC-6: Dashboard metriche e monitoraggio}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{diagrammi_use_case/UC-6.png}
-\end{center}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.png}
+    \caption{Diagramma del caso d'uso UC-6: Dashboard metriche e monitoraggio}
+    \label{fig:uc-6}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    
     \item[Attore Principale] Analista dati
     
     \item[Trigger] L'Analista dati accede all'area analitica per monitorare le performance e l'utilizzo dell'AI Assistant.
@@ -1184,11 +1206,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.1: Visualizzazione panoramica della dashboard}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-6.1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-6.1: Visualizzazione panoramica della dashboard}
+    \label{fig:uc-6.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati accede all'area analitica del sistema.
@@ -1200,11 +1225,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.2: Visualizzazione statistiche di utilizzo}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-6.2.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-6.2: Visualizzazione statistiche di utilizzo}
+    \label{fig:uc-6.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati si trova all'interno della dashboard.
@@ -1216,11 +1244,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.3: Monitoraggio del rating medio}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-6.3.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-6.3: Monitoraggio del rating medio}
+    \label{fig:uc-6.3}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] Sono presenti nel sistema feedback numerici espressi dai Redattori (UC-5).
@@ -1232,11 +1263,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.4: Consultazione dei feedback testuali}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-6.4.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-6.4: Consultazione dei feedback testuali}
+    \label{fig:uc-6.4}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] Sono presenti nel sistema commenti testuali associati alle valutazioni.
@@ -1248,11 +1282,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.5: Filtraggio dei dati analitici}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-6.5.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-6.5: Filtraggio dei dati analitici}
+    \label{fig:uc-6.5}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati visualizza i dati all'interno della dashboard.
@@ -1273,11 +1310,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.6: Esportazione report analitico}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-6.6.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-6.6: Esportazione report analitico}
+    \label{fig:uc-6.6}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] Il sistema espone i comandi di esportazione dati.
@@ -1298,11 +1338,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-6.E1: Errore - Dati non disponibili}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-6.E1.png}
-\end{center}
+    \includegraphics[width=0.45\textwidth]{diagrammi_use_case/UC-6.E1.png}
+    \caption{Diagramma del caso d'uso UC-6.E1: Errore per dati non disponibili}
+    \label{fig:uc-6.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista applica filtri o richiede esportazioni per parametri privi di interazioni registrate.
@@ -1317,11 +1360,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
 \subsubsection{UC-7: Upload del documento}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_7.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-7: Upload del documento}
+    \label{fig:uc-7}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
     \item[Attore Principale] Consulente del lavoro
@@ -1356,11 +1402,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-7.E1: Gestione documento duplicato}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_7.E1.png}
-\end{center}
+    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_7.E1.png}
+    \caption{Diagramma del caso d'uso UC-7.E1: Gestione documento duplicato}
+    \label{fig:uc-7.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
@@ -1373,11 +1422,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-7.E2: Gestione formato non valido}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_7.E2.png}
-\end{center}
+    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_7.E2.png}
+    \caption{Diagramma del caso d'uso UC-7.E2: Gestione formato non valido}
+    \label{fig:uc-7.e2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
@@ -1390,11 +1442,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-8: Upload documento con classificazione e metadati}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_8.png}
-\end{center}
+    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_8.png}
+    \caption{Diagramma del caso d'uso UC-8: Upload documento con classificazione e metadati}
+    \label{fig:uc-8}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Attore Secondario] AI Analyst
@@ -1423,11 +1478,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 
 \subsubsection{UC-9: Visualizzazione storico documenti analizzati}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_9.png}
-\end{center}
+    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_9.png}
+    \caption{Diagramma del caso d'uso UC-9: Visualizzazione storico documenti analizzati}
+    \label{fig:uc-9}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende consultare lo storico dei documenti analizzati nel modulo AI Co-Pilot.
@@ -1452,11 +1510,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-9.E1: Nessun elemento individuato}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_9.E1.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-9.E1: Nessun elemento individuato}
+    \label{fig:uc-9.e1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
@@ -1469,11 +1530,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-10: Visualizzazione storico con filtri}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/uc_10.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-10: Visualizzazione storico con filtri}
+    \label{fig:uc-10}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
@@ -1496,11 +1560,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-11: Filtro storico con barra di ricerca}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_11.png}
-\end{center}
+    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_11.png}
+    \caption{Diagramma del caso d'uso UC-11: Filtro storico con barra di ricerca}
+    \label{fig:uc-11}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
@@ -1522,11 +1589,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-12: Filtro storico per stato invio}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_12.png}
-\end{center}
+    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_12.png}
+    \caption{Diagramma del caso d'uso UC-12: Filtro storico per stato invio}
+    \label{fig:uc-12}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende visualizzare solo documenti inviati o non inviati.
@@ -1548,11 +1618,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-13: Filtro storico per confidenza}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_13.png}
-\end{center}
+    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_13.png}
+    \caption{Diagramma del caso d'uso UC-13: Filtro storico per confidenza}
+    \label{fig:uc-13}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende filtrare lo storico in base alla confidenza dei dati estratti rispetto a una soglia.
@@ -1574,11 +1647,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-14: Filtro storico per mese e anno}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_14.png}
-\end{center}
+    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_14.png}
+    \caption{Diagramma del caso d'uso UC-14: Filtro storico per mese e anno}
+    \label{fig:uc-14}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende visualizzare i documenti relativi a uno specifico mese e anno.
@@ -1600,11 +1676,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-15: Visualizzazione singolo documento dallo storico}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.png}
-\end{center}
+    \caption{Diagramma del caso d'uso UC-15: Visualizzazione singolo documento dallo storico}
+    \label{fig:uc-15}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende consultare il dettaglio di un documento selezionato dallo storico.
@@ -1625,11 +1704,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-15.1: Visualizzazione documento originale splittato}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.1.png}
-\end{center}
+    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.1.png}
+    \caption{Diagramma del caso d'uso UC-15.1: Visualizzazione documento originale splittato}
+    \label{fig:uc-15.1}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-15).
@@ -1642,11 +1724,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-15.2: Visualizzazione documento originale non splittato}
+\mbox{} \\
 
-\begin{center}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.2.png}
-\end{center}
+    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.2.png}
+    \caption{Diagramma del caso d'uso UC-15.2: Visualizzazione documento originale non splittato}
+    \label{fig:uc-15.2}
+\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-15).
