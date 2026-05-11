@@ -168,19 +168,21 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} \\
-        0.1.0 & 2026-04-13 & Prima stesura del documento & V. Y. Kaneda Fernandes & A. Oloni \\
+        0.1.0 & 2026-04-13 & Prima stesura del documento & Angela Maule & - \\
         \hline
-        0.2.0 & 2026-04-14 & Stesura del primo periodo & V. Y. Kaneda Fernandes & A. Oloni\\
+        0.2.0 & 2026-04-14 & Stesura del primo periodo & Angela Maule & -\\
         \hline
-        0.3.0 & 2026-04-21 & Aggiunta delle sezioni: \textbf{\hyperref[sec:scopo_del_documento]{§1.2}, \hyperref[sec:glossario]{§1.3}, \hyperref[sec:riferimenti]{§1.4}, \hyperref[sec:analisi_dei_rischi]{§2}, \hyperref[sec:modello_di_sviluppo]{§3}}, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & A. Oloni & V. Y. Kaneda Fernandes \\
+        0.3.0 & 2026-04-21 & Aggiunta delle sezioni: \textbf{\hyperref[sec:scopo_del_documento]{§1.2}, \hyperref[sec:glossario]{§1.3}, \hyperref[sec:riferimenti]{§1.4}, \hyperref[sec:analisi_dei_rischi]{§2}, \hyperref[sec:modello_di_sviluppo]{§3}}, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & A. Oloni & -\\
         \hline
-        0.3.1 & 2026-04-23 & Stesura delle sezioni \textbf{\hyperref[sec:introduzione]{§1}} e \textbf{\hyperref[sec:analisi_dei_rischi]{§2}} & A. Oloni & V. Y. Kaneda Fernandes \\
+        0.3.1 & 2026-04-23 & Stesura delle sezioni \textbf{\hyperref[sec:introduzione]{§1}} e \textbf{\hyperref[sec:analisi_dei_rischi]{§2}} & A. Oloni & - \\
         \hline
-        0.3.2 & 2026-04-26 & Stesura della sezione \textbf{\hyperref[sec:modello_di_sviluppo]{§3}} & A.Oloni & V. Y. Kaneda Fernandes \\
+        0.3.2 & 2026-04-26 & Stesura della sezione \textbf{\hyperref[sec:modello_di_sviluppo]{§3}} & A.Oloni & - \\
         \hline
-        0.3.3 & 2026-04-29 & Inizio stesura della sezione \textbf{\hyperref[sec:pianificazione]{§4}} & A.Oloni & V. Y. Kaneda Fernandes e E. Bellet\\
+        0.3.3 & 2026-04-29 & Inizio stesura della sezione \textbf{\hyperref[sec:pianificazione]{§4}} & A.Oloni & -\\
         \hline
-        0.4.0 & 2026-04-30 & Aggiunta di specifiche nel Primo Periodo e Stesura del Secondo Periodo & A.Oloni & V. Y. Kaneda Fernandes e E. Bellet\\
+        0.3.4 & 2026-05-02 & Aggiunta di specifiche nel Primo Periodo e Stesura del Secondo Periodo & A.Oloni & - \\
+        \hline
+        0.4.0 & 2026-05-07 & Verifica & - & Y.Y. Kaneda Fernandes \\
         \hline
     \end{tabularx}
     \caption{Registro delle Modifiche}
@@ -410,9 +412,11 @@ Probabilità & Alta\\
 
 Pericolosità & Alta\\
 
-Conseguenze & \\
+Conseguenze & La mancata organizzazione sulla divisione delle responsabilità può portare a ritardi e ad uno spreco di risorse non indifferente, con il rischio di 
+far slittare ulteriormente la scadenza della consegna del progetto\\
 
-Mitigazione & \\
+Mitigazione & Durante le riunioni del team, si definiscono in maniera precisa e chiara, scrivendo le varie responsabilità e attività da svolgere durante i singoli Sprint,
+così da evitare fraintendimenti e duplice lavoro.\\
 \end{tabular}
 \caption{RO2: Confusione sulla gestione delle responsabilità}
 \end{table}
@@ -687,6 +691,7 @@ Quindi i punti chiave in questa \textit{Requirements and Technology Baseline} so
 \end{itemize}
 \subsubsection{Periodi}
 \subsubsubsection{Primo Periodo}
+
 \label{sec:rtb_primoperiodo}
 \begin{table}[H]
     \centering
@@ -702,8 +707,30 @@ Quindi i punti chiave in questa \textit{Requirements and Technology Baseline} so
 \end{table}
 
 Durante il primo Sprint, il team subito dopo l'aggiudicazione del capitolato, ci siamo concentrati sulla comprensione completa e più approfondita della documentazione, ed a richiedere 
-all'azienda dei consigli riguardo le varie tecnologie. Parallelamente, il gruppo ha analizzato i vari \textit{casi d'uso} presenti ed iniziato la stesura del documento \textit{Analisi dei Requisiti}, seguita dalle \textit{Norme di Progetto},
-una prima bozza del \textit{Glossario}, del \textit{Piano di Qualifica} e del \textit{Piano di Progetto}. Inoltre, si è iniziato a costruire un mock-up il quale verrà usato come principale riferimento dello sviluppo.\\
+all'azienda dei consigli riguardo le varie tecnologie. Parallelamente, il gruppo ha analizzato i vari \textit{casi d'uso} presenti ed iniziato la stesura del documento \textit{Analisi dei Requisiti}, seguita dalle \textit{Norme di Progetto} e
+una prima bozza del \textit{Glossario}. Inoltre, si è iniziato a costruire un mock-up il quale verrà usato come principale riferimento dello sviluppo.\\
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
+\end{center}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \rowcolors{2}{white}{LimeGreen!15}
+    \begin{tabularx}{\textwidth}{|X c|}
+    \hline \rowcolor{LimeGreen!50}
+        \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato}\\
+        \hline
+        Aggiornamento sito web per la visualizzazione dei documenti & Programmatore\\
+        Stesura Glossario & Analista\\
+        Stesura Norme di Progetto & Amministratore\\
+        Stesura Analisi dei Requisiti & Analista\\
+        Costruzione Mock-up & Progettista\\
+        Redazione verbali interni durante le riunioni & Responsabile\\
+    \hline
+    \end{tabularx}
+\end{table}
+
 \noindent\textbf{Considerazioni (Sprint Review e Retrospective)}\\
 Il team ha rispettato le scadenze e gli obiettivi impostati per il primo periodo di lavoro. La stesura dei documenti sta procedendo a ritmi notevoli. Nella costruzione del mock-up, ci sono stati diversi disguidi organizzativi
 e tecnologici, ma il team è riuscito a risolvere il problema in tempi brevi.
@@ -711,8 +738,6 @@ e tecnologici, ma il team è riuscito a risolvere il problema in tempi brevi.
 
 
 \subsubsubsection{Secondo Periodo}
-Durante il secondo Sprint, il team ha continuato la stesura dei documenti, principalmente si è discusso per la stesura del Glossario e del Piano di Progetto. Il mock-up è stato concluso, il quale verrà presentato all'azienda proponente durante lo Sprint successivo,
-tramite una riunione concordata. Viene inoltre continuata la stesura del documento \textit{Analisi dei Requisiti}, continuando a stilare i vari casi d'uso riscontrati. L'obiettivo principale è stato l'allineamento dei documenti, affinchè ci siano minori incomprensioni.
 
 \label{sec:rtb_secondoperiodo}
 \begin{table}[H]
@@ -722,11 +747,40 @@ tramite una riunione concordata. Viene inoltre continuata la stesura del documen
     \hline \rowcolor{Dandelion!50}
     \textbf{Data Inizio} & \textbf{Data Fine}\\
     \hline
-    13/03/2026 & 26/04/2026\\
+    13/04/2026 & 26/04/2026\\
     \hline
 
     \end{tabularx}
 \end{table}
+
+Durante il secondo Sprint, il team ha continuato la stesura dei documenti ed iniziato la redazione del \textit{Piano di Progetto}, principalmente si è discusso per la stesura del Glossario e del Piano di Progetto. Il mock-up è stato concluso e mostrato all'azienda, nel quale ha espresso di modificare minimi dettagli. La visione e conferma del mock-up, dopo la rifinitura,
+è prevista nello Sprint successivo. Viene inoltre continuata la stesura del documento \textit{Analisi dei Requisiti} ed iniziata la stesura del \textit{Piano di Progetto}, continuando a stilare i vari casi d'uso riscontrati. L'obiettivo principale è stato l'allineamento dei documenti, affinchè ci siano minori incomprensioni. \\
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
+\end{center}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \rowcolors{2}{white}{LimeGreen!15}
+    \begin{tabularx}{\textwidth}{|X c|}
+    \hline \rowcolor{LimeGreen!50}
+        \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato}\\
+        \hline
+        Inizio stesura Piano di Progetto & Responsabile\\
+        Aggiornamento Glossario & Analista\\
+        Aggiornamento Norme di Progetto & Amministratore\\
+        Aggiornamento Analisi dei Requisiti & Analista\\
+        Rifinitura Mock-up & Progettista\\
+        Redazione verbali interni e stesura verbale esterno con l'azienda & Responsabile\\
+    \hline
+    \end{tabularx}
+\end{table}
+
+
+\noindent\textbf{Considerazioni (Sprint Review e Retrospective)}\\
+Lo Sprint si è concluso con minimi errori e con una divisione del lavoro complessivamente discreta. C'è stata una minima sottostimazione dei costi rispetto all'effettivo consuntivo. Si punta a migliorare il problema già dall'inizio del prossimo sprint.
+
 
 \subsubsubsection{Terzo Periodo}
 \label{sec:rtb_terzoperiodo}
@@ -737,7 +791,7 @@ tramite una riunione concordata. Viene inoltre continuata la stesura del documen
     \hline \rowcolor{Dandelion!50}
     \textbf{Data Inizio} & \textbf{Data Fine}\\
     \hline
-    27/03/2026 & 10/05/2026\\
+    27/04/2026 & 10/05/2026\\
     \hline
 
     \end{tabularx}
@@ -747,8 +801,6 @@ tramite una riunione concordata. Viene inoltre continuata la stesura del documen
 \label{sec:preventivo_e_consuntivo}
 \subsection{Primo Periodo: Sprint 30/03/2026 - 12/04/2026}
 \label{sec:pec_primoperiodo}
-Durante il primo Sprint abbiamo iniziato a raggruppare tutte le idee ed obiettivi per incominciare l'RTB \textit{(Requirement and Technology Baseline)},
-dando quindi inizio alla stesura dei primi documenti utili come \textit{Norme di Progetto}, \textit{Glossario}, \textit{Analisi dei Requisiti} e \textit{Piano di Qualifica}.\\
 
 \vspace{0.5em}
 
@@ -766,17 +818,17 @@ dando quindi inizio alla stesura dei primi documenti utili come \textit{Norme di
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
-Eleonora Bellet & - & - & -- & - & - & - & -\\
-Diego Belluz & - & - & -- & - & - & - & -\\
-Angela Maule & - & - & -- & - & - & - & -\\
-Angelica Gastaldello & - & - & -- & - & - & - & -\\
-Alex Oloni & - & - & -- & - & - & - & -\\
-Leonardo Soligo & - & - & -- & - & - & - & -\\
-V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & 2 & - & 1 & - & - & - & 3\\
+Eleonora Bellet & - & 3 & - & - & - & - & 3\\
+Alex Oloni & - & - & 1 & 2 & - & - & 3\\
+Diego Belluz & - & 3 & - & - & - & - & 3\\
+Angela Maule & - & - & 2 & - & - & - & 2\\
+Leonardo Soligo & - & 3 & 2 & 1 & - & - & 6\\
+V.Y. Kaneda Fernandes & - & 2 & - & - & - & 3 & 5\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Totale} & - & - & -- & - & - & - & -\\
+\textbf{Totale} & 2 & 6 & 9 & 4 & 1 & 3 & 25\\
 \hline
 \end{tabular}
 \caption{Preventivo ore per componente - Primo Sprint}
@@ -794,21 +846,40 @@ V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
-Eleonora Bellet & - & - & - & - & - & - & -\\
-Diego Belluz & - & - & - & - & - & - & -\\
-Angela Maule & - & - & - & - & - & - & -\\
-Angelica Gastaldello & - & - & -- & - & - & - & -\\
-Alex Oloni & - & - & - & - & - & - & -\\
-Leonardo Soligo & - & - & -- & - & - & - & -\\
-V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & 2 & - & 2 & - & - & - & 4\\
+Eleonora Bellet & - & 3 & - & - & - & - & 3\\
+Alex Oloni & - & - & 1 & 2 & - & - & 3\\
+Diego Belluz & - & 3 & - & - & - & - & 3\\
+Angela Maule & - & - & 3 & - & - & - & 3\\
+Leonardo Soligo & - & 2 & 3 & 1 & - & - & 6\\
+V.Y. Kaneda Fernandes & - & 2 & - & - & - & 2 & 4\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Totale} & - & - & - & - & - & - & -\\
+\textbf{Totale} & 2 & 6 & 10 & 5 & 1 & 2 & 26\\
 \hline
 \end{tabular}
 \caption{Consuntivo ore per componente - Primo Sprint}
 \end{table}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            7.7/Responsabile,
+            23/Amministratore,
+            38.5/Analista,
+            19.2/Progettista,
+            3.9/Programmatore,
+            7.7/Verificatore
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Primo Sprint}
+\end{figure}
 
 \vspace{0.5cm}
 \begin{center}
@@ -825,11 +896,11 @@ V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
 Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
-Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
+Costo Totale &  60 \euro& 120 \euro & 250 \euro & 125 \euro & 15 \euro & 30 \euro & 600 \euro\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Saldo fine periodo} & \euro & \euro & \euro & \euro & \euro & \euro & \cellcolor{yellow!50} dad \euro  \\
+\textbf{Saldo fine periodo} & 1620 \euro & 900 \euro & 1250 \euro & 3450 \euro & 2385 \euro & 2370 \euro & \cellcolor{yellow!50} 11975 \euro  \\
 \hline
 \end{tabular}
 \caption{Riepilogo costi e budget rimanente - Sprint 1}
@@ -849,21 +920,24 @@ Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
 \noindent\textbf{Preventivo}
 \end{center}
 
+\begin{table}[H]
+\centering
+\vspace{2mm}
 \begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
-Eleonora Bellet & - & - & -- & - & - & - & -\\
-Diego Belluz & - & - & -- & - & - & - & -\\
-Angela Maule & - & - & -- & - & - & - & -\\
-Angelica Gastaldello & - & - & -- & - & - & - & -\\
-Alex Oloni & - & - & -- & - & - & - & -\\
-Leonardo Soligo & - & - & -- & - & - & - & -\\
-V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & - & - & 3 & - & - & - & 3\\
+Eleonora Bellet & - & 3 & - & - & - & 1 & 4\\
+Alex Oloni & 1 & 3 & - & - & - & - & 4\\
+Diego Belluz & - & - & 2 & - & - & - & 2\\
+Angela Maule & 2 & - & 1 & - & - & - & 3\\
+Leonardo Soligo & - & - & - & 2 & - & - & 2\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & - & 2\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Totale} & - & - & -- & - & - & - & -\\
+\textbf{Totale} & 3 & 6 & 8 & 2 & 0 & - & 1\\
 \hline
 \end{tabular}
 \caption{Preventivo ore per componente - Secondo Sprint}
@@ -874,28 +948,44 @@ V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \noindent\textbf{Consuntivo}
 \end{center}
 
-\begin{table}[H]
-\centering
-\vspace{2mm}
 \begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
-Eleonora Bellet & - & - & - & - & - & - & -\\
-Diego Belluz & - & - & - & - & - & - & -\\
-Angela Maule & - & - & - & - & - & - & -\\
-Angelica Gastaldello & - & - & -- & - & - & - & -\\
-Alex Oloni & - & - & - & - & - & - & -\\
-Leonardo Soligo & - & - & -- & - & - & - & -\\
-V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
+Angelica Gastaldello & - & - & 4 & - & - & - & 4\\
+Eleonora Bellet & - & 3 & - & - & - & 1 & 4\\
+Alex Oloni & 2 & 2 & - & - & - & - & 4\\
+Diego Belluz & - & 2 & - & - & - & - & 2\\
+Angela Maule & 3 & - & 2 & - & - & - & 5\\
+Leonardo Soligo & - & - & - & 2 & - & - & 2\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & - & 2\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Totale} & - & - & - & - & - & - & -\\
+\textbf{Totale} & 5 & 5 & 10 & 2 & 0 & 1 & 23\\
 \hline
 \end{tabular}
 \caption{Consuntivo ore per componente - Secondo Sprint}
 \end{table}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, orange!60}
+        ]{
+            21.7/Responsabile,
+            21.7/Amministratore,
+            43.5/Analista,
+            8.7/Progettista,
+            4.4/Verificatore
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Secondo Sprint}
+\end{figure}
+
 
 \vspace{0.5cm}
 \begin{center}
@@ -911,11 +1001,11 @@ V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
 Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
-Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
+Costo Totale &  150 \euro& 100 \euro & 250 \euro & 50 \euro & 0 \euro & 15 \euro & 565\euro\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Saldo fine periodo} & \euro & \euro & \euro & \euro & \euro & \euro & \cellcolor{yellow!50} dad \euro  \\
+\textbf{Saldo fine periodo} & 1470 \euro & 800 \euro & 1000 \euro & 3400 \euro & 2385 \euro & 2355 \euro & \cellcolor{yellow!50} 11410 \euro  \\
 \hline
 \end{tabular}
 \caption{Riepilogo costi e budget rimanente - Secondo Sprint}
@@ -939,11 +1029,11 @@ Costo Totale &  \euro& \euro &\euro & \euro & \euro & \euro & \euro\\
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
+Angelica Gastaldello & - & - & -- & - & - & - & -\\
 Eleonora Bellet & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & -- & - & - & - & -\\
 Diego Belluz & - & - & -- & - & - & - & -\\
 Angela Maule & - & - & -- & - & - & - & -\\
-Angelica Gastaldello & - & - & -- & - & - & - & -\\
-Alex Oloni & - & - & -- & - & - & - & -\\
 Leonardo Soligo & - & - & -- & - & - & - & -\\
 V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \hline
@@ -967,11 +1057,11 @@ V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
-Eleonora Bellet & - & - & - & - & - & - & -\\
-Diego Belluz & - & - & - & - & - & - & -\\
-Angela Maule & - & - & - & - & - & - & -\\
 Angelica Gastaldello & - & - & -- & - & - & - & -\\
-Alex Oloni & - & - & - & - & - & - & -\\
+Eleonora Bellet & - & - & -- & - & - & - & -\\
+Alex Oloni & - & - & -- & - & - & - & -\\
+Diego Belluz & - & - & -- & - & - & - & -\\
+Angela Maule & - & - & -- & - & - & - & -\\
 Leonardo Soligo & - & - & -- & - & - & - & -\\
 V.Y. Kaneda Fernandes & - & - & -- & - & - & - & -\\
 \hline
