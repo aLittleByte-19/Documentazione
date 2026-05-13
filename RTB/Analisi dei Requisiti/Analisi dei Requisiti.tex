@@ -275,25 +275,27 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-       \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro e i moduli di configurazione.
+      \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro.
+        \item Il Redattore svuota i campi di configurazione (\textbf{UC-1.5}).
         \item Il Redattore compila il campo relativo al prompt testuale (\textbf{UC-1.1}).
         \item Il Redattore imposta il tono desiderato (\textbf{UC-1.2}).
         \item Il Redattore imposta lo stile editoriale (\textbf{UC-1.3}).
+        \item Il Redattore seleziona la lunghezza desiderata per la bozza (\textbf{UC-1.6}).
+        \item Il Redattore salva la configurazione inserita (\textbf{UC-1.4}).
         \item Il Redattore conferma l'avvio della generazione cliccando sul comando "Genera bozza".
-        \item Il sistema visualizza a schermo l'anteprima del contenuto generato, comprendente titolo, testo e immagine di copertina (\textbf{UC-2})
-    \end{enumerate}
-\item[Scenari Alternativi] 
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{5a. Salvataggio della configurazione}: Il Redattore decide di memorizzare i parametri inseriti invece di procedere con la generazione; viene eseguito \textbf{UC-1.4}.
-        \item \textbf{5b. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
-        \item \textbf{5c. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
+        \item Il sistema visualizza a schermo l'anteprima del contenuto generato, comprendente titolo, testo e immagine di copertina (\textbf{UC-2}).
+        \end{enumerate}
+    \item[Scenari Alternativi] 
+     \begin{itemize}[leftmargin=*, nosep]
+         \item \textbf{7a/8a. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
+        \item \textbf{8b. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
     \end{itemize}
 
     \item[Relazioni] 
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3.
-        \item \textbf{Estensioni}: UC-1.4, UC-1.E1, UC-1.E2.
-    \end{itemize}
+     \begin{itemize}[leftmargin=*, nosep]
+         \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3, UC-1.4, UC-1.5, UC-1.6 .
+         \item \textbf{Estensioni}: UC-1.E1, UC-1.E2.
+     \end{itemize}
 
 \end{description}
 
@@ -355,7 +357,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \mbox{}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.4.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-1.4.png}
     \caption{Diagramma del caso d'uso UC-1.4: Salvataggio della configurazione del prompt}
     \label{fig:uc-1.4}
 \end{figure}
@@ -378,6 +380,44 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item \textbf{Estensioni}: UC-1.E1.
     \end{itemize}
 \end{description}
+
+\paragraph{UC-1.5: Svuotamento dei campi di configurazione}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-1.5.png}
+    \caption{Diagramma del caso d'uso UC-1.5: Svuotamento dei campi di configurazione}
+    \label{fig:uc-1.5}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Pre-condizioni] Il Redattore ha compilato parzialmente o totalmente i campi di configurazione.
+    \item[Post-condizioni] Il sistema ha ripristinato tutti i campi ai valori predefiniti o vuoti.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando rapido di azzeramento (es. "Svuota campi").
+        \item Il sistema cancella il testo inserito nel prompt e ripristina le selezioni di tono e stile ai valori di default.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-1.6: Selezione della lunghezza della bozza}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.6.png}
+    \caption{Diagramma del caso d'uso UC-1.6: Selezione della lunghezza della bozza}
+    \label{fig:uc-1.6}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Pre-condizioni] Il sistema espone le opzioni di configurazione dei parametri di generazione.
+    \item[Post-condizioni] Il parametro relativo alla lunghezza del testo è stato impostato.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona la lunghezza desiderata (es. breve, media, lunga) tramite l'apposito menu di scelta.
+    \end{enumerate}
+\end{description}
+
 
 \paragraph{UC-1.E1: Errore - Prompt mancante o insufficiente}
 \mbox{}
@@ -422,7 +462,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \mbox{} \\
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth]{diagrammi_use_case/UC-2.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-2.png}
     \caption{Diagramma del caso d'uso UC-2: Anteprima e revisione del contenuto}
     \label{fig:uc-2}
 \end{figure}
@@ -444,13 +484,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore modifica manualmente il titolo (\textbf{UC-2.4}).
         \item Il Redattore modifica manualmente il testo (\textbf{UC-2.5}).
         \item Il Redattore sostituisce l'immagine di copertina suggerita con un file locale (\textbf{UC-2.6}).
-        \item Il Redattore richiede la rigenerazione totale del contenuto (\textbf{UC-2.7}).
-        \item Il Redattore decide di scartare il contenuto generato eliminando la bozza corrente (\textbf{UC-2.8}).
+        \item Il Redattore richiede la rigenerazione totale del contenuto all'AI (\textbf{UC-2.7}).
+        \item Il Redattore scarta il contenuto generato eliminando la bozza corrente (\textbf{UC-2.8}).
+        \item Il Redattore annulla le modifiche manuali per ripristinare il testo originale (\textbf{UC-2.9}).
     \end{enumerate}
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-2.1, UC-2.2, UC-2.3, UC-2.4, UC-2.5, UC-2.6, UC-2.7, UC-2.8.
+        \item \textbf{Inclusioni}: UC-2.1, UC-2.2, UC-2.3, UC-2.4, UC-2.5, UC-2.6, UC-2.7, UC-2.8, UC-2.9.
     \end{itemize}
 
 \end{description}
@@ -519,7 +560,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.4.png}
+    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/UC-2.4.png}
     \caption{Diagramma del caso d'uso UC-2.4: Modifica manuale del titolo}
     \label{fig:uc-2.4}
 \end{figure}
@@ -550,7 +591,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-2.5.png}
+    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/UC-2.5.png}
     \caption{Diagramma del caso d'uso UC-2.5: Modifica manuale del testo}
     \label{fig:uc-2.5}
 \end{figure}
@@ -580,7 +621,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-2.6.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-2.6.png}
     \caption{Diagramma del caso d'uso UC-2.6: Sostituzione dell'immagine di copertina}
     \label{fig:uc-2.6}
 \end{figure}
@@ -610,7 +651,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-2.7.png}
+    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/UC-2.7.png}
     \caption{Diagramma del caso d'uso UC-2.7: Rigenerazione del contenuto}
     \label{fig:uc-2.7}
 \end{figure}
@@ -653,6 +694,25 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema richiede una conferma per l'operazione.
         \item Il Redattore conferma l'intenzione di scartare la bozza.
         \item Il sistema riporta l'utente alla schermata di configurazione iniziale.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-2.9: Annullamento delle modifiche manuali}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-2.9.png}
+    \caption{Diagramma del caso d'uso UC-2.9: Annullamento delle modifiche manuali}
+    \label{fig:uc-2.9}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Pre-condizioni] Il Redattore ha apportato modifiche testuali alla bozza (UC-2.4 o UC-2.5).
+    \item[Post-condizioni] Il sistema ha ripristinato il testo alla versione originariamente generata dall'AI.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando "Annulla modifiche".
+        \item Il sistema sovrascrive le modifiche umane e ricarica a schermo il testo di partenza elaborato dal modulo AI.
     \end{enumerate}
 \end{description}
 
@@ -737,6 +797,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore visualizza le opzioni di finalizzazione disponibili (\textbf{UC-3.1}).
+        \item Il Redattore visualizza l'anteprima del documento finale (\textbf{UC-3.5}).
         \item Il Redattore archivia il documento selezionando il salvataggio in bozza (\textbf{UC-3.2}).
         \item Il Redattore scarica il file selezionando il comando di esportazione (\textbf{UC-3.3}).
         \item Il Redattore distribuisce il contenuto selezionando l'inoltro tramite posta elettronica (\textbf{UC-3.4}).
@@ -744,7 +805,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-3.1, UC-3.2, UC-3.3, UC-3.4.
+        \item \textbf{Inclusioni}: UC-3.1, UC-3.2, UC-3.3, UC-3.4, UC-3.5.
     \end{itemize}
 
 \end{description}
@@ -813,7 +874,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-3.4.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-3.4.png}
     \caption{Diagramma del caso d'uso UC-3.4: Inoltro tramite e-mail}
     \label{fig:uc-3.4}
 \end{figure}
@@ -836,6 +897,25 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Estensioni}: UC-3.4.E1.
     \end{itemize}
+\end{description}
+
+\paragraph{UC-3.5: Visualizzazione anteprima di esportazione}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.5.png}
+    \caption{Diagramma del caso d'uso UC-3.5: Visualizzazione anteprima di esportazione}
+    \label{fig:uc-3.5}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione e il Redattore intende esportare il file.
+    \item[Post-condizioni] Il Redattore ha visualizzato a schermo l'aspetto del documento finale.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando di anteprima di stampa/esportazione.
+        \item Il sistema genera e mostra a schermo una preview del documento impaginato, rendendo visibile il marcatore di trasparenza ("Creato da AI Assistant").
+    \end{enumerate}
 \end{description}
 
 \paragraph{UC-3.4.E1: Errore - Indirizzo e-mail non valido}
@@ -863,7 +943,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/UC-4.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-4.png}
     \caption{Diagramma del caso d'uso UC-4: Gestione libreria prompt e storico}
     \label{fig:uc-4}
 \end{figure}
@@ -871,7 +951,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Attore Principale] Redattore
     
-\item[Trigger] Il Redattore intende consultare, filtrare o riutilizzare i prompt archiviati nelle sessioni precedenti.
+    \item[Trigger] Il Redattore intende consultare, filtrare o riutilizzare i prompt archiviati nelle sessioni precedenti.
 
     \item[Pre-condizioni] Il Redattore accede alla sezione "Storico/Libreria" dell'applicativo.
     
@@ -883,11 +963,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore effettua una ricerca o applica filtri ai contenuti (\textbf{UC-4.2}).
         \item Il Redattore seleziona un prompt salvato per riutilizzarne i parametri (\textbf{UC-4.3}).
         \item Il Redattore gestisce i contenuti preferiti tramite bookmark (\textbf{UC-4.4}).
+        \item Il Redattore elimina un elemento dallo storico (\textbf{UC-4.5}).
     \end{enumerate}
-
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-4.1, UC-4.2, UC-4.3, UC-4.4.
+        \item \textbf{Inclusioni}: UC-4.1, UC-4.2, UC-4.3, UC-4.4, UC-4.5.
     \end{itemize}
 \end{description}
 
@@ -915,7 +995,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-4.2.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-4.2.png}
     \caption{Diagramma del caso d'uso UC-4.2: Ricerca e filtraggio dello storico}
     \label{fig:uc-4.2}
 \end{figure}
@@ -976,6 +1056,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona l'icona dedicata per contrassegnare l'elemento come preferito o per rimuoverlo.
         \item Il sistema fornisce un feedback visivo immediato (cambio colore o icona).
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-4.5: Eliminazione di un elemento dallo storico}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-4.5.png}
+    \caption{Diagramma del caso d'uso UC-4.5: Eliminazione di un elemento dallo storico}
+    \label{fig:uc-4.5}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Pre-condizioni] Il Redattore ha individuato un elemento nello storico che desidera rimuovere.
+    \item[Post-condizioni] Il sistema ha rimosso definitivamente l'elemento selezionato dal database.
+    \item[Scenario Principale] 
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando di eliminazione in corrispondenza di un prompt archiviato.
+        \item Il sistema richiede una conferma di sicurezza per procedere.
+        \item Il Redattore conferma l'operazione.
+        \item Il sistema rimuove l'elemento e aggiorna dinamicamente la lista a schermo.
     \end{enumerate}
 \end{description}
 
@@ -1075,7 +1177,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.3.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-5.3.png}
     \caption{Diagramma del caso d'uso UC-5.3: Inserimento del commento testuale}
     \label{fig:uc-5.3}
 \end{figure}
@@ -1095,7 +1197,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-5.2.E1.
+        \item \textbf{Estensioni}: UC-5.3.E1.
     \end{itemize}
 \end{description}
 
@@ -1104,7 +1206,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-5.4.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-5.4.png}
     \caption{Diagramma del caso d'uso UC-5.4: Invio della valutazione}
     \label{fig:uc-5.4}
 \end{figure}
@@ -1286,7 +1388,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-6.5.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.5.png}
     \caption{Diagramma del caso d'uso UC-6.5: Filtraggio dei dati analitici}
     \label{fig:uc-6.5}
 \end{figure}
@@ -1314,7 +1416,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-6.6.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.6.png}
     \caption{Diagramma del caso d'uso UC-6.6: Esportazione report analitico}
     \label{fig:uc-6.6}
 \end{figure}
@@ -1680,7 +1782,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/uc_15.png}
     \caption{Diagramma del caso d'uso UC-15: Visualizzazione singolo documento dallo storico}
     \label{fig:uc-15}
 \end{figure}
@@ -1695,11 +1797,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
         \item Il sistema mostra il documento originale splittato relativo al dipendente selezionato (\textbf{UC-15.1}).
         \item Il sistema mostra il documento originale non splittato (\textbf{UC-15.2}).
-        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-15.3}), azienda (\textbf{UC-15.4}), nome del file (\textbf{UC-15.5}), data del documento (\textbf{UC-15.6}), numero di pagine (\textbf{UC-15.7}), tipologia del documento (\textbf{UC-15.8}), breve descrizione del documento (\textbf{UC-15.9}), confidenza in percentuale (\textbf{UC-15.10}), stato di invio del documento (\textbf{UC-15.11}).
+        \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-15.3}), azienda (\textbf{UC-15.4}), nome del file (\textbf{UC-15.5}), data del documento (\textbf{UC-15.6}), numero di pagine (\textbf{UC-15.7}), tipologia del documento (\textbf{UC-15.8}), breve descrizione del documento (\textbf{UC-15.9}), confidenza in percentuale (\textbf{UC-15.10}), stato di invio del documento (\textbf{UC-15.11}), email destinatario (\textbf{UC-15.12}), codice fiscale (\textbf{UC-15.13}), matricola dipendente (\textbf{UC-15.14}) e data/ora caricamento (\textbf{UC-15.15}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-15.1, UC-15.2, UC-15.3, UC-15.4, UC-15.5, UC-15.6, UC-15.7, UC-15.8, UC-15.9, UC-15.10, UC-15.11.
+        \item \textbf{Inclusioni}: UC-15.1, UC-15.2, UC-15.3, UC-15.4, UC-15.5, UC-15.6, UC-15.7, UC-15.8, UC-15.9, UC-15.10, UC-15.11, UC-15.12, UC-15.13, UC-15.14, UC-15.15.
     \end{itemize}
 \end{description}
 
@@ -1962,6 +2064,83 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
+\paragraph{UC-15.12: Visualizzazione email destinatario}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.12.png}
+    \caption{Diagramma del caso d'uso UC-15.12: Visualizzazione email destinatario}
+    \label{fig:uc-15.12}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha eseguito l'estrazione dei metadati dal documento selezionato.
+    \item[Post-condizioni] Il sistema mostra il valore del campo email del destinatario nel pannello dati estratti.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema recupera l'indirizzo e-mail estratto associato al documento.
+        \item Il sistema visualizza l'indirizzo e-mail nel pannello dati estratti con eventuale icona per copiarlo o inviare una mail rapida.
+    \end{enumerate}
+\end{description}
+
+
+\paragraph{UC-15.13: Visualizzazione codice fiscale}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.13.png}
+    \caption{Diagramma del caso d'uso UC-15.13: Visualizzazione codice fiscale}
+    \label{fig:uc-15.13}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto i metadati anagrafici dal documento.
+    \item[Post-condizioni] Il sistema mostra il codice fiscale del dipendente nel pannello dati estratti.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema recupera il codice fiscale estratto.
+    \   \item Il sistema visualizza il codice fiscale con un controllo di validità formale (checksum).
+\end{enumerate}
+\end{description}
+
+\paragraph{UC-15.14: Visualizzazione matricola dipendente}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.14.png}
+    \caption{Diagramma del caso d'uso UC-15.14: Visualizzazione matricola dipendente}
+    \label{fig:uc-15.14}
+    \end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema ha estratto o associato l'identificativo interno (matricola) al documento.
+    \item[Post-condizioni] Il sistema mostra la matricola del dipendente nel pannello dati estratti.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+       \item Il sistema recupera la matricola associata al record.
+       \item Il sistema visualizza la matricola e fornisce link/azione per consultare la scheda dipendente correlata.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-15.15: Visualizzazione data/ora caricamento}
+\mbox{} \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.15.png}
+    \caption{Diagramma del caso d'uso UC-15.15: Visualizzazione data/ora caricamento}
+    \label{fig:uc-15.15}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il record del documento contiene il timestamp di caricamento.
+    \item[Post-condizioni] Il sistema mostra la data e l'ora di caricamento del documento nello storico.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema legge il timestamp di caricamento associato al documento.
+        \item Il sistema visualizza la data/ora nel pannello dati estratti e nel sommario dello storico.
+\end{enumerate}
+\end{description}
+
 \paragraph{UC-15.3.E1: Nome e cognome del dipendente non disponibile}
 \mbox{} \\
 
@@ -2098,19 +2277,23 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Il sistema salva le modifiche apportate ai campi editabili del documento selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro seleziona l'azione di modifica del documento.
+\item Il Consulente del lavoro seleziona l'azione di modifica del documento.
         \item Il sistema abilita la modalità di modifica dei campi consentiti.
         \item Il Consulente del lavoro modifica nome e cognome del dipendente (\textbf{UC-16.1}).
         \item Il Consulente del lavoro modifica azienda (\textbf{UC-16.2}).
         \item Il Consulente del lavoro modifica data del documento (\textbf{UC-16.3}).
         \item Il Consulente del lavoro modifica tipologia del documento (\textbf{UC-16.4}).
         \item Il Consulente del lavoro modifica breve descrizione del documento (\textbf{UC-16.5}).
+        \item Il Consulente del lavoro modifica email destinatario (\textbf{UC-16.6}).
+        \item Il Consulente del lavoro modifica codice fiscale (\textbf{UC-16.7}).
+        \item Il Consulente del lavoro modifica matricola dipendente (\textbf{UC-16.8}).
         \item Il Consulente del lavoro conferma il salvataggio.
         \item Il sistema valida i dati inseriti e salva le modifiche.
     \end{enumerate}
     \item[Relazioni]
+\item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-16.1, UC-16.2, UC-16.3, UC-16.4, UC-16.5.
+        \item \textbf{Inclusioni}: UC-16.1, UC-16.2, UC-16.3, UC-16.4, UC-16.5, UC-16.6, UC-16.7, UC-16.8.
     \end{itemize}
 \end{description}
 
@@ -2210,6 +2393,73 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro inserisce il nuovo valore nel campo breve descrizione del documento.
+        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-16.6: Modifica email destinatario}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.6.png}
+    \caption{Diagramma del caso d'uso UC-16.6: Modifica email destinatario}
+    \label{fig:uc-16.6}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16) e il campo email è visibile nel pannello dati estratti.
+    \item[Post-condizioni] Il sistema aggiorna il valore del campo email destinatario e lo registra in attesa del salvataggio finale.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona il campo email destinatario.
+        \item Il Consulente del lavoro inserisce o modifica l'indirizzo e-mail.
+        \item Il sistema esegue una validazione formale del formato e segnala eventuali errori.
+        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+    \end{enumerate}
+
+\end{description}
+
+\paragraph{UC-16.7: Modifica codice fiscale}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_16.7.png}
+    \caption{Diagramma del caso d'uso UC-16.7: Modifica codice fiscale}
+    \label{fig:uc-16.7}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16) e il campo codice fiscale è visibile nel pannello dati estratti.
+    \item[Post-condizioni] Il sistema aggiorna il valore del campo codice fiscale e lo registra in attesa del salvataggio finale.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona il campo codice fiscale.
+        \item Il Consulente del lavoro inserisce o corregge il codice fiscale.
+        \item Il sistema esegue un controllo di validità formale (checksum) e segnala eventuali incongruenze.
+        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-16.8: Modifica matricola dipendente}
+\mbox{} \\
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.8.png}
+    \caption{Diagramma del caso d'uso UC-16.8: Modifica matricola dipendente}
+    \label{fig:uc-16.8}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16) e il campo matricola è visibile nel pannello dati estratti.
+    \item[Post-condizioni] Il sistema aggiorna la matricola del dipendente e la registra in attesa del salvataggio finale; eventuale link alla scheda dipendente viene aggiornato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona il campo matricola.
+        \item Il Consulente del lavoro inserisce o modifica la matricola.
+        \item Il sistema verifica l'unicità o la corrispondenza con la scheda dipendente e segnala eventuali conflitti.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
 \end{description}
