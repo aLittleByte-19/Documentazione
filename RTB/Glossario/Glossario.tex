@@ -102,7 +102,8 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
-        0.2.3 & 2026-05-01 & Aggiunti termini dell'analisi dei requisiti & Diego Belluz & - & - \\
+        0.3.0 & 2026-05-09 & Aggiunti termini dell'analisi dei requisiti, norme di progetto e piano di progetto & V. Y. Kaneda Fernandes & - & - \\
+        0.2.3 & 2026-05-01 & Aggiunti termini dell'analisi dei requisiti & Eleonora Bellet & - & - \\
         0.2.2 & 2026-04-27 & Aggiunta di alcuni termini delle Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
         0.2.1 & 2026-04-22 & Aggiunta di alcuni termini della Analisi dei Requisiti& V. Y. Kaneda Fernandes & - & - \\
         0.2.0 & 2026-04-12 & Aggiunta termini al documento & V. Y. Kaneda Fernandes & - & - \\
@@ -149,11 +150,17 @@ Modulo esterno (attore di sistema) che costituisce il nucleo di intelligenza art
 \subsection{Amministratore}
 Figura responsabile della configurazione dell'ambiente standalone, della gestione dei privilegi degli account e della definizione delle policy globali.
 
+\subsection{Analisi dei Rischi}
+Processo continuo e strutturato volto a identificare, classificare e valutare i potenziali eventi critici (tecnologici, organizzativi o personali) che potrebbero compromettere lo svolgimento del progetto, definendo preventivamente strategie di mitigazione.
+
 \subsection{Analisi Dinamica}
 Attività di verifica del codice eseguita durante la sua esecuzione.
 
 \subsection{Analisi Statica}
 Attività di verifica del codice eseguita senza la sua esecuzione.
+
+\subsection{Analisi Statica dei Requisiti}
+Attività di verifica svolta sulla documentazione (come l'Analisi dei Requisiti) per identificare ambiguità, lacune o errori di progettazione concettuale prima che si proceda allo sviluppo del software.
 
 \subsection{Analista}
 Ruolo incaricato dell'analisi dei requisiti e del dominio.
@@ -262,6 +269,9 @@ Il processo automatico che invia i documenti ai destinatari finali attraverso l'
 \subsection{Entity Resolution}
 È il processo che permette al sistema di riconoscere correttamente a quale persona o azienda appartiene un dato, anche se le informazioni sono parziali o scritte in modo leggermente diverso.
 
+\subsection{Errore di Validazione}
+Stato in cui il sistema rifiuta o segnala come non conforme un dato inserito dall'utente (es. email non valida o prompt insufficiente) o un file caricato (es. duplicato o formato non supportato), impedendo la prosecuzione dell'azione.
+
 \subsection{Esecuzione Asincrona}
 Modalità di esecuzione di operazioni lunghe in background per non bloccare l'interfaccia utente.
 
@@ -302,6 +312,9 @@ Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'
 
 \subsection{Incrementale}
 Approccio di sviluppo in cui le norme e il prodotto vengono costantemente aggiornati e affinati nel tempo.
+
+\subsection{Integrazione Continua (Continuous Integration / CI)}
+Pratica di sviluppo software che prevede l'unione frequente del codice scritto dai vari programmatori in una repository condivisa, dove un sistema automatizzato compie build e test mirati a intercettare immediatamente gli errori di integrazione.
 
 \subsection{Issue}
 Strumento per pianificare, assegnare e monitorare task o problemi all'interno del repository.
@@ -348,6 +361,9 @@ Rappresentazione grafica o prototipo a bassa fedeltà dell'interfaccia utente, u
 \subsection{Modello C4}
 Modello di design utilizzato per descrivere l'architettura del sistema.
 
+\subsection{Modello di Sviluppo}
+Approccio metodologico e framework operativo adottato dal team per scandire le fasi del ciclo di vita del software (ad esempio, l'approccio incrementale ed iterativo pianificato per il capitolato Nexum).
+
 \subsection{Modularità}
 Suddivisione del codice in componenti indipendenti con responsabilità singole.
 
@@ -371,6 +387,9 @@ Fase del progetto che identifica la linea di base del prodotto finale.
 
 \subsection{Pianificazione}
 Attività di definizione della sequenza di compiti, scadenze e assegnazione delle responsabilità per il raggiungimento degli obiettivi.
+
+\subsection{Pianificazione delle Scadenze}
+Processo di calendarizzazione e allocazione temporale delle attività, delle pietre miliari (Milestone) e delle consegne ufficiali del progetto al fine di monitorare l'avanzamento dei lavori ed evitare ritardi.
 
 \subsection{Postcondizioni}
 Stato finale dei dati o del sistema dopo la conclusione con successo di un caso d'uso.
@@ -515,6 +534,9 @@ Ruolo incaricato di revisionare i documenti e il codice prodotti dagli altri mem
 È il sistema che tiene traccia delle diverse versioni di un documento o di un codice, permettendo di vedere cosa è cambiato nel tempo.
 
 \section{W}
+
+\subsection{Walkthrough}
+Metodo di revisione informale e di lettura approfondita dei documenti o del codice sorgente, eseguito dal team senza l'ausilio di criteri di controllo rigidi o preconcetti, mirato a identificare difetti, incongruenze o margini di miglioramento in modo collaborativo.
 
 \subsection{Way of Working (WoW)}
 Insieme di procedure operative, strumenti e regole di collaborazione adottate dal team.
