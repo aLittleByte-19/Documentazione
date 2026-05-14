@@ -269,8 +269,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Trigger] Il Redattore seleziona la funzione di creazione di un nuovo contenuto supportato dall'AI.
     
-    \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo".
-    
+    \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "AI Assistant Generativo", preimpostando i parametri di tono, stile e lunghezza sui valori di default.
+
     \item[Post-condizioni] Il sistema mostra l'anteprima del contenuto generato (comprendente titolo, testo e immagine di copertina) e abilita le funzionalità di revisione.
     
     \item[Scenario Principale] 
@@ -327,7 +327,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] Il sistema espone l'elenco dei toni utilizzabili.
+    \item[Pre-condizioni] Il sistema espone l'elenco dei toni utilizzabili, impostato sul valore di default.
     \item[Post-condizioni] Il parametro relativo al tono di voce è stato impostato.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -345,7 +345,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] Il sistema espone l'elenco degli stili di scrittura supportati.
+    \item[Pre-condizioni] Il sistema espone l'elenco degli stili di scrittura supportati, impostato sul valore di default.
     \item[Post-condizioni] Il parametro relativo allo stile è stato impostato.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -354,7 +354,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \paragraph{UC-1.4: Salvataggio della configurazione del prompt}
-\mbox{}
+\mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-1.4.png}
@@ -364,15 +364,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il Redattore ha compilato uno o più parametri nell'interfaccia di composizione.
-    \item[Post-condizioni] La configurazione attuale è memorizzata nella libreria personale dei prompt.
+    \item[Post-condizioni] La configurazione attuale è memorizzata nella libreria personale dei prompt con un nome univoco.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona il comando "Salva prompt".
+        \item Il sistema richiede l'inserimento di un nome identificativo per la configurazione.
+        \item Il Redattore conferma l'operazione (inserendo un nome oppure lasciando il campo vuoto).
+        \item Il sistema elabora il nome: in caso di campo vuoto o di nome già esistente in libreria, il sistema assegna un'etichetta progressiva automatica (es. "Senza nome (1)").
         \item Il sistema memorizza i dati inseriti per consentirne il riutilizzo in sessioni successive.
     \end{enumerate}
     \item[Scenari Alternativi] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Prompt mancante}: Il Redattore tenta il salvataggio con il campo prompt vuoto; viene eseguito \textbf{UC-1.E1}.
+        \item \textbf{1a. Prompt mancante}: Il Redattore tenta il salvataggio con il campo prompt principale vuoto; viene eseguito \textbf{UC-1.E1}.
     \end{itemize}
 
     \item[Relazioni] 
@@ -410,7 +413,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] Il sistema espone le opzioni di configurazione dei parametri di generazione.
+    \item[Pre-condizioni] Il sistema espone le opzioni di configurazione della lunghezza, impostate sul valore di default.
     \item[Post-condizioni] Il parametro relativo alla lunghezza del testo è stato impostato.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -793,9 +796,9 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Trigger] Il Redattore ha concluso la fase di revisione della bozza e intende approvarla e finalizzarla in un documento da archiviare, esportare o distribuire.
 
-    \item[Pre-condizioni] La bozza revisionata (UC-2) è pronta per l'approvazione e presenta il marcatore di trasparenza "Creato da AI Assistant".
+    \item[Pre-condizioni] La bozza revisionata (UC-2) è pronta per l'approvazione.
     
-    \item[Post-condizioni] Il sistema ha promosso la bozza a documento e lo ha archiviato, esportato o inoltrato con successo.
+    \item[Post-condizioni] Il sistema ha promosso la bozza a documento e lo ha archiviato, esportato o inoltrato con successo; nei casi di esportazione e inoltro il documento riporta in calce il marcatore di trasparenza ``Creato da AI Assistant''.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -852,23 +855,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-3.3: Esportazione del documento}
+\paragraph{UC-3.3: Esportazione del documento in PDF}
 \mbox{} \\
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.3.png}
     \caption{Diagramma del caso d'uso UC-3.3: Esportazione del documento}
     \label{fig:uc-3.3}
 \end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
-    \item[Post-condizioni] Il sistema ha generato un file scaricabile del documento, comprensivo del marcatore di trasparenza.
+    \item[Post-condizioni] Il sistema ha generato un file PDF scaricabile comprensivo del marcatore di trasparenza ``Creato da AI Assistant''.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il comando di esportazione e indica il formato desiderato.
-        \item Il sistema avvia il download del documento sul dispositivo dell'utente.
+        \item Il Redattore seleziona il comando di esportazione PDF.
+        \item Il sistema avvia il download del documento sul dispositivo dell'utente nel formato PDF.
     \end{enumerate}
 \end{description}
 
@@ -884,11 +886,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema espone il campo per l'inserimento dell'indirizzo del destinatario.
-    \item[Post-condizioni] Il documento è stato trasmesso con successo all'indirizzo specificato.
+    \item[Post-condizioni] Il documento è stato trasmesso con successo all'indirizzo specificato, con il marcatore di trasparenza ``Creato da AI Assistant''.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona l'opzione di invio e inserisce l'indirizzo e-mail di destinazione.
-        \item Il sistema trasmette il messaggio includendo il marcatore automatico di trasparenza.
+        \item Il sistema trasmette il messaggio includendo il marcatore di trasparenza.
         \item Il sistema notifica il successo dell'operazione.
     \end{enumerate}
     \item[Scenari Alternativi] 
@@ -913,11 +915,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione e il Redattore intende esportare il documento.
-    \item[Post-condizioni] Il Redattore ha visualizzato a schermo l'aspetto del documento finale.
+    \item[Post-condizioni] Il Redattore ha visualizzato a schermo l'aspetto del documento finale, comprensivo del marcatore di trasparenza ``Creato da AI Assistant''.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona il comando di anteprima di stampa/esportazione.
-        \item Il sistema genera e mostra a schermo una preview del documento impaginato, rendendo visibile il marcatore di trasparenza ("Creato da AI Assistant").
+        \item Il sistema genera e mostra a schermo una preview del documento impaginato, rendendo visibile il marcatore di trasparenza.
     \end{enumerate}
 \end{description}
 
@@ -1105,28 +1107,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 \subsubsection{UC-5: Sistema di valutazione e feedback}
-
+\mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/UC-5.png}
     \caption{Diagramma del caso d'uso UC-5: Sistema di valutazione e feedback}
     \label{fig:uc-5}
 \end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     
     \item[Attore Principale] Redattore
     
-\item[Trigger] Il Redattore intende fornire un riscontro qualitativo sulla bozza generata dall'intelligenza artificiale.
+    \item[Trigger] Il Redattore intende fornire un riscontro qualitativo sulla bozza generata.
 
-    \item[Pre-condizioni] Il sistema ha completato la generazione dell'output (UC-1) e abilita le funzionalità di raccolta feedback.
+    \item[Pre-condizioni] Il sistema ha completato la generazione dell'output (UC-1) e abilita le funzionalità di raccolta feedback. La fornitura del feedback è un'azione completamente opzionale (UC-3).
     
-    \item[Post-condizioni] Il feedback (punteggio ed eventuale commento) è archiviato nel sistema.
+    \item[Post-condizioni] Il feedback (punteggio ed eventuale commento) è archiviato nel sistema in associazione alla bozza valutata.
     
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore visualizza il modulo di valutazione a schermo (\textbf{UC-5.1}).
         \item Il Redattore assegna un punteggio di gradimento tramite il selettore grafico (\textbf{UC-5.2}).
-        \item Il Redattore inserisce una nota testuale opzionale per dettagliare il feedback (\textbf{UC-5.3}).
+        \item Il Redattore inserisce una nota testuale per dettagliare il feedback (\textbf{UC-5.3}).
         \item Il Redattore conferma l'invio della valutazione (\textbf{UC-5.4}).
     \end{enumerate}
 
@@ -1206,22 +1208,21 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-5.4: Invio della valutazione}
 \mbox{} \\
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-5.4.png}
     \caption{Diagramma del caso d'uso UC-5.4: Invio della valutazione}
     \label{fig:uc-5.4}
 \end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] Il Redattore ha compilato i dati obbligatori del modulo (rating).
-    \item[Post-condizioni] La valutazione è stata acquisita dal sistema e il modulo è disabilitato.
+    \item[Pre-condizioni] Il Redattore ha compilato il dato obbligatorio del modulo (rating).
+    \item[Post-condizioni] La valutazione è stata acquisita dal sistema e il modulo è disabilitato per la bozza corrente.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona il comando di invio del feedback.
         \item Il sistema conferma l'acquisizione dei dati visualizzando un messaggio di ringraziamento.
-        \item Il sistema disabilita ulteriori modifiche al modulo di valutazione corrente.
+        \item Il sistema disabilita permanentemente il modulo di feedback per la generazione corrente, al fine di prevenire votazioni multiple.
     \end{enumerate}
     \item[Scenari Alternativi] 
     \begin{itemize}[leftmargin=*, nosep]
@@ -1388,20 +1389,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-6.5: Filtraggio dei dati analitici}
 \mbox{} \\
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.5.png}
     \caption{Diagramma del caso d'uso UC-6.5: Filtraggio dei dati analitici}
     \label{fig:uc-6.5}
 \end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Pre-condizioni] L'Analista dati visualizza i dati all'interno della dashboard.
     \item[Post-condizioni] Il sistema aggiorna la visualizzazione in base ai parametri selezionati.
     \item[Scenario Principale] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati imposta parametri specifici.
+        \item L'Analista dati imposta parametri specifici di filtro (es. intervallo di date, tono, stile).
         \item Il sistema aggiorna istantaneamente la visualizzazione in base ai criteri scelti.
     \end{enumerate}
     \item[Scenari Alternativi] 
