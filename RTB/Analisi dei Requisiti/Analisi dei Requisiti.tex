@@ -2419,14 +2419,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema esegue una validazione formale del formato e segnala eventuali errori.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Formato e-mail non valido: il sistema intercetta un indirizzo sintatticamente errato; viene eseguito \textbf{UC-16.6.E1}.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-16.6.E1.
-    \end{itemize}
+
 \end{description}
 
 \paragraph{UC-16.7: Modifica codice fiscale}
@@ -2449,14 +2442,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il sistema esegue un controllo di validità formale (checksum) e segnala eventuali incongruenze.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Codice fiscale non valido: il sistema rileva che il valore inserito non supera il controllo di validità formale (checksum); viene eseguito \textbf{UC-16.7.E1}.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-16.7.E1.
-    \end{itemize}
 \end{description}
 
 \paragraph{UC-16.8: Modifica matricola dipendente}
@@ -2478,46 +2463,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro inserisce o modifica la matricola.
         \item Il sistema verifica l'unicità o la corrispondenza con la scheda dipendente e segnala eventuali conflitti.
         \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
-    \end{enumerate}
-\end{description}
-
-\paragraph{UC-16.6.E1: Errore - Formato email non valido}
-\mbox{} \\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.6.E1.png}
-    \caption{Diagramma del caso d'uso UC-16.6.E1: Errore per formato email non valido}
-    \label{fig:uc-16.6.e1}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo email destinatario (UC-16.6) e ha inserito un indirizzo con formato non valido.
-    \item[Post-condizioni] Il sistema segnala l'errore e non registra il valore finché non viene fornito un indirizzo e-mail con formato corretto.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema intercetta il formato e-mail non valido.
-        \item Il sistema evidenzia il campo errato e richiede l'inserimento di un indirizzo e-mail corretto.
-    \end{enumerate}
-\end{description}
-
-\paragraph{UC-16.7.E1: Errore - Codice fiscale non valido}
-\mbox{} \\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/uc_16.7.E1.png}
-    \caption{Diagramma del caso d'uso UC-16.7.E1: Errore per codice fiscale non valido}
-    \label{fig:uc-16.7.e1}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo codice fiscale (UC-16.7) e il valore inserito non supera il controllo di validità formale (checksum).
-    \item[Post-condizioni] Il sistema segnala l'incongruenza e non registra il valore finché non viene fornito un codice fiscale corretto.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva che il codice fiscale inserito non supera il controllo di validità formale (checksum).
-        \item Il sistema evidenzia il campo e segnala l'incongruenza, richiedendo la correzione del codice fiscale.
     \end{enumerate}
 \end{description}
 
