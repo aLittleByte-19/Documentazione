@@ -1,0 +1,168 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{Immagini/Logo_Progetto-ezgif.com-crop.png}
+\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-05-11}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+        \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale 2026-05-11}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Interno - 2026-05-11}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Eleonora Bellet \\
+            Verificatori & V.Y. Kaneda Fernandes\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-05-11\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Discord \\[6pt]
+
+Orario (Inizio - Fine) & 15:00 -- 15:40 \\[6pt]
+
+Redattore &
+  E. Bellet\\[6pt]
+
+Amministratore & 
+D. Belluz\\[6pt]
+
+Verificatore &
+V. Y. Kaneda Fernandes\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  A. Gastaldello\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\& 
+  V. Y. Kaneda Fernandes\\[6pt]
+
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Pianificazione architettura e tecnologie per il Proof of Concept (POC)
+    \item Stato di avanzamento del Glossario e delle correzioni manuali
+    \item Verifica delle sezioni mancanti nelle Norme di Progetto (Way of Working e Test)
+    \item Organizzazione del diario di bordo e flussi di caricamento su Repository
+\end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Piano su POC e Scelte Tecnologiche}
+Il team ha discusso l'architettura tecnica per lo sviluppo del Proof of Concept (POC). Lo stack principale si baserà su Laravel e Filament. Per quanto riguarda lo storage e la simulazione degli ambienti cloud (AWS-like), Leonardo ha proposto l'adozione di MinIO, data la sua piena compatibilità con le API S3; questo permetterà di lavorare in locale in modo replicabile tramite container Docker, facilitando l'integrazione immediata non appena saranno attive le credenziali definitive (il cui link di invito ha una validità di una settimana).
+Dal punto di vista metodologico, si darà priorità al networking e alla configurazione dell'environment prima di procedere all'integrazione applicativa nei container. Angelica ha confermato di aver avviato lo sviluppo e mostrato una prima demo con Filament. L'integrazione di componenti di intelligenza artificiale rimarrà minimale in questa fase (es. prompt per generazione automatica di titoli e contenuti).
+
+\subsection{Glossario e Diario di Bordo (DR)}
+Leonardo ha terminato la stesura delle ultime voci del glossary-link raccogliendo i feedback inviati da Yuri. Attualmente si rende necessario un test di carico sui documenti più pesanti per verificare la corretta tenuta e il funzionamento dei link di navigazione interna. Eventuali fix rapidi verranno applicati non appena saranno inserite le nuove sezioni testuali.
+In merito ai colloqui documentati nel diario di bordo con il Prof. Cardin, è stato chiarito che tali incontri hanno natura prettamente informativa e di allineamento preliminare, senza che vi sia l'aspettativa di correzioni formali immediate. Nuovi quesiti tecnici verranno formalizzati solo a seguito delle prime evidenze riscontrate durante il setup del POC.
+
+
+\subsection{Avanzamento Norme di Progetto}
+È stato rilevato un gap documentale all'interno delle Norme di Progetto (Norme/Way of Working). Il team ha aperto un confronto per identificare se la mancanza risieda nella sezione dedicata alle strategie di Test o in una sottoparte dei processi di lavoro operativi. È stato richiesto un controllo ispettivo immediato per sbloccare la stesura e permettere l'avanzamento delle attività incrementali.
+
+\subsection{Gestione Repository e Flusso Documentale}
+Per la gestione del diario di bordo, Alex ha proposto una struttura rigorosa all'interno della repository con una cartella dedicata e un naming standardizzato basato sul formato data lineare (Anno-Mese-Giorno). Viene categoricamente stabilito che tutti i diari e i verbali ufficiali debbano essere pubblicati sul sito web del gruppo e non semplicemente condivisi sui canali di messaggistica interni.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit {Alex Oloni e Vinicius Yuri Kaneda Fernandes} & Studio Tecnologie da Implementare & \href{https://github.com/aLittleByte-19/Documentazione/issues/87}{\#87}\\
+    \hline
+         \textit {Angelica Gastaldello e Leonardo Soligo} & Sviluppo POC& \href{https://github.com/aLittleByte-19/Documentazione/issues/86}{\#86}\\
+    \hline
+        \textit{Diego Belluz} &  Continuazione della stesura di Norme di Progetto& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
+    \hline
+        \textit{Eleonora Bellet} & Stesura Verbale Interno 11/05/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/85}{\#85}\\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
