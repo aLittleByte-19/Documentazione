@@ -133,8 +133,10 @@
 
 \newpage
 \listoffigures
+\newpage
+\listoftables
 \pagenumbering{arabic}
-\setcounter{page}{4}
+\setcounter{page}{5}
 \fancyfoot[R]{Analisi dei Requisiti\hspace{0.8em}\thepage}
 
 \section{Introduzione}
@@ -2859,8 +2861,7 @@ Questa sezione raccoglie i requisiti individuati a partire dall'analisi dei casi
 \begin{itemize}
     \item \textbf{Requisiti funzionali} (RF): descrivono le funzionalità che il sistema deve offrire agli utenti;
     \item \textbf{Requisiti di qualità} (RQ): definiscono gli standard di processo e di prodotto che il gruppo deve rispettare;
-    \item \textbf{Requisiti di vincolo} (RVC): specificano i limiti tecnologici entro cui il sistema deve essere sviluppato;
-    \item \textbf{Requisiti prestazionali} (RP): stabiliscono le soglie quantitative di efficienza e disponibilità del sistema.
+    \item \textbf{Requisiti di vincolo} (RVC): specificano i limiti tecnologici entro cui il sistema deve essere sviluppato.
 \end{itemize}
 
 Ogni requisito è identificato da un codice univoco nella forma \textbf{\textit{categoria\_n}-\textit{priorità}}, dove il suffisso indica il grado di obbligatorietà:
@@ -2879,6 +2880,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
 {\small
 \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{2.5cm}|p{9.5cm}|p{3.5cm}|}
+    \caption{Requisiti funzionali} \label{tab:rf} \\
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\
@@ -3117,6 +3119,7 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
 {\small
 \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{2.5cm}|p{9.5cm}|p{3.5cm}|}
+    \caption{Requisiti di qualità} \label{tab:rq} \\
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\
@@ -3136,13 +3139,13 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     RQ2-OB & Le pratiche di sviluppo devono essere conformi alle Norme di Progetto adottate dal gruppo. & Interna \\
     \hline
-    RQ3-OB & Il prodotto deve superare tutti i test automatizzati con una copertura del codice non inferiore alla soglia minima concordata con il proponente e definita nel Piano di Qualifica. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato}, Piano di Qualifica \\
+    RQ3-OB & Il prodotto deve superare tutti i test automatizzati con una copertura del codice (statement coverage) non inferiore all'80\%. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
     RQ4-OB & La documentazione del codice sorgente deve rispettare le convenzioni definite nelle Norme di Progetto. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato}, Interna \\
     \hline
     RQ5-OB & Il sorgente deve essere gestito tramite un sistema di versionamento, con istruzioni di setup incluse nel repository. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ6-OB & Produzione di un report conclusivo sull'integrazione realizzata, con indicazioni per sviluppi futuri. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ6-OB & Produzione di un manuale utente per il prodotto sviluppato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
 
 \end{longtable}
@@ -3156,6 +3159,7 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
 {\small
 \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{2.5cm}|p{9.5cm}|p{3.5cm}|}
+    \caption{Requisiti di vincolo} \label{tab:rvc} \\
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\
@@ -3210,28 +3214,43 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Accessibilità}} \\
     \hline
-    RVC12-OB & Il sistema deve superare i controlli di accessibilità automatizzati eseguiti tramite lo strumento pa11y e axe sulle interfacce utente principali. & Interna/Proponente \\
+    RVC12-OB & Il sistema deve superare i controlli di accessibilità automatizzati eseguiti tramite lo strumento pa11y e axe sulle interfacce utente principali tramite Playwright su Chromium. & Interna/Proponente \\
+    \hline
+
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Browser supportati}} \\
+    \hline
+    RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle ultime due versioni stabili: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
+    \hline
+
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Requisiti minimi di sistema}} \\
+    \hline
+    RVC14-OB & L'ambiente di esecuzione deve essere containerizzato con Docker Compose. Lo stack comprende: Nginx, PHP-FPM 8.4, Laravel 12, PostgreSQL 16, Redis 7 e storage S3-compatible (MinIO). & Interna/Proponente \\
+    \hline
+    RVC15-OB & La configurazione minima del server richiede 2 vCPU, 4 GB di RAM e 10 GB di spazio disco, con porta HTTP esposta su 8080 o reverse proxy HTTPS. & Interna/Proponente \\
+    \hline
+    RVC16-OB & L'utilizzo delle funzionalità AI richiede credenziali AWS valide e accesso outbound ad Amazon Bedrock. & Interna/Proponente \\
     \hline
 
 \end{longtable}
 }
 
-\subsection{Requisiti prestazionali}
+\subsection{Tracciamento casi d'uso}
 
-I requisiti prestazionali definiscono le soglie quantitative di efficienza e disponibilità che il sistema deve soddisfare. Derivano da analisi interne al gruppo e sono finalizzati a garantire un'esperienza utente adeguata al contesto operativo.
+La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requisiti funzionali da essi derivati, al fine di verificare che ogni funzionalità analizzata abbia generato almeno un requisito.
 
 \vspace{0.4cm}
 {\small
 \renewcommand{\arraystretch}{1.3}
-\begin{longtable}{|p{2.5cm}|p{9.5cm}|p{3.5cm}|}
+\begin{longtable}{|p{3cm}|p{6cm}|}
+    \caption{Tracciamento casi d'uso} \label{tab:tracciamento} \\
     \hline
     \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\
+    \textbf{Caso d'uso} & \textbf{Requisiti} \\
     \hline
     \endfirsthead
     \hline
     \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\
+    \textbf{Caso d'uso} & \textbf{Requisiti} \\
     \hline
     \endhead
     \hline
@@ -3239,23 +3258,230 @@ I requisiti prestazionali definiscono le soglie quantitative di efficienza e dis
     \hline
     \endlastfoot
 
-    RP1-OB & Il modulo AI Assistant Generativo deve completare la generazione di una bozza testuale di lunghezza standard (fino a 400 parole) entro 8 secondi dall'invio del prompt. & Interna \\
+    \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{AI Assistant Generativo}} \\
     \hline
-    RP2-OB & Il modulo AI Co-Pilot deve completare la classificazione automatica di un documento PDF entro 10 secondi dal termine dell'upload, indipendentemente dal numero di pagine fino a un massimo di 20. & Interna \\
+    UC-1 & RF7-OB \\
     \hline
-    RP3-OB & Le operazioni di navigazione e interazione con la dashboard amministrativa devono produrre una risposta visibile all'utente entro 1 secondo in condizioni di carico standard. & Interna \\
+    UC-1.1 & RF1-OB \\
     \hline
-    RP4-OB & Il sistema deve supportare il caricamento di file PDF di dimensione massima pari a 500~MB per documento singolo e fino a 3000 pagine per elaborazione, in conformità con i limiti imposti da AWS Textract per l'elaborazione asincrona. & Interna \\
+    UC-1.2 & RF2-OB \\
     \hline
-    RP5-OB & Il processo di riconoscimento ottico dei caratteri (OCR) applicato a documenti scansionati non deve superare gli 8 secondi per pagina in condizioni di carico standard. & Interna \\
+    UC-1.3 & RF3-OB \\
     \hline
-    RP6-OB & La pipeline di split dei documenti massivi deve elaborare un lotto di 30 pagine entro 60 secondi dall'avvio del processo. & Interna \\
+    UC-1.4 & RF5-OB \\
     \hline
-    RP7-OP & La dashboard di analisi e reportistica dell'AI Assistant deve caricare le statistiche relative a un insieme di fino a 500 record entro 4 secondi. & Interna \\
+    UC-1.5 & RF6-OB \\
     \hline
-    RP8-OP & Il sistema deve garantire una disponibilità del servizio non inferiore al 99,5\% su base mensile, calcolata sull'intero arco giornaliero. & Interna \\
+    UC-1.6 & RF4-OP \\
     \hline
-    RP9-OP & Il sistema deve essere in grado di gestire l'elaborazione concorrente di almeno 20 documenti senza che il tempo medio di elaborazione per singolo documento superi il doppio del valore registrato in condizioni di carico singolo. & Interna \\
+    UC-1.E1 & RF8-OB \\
+    \hline
+    UC-1.E2 & RF9-OB \\
+    \hline
+    UC-2 & RF11-OB \\
+    \hline
+    UC-2.1 & RF12-OB \\
+    \hline
+    UC-2.2 & RF13-OB \\
+    \hline
+    UC-2.3 & RF14-OB \\
+    \hline
+    UC-2.4 & RF15-OB \\
+    \hline
+    UC-2.5 & RF16-OB \\
+    \hline
+    UC-2.6 & --- \\
+    \hline
+    UC-2.6.E1 & RF17-OB \\
+    \hline
+    UC-2.7 & RF18-OB \\
+    \hline
+    UC-2.7.E1 & RF10-OB \\
+    \hline
+    UC-2.8 & RF19-OB \\
+    \hline
+    UC-2.9 & RF20-OP \\
+    \hline
+    UC-2.E1 & RF21-OB \\
+    \hline
+    UC-3 & RF22-OB \\
+    \hline
+    UC-3.1 & RF23-OB \\
+    \hline
+    UC-3.2 & RF24-OB \\
+    \hline
+    UC-3.3 & RF25-OB \\
+    \hline
+    UC-3.4 & --- \\
+    \hline
+    UC-3.4.E1 & RF27-OB \\
+    \hline
+    UC-3.5 & RF26-OP \\
+    \hline
+    UC-4 & RF28-OB \\
+    \hline
+    UC-4.1 & RF29-OB \\
+    \hline
+    UC-4.2 & RF30-OB \\
+    \hline
+    UC-4.2.E1 & RF31-OB \\
+    \hline
+    UC-4.3 & RF32-OB \\
+    \hline
+    UC-4.4 & --- \\
+    \hline
+    UC-4.5 & RF33-OP \\
+    \hline
+    UC-5 & RF34-OB \\
+    \hline
+    UC-5.1 & RF35-OB \\
+    \hline
+    UC-5.2 & RF36-OB \\
+    \hline
+    UC-5.3 & --- \\
+    \hline
+    UC-5.3.E1 & RF39-OB \\
+    \hline
+    UC-5.4 & RF37-OB \\
+    \hline
+    UC-5.4.E1 & RF38-OB \\
+    \hline
+    UC-6 & RF40-OB \\
+    \hline
+    UC-6.1 & RF41-OB \\
+    \hline
+    UC-6.2 & RF42-OB \\
+    \hline
+    UC-6.3 & RF43-OB \\
+    \hline
+    UC-6.4 & RF44-OB \\
+    \hline
+    UC-6.5 & --- \\
+    \hline
+    UC-6.6 & --- \\
+    \hline
+    UC-6.6.E1 & RF45-OB \\
+    \hline
+
+    \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{AI Co-Pilot per Consulenti del Lavoro}} \\
+    \hline
+    UC-7 & RF46-OB \\
+    \hline
+    UC-7.E1 & RF47-OB \\
+    \hline
+    UC-7.E2 & RF48-OB \\
+    \hline
+    UC-8 & RF49-OB \\
+    \hline
+    UC-9 & RF50-OB \\
+    \hline
+    UC-9.E1 & RF51-OB \\
+    \hline
+    UC-10 & RF52-OB \\
+    \hline
+    UC-11 & RF53-OB \\
+    \hline
+    UC-12 & RF54-OB \\
+    \hline
+    UC-13 & RF55-OB \\
+    \hline
+    UC-14 & --- \\
+    \hline
+    UC-15 & RF56-OB \\
+    \hline
+    UC-15.1 & RF57-OB \\
+    \hline
+    UC-15.2 & RF58-OB \\
+    \hline
+    UC-15.3 & RF59-OB \\
+    \hline
+    UC-15.3.E1 & RF72-OB \\
+    \hline
+    UC-15.4 & RF60-OB \\
+    \hline
+    UC-15.4.E1 & RF73-OB \\
+    \hline
+    UC-15.5 & RF61-OB \\
+    \hline
+    UC-15.6 & RF62-OB \\
+    \hline
+    UC-15.6.E1 & RF74-OB \\
+    \hline
+    UC-15.7 & RF63-OB \\
+    \hline
+    UC-15.8 & RF64-OB \\
+    \hline
+    UC-15.8.E1 & RF75-OB \\
+    \hline
+    UC-15.9 & RF65-OB \\
+    \hline
+    UC-15.9.E1 & RF76-OB \\
+    \hline
+    UC-15.10 & RF66-OB \\
+    \hline
+    UC-15.10.E1 & RF77-OB \\
+    \hline
+    UC-15.11 & RF67-OB \\
+    \hline
+    UC-15.12 & RF68-OP \\
+    \hline
+    UC-15.13 & RF69-OP \\
+    \hline
+    UC-15.14 & RF70-OP \\
+    \hline
+    UC-15.15 & RF71-OP \\
+    \hline
+    UC-16 & RF78-OB \\
+    \hline
+    UC-16.1 & RF79-OB \\
+    \hline
+    UC-16.2 & RF80-OB \\
+    \hline
+    UC-16.3 & RF81-OB \\
+    \hline
+    UC-16.4 & RF82-OB \\
+    \hline
+    UC-16.5 & RF83-OB \\
+    \hline
+    UC-16.6 & RF84-OP \\
+    \hline
+    UC-16.6.E1 & RF87-OP \\
+    \hline
+    UC-16.7 & RF85-OP \\
+    \hline
+    UC-16.7.E1 & RF88-OP \\
+    \hline
+    UC-16.8 & RF86-OP \\
+    \hline
+    UC-17 & RF89-OB \\
+    \hline
+    UC-17.1 & RF90-OB \\
+    \hline
+    UC-17.2 & RF91-OB \\
+    \hline
+    UC-17.3 & RF92-OB \\
+    \hline
+    UC-17.4 & RF93-OB \\
+    \hline
+    UC-18 & RF94-OB \\
+    \hline
+    UC-18.1 & RF95-OB \\
+    \hline
+    UC-18.2 & RF96-OB \\
+    \hline
+    UC-18.3 & RF97-OB \\
+    \hline
+    UC-19 & RF98-OB \\
+    \hline
+    UC-19.1 & RF99-OB \\
+    \hline
+    UC-19.2 & RF100-OB \\
+    \hline
+    UC-19.3 & RF101-OB \\
+    \hline
+    UC-19.4 & RF102-OB \\
+    \hline
+    UC-19.5 & RF103-OB \\
     \hline
 
 \end{longtable}
@@ -3269,6 +3495,7 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
 {\small
 \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
+    \caption{Riepilogo dei requisiti} \label{tab:riepilogo} \\
     \hline
     \rowcolor{gray!20}
     \textbf{Tipo di requisito} & \textbf{Obbligatori} & \textbf{Opzionali} & \textbf{Totale} \\
@@ -3288,11 +3515,9 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     Di qualità & 6 & 0 & 6 \\
     \hline
-    Di vincolo & 11 & 1 & 12 \\
+    Di vincolo & 15 & 1 & 16 \\
     \hline
-    Prestazionali & 6 & 3 & 9 \\
-    \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{113} & \textbf{17} & \textbf{130} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{111} & \textbf{14} & \textbf{125} \\
 
 \end{longtable}
 }
