@@ -1,0 +1,958 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{longtable}
+
+\newcommand{\groupmail}{alittlebyte19@gmail.com}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Piano di Qualifica}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Piano di Qualifica}
+
+    \setcounter{secnumdepth}{4}
+    \setcounter{tocdepth}{4}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Piano di Qualifica}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattori   & Eleonora Bellet, Diego Belluz \\
+            Verificatori& Leonardo Soligo, Angelica Gastaldello\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 16/05/2026 \\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white}
+\begin{center}
+    {\footnotesize
+    \begin{tabularx}{\textwidth}{|p{1.4cm}|p{1.8cm}|X|p{2.4cm}|p{2.3cm}|p{2.3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.1.0 & 16/05/2026 & Prima stesura e completamento riferimenti & Eleonora Bellet, Diego Belluz & Leonardo Soligo, Angelica Gastaldello & - \\
+        \hline
+    \end{tabularx}
+    }
+    
+\end{center}
+\newpage
+
+\begin{center} 
+    {\Large \textbf{Indice}}
+\end{center}
+
+\vspace{0.6cm}
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{4}
+\fancyfoot[R]{Piano di Qualifica\hspace{0.8em}\thepage}
+
+\section{Introduzione}
+
+\subsection{Finalità del documento}
+Il presente documento, denominato \textit{Piano di Qualifica}, ha lo scopo di definire le strategie, le procedure e le metriche adottate dal gruppo \textit{aLittleByte} per garantire la qualità del prodotto software e dei processi produttivi relativi al progetto C5 (NEXUM), proposto dall'azienda \textit{Eggon}.
+
+In particolare, questo documento si prefigge di:
+\begin{itemize}
+    \item \textbf{Definire gli obiettivi di qualità:} specificare i target qualitativi per il processo di sviluppo (efficienza, stabilità) e per il prodotto software (funzionalità, affidabilità, manutenibilità), in conformità con gli standard ISO/IEC 12207 e ISO/IEC 9126;
+    \item \textbf{Identificare le metriche:} selezionare gli indicatori quantitativi più idonei per monitorare il raggiungimento degli obiettivi, fissando per ciascuno le soglie di accettazione e di ottimalità;
+    \item \textbf{Pianificare le attività di verifica e validazione:} descrivere le metodologie di test (unità, integrazione, sistema, accettazione) e le procedure di analisi statica del codice e della documentazione;
+    \item \textbf{Monitorare l'andamento del progetto:} fornire un resoconto puntuale delle misurazioni effettuate durante le varie fasi del ciclo di vita, permettendo al team di individuare tempestivamente criticità e attuare azioni correttive.
+\end{itemize}
+
+\subsection{Glossario}
+Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, è stato redatto un documento esterno denominato \textit{Glossario}.
+I termini tecnici, gli acronimi e le parole con un significato specifico all'interno del progetto sono contrassegnati nel testo da una ``G'' in pedice (es. parola\textsubscript{\scalebox{0.6}{\textbf{G}}}). La loro definizione completa è consultabile nel \textit{Glossario}.
+
+\subsection{Riferimenti}
+\subsubsection{Riferimenti normativi}
+\begin{itemize}
+    \item \textbf{Capitolato d'appalto C5 - NEXUM (Eggon):}\\
+    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
+
+    \item \textbf{Norme di Progetto:}\\
+    Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative.\\
+    \url{https://github.com/aLittleByte-19/Documentazione}
+
+    \item \textbf{Regolamento del progetto didattico:}\\
+    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}
+
+    \item \textbf{Piano di Progetto:}\\
+    Documento interno del gruppo \textit{aLittleByte}.\\
+    \url{https://github.com/aLittleByte-19/Documentazione}
+\end{itemize}
+
+\subsubsection{Riferimenti informativi}
+\begin{itemize}
+    \item \textbf{Glossario:}\\
+    Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici.\\
+    \url{https://github.com/aLittleByte-19/Documentazione}
+
+    \item \textbf{Standard ISO/IEC 12207:1995:}\\
+    \textit{Information technology -- Software life cycle processes}.\\
+    \url{https://www.math.unipd.it/~tullio/IS-1/2009/Approfondimenti/ISO_12207-1995.pdf}
+
+    \item \textbf{Standard ISO/IEC 9126:}\\
+    \textit{Software engineering -- Product quality}.\\
+    \url{https://it.wikipedia.org/wiki/ISO/IEC_9126}
+
+    \item \textbf{Slide T07 - Qualità del software:}\\
+    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf}\\
+
+    \item \textbf{Slide T08 - Qualità del software:}\\
+    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T08.pdf}\\
+\end{itemize}
+
+\section{Qualità di processo}
+La qualità di processo descrive quanto le attività di sviluppo siano pianificate, controllate e migliorate nel tempo. Il riferimento metodologico adottato è lo standard ISO/IEC 12207, adattato al Way of Working del gruppo.
+Le metriche di qualità del processo misurano l'efficacia, l'efficienza e il controllo delle attività necessarie per sviluppare, gestire e consegnare il prodotto software. Il loro scopo è di monitorare l'aderenza alla pianificazione, la stabilità dei processi, la sostenibilità dei costi e il miglioramento costante dei risultati. Queste metriche non valutano il prodotto finito, ma il modo in cui il prodotto viene realizzato.
+Il monitoraggio continuo consente di confrontare i valori rilevati con le soglie stabilite, garantendo trasparenza verso i committenti e coerenza interna nelle scelte operative.
+
+In questo documento, tali misure vengono identificate tramite la sigla \textbf{MPC} (Metriche di Processo e Controllo). Questo identificativo permette di classificare e tracciare tutte le misurazioni relative alla gestione dei costi, all'avanzamento temporale, alla qualità della documentazione e all'efficienza dei processi interni al team di sviluppo.
+
+\subsection{Processi primari}
+\subsubsection{Fornitura}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPC-EV & Earned Value & $\geq 0$ & $\leq$ EAC \\
+        MPC-PV & Planned Value & $\geq 0$ & $\leq$ BAC \\
+        MPC-AC & Actual Cost & $\geq 0$ & $\leq$ EAC \\
+        MPC-CPI & Cost Performance Index & $\geq 0,9$ & $1$ \\
+        MPC-SPI & Schedule Performance Index & $\geq 0,9$ & $1$ \\
+        MPC-EAC & Estimated At Completion & $\pm 5\%$ rispetto al BAC & BAC \\
+        MPC-ETC & Estimate To Complete & $\geq 0$ & $\leq$ EAC \\
+        MPC-TEAC & Time Estimate At Completion & $\geq 0$ & $\leq$ Durata pianificata \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della fornitura.}
+\end{table}
+
+\subsubsection{Sviluppo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPC-RSI & Requirements Stability Index & $\geq 70\%$ & $100\%$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità dello sviluppo.}
+\end{table}
+
+\subsection{Processi di supporto}
+\subsubsection{Documentazione}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPC-IG & Indice di Gulpease del documento & $\geq 60$ & $\geq 80$ \\
+        MPC-CO & Correttezza ortografica & $0$ errori & $0$ errori \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della documentazione.}
+\end{table}
+
+\subsubsection{Verifica}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPC-CC & Code Coverage & $\geq 80\%$ & $100\%$ \\
+        MPC-TSR & Test Success Rate & $100\%$ & $100\%$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della verifica.}
+\end{table}
+
+\subsubsection{Gestione della qualità}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPC-QMS & Quality Metrics Satisfied & $\geq 80\%$ & $100\%$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della gestione della qualità.}
+\end{table}
+
+\subsection{Processi organizzativi}
+\subsubsection{Gestione dei processi}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPC-TE & Time Efficiency & $\geq 50\%$ & $100\%$ \\
+        MPC13 & Percentuale Rischi Inattesi & $\leq 20\%$ & $0\%$ \\
+        MPC14 & Labor Efficiency & $\geq 70\%$ & $\geq 100\%$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della gestione dei processi.}
+\end{table}
+
+\section{Qualità di prodotto}
+La qualità di prodotto misura le proprietà interne ed esterne del software finale. Lo standard di riferimento è ISO/IEC 9126, adottato come base per definire le metriche di prodotto.
+Tali metriche consentono di verificare che il sistema rispetti i requisiti e che l'esperienza d'uso risulti stabile e prevedibile nelle condizioni operative attese.
+
+In questo documento, tali misure vengono identificate tramite la sigla \textbf{MPD} (Metriche di Prodotto). Questo identificativo permette di classificare e monitorare le caratteristiche del software, facilitando la verifica del raggiungimento degli obiettivi qualitativi prefissati.
+
+\subsection{Funzionalità}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPD01 & Requisiti obbligatori soddisfatti & $100\%$ & $100\%$ \\
+        MPD02 & Requisiti opzionali soddisfatti & $0\%$ & $100\%$ \\
+        MPD03 & AI Acceptance Rate (rating $\geq 3/5$) & $\geq 60\%$ & $\geq 80\%$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità delle funzionalità.}
+\end{table}
+
+\subsection{Affidabilità}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPD05 & Branch Coverage & $\geq 70\%$ & $\geq 85\%$ \\
+        MPD06 & Defect Density & $\leq 3$ / KLOC & $\leq 1$ / KLOC \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità dell'affidabilità.}
+\end{table}
+
+\subsection{Efficienza}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPD07 & Latenza interfaccia utente & $\leq 2$ sec & $\leq 0,5$ sec \\
+        MPD08 & Latenza generazione testo AI Assistant & $\leq 5$ sec & $\leq 3$ sec \\
+        MPD09 & Latenza generazione immagine AI Assistant & $\leq 10$ sec & $\leq 5$ sec \\
+        MPD10 & Latenza analisi documentale AI Co-Pilot & $\leq 10$ sec & $\leq 5$ sec \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità dell'efficienza.}
+\end{table}
+
+\subsection{Usabilità}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPD11 & Profondità Massima di Navigazione & $\leq 5$ livelli & $\leq 3$ livelli \\
+        MPD12 & Learning Time (funzioni principali) & $\leq 30$ min & $\leq 15$ min \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità dell'usabilità.}
+\end{table}
+
+\subsection{Mantenibilità}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPD13 & Code Smell & $\leq 5$ & $0$ \\
+        MPD14 & Coefficient of Coupling & $\leq 0{,}7$ & $\leq 0{,}4$ \\
+        MPD15 & Cyclomatic Complexity (per metodo) & $\leq 15$ & $\leq 10$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della mantenibilità.}
+\end{table}
+
+\subsection{Portabilità}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!8}{white}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
+        \hline
+        MPD16 & Compatibilità Cross-Browser & $\geq 80\%$ & $100\%$ \\
+        \hline
+    \end{tabularx}
+    \caption{Valori per misurare la qualità della portabilità.}
+\end{table}
+
+\section{Metodi di testing}
+La presente sezione descrive le attività di testing adottate nel progetto e le metriche utilizzate per valutare l'efficacia del processo di verifica.
+Le attività di testing forniscono evidenza oggettiva del corretto funzionamento dell'intero sistema e supportano la valutazione delle metriche di qualità del prodotto discusse in questo documento.
+
+I test avranno un codice univoco, la descrizione, il requisito di riferimento e lo stato attuale. I codici per descrivere gli stati dei test sono i seguenti:
+\begin{itemize}
+    \item \textbf{NI}: Non Implementato
+    \item \textbf{I}: Implementato, ma non ancora verificato
+    \item \textbf{S}: Superato, ovvero il test è stato eseguito ed ha restituito un esito positivo
+    \item \textbf{NS}: Non Superato, ovvero il test è stato eseguito ma ha restituito un esito negativo
+\end{itemize}
+
+\subsection{Copertura del codice}
+La copertura del codice (Code Coverage) misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici. Tale metrica consente di valutare il grado di verifica del software ed è direttamente collegata alla metrica \textbf{MPC-CC}.
+Il valore minimo accettabile è fissato all'80\%.
+
+\subsection{Test unitari}
+I test unitari verificano il corretto funzionamento delle singole unità software in isolamento. L'attenzione è rivolta alle componenti critiche del backend: logica di elaborazione dei prompt, validazione degli input, gestione dei metadati documentali e algoritmi di classificazione AI. I test sono realizzati con il framework Pest e contribuiscono al miglioramento delle metriche \textbf{MPC-TSR} e \textbf{MPC-CC}.
+
+\subsection{Test di integrazione}
+I test di integrazione verificano il corretto comportamento delle interazioni tra i componenti del sistema. Considerata la natura distribuita dell'architettura, tali test risultano fondamentali per il raggiungimento di un solido risultato.
+
+\renewcommand{\arraystretch}{1.15}
+\rowcolors{2}{gray!8}{white}
+\begin{longtable}{|p{2.2cm}|p{8.5cm}|p{3.8cm}|p{1.5cm}|}
+    \caption{Test di integrazione} \label{tab:ti} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Moduli} & \textbf{Stato} \\
+    \hline
+    \endfirsthead
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Moduli} & \textbf{Stato} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    TI-001 & Verifica che il sistema scambi correttamente i dati tra frontend e backend tramite API REST. & UI (Blade) $\leftrightarrow$ Laravel 12 & NI \\
+    \hline
+    TI-002 & Verifica che il sistema invii il prompt e riceva la risposta generata dal servizio AI. & Backend $\leftrightarrow$ Amazon Bedrock & NI \\
+    \hline
+    TI-003 & Verifica che il sistema persista e recuperi correttamente i dati applicativi dal database. & Backend $\leftrightarrow$ PostgreSQL & NI \\
+    \hline
+    TI-004 & Verifica che il sistema esegua la pipeline OCR e la classificazione dei documenti tramite AI Analyst. & Backend $\leftrightarrow$ AI Analyst & NI \\
+    \hline
+    TI-005 & Verifica che il sistema gestisca correttamente l'upload, lo storage e l'accesso ai file. & Backend $\leftrightarrow$ MinIO (S3) & NI \\
+    \hline
+    TI-006 & Verifica che il sistema esegua correttamente i job in modalità asincrona tramite le code. & Backend $\leftrightarrow$ Redis Queue & NI \\
+    \hline
+\end{longtable}
+
+\subsection{Test di regressione}
+I test di regressione vengono eseguiti al termine di ogni sprint, dopo l'integrazione di nuove funzionalità o la correzione di difetti, con lo scopo di accertare che il comportamento già verificato non sia stato compromesso. Consistono nella riesecuzione automatica dell'intera suite di test unitari e di integrazione preesistente. Un aumento dei fallimenti costituisce un indicatore di instabilità che richiede analisi e risoluzione prima del rilascio.
+
+\subsection{Test di sistema}
+I test di sistema verificano il corretto comportamento complessivo dell'applicazione in un ambiente il più possibile simile a quello di utilizzo reale. La tabella seguente raccoglie in modo unitario tutti i test di sistema, raggruppati per tipologia di requisito: funzionali, di qualità e di vincolo.
+
+\renewcommand{\arraystretch}{1.15}
+\rowcolors{2}{gray!8}{white}
+\begin{longtable}{|p{2.2cm}|p{9.5cm}|p{2.3cm}|p{1.5cm}|}
+    \caption{Test di sistema} \label{tab:ts} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \hline
+    \endfirsthead
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti funzionali}} \\
+    \hline
+    TS-F-001 & Verifica che il sistema permetta al Redattore di compilare il prompt testuale descrittivo del contenuto da generare. & RF1-OB & NI \\
+    \hline
+    TS-F-002 & Verifica che il sistema permetta al Redattore di selezionare il tono comunicativo della bozza da generare. & RF2-OB & NI \\
+    \hline
+    TS-F-003 & Verifica che il sistema permetta al Redattore di selezionare lo stile editoriale della bozza da generare. & RF3-OB & NI \\
+    \hline
+    TS-F-004 & Verifica che il sistema permetta al Redattore di selezionare la lunghezza desiderata per la bozza da generare. & RF4-OP & NI \\
+    \hline
+    TS-F-005 & Verifica che il sistema permetta al Redattore di salvare la configurazione corrente del prompt nella libreria personale. & RF5-OB & NI \\
+    \hline
+    TS-F-006 & Verifica che il sistema permetta al Redattore di svuotare i campi di configurazione ripristinando i valori predefiniti. & RF6-OB & NI \\
+    \hline
+    TS-F-007 & Verifica che il sistema avvii la generazione del contenuto tramite il modulo AI Post Generator a partire dal prompt e dai parametri configurati. & RF7-OB & NI \\
+    \hline
+    TS-F-008 & Verifica che il sistema notifichi il Redattore qualora il campo prompt sia assente o insufficiente prima dell'avvio della generazione. & RF8-OB & NI \\
+    \hline
+    TS-F-009 & Verifica che il sistema notifichi il Redattore in caso di errore interno o timeout durante la generazione iniziale del contenuto tramite AI. & RF9-OB & NI \\
+    \hline
+    TS-F-010 & Verifica che il sistema notifichi il Redattore in caso di errore interno o timeout durante la rigenerazione del contenuto tramite AI. & RF10-OB & NI \\
+    \hline
+    TS-F-011 & Verifica che il sistema visualizzi un'anteprima della bozza generata. & RF11-OB & NI \\
+    \hline
+    TS-F-012 & Verifica che il sistema visualizzi il titolo della bozza generata nell'anteprima. & RF12-OB & NI \\
+    \hline
+    TS-F-013 & Verifica che il sistema visualizzi il testo della bozza generata nell'anteprima. & RF13-OB & NI \\
+    \hline
+    TS-F-014 & Verifica che il sistema visualizzi l'immagine di copertina della bozza generata nell'anteprima. & RF14-OB & NI \\
+    \hline
+    TS-F-015 & Verifica che il sistema permetta al Redattore di modificare manualmente il titolo della bozza. & RF15-OB & NI \\
+    \hline
+    TS-F-016 & Verifica che il sistema permetta al Redattore di modificare manualmente il testo della bozza. & RF16-OB & NI \\
+    \hline
+    TS-F-017 & Verifica che il sistema notifichi il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & RF17-OB & NI \\
+    \hline
+    TS-F-018 & Verifica che il sistema permetta al Redattore di richiedere la rigenerazione della bozza mantenendo i parametri di configurazione. & RF18-OB & NI \\
+    \hline
+    TS-F-019 & Verifica che il sistema permetta al Redattore di eliminare la bozza generata corrente. & RF19-OB & NI \\
+    \hline
+    TS-F-020 & Verifica che il sistema permetta al Redattore di annullare le modifiche manuali apportate alla bozza, ripristinando il contenuto originale. & RF20-OP & NI \\
+    \hline
+    TS-F-021 & Verifica che il sistema notifichi il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & RF21-OB & NI \\
+    \hline
+    TS-F-022 & Verifica che il sistema permetta al Redattore di approvare e finalizzare il documento generato. & RF22-OB & NI \\
+    \hline
+    TS-F-023 & Verifica che il sistema visualizzi le opzioni disponibili per la finalizzazione del documento. & RF23-OB & NI \\
+    \hline
+    TS-F-024 & Verifica che il sistema permetta il salvataggio del documento come bozza nello storico. & RF24-OB & NI \\
+    \hline
+    TS-F-025 & Verifica che il sistema permetta l'esportazione del documento finalizzato in formato PDF. & RF25-OB & NI \\
+    \hline
+    TS-F-026 & Verifica che il sistema permetta al Redattore di visualizzare un'anteprima del documento prima dell'esportazione definitiva. & RF26-OP & NI \\
+    \hline
+    TS-F-027 & Verifica che il sistema notifichi il Redattore in caso di indirizzo e-mail non valido durante l'inoltro del documento. & RF27-OB & NI \\
+    \hline
+    TS-F-028 & Verifica che il sistema fornisca al Redattore una libreria personale dei prompt con il relativo storico delle generazioni passate. & RF28-OB & NI \\
+    \hline
+    TS-F-029 & Verifica che il sistema permetta al Redattore di visualizzare l'elenco delle generazioni passate e i prompt salvati nella libreria personale. & RF29-OB & NI \\
+    \hline
+    TS-F-030 & Verifica che il sistema permetta la ricerca e il filtraggio dello storico dei prompt e delle generazioni passate. & RF30-OB & NI \\
+    \hline
+    TS-F-031 & Verifica che il sistema avvisi l'utente quando la ricerca nello storico non produce risultati. & RF31-OB & NI \\
+    \hline
+    TS-F-032 & Verifica che il sistema permetta il caricamento e il riutilizzo di una configurazione prompt dalla libreria personale. & RF32-OB & NI \\
+    \hline
+    TS-F-033 & Verifica che il sistema permetta l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & RF33-OP & NI \\
+    \hline
+    TS-F-034 & Verifica che il sistema fornisca un modulo di valutazione qualitativa delle bozze generate. & RF34-OB & NI \\
+    \hline
+    TS-F-035 & Verifica che il sistema permetta al Redattore di accedere al modulo di valutazione qualitativa della bozza generata. & RF35-OB & NI \\
+    \hline
+    TS-F-036 & Verifica che il sistema permetta al Redattore di assegnare un rating numerico alla bozza generata. & RF36-OB & NI \\
+    \hline
+    TS-F-037 & Verifica che il sistema permetta al Redattore di inviare la valutazione al sistema. & RF37-OB & NI \\
+    \hline
+    TS-F-038 & Verifica che il sistema notifichi il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & RF38-OB & NI \\
+    \hline
+    TS-F-039 & Verifica che il sistema notifichi il Redattore qualora il commento testuale superi il limite di caratteri consentito. & RF39-OB & NI \\
+    \hline
+    TS-F-040 & Verifica che il sistema fornisca all'Analista dati una dashboard dedicata con metriche di utilizzo del modulo AI Assistant Generativo. & RF40-OB & NI \\
+    \hline
+    TS-F-041 & Verifica che il sistema visualizzi nella dashboard una panoramica dell'attività complessiva del modulo AI Assistant. & RF41-OB & NI \\
+    \hline
+    TS-F-042 & Verifica che il sistema visualizzi nella dashboard le statistiche di utilizzo del modulo AI Assistant. & RF42-OB & NI \\
+    \hline
+    TS-F-043 & Verifica che il sistema visualizzi nella dashboard il rating medio delle bozze generate. & RF43-OB & NI \\
+    \hline
+    TS-F-044 & Verifica che il sistema permetta all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & RF44-OB & NI \\
+    \hline
+    TS-F-045 & Verifica che il sistema notifichi l'Analista dati qualora i dati non siano disponibili per l'esportazione del report. & RF45-OB & NI \\
+    \hline
+    TS-F-046 & Verifica che il sistema permetta al Consulente del lavoro di caricare singoli documenti o lotti nel repository dedicato. & RF46-OB & NI \\
+    \hline
+    TS-F-047 & Verifica che il sistema rilevi i documenti duplicati durante l'upload e notifichi il Consulente del lavoro richiedendone conferma. & RF47-OB & NI \\
+    \hline
+    TS-F-048 & Verifica che il sistema rilevi i formati file non supportati durante l'upload e notifichi il Consulente del lavoro. & RF48-OB & NI \\
+    \hline
+    TS-F-049 & Verifica che il sistema classifichi automaticamente i documenti caricati e popoli i metadati associati tramite il modulo AI Analyst. & RF49-OB & NI \\
+    \hline
+    TS-F-050 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & RF50-OB & NI \\
+    \hline
+    TS-F-051 & Verifica che il sistema notifichi l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & RF51-OB & NI \\
+    \hline
+    TS-F-052 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite criteri multipli. & RF52-OB & NI \\
+    \hline
+    TS-F-053 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite barra di ricerca testuale. & RF53-OB & NI \\
+    \hline
+    TS-F-054 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & RF54-OB & NI \\
+    \hline
+    TS-F-055 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & RF55-OB & NI \\
+    \hline
+    TS-F-056 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & RF56-OB & NI \\
+    \hline
+    TS-F-057 & Verifica che il sistema permetta la visualizzazione del documento originale nella versione splittata. & RF57-OB & NI \\
+    \hline
+    TS-F-058 & Verifica che il sistema permetta la visualizzazione del documento originale non splittato. & RF58-OB & NI \\
+    \hline
+    TS-F-059 & Verifica che il sistema visualizzi il nome e cognome del destinatario associato al documento. & RF59-OB & NI \\
+    \hline
+    TS-F-060 & Verifica che il sistema visualizzi l'azienda associata al documento. & RF60-OB & NI \\
+    \hline
+    TS-F-061 & Verifica che il sistema visualizzi il nome del file del documento. & RF61-OB & NI \\
+    \hline
+    TS-F-062 & Verifica che il sistema visualizzi la data del documento. & RF62-OB & NI \\
+    \hline
+    TS-F-063 & Verifica che il sistema visualizzi il numero di pagine del documento. & RF63-OB & NI \\
+    \hline
+    TS-F-064 & Verifica che il sistema visualizzi la tipologia del documento. & RF64-OB & NI \\
+    \hline
+    TS-F-065 & Verifica che il sistema visualizzi la breve descrizione del documento. & RF65-OB & NI \\
+    \hline
+    TS-F-066 & Verifica che il sistema visualizzi il livello di confidenza in percentuale del documento. & RF66-OB & NI \\
+    \hline
+    TS-F-067 & Verifica che il sistema visualizzi lo stato di invio del documento. & RF67-OB & NI \\
+    \hline
+    TS-F-068 & Verifica che il sistema visualizzi l'indirizzo e-mail del destinatario del documento. & RF68-OP & NI \\
+    \hline
+    TS-F-069 & Verifica che il sistema visualizzi il codice fiscale del destinatario. & RF69-OP & NI \\
+    \hline
+    TS-F-070 & Verifica che il sistema visualizzi la matricola del dipendente. & RF70-OP & NI \\
+    \hline
+    TS-F-071 & Verifica che il sistema visualizzi la data e ora di caricamento del documento. & RF71-OP & NI \\
+    \hline
+    TS-F-072 & Verifica che il sistema gestisca l'assenza del nome del destinatario visualizzando un indicatore apposito. & RF72-OB & NI \\
+    \hline
+    TS-F-073 & Verifica che il sistema gestisca l'assenza dell'azienda associata al documento visualizzando un indicatore apposito. & RF73-OB & NI \\
+    \hline
+    TS-F-074 & Verifica che il sistema gestisca l'assenza della data del documento visualizzando un indicatore apposito. & RF74-OB & NI \\
+    \hline
+    TS-F-075 & Verifica che il sistema gestisca l'assenza della tipologia del documento visualizzando un indicatore apposito. & RF75-OB & NI \\
+    \hline
+    TS-F-076 & Verifica che il sistema gestisca l'assenza della breve descrizione visualizzando un indicatore apposito. & RF76-OB & NI \\
+    \hline
+    TS-F-077 & Verifica che il sistema gestisca l'assenza del livello di confidenza visualizzando un indicatore apposito. & RF77-OB & NI \\
+    \hline
+    TS-F-078 & Verifica che il sistema permetta al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & RF78-OB & NI \\
+    \hline
+    TS-F-079 & Verifica che il sistema permetta la modifica del nome e cognome del destinatario associato al documento. & RF79-OB & NI \\
+    \hline
+    TS-F-080 & Verifica che il sistema permetta la modifica dell'azienda associata al documento. & RF80-OB & NI \\
+    \hline
+    TS-F-081 & Verifica che il sistema permetta la modifica della data del documento. & RF81-OB & NI \\
+    \hline
+    TS-F-082 & Verifica che il sistema permetta la modifica della tipologia del documento. & RF82-OB & NI \\
+    \hline
+    TS-F-083 & Verifica che il sistema permetta la modifica della breve descrizione del documento. & RF83-OB & NI \\
+    \hline
+    TS-F-084 & Verifica che il sistema permetta la modifica dell'indirizzo e-mail del destinatario. & RF84-OP & NI \\
+    \hline
+    TS-F-085 & Verifica che il sistema permetta la modifica del codice fiscale del destinatario. & RF85-OP & NI \\
+    \hline
+    TS-F-086 & Verifica che il sistema permetta la modifica della matricola del dipendente. & RF86-OP & NI \\
+    \hline
+    TS-F-087 & Verifica che il sistema notifichi il Consulente del lavoro in caso di formato e-mail non valido durante la modifica dei metadati. & RF87-OP & NI \\
+    \hline
+    TS-F-088 & Verifica che il sistema notifichi il Consulente del lavoro in caso di codice fiscale non valido durante la modifica dei metadati. & RF88-OP & NI \\
+    \hline
+    TS-F-089 & Verifica che il sistema generi automaticamente il contenuto del messaggio di invio per il documento da spedire. & RF89-OB & NI \\
+    \hline
+    TS-F-090 & Verifica che il sistema visualizzi il destinatario del messaggio di invio generato automaticamente. & RF90-OB & NI \\
+    \hline
+    TS-F-091 & Verifica che il sistema visualizzi l'oggetto del messaggio di invio generato automaticamente. & RF91-OB & NI \\
+    \hline
+    TS-F-092 & Verifica che il sistema visualizzi il testo del messaggio di invio generato automaticamente. & RF92-OB & NI \\
+    \hline
+    TS-F-093 & Verifica che il sistema permetta la conferma e l'effettivo invio del messaggio al destinatario. & RF93-OB & NI \\
+    \hline
+    TS-F-094 & Verifica che il sistema permetta al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & RF94-OB & NI \\
+    \hline
+    TS-F-095 & Verifica che il sistema permetta la modifica del destinatario del messaggio di invio. & RF95-OB & NI \\
+    \hline
+    TS-F-096 & Verifica che il sistema permetta la modifica dell'oggetto del messaggio di invio. & RF96-OB & NI \\
+    \hline
+    TS-F-097 & Verifica che il sistema permetta la modifica del testo del messaggio di invio. & RF97-OB & NI \\
+    \hline
+    TS-F-098 & Verifica che il sistema fornisca all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & RF98-OB & NI \\
+    \hline
+    TS-F-099 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot il numero totale di documenti analizzati. & RF99-OB & NI \\
+    \hline
+    TS-F-100 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & RF100-OB & NI \\
+    \hline
+    TS-F-101 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & RF101-OB & NI \\
+    \hline
+    TS-F-102 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & RF102-OB & NI \\
+    \hline
+    TS-F-103 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & RF103-OB & NI \\
+    \hline
+    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di qualità}} \\
+    \hline
+    TS-Q-001 & Verifica che l'Analisi dei Requisiti sia completa di casi d'uso modellati tramite UML. & RQ1-OB & NI \\
+    \hline
+    TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle Norme di Progetto adottate dal gruppo. & RQ2-OB & NI \\
+    \hline
+    TS-Q-003 & Verifica che il prodotto superi tutti i test automatizzati con una copertura del codice non inferiore all'80\%. & RQ3-OB & NI \\
+    \hline
+    TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle Norme di Progetto. & RQ4-OB & NI \\
+    \hline
+    TS-Q-005 & Verifica che il sorgente sia gestito tramite un sistema di versionamento con istruzioni di setup incluse nel repository. & RQ5-OB & NI \\
+    \hline
+    TS-Q-006 & Verifica che il manuale utente del prodotto sia prodotto e aggiornato. & RQ6-OB & NI \\
+    \hline
+    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di vincolo}} \\
+    \hline
+    TS-V-001 & Verifica che il codice sorgente sia versionato tramite Git su un repository condiviso. & RVC1-OB & NI \\
+    \hline
+    TS-V-002 & Verifica che il codice sorgente rispetti le regole di formattazione definite da Laravel Pint. & RVC2-OB & NI \\
+    \hline
+    TS-V-003 & Verifica che la suite di test automatizzati sia scritta con il framework Pest. & RVC3-OB & NI \\
+    \hline
+    TS-V-004 & Verifica che il backend sia sviluppato con il framework Laravel 12 su PHP 8.4. & RVC4-OB & NI \\
+    \hline
+    TS-V-005 & Verifica che il database relazionale del sistema sia PostgreSQL. & RVC5-OB & NI \\
+    \hline
+    TS-V-006 & Verifica che le code asincrone e la gestione dei job in background utilizzino Redis. & RVC6-OB & NI \\
+    \hline
+    TS-V-007 & Verifica che il frontend delle interfacce utente sia realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & RVC7-OB & NI \\
+    \hline
+    TS-V-008 & Verifica che l'ambiente di sviluppo e di esecuzione del sistema sia containerizzato tramite Docker e orchestrato con Docker Compose. & RVC8-OB & NI \\
+    \hline
+    TS-V-009 & Verifica che il web server dell'applicazione sia Nginx. & RVC9-OB & NI \\
+    \hline
+    TS-V-010 & Verifica che lo storage dei file caricati nel sistema utilizzi MinIO, servizio compatibile con le API Amazon S3. & RVC10-OB & NI \\
+    \hline
+    TS-V-011 & Verifica che i modelli di intelligenza artificiale generativa possano essere erogati tramite Amazon Bedrock. & RVC11-OP & NI \\
+    \hline
+    TS-V-012 & Verifica che il sistema superi i controlli di accessibilità automatizzati tramite pa11y e axe sulle interfacce principali. & RVC12-OB & NI \\
+    \hline
+    TS-V-013 & Verifica che il sistema sia fruibile sui principali browser moderni evergreen nelle ultime due versioni stabili. & RVC13-OB & NI \\
+    \hline
+    TS-V-014 & Verifica che l'ambiente di esecuzione sia containerizzato con Docker Compose con lo stack completo richiesto. & RVC14-OB & NI \\
+    \hline
+    TS-V-015 & Verifica che la configurazione minima del server rispetti i requisiti di 2 vCPU, 4 GB di RAM e 10 GB di spazio disco. & RVC15-OB & NI \\
+    \hline
+    TS-V-016 & Verifica che l'utilizzo delle funzionalità AI richieda credenziali AWS valide e accesso outbound ad Amazon Bedrock. & RVC16-OB & NI \\
+    \hline
+\end{longtable}
+
+\subsection{Tracciamento}
+La tabella seguente riporta in forma compatta la corrispondenza bidirezionale tra i test di sistema e i requisiti coperti, raggruppati per tipologia.
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.1}
+\rowcolors{2}{gray!8}{white}
+\begin{longtable}{|p{2.5cm}|p{2.2cm}|p{2.5cm}|p{2.2cm}|}
+    \caption{Tracciamento test di sistema -- requisiti} \label{tab:tracciamento-ts} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice test} & \textbf{Requisito} & \textbf{Codice test} & \textbf{Requisito} \\
+    \hline
+    \endfirsthead
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice test} & \textbf{Requisito} & \textbf{Codice test} & \textbf{Requisito} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Funzionali}} \\
+    \hline
+    TS-F-001 & RF1-OB & TS-F-002 & RF2-OB \\
+    \hline
+    TS-F-003 & RF3-OB & TS-F-004 & RF4-OP \\
+    \hline
+    TS-F-005 & RF5-OB & TS-F-006 & RF6-OB \\
+    \hline
+    TS-F-007 & RF7-OB & TS-F-008 & RF8-OB \\
+    \hline
+    TS-F-009 & RF9-OB & TS-F-010 & RF10-OB \\
+    \hline
+    TS-F-011 & RF11-OB & TS-F-012 & RF12-OB \\
+    \hline
+    TS-F-013 & RF13-OB & TS-F-014 & RF14-OB \\
+    \hline
+    TS-F-015 & RF15-OB & TS-F-016 & RF16-OB \\
+    \hline
+    TS-F-017 & RF17-OB & TS-F-018 & RF18-OB \\
+    \hline
+    TS-F-019 & RF19-OB & TS-F-020 & RF20-OP \\
+    \hline
+    TS-F-021 & RF21-OB & TS-F-022 & RF22-OB \\
+    \hline
+    TS-F-023 & RF23-OB & TS-F-024 & RF24-OB \\
+    \hline
+    TS-F-025 & RF25-OB & TS-F-026 & RF26-OP \\
+    \hline
+    TS-F-027 & RF27-OB & TS-F-028 & RF28-OB \\
+    \hline
+    TS-F-029 & RF29-OB & TS-F-030 & RF30-OB \\
+    \hline
+    TS-F-031 & RF31-OB & TS-F-032 & RF32-OB \\
+    \hline
+    TS-F-033 & RF33-OP & TS-F-034 & RF34-OB \\
+    \hline
+    TS-F-035 & RF35-OB & TS-F-036 & RF36-OB \\
+    \hline
+    TS-F-037 & RF37-OB & TS-F-038 & RF38-OB \\
+    \hline
+    TS-F-039 & RF39-OB & TS-F-040 & RF40-OB \\
+    \hline
+    TS-F-041 & RF41-OB & TS-F-042 & RF42-OB \\
+    \hline
+    TS-F-043 & RF43-OB & TS-F-044 & RF44-OB \\
+    \hline
+    TS-F-045 & RF45-OB & TS-F-046 & RF46-OB \\
+    \hline
+    TS-F-047 & RF47-OB & TS-F-048 & RF48-OB \\
+    \hline
+    TS-F-049 & RF49-OB & TS-F-050 & RF50-OB \\
+    \hline
+    TS-F-051 & RF51-OB & TS-F-052 & RF52-OB \\
+    \hline
+    TS-F-053 & RF53-OB & TS-F-054 & RF54-OB \\
+    \hline
+    TS-F-055 & RF55-OB & TS-F-056 & RF56-OB \\
+    \hline
+    TS-F-057 & RF57-OB & TS-F-058 & RF58-OB \\
+    \hline
+    TS-F-059 & RF59-OB & TS-F-060 & RF60-OB \\
+    \hline
+    TS-F-061 & RF61-OB & TS-F-062 & RF62-OB \\
+    \hline
+    TS-F-063 & RF63-OB & TS-F-064 & RF64-OB \\
+    \hline
+    TS-F-065 & RF65-OB & TS-F-066 & RF66-OB \\
+    \hline
+    TS-F-067 & RF67-OB & TS-F-068 & RF68-OP \\
+    \hline
+    TS-F-069 & RF69-OP & TS-F-070 & RF70-OP \\
+    \hline
+    TS-F-071 & RF71-OP & TS-F-072 & RF72-OB \\
+    \hline
+    TS-F-073 & RF73-OB & TS-F-074 & RF74-OB \\
+    \hline
+    TS-F-075 & RF75-OB & TS-F-076 & RF76-OB \\
+    \hline
+    TS-F-077 & RF77-OB & TS-F-078 & RF78-OB \\
+    \hline
+    TS-F-079 & RF79-OB & TS-F-080 & RF80-OB \\
+    \hline
+    TS-F-081 & RF81-OB & TS-F-082 & RF82-OB \\
+    \hline
+    TS-F-083 & RF83-OB & TS-F-084 & RF84-OP \\
+    \hline
+    TS-F-085 & RF85-OP & TS-F-086 & RF86-OP \\
+    \hline
+    TS-F-087 & RF87-OP & TS-F-088 & RF88-OP \\
+    \hline
+    TS-F-089 & RF89-OB & TS-F-090 & RF90-OB \\
+    \hline
+    TS-F-091 & RF91-OB & TS-F-092 & RF92-OB \\
+    \hline
+    TS-F-093 & RF93-OB & TS-F-094 & RF94-OB \\
+    \hline
+    TS-F-095 & RF95-OB & TS-F-096 & RF96-OB \\
+    \hline
+    TS-F-097 & RF97-OB & TS-F-098 & RF98-OB \\
+    \hline
+    TS-F-099 & RF99-OB & TS-F-100 & RF100-OB \\
+    \hline
+    TS-F-101 & RF101-OB & TS-F-102 & RF102-OB \\
+    \hline
+    TS-F-103 & RF103-OB & & \\
+    \hline
+    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Qualità}} \\
+    \hline
+    TS-Q-001 & RQ1-OB & TS-Q-002 & RQ2-OB \\
+    \hline
+    TS-Q-003 & RQ3-OB & TS-Q-004 & RQ4-OB \\
+    \hline
+    TS-Q-005 & RQ5-OB & TS-Q-006 & RQ6-OB \\
+    \hline
+    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Vincolo}} \\
+    \hline
+    TS-V-001 & RVC1-OB & TS-V-002 & RVC2-OB \\
+    \hline
+    TS-V-003 & RVC3-OB & TS-V-004 & RVC4-OB \\
+    \hline
+    TS-V-005 & RVC5-OB & TS-V-006 & RVC6-OB \\
+    \hline
+    TS-V-007 & RVC7-OB & TS-V-008 & RVC8-OB \\
+    \hline
+    TS-V-009 & RVC9-OB & TS-V-010 & RVC10-OB \\
+    \hline
+    TS-V-011 & RVC11-OP & TS-V-012 & RVC12-OB \\
+    \hline
+    TS-V-013 & RVC13-OB & TS-V-014 & RVC14-OB \\
+    \hline
+    TS-V-015 & RVC15-OB & TS-V-016 & RVC16-OB \\
+    \hline
+\end{longtable}
+}
+
+\subsection{Test di accettazione}
+I test di accettazione verificano che il sistema soddisfi i requisiti utente relativi al capitolato d'appalto. Ogni test è associato al caso d'uso di riferimento.
+
+\renewcommand{\arraystretch}{1.15}
+\rowcolors{2}{gray!8}{white}
+\begin{longtable}{|p{2.2cm}|p{9.5cm}|p{2.3cm}|p{1.5cm}|}
+    \caption{Test di accettazione} \label{tab:ta} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \hline
+    \endfirsthead
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    TA-001 & Verifica che il sistema permetta al Redattore di configurare i parametri e avviare la generazione di un contenuto tramite AI Assistant. & UC-1 & NI \\
+    \hline
+    TA-002 & Verifica che il sistema visualizzi l'anteprima della bozza e permetta revisioni manuali, rigenerazione e scarto. & UC-2 & NI \\
+    \hline
+    TA-003 & Verifica che il sistema permetta la finalizzazione del documento con le opzioni di salvataggio in bozza, esportazione PDF e inoltro. & UC-3 & NI \\
+    \hline
+    TA-004 & Verifica che il sistema fornisca una libreria personale dei prompt con storico delle generazioni, ricerca, filtraggio e riutilizzo. & UC-4 & NI \\
+    \hline
+    TA-005 & Verifica che il sistema permetta l'inserimento e l'invio di una valutazione qualitativa con rating numerico sulla bozza generata. & UC-5 & NI \\
+    \hline
+    TA-006 & Verifica che il sistema esponga all'Analista dati la dashboard dell'AI Assistant con panoramica, statistiche di utilizzo e rating medio. & UC-6 & NI \\
+    \hline
+    TA-007 & Verifica che il sistema permetta al Consulente del lavoro di caricare documenti o lotti nel repository, con gestione di duplicati e formati non validi. & UC-7 & NI \\
+    \hline
+    TA-008 & Verifica che il sistema classifichi automaticamente i documenti caricati e popoli i metadati tramite AI Analyst. & UC-8 & NI \\
+    \hline
+    TA-009 & Verifica che il sistema permetta la consultazione e il filtraggio dello storico dei documenti analizzati con criteri multipli. & UC-9 & NI \\
+    \hline
+    TA-010 & Verifica che il sistema visualizzi i dettagli completi di un documento dallo storico, inclusa la versione splittata e i metadati associati. & UC-15 & NI \\
+    \hline
+    TA-011 & Verifica che il sistema permetta la modifica dei metadati di un documento e il relativo aggiornamento del livello di confidenza. & UC-16 & NI \\
+    \hline
+    TA-012 & Verifica che il sistema generi automaticamente il messaggio di invio, permetta la modifica del contenuto e la spedizione al destinatario. & UC-17, UC-18 & NI \\
+    \hline
+    TA-013 & Verifica che il sistema esponga all'Analista dati la dashboard del Co-Pilot con metriche di monitoraggio dell'analisi documentale. & UC-19 & NI \\
+    \hline
+\end{longtable}
+
+
+\end{document}
