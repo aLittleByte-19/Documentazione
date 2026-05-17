@@ -12,6 +12,9 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath}
 \usepackage{longtable}
+\usepackage{eurosym}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
 \newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
@@ -83,7 +86,8 @@
             Redattori   & Eleonora Bellet, Diego Belluz \\
             Verificatori& Leonardo Soligo, Angelica Gastaldello\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 16/05/2026 \\
+            Versione    & 0.5.0 \\
+            Data        & 17/05/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -107,11 +111,33 @@
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline
-        0.1.0 & 16/05/2026 & Prima stesura e completamento riferimenti & Eleonora Bellet, Diego Belluz & Leonardo Soligo, Angelica Gastaldello & - \\
+        0.5.0 & 17/05/2026 & Aggiunta sezione 5 - Cruscotto di qualità & - & - & - \\
+        \hline
+        0.4.3 & 15/05/2026 & Test di accettazione e tabelle di tracciamento & - & - & - \\
+        \hline
+        0.4.2 & 14/05/2026 & Test di sistema - qualità e vincolo & - & - & - \\
+        \hline
+        0.4.1 & 13/05/2026 & Test di sistema - funzionali & - & - & - \\
+        \hline
+        0.4.0 & 12/05/2026 & Aggiunta sezione 4 - Metodi di testing & - & - & - \\
+        \hline
+        0.3.2 & 09/05/2026 & Correzioni soglie metriche MPC e MPD & - & - & - \\
+        \hline
+        0.3.1 & 08/05/2026 & Aggiunta metriche MPD per usabilità, mantenibilità e portabilità & - & - & - \\
+        \hline
+        0.3.0 & 07/05/2026 & Aggiunta sezione 3 - Qualità di prodotto & - & - & - \\
+        \hline
+        0.2.1 & 05/05/2026 & Aggiunta metriche MPC per processi organizzativi & - & - & - \\
+        \hline
+        0.2.0 & 03/05/2026 & Aggiunta sezione 2 - Qualità di processo & - & - & - \\
+        \hline
+        0.1.1 & 01/05/2026 & Completamento riferimenti normativi e informativi & - & - & - \\
+        \hline
+        0.1.0 & 29/04/2026 & Prima stesura del documento & - & - & - \\
         \hline
     \end{tabularx}
     }
-    
+
 \end{center}
 \newpage
 
@@ -294,8 +320,8 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
         MPC-TE & Time Efficiency & $\geq 50\%$ & $100\%$ \\
-        MPC13 & Percentuale Rischi Inattesi & $\leq 20\%$ & $0\%$ \\
-        MPC14 & Labor Efficiency & $\geq 70\%$ & $\geq 100\%$ \\
+        MPC-PRI & Percentuale Rischi Inattesi & $\leq 20\%$ & $0\%$ \\
+        MPC-LE & Labor Efficiency & $\geq 70\%$ & $\geq 100\%$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della gestione dei processi.}
@@ -335,8 +361,8 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPD05 & Branch Coverage & $\geq 70\%$ & $\geq 85\%$ \\
-        MPD06 & Defect Density & $\leq 3$ / KLOC & $\leq 1$ / KLOC \\
+        MPD04 & Branch Coverage & $\geq 70\%$ & $\geq 85\%$ \\
+        MPD05 & Defect Density & $\leq 3$ / KLOC & $\leq 1$ / KLOC \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dell'affidabilità.}
@@ -352,10 +378,10 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPD07 & Latenza interfaccia utente & $\leq 2$ sec & $\leq 0,5$ sec \\
-        MPD08 & Latenza generazione testo AI Assistant & $\leq 5$ sec & $\leq 3$ sec \\
-        MPD09 & Latenza generazione immagine AI Assistant & $\leq 10$ sec & $\leq 5$ sec \\
-        MPD10 & Latenza analisi documentale AI Co-Pilot & $\leq 10$ sec & $\leq 5$ sec \\
+        MPD06 & Latenza interfaccia utente & $\leq 2$ sec & $\leq 0,5$ sec \\
+        MPD07 & Latenza generazione testo AI Assistant & $\leq 5$ sec & $\leq 3$ sec \\
+        MPD08 & Latenza generazione immagine AI Assistant & $\leq 10$ sec & $\leq 5$ sec \\
+        MPD09 & Latenza analisi documentale AI Co-Pilot & $\leq 10$ sec & $\leq 5$ sec \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dell'efficienza.}
@@ -371,8 +397,8 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPD11 & Profondità Massima di Navigazione & $\leq 5$ livelli & $\leq 3$ livelli \\
-        MPD12 & Learning Time (funzioni principali) & $\leq 30$ min & $\leq 15$ min \\
+        MPD10 & Profondità Massima di Navigazione & $\leq 5$ livelli & $\leq 3$ livelli \\
+        MPD11 & Learning Time (funzioni principali) & $\leq 30$ min & $\leq 15$ min \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dell'usabilità.}
@@ -388,9 +414,9 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPD13 & Code Smell & $\leq 5$ & $0$ \\
-        MPD14 & Coefficient of Coupling & $\leq 0{,}7$ & $\leq 0{,}4$ \\
-        MPD15 & Cyclomatic Complexity (per metodo) & $\leq 15$ & $\leq 10$ \\
+        MPD12 & Code Smell & $\leq 5$ & $0$ \\
+        MPD13 & Coefficient of Coupling & $\leq 0{,}7$ & $\leq 0{,}4$ \\
+        MPD14 & Cyclomatic Complexity (per metodo) & $\leq 15$ & $\leq 10$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della mantenibilità.}
@@ -406,7 +432,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPD16 & Compatibilità Cross-Browser & $\geq 80\%$ & $100\%$ \\
+        MPD15 & Compatibilità Cross-Browser & $\geq 80\%$ & $100\%$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della portabilità.}
@@ -712,6 +738,8 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-Q-006 & Verifica che il manuale utente del prodotto sia prodotto e aggiornato. & RQ6-OB & NI \\
     \hline
+    TS-Q-007 & Verifica tramite sessione di user testing che gli utenti siano in grado di apprendere le funzionalità principali del sistema in meno di 30 minuti. & MPD11 & NI \\
+    \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di vincolo}} \\
     \hline
     TS-V-001 & Verifica che il codice sorgente sia versionato tramite Git su un repository condiviso. & RVC1-OB & NI \\
@@ -748,8 +776,91 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
 \end{longtable}
 
+\subsection{Test di accettazione}
+I test di accettazione verificano che il sistema soddisfi i requisiti utente relativi al capitolato d'appalto. Ogni test è associato al caso d'uso di riferimento.
+
+\renewcommand{\arraystretch}{1.15}
+\rowcolors{2}{gray!8}{white}
+\begin{longtable}{|p{2.2cm}|p{9.5cm}|p{2.3cm}|p{1.5cm}|}
+    \caption{Test di accettazione} \label{tab:ta} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \hline
+    \endfirsthead
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    TA-001 & Verifica che il sistema permetta al Redattore di configurare completamente i parametri del prompt (tono, stile, lunghezza) e avviare la generazione AI con successo. & UC-1 & NI \\
+    \hline
+    TA-002 & Verifica che il sistema notifichi il Redattore qualora tenti di avviare la generazione con il campo prompt assente o insufficiente. & UC-1 & NI \\
+    \hline
+    TA-003 & Verifica che il sistema visualizzi correttamente l'anteprima della bozza generata con titolo, testo e immagine di copertina. & UC-2 & NI \\
+    \hline
+    TA-004 & Verifica che il sistema permetta al Redattore di modificare manualmente il titolo e il testo della bozza e di visualizzare il contenuto aggiornato. & UC-2 & NI \\
+    \hline
+    TA-005 & Verifica che il sistema permetta al Redattore di rigenerare la bozza mantenendo la configurazione del prompt corrente. & UC-2 & NI \\
+    \hline
+    TA-006 & Verifica che il sistema permetta al Redattore di eliminare la bozza generata corrente. & UC-2 & NI \\
+    \hline
+    TA-007 & Verifica che il sistema permetta il salvataggio del documento finalizzato come bozza nello storico. & UC-3 & NI \\
+    \hline
+    TA-008 & Verifica che il sistema permetta l'esportazione del documento finalizzato in formato PDF, con anteprima pre-esportazione. & UC-3 & NI \\
+    \hline
+    TA-009 & Verifica che il sistema permetta l'inoltro del documento finalizzato via e-mail e notifichi il Redattore in caso di indirizzo non valido. & UC-3 & NI \\
+    \hline
+    TA-010 & Verifica che il sistema visualizzi la libreria personale con lo storico delle generazioni e i prompt salvati, con possibilità di eliminazione. & UC-4 & NI \\
+    \hline
+    TA-011 & Verifica che il sistema permetta la ricerca, il filtraggio e il riutilizzo di una configurazione prompt dalla libreria personale. & UC-4 & NI \\
+    \hline
+    TA-012 & Verifica che il sistema permetta al Redattore di inserire e inviare una valutazione qualitativa con rating numerico sulla bozza generata. & UC-5 & NI \\
+    \hline
+    TA-013 & Verifica che il sistema notifichi il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & UC-5 & NI \\
+    \hline
+    TA-014 & Verifica che il sistema esponga all'Analista dati la dashboard AI Assistant con panoramica dell'attività complessiva e statistiche di utilizzo. & UC-6 & NI \\
+    \hline
+    TA-015 & Verifica che il sistema visualizzi nella dashboard AI Assistant il rating medio delle bozze e permetta la consultazione dei feedback testuali. & UC-6 & NI \\
+    \hline
+    TA-016 & Verifica che il sistema permetta al Consulente del lavoro di caricare un singolo documento nel repository con classificazione automatica tramite AI Analyst. & UC-7, UC-8 & NI \\
+    \hline
+    TA-017 & Verifica che il sistema permetta l'upload di un lotto di documenti e rilevi i duplicati richiedendo conferma al Consulente del lavoro. & UC-7 & NI \\
+    \hline
+    TA-018 & Verifica che il sistema rilevi un file in formato non supportato durante l'upload e notifichi il Consulente del lavoro. & UC-7 & NI \\
+    \hline
+    TA-019 & Verifica che il sistema visualizzi al Consulente del lavoro lo storico dei documenti analizzati e notifichi in caso di assenza di risultati. & UC-9, UC-9.E1 & NI \\
+    \hline
+    TA-020 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la combinazione di più criteri contemporaneamente. & UC-10 & NI \\
+    \hline
+    TA-021 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la barra di ricerca testuale. & UC-11 & NI \\
+    \hline
+    TA-022 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & UC-12 & NI \\
+    \hline
+    TA-023 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & UC-13 & NI \\
+    \hline
+    TA-024 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & UC-14 & NI \\
+    \hline
+    TA-025 & Verifica che il sistema visualizzi i dettagli completi di un documento dallo storico, inclusi i metadati associati e la versione splittata del documento originale. & UC-15 & NI \\
+    \hline
+    TA-026 & Verifica che il sistema permetta la modifica dei metadati principali di un documento (nome destinatario, azienda, data, tipologia, descrizione) e il relativo salvataggio. & UC-16 & NI \\
+    \hline
+    TA-027 & Verifica che il sistema notifichi il Consulente del lavoro in caso di e-mail o codice fiscale in formato non valido durante la modifica dei metadati. & UC-16 & NI \\
+    \hline
+    TA-028 & Verifica che il sistema generi automaticamente il messaggio di invio per il documento selezionato e ne visualizzi destinatario, oggetto e testo. & UC-17 & NI \\
+    \hline
+    TA-029 & Verifica che il sistema permetta la modifica del contenuto del messaggio di invio generato e la conferma della spedizione al destinatario. & UC-18 & NI \\
+    \hline
+    TA-030 & Verifica che il sistema esponga all'Analista dati la dashboard Co-Pilot con metriche di monitoraggio dell'analisi documentale (totale documenti, classificazioni corrette, documenti sotto soglia, destinatari riconosciuti, tempo medio di analisi). & UC-19 & NI \\
+    \hline
+\end{longtable}
+
 \subsection{Tracciamento}
-La tabella seguente riporta in forma compatta la corrispondenza bidirezionale tra i test di sistema e i requisiti coperti, raggruppati per tipologia.
+La tabella seguente riporta la corrispondenza tra i test di sistema e i requisiti coperti, e tra i test di accettazione e i casi d'uso di riferimento.
 
 {\footnotesize
 \renewcommand{\arraystretch}{1.1}
@@ -884,6 +995,8 @@ La tabella seguente riporta in forma compatta la corrispondenza bidirezionale tr
     \hline
     TS-Q-005 & RQ5-OB & TS-Q-006 & RQ6-OB \\
     \hline
+    TS-Q-007 & MPD11 & & \\
+    \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Vincolo}} \\
     \hline
     TS-V-001 & RVC1-OB & TS-V-002 & RVC2-OB \\
@@ -905,54 +1018,404 @@ La tabella seguente riporta in forma compatta la corrispondenza bidirezionale tr
 \end{longtable}
 }
 
-\subsection{Test di accettazione}
-I test di accettazione verificano che il sistema soddisfi i requisiti utente relativi al capitolato d'appalto. Ogni test è associato al caso d'uso di riferimento.
-
-\renewcommand{\arraystretch}{1.15}
+{\footnotesize
+\renewcommand{\arraystretch}{1.1}
 \rowcolors{2}{gray!8}{white}
-\begin{longtable}{|p{2.2cm}|p{9.5cm}|p{2.3cm}|p{1.5cm}|}
-    \caption{Test di accettazione} \label{tab:ta} \\
+\begin{longtable}{|p{2.5cm}|p{2.2cm}|p{2.5cm}|p{2.2cm}|}
+    \caption{Tracciamento test di accettazione -- casi d'uso} \label{tab:tracciamento-ta} \\
     \hline
     \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \textbf{Codice test} & \textbf{Caso d'uso} & \textbf{Codice test} & \textbf{Caso d'uso} \\
     \hline
     \endfirsthead
     \hline
     \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    \textbf{Codice test} & \textbf{Caso d'uso} & \textbf{Codice test} & \textbf{Caso d'uso} \\
     \hline
     \endhead
     \hline
     \endfoot
     \hline
     \endlastfoot
-    TA-001 & Verifica che il sistema permetta al Redattore di configurare i parametri e avviare la generazione di un contenuto tramite AI Assistant. & UC-1 & NI \\
+    TA-001 & UC-1 & TA-002 & UC-1 \\
     \hline
-    TA-002 & Verifica che il sistema visualizzi l'anteprima della bozza e permetta revisioni manuali, rigenerazione e scarto. & UC-2 & NI \\
+    TA-003 & UC-2 & TA-004 & UC-2 \\
     \hline
-    TA-003 & Verifica che il sistema permetta la finalizzazione del documento con le opzioni di salvataggio in bozza, esportazione PDF e inoltro. & UC-3 & NI \\
+    TA-005 & UC-2 & TA-006 & UC-2 \\
     \hline
-    TA-004 & Verifica che il sistema fornisca una libreria personale dei prompt con storico delle generazioni, ricerca, filtraggio e riutilizzo. & UC-4 & NI \\
+    TA-007 & UC-3 & TA-008 & UC-3 \\
     \hline
-    TA-005 & Verifica che il sistema permetta l'inserimento e l'invio di una valutazione qualitativa con rating numerico sulla bozza generata. & UC-5 & NI \\
+    TA-009 & UC-3 & TA-010 & UC-4 \\
     \hline
-    TA-006 & Verifica che il sistema esponga all'Analista dati la dashboard dell'AI Assistant con panoramica, statistiche di utilizzo e rating medio. & UC-6 & NI \\
+    TA-011 & UC-4 & TA-012 & UC-5 \\
     \hline
-    TA-007 & Verifica che il sistema permetta al Consulente del lavoro di caricare documenti o lotti nel repository, con gestione di duplicati e formati non validi. & UC-7 & NI \\
+    TA-013 & UC-5 & TA-014 & UC-6 \\
     \hline
-    TA-008 & Verifica che il sistema classifichi automaticamente i documenti caricati e popoli i metadati tramite AI Analyst. & UC-8 & NI \\
+    TA-015 & UC-6 & TA-016 & UC-7, UC-8 \\
     \hline
-    TA-009 & Verifica che il sistema permetta la consultazione e il filtraggio dello storico dei documenti analizzati con criteri multipli. & UC-9 & NI \\
+    TA-017 & UC-7 & TA-018 & UC-7 \\
     \hline
-    TA-010 & Verifica che il sistema visualizzi i dettagli completi di un documento dallo storico, inclusa la versione splittata e i metadati associati. & UC-15 & NI \\
+    TA-019 & UC-9, UC-9.E1 & TA-020 & UC-10 \\
     \hline
-    TA-011 & Verifica che il sistema permetta la modifica dei metadati di un documento e il relativo aggiornamento del livello di confidenza. & UC-16 & NI \\
+    TA-021 & UC-11 & TA-022 & UC-12 \\
     \hline
-    TA-012 & Verifica che il sistema generi automaticamente il messaggio di invio, permetta la modifica del contenuto e la spedizione al destinatario. & UC-17, UC-18 & NI \\
+    TA-023 & UC-13 & TA-024 & UC-14 \\
     \hline
-    TA-013 & Verifica che il sistema esponga all'Analista dati la dashboard del Co-Pilot con metriche di monitoraggio dell'analisi documentale. & UC-19 & NI \\
+    TA-025 & UC-15 & TA-026 & UC-16 \\
+    \hline
+    TA-027 & UC-16 & TA-028 & UC-17 \\
+    \hline
+    TA-029 & UC-18 & TA-030 & UC-19 \\
     \hline
 \end{longtable}
+}
 
+
+\section{Cruscotto di qualità}
+
+Il cruscotto di qualità raccoglie i dati misurati nelle diverse iterazioni del progetto, mettendoli in relazione con le soglie accettabili e ottimali definite nella sezione \emph{Qualità di processo}. L'obiettivo è fornire una visione sintetica e aggiornata dello stato qualitativo del prodotto e dei processi, permettendo di identificare tempestivamente eventuali aree di miglioramento.
+
+Le misurazioni si riferiscono ai quattro sprint del periodo RTB:
+
+\begin{itemize}
+    \item \textbf{Sprint 1 (S1):} 30/03/2026 – 12/04/2026
+    \item \textbf{Sprint 2 (S2):} 13/04/2026 – 26/04/2026
+    \item \textbf{Sprint 3 (S3):} 27/04/2026 – 10/05/2026
+    \item \textbf{Sprint 4 (S4):} 11/05/2026 – 24/05/2026
+\end{itemize}
+
+Il Budget At Completion (BAC) dell'intero progetto è pari a \EUR{12.575,00}.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Processi primari — Fornitura}
+
+\subsubsection{MPC-EV e MPC-PV — Earned Value e Planned Value}
+
+Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare entro ciascuno sprint, estratto dai preventivi del Piano di Progetto. L'Earned Value (EV) rappresenta il valore del lavoro effettivamente completato. Nella fase RTB si assume che gli obiettivi di ogni sprint siano stati completamente raggiunti (come risulta dalle retrospettive nel Piano di Progetto), pertanto $\text{EV} = \text{PV}$ per tutti gli sprint.
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|r|r|r|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Sprint} & \textbf{PV (\euro)} & \textbf{EV (\euro)} & \textbf{PV cum.\ (\euro)} & \textbf{EV cum.\ (\euro)} \\
+    \hline
+    S1 & 670,00  & 670,00  & 670,00  & 670,00  \\
+    S2 & 565,00  & 565,00  & 1.235,00 & 1.235,00 \\
+    S3 & 750,00  & 750,00  & 1.985,00 & 1.985,00 \\
+    S4 & 850,00  & 850,00  & 2.835,00 & 2.835,00 \\
+    \hline
+\end{tabular}
+\caption{Andamento MPC-EV e MPC-PV per sprint (fase RTB)}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-EV e MPC-PV da inserire]
+\centering Inserire qui il grafico a linee dell'andamento di EV e PV cumulativi per sprint.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} Entrambi i valori sono $\geq 0$ per tutti gli sprint (\emph{soglia accettabile} raggiunta). Il PV cumulativo è $\leq \text{BAC} = \EUR{12.575,00}$ (\emph{soglia ottimale per MPC-PV} raggiunta); l'EV cumulativo è $\leq \text{EAC}$ (\emph{soglia ottimale per MPC-EV} raggiunta).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-AC — Actual Cost}
+
+L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro completato in ciascuno sprint, ricavato dai consuntivi del Piano di Progetto.
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|r|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Sprint} & \textbf{AC (\euro)} & \textbf{AC cumulativo (\euro)} \\
+    \hline
+    S1 & 705,00  & 705,00  \\
+    S2 & 625,00  & 1.330,00 \\
+    S3 & 830,00  & 2.160,00 \\
+    S4 & 975,00  & 3.135,00 \\
+    \hline
+\end{tabular}
+\caption{Andamento MPC-AC per sprint (fase RTB)}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-AC da inserire]
+\centering Inserire qui il grafico a linee dell'andamento dell'AC cumulativo per sprint.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} I costi effettivi sono positivi in tutti gli sprint (\emph{soglia accettabile} raggiunta). Rispetto al PV si osserva un lieve sforamento in ogni sprint, indicando costi leggermente superiori a quelli pianificati.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-CPI e MPC-SPI — Cost Performance Index e Schedule Performance Index}
+
+Il Cost Performance Index misura l'efficienza dei costi:
+\[
+  \text{CPI} = \frac{\text{EV}_\text{cum}}{\text{AC}_\text{cum}}
+\]
+Lo Schedule Performance Index misura l'efficienza del tempo:
+\[
+  \text{SPI} = \frac{\text{EV}_\text{cum}}{\text{PV}_\text{cum}}
+\]
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|r|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Sprint} & \textbf{CPI} & \textbf{SPI} \\
+    \hline
+    S1 & 0,950 & 1,000 \\
+    S2 & 0,929 & 1,000 \\
+    S3 & 0,919 & 1,000 \\
+    S4 & 0,904 & 1,000 \\
+    \hline
+\end{tabular}
+\caption{Andamento MPC-CPI e MPC-SPI per sprint (fase RTB)}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-CPI e MPC-SPI da inserire]
+\centering Inserire qui il grafico a linee dell'andamento di CPI e SPI per sprint.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} Il CPI risulta in lieve calo progressivo ma rimane $\geq 0{,}9$ (\emph{soglia accettabile} raggiunta) per tutti gli sprint. Il valore a S4 di 0,904 indica che per ogni euro pianificato si è sostenuto un costo di circa \EUR{1,11}. L'SPI pari a 1,000 in tutti gli sprint conferma il pieno rispetto delle scadenze pianificate (\emph{soglia ottimale} raggiunta).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-EAC e MPC-ETC — Estimated At Completion e Estimate To Complete}
+
+L'Estimated At Completion stima il costo totale del progetto proiettando la performance corrente:
+\[
+  \text{EAC} = \frac{\text{BAC}}{\text{CPI}}
+\]
+L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento:
+\[
+  \text{ETC} = \text{EAC} - \text{AC}_\text{cum}
+\]
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|r|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Sprint} & \textbf{EAC (\euro)} & \textbf{ETC (\euro)} \\
+    \hline
+    S1 & 13.231,00 & 12.526,00 \\
+    S2 & 13.544,00 & 12.214,00 \\
+    S3 & 13.683,00 & 11.523,00 \\
+    S4 & 13.906,00 & 10.771,00 \\
+    \hline
+\end{tabular}
+\caption{Andamento MPC-EAC e MPC-ETC per sprint (fase RTB)}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-EAC e MPC-ETC da inserire]
+\centering Inserire qui il grafico a linee dell'andamento di EAC ed ETC per sprint, con riferimento al BAC.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} L'EAC stimato supera il BAC di \EUR{12.575,00} in tutti gli sprint e si attesta a \EUR{13.906,00} a S4, con uno scostamento del $+10{,}6\%$ rispetto al BAC — superiore alla soglia accettabile di $\pm 5\%$ (\emph{soglia non raggiunta} per MPC-EAC). L'ETC è positivo per tutti gli sprint (\emph{soglia accettabile} raggiunta per MPC-ETC). Il trend crescente dell'EAC richiede un monitoraggio rigoroso dei costi nelle fasi successive.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-TEAC — Time Estimate At Completion}
+
+Il Time Estimate At Completion stima la durata totale del progetto a partire dalla performance di avanzamento. Calcolato come $\text{TEAC} = \text{Durata pianificata} / \text{SPI}$: poiché $\text{SPI} = 1{,}000$ per tutti gli sprint, il progetto procede esattamente in linea con il calendario.
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|r|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Sprint} & \textbf{SPI} & \textbf{TEAC (settimane)} \\
+    \hline
+    S1 & 1,000 & 8,0 \\
+    S2 & 1,000 & 8,0 \\
+    S3 & 1,000 & 8,0 \\
+    S4 & 1,000 & 8,0 \\
+    \hline
+\end{tabular}
+\caption{Andamento MPC-TEAC per sprint (fase RTB — durata pianificata RTB: 8 settimane)}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-TEAC da inserire]
+\centering Inserire qui il grafico dell'andamento del TEAC per sprint rispetto alla durata pianificata.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} TEAC = durata pianificata (8 settimane) in tutti gli sprint (\emph{soglia ottimale} raggiunta). Il progetto non presenta ritardi di pianificazione nella fase RTB.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Processi primari — Sviluppo}
+
+\subsubsection{MPC-RSI — Requirements Stability Index}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-RSI (Dati non ancora disponibili)]
+Il Requirements Stability Index verrà calcolato al termine della fase RTB confrontando il numero di requisiti aggiunti, modificati o eliminati rispetto alla versione iniziale dell'Analisi dei Requisiti.
+
+\medskip
+\textbf{Formula:} $\displaystyle\text{RSI} = \left(1 - \frac{N_\text{modificati} + N_\text{eliminati} + N_\text{aggiunti}}{N_\text{totali iniziali}}\right) \times 100\%$
+
+\medskip
+\textbf{Soglie:} accettabile $\geq 70\%$, ottimale $= 100\%$.
+\end{tcolorbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Processi di supporto — Documentazione}
+
+\subsubsection{MPC-IG — Indice di Gulpease}
+
+L'Indice di Gulpease misura la leggibilità dei documenti in lingua italiana secondo la formula:
+\[
+  G = 89 - \frac{10 \cdot L}{P} + \frac{300 \cdot F}{P}
+\]
+dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di frasi. Il calcolo è stato effettuato tramite estrazione del testo con \texttt{detex} e script Python.
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|c|c|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Documento} & \textbf{Indice di Gulpease} & \textbf{Soglia accettabile} & \textbf{Esito} \\
+    \hline
+    Analisi dei Requisiti & 59,7 & $\geq 60$ & Borderline \\
+    Norme di Progetto     & 45,9 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    Piano di Progetto     & 47,7 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    Piano di Qualifica    & 55,8 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    \hline
+\end{tabular}
+\caption{Indice di Gulpease dei documenti RTB}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-IG da inserire]
+\centering Inserire qui il grafico a barre dell'Indice di Gulpease per documento, con riferimento alla soglia accettabile.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} I documenti tecnici mostrano punteggi compresi tra 45,9 e 59,7, al di sotto della soglia accettabile di 60 (\emph{soglia non raggiunta}). Questo risultato è strutturalmente atteso: la terminologia tecnica specialistica, gli acronimi e i costrutti formali riducono l'indice di leggibilità nei documenti ingegneristici. Si raccomanda di semplificare ove possibile la struttura delle frasi nelle prossime revisioni.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-CO — Correttezza ortografica}
+
+La verifica è stata condotta tramite estrazione del testo con \texttt{detex} e analisi automatica della correttezza ortografica.
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|r|c|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Documento} & \textbf{Errori ortografici} & \textbf{Esito} \\
+    \hline
+    Analisi dei Requisiti & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    Norme di Progetto     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    Piano di Progetto     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    Piano di Qualifica    & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    \hline
+\end{tabular}
+\caption{Correttezza ortografica dei documenti RTB}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-CO da inserire]
+\centering Inserire qui il grafico a barre degli errori ortografici per documento.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} Tutti i documenti presentano 0 errori ortografici (\emph{soglia ottimale} raggiunta).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Processi di supporto — Verifica}
+
+\subsubsection{MPC-CC e MPC-TSR — Code Coverage e Test Success Rate}
+
+Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono applicabili nella fase RTB in quanto lo sviluppo del codice sorgente non è ancora iniziato. La misurazione di queste metriche è prevista a partire dalla fase PB (Product Baseline), quando saranno disponibili i test automatici e il codice da verificare.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Processi di supporto — Gestione della qualità}
+
+\subsubsection{MPC-QMS — Quality Metrics Satisfied}
+
+Il Quality Metrics Satisfied misura la percentuale di metriche di processo che soddisfano la soglia accettabile nel periodo di riferimento:
+\[
+  \text{QMS} = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%
+\]
+
+La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase RTB (sono escluse le metriche per le quali non sono ancora disponibili i dati: MPC-RSI, MPC-TE, MPC-PRI, MPC-LE, MPC-CC, MPC-TSR).
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{gray!15}{white}
+\begin{tabular}{|l|p{3.5cm}|p{3cm}|c|}
+    \hline
+    \rowcolor{gray!35}
+    \textbf{Metrica} & \textbf{Valore misurato} & \textbf{Soglia accettabile} & \textbf{Esito} \\
+    \hline
+    MPC-EV  & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-PV  & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-AC  & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-CPI & 0,904 (S4)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-SPI & 1,000 (tutti gli sprint) & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-EAC & $+10{,}6\%$ dal BAC (S4) & $\pm 5\%$ dal BAC & \textcolor{red!70!black}{Non soddisfatta} \\
+    MPC-ETC & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-TEAC & 8 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-IG  & 45,9 – 59,7             & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    MPC-CO  & 0 errori                 & 0 errori & \textcolor{green!60!black}{Soddisfatta} \\
+    \hline
+    \rowcolor{gray!25}
+    \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{8 / 10} \\
+    \hline
+    \rowcolor{gray!25}
+    \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{80\%} \\
+    \hline
+\end{tabular}
+\caption{Calcolo MPC-QMS per la fase RTB}
+\end{table}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-QMS da inserire]
+\centering Inserire qui il grafico a barre della percentuale di metriche soddisfatte per sprint.
+\end{tcolorbox}
+
+\noindent\textbf{Valutazione:} Il QMS al termine della fase RTB è pari all'80\%, corrispondente alla \emph{soglia accettabile} ($\geq 80\%$). Le due metriche non soddisfatte richiedono interventi correttivi:
+\begin{itemize}
+    \item \textbf{MPC-EAC:} il costo stimato a completamento supera il BAC del 10,6\%. Nelle fasi successive è necessario un controllo più rigoroso dei costi, con revisione periodica delle stime e delle allocazioni orarie.
+    \item \textbf{MPC-IG:} i documenti tecnici presentano indici di leggibilità al di sotto della soglia di 60. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi ove possibile senza compromettere la precisione tecnica.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Processi organizzativi — Gestione dei processi}
+
+\subsubsection{MPC-TE — Time Efficiency}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-TE (Dati non ancora disponibili)]
+Il Time Efficiency verrà calcolato confrontando le ore produttive effettivamente rendicontate con il totale delle ore disponibili in ciascuno sprint. I dati di dettaglio sulle ore non produttive (assenze, interruzioni non pianificate) non sono stati raccolti sistematicamente nella fase RTB.
+
+\medskip
+\textbf{Formula:} $\displaystyle\text{TE} = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$
+
+\medskip
+\textbf{Soglie:} accettabile $\geq 50\%$, ottimale $= 100\%$.
+\end{tcolorbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-PRI — Percentuale Rischi Inattesi}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-PRI (Dati non ancora disponibili)]
+La Percentuale di Rischi Inattesi verrà calcolata al termine della fase RTB confrontando i rischi effettivamente manifestatisi con quelli identificati nel registro dei rischi del Piano di Progetto.
+
+\medskip
+\textbf{Formula:} $\displaystyle\text{PRI} = \frac{N_\text{rischi inattesi}}{N_\text{rischi totali manifestati}} \times 100\%$
+
+\medskip
+\textbf{Soglie:} accettabile $\leq 20\%$, ottimale $= 0\%$.
+\end{tcolorbox}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{MPC-LE — Labor Efficiency}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-LE (Dati non ancora disponibili)]
+Il Labor Efficiency confronta le ore dedicate ad attività a valore aggiunto con il totale delle ore lavorate. Il calcolo richiede un tracciamento puntuale delle ore per tipologia di attività, che verrà implementato nelle fasi successive al RTB.
+
+\medskip
+\textbf{Formula:} $\displaystyle\text{LE} = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$
+
+\medskip
+\textbf{Soglie:} accettabile $\geq 70\%$, ottimale $\geq 100\%$.
+\end{tcolorbox}
 
 \end{document}
