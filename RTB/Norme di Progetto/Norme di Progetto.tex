@@ -104,6 +104,8 @@
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline 
+        0.13.0 & 18/05/2026 & Aggiunta sezione qualità del software & Diego Belluz & Eleonora Bellet & - \\
+        \hline 
         0.12.0 & 8/05/2026 & Struttura dei diari di bordo & Eleonora Bellet & Diego Belluz & - \\
         \hline
         0.11.2 & 7/05/2026 & Corretti errori di sintassi & Eleonora Bellet & Diego Belluz & - \\
@@ -355,7 +357,7 @@ I Diari di Bordo sono delle diapositive realizzate per gli incontri settimanali 
 Sono documenti brevi che trattano dei seguenti argomenti:
 
 \begin{itemize}
-    \item \textbf{Copertina:} Riporta le informazioni identificative di base, ovvero il logo del team, la data della presentazione, il numero del gruppo e i nomi dei componenti.
+    \item \textbf{Copertina:} Riporta le informazioni identificative di base, ovvero il logo del team, la data della presentatione, il numero del gruppo e i nomi dei componenti.
     
     \item \textbf{Cosa abbiamo fatto:} Un riepilogo sintetico e puntato delle attività concluse nell'ultimo periodo.
     
@@ -663,5 +665,52 @@ Gli incontri interni del gruppo \textit{aLittleByte} sono pianificati in modo me
 I colloqui con l'azienda proponente sono essenziali per garantire il continuo allineamento sugli obiettivi e raccogliere \textit{feedback} sul lavoro svolto.
 Tutte le sedute si tengono in via telematica sfruttando la piattaforma \textbf{Google Meet}. A conclusione di ogni colloquio, il team si occupa di redigere un Verbale Esterno formale che riepiloga puntualmente le tematiche affrontate, le decisioni prese e le future azioni concordate. Tale documento viene infine inoltrato al referente aziendale per un controllo incrociato e, previa conferma di aderenza con quanto discusso, sottoposto alla sua firma per approvazione definitiva.
 
+\section{Qualità del software}
+Con l'espressione ``qualità del software'' si indica la totalità delle proprietà di un'entità che concorrono a soddisfare le necessità degli utenti, siano esse dichiarate esplicitamente o sottintese. Tale valutazione si focalizza su due direttrici fondamentali: il valore del prodotto finito e l'efficacia del processo di realizzazione.
+
+L'eccellenza del risultato finale scaturisce invariabilmente dal valore del percorso produttivo intrapreso. Per garantire un software di alto livello, la strategia di valutazione deve essere programmata con cura e non limitata ad una sola verifica finale: tale approccio favorisce una gestione proattiva basata sul monitoraggio costante, superando la logica reattiva volta alla semplice risoluzione delle anomalie.
+
+L'intero processo di valutazione si articola in quattro fasi principali (definizione preventiva delle metriche, misurazione, valutazione dei dati e accettazione finale).
+
+\subsection{Qualità del prodotto}
+Per definire e misurare la qualità intrinseca del software, lo standard di riferimento adottato è la serie di norme ISO/IEC 25010. Questo standard internazionale organizza la qualità in due diverse categorie:
+\begin{enumerate}
+    \item \textbf{Qualità del Prodotto}, che analizza le seguenti proprietà intrinseche del software:
+    \begin{itemize}
+        \item Adeguatezza funzionale;
+        \item Efficienza prestazionale;
+        \item Compatibilità;
+        \item Usabilità;
+        \item Affidabilità;
+        \item Sicurezza;
+        \item Manutenibilità;
+        \item Portabilità;
+    \end{itemize}
+    \item \textbf{Qualità in Uso}, che valuta le seguenti caratteristiche dal punto di vista dell'utente finale:
+    \begin{itemize}
+        \item Efficacia;
+        \item Efficienza;
+        \item Soddisfazione;
+        \item Libertà da rischi;
+        \item Contesto di copertura.
+    \end{itemize}
+\end{enumerate}
+
+Al fine di ottenerne una misurazione oggettiva, sono state stabilite specifiche metriche di prodotto, le quali trovano puntuale rendicontazione e misurazione all'interno del \textit{Piano di Qualifica}. Tali metriche consentono di analizzare in termini quantitativi elementi determinanti sia del codice sorgente che dell'applicativo finale, tra cui la funzionalità, l'affidabilità, l'efficienza, l'usabilità, la manutenibilità e la portabilità.
+
+\subsection{Qualità del processo}
+Gli standard di riferimento per la qualità del processo sono l'ISO/IEC 9001 e il modello CMMI (\textit{Capability Maturity Model Integration}). Questi standard forniscono le linee guida per la gestione della qualità nei processi di sviluppo, includendo la pianificazione, il controllo e il miglioramento continuo.
+
+Secondo questo standard la qualità del processo si basa su diversi principi fondamentali:
+\begin{itemize}
+    \item \textbf{Responsabilità della leadership:} chi dirige ha il compito di delineare la politica della qualità, fissare i traguardi e assicurarsi che ogni componente del gruppo conosca i propri compiti.
+    \item \textbf{Ottimizzazione delle risorse:} risulta prioritario dotare il team di strumenti idonei (quali IDE o sistemi di controllo versione come Git) e garantire ai collaboratori l'addestramento indispensabile.
+    \item \textbf{Sviluppo dell'output:} il ciclo produttivo esige che la raccolta dei requisiti, il design e la codifica siano fasi monitorate e costantemente verificabili.
+    \item \textbf{Valutazione e perfezionamento:} è vitale osservare con regolarità l'avanzamento dei lavori per scovare possibili margini di crescita e applicare rimedi tempestivi in caso di criticità.
+\end{itemize}
+
+In questo progetto, tale obiettivo viene perseguito attraverso una precisa delineazione di metodologie e strumenti operativi. Il controllo costante dell'avanzamento è garantito da sistemi di tracciamento dei problemi (\textit{issue tracking}) e da incontri periodici formalizzati, supportati da un'analisi rigorosa dei requisiti e da verifiche regolari sugli standard qualitativi dei risultati ottenuti.
+
+Al fine di assicurare un monitoraggio imparziale, il gruppo ha stabilito specifiche metriche di processo, dettagliate all'interno del \textit{Piano di Qualifica}. Tali indicatori permettono di misurare l'efficienza del ciclo di sviluppo, focalizzandosi su variabili critiche quali la puntualità nelle consegne, l'aderenza al budget stabilito, la frequenza di anomalie rilevate, l'estensione dei test e la conformità complessiva ai criteri prefissati.
 
 \end{document}
