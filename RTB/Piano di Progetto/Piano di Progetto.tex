@@ -751,6 +751,39 @@ Verificatore & 15€/h &160h  &2.400€  \\
     \caption{Preventivo Costi - Prima Stesura}
 \end{figure}
 
+\subsection{Ripartizione Oraria per Membro}
+Come già previsto nella dichiarazione degli impegni, al fine di garantire il rispetto del principio di rotazione dei ruoli e assicurare un carico di lavoro uniforme, il team ha definito una matrice di ripartizione oraria. Ciascun componente del gruppo si impegna formalmente a prestare un totale di 90 ore produttive individuali lungo l'intero ciclo di vita del progetto, per un ammontare complessivo di 630 ore lavorative.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{Membro del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+    \hline
+    Angelica Gastaldello & 8 & 7 & 9 & 21 & 22 & 23 & \textbf{90} \\
+    \hline
+    Eleonora Bellet & 8 & 7 & 8 & 20 & 23 & 24 & \textbf{90} \\
+    \hline
+    Alex Oloni & 8 & 8 & 8 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    Diego Belluz & 8 & 7 & 9 & 21 & 23 & 22 & \textbf{90} \\
+    \hline
+    Angela Maule & 8 & 8 & 8 & 21 & 23 & 22 & \textbf{90} \\
+    \hline
+    Leonardo Soligo & 8 & 7 & 9 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    V.Y. Kaneda Fernandes & 8 & 8 & 8 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale Ore Ruolo} & \textbf{56} & \textbf{52} & \textbf{59} & \textbf{143} & \textbf{160} & \textbf{160} & \textbf{630} \\
+    \hline
+    \end{tabularx}
+    \caption{Matrice di ripartizione oraria complessiva per ciascun componente del team}
+    \label{tab:ripartizione_oraria_totale}
+\end{table}
+\newpage
+
 \newpage
 
 \section{Modello di Sviluppo}
@@ -888,29 +921,47 @@ A seguito dell'aggiudicazione del capitolato, le attività del primo Sprint si s
 \begin{center}
 \noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
 \end{center}
+Di seguito vengono dettagliate le singole attività pianificate per l'iterazione, con il relativo confronto tra le ore stimate in sede di Sprint Planning e le ore effettivamente impiegate a consuntivo.
+
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
-    \rowcolors{2}{white}{LimeGreen!15}
-    \begin{tabularx}{\textwidth}{|X c|}
-    \hline \rowcolor{LimeGreen!50}
-        \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato}\\
-        \hline
-        Aggiornamento sito web per la visualizzazione dei documenti & Programmatore\\
-        Stesura Glossario & Analista\\
-        Stesura Norme di Progetto & Amministratore\\
-        Stesura Analisi dei Requisiti & Analista\\
-        Costruzione Mock-up & Progettista\\
-        Redazione verbali interni durante le riunioni & Responsabile\\
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
     \hline
-    \end{tabularx}
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento sito web per visualizzazione doc. & Programmatore & 1 & 1 & Completata \\
+    \hline
+    Inizio stesura Glossario & Analista & 3 & 3 & Completata \\
+    \hline
+    Inizio stesura Analisi dei Requisiti & Analista & 6 & 7 & Completata\\
+    \hline
+    Inizio stesura Norme di Progetto & Amministratore & 6 & 6 & Completata \\
+    \hline
+    Costruzione Mock-up & Progettista & 4 & 5 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & Verificatore & 4 & 3 & Completata \\
+    \hline
+    Redazione verbali interni durante le riunioni & Responsabile & 5 & 5 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{29} & \textbf{30} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 1}
+    \label{tab:task_sprint1}
 \end{table}
 
-\noindent\textbf{Considerazioni (Sprint Review e Retrospective)}\\
-Il team ha rispettato le scadenze e gli obiettivi impostati per il primo periodo di lavoro. La stesura dei documenti sta procedendo a ritmi notevoli. Nella costruzione del mock-up, ci sono stati diversi disguidi organizzativi
-e tecnologici, ma il team è riuscito a risolvere il problema in tempi brevi.
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Avvio efficace delle attività fondanti del progetto, con la configurazione dell'ambiente di lavoro, la prima stesura della documentazione principale (Glossario, Analisi dei Requisiti, Norme di Progetto) e la realizzazione della prima versione del mock-up grafico.
+    \item \textbf{Problematiche Riscontrate:} Lieve rallentamento fisiologico per i ruoli di Analista e Progettista, dovuto alla curva di apprendimento nell'utilizzo dei tool grafici e alla fase di rodaggio nella stesura dei requisiti.
+    \item \textbf{Azioni Correttive:} Maggiore accortezza nelle stime per le attività di Analisi e Progettazione durante i prossimi Sprint Planning; introduzione dell'obbligo di avviso tempestivo al Responsabile in caso di ritardi per consentire una rapida redistribuzione del carico.
+\end{itemize}
 \newpage
-
 
 \subsubsubsection{Secondo Periodo}
 
@@ -933,27 +984,46 @@ Durante il secondo Sprint, l'obiettivo principale del team è stato il consolida
 \begin{center}
 \noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
 \end{center}
+
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
-    \rowcolors{2}{white}{LimeGreen!15}
-    \begin{tabularx}{\textwidth}{|X c|}
-    \hline \rowcolor{LimeGreen!50}
-        \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato}\\
-        \hline
-        Inizio stesura Piano di Progetto & Responsabile\\
-        Aggiornamento Glossario & Analista\\
-        Aggiornamento Norme di Progetto & Amministratore\\
-        Aggiornamento Analisi dei Requisiti & Analista\\
-        Rifinitura Mock-up & Progettista\\
-        Redazione verbali interni e stesura verbale esterno con l'azienda & Responsabile\\
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
     \hline
-    \end{tabularx}
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Inizio stesura Piano di Progetto & Responsabile & 3 & 3 & Completata \\
+    \hline
+    Aggiornamento Glossario & Analista & 3 & 4 & Completata \\
+    \hline
+    Aggiornamento Norme di Progetto & Amministratore & 6 & 5 & Completata \\
+    \hline
+    Aggiornamento Analisi dei Requisiti & Analista & 5 & 6 & Completata \\
+    \hline
+    Rifinitura Mock-up & Progettista & 2 & 2 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & Verificatore & 3 & 5 & Completata \\
+    \hline
+    Redazione verbali interni e verbale esterno & Responsabile & 2 & 2 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{24} & \textbf{27} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 2}
+    \label{tab:task_sprint2}
 \end{table}
 
 
-\noindent\textbf{Considerazioni (Sprint Review e Retrospective)}\\
-Lo Sprint si è concluso con esito positivo, evidenziando criticità trascurabili e una distribuzione dei carichi di lavoro nel complesso equilibrata. Sotto il profilo economico, si è registrata una lieve sottostima delle ore preventivate rispetto ai dati effettivi di consuntivo. Il team si pone l'obiettivo di affinare le metriche di stima e ottimizzare la pianificazione già a partire dal prossimo sprint.
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Ultimazione e presentazione del mock-up grafico all'azienda proponente; buon avanzamento nel consolidamento e nell'allineamento della documentazione per prevenire ambiguità.
+    \item \textbf{Problematiche Riscontrate:} Emersione di richieste per modifiche minori sul mock-up da parte del proponente e incremento imprevisto del carico di lavoro per i ruoli di Analista (estensione casi d'uso) e Verificatore.
+    \item \textbf{Azioni Correttive:} Ottimizzazione della pianificazione interna per riassorbire lo sforzo orario extra e impegno del team nell'affinare le metriche di stima a partire dall'iterazione successiva.
+\end{itemize}
 \newpage
 
 \subsubsubsection{Terzo Periodo}
@@ -971,32 +1041,54 @@ Lo Sprint si è concluso con esito positivo, evidenziando criticità trascurabil
     \end{tabularx}
 \end{table}
 
-Durante il terzo Sprint, il team ha proseguito attivamente con la stesura della documentazione, concentrandosi in particolar modo sul consolidamento dell'\textit{Analisi dei Requisiti} (estensione dei casi d'uso e diagrammazione), sull'ampliamento del \textit{Piano di Progetto} e sull'aggiornamento continuo del \textit{Glossario}. Dal punto di vista tecnico, è stata ultimata la revisione del mock-up per il proponente ed è iniziata la fase di autoformazione sui framework scelti per lo sviluppo (Laravel e Filament).
+Durante il terzo Sprint, il team ha proseguito attivamente con la stesura della documentazione, concentrandosi in particolar modo sul consolidamento dell'\textit{Analisi dei Requisiti} (estensione dei casi d'uso e diagrammazione), sull'ampliamento del \textit{Piano di Progetto} e sull'aggiornamento continuo del \textit{Glossario}. Inoltre, è stata iniziata la stesura del \textit{Piano di Qualifica}. Dal punto di vista tecnico, è stata ultimata la revisione del mock-up per il proponente ed è iniziata la fase di autoformazione sui framework scelti per lo sviluppo (Laravel e Filament).
 
 \begin{center}
 \noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
 \end{center}
+
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
-    \rowcolors{2}{white}{LimeGreen!15}
-    \begin{tabularx}{\textwidth}{|X c|}
-    \hline \rowcolor{LimeGreen!50}
-        \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato}\\
-        \hline
-        Aggiornamento Piano di Progetto & Responsabile\\
-        Aggiornamento Glossario & Analista\\
-        Aggiornamento Norme di Progetto & Amministratore\\
-        Aggiornamento Analisi dei Requisiti & Analista\\
-        Rifinitura Mock-up & Programmatore\\
-        Studio delle tecnologie adottate & Progettista \\
-        Redazione verbali interni e stesura verbale esterno con l'azienda & Responsabile\\
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
     \hline
-    \end{tabularx}
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento Piano di Progetto & Responsabile & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento Glossario & Analista & 2 & 3 & Completata \\
+    \hline
+    Aggiornamento Norme di Progetto & Amministratore & 3 & 3 & Completata \\
+    \hline
+    Aggiornamento Analisi dei Requisiti & Analista & 7 & 9 & Completata \\
+    \hline
+    Inizio stesura Piano di Qualifica & Responsabile & 1 & 1 & Completata \\
+    \hline
+    Rifinitura Mock-up & Programmatore & 0 & 2 & Completata \\
+    \hline
+    Studio delle tecnologie adottate & Progettista & 12 & 11 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & Verificatore & 3 & 3 & Completata \\
+    \hline
+    Redazione verbali interni e verbale esterno & Responsabile & 2 & 2 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{31} & \textbf{35} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 3}
+    \label{tab:task_sprint3}
 \end{table}
 
-\noindent\textbf{Considerazioni (Sprint Review e Retrospective)}\\
-Analizzando il rendiconto orario dello Sprint, si evince un fisiologico scostamento rispetto al preventivo iniziale, derivato da una precisa scelta gestionale discussa internamente. Le ore inizialmente allocate per il ruolo di \textit{Progettista} sono state infatti ridotte per poter trasferire parte del budget orario sul ruolo di \textit{Analista}, al fine di sostenere l'intenso carico di lavoro richiesto in questa fase per la stesura dell'AdR. Inoltre, una piccola parte delle ore è stata investita nel ruolo di \textit{Programmatore} (non inizialmente preventivato) per consentire la realizzazione pratica e la rifinitura del mock-up. Questa rimodulazione dimostra la capacità del team di adattare in modo flessibile le risorse alle reali esigenze di progetto, ottimizzando il budget a disposizione senza comprometterne la stabilità.\\
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Approvazione finale del mock-up da parte del proponente, forte progressione nella stesura dei casi d'uso (AdR) e avvio efficace della fase di autoformazione sui framework tecnologici Laravel e Filament.
+    \item \textbf{Problematiche Riscontrate:} Sottostima iniziale dell'intensità del lavoro richiesto per la diagrammazione dei requisiti ed emersione di attività tecniche non preventivate (ruolo del Programmatore) necessarie alla rifinitura del mock-up.
+    \item \textbf{Azioni Correttive:} Gestione flessibile e tempestiva del budget orario, attuando una riduzione mirata sulle ore del Progettista per supportare i ruoli che hanno portato via più tempo del necessario (Analista e Programmatore).
+\end{itemize}
 \newpage
 
 \subsubsubsection{Quarto Periodo}
@@ -1015,29 +1107,86 @@ Analizzando il rendiconto orario dello Sprint, si evince un fisiologico scostame
     \end{tabularx}
 \end{table}
 
+Il quarto periodo di Sprint ha rappresentato il momento di convergenza e finalizzazione di tutte le attività legate alla fase di RTB. Sul piano documentale, il team si è focalizzato sulla chiusura formale dell'Analisi dei Requisiti e del Glossario, integrando gli ultimi raffinamenti emersi dalle verifiche interne. Il nucleo operativo dell'iterazione è stato tuttavia assorbito dalle attività tecniche, con la definizione teorica e la successiva implementazione pratica del PoC. Sfruttando lo stack tecnologico concordato il gruppo ha sviluppato un prototipo funzionante mirato a validare la fattibilità delle architetture e a minimizzare i rischi tecnologici individuati. 
+
+A conclusione dell'iterazione, il team ha organizzato un incontro ufficiale con l'azienda proponente Eggon per presentare una demo operativa del PoC. Il colloquio ha permesso di mostrare le soluzioni software realizzate, ricevendo un riscontro estremamente positivo da parte del committente; questo passaggio ha sancito il superamento dei criteri di accettazione interni e ha confermato la solidità del lavoro svolto in preparazione al colloquio di revisione RTB.
+
 \begin{center}
 \noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
 \end{center}
 \begin{table}[H]
     \centering
-    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
-    \rowcolors{2}{white}{LimeGreen!15}
-    \begin{tabularx}{\textwidth}{|X c|}
-    \hline \rowcolor{LimeGreen!50}
-        \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato}\\
-        \hline
-        Aggiornamento Piano di Progetto & Responsabile\\
-        Aggiornamento Glossario & Analista\\
-        Aggiornamento Norme di Progetto & Amministratore\\
-        Conclusione Analisi dei Requisiti & Analista\\
-        Definizione del PoC & Progettista\\
-        Implementazione del PoC & Programmatore \\
-        Redazione verbali interni e stesura verbale esterno con l'azienda & Responsabile\\
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
     \hline
-    \end{tabularx}
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento Piano di Progetto & Responsabile & 1 & 1 & Completata \\
+    \hline
+    Stesura e incremento Piano di Qualifica & Responsabile & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento Norme di Progetto & Amministratore & 1 & 1 & Completata \\
+    \hline
+    Conclusione Analisi dei Requisiti e Glossario & Analista & 1 & 1 & Completata \\
+    \hline
+    Definizione del PoC & Progettista & 13 & 15 & Completata \\
+    \hline
+    Implementazione del PoC & Programmatore & 16 & 18 & Completata \\
+    \hline
+    Verifica della documentazione e del PoC & Verificatore & 8 & 11 & Completata \\
+    \hline
+    Redazione verbali interni ed esterni & Responsabile & 1 & 1 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{43} & \textbf{50} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 4}
+    \label{tab:task_sprint4}
 \end{table}
 
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Chiusura definitiva dell'Analisi dei Requisiti e sviluppo completato del Proof of Concept (PoC) utilizzando le tecnologie designate; Completati Norme di progetto, piano di qualifica, piano di progetto e glossario in vista dell'RTB.
+    \item \textbf{Problematiche Riscontrate:} La complessa integrazione delle tecnologie nel PoC ha richiesto uno sforzo superiore alle attese, generando uno scostamento di +7 ore totali concentrate esclusivamente nei ruoli tecnici (Progettista, Programmatore e Verificatore).
+    \item \textbf{Azioni Correttive:} Trattandosi dell'ultimo Sprint della fase RTB, il gruppo utilizzerà le criticità per il preventivo delle ore del PoC per stilare una pianificazione oraria post-RTB estremamente accurata, prevedendo \textit{buffer} di rischio più ampi per la fase di coding.
+\end{itemize}
 
+\subsection{Pianificazione a Lungo Termine (Verso la PB)}
+La programmazione analitica dei singoli Sprint e delle scadenze intermedie verrà ufficializzata e integrata nella release v2.0.0 del presente documento, dopo aver superato la RTB. Nonostante ciò, il team ha delineato subito una strategia di sviluppo a lungo termine da poter seguire. Questo approccio, articolato in 4 macro-fasi sequenziali, è concepito per assicurare un rilascio incrementale, isolando le criticità architetturali.
+
+\subsubsection{Macro-fase 1: Consolidamento Architetturale e Infrastrutturale (Post-RTB)}
+Questa fase segna il passaggio dallo sviluppo sperimentale PoC alla progettazione ingegneristica rigorosa del sistema.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Stabilizzare l'architettura di base e predisporre l'ambiente cloud definitivo, garantendo che le fondamenta del software siano scalabili e sicure per il trattamento di dati aziendali.
+    \item \textbf{Attività chiave:} Stesura del \textit{Technical Design} definitivo (diagrammi UML avanzati), configurazione strutturata dei database e dello storage cloud per i documenti, implementazione dei protocolli di sicurezza per i dati sensibili in conformità al GDPR e setup della pipeline automatizzata di CI/CD.
+\end{itemize}
+
+\subsubsection{Macro-fase 2: Sviluppo del Core del Prodotto (Fase MVP)}
+Fase interamente focalizzata sulla realizzazione del nucleo funzionale essenziale per la piattaforma, al fine di soddisfare tutti i requisiti classificati come obbligatori.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Rilasciare un \textit{Minimum Viable Product} (MVP) stabile, in grado di dimostrare l'interoperabilità di base tra le interfacce utente e i servizi di backend.
+    \item \textbf{Attività chiave:} Sviluppo delle API principali di comunicazione, implementazione delle componenti core per la dashboard amministrativa e le interfacce lato dipendente, e prima integrazione stabile dei motori di Intelligenza Artificiale per l'elaborazione dei testi e il riconoscimento documentale di base.
+\end{itemize}
+
+\subsubsection{Macro-fase 3: Estensione Funzionale, Ottimizzazione e Sicurezza}
+Fase orientata al completamento dei requisiti desiderabili e opzionali, focalizzandosi sull'efficienza e sulla rifinitura dell'esperienza utente (UX).
+\begin{itemize}
+    \item \textbf{Obiettivo:} Raggiungere la piena copertura funzionale del capitolato, ottimizzando i costi operativi legati alle chiamate AI e perfezionando le logiche di automazione.
+    \item \textbf{Attività chiave:} Estensione delle funzionalità AI (raffinamento dei prompt e dei meccanismi di smistamento automatico), implementazione di sistemi di caching per minimizzare le richieste esterne, definizione granulare del controllo accessi basato sui ruoli (RBAC) e rifinitura grafica delle interfacce \textit{Nexum}.
+\end{itemize}
+
+\subsubsection{Macro-fase 4: Validazione, Quality Assurance e Rilascio}
+L'ultimo periodo prima della consegna ufficiale, dedicato esclusivamente alle attività di verifica approfondita e alla preparazione del deployment finale.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Certificare la conformità totale del prodotto rispetto ai requisiti qualitativi, prestazionali e di sicurezza concordati con la proponente.
+    \item \textbf{Attività chiave:} Esecuzione intensiva dei \textit{System Test} e dei test di integrazione, sessioni di \textit{User Acceptance Test} (UAT) in coordinamento con Eggon, stesura e validazione della manualistica finale (Manuale Utente e Manuale Amministratore) e rilascio del codice in ambiente di produzione.
+\end{itemize}
+
+\newpage
 \section{Preventivo e Consuntivo dei Periodi}
 \label{sec:preventivo_e_consuntivo}
 \subsection{Primo Periodo: Sprint 30/03/2026 - 12/04/2026}
@@ -1147,6 +1296,43 @@ Costo Totale &  150 \euro& 120 \euro & 250 \euro & 125 \euro & 15 \euro & 45 \eu
 \caption{Riepilogo costi e budget rimanente - Primo Sprint }
 \end{table}
 
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 1}
+Al termine del primo Sprint, viene effettuato il calcolo del \textit{Preventivo a Finire} (EAC - \textit{Estimate at Completion}) per monitorare proattivamente l'andamento economico del progetto. Questa metrica proietta il costo totale finale sulla base degli scostamenti registrati nell'iterazione appena conclusa.
+
+Rispetto al preventivo iniziale dello Sprint 1, si è registrato un lieve scostamento in eccesso per i ruoli di Analista (+1 ora) e Progettista (+1 ora), parzialmente compensato da un risparmio nel ruolo di Verificatore (-1 ora). Di seguito viene presentata la proiezione aggiornata sull'intero ciclo di vita del progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro \\
+    \hline
+    Amministratore & 52 & +0 & 52 & 1.020,00 \euro & 0,00 \euro\\
+    \hline
+    Analista & 59 & +1 & 60 & 1.500,00 \euro & -25,00 \euro\\
+    \hline
+    Progettista & 143 & +1 & 144 & 3.575,00 \euro & -25,00 \euro\\
+    \hline
+    Programmatore & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro\\
+    \hline
+    Verificatore & 160 & -1 & 159 & 2.400,00 \euro & +15,00 \euro \\
+    \hline
+    \rowcolor{green!50!black!20!white}
+   \textbf{Totale} & \textbf{630} & \textbf{+1} & \textbf{631} & \textbf{12.605,00 \euro} & \textbf{-35,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza al termine dello Sprint 1}
+    \label{tab:eac_sprint1}
+\end{table}
+
+Come si nota dalla Tabella~\ref{tab:eac_sprint1}, il bilancio a finire proietta un totale di 631 ore con un costo complessivo stimato di € 12.610,00. La Varianza a Finire (VAC) risulta essere leggermente negativa e pari a € -35,00. Essendo il primo Sprint di progetto, questo scostamento è considerato del tutto fisiologico e legato alla fase di rodaggio del team; esso verrà tenuto in considerazione nelle prossime pianificazioni per riportare il bilancio in perfetto equilibrio.
+
+\newpage
 \subsection{Secondo Periodo: Sprint 13/04/2026 - 26/04/2026}
 \label{sec:pec_secondoperiodo}
 
@@ -1228,8 +1414,6 @@ V.Y. Kaneda Fernandes & - & - & 2 & - & - & 3 & 5\\
 \end{figure}
 
 
-
-
 \vspace{0.5cm}
 \begin{center}
     
@@ -1253,6 +1437,44 @@ Costo Totale &  150 \euro& 100 \euro & 250 \euro & 50 \euro & 0 \euro & 75 \euro
 \end{tabular}
 \caption{Riepilogo costi e budget rimanente - Secondo Sprint}
 \end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 2}
+Al termine del secondo Sprint, il \textit{Preventivo a Finire} (EAC) è stato ricalcolato tenendo conto degli scostamenti cumulativi registrati nelle prime due iterazioni di progetto. 
+
+Nello Sprint appena concluso si è verificato un lieve scostamento in eccesso rispetto alle stime, principalmente dovuto all'aumento delle ore necessarie per l'Analisi dei Requisiti e per le attività di Verifica, parzialmente mitigate da un risparmio nel ruolo di Amministratore. Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    Amministratore & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro \\
+    \hline
+    Analista & 59 & +3 & 62 & 1.550,00 \euro & -75,00 \euro \\
+    \hline
+    Progettista & 143 & +1 & 144 & 3.600,00 \euro & -25,00 \euro\\
+    \hline
+    Programmatore & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro \\
+    \hline
+    Verificatore & 160 & +1 & 161 & 2.415,00 \euro & -15,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+4} & \textbf{634} & \textbf{12.665,00 \euro} & \textbf{-95,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 2}
+    \label{tab:eac_sprint2}
+\end{table}
+
+Come mostrato nella Tabella~\ref{tab:eac_sprint2}, lo scostamento cumulativo totale si attesta a +4 ore rispetto al piano originale. La Varianza a Finire (VAC) registra un valore di € -95,00. Il team ha preso atto di questa tendenza al rialzo, dovuta principalmente al consolidamento della documentazione; verranno pertanto pianificate delle azioni di ottimizzazione nelle successive iterazioni tecniche per riassorbire tale scostamento e rientrare nel budget stabilito.
+
+\newpage
 
 \subsection{Terzo Periodo: Sprint 27/04/2026 - 10/05/2026}
 \label{sec:pec_terzoperiodo}
@@ -1283,11 +1505,10 @@ V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
 \textbf{Totale}      & 4 & 3 & 9 & 12 & 0 & 3 & 31\\
 \hline
 \end{tabular}
-\caption{Preventivo ore per componente}
+\caption{Preventivo ore per componente - Terzo sprint}
 \end{table}
 
 \begin{center}
-    
 \noindent\textbf{Consuntivo}
 \end{center}
 
@@ -1314,7 +1535,7 @@ V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
 \caption{Consuntivo ore per componente - Terzo Sprint}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
         \pie[
@@ -1334,8 +1555,8 @@ V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
 \end{figure}
 
 \vspace{0.5cm}
+
 \begin{center}
-    
 \noindent\textbf{Bilancio Economico}
 \end{center}
 
@@ -1357,6 +1578,43 @@ Costo Totale &  120 \euro & 60 \euro & 300 \euro & 275 \euro & 30 \euro & 45 \eu
 \caption{Riepilogo costi e budget rimanente - Terzo Sprint}
 \end{table}
 
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 3}
+Al termine del terzo Sprint, il Responsabile ha proceduto al ricalcolo del \textit{Preventivo a Finire}. Questa analisi predittiva valuta l'impatto degli scostamenti cumulativi registrati fin dall'inizio del progetto rispetto al budget aggiornato in fase di avvio.
+
+Durante quest'ultima iterazione, il team ha compensato lo scostamento in eccesso registrato precedentemente sul ruolo di Progettista, riportando il suo bilancio cumulativo in perfetto equilibrio. Tuttavia, il perdurare di un intenso carico di lavoro sull'Analisi dei Requisiti e l'avvio delle attività di Programmazione per la chiusura del Mock-up e l'inizio del Poc hanno generato un ulteriore assorbimento di risorse. Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    Amministratore & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro \\
+    \hline
+    Analista & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro \\
+    \hline
+    Progettista & 143 & +0 & 143 & 3.575,00 \euro & 0,00 \euro \\
+    \hline
+    Programmatore & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro\\
+    \hline
+    Verificatore & 160 & +1 & 161 & 2.415,00 \euro & -15,00 \euro \\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+8} & \textbf{638} & \textbf{12.745,00 \euro} & \textbf{-175,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 3}
+    \label{tab:eac_sprint3}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint3}, il bilancio a finire proietta attualmente un totale di 638 ore, con una Varianza (VAC) complessiva di -175,00 \euro dovuta quasi interamente alle stime al ribasso per il ruolo di Analista nelle fasi iniziali. Tale scostamento impone al team un'attenta ripianificazione nelle prossime settimane: l'ottimizzazione e il risparmio delle ore di Analista e Responsabile durante la fase di PB saranno essenziali per garantire un rientro all'interno del tetto massimo di spesa.
+
+\newpage
 \subsection{Quarto Periodo: Sprint 11/05/2026 - 24/05/2026}
 \label{sec:pec_quartoperiodo}
 
@@ -1386,14 +1644,12 @@ V.Y. Kaneda Fernandes & - & - & - & 2 & - & 4 & 6\\
 \textbf{Totale}      & 4 & 1 & 1 & 13 & 16 & 8 & 43\\
 \hline
 \end{tabular}
-\caption{Preventivo ore per componente}
+\caption{Preventivo ore per componente - Quarto Sprint}
 \end{table}
 
 \begin{center}
-    
 \noindent\textbf{Consuntivo}
 \end{center}
-
 \begin{table}[H]
 \centering
 \vspace{2mm}
@@ -1401,25 +1657,58 @@ V.Y. Kaneda Fernandes & - & - & - & 2 & - & 4 & 6\\
 \hline
 \textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
-Angelica Gastaldello & - & - & - & - & - & - & -\\
-Eleonora Bellet & - & - & - & - & - & - & -\\
-Alex Oloni & - & - & - & - & - & - & -\\
-Diego Belluz & - & - & - & - & - & - & -\\
-Angela Maule & - & - & - & - & - & - & -\\
-Leonardo Soligo & - &  - & - & - & - & - & -\\
-V.Y. Kaneda Fernandes & - & - & - & - & - & - & -\\
-\hline
+    Angelica Gastaldello & & & & 3 & 5 & & 8 \\
+    \hline
+    Eleonora Bellet & 4 & & & & & 3 & 7 \\
+    \hline
+    Alex Oloni & & & & 2 & 4 & & 6 \\
+    \hline
+    Diego Belluz & & 1 & & 2 & & 3 & 6 \\
+    \hline
+    Angela Maule & & & 1 & 3 & 4 & & 8 \\
+    \hline
+    Leonardo Soligo & & & & 3 & 5 & & 8 \\
+    \hline
+    V.Y. Kaneda Fernandes & & & & 2 & & 5 & 7 \\
+    \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Totale} & - & - & - & - & - & - & -\\
-\hline
-\end{tabular}
-\caption{Consuntivo ore per componente - Quarto Sprint}
+    Totale & 4 & 1 & 1 & 15 & 18 & 11 & 50 \\
+    \hline
+   \end{tabular}
+\caption{Consuntivo ore per componente - Quarto sprint}
 \end{table}
 
-\vspace{0.5cm}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            hide number,
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            12.31/Responsabile,
+            2.05/Amministratore,
+            2.56/Analista,
+            38.46/Progettista,
+            27.70/Programmatore,
+            16.92/Verificatore
+        }
+        \node at (22:1.6) {12.31\%};  
+        \node at (130:1.6) {38.46\%};
+        \node at (249:1.6) {27.70\%}; 
+        \node at (330:1.6) {16.92\%}; 
+
+        \draw[<-] (48:2.9) -- (48:4.2) node[right] {2.05\%};
+        
+        \draw[<-] (56:2.9) -- (56:4.6) node[above right] {2.56\%};
+
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Quarto Sprint}
+\end{figure}
+
 \begin{center}
-    
 \noindent\textbf{Bilancio Economico}
 \end{center}
 
@@ -1431,14 +1720,49 @@ V.Y. Kaneda Fernandes & - & - & - & - & - & - & -\\
 \textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
 \hline
 Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
-Costo Totale &   \euro &  \euro &  \euro &  \euro &  \euro &  \euro &  \euro\\
+Costo Totale &  120 \euro & 20 \euro & 25 \euro & 375 \euro & 270 \euro & 165 \euro &  975 \euro\\
 \hline
 \hiderowcolors
 \rowcolor{green!50!black!20!white}
-\textbf{Saldo fine periodo} &  \euro &  \euro &  \euro &  \euro &  \euro &  \euro & \cellcolor{yellow!50}  \euro  \\
+\textbf{Saldo fine periodo} & 1140 \euro & 720 \euro & 675 \euro & 2750 \euro & 2085 \euro & 2070 \euro & \cellcolor{yellow!50} 9.440 \euro  \\
 \hline
 \end{tabular}
 \caption{Riepilogo costi e budget rimanente - Quarto Sprint}
+\end{table}
+
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 4 (Chiusura RTB)}
+Al termine del quarto e ultimo Sprint della fase di pre-qualifica, viene rendicontato il \textit{Preventivo a Finire} (EAC) finale per la \textit{Requirements and Technology Baseline} (RTB).
+
+La realizzazione e il collaudo del Proof of Concept (PoC) hanno richiesto un effort tecnico superiore alle stime (complessive +7 ore sui ruoli di Progettazione, Programmazione e Verifica). Questo scostamento, sommato a quelli delle iterazioni precedenti, porta la Varianza a Finire complessiva a -300,00 \euro. Trattandosi della chiusura di una macro-fase, il team ha assorbito tale varianza all'interno del margine di rischio concordato; la futura pianificazione della fase di \textit{Product Baseline} (PB) sarà calibrata su metriche più conservative per garantire l'assoluto rispetto del tetto di spesa.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    Amministratore & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    Analista & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro\\
+    \hline
+    Progettista & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    Programmatore & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro \\
+    \hline
+    Verificatore & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+15} & \textbf{645} & \textbf{12.870,00 \euro} & \textbf{-300,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Preventivo a Finire e Varianza cumulativa finale per la fase RTB}
+    \label{tab:eac_sprint4}
 \end{table}
 
 
