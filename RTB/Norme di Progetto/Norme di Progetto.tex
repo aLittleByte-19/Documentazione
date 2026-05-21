@@ -14,6 +14,7 @@
 \newcommand{\grouplogo}{.github/site-src/assets/logo_alittlebyte.png}
 \newcommand{\groupsymbol}{.github/site-src/assets/solo_logo.png}
 
+
 \geometry{
     left=2.5cm,
     right=2.5cm,
@@ -103,6 +104,9 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.14.0 & 20/05/2026 & Aggiunta sezione metriche & Diego Belluz & Eleonora Bellet & - \\
+        
         \hline 
         0.13.0 & 18/05/2026 & Aggiunta sezione qualità del software & Diego Belluz & Eleonora Bellet & - \\
         \hline 
@@ -467,19 +471,29 @@ Questo tipo di analisi può avvenire tramite metodi formali o, più comunemente 
 Al termine di ogni controllo, le attività svolte e i problemi riscontrati vengono opportunamente documentati. Gli errori vengono discussi in modo costruttivo tra il verificatore e l'autore del documento (o del codice); tuttavia, l'applicazione materiale delle correzioni rimane sempre di competenza dell'autore originale, al fine di garantire coerenza e responsabilità. Tutto ciò viene documentato all'interno della \textit{Pull Request}, che in caso di errori non viene approvata, e nel relativo documento. 
 
 \paragraph{Analisi Dinamica}
-da completare
+A differenza della tecnica statica, l'analisi dinamica presuppone l'esecuzione dell'oggetto sottoposto a verifica. Tale approccio esamina le reazioni di specifiche porzioni del software applicandovi un numero definito di "casi prova". Questi test devono possedere i requisiti di ripetibilità e automazione.
+
+Ogni sessione di test è definita dai seguenti stati:
+\begin{itemize}
+    \item \textbf{NI}: non implementato
+    \item \textbf{I}: implementato
+    \item \textbf{S}: superato
+    \item \textbf{NS}: non superato
+\end{itemize}
 
 \paragraph{Test Di Unità}
-da completare
+I test d'unità si focalizzano sulla verifica isolata di singole componenti software, come funzioni, classi o metodi, separandole dal resto dell'architettura di sistema.
+
+Il fine di questa attività risiede nel confermare che ogni unità generi i risultati previsti partendo da input determinati. Questo processo consente di intercettare precocemente difetti di implementazione o errori nella logica funzionale durante le fasi iniziali della progettazione.
 
 \paragraph{Test di Regressione}
-da completare
+L'esecuzione dei test di regressione è finalizzata ad accertare che interventi correttivi o evolutivi sul codice non abbiano introdotto nuovi difetti o problemi nelle funzionalità già esistenti.
 
 \paragraph{Test di Integrazione}
-da completare
+L'esecuzione dei test d'integrazione è mirata a confermare che le varie componenti del software operino tra loro in modo sinergico e privo di errori.
 
 \paragraph{Test di Sistema}
-da completare
+I test di sistema hanno l'obiettivo di accertare che il comportamento globale del prodotto rispetti integralmente i requisiti software stabiliti durante l'analisi dei requisiti.
 
 \subsection{Validazione}
 La validazione rappresenta il processo finale che conferma in modo definitivo che le caratteristiche del prodotto software siano pienamente conformi ai bisogni dell'utilizzo finale e agli obiettivi d'uso previsti. L'obiettivo principale è rispondere al quesito: \textit{''Did I build the right system?''} 
@@ -673,44 +687,123 @@ L'eccellenza del risultato finale scaturisce invariabilmente dal valore del perc
 L'intero processo di valutazione si articola in quattro fasi principali (definizione preventiva delle metriche, misurazione, valutazione dei dati e accettazione finale).
 
 \subsection{Qualità del prodotto}
-Per definire e misurare la qualità intrinseca del software, lo standard di riferimento adottato è la serie di norme ISO/IEC 25010. Questo standard internazionale organizza la qualità in due diverse categorie:
+Per definire e misurare la qualità intrinseca del software, lo standard di riferimento adottato è la serie di norme ISO/IEC 9126. Questo standard internazionale organizza la qualità in due diverse categorie:
 \begin{enumerate}
     \item \textbf{Qualità del Prodotto}, che analizza le seguenti proprietà intrinseche del software:
     \begin{itemize}
-        \item Adeguatezza funzionale;
-        \item Efficienza prestazionale;
-        \item Compatibilità;
-        \item Usabilità;
-        \item Affidabilità;
-        \item Sicurezza;
-        \item Manutenibilità;
-        \item Portabilità;
-    \end{itemize}
-    \item \textbf{Qualità in Uso}, che valuta le seguenti caratteristiche dal punto di vista dell'utente finale:
-    \begin{itemize}
-        \item Efficacia;
+        \item Funzionalità;
+        \item Affidabilità,
         \item Efficienza;
-        \item Soddisfazione;
-        \item Libertà da rischi;
-        \item Contesto di copertura.
+        \item Usabilità;
+        \item Mantenibilità;
+        \item Portabilità 
     \end{itemize}
+    
 \end{enumerate}
 
 Al fine di ottenerne una misurazione oggettiva, sono state stabilite specifiche metriche di prodotto, le quali trovano puntuale rendicontazione e misurazione all'interno del \textit{Piano di Qualifica}. Tali metriche consentono di analizzare in termini quantitativi elementi determinanti sia del codice sorgente che dell'applicativo finale, tra cui la funzionalità, l'affidabilità, l'efficienza, l'usabilità, la manutenibilità e la portabilità.
 
 \subsection{Qualità del processo}
-Gli standard di riferimento per la qualità del processo sono l'ISO/IEC 9001 e il modello CMMI (\textit{Capability Maturity Model Integration}). Questi standard forniscono le linee guida per la gestione della qualità nei processi di sviluppo, includendo la pianificazione, il controllo e il miglioramento continuo.
+Gli standard di riferimento per la qualità del processo sono l'ISO/IEC 12207. Questo standard fornisce le linee guida per la gestione della qualità nei processi di sviluppo, includendo la pianificazione, il controllo e il miglioramento continuo.
 
 Secondo questo standard la qualità del processo si basa su diversi principi fondamentali:
 \begin{itemize}
-    \item \textbf{Responsabilità della leadership:} chi dirige ha il compito di delineare la politica della qualità, fissare i traguardi e assicurarsi che ogni componente del gruppo conosca i propri compiti.
-    \item \textbf{Ottimizzazione delle risorse:} risulta prioritario dotare il team di strumenti idonei (quali IDE o sistemi di controllo versione come Git) e garantire ai collaboratori l'addestramento indispensabile.
-    \item \textbf{Sviluppo dell'output:} il ciclo produttivo esige che la raccolta dei requisiti, il design e la codifica siano fasi monitorate e costantemente verificabili.
-    \item \textbf{Valutazione e perfezionamento:} è vitale osservare con regolarità l'avanzamento dei lavori per scovare possibili margini di crescita e applicare rimedi tempestivi in caso di criticità.
+    \item \textbf{Focalizzazione su Scopo e Risultati (Purpose and Outcomes):} Questo rappresenta il pilastro fondamentale. Per garantire la qualità, ogni fase (dall'approvvigionamento alla creazione, fino alla verifica) deve avere finalità ben definite e generare esiti attesi che siano concreti, misurabili e verificabili.
+    \item \textbf{Approccio Modulare (Modularity):} La struttura dei processi deve basarsi su componenti caratterizzate da "forte coesione e debole accoppiamento". Ogni singolo modulo deve concentrarsi su un unico traguardo ed essere autonomo, così da limitare le ripercussioni sull'intero ciclo produttivo in caso di variazioni o criticità in un'area specifica.
+    \item \textbf{Attribuzione delle Responsabilità (Responsibility):} Seguendo il principio per cui una responsabilità indistinta equivale a nessuna responsabilità, lo standard richiede che ogni attività sia assegnata a un ruolo preciso (come Sviluppatore, Fornitore, Acquisitore o Verificatore), eliminando incertezze all'interno dell'organizzazione.
+    \item \textbf{Personalizzazione dei Processi (Tailoring):}Data la diversità tra i vari progetti software, lo standard prevede il principio del Tailoring. Le aziende devono adattare i processi alle proprie esigenze, selezionando esclusivamente le procedure pertinenti alla complessità, al rischio e alle risorse disponibili, evitando carichi burocratici superflui.
+    \item \textbf{Evoluzione Continua e Tracciabilità:}È essenziale che ogni intervento, anomalia o variazione sia riconducibile al requisito di partenza. Il sistema non è statico, poiché integra cicli di audit, revisione e gestione delle problematiche. Ciò permette al gruppo di lavoro di ottimizzare costantemente le proprie metodologie, avvalendosi spesso di modelli quali CMMI o SPICE per attestare il livello di maturità raggiunto.
 \end{itemize}
 
 In questo progetto, tale obiettivo viene perseguito attraverso una precisa delineazione di metodologie e strumenti operativi. Il controllo costante dell'avanzamento è garantito da sistemi di tracciamento dei problemi (\textit{issue tracking}) e da incontri periodici formalizzati, supportati da un'analisi rigorosa dei requisiti e da verifiche regolari sugli standard qualitativi dei risultati ottenuti.
 
 Al fine di assicurare un monitoraggio imparziale, il gruppo ha stabilito specifiche metriche di processo, dettagliate all'interno del \textit{Piano di Qualifica}. Tali indicatori permettono di misurare l'efficienza del ciclo di sviluppo, focalizzandosi su variabili critiche quali la puntualità nelle consegne, l'aderenza al budget stabilito, la frequenza di anomalie rilevate, l'estensione dei test e la conformità complessiva ai criteri prefissati.
+
+\section{Metriche}
+Questa sezione definisce in modo formale tutte le metriche adottate dal gruppo per quantificare la qualità del processo di sviluppo e del prodotto software finale. I valori di soglia (accettabili e ottimali) e i risultati effettivi delle misurazioni sono demandati e documentati all'interno del \textit{Piano di Qualifica}.
+
+\subsection{Metriche per la qualità di processo}
+Queste metriche (identificate dalla sigla MPC) misurano l'efficacia, l'efficienza e il controllo delle attività necessarie per sviluppare il prodotto.
+
+\subsubsection{Processi di Fornitura e Sviluppo}
+\begin{itemize}
+    \item \textbf{MPC-EV - Earned Value}: Rappresenta il valore del lavoro effettivamente completato.
+    \item \textbf{MPC-PV - Planned Value}: Rappresenta il valore pianificato del lavoro da completare entro ciascuno sprint.
+    \item \textbf{MPC-AC - Actual Cost}: Rappresenta il costo effettivo sostenuto per il lavoro completato in ciascuno sprint.
+    \item \textbf{MPC-CPI - Cost Performance Index}: Misura l'efficienza dei costi. Si calcola come: 
+    $$CPI = \frac{EV_{cum}}{AC_{cum}}$$
+    \item \textbf{MPC-SPI - Schedule Performance Index}: Misura l'efficienza del tempo. Si calcola come: 
+    $$SPI = \frac{EV_{cum}}{PV_{cum}}$$
+    \item \textbf{MPC-EAC - Estimated At Completion}: Stima il costo totale del progetto proiettando la performance corrente. Si calcola come: 
+    $$EAC = \frac{BAC}{CPI}$$
+    \item \textbf{MPC-ETC - Estimate To Complete}: Rappresenta la stima dei costi rimanenti al completamento. Si calcola come: 
+    $$ETC = EAC - AC_{cum}$$ 
+    \item \textbf{MPC-TEAC - Time Estimate At Completion}: Stima la durata totale del progetto a partire dalla performance di avanzamento. Si calcola come: 
+    $$TEAC = \frac{\text{Durata pianificata}}{SPI}$$
+    \item \textbf{MPC-RSI - Requirements Stability Index}: Calcolato confrontando il numero di requisiti aggiunti, modificati o eliminati rispetto alla versione iniziale. Formula: 
+    $$RSI = \left(1 - \frac{N_{modificati} + N_{eliminati} + N_{aggiunti}}{N_{totali\_iniziali}}\right) \times 100\%$$
+\end{itemize}
+
+\subsubsection{Processi di Supporto}
+\begin{itemize}
+    \item \textbf{MPC-IG - Indice di Gulpease}: Misura la leggibilità dei documenti in lingua italiana. Formula: 
+    $$G = 89 - \frac{10 \cdot L}{P} + \frac{300 \cdot F}{P}$$
+    \item \textbf{MPC-CO - Correttezza ortografica}: Analisi automatica della correttezza ortografica per individuare errori di battitura o sintassi.
+    \item \textbf{MPC-CC - Code Coverage}: Misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici.
+    \item \textbf{MPC-TSR - Test Success Rate}: Percentuale di test automatici che hanno restituito un esito positivo in fase di esecuzione.
+    \item \textbf{MPC-QMS - Quality Metrics Satisfied}: Misura la percentuale di metriche di processo che soddisfano la soglia accettabile. Formula: 
+    $$QMS = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%$$ 
+\end{itemize}
+
+\subsubsection{Processi Organizzativi}
+\begin{itemize}
+    \item \textbf{MPC-TE - Time Efficiency}: Calcolato confrontando le ore produttive effettivamente rendicontate con il totale delle ore disponibili. Formula: 
+    $$TE = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$$ 
+    \item \textbf{MPC-PRI - Percentuale Rischi Inattesi}: Confronta i rischi effettivamente manifestatisi con quelli identificati nel registro dei rischi. Formula: 
+    $$PRI = \frac{N_{rischi\_inattesi}}{N_{rischi\_totali\_manifestati}} \times 100\%$$ 
+    \item \textbf{MPC-LE - Labor Efficiency}: Confronta le ore dedicate ad attività a valore aggiunto con il totale delle ore lavorate. Formula: 
+    $$LE = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$$ 
+\end{itemize}
+
+\subsection{Metriche per la qualità di prodotto}
+Queste metriche (identificate dalla sigla MPD) misurano le proprietà interne ed esterne del software finale per garantire che il sistema rispetti i requisiti.
+
+\begin{itemize}
+    \item \textbf{Funzionalità}:
+    \begin{itemize}
+        \item \textbf{MPD01}: Requisiti obbligatori soddisfatti
+        \item \textbf{MPD02}: Requisiti opzionali soddisfatti.
+        \item \textbf{MPD03}: AI Acceptance Rate (rating $\ge 3/5$)
+    \end{itemize}
+    \item \textbf{Affidabilità}:
+    \begin{itemize}
+        \item \textbf{MPD04}: Branch Coverage
+        \item \textbf{MPD05}: Defect Density (Densità dei difetti per KLOC).
+    \end{itemize}
+    \item \textbf{Efficienza}:
+    \begin{itemize}
+        \item \textbf{MPD06}: Latenza interfaccia utente.
+        \item \textbf{MPD07}: Latenza generazione testo AI Assistant.
+        \item \textbf{MPD08}: Latenza generazione immagine AI Assistant.
+        \item \textbf{MPD09}: Latenza analisi documentale AI Co-Pilot.
+    \end{itemize}
+    \item \textbf{Usabilità}:
+    \begin{itemize}
+        \item \textbf{MPD10}: Profondità Massima di Navigazione (numero di livelli).
+        \item \textbf{MPD11}: Learning Time (tempo di apprendimento per le funzioni principali).
+\end{itemize}
+\newpage
+
+    \item \textbf{Mantenibilità}:
+    \begin{itemize}
+        \item \textbf{MPD12}: Code Smell.
+        \item \textbf{MPD13}: Coefficient of Coupling.
+        \item \textbf{MPD14}: Cyclomatic Complexity (complessità per singolo metodo).
+    \end{itemize}
+    \item \textbf{Portabilità}:
+    \begin{itemize}
+        \item \textbf{MPD15}: Compatibilità Cross-Browser.
+    \end{itemize}
+\end{itemize}
 
 \end{document}
