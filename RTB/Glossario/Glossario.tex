@@ -102,8 +102,9 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
-        0.3.0 & 2026-05-09 & Aggiunti termini dell'analisi dei requisiti, norme di progetto e piano di progetto & V. Y. Kaneda Fernandes & - & - \\
-        0.2.3 & 2026-05-01 & Aggiunti termini dell'analisi dei requisiti & Eleonora Bellet & - & - \\
+        0.3.1 & 2026-05-22 & Aggiunti termini del Piano di Qualifica, Analisi dei Requisiti e Norme di Progetto. & V. Y. Kaneda Fernandes & - & - \\
+        0.3.0 & 2026-05-09 & Aggiunti termini dell'Analisi dei Requisiti, Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
+        0.2.3 & 2026-05-01 & Aggiunti termini dell'Analisi dei Requisiti & Eleonora Bellet & - & - \\
         0.2.2 & 2026-04-27 & Aggiunta di alcuni termini delle Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
         0.2.1 & 2026-04-22 & Aggiunta di alcuni termini della Analisi dei Requisiti& V. Y. Kaneda Fernandes & - & - \\
         0.2.0 & 2026-04-12 & Aggiunta termini al documento & V. Y. Kaneda Fernandes & - & - \\
@@ -129,11 +130,17 @@
 \subsection{Accuratezza}
 Metrica monitorata dall'Analista Dati per osservare la precisione del sistema nello smistamento e riconoscimento automatico.
 
+\subsection{Actual Cost (MPC-AC)}
+Costo totale effettivamente sostenuto e contabilizzato per il lavoro svolto in un determinato periodo di tempo.
+
 \subsection{Agile SCRUM}
 Il metodo di lavoro usato dal team per sviluppare il software, basato su piccoli obiettivi da raggiungere in tempi brevi (solitamente ogni due settimane) invece di fare un unico grande progetto lungo mesi.
 
 \subsection{AI (Intelligenza Artificiale)}
 Tecnologie che permettono ai computer di fare cose che normalmente richiedono l'intelligenza umana, come imparare, analizzare dati o creare contenuti.
+
+\subsection{AI Acceptance Rate (MPD03)}
+Metrica che valuta il tasso di gradimento delle risposte o dei testi generati dall'AI Assistant, calcolato sulla base dei feedback degli utenti che assegnano un punteggio pari o superiore a una soglia definita.
 
 \subsection{AI Analyst}
 Nucleo elaborativo del modulo AI Co-Pilot che esegue autonomamente classificazione documentale, OCR ed estrazione dati.
@@ -146,6 +153,9 @@ Un tipo di intelligenza artificiale specializzata nel creare da sola nuovi testi
 
 \subsection{AI Post Generator}
 Modulo esterno (attore di sistema) che costituisce il nucleo di intelligenza artificiale per l'elaborazione di testi, titoli e immagini.
+
+\subsection{Amazon Bedrock}
+Servizio interamente gestito da Amazon Web Services (AWS) che rende disponibili modelli di fondazione (FM) delle principali aziende di AI tramite API, utilizzato per integrare funzionalità di intelligenza artificiale generativa.
 
 \subsection{Amministratore}
 Figura responsabile della configurazione dell'ambiente standalone, della gestione dei privilegi degli account e della definizione delle policy globali.
@@ -170,6 +180,9 @@ Figura che supervisiona l'efficienza del sistema, monitorando le performance del
 
 \subsection{Approcio Incrementale}
 Metodo di stesura e sviluppo in cui le norme e il prodotto vengono costantemente aggiornati e affinati nel tempo.
+
+\subsection{Architettura dei Processi}
+Struttura organizzativa e concettuale che mappa e interconnette tutti i processi (primari, di supporto, organizzativi) adottati dal team per lo sviluppo del progetto.
 
 \subsection{Asincronia (Comunicazione asincrona)}
 Modalità di comunicazione tra moduli che permette di non bloccare l'interfaccia utente durante operazioni lunghe.
@@ -197,10 +210,13 @@ Stato temporaneo di un documento o di un contenuto testuale salvato nel sistema 
 \subsection{Branch (Ramo)}
 Ramificazione separata del codice sorgente che permette lo sviluppo isolato di funzionalità o documenti.
 
+\subsection{Branch Coverage (MPD04)}
+Misura della percentuale di rami decisionali (punti di diramazione del codice come i costrutti condizionali if/else) eseguiti con successo durante i test dinamici.
+
 \section{C}
 
 \subsection{Capitolato}
-Documento tecnico fornito dal proponente (nel vostro caso il "Capitolato C5") che definisce i requisiti, le tecnologie richieste e gli obiettivi del prodotto software.
+Documento tecnico fornito dal proponente che definisce i requisiti, le tecnologie richieste e gli obiettivi del prodotto software.
 
 \subsection{Caso d'Uso (UC)}
 Descrizione di un'interazione tra un attore e il sistema per raggiungere un obiettivo specifico, fondamentale per definire i requisiti.
@@ -220,6 +236,9 @@ Metrica che indica la percentuale di codice sorgente eseguita durante i test aut
 \subsection{Code Review}
 Revisione del codice effettuata tra pari per garantirne la qualità e la tracciabilità.
 
+\subsection{Coefficient of Coupling (MPD13)}
+Indicatore del grado di interdipendenza tra i diversi moduli o classi del software. Un accoppiamento basso è preferibile per garantire isolamento e manutenibilità.
+
 \subsection{Committente (o Proponente)}
 L'azienda, l'ente o la persona che ha commissionato il progetto software fornendo il capitolato iniziale (in questo caso, Eggon S.r.l.).
 
@@ -238,6 +257,12 @@ Rendiconto finale delle ore effettivamente impiegate e dei costi realmente soste
 \subsection{Copie Atomiche}
 Il risultato dello "split" di un documento massivo; sono le singole parti destinate ai singoli dipendenti.
 
+\subsection{Cost Performance Index (MPC-CPI)}
+Indicatore dell'efficienza dei costi di un progetto; esprime il rapporto tra il valore del lavoro completato (Earned Value) e i costi effettivi sostenuti (Actual Cost).
+
+\subsection{Cyclomatic Complexity (MPD14)}
+Complessità ciclomatica; metrica software che misura il numero di percorsi linearmente indipendenti attraverso il codice sorgente di un metodo o di una funzione, utile per valutarne la testabilità.
+
 \section{D}
 
 \subsection{Dashboard}
@@ -249,8 +274,14 @@ La pagina di controllo riservata ai gestori del sistema, da cui si possono usare
 \subsection{Data-driven}
 Approccio decisionale e di sviluppo basato sull'analisi di dati oggettivi (come le metriche di utilizzo e i feedback quantitativi) per guidare l'evoluzione dei modelli AI e del sistema.
 
+\subsection{Defect Density}
+Densità dei difetti; esprime il numero di bug o difetti confermati identificati nel software rapportati alla dimensione del codice stesso, tipicamente espressa per KLOC (migliaia di linee di codice).
+
 \subsection{Design Pattern}
 Soluzioni progettuali consolidate utilizzate per risolvere problemi comuni di progettazione software.
+
+\subsection{Detex}
+Strumento software a riga di comando utilizzato per rimuovere la sintassi e i comandi specifici di dei file in formato LaTeX, estraendone esclusivamente il testo puro in formato ASCII/UTF-8.
 
 \subsection{Diagramma dele classi UML}
 Rappresentazione grafica della struttura statica del sistema attraverso le classi e le loro relazioni.
@@ -266,6 +297,9 @@ Il processo automatico che invia i documenti ai destinatari finali attraverso l'
 
 \section{E}
 
+\subsection{Earned Value (MPC-EV)}
+Valore monetario del lavoro effettivamente completato fino a una determinata data, calcolato in base al budget originario stanziato per quel lavoro.
+
 \subsection{Entity Resolution}
 È il processo che permette al sistema di riconoscere correttamente a quale persona o azienda appartiene un dato, anche se le informazioni sono parziali o scritte in modo leggermente diverso.
 
@@ -277,6 +311,12 @@ Modalità di esecuzione di operazioni lunghe in background per non bloccare l'in
 
 \subsection{Estensione}
 Relazioni tra casi d'uso; l'inclusione indica un sotto-processo obbligatorio, l'estensione un comportamento opzionale.
+
+\subsection{Estimate To Complete (MPC-ETC)}
+Stima dei costi previsti per completare tutto il lavoro rimanente del progetto.
+
+\subsection{Estimated At Completion (MPC-EAC)}
+Stima del costo totale finale previsto per il progetto alla sua chiusura, calcolata aggiornando il budget iniziale sulla base delle performance correnti.
 
 \section{F}
 
@@ -321,16 +361,25 @@ Strumento per pianificare, assegnare e monitorare task o problemi all'interno de
 
 \section{K}
 
+\subsection{KLOC}
+Acronimo di Thousands of Lines of Code (Migliaia di Linee di Codice); unità di misura della dimensione di un software utilizzata come base per il calcolo di metriche sulla densità dei difetti e sulla produttività.
+
 \subsection{KPI (Key Performance Indicator)}
 Numeri o percentuali usati per misurare se il sistema sta funzionando bene (ad esempio, quante buste paga vengono riconosciute correttamente al primo colpo).
 
 \section{L}
+
+\subsection{Labor Efficiency (MPC-LE)}
+Metrica che confronta le ore dedicate ad attività ad alto valore aggiunto con il totale complessivo delle ore lavorate dal team.
 
 \subsection{Latex}
 Linguaggio di composizione tipografica usato per la stesura di documenti professionali e uniformi.
 
 \subsection{Layout affiancato}
 Disposizione dell'interfaccia utente che divide lo schermo in due pannelli visibili contemporaneamente (ad esempio, per mostrare il documento originale a sinistra e i dati estratti a destra).
+
+\subsection{Learning Time (MPD11)}
+Tempo di apprendimento richiesto a un utente tipo per comprendere ed essere in grado di utilizzare autonomamente le funzioni principali del sistema.
 
 \subsection{Lista di Dispaccio}
 Elenco organizzato dei destinatari e dei messaggi pronti per l'invio dopo l'analisi AI.
@@ -352,6 +401,9 @@ Informazioni di contesto associate a un file, come il periodo temporale (mese/an
 \subsection{Milestone}
 Traguardo significativo o punto di controllo nel cronoprogramma di progetto che segna il completamento di una fase importante.
 
+\subsection{MinIO}
+Server di object storage open-source ad alte prestazioni, compatibile a livello di API con il servizio cloud Amazon S3 (Simple Storage Service), utilizzato in locale o in infrastrutture private per la gestione dell'upload dei file.
+
 \subsection{Mitigazione (dei rischi)}
 Insieme di azioni e strategie concrete messe in atto per ridurre la probabilità che un rischio si verifichi o per limitarne l'impatto negativo sul progetto.
 
@@ -366,6 +418,9 @@ Approccio metodologico e framework operativo adottato dal team per scandire le f
 
 \subsection{Modularità}
 Suddivisione del codice in componenti indipendenti con responsabilità singole.
+
+\subsection{Moduli Esterni}
+Sistemi informatici terzi, indipendenti dall'applicazione principale (es. API di servizi di IA o provider cloud), con cui il software scambia dati per completare determinate operazioni.
 
 \subsection{MVP (Minimum Viable Product)}
 Versione del prodotto con le funzionalità minime necessarie per essere rilasciato e testato.
@@ -385,14 +440,23 @@ Una tecnologia che legge automaticamente il testo contenuto all'interno di immag
 \subsection{PB (Product Baseline)}
 Fase del progetto che identifica la linea di base del prodotto finale.
 
+\subsection{Pest}
+Framework di testing moderno per il linguaggio di programmazione PHP, focalizzato sulla semplicità e sulla leggibilità dei test unitari, integrato nella suite del backend.
+
 \subsection{Pianificazione}
 Attività di definizione della sequenza di compiti, scadenze e assegnazione delle responsabilità per il raggiungimento degli obiettivi.
 
 \subsection{Pianificazione delle Scadenze}
 Processo di calendarizzazione e allocazione temporale delle attività, delle pietre miliari (Milestone) e delle consegne ufficiali del progetto al fine di monitorare l'avanzamento dei lavori ed evitare ritardi.
 
+\subsection{Planned Value (MPC-PV)}
+Valore del budget autorizzato e assegnato al lavoro pianificato da completare entro una determinata data.
+
 \subsection{Postcondizioni}
 Stato finale dei dati o del sistema dopo la conclusione con successo di un caso d'uso.
+
+\subsection{PostgreSQL}
+Sistema di gestione di database relazionali (RDBMS) open-source a oggetti, noto per l'elevata affidabilità, robustezza dei dati e conformità agli standard SQL.
 
 \subsection{Precondizioni}
 Stato obbligatorio in cui deve trovarsi il sistema prima che un caso d'uso possa essere avviato.
@@ -415,6 +479,11 @@ Richiesta di revisione e integrazione di modifiche da un branch a un altro su Gi
 \subsection{PWA (Progressive Web App)}
 Applicazione web sviluppata per offrire un'esperienza utente, funzionalità e prestazioni del tutto simili a quelle di un'applicazione nativa (mobile o desktop), pur essendo accessibile tramite browser.
 
+\section{Q}
+
+\subsection{Quality Metrics Satisfied (MPC-QMS)}
+Percentuale che indica il rapporto tra il numero di metriche di qualità che hanno soddisfatto le soglie prefissate e il totale delle metriche monitorate.
+
 \section{R}
 
 \subsection{Rating}
@@ -425,6 +494,12 @@ Un sistema di sicurezza che decide cosa può fare un utente in base al suo ruolo
 
 \subsection{Redattore}
 Utente aziendale delegato alla creazione di comunicazioni interne tramite il modulo AI Assistant, responsabile della calibrazione del tono e della validazione dei contenuti.
+
+\subsection{Redis Queue (RQ)}
+Sistema di gestione delle code di messaggi basato su Redis che permette di pianificare ed eseguire job, attività o elaborazioni in background in modalità asincrona rispetto al flusso principale dell'applicazione.
+
+\subsection{Requirements Stability Index (MPC-RSI)}
+Indice che misura il grado di stabilità dei requisiti nel tempo, calcolato analizzando il numero di requisiti aggiunti, modificati o eliminati rispetto a una baseline iniziale.
 
 \subsection{Responsabile}
 Ruolo incaricato di approvare formalmente i contenuti e coordinare il team.
@@ -447,6 +522,9 @@ Capacità del sistema di gestire errori e anomalie (es. retry di rete) mantenend
 \subsection{Retention Policy}
 La regola che stabilisce per quanto tempo un documento deve essere conservato nel sistema prima di essere cancellato definitivamente per motivi di privacy o spazio.
 
+\subsection{Riferimento Normativo}
+Legge, standard ufficiale o documento interno (es. le Norme di Progetto stesse) che contiene disposizioni a cui il team deve obbligatoriamente conformarsi durante lo svolgimento delle attività.
+
 \subsection{RO (Rischio Operativo/Organizzativo)}
 Categoria di rischi legati alla gestione del gruppo, alla comunicazione interna e all'organizzazione del tempo.
 
@@ -464,6 +542,9 @@ Fase del progetto che identifica una linea di base per i requisiti e le tecnolog
 
 \subsection{Sandbox di Sviluppo}
 Un ambiente di prova isolato dove i programmatori possono testare nuove funzioni senza rischiare di rompere il sistema principale usato dagli utenti.
+
+\subsection{Schedule Performance Index (MPC-SPI)}
+Indicatore dell'efficienza temporale di un progetto; esprime il rapporto tra il valore del lavoro completato (Earned Value) e il valore del lavoro pianificato (Planned Value).
 
 \subsection{Scenario Alternativo}
 Percorso secondario che descrive la gestione di errori, eccezioni o scelte diverse dell'utente.
@@ -506,6 +587,12 @@ Test eseguiti per assicurarsi che nuove modifiche non abbiano introdotto errori 
 \subsection{Test di Unità}
 Test volti a verificare il corretto funzionamento di singole parti (unità) di codice.
 
+\subsection{Time Efficiency (MPC-TE)}
+Rapporto percentuale tra le ore produttive effettivamente rendicontate e il totale delle ore nominalmente disponibili all'interno di un periodo o sprint.
+
+\subsection{Time Estimate At Completion (MPC-TEAC)}
+Stima della durata temporale totale complessiva richiesta per completare il progetto alla luce dell'andamento effettivo osservato.
+
 \subsection{Timeout}
 Interruzione forzata di un'operazione che si verifica quando un servizio o un modulo (come il motore di generazione AI) non risponde alla richiesta entro un tempo massimo prestabilito.
 
@@ -518,6 +605,10 @@ Parametri di configurazione (es. formale, empatico, tecnico) che calibrano il re
 \subsection{Trigger}
 Evento o azione che innesca l'esecuzione di un caso d'uso.
 
+\section{U}
+
+\subsection{Utente Operativo}
+Tipologia di utente (es. membro dello studio o consulente) autorizzato a utilizzare le funzionalità ordinarie del software, privo di privilegi di configurazione sistemistica o amministrativa.
 
 \section{V}
 
