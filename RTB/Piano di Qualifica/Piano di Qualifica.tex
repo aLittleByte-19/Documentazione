@@ -17,8 +17,9 @@
 \pgfplotsset{compat=1.18}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
-\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{.github/site-src/assets/solo_logo.png}
+
 
 \geometry{
     left=2.5cm,
@@ -1110,9 +1111,30 @@ Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare
 \caption{Andamento MPC-EV e MPC-PV per sprint (fase RTB)}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-EV e MPC-PV da inserire]
-\centering Inserire qui il grafico a linee dell'andamento di EV e PV cumulativi per sprint.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Andamento MPC-EV e MPC-PV Cumulativi},
+    xlabel={Sprint},
+    ylabel={Valore (\euro)},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=0, ymax=3200,
+    grid=both,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+    width=0.85\textwidth,
+    height=6.5cm
+]
+\addplot[color=blue, mark=o, thick, dashed] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835)};
+\addlegendentry{PV Cumulativo}
+\addplot[color=teal, mark=x, thick] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835)};
+\addlegendentry{EV Cumulativo}
+\end{axis}
+\end{tikzpicture}
+\caption{Grafico dell'andamento cumulativo di Planned Value ed Earned Value per sprint.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} Entrambi i valori sono $\geq 0$ per tutti gli sprint (\emph{soglia accettabile} raggiunta). Il PV cumulativo è $\leq \text{BAC} = \EUR{12.575,00}$ (\emph{soglia ottimale per MPC-PV} raggiunta); l'EV cumulativo è $\leq \text{EAC}$ (\emph{soglia ottimale per MPC-EV} raggiunta).
 
@@ -1138,9 +1160,28 @@ L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro comple
 \caption{Andamento MPC-AC per sprint (fase RTB)}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-AC da inserire]
-\centering Inserire qui il grafico a linee dell'andamento dell'AC cumulativo per sprint.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Andamento MPC-AC Cumulativo},
+    xlabel={Sprint},
+    ylabel={Costo Effettivo (\euro)},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=0, ymax=3500,
+    grid=both,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+    width=0.85\textwidth,
+    height=6.5cm
+]
+\addplot[color=red!80!black, mark=square*, thick] coordinates {(S1,705) (S2,1330) (S3,2160) (S4,3135)};
+\addlegendentry{AC Cumulativo}
+\end{axis}
+\end{tikzpicture}
+\caption{Grafico dell'andamento dei costi effettivi cumulati.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} I costi effettivi sono positivi in tutti gli sprint (\emph{soglia accettabile} raggiunta). Rispetto al PV si osserva un lieve sforamento in ogni sprint, indicando costi leggermente superiori a quelli pianificati.
 
@@ -1173,9 +1214,32 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
 \caption{Andamento MPC-CPI e MPC-SPI per sprint (fase RTB)}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-CPI e MPC-SPI da inserire]
-\centering Inserire qui il grafico a linee dell'andamento di CPI e SPI per sprint.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Andamento indici CPI e SPI},
+    xlabel={Sprint},
+    ylabel={Indice},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=0.8, ymax=1.1,
+    grid=both,
+    grid style={dashed, gray!30},
+    legend pos=south west,
+    width=0.85\textwidth,
+    height=6.5cm
+]
+\addplot[color=orange, mark=violet, thick] coordinates {(S1,0.950) (S2,0.929) (S3,0.919) (S4,0.904)};
+\addlegendentry{CPI}
+\addplot[color=cyan!80!black, mark=triangle*, thick] coordinates {(S1,1.000) (S2,1.000) (S3,1.000) (S4,1.000)};
+\addlegendentry{SPI}
+\draw[red, thick, dashed] (axis cs:S1,0.9) -- (axis cs:S4,0.9);
+\node[red, anchor=south west] at (axis cs:S1,0.9) {\footnotesize Soglia Accettabile (0.9)};
+\end{axis}
+\end{tikzpicture}
+\caption{Confronto tra Cost Performance Index e Schedule Performance Index.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} Il CPI risulta in lieve calo progressivo ma rimane $\geq 0{,}9$ (\emph{soglia accettabile} raggiunta) per tutti gli sprint. Il valore a S4 di 0,904 indica che per ogni euro pianificato si è sostenuto un costo di circa \EUR{1,11}. L'SPI pari a 1,000 in tutti gli sprint conferma il pieno rispetto delle scadenze pianificate (\emph{soglia ottimale} raggiunta).
 
@@ -1208,9 +1272,32 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
 \caption{Andamento MPC-EAC e MPC-ETC per sprint (fase RTB)}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-EAC e MPC-ETC da inserire]
-\centering Inserire qui il grafico a linee dell'andamento di EAC ed ETC per sprint, con riferimento al BAC.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Andamento EAC e ETC rispetto al BAC},
+    xlabel={Sprint},
+    ylabel={Valore (\euro)},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=9000, ymax=15000,
+    grid=both,
+    grid style={dashed, gray!30},
+    legend pos=east,
+    width=0.85\textwidth,
+    height=6.5cm
+]
+\addplot[color=blue, mark=purple, thick] coordinates {(S1,13231) (S2,13544) (S3,13683) (S4,13906)};
+\addlegendentry{EAC}
+\addplot[color=olive, mark=diamond*, thick] coordinates {(S1,12526) (S2,12214) (S3,11523) (S4,10771)};
+\addlegendentry{ETC}
+\draw[green!60!black, ultra thick, dotted] (axis cs:S1,12575) -- (axis cs:S4,12575);
+\node[green!60!black, anchor=north west] at (axis cs:S1,12575) {\footnotesize BAC (12.575 \euro)};
+\end{axis}
+\end{tikzpicture}
+\caption{Proiezione dei costi finali (EAC) e costi a finire (ETC) rispetto al budget.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} L'EAC stimato supera il BAC di \EUR{12.575,00} in tutti gli sprint e si attesta a \EUR{13.906,00} a S4, con uno scostamento del $+10{,}6\%$ rispetto al BAC — superiore alla soglia accettabile di $\pm 5\%$ (\emph{soglia non raggiunta} per MPC-EAC). L'ETC è positivo per tutti gli sprint (\emph{soglia accettabile} raggiunta per MPC-ETC). Il trend crescente dell'EAC richiede un monitoraggio rigoroso dei costi nelle fasi successive.
 
@@ -1236,9 +1323,30 @@ Il Time Estimate At Completion stima la durata totale del progetto a partire dal
 \caption{Andamento MPC-TEAC per sprint (fase RTB — durata pianificata RTB: 8 settimane)}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-TEAC da inserire]
-\centering Inserire qui il grafico dell'andamento del TEAC per sprint rispetto alla durata pianificata.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Andamento Time Estimate At Completion},
+    xlabel={Sprint},
+    ylabel={Settimane},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=0, ymax=10,
+    grid=both,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+    width=0.85\textwidth,
+    height=6.5cm
+]
+\addplot[color=violet, mark=*, thick] coordinates {(S1,8.0) (S2,8.0) (S3,8.0) (S4,8.0)};
+\addlegendentry{TEAC}
+\draw[gray, thick, dashed] (axis cs:S1,8.0) -- (axis cs:S4,8.0);
+\node[gray, anchor=south west] at (axis cs:S1,8.0) {\footnotesize Durata Pianificata (8 sett.)};
+\end{axis}
+\end{tikzpicture}
+\caption{Stima del tempo finale di conclusione delle attività.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} TEAC = durata pianificata (8 settimane) in tutti gli sprint (\emph{soglia ottimale} raggiunta). Il progetto non presenta ritardi di pianificazione nella fase RTB.
 
@@ -1285,9 +1393,36 @@ dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di fra
 \caption{Indice di Gulpease dei documenti RTB}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-IG da inserire]
-\centering Inserire qui il grafico a barre dell'Indice di Gulpease per documento, con riferimento alla soglia accettabile.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Indice di Gulpease per Documento},
+    ylabel={Punteggio Indice},
+    symbolic x coords={AdR, NdP, PdP, PdQ},
+    xtick=data,
+    ymin=0, ymax=80,
+    ybar,
+    bar width=20pt,
+    grid=major,
+    grid style={dashed, gray!30},
+    width=0.85\textwidth,
+    height=6.5cm,
+    nodes near coords,
+    nodes near coords align={vertical}
+]
+\addplot[fill=skyblue!60!white, draw=black] coordinates {
+    (AdR,59.7) 
+    (NdP,45.9) 
+    (PdP,47.7) 
+    (PdQ,55.8)
+};
+\draw[red, thick, dashed] (axis cs:AdR,60) -- (axis cs:PdQ,60);
+\node[red, anchor=south east] at (axis cs:PdQ,60) {\footnotesize Soglia Accettabile (60)};
+\end{axis}
+\end{tikzpicture}
+\caption{Livello di leggibilità dei documenti calcolato tramite Indice di Gulpease.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} I documenti tecnici mostrano punteggi compresi tra 45,9 e 59,7, al di sotto della soglia accettabile di 60 (\emph{soglia non raggiunta}). Questo risultato è strutturalmente atteso: la terminologia tecnica specialistica, gli acronimi e i costrutti formali riducono l'indice di leggibilità nei documenti ingegneristici. Si raccomanda di semplificare ove possibile la struttura delle frasi nelle prossime revisioni.
 
@@ -1313,9 +1448,8 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{detex} e 
 \caption{Correttezza ortografica dei documenti RTB}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-CO da inserire]
-\centering Inserire qui il grafico a barre degli errori ortografici per documento.
-\end{tcolorbox}
+
+
 
 \noindent\textbf{Valutazione:} Tutti i documenti presentano 0 errori ortografici (\emph{soglia ottimale} raggiunta).
 
@@ -1367,9 +1501,48 @@ La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase 
 \caption{Calcolo MPC-QMS per la fase RTB}
 \end{table}
 
-\begin{tcolorbox}[colback=gray!5, colframe=gray!45, title=Segnaposto — Grafico MPC-QMS da inserire]
-\centering Inserire qui il grafico a barre della percentuale di metriche soddisfatte per sprint.
-\end{tcolorbox}
+L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) grazie al pieno rispetto degli obiettivi di progetto e alla qualità della documentazione. In S2, S3, S4, il valore si stabilizza all'80\% (\emph{soglia accettabile}) a causa del superamento della soglia del $+5\%$ per l'EAC e del punteggio IG inferiore a 60 in Analisi Requisiti. Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+    title={Andamento MPC-QMS per Sprint rispetto alle Soglie},
+    ylabel={Percentuale soddisfazione (\%)},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=0, ymax=100,
+    ytick={0, 20, 40, 60, 80, 100},
+    grid=major,
+    grid style={dashed, gray!30},
+    bar width=18pt, 
+    legend style={at={(0.5,-0.20)}, anchor=north, legend columns=-1, draw=none} 
+]
+
+
+\addplot[ybarStacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20)};
+
+
+\addplot[ybarStacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80)};
+
+
+\addplot[ybar, fill=blue!70!white, draw=none, bar width=10pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0)};
+
+
+\addplot[ybar, fill=green!60!black, draw=none, bar width=10pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,80)};
+
+
+\addplot[draw=blue!70!white, thick, fill=none] coordinates {}; \addlegendentry{Valore Rilevato}
+
+
+\addplot[pattern=dots, pattern color=black!40, fill=none] coordinates {}; \addlegendentry{Valore Accettabile (Soglia 80\%)}
+
+\addplot[fill=gray!8, pattern=crosshatch, pattern color=black!40] coordinates {}; \addlegendentry{Valore Ottimale (Soglia 100\%)}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Grafico percentuale di metriche soddisfatte (MPC-QMS) per sprint confrontato con le soglie regionali.}
+\end{figure}
 
 \noindent\textbf{Valutazione:} Il QMS al termine della fase RTB è pari all'80\%, corrispondente alla \emph{soglia accettabile} ($\geq 80\%$). Le due metriche non soddisfatte richiedono interventi correttivi:
 \begin{itemize}
