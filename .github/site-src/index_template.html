@@ -2,56 +2,213 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Documentazione Progetto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aLittleByte - Documentazione Progetto</title>
+    <!-- Font Awesome per le icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
+
+<header>
     <nav>
-     <img id="header-logo" src="assets/logo.png"  alt=""> <p class="nome-logo">aLittleByte</p>
-      <div id="nav-navigation">
-        <p><a href="#candidatura">CANDIDATURA</a></p>
-        <p><a href="#RTB">RTB</a></p>
-        <p><a href="#PB">PB</a></p>
-        <p><a href="#contatti">CONTATTI</a></p>
-        <p><a href="#about">ABOUT</a></p>
-      </div>
+        <div class="logo-container">
+            <img id="header-logo" src="assets/logo.png" alt="aLittleByte Logo">
+            <p class="nome-logo">aLittleByte</p>
+        </div>
+        <div class="nav-controls">
+            <div id="nav-navigation">
+                <button class="nav-btn" data-section="candidatura">
+                    <i class="fas fa-file-alt"></i>CANDIDATURA
+                </button>
+                <button class="nav-btn" data-section="rtb">
+                    <i class="fas fa-chart-line"></i>RTB
+                </button>
+                <button class="nav-btn" data-section="pb">
+                    <i class="fas fa-check-double"></i>PB
+                </button>
+                <button class="nav-btn" data-section="contatti">
+                    <i class="fas fa-envelope"></i>CONTATTI
+                </button>
+                <button class="nav-btn active" data-section="about">
+                    <i class="fas fa-users"></i>ABOUT
+                </button>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
     </nav>
-  </header>
+</header>
 
-  <section id="Documentazione" class="primaSezione">
-    <!-- START_DOCS -->
-    <!-- Contenuto generato automaticamente -->
-    <!-- END_DOCS -->
-  </section>
-  <section id="contatti">
-    <h1>CONTATTI</h1>
-    <p>Repository Github: 
-      <a id="link-github" href="https://github.com/aLittleByte-19/Documentazione" target="_blank">https://github.com/aLittleByte-19/Documentazione</a>
-    </p>
-    <p>Email: <a href="mailto:alittlebyte19@gmail.com" target="_blank"><span class="mail">alittlebyte.swe@gmail.com</span></a></p>
-  </section>
-  
-    <section id="about">
-    <h1>ABOUT</h1>
-    <p>
-    Il gruppo aLittleByte nasce per il progetto didattico del corso di <em>Ingegneria del Software</em>
-    dell'Università di Padova</a>. 
-    </p>
-    <p>I membri del gruppo sono:
-      <ul>
-        <li><a href="https://github.com/eleonorabellet" target="_blank">Bellet Eleonora</a></li>
-        <li><a href="https://github.com/dieguz22" target="_blank">Belluz Diego</a></li>
-        <li><a href="https://github.com/angelica-gastal" target="_blank">Gastaldello Angelica</a></li>
-        <li><a href="https://github.com/VinnYuri" target="_blank">Kaneda Fernandes Vinicius Yuri</a></li>
-        <li><a href="https://github.com/angelamaule" target="_blank">Maule Angela</a></li>
-        <li><a href="https://github.com/ArekkusuIT" target="_blank">Oloni Alex</a></li>
-        <li><a href="https://github.com/subnetMusk" target="_blank">Soligo Leonardo</a></li>
-      </ul>
-    </p>
-  </section>
+<main>
+    <div class="section-container">
+        <div class="info-box">
+            <i class="fas fa-info-circle"></i> 
+            Clicca sui pulsanti sopra per vedere le diverse sezioni. Dentro ogni sezione trovi menu a tendina per organizzare i documenti.
+        </div>
 
-  <p id="last-update">Ultimo aggiornamento: <!-- TIMESTAMP --></p>
-  
+        <!-- SEZIONE CANDIDATURA -->
+        <div id="candidatura" class="main-section dynamic-section">
+            <h2><i class="fas fa-file-signature"></i>Candidatura</h2>
+            <!-- START_DOCS_CANDIDATURA -->
+            
+            <!-- END_DOCS_CANDIDATURA -->
+        </div>
+
+        <!-- SEZIONE RTB -->
+        <div id="rtb" class="main-section dynamic-section">
+            <h2><i class="fas fa-chart-line"></i>RTB - Requirement & Technology Baseline</h2>
+            
+            <!-- START_DOCS_RTB -->
+            <!-- Lo script Python inserirà qui automaticamente i dropdown con i PDF della cartella documents/rtb/ -->
+            <!-- END_DOCS_RTB -->
+        </div>
+
+        <!-- SEZIONE PB -->
+        <div id="pb" class="main-section dynamic-section">
+            <h2><i class="fas fa-check-double"></i>PB - Product Baseline</h2>
+            
+            <!-- START_DOCS_PB -->
+            <!-- Lo script Python inserirà qui automaticamente i dropdown con i PDF della cartella documents/pb/ -->
+            <!-- END_DOCS_PB -->
+            
+        </div>
+
+        <!-- SEZIONE CONTATTI -->
+        <div id="contatti" class="main-section dynamic-section">
+            <h2><i class="fas fa-envelope"></i>Contatti</h2>
+            
+            <div class="inner-dropdown">
+                <div class="inner-dropdown-header">
+                    <h3><i class="fas fa-address-card"></i>Informazioni di Contatto</h3>
+                    <i class="fas fa-chevron-down inner-dropdown-icon"></i>
+                </div>
+                <div class="inner-dropdown-content">
+                    <div class="inner-content">
+                        <ul class="contact-list">
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:alittlebyte@studenti.unipd.it">alittlebyte@studenti.unipd.it</a>
+                            </li>
+                            <li>
+                                <i class="fab fa-github"></i>
+                                <a href="https://github.com/aLittleByte" target="_blank">GitHub - aLittleByte</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-university"></i>
+                                <span>Università di Padova - Ingegneria del Software</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- SEZIONE ABOUT (visibile di default) -->
+<div id="about" class="main-section dynamic-section active-section">
+    <h2><i class="fas fa-users"></i>About - Il Gruppo</h2>
+    
+    <div class="inner-dropdown">
+        <div class="inner-dropdown-header">
+            <h3><i class="fas fa-info-circle"></i>Chi siamo</h3>
+            <i class="fas fa-chevron-down inner-dropdown-icon"></i>
+        </div>
+        <div class="inner-dropdown-content">
+            <div class="inner-content">
+                <p>
+                    Il gruppo aLittleByte nasce per il progetto didattico del corso di <em>Ingegneria del Software</em>
+                    dell'Università di Padova.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="inner-dropdown">
+        <div class="inner-dropdown-header">
+            <h3><i class="fas fa-user-friends"></i>Membri del Team</h3>
+            <i class="fas fa-chevron-down inner-dropdown-icon"></i>
+        </div>
+        <div class="inner-dropdown-content">
+            <div class="inner-content">
+                <ul class="members-grid">
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/eleonorabellet.png" alt="Eleonora Bellet" class="member-avatar">
+                            <a href="https://github.com/eleonorabellet" target="_blank">
+                                <i class="fab fa-github"></i>Bellet Eleonora
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/dieguz22.png" alt="Diego Belluz" class="member-avatar">
+                            <a href="https://github.com/dieguz22" target="_blank">
+                                <i class="fab fa-github"></i>Belluz Diego
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/angelica-gastal.png" alt="Angelica Gastaldello" class="member-avatar" >
+                            <a href="https://github.com/angelica-gastal" target="_blank">
+                                <i class="fab fa-github"></i>Gastaldello Angelica
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/VinnYuri.png" alt="Vinicius Yuri Kaneda Fernandes" class="member-avatar" >
+                            <a href="https://github.com/VinnYuri" target="_blank">
+                                <i class="fab fa-github"></i>Kaneda Fernandes Vinicius Yuri
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/angelamaule.png" alt="Angela Maule" class="member-avatar">
+                            <a href="https://github.com/angelamaule" target="_blank">
+                                <i class="fab fa-github"></i>Maule Angela
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/ArekkusuIT.png" alt="Alex Oloni" class="member-avatar" >
+                            <a href="https://github.com/ArekkusuIT" target="_blank">
+                                <i class="fab fa-github"></i>Oloni Alex
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="member-card">
+                            <img src="https://github.com/subnetMusk.png" alt="Leonardo Soligo" class="member-avatar" >
+                            <a href="https://github.com/subnetMusk" target="_blank">
+                                <i class="fab fa-github"></i>Soligo Leonardo
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <p id="last-update">
+        <i class="fas fa-sync-alt"></i> Ultimo aggiornamento: 09/03/2026 14:57
+    </p>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <p>© 2026 aLittleByte - Ingegneria del Software</p>
+        <p>Università degli Studi di Padova</p>
+    </div>
+</footer>
+
+<div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
