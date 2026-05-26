@@ -4,19 +4,28 @@
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage{geometry}
-\usepackage{tabularx}
+\usepackage{tabularx} % Per l'ambiente tabularx (tabelle)
+\usepackage{calc} % Sempre per le tabelle
 \usepackage[table]{xcolor}
 \usepackage[most]{tcolorbox}
-\usepackage{float}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
-\usepackage{amsmath}
-\usepackage{longtable}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{xcolor}  
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{colortbl}
 \usepackage{eurosym}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec} 
 
-\newcommand{\groupmail}{alittlebyte19@gmail.com}
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
 \newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
 \newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
 
@@ -29,6 +38,55 @@
     includeheadfoot
 }
 
+\newcommand{\slice}[4]{
+  \pgfmathparse{0.5*#1+0.5*#2}
+  \let\midangle\pgfmathresult
+
+  \draw[thick,fill=black!10] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+
+  \node[label=\midangle:#4] at (\midangle:1) {};
+
+  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
+  \let\temp\pgfmathresult
+  \pgfmathparse{max(\temp,-0.5) + 0.8}
+  \let\innerpos\pgfmathresult
+  \node at (\midangle:\innerpos) {#3};
+}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+%\def\toclevel@paragraph{6}
+\def\toclevel@subparagraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+
+
 \pagestyle{fancy}
 \fancyhf{}
 
@@ -37,7 +95,7 @@
 
 \renewcommand{\footrulewidth}{0.4pt}
 \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
-\fancyfoot[R]{Piano di Qualifica}
+\fancyfoot[R]{Piano di Progetto}
 
 \fancypagestyle{firstpage}{
     \fancyhf{}
@@ -52,10 +110,7 @@
         }
     }
     \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
-    \fancyfoot[R]{Piano di Qualifica}
-
-    \setcounter{secnumdepth}{4}
-    \setcounter{tocdepth}{4}
+    \fancyfoot[R]{Piano di Progetto}
 }
 
 \begin{document}
@@ -65,7 +120,7 @@
 \vspace*{0.5cm}
 
 \begin{center}
-    {\LARGE \textbf{Piano di Qualifica}}
+    {\LARGE \textbf{Piano di Progetto}}
 \end{center}
 
 \vspace{1.5cm}
@@ -82,18 +137,18 @@
         left=8pt, right=8pt, top=8pt, bottom=8pt
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Stato       & In Corso \\
             Gruppo      & aLittleByte (gruppo 19) \\
-            Redattori   & Eleonora Bellet, Diego Belluz \\
-            Verificatori& Leonardo Soligo, Angelica Gastaldello\\
+            Redattore   & A. Maule, A.Oloni, E. Bellet \\
+            Verificatori &  \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Versione    & 0.5.0 \\
-            Data        & 17/05/2026 \\
+            Data        & 2026-04-13
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
 
 \newpage
-
+\fancyfoot[R]{Piano di Progetto\hspace{0.8em}}
 \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
 
 \begin{center}
@@ -101,1493 +156,1664 @@
 \end{center}
 
 \vspace{0.35cm}
-
 \renewcommand{\arraystretch}{1.35}
 \rowcolors{2}{gray!8}{white}
-\begin{center}
-    {\footnotesize
-    \begin{tabularx}{\textwidth}{|p{1.4cm}|p{1.8cm}|X|p{2.4cm}|p{2.3cm}|p{2.3cm}|}
+\begin{table}[h]
+\centering
+    \footnotesize
+    \begin{tabularx}{\textwidth}{|l|l|X|p{2cm}|p{2.5cm}|p{2.5cm}|}
         \hline
         \rowcolor{gray!20}
-        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} \\
         \hline
-        0.5.0 & 17/05/2026 & Aggiunta sezione 5 - Cruscotto di qualità & - & - & - \\
+        0.9.0 & 2026-05-25 & Aggiunta del quarto sprint & Eleonora Bellet & - \\
         \hline
-        0.4.3 & 15/05/2026 & Test di accettazione e tabelle di tracciamento & - & - & - \\
+        0.8.0 & 2026-05-20 & Aggiunti i preventivi a finire del terzo sprint e iniziato il preventivo del quarto sprint & Eleonora Bellet & - \\
         \hline
-        0.4.2 & 14/05/2026 & Test di sistema - qualità e vincolo & - & - & - \\
+        0.7.0 & 2026-05-15 & Aggiunti i preventivi a finire del primo e del secondo sprint & Eleonora Bellet & - \\
         \hline
-        0.4.1 & 13/05/2026 & Test di sistema - funzionali & - & - & - \\
+        0.6.0 & 2026-05-12 & Aggiunto terzo sprint & Eleonora Bellet & -\\
         \hline
-        0.4.0 & 12/05/2026 & Aggiunta sezione 4 - Metodi di testing & - & - & - \\
+        0.5.0 & 2026-05-11 & Aggiunti rischi all'analisi dei rischi & Eleonora Bellet & - \\
+       \hline
+        0.4.0 & 2026-05-07 & Verifica & - & Y.Y. Kaneda Fernandes \\
         \hline
-        0.3.2 & 09/05/2026 & Correzioni soglie metriche MPC e MPD & - & - & - \\
+        0.3.4 & 2026-05-02 & Aggiunta di specifiche nel Primo Periodo e Stesura del Secondo Periodo & A.Oloni & - \\
         \hline
-        0.3.1 & 08/05/2026 & Aggiunta metriche MPD per usabilità, mantenibilità e portabilità & - & - & - \\
+        0.3.3 & 2026-04-29 & Inizio stesura della sezione \textbf{\hyperref[sec:pianificazione]{§4}} & A.Oloni & -\\
         \hline
-        0.3.0 & 07/05/2026 & Aggiunta sezione 3 - Qualità di prodotto & - & - & - \\
+        0.3.2 & 2026-04-26 & Stesura della sezione \textbf{\hyperref[sec:modello_di_sviluppo]{§3}} & A.Oloni & - \\
         \hline
-        0.2.1 & 05/05/2026 & Aggiunta metriche MPC per processi organizzativi & - & - & - \\
+        0.3.1 & 2026-04-23 & Stesura delle sezioni \textbf{\hyperref[sec:introduzione]{§1}} e \textbf{\hyperref[sec:analisi_dei_rischi]{§2}} & A. Oloni & - \\
         \hline
-        0.2.0 & 03/05/2026 & Aggiunta sezione 2 - Qualità di processo & - & - & - \\
+        0.3.0 & 2026-04-21 & Aggiunta delle sezioni: \textbf{\hyperref[sec:scopo_del_documento]{§1.2}, \hyperref[sec:glossario]{§1.3}, \hyperref[sec:riferimenti]{§1.4}, \hyperref[sec:analisi_dei_rischi]{§2}, \hyperref[sec:modello_di_sviluppo]{§3}}, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & A. Oloni & -\\
         \hline
-        0.1.1 & 01/05/2026 & Completamento riferimenti normativi e informativi & - & - & - \\
+        0.2.0 & 2026-04-14 & Stesura del primo periodo & Angela Maule & -\\
         \hline
-        0.1.0 & 29/04/2026 & Prima stesura del documento & - & - & - \\
+        0.1.0 & 2026-04-13 & Prima stesura del documento & Angela Maule & - \\
         \hline
     \end{tabularx}
-    }
-
-\end{center}
-\newpage
-
-\begin{center} 
-    {\Large \textbf{Indice}}
-\end{center}
-
-\vspace{0.6cm}
-
-\tableofcontents
-
+    \caption{Registro delle Modifiche}
+\end{table}
 \newpage
 \pagenumbering{arabic}
-\setcounter{page}{4}
-\fancyfoot[R]{Piano di Qualifica\hspace{0.8em}\thepage}
+\setcounter{page}{1}
+\fancyfoot[R]{Piano di Progetto\hspace{0.8em}\thepage}
+\newpage
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\newpage
 
 \section{Introduzione}
+\label{sec:introduzione}
 
-\subsection{Finalità del documento}
-Il presente documento, denominato \textit{Piano di Qualifica}, ha lo scopo di definire le strategie, le procedure e le metriche adottate dal gruppo \textit{aLittleByte} per garantire la qualità del prodotto software e dei processi produttivi relativi al progetto C5 (NEXUM), proposto dall'azienda \textit{Eggon}.
+\subsection{Scopo del documento}
+\label{sec:scopo_del_documento}
+Il Piano di Progetto è un documento nella quale vengono fissati in maniera chiara e coincisa gli obiettivi, la progettazione, l'esecuzione ed il controllo delle attività del progetto, fungendo quindi da bussola per allineare il lavoro in svolgimento verso un'unico obiettivo comune.
+Inoltre questo documento specifica anche la suddivisione del lavoro, la stima dei costi di realizzazione, le risorse necessarie e i vari rischi con la loro conseguente mitigazione, dati necessari per il compimento dei traguardi stabiliti ed evitare costi ed espansioni non controllate.
 
-In particolare, questo documento si prefigge di:
+
+\subsection{Scopo del prodotto}
+\label{sec:scopo_del_prodotto}
+Il prodotto da realizzare consiste in un'estensione innovativa per \textit{''Nexum"}, una piattaforma digitale sviluppata dall'azienda proponente \textit{Eggon}, dedicata alla comunicazione interna e alla gestione HR.
+Nello specifico, il progetto mira a potenziare l'ecosistema Nexum attraverso lo sviluppo e l'integrazione di due moduli basati sull'Intelligenza Artificiale:
 \begin{itemize}
-    \item \textbf{Definire gli obiettivi di qualità:} specificare i target qualitativi per il processo di sviluppo (efficienza, stabilità) e per il prodotto software (funzionalità, affidabilità, manutenibilità), in conformità con gli standard ISO/IEC 12207 e ISO/IEC 9126;
-    \item \textbf{Identificare le metriche:} selezionare gli indicatori quantitativi più idonei per monitorare il raggiungimento degli obiettivi, fissando per ciascuno le soglie di accettazione e di ottimalità;
-    \item \textbf{Pianificare le attività di verifica e validazione:} descrivere le metodologie di test (unità, integrazione, sistema, accettazione) e le procedure di analisi statica del codice e della documentazione;
-    \item \textbf{Monitorare l'andamento del progetto:} fornire un resoconto puntuale delle misurazioni effettuate durante le varie fasi del ciclo di vita, permettendo al team di individuare tempestivamente criticità e attuare azioni correttive.
+    \item \textbf{AI Assistant Generativo:} Un modulo dedicato agli utenti amministrativi (dashboard) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un prompt, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
+    \item \textbf{AI Co-Pilot per Consulenti del Lavoro (CdL):} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di OCR ed \textbf{Entity Resolution}, e automatizzare lo smistamento e il dispaccio massivo.
 \end{itemize}
+
+L'obiettivo finale è migliorare l'efficienza dei processi HR e semplificare l'interoperabilità tra le aziende e gli studi dei Consulenti del Lavoro.
 
 \subsection{Glossario}
-Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, è stato redatto un documento esterno denominato \textit{Glossario}.
-I termini tecnici, gli acronimi e le parole con un significato specifico all'interno del progetto sono contrassegnati nel testo da una ``G'' in pedice (es. parola\textsubscript{\scalebox{0.6}{\textbf{G}}}). La loro definizione completa è consultabile nel \textit{Glossario}.
+\label{sec:glossario}
+Per questioni di ordine e di chiarezza dei concetti utilizzati, si è deciso di redarre un \textit{Glossario}, nel quale viene contenuta
+tutta la terminologia e la specifica dei termini che possono risultare confusionari, tecnici o semplicemente ambigui.
+
+Il glossario è disponibile a questo link: da mettere
 
 \subsection{Riferimenti}
+\label{sec:riferimenti}
 \subsubsection{Riferimenti normativi}
 \begin{itemize}
-    \item \textbf{Capitolato d'appalto C5 - NEXUM (Eggon):}\\
-    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
-
-    \item \textbf{Norme di Progetto:}\\
-    Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative.\\
-    \url{https://github.com/aLittleByte-19/Documentazione}
-
-    \item \textbf{Regolamento del progetto didattico:}\\
-    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}
-
-    \item \textbf{Piano di Progetto:}\\
-    Documento interno del gruppo \textit{aLittleByte}.\\
-    \url{https://github.com/aLittleByte-19/Documentazione}
+    \item Norme di Progetto
+    \item Capitolato C5: \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{\textit{\textbf{'Nexum'}}}
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}{Regolamento Progetto Didattico}
 \end{itemize}
-
 \subsubsection{Riferimenti informativi}
 \begin{itemize}
-    \item \textbf{Glossario:}\\
-    Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici.\\
-    \url{https://github.com/aLittleByte-19/Documentazione}
-
-    \item \textbf{Standard ISO/IEC 12207:1995:}\\
-    \textit{Information technology -- Software life cycle processes}.\\
-    \url{https://www.math.unipd.it/~tullio/IS-1/2009/Approfondimenti/ISO_12207-1995.pdf}
-
-    \item \textbf{Standard ISO/IEC 9126:}\\
-    \textit{Software engineering -- Product quality}.\\
-    \url{https://it.wikipedia.org/wiki/ISO/IEC_9126}
-
-    \item \textbf{Slide T07 - Qualità del software:}\\
-    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf}\\
-
-    \item \textbf{Slide T08 - Qualità del software:}\\
-    \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T08.pdf}\\
+    \item Glossario
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf}{T2: Ciclo di Vita del Software}
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T03.pdf}{T3: Modelli di sviluppo Software}
+    \item \href{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf}{T4: Gestione di Progetto}
 \end{itemize}
 
-\section{Qualità di processo}
-La qualità di processo descrive quanto le attività di sviluppo siano pianificate, controllate e migliorate nel tempo. Il riferimento metodologico adottato è lo standard ISO/IEC 12207, adattato al Way of Working del gruppo.
-Le metriche di qualità del processo misurano l'efficacia, l'efficienza e il controllo delle attività necessarie per sviluppare, gestire e consegnare il prodotto software. Il loro scopo è di monitorare l'aderenza alla pianificazione, la stabilità dei processi, la sostenibilità dei costi e il miglioramento costante dei risultati. Queste metriche non valutano il prodotto finito, ma il modo in cui il prodotto viene realizzato.
-Il monitoraggio continuo consente di confrontare i valori rilevati con le soglie stabilite, garantendo trasparenza verso i committenti e coerenza interna nelle scelte operative.
 
-In questo documento, tali misure vengono identificate tramite la sigla \textbf{MPC} (Metriche di Processo e Controllo). Questo identificativo permette di classificare e tracciare tutte le misurazioni relative alla gestione dei costi, all'avanzamento temporale, alla qualità della documentazione e all'efficienza dei processi interni al team di sviluppo.
-
-\subsection{Processi primari}
-\subsubsection{Fornitura}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPC-EV & Earned Value & $\geq 0$ & $\leq$ EAC \\
-        MPC-PV & Planned Value & $\geq 0$ & $\leq$ BAC \\
-        MPC-AC & Actual Cost & $\geq 0$ & $\leq$ EAC \\
-        MPC-CPI & Cost Performance Index & $\geq 0,9$ & $1$ \\
-        MPC-SPI & Schedule Performance Index & $\geq 0,9$ & $1$ \\
-        MPC-EAC & Estimated At Completion & $\pm 5\%$ rispetto al BAC & BAC \\
-        MPC-ETC & Estimate To Complete & $\geq 0$ & $\leq$ EAC \\
-        MPC-TEAC & Time Estimate At Completion & $\geq 0$ & $\leq$ Durata pianificata \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della fornitura.}
-\end{table}
-
-\subsubsection{Sviluppo}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPC-RSI & Requirements Stability Index & $\geq 70\%$ & $100\%$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità dello sviluppo.}
-\end{table}
-
-\subsection{Processi di supporto}
-\subsubsection{Documentazione}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPC-IG & Indice di Gulpease del documento & $\geq 60$ & $\geq 80$ \\
-        MPC-CO & Correttezza ortografica & $0$ errori & $0$ errori \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della documentazione.}
-\end{table}
-
-\subsubsection{Verifica}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPC-CC & Code Coverage & $\geq 80\%$ & $100\%$ \\
-        MPC-TSR & Test Success Rate & $100\%$ & $100\%$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della verifica.}
-\end{table}
-
-\subsubsection{Gestione della qualità}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPC-QMS & Quality Metrics Satisfied & $\geq 80\%$ & $100\%$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della gestione della qualità.}
-\end{table}
-
-\subsection{Processi organizzativi}
-\subsubsection{Gestione dei processi}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPC-TE & Time Efficiency & $\geq 50\%$ & $100\%$ \\
-        MPC-PRI & Percentuale Rischi Inattesi & $\leq 20\%$ & $0\%$ \\
-        MPC-LE & Labor Efficiency & $\geq 70\%$ & $\geq 100\%$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della gestione dei processi.}
-\end{table}
-
-\section{Qualità di prodotto}
-La qualità di prodotto misura le proprietà interne ed esterne del software finale. Lo standard di riferimento è ISO/IEC 9126, adottato come base per definire le metriche di prodotto.
-Tali metriche consentono di verificare che il sistema rispetti i requisiti e che l'esperienza d'uso risulti stabile e prevedibile nelle condizioni operative attese.
-
-In questo documento, tali misure vengono identificate tramite la sigla \textbf{MPD} (Metriche di Prodotto). Questo identificativo permette di classificare e monitorare le caratteristiche del software, facilitando la verifica del raggiungimento degli obiettivi qualitativi prefissati.
-
-\subsection{Funzionalità}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPD01 & Requisiti obbligatori soddisfatti & $100\%$ & $100\%$ \\
-        MPD02 & Requisiti opzionali soddisfatti & $0\%$ & $100\%$ \\
-        MPD03 & AI Acceptance Rate (rating $\geq 3/5$) & $\geq 60\%$ & $\geq 80\%$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità delle funzionalità.}
-\end{table}
-
-\subsection{Affidabilità}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPD04 & Branch Coverage & $\geq 70\%$ & $\geq 85\%$ \\
-        MPD05 & Defect Density & $\leq 3$ / KLOC & $\leq 1$ / KLOC \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità dell'affidabilità.}
-\end{table}
-
-\subsection{Efficienza}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPD06 & Latenza interfaccia utente & $\leq 2$ sec & $\leq 0,5$ sec \\
-        MPD07 & Latenza generazione testo AI Assistant & $\leq 5$ sec & $\leq 3$ sec \\
-        MPD08 & Latenza generazione immagine AI Assistant & $\leq 10$ sec & $\leq 5$ sec \\
-        MPD09 & Latenza analisi documentale AI Co-Pilot & $\leq 10$ sec & $\leq 5$ sec \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità dell'efficienza.}
-\end{table}
-
-\subsection{Usabilità}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPD10 & Profondità Massima di Navigazione & $\leq 5$ livelli & $\leq 3$ livelli \\
-        MPD11 & Learning Time (funzioni principali) & $\leq 30$ min & $\leq 15$ min \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità dell'usabilità.}
-\end{table}
-
-\subsection{Mantenibilità}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPD12 & Code Smell & $\leq 5$ & $0$ \\
-        MPD13 & Coefficient of Coupling & $\leq 0{,}7$ & $\leq 0{,}4$ \\
-        MPD14 & Cyclomatic Complexity (per metodo) & $\leq 15$ & $\leq 10$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della mantenibilità.}
-\end{table}
-
-\subsection{Portabilità}
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \rowcolors{2}{gray!8}{white}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|X|p{3cm}|p{3cm}|}
-        \hline
-        \rowcolor{gray!20}
-        \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
-        \hline
-        MPD15 & Compatibilità Cross-Browser & $\geq 80\%$ & $100\%$ \\
-        \hline
-    \end{tabularx}
-    \caption{Valori per misurare la qualità della portabilità.}
-\end{table}
-
-\section{Metodi di testing}
-La presente sezione descrive le attività di testing adottate nel progetto e le metriche utilizzate per valutare l'efficacia del processo di verifica.
-Le attività di testing forniscono evidenza oggettiva del corretto funzionamento dell'intero sistema e supportano la valutazione delle metriche di qualità del prodotto discusse in questo documento.
-
-I test avranno un codice univoco, la descrizione, il requisito di riferimento e lo stato attuale. I codici per descrivere gli stati dei test sono i seguenti:
+\section{Analisi dei Rischi}
+\label{sec:analisi_dei_rischi}
+In questa sezione vengono individuati e analizzati i fattori di rischio che, a seconda del loro livello di gravità, potrebbero ostacolare l'avanzamento dei lavori e il successo dell'iniziativa. Rilevare tempestivamente questi rischi e predisporre le opportune tecniche di mitigazione permette di ridurre drasticamente gli imprevisti in fase di sviluppo. Questa gestione controllata favorisce il rispetto del budget preventivato, l'aderenza alle tempistiche di consegna e una maggiore fluidità nei processi di lavoro. Il processo di gestione dei rischi è strutturato nelle seguenti fasi sequenziali:
 \begin{itemize}
-    \item \textbf{NI}: Non Implementato
-    \item \textbf{I}: Implementato, ma non ancora verificato
-    \item \textbf{S}: Superato, ovvero il test è stato eseguito ed ha restituito un esito positivo
-    \item \textbf{NS}: Non Superato, ovvero il test è stato eseguito ma ha restituito un esito negativo
+    \item \textbf{Identificazione}: Questa fase consiste nell'individuare le varie zone di rischio, quale area di competenza viene impattata ed il fattore scatenante.
+    In esso viene creato un elenco/inventario per far si che venga creata una mappatura completa sui vari rischi che possono compromettere il progetto.
+    \item \textbf{Analisi}: Valutazione dettagliata e approfondita dei rischi, per valutarne la probabilità e la gravità che ne consegue se il rischio si applica.
+    Analizzando i vari rischi, si può così optare per strategie più efficaci e funzionali per il trattamento di essi.
+    \item \textbf{Valutazione}: Consiste nella specifica delle criticità, in ordine di importanza, per poi proporre la mitigazione necessaria e più adatta per quel determinato rischio,
+    Grazie a ciò, si ha un'idea più chiara su quali minacce concentrarsi maggiormente, ottimizzando i tempi e l'uso di risorse.
+    \item \textbf{Gestione}: Implica l'utilizzo di mezzi e tecniche come misure preventive per evitare l'insorgere dei rischi, utilizzando proprio le mitigazioni.
+    Quindi si specifica che, dopo le fasi precedenti, si procede ad eseguire azioni concrete con l'obiettivo di bloccare i vari contrattempi che possono nascere.
+    \item \textbf{Monitoraggio e Revisione}: Dopo aver implementato le varie mitigazioni, il periodo che segue consiste nel controllo periodico e regolare delle soluzioni proposte e messe in atto,
+    per far si che le soluzioni adottate siano efficienti e coprano le problematiche che nascono, oltre a modificare la strategia se nuove difficoltà si presentano.
 \end{itemize}
 
-\subsection{Copertura del codice}
-La copertura del codice (Code Coverage) misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici. Tale metrica consente di valutare il grado di verifica del software ed è direttamente collegata alla metrica \textbf{MPC-CC}.
-Il valore minimo accettabile è fissato all'80\%.
+\subsection{Categorie di Rischio}
+Queste fasi elencate devono essere attuate costantemente durante tutto il periodo di vita del progetto, con lo scopo di avere efficenza a livello di tempi e di costi.
+Per identificare meglio questi rischi, si è deciso di utilizzare un formato nel quale viene specificata la zona di interesse e l'importanza del rischio:
+\begin{center}
+    \textbf{R[Tipo][Indice]}
+\end{center}
+Dove \textbf{Tipo} indica la categoria in cui rientra il rischio, che si divide in tre sezioni:
+\begin{itemize}
+    \item \textbf{T}: Tecnologico
+    \item \textbf{O}: Organizzativo, legato alla comunicazione e alla gestione interna del team
+    \item \textbf{P}: Personale, singolare ad ogni membro del gruppo
+    \item \textbf{R}: Requisiti, legato a possibili modifiche, aggiunte o incomprensioni delle richieste del proponente
+\end{itemize}
+L'\textbf{\textit{Indice}} indica l'ordine dei rischi su ogni categoria, in cui abbiamo deciso di metterli in ordine di Probabilità e Pericolosità.
 
-\subsection{Test unitari}
-I test unitari verificano il corretto funzionamento delle singole unità software in isolamento. L'attenzione è rivolta alle componenti critiche del backend: logica di elaborazione dei prompt, validazione degli input, gestione dei metadati documentali e algoritmi di classificazione AI. I test sono realizzati con il framework Pest e contribuiscono al miglioramento delle metriche \textbf{MPC-TSR} e \textbf{MPC-CC}.
+\newpage
+\subsection{RT: Rischi legati alle Tecnologie}
+\subsubsection{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+Nel Capitolato C5 \textbf{\textit{'Nexum'}} richiede varie tecnologie richieste dall'azienda proponente che escono dal nostro campo di competenza che abbiamo sviluppato durante il periodo di Università, andando ad imparare tecnologie di cui i membri non hanno confidenza e padronanza.
 
-\subsection{Test di integrazione}
-I test di integrazione verificano il corretto comportamento delle interazioni tra i componenti del sistema. Considerata la natura distribuita dell'architettura, tali test risultano fondamentali per il raggiungimento di un solido risultato.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
 
-\renewcommand{\arraystretch}{1.15}
-\rowcolors{2}{gray!8}{white}
-\begin{longtable}{|p{2.2cm}|p{8.5cm}|p{3.8cm}|p{1.5cm}|}
-    \caption{Test di integrazione} \label{tab:ti} \\
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT1 \\
+
+Probabilità & Molto Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & L'apprendimento e l'utilizzo con minima sicurezza dei nuovi linguaggi e tecnologie proposte, comporterà sicuramente ad un rallentamento nel raggiungimento degli obiettivi del progetto,
+portando tutto il gruppo a concentrarsi ed adattarsi alle nuove risorse proposte. \\
+
+Mitigazione & È indispensabile che ogni membro, sia singolarmente che a gruppi, dedichi un periodo di tempo per imparare ed esplorare le nuove tecnologie, per far si che vengano utilizzate nel modo più efficiente possibile all'interno del capitolato.
+Ogni membro del gruppo si dedicherà nella ricerca di varia documentazione per l'apprendimento delle nuove tecnologie e le varie best practices.\\
+\end{tabular}
+\caption{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+\end{table}
+\newpage
+
+\subsubsection{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+Avendo già difficoltà non indifferenti con l'apprendimento delle nuove tecnologie, se le risorse e la documentazione risultano insufficienti o carenti, il processo di studio diventa ancora più complesso, principalmente per le tecnologie non note a nessun membro del team, oltre ad adattarle al progetto.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT2 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze &  Senza documentazione adatta o carente, questo rischio causa rallentamenti, per l'apprendimento e la comprensione dei linguaggi, e ritardi nello sviluppo del codice e nella fase di debugging \\
+
+Mitigazione & Si può richiedere all'azienda proponente di proporci qualche spunto o documentazione necessaria per imparare le nuove tecnologie, oppure si possono
+trovare dei compromessi sull'utilizzo delle tecnologie, utilizzando delle soluzioni alternative meno complicate e con la documentazione più completa possibile\\
+\end{tabular}
+\caption{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+\end{table}
+\newpage
+
+\subsubsection{RT2: Disallineamento e integrazione dei sottosistemi}
+Nello sviluppo di un sistema complesso come quello richiesto per il Capitolato C5 \textbf{\textit{'Nexum'}}, il lavoro viene diviso in moduli (frontend, backend, database). Esiste il rischio concreto che le interfacce di comunicazione tra questi sottosistemi non siano perfettamente allineate, causando errori critici in fase di unione del codice.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT3: Disallineamento e integrazione dei sottosistemi}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT3 \\
+
+Probabilità & Media \\
+
+Pericolosità & Alta \\
+
+Conseguenze & Il sistema potrebbe risultare frammentato e inutilizzabile nonostante il corretto funzionamento dei singoli componenti presi isolatamente, costringendo il team a pesanti sessioni di refactoring non pianificate. \\
+
+Mitigazione & Definizione formale e preventiva dei contratti API e dei protocolli di comunicazione tra i vari moduli. Introduzione di test di integrazione automatici all'interno del flusso di Continuous Integration. \\
+\end{tabular}
+\caption{RT3: Disallineamento e integrazione dei sottosistemi}
+\end{table}
+\newpage
+
+\subsubsection{RT4: Incongruenze tra ambienti di sviluppo e produzione}
+La varietà di sistemi operativi e configurazioni hardware tra i sette membri del gruppo può portare a bug difficili da replicare, noti come problemi di "ambiente". Questo rischio può causare il malfunzionamento del software sulla macchina del proponente nonostante funzioni sui PC del team.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT4: Incongruenze tra ambienti di sviluppo e produzione}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT4 \\
+
+Probabilità & Media \\
+
+Pericolosità & Media \\
+
+Conseguenze & Rallentamento delle attività di debugging e rischio di fallimento delle dimostrazioni ufficiali a causa di dipendenze mancanti o configurazioni errate nel sistema di destinazione. \\
+
+Mitigazione & Standardizzazione dell'ambiente di sviluppo tramite l'utilizzo di containerizzazione (\textit{Docker}). Ogni membro del gruppo utilizzerà la medesima immagine per garantire che il software si comporti in modo identico su ogni macchina. \\
+\end{tabular}
+
+\caption{RT4: Incongruenze tra ambienti di sviluppo e produzione}
+\end{table}
+\newpage 
+
+\subsubsection{RT5: Esposizione involontaria di dati sensibili o credenziali}
+Durante il caricamento del codice su piattaforme di versionamento pubblico come GitHub, esiste il rischio di includere accidentalmente chiavi API, password di database o token di accesso. Questo metterebbe a rischio la sicurezza del progetto.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT5: Esposizione involontaria di dati sensibili o credenziali}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT5 \\
+
+Probabilità & Bassa \\
+
+Pericolosità & Molto Alta \\
+
+Conseguenze & Compromissione degli account, possibile utilizzo non autorizzato delle risorse cloud da parte di terzi e necessità di invalidare e rigenerare tutte le credenziali esposte, con relativa pulizia dello storico Git. \\
+
+Mitigazione & Utilizzo sistematico di file di configurazione locali (.env) esclusi dal tracciamento Git tramite il file .gitignore. Formazione dei membri sull'uso di segreti e adozione di tool automatici per la scansione dei segreti nei commit. \\
+\end{tabular}
+\caption{RT5: Esposizione involontaria di dati sensibili o credenziali}
+\end{table}
+\newpage
+
+\subsubsection{RT6: Perdita di file o danneggiamento di essi}
+C'è la possibilità che i file vengano danneggiati o vengono cancellati per errori software, hardware o per errori umani.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT6: Perdita di file o danneggiamento di essi}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT6 \\
+
+Probabilità & Bassa\\
+
+Pericolosità & Media\\
+
+Conseguenze & Perdere i documenti necessari causa un rallentamento non oscurabile al proseguimento del progetto, dovendo rimediare all'errore con la ricostruzione dei file mancanti\\
+
+Mitigazione & Si adotta una soluzione nella quale viene utilizzato un sistema per il salvataggio dei file robusto ed affidabile, con salvataggio del lavoro graduale ed incrementale. 
+Fare ciò garantisce sicurezza ed integrità dei documenti di lavoro, facilitandone anche il recupero in caso di perdita. \\
+\end{tabular}
+\caption{RT6: Perdita di file o danneggiamento di essi}
+\end{table}
+\newpage
+
+\subsection{RO: Rischi legati all'Organizzazione del gruppo}
+\subsubsection{RO1: Mancanza di comunicazione chiara e completa}
+La comunicazione all'interno del gruppo può essere insufficientemente esaustiva o chiara, portando ad errori di comprensione, malintesi 
+e disallineamenti sulle attività pianificate
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO1: Mancanza di comunicazione chiara e completa}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO1 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Può causare gravi errori nello sviluppo, portare a rallentamenti e ritardi consistenti per rimediare alle mancanze o duplicazioni delle attività.
+Oltre al malumore generale causato nel gruppo, comporta a probabili errori nel prodotto finale, peggiorando la qualità dello stesso.\\
+
+Mitigazione & Si pubblica un resoconto chiaro e coinciso delle mansioni che si devono portare a termine, ognuno col proprio destinatario, e discutendo in maniera costante con gli altri membri attraverso i vari canali di comunicazione (WhatsApp, Telegram, Discord). Si organizzano riunioni periodiche per portare agli altri membri il riassunto dettagliato del proprio lavoro durante il periodo di sprint, discutendo inoltre delle prossime milestone che si vogliono raggiungere, fissando poi in maniera esaustiva le varie mansioni di ogni singolo membro.\\
+\end{tabular}
+\caption{RO1: Mancanza di comunicazione chiara e completa}
+\end{table}
+\newpage
+
+
+\subsubsection{RO2: Confusione sulla gestione delle responsabilità}
+La mancata chiarezza sui ruoli affidati durante il periodo può portare a confusione sulle proprie attività, sovrapposizioni e lacune in settori che richiedono maggiore attenzione.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO2: Confusione sulla gestione delle responsabilità}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO2 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La mancata organizzazione sulla divisione delle responsabilità può portare a ritardi e ad uno spreco di risorse non indifferente, con il rischio di 
+far slittare ulteriormente la scadenza della consegna del progetto\\
+
+Mitigazione & Durante le riunioni del team, si definiscono in maniera precisa e chiara, scrivendo le varie responsabilità e attività da svolgere durante i singoli Sprint, così da evitare fraintendimenti e duplice lavoro.\\
+\end{tabular}
+\caption{RO2: Confusione sulla gestione delle responsabilità}
+\end{table}
+\newpage
+
+\subsubsection{RO3: Gestione del tempo e delle scadenze}
+La mancanza di organizzazione del tempo e delle varie scadenze indicate per il compimento del progetto, come la sottovalutazione degli impegni o scadenze irrealizzabili, possono portare a ritardi che
+possono compromettere il risultato finale, oltre a causare slittamenti nelle scadenze.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO3: Gestione del tempo e delle scadenze}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO3 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La sottovalutazione dei propri impegni può portare a rimandare il lavoro a cui si è stati affidati, causando slittamenti non indifferenti riguardo le scadenze.
+Inoltre la proposizione di pianificazioni irrealizzabili, portano a svolgere le attività in maniera sbrigativa, portando ad una qualità peggiore del prodotto finale. \\
+
+Mitigazione & Ogni membro del gruppo deve organizzarsi affinchè i vari compiti che gli vengono assegnati siano compatibili e siano realizzabili. Il Responsabile deve
+essere inoltre avvisato tempestivamente se ci sono difficoltà nel rispettare le scadenze, cercando di darsi una mano in maniera reciproca. Infine, devono essere svolte riunioni periodiche, affinchè ogni difficoltà emersa possa essere resa nota a tutti i membri e così adattarsi di conseguenza.\\
+\end{tabular}
+\caption{RO3: Gestione del tempo e delle scadenze}
+\end{table}
+\newpage
+
+\subsubsection{RO4: Esaurimento precoce del monte ore per un ruolo specifico}
+A causa dei rigidi vincoli di ripartizione oraria stabiliti nel preventivo e della regola di rotazione, esiste la possibilità che un membro del team esaurisca prematuramente le ore a sua disposizione per un determinato ruolo (ad esempio Amministratore o Progettista), prima del termine del progetto.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO4: Esaurimento precoce del monte ore per un ruolo specifico}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO4 \\
+
+Probabilità & Media\\
+
+Pericolosità & Media\\
+
+Conseguenze & Impossibilità formale per un componente di svolgere determinate mansioni senza violare le direttive del Piano di Progetto. Necessità di riassegnare i task in emergenza ad altri membri, con possibile rallentamento delle attività in corso e perdita di efficienza.\\
+
+Mitigazione & Monitoraggio costante, alla fine di ogni Sprint, del bilancio orario rimanente (Saldo Ore) per ciascun componente tramite il foglio di calcolo condiviso. Quando un membro si avvicina all'esaurimento delle ore per un ruolo, il Responsabile pianificherà in anticipo un passaggio di consegne verso un collega con un monte ore ancora intatto.\\
+\end{tabular}
+\caption{RO4: Esaurimento precoce del monte ore per un ruolo specifico}
+\end{table}
+\newpage
+
+\subsubsection{RO5: Mancata o carenza di comunicazione col proponente}
+La comunicazione con l'azienda proponente è fondamentale per far si che il prodotto finale sia in linea con le richieste, se questa viene a mancare o le risposte non sono abbastanza tempestive, possono causare ritardi e fraintendimenti su questioni tecnologiche ed organizzative.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO5: Mancata o carenza di comunicazione col proponente}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO5 \\
+
+Probabilità & Media\\
+
+Pericolosità & Media\\
+
+Conseguenze & Ritardi a causa di incertezze su domande a livello tecnico ed organizzativo. Probabile disallineamento tra la richiesta del proponente
+ed il prodotto del team\\
+Mitigazione & Ogni qualvolta ci sono dubbi di rilievo, è opportuno interpellare il proponente tramite i mezzi di comunicazione da loro fornitoci. Se il problema persiste,
+si contatta il committente per un colloquio. È inoltre importante fare una documentazione chiara e precisa sui verbali esterni.\\
+\end{tabular}
+\caption{RO5: Mancata o carenza di comunicazione col proponente}
+\end{table}
+
+\newpage
+
+\subsection{RP: Rischi personali legati ai singoli membri}
+\subsubsection{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+Il mancato svolgimento dei propri impegni per problemi di salute, accademici o personali possono compromettere la continuità del progetto.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RP1 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La riduzione del tempo impiegato al progetto porta ad un rallentamento delle varie attività. Procrastinazione e mancanza di organizzazione dei propri impegni,
+i quali comportano problemi nella pianificazione delle varie attività. Eventi imprevisti come malattia o emergenze, oppure situazioni lavorative per alcuni membri, sicuramente 
+incidono notevolmente sul tempo di termine del progetto, allungando i tempi delle scadenze ed influenzando le capacità del gruppo.\\
+
+Mitigazione & Pianificare in maniera chiara e realizzabile i propri impegni sul progetto, mettendoli in linea con i propri impegni personali ed accademici.
+Prevedere del tempo extra in caso di eventi imprevisti. Comunicare in maniera tempestiva o, in caso di impegni accademici e lavorativi, a priori con un buon margine di tempo, al Responsabile del Progetto, affinchè si abbia maggior margine
+di manovra per una miglior disposizione delle responsabilità e di redistribuzione delle attività ai membri del gruppo, con effetto immediato o nel prossimo sprint, in caso in cui 
+non si vuole sovraccaricare di lavoro il team. \\
+\end{tabular}
+\caption{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+\end{table}
+
+\newpage
+
+\subsubsection{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+Se viene svolto un lavoro che non coincide con le specifiche del capitolato oppure non si adempie al lavoro svolto, ci sono dei rischi sul tempo e sui costi.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RP2 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Perdita di interesse del proponente, costi e tempi maggiori rispetto a quelli dichiarati per rimediare al problema creatosi e malumori
+all'interno del gruppo, perdendo così coesione fra i vari membri del gruppo.\\
+
+Mitigazione & Comunicazione continua fra i membri del gruppo. Adozione di una gestione chiara e rigorosa sul progetto, per evitare sbavature. Comunicazione periodica col cliente, affinchè il lavoro
+sia in linea con gli impegni dichiarati\\
+\end{tabular}
+\caption{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+\end{table}
+
+\newpage
+\subsection{RR: Rischi legati ai Requisiti}
+\subsubsection{RR1: Cambiamento o aggiunta di requisiti in corso d'opera}
+Durante lo sviluppo del progetto, l'azienda proponente potrebbe modificare le proprie necessità o richiedere l'aggiunta di nuove funzionalità non previste inizialmente nel capitolato o nell'Analisi dei Requisiti.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RR1: Cambiamento o aggiunta di requisiti in corso d'opera}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RR1 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & L'inserimento di nuovi requisiti ad architettura già definita comporta un pesante lavoro di refactoring, un aumento dei costi preventivati e un inevitabile ritardo nelle scadenze (RTB o PB), compromettendo la stabilità del lavoro già svolto.\\
+
+Mitigazione & Adozione rigorosa della metodologia Agile. I nuovi requisiti verranno valutati dal team e, se accettati, inseriti nel Product Backlog per essere sviluppati negli Sprint successivi, rinegoziando eventualmente i tempi di consegna con il proponente. Verrà data priorità ai requisiti obbligatori per garantire in ogni caso la consegna dell'MVP (Minimum Viable Product).\\
+\end{tabular}
+\caption{RR1: Cambiamento o aggiunta di requisiti in corso d'opera}
+\end{table}
+\newpage
+
+\subsubsection{RR2: Ambiguità o errata interpretazione dei requisiti}
+I requisiti concordati potrebbero risultare poco chiari, ambigui o interpretabili in modi diversi dai vari membri del team o tra il team e la proponente stessa.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RR2: Ambiguità o errata interpretazione dei requisiti}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RR2 \\
+
+Probabilità & Bassa\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Sviluppo di funzionalità non conformi alle reali aspettative dell'azienda. Questo errore porta a un enorme spreco di risorse, in quanto il codice prodotto risulta inutile e deve essere scartato o pesantemente riscritto, generando frustrazione nel team.\\
+
+Mitigazione & Durante la stesura del documento di Analisi dei Requisiti, ogni caso d'uso deve essere tracciato e approvato meticolosamente. Mantenere un dialogo costante con la proponente, inviando diagrammi e prototipi grafici (Mockup) per validare visivamente le funzionalità prima di iniziare a scrivere il codice.\\
+\end{tabular}
+\caption{RR2: Ambiguità o errata interpretazione dei requisiti}
+\end{table}
+\newpage
+
+\section{Stima Costi di Sviluppo}
+In questa sezione viene dettagliato il budget preventivato per la realizzazione dell'intero progetto. Tale pianificazione è stata redatta per consentire una gestione flessibile delle risorse umane, permettendo di intervenire sull'assegnazione delle ore per i vari ruoli qualora le necessità di sviluppo lo richiedano. Resta fermo l'impegno del gruppo a non superare il budget complessivo definito nel Preventivo dei Costi consegnato durante la fase di Candidatura.
+\subsection{Preventivo Costi - Prima Stesura 24-03-2026}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Ruolo} & \textbf{Costo Orario (€/h)} & \textbf{Ore} & \textbf{Costo (€)} \\
+\hline
+Responsabile & 30€/h &56h  &1.680€  \\
+\hline
+Amministratore & 20€/h &51h  &1.020€  \\
+\hline
+Analista & 25€/h &60h  &1.500€  \\
+\hline
+Progettista & 25€/h &143h  &3.575€  \\
+\hline
+Programmatore & 15€/h &160h  &2.400€  \\
+\hline
+Verificatore & 15€/h &160h  &2.400€  \\
+\hline
+\textbf{Totale} & & \textbf{630} & \textbf{12.575€} \\
+\hline
+\end{tabular}
+\caption{Riassunto dei costi derivanti dalle ore assegnate a ciascun ruolo}
+\label{tab:costi_ruoli}
+\end{table}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            8.9/Responsabile (56 ore),
+            8.1/Amministratore (51 ore),
+            9.5/Analista (60 ore),
+            22.7/Progettista (143 ore),
+            25.4/Programmatore (160 ore),
+            25.4/Verificatore (160 ore)
+        }
+    \end{tikzpicture}
+    \caption{Preventivo Costi - Prima Stesura}
+\end{figure}
+
+\subsection{Ripartizione Oraria per Membro}
+Come già previsto nella dichiarazione degli impegni, al fine di garantire il rispetto del principio di rotazione dei ruoli e assicurare un carico di lavoro uniforme, il team ha definito una matrice di ripartizione oraria. Ciascun componente del gruppo si impegna formalmente a prestare un totale di 90 ore produttive individuali lungo l'intero ciclo di vita del progetto, per un ammontare complessivo di 630 ore lavorative.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{Membro del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+    \hline
+    Angelica Gastaldello & 8 & 7 & 9 & 21 & 22 & 23 & \textbf{90} \\
+    \hline
+    Eleonora Bellet & 8 & 7 & 8 & 20 & 23 & 24 & \textbf{90} \\
+    \hline
+    Alex Oloni & 8 & 8 & 8 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    Diego Belluz & 8 & 7 & 9 & 21 & 23 & 22 & \textbf{90} \\
+    \hline
+    Angela Maule & 8 & 8 & 8 & 21 & 23 & 22 & \textbf{90} \\
+    \hline
+    Leonardo Soligo & 8 & 7 & 9 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    V.Y. Kaneda Fernandes & 8 & 8 & 8 & 20 & 23 & 23 & \textbf{90} \\
     \hline
     \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Moduli} & \textbf{Stato} \\
+    \textbf{Totale Ore Ruolo} & \textbf{56} & \textbf{52} & \textbf{59} & \textbf{143} & \textbf{160} & \textbf{160} & \textbf{630} \\
     \hline
-    \endfirsthead
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Moduli} & \textbf{Stato} \\
-    \hline
-    \endhead
-    \hline
-    \endfoot
-    \hline
-    \endlastfoot
-    TI-001 & Verifica che il sistema scambi correttamente i dati tra frontend e backend tramite API REST. & UI (Blade) $\leftrightarrow$ Laravel 12 & NI \\
-    \hline
-    TI-002 & Verifica che il sistema invii il prompt e riceva la risposta generata dal servizio AI. & Backend $\leftrightarrow$ Amazon Bedrock & NI \\
-    \hline
-    TI-003 & Verifica che il sistema persista e recuperi correttamente i dati applicativi dal database. & Backend $\leftrightarrow$ PostgreSQL & NI \\
-    \hline
-    TI-004 & Verifica che il sistema esegua la pipeline OCR e la classificazione dei documenti tramite AI Analyst. & Backend $\leftrightarrow$ AI Analyst & NI \\
-    \hline
-    TI-005 & Verifica che il sistema gestisca correttamente l'upload, lo storage e l'accesso ai file. & Backend $\leftrightarrow$ MinIO (S3) & NI \\
-    \hline
-    TI-006 & Verifica che il sistema esegua correttamente i job in modalità asincrona tramite le code. & Backend $\leftrightarrow$ Redis Queue & NI \\
-    \hline
-\end{longtable}
+    \end{tabularx}
+    \caption{Matrice di ripartizione oraria complessiva per ciascun componente del team}
+    \label{tab:ripartizione_oraria_totale}
+\end{table}
+\newpage
 
-\subsection{Test di regressione}
-I test di regressione vengono eseguiti al termine di ogni sprint, dopo l'integrazione di nuove funzionalità o la correzione di difetti, con lo scopo di accertare che il comportamento già verificato non sia stato compromesso. Consistono nella riesecuzione automatica dell'intera suite di test unitari e di integrazione preesistente. Un aumento dei fallimenti costituisce un indicatore di instabilità che richiede analisi e risoluzione prima del rilascio.
+\newpage
 
-\subsection{Test di sistema}
-I test di sistema verificano il corretto comportamento complessivo dell'applicazione in un ambiente il più possibile simile a quello di utilizzo reale. La tabella seguente raccoglie in modo unitario tutti i test di sistema, raggruppati per tipologia di requisito: funzionali, di qualità e di vincolo.
+\section{Modello di Sviluppo}
+\label{sec:modello_di_sviluppo}
+Affinchè lo svolgimento del Capitolato \textit{C5: 'Nexum'} venga svolto in maniera efficiente ed in linea con le scadenze, il team ha deciso
+di utilizzare un modello di sviluppo \href{https://agilemanifesto.org/}{\textbf{\textit{Agile}}} per la capacità di adattamento a cambiamenti improvvisi o naturali, oltre all'approccio incrementale ed iterativo, grazie al quale, con questi brevi cicli chiamati \textit{Sprint},
+offre una capacità maggiore di controllo e di miglioramento del software. Oltre a ciò, offre una continua contrattazione e dialogo col cliente, individuando problemi o modifiche necessarie in tempi brevi,
+andando ad influire positivamente sul rispetto delle scadenze e dei costi di sviluppo.
+\subsection{Fasi del Progetto}
+Le fasi del progetto si dividono in tre macro sezioni, nelle quali ognuna di esse ha obiettivi specifici e diversificati:
+\begin{itemize}
+    \item \textbf{Candidatura}: Questo è il periodo preliminare e precedente all'inizio dell'RTB, nella quale vengono studiati e valutati i vari
+    capitolati proposti dalle varie aziende proponenti.
+    \item \textbf{RTB \textit{(Requirements and Technology Baseline)}}: Questa fase avviene dopo l'aggiudicazione dell'appalto. Rappresenta il punto di controllo iniziale, fissato al termine della prima milestone di revisione. Essa certifica il consolidamento dei requisiti, la stabilità della documentazione normativa e la validazione delle scelte tecnologiche avvenuta tramite il \textit{Proof of Concept}.
+    \item \textbf{PB: \textit{(Product Baseline)}}: In questo ultimo periodo, viene elaborato e sviluppato il prodotto software. È la baseline finale stabilita a conclusione della milestone di accettazione, volta a validare la conformità dell'MVP, l'avvenuta esecuzione di tutti i piani di test di sistema e la sottomissione finale del prodotto.
+\end{itemize}
 
-\renewcommand{\arraystretch}{1.15}
-\rowcolors{2}{gray!8}{white}
-\begin{longtable}{|p{2.2cm}|p{9.5cm}|p{2.3cm}|p{1.5cm}|}
-    \caption{Test di sistema} \label{tab:ts} \\
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
-    \hline
-    \endfirsthead
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
-    \hline
-    \endhead
-    \hline
-    \endfoot
-    \hline
-    \endlastfoot
-    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti funzionali}} \\
-    \hline
-    TS-F-001 & Verifica che il sistema permetta al Redattore di compilare il prompt testuale descrittivo del contenuto da generare. & RF1-OB & NI \\
-    \hline
-    TS-F-002 & Verifica che il sistema permetta al Redattore di selezionare il tono comunicativo della bozza da generare. & RF2-OB & NI \\
-    \hline
-    TS-F-003 & Verifica che il sistema permetta al Redattore di selezionare lo stile editoriale della bozza da generare. & RF3-OB & NI \\
-    \hline
-    TS-F-004 & Verifica che il sistema permetta al Redattore di selezionare la lunghezza desiderata per la bozza da generare. & RF4-OP & NI \\
-    \hline
-    TS-F-005 & Verifica che il sistema permetta al Redattore di salvare la configurazione corrente del prompt nella libreria personale. & RF5-OB & NI \\
-    \hline
-    TS-F-006 & Verifica che il sistema permetta al Redattore di svuotare i campi di configurazione ripristinando i valori predefiniti. & RF6-OB & NI \\
-    \hline
-    TS-F-007 & Verifica che il sistema avvii la generazione del contenuto tramite il modulo AI Post Generator a partire dal prompt e dai parametri configurati. & RF7-OB & NI \\
-    \hline
-    TS-F-008 & Verifica che il sistema notifichi il Redattore qualora il campo prompt sia assente o insufficiente prima dell'avvio della generazione. & RF8-OB & NI \\
-    \hline
-    TS-F-009 & Verifica che il sistema notifichi il Redattore in caso di errore interno o timeout durante la generazione iniziale del contenuto tramite AI. & RF9-OB & NI \\
-    \hline
-    TS-F-010 & Verifica che il sistema notifichi il Redattore in caso di errore interno o timeout durante la rigenerazione del contenuto tramite AI. & RF10-OB & NI \\
-    \hline
-    TS-F-011 & Verifica che il sistema visualizzi un'anteprima della bozza generata. & RF11-OB & NI \\
-    \hline
-    TS-F-012 & Verifica che il sistema visualizzi il titolo della bozza generata nell'anteprima. & RF12-OB & NI \\
-    \hline
-    TS-F-013 & Verifica che il sistema visualizzi il testo della bozza generata nell'anteprima. & RF13-OB & NI \\
-    \hline
-    TS-F-014 & Verifica che il sistema visualizzi l'immagine di copertina della bozza generata nell'anteprima. & RF14-OB & NI \\
-    \hline
-    TS-F-015 & Verifica che il sistema permetta al Redattore di modificare manualmente il titolo della bozza. & RF15-OB & NI \\
-    \hline
-    TS-F-016 & Verifica che il sistema permetta al Redattore di modificare manualmente il testo della bozza. & RF16-OB & NI \\
-    \hline
-    TS-F-017 & Verifica che il sistema notifichi il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & RF17-OB & NI \\
-    \hline
-    TS-F-018 & Verifica che il sistema permetta al Redattore di richiedere la rigenerazione della bozza mantenendo i parametri di configurazione. & RF18-OB & NI \\
-    \hline
-    TS-F-019 & Verifica che il sistema permetta al Redattore di eliminare la bozza generata corrente. & RF19-OB & NI \\
-    \hline
-    TS-F-020 & Verifica che il sistema permetta al Redattore di annullare le modifiche manuali apportate alla bozza, ripristinando il contenuto originale. & RF20-OP & NI \\
-    \hline
-    TS-F-021 & Verifica che il sistema notifichi il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & RF21-OB & NI \\
-    \hline
-    TS-F-022 & Verifica che il sistema permetta al Redattore di approvare e finalizzare il documento generato. & RF22-OB & NI \\
-    \hline
-    TS-F-023 & Verifica che il sistema visualizzi le opzioni disponibili per la finalizzazione del documento. & RF23-OB & NI \\
-    \hline
-    TS-F-024 & Verifica che il sistema permetta il salvataggio del documento come bozza nello storico. & RF24-OB & NI \\
-    \hline
-    TS-F-025 & Verifica che il sistema permetta l'esportazione del documento finalizzato in formato PDF. & RF25-OB & NI \\
-    \hline
-    TS-F-026 & Verifica che il sistema permetta al Redattore di visualizzare un'anteprima del documento prima dell'esportazione definitiva. & RF26-OP & NI \\
-    \hline
-    TS-F-027 & Verifica che il sistema notifichi il Redattore in caso di indirizzo e-mail non valido durante l'inoltro del documento. & RF27-OB & NI \\
-    \hline
-    TS-F-028 & Verifica che il sistema fornisca al Redattore una libreria personale dei prompt con il relativo storico delle generazioni passate. & RF28-OB & NI \\
-    \hline
-    TS-F-029 & Verifica che il sistema permetta al Redattore di visualizzare l'elenco delle generazioni passate e i prompt salvati nella libreria personale. & RF29-OB & NI \\
-    \hline
-    TS-F-030 & Verifica che il sistema permetta la ricerca e il filtraggio dello storico dei prompt e delle generazioni passate. & RF30-OB & NI \\
-    \hline
-    TS-F-031 & Verifica che il sistema avvisi l'utente quando la ricerca nello storico non produce risultati. & RF31-OB & NI \\
-    \hline
-    TS-F-032 & Verifica che il sistema permetta il caricamento e il riutilizzo di una configurazione prompt dalla libreria personale. & RF32-OB & NI \\
-    \hline
-    TS-F-033 & Verifica che il sistema permetta l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & RF33-OP & NI \\
-    \hline
-    TS-F-034 & Verifica che il sistema fornisca un modulo di valutazione qualitativa delle bozze generate. & RF34-OB & NI \\
-    \hline
-    TS-F-035 & Verifica che il sistema permetta al Redattore di accedere al modulo di valutazione qualitativa della bozza generata. & RF35-OB & NI \\
-    \hline
-    TS-F-036 & Verifica che il sistema permetta al Redattore di assegnare un rating numerico alla bozza generata. & RF36-OB & NI \\
-    \hline
-    TS-F-037 & Verifica che il sistema permetta al Redattore di inviare la valutazione al sistema. & RF37-OB & NI \\
-    \hline
-    TS-F-038 & Verifica che il sistema notifichi il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & RF38-OB & NI \\
-    \hline
-    TS-F-039 & Verifica che il sistema notifichi il Redattore qualora il commento testuale superi il limite di caratteri consentito. & RF39-OB & NI \\
-    \hline
-    TS-F-040 & Verifica che il sistema fornisca all'Analista dati una dashboard dedicata con metriche di utilizzo del modulo AI Assistant Generativo. & RF40-OB & NI \\
-    \hline
-    TS-F-041 & Verifica che il sistema visualizzi nella dashboard una panoramica dell'attività complessiva del modulo AI Assistant. & RF41-OB & NI \\
-    \hline
-    TS-F-042 & Verifica che il sistema visualizzi nella dashboard le statistiche di utilizzo del modulo AI Assistant. & RF42-OB & NI \\
-    \hline
-    TS-F-043 & Verifica che il sistema visualizzi nella dashboard il rating medio delle bozze generate. & RF43-OB & NI \\
-    \hline
-    TS-F-044 & Verifica che il sistema permetta all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & RF44-OB & NI \\
-    \hline
-    TS-F-045 & Verifica che il sistema notifichi l'Analista dati qualora i dati non siano disponibili per l'esportazione del report. & RF45-OB & NI \\
-    \hline
-    TS-F-046 & Verifica che il sistema permetta al Consulente del lavoro di caricare singoli documenti o lotti nel repository dedicato. & RF46-OB & NI \\
-    \hline
-    TS-F-047 & Verifica che il sistema rilevi i documenti duplicati durante l'upload e notifichi il Consulente del lavoro richiedendone conferma. & RF47-OB & NI \\
-    \hline
-    TS-F-048 & Verifica che il sistema rilevi i formati file non supportati durante l'upload e notifichi il Consulente del lavoro. & RF48-OB & NI \\
-    \hline
-    TS-F-049 & Verifica che il sistema classifichi automaticamente i documenti caricati e popoli i metadati associati tramite il modulo AI Analyst. & RF49-OB & NI \\
-    \hline
-    TS-F-050 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & RF50-OB & NI \\
-    \hline
-    TS-F-051 & Verifica che il sistema notifichi l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & RF51-OB & NI \\
-    \hline
-    TS-F-052 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite criteri multipli. & RF52-OB & NI \\
-    \hline
-    TS-F-053 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite barra di ricerca testuale. & RF53-OB & NI \\
-    \hline
-    TS-F-054 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & RF54-OB & NI \\
-    \hline
-    TS-F-055 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & RF55-OB & NI \\
-    \hline
-    TS-F-056 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & RF56-OB & NI \\
-    \hline
-    TS-F-057 & Verifica che il sistema permetta la visualizzazione del documento originale nella versione splittata. & RF57-OB & NI \\
-    \hline
-    TS-F-058 & Verifica che il sistema permetta la visualizzazione del documento originale non splittato. & RF58-OB & NI \\
-    \hline
-    TS-F-059 & Verifica che il sistema visualizzi il nome e cognome del destinatario associato al documento. & RF59-OB & NI \\
-    \hline
-    TS-F-060 & Verifica che il sistema visualizzi l'azienda associata al documento. & RF60-OB & NI \\
-    \hline
-    TS-F-061 & Verifica che il sistema visualizzi il nome del file del documento. & RF61-OB & NI \\
-    \hline
-    TS-F-062 & Verifica che il sistema visualizzi la data del documento. & RF62-OB & NI \\
-    \hline
-    TS-F-063 & Verifica che il sistema visualizzi il numero di pagine del documento. & RF63-OB & NI \\
-    \hline
-    TS-F-064 & Verifica che il sistema visualizzi la tipologia del documento. & RF64-OB & NI \\
-    \hline
-    TS-F-065 & Verifica che il sistema visualizzi la breve descrizione del documento. & RF65-OB & NI \\
-    \hline
-    TS-F-066 & Verifica che il sistema visualizzi il livello di confidenza in percentuale del documento. & RF66-OB & NI \\
-    \hline
-    TS-F-067 & Verifica che il sistema visualizzi lo stato di invio del documento. & RF67-OB & NI \\
-    \hline
-    TS-F-068 & Verifica che il sistema visualizzi l'indirizzo e-mail del destinatario del documento. & RF68-OP & NI \\
-    \hline
-    TS-F-069 & Verifica che il sistema visualizzi il codice fiscale del destinatario. & RF69-OP & NI \\
-    \hline
-    TS-F-070 & Verifica che il sistema visualizzi la matricola del dipendente. & RF70-OP & NI \\
-    \hline
-    TS-F-071 & Verifica che il sistema visualizzi la data e ora di caricamento del documento. & RF71-OP & NI \\
-    \hline
-    TS-F-072 & Verifica che il sistema gestisca l'assenza del nome del destinatario visualizzando un indicatore apposito. & RF72-OB & NI \\
-    \hline
-    TS-F-073 & Verifica che il sistema gestisca l'assenza dell'azienda associata al documento visualizzando un indicatore apposito. & RF73-OB & NI \\
-    \hline
-    TS-F-074 & Verifica che il sistema gestisca l'assenza della data del documento visualizzando un indicatore apposito. & RF74-OB & NI \\
-    \hline
-    TS-F-075 & Verifica che il sistema gestisca l'assenza della tipologia del documento visualizzando un indicatore apposito. & RF75-OB & NI \\
-    \hline
-    TS-F-076 & Verifica che il sistema gestisca l'assenza della breve descrizione visualizzando un indicatore apposito. & RF76-OB & NI \\
-    \hline
-    TS-F-077 & Verifica che il sistema gestisca l'assenza del livello di confidenza visualizzando un indicatore apposito. & RF77-OB & NI \\
-    \hline
-    TS-F-078 & Verifica che il sistema permetta al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & RF78-OB & NI \\
-    \hline
-    TS-F-079 & Verifica che il sistema permetta la modifica del nome e cognome del destinatario associato al documento. & RF79-OB & NI \\
-    \hline
-    TS-F-080 & Verifica che il sistema permetta la modifica dell'azienda associata al documento. & RF80-OB & NI \\
-    \hline
-    TS-F-081 & Verifica che il sistema permetta la modifica della data del documento. & RF81-OB & NI \\
-    \hline
-    TS-F-082 & Verifica che il sistema permetta la modifica della tipologia del documento. & RF82-OB & NI \\
-    \hline
-    TS-F-083 & Verifica che il sistema permetta la modifica della breve descrizione del documento. & RF83-OB & NI \\
-    \hline
-    TS-F-084 & Verifica che il sistema permetta la modifica dell'indirizzo e-mail del destinatario. & RF84-OP & NI \\
-    \hline
-    TS-F-085 & Verifica che il sistema permetta la modifica del codice fiscale del destinatario. & RF85-OP & NI \\
-    \hline
-    TS-F-086 & Verifica che il sistema permetta la modifica della matricola del dipendente. & RF86-OP & NI \\
-    \hline
-    TS-F-087 & Verifica che il sistema notifichi il Consulente del lavoro in caso di formato e-mail non valido durante la modifica dei metadati. & RF87-OP & NI \\
-    \hline
-    TS-F-088 & Verifica che il sistema notifichi il Consulente del lavoro in caso di codice fiscale non valido durante la modifica dei metadati. & RF88-OP & NI \\
-    \hline
-    TS-F-089 & Verifica che il sistema generi automaticamente il contenuto del messaggio di invio per il documento da spedire. & RF89-OB & NI \\
-    \hline
-    TS-F-090 & Verifica che il sistema visualizzi il destinatario del messaggio di invio generato automaticamente. & RF90-OB & NI \\
-    \hline
-    TS-F-091 & Verifica che il sistema visualizzi l'oggetto del messaggio di invio generato automaticamente. & RF91-OB & NI \\
-    \hline
-    TS-F-092 & Verifica che il sistema visualizzi il testo del messaggio di invio generato automaticamente. & RF92-OB & NI \\
-    \hline
-    TS-F-093 & Verifica che il sistema permetta la conferma e l'effettivo invio del messaggio al destinatario. & RF93-OB & NI \\
-    \hline
-    TS-F-094 & Verifica che il sistema permetta al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & RF94-OB & NI \\
-    \hline
-    TS-F-095 & Verifica che il sistema permetta la modifica del destinatario del messaggio di invio. & RF95-OB & NI \\
-    \hline
-    TS-F-096 & Verifica che il sistema permetta la modifica dell'oggetto del messaggio di invio. & RF96-OB & NI \\
-    \hline
-    TS-F-097 & Verifica che il sistema permetta la modifica del testo del messaggio di invio. & RF97-OB & NI \\
-    \hline
-    TS-F-098 & Verifica che il sistema fornisca all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & RF98-OB & NI \\
-    \hline
-    TS-F-099 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot il numero totale di documenti analizzati. & RF99-OB & NI \\
-    \hline
-    TS-F-100 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & RF100-OB & NI \\
-    \hline
-    TS-F-101 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & RF101-OB & NI \\
-    \hline
-    TS-F-102 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & RF102-OB & NI \\
-    \hline
-    TS-F-103 & Verifica che il sistema visualizzi nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & RF103-OB & NI \\
-    \hline
-    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di qualità}} \\
-    \hline
-    TS-Q-001 & Verifica che l'Analisi dei Requisiti sia completa di casi d'uso modellati tramite UML. & RQ1-OB & NI \\
-    \hline
-    TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle Norme di Progetto adottate dal gruppo. & RQ2-OB & NI \\
-    \hline
-    TS-Q-003 & Verifica che il prodotto superi tutti i test automatizzati con una copertura del codice non inferiore all'80\%. & RQ3-OB & NI \\
-    \hline
-    TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle Norme di Progetto. & RQ4-OB & NI \\
-    \hline
-    TS-Q-005 & Verifica che il sorgente sia gestito tramite un sistema di versionamento con istruzioni di setup incluse nel repository. & RQ5-OB & NI \\
-    \hline
-    TS-Q-006 & Verifica che il manuale utente del prodotto sia prodotto e aggiornato. & RQ6-OB & NI \\
-    \hline
-    TS-Q-007 & Verifica tramite sessione di user testing che gli utenti siano in grado di apprendere le funzionalità principali del sistema in meno di 30 minuti. & MPD11 & NI \\
-    \hline
-    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di vincolo}} \\
-    \hline
-    TS-V-001 & Verifica che il codice sorgente sia versionato tramite Git su un repository condiviso. & RVC1-OB & NI \\
-    \hline
-    TS-V-002 & Verifica che il codice sorgente rispetti le regole di formattazione definite da Laravel Pint. & RVC2-OB & NI \\
-    \hline
-    TS-V-003 & Verifica che la suite di test automatizzati sia scritta con il framework Pest. & RVC3-OB & NI \\
-    \hline
-    TS-V-004 & Verifica che il backend sia sviluppato con il framework Laravel 12 su PHP 8.4. & RVC4-OB & NI \\
-    \hline
-    TS-V-005 & Verifica che il database relazionale del sistema sia PostgreSQL. & RVC5-OB & NI \\
-    \hline
-    TS-V-006 & Verifica che le code asincrone e la gestione dei job in background utilizzino Redis. & RVC6-OB & NI \\
-    \hline
-    TS-V-007 & Verifica che il frontend delle interfacce utente sia realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & RVC7-OB & NI \\
-    \hline
-    TS-V-008 & Verifica che l'ambiente di sviluppo e di esecuzione del sistema sia containerizzato tramite Docker e orchestrato con Docker Compose. & RVC8-OB & NI \\
-    \hline
-    TS-V-009 & Verifica che il web server dell'applicazione sia Nginx. & RVC9-OB & NI \\
-    \hline
-    TS-V-010 & Verifica che lo storage dei file caricati nel sistema utilizzi MinIO, servizio compatibile con le API Amazon S3. & RVC10-OB & NI \\
-    \hline
-    TS-V-011 & Verifica che i modelli di intelligenza artificiale generativa possano essere erogati tramite Amazon Bedrock. & RVC11-OP & NI \\
-    \hline
-    TS-V-012 & Verifica che il sistema superi i controlli di accessibilità automatizzati tramite pa11y e axe sulle interfacce principali. & RVC12-OB & NI \\
-    \hline
-    TS-V-013 & Verifica che il sistema sia fruibile sui principali browser moderni evergreen nelle ultime due versioni stabili. & RVC13-OB & NI \\
-    \hline
-    TS-V-014 & Verifica che l'ambiente di esecuzione sia containerizzato con Docker Compose con lo stack completo richiesto. & RVC14-OB & NI \\
-    \hline
-    TS-V-015 & Verifica che la configurazione minima del server rispetti i requisiti di 2 vCPU, 4 GB di RAM e 10 GB di spazio disco. & RVC15-OB & NI \\
-    \hline
-    TS-V-016 & Verifica che l'utilizzo delle funzionalità AI richieda credenziali AWS valide e accesso outbound ad Amazon Bedrock. & RVC16-OB & NI \\
-    \hline
-\end{longtable}
+\subsection{Adozione del framework SCRUM al progetto}
+Il team ha utilizzato SCRUM in questo progetto accademico per avere maggiore efficienza operativa ed un continuo riscontro con gli altri membri del gruppo.
+Il ciclo di lavoro viene diviso in Sprint, e in esso vengono eseguiti:
+\begin{itemize}
+    \item \textbf{Sprint Planning}: All'inizio del nuovo Sprint, il gruppo decide le varie mansioni e attività da svolgere emerse, producendo uno \textit{Sprint Backlog}.
+    \item \textbf{Meeting Sicrono}: Il team si riunisce in riunione su un'apposita applicazione in chiamata per discutere delle attività da svolgere
+    durante lo Sprint in apertura, specificando le varie priorità ed importanza, oltre alle risorse che andranno impiegate.
+    \item \textbf{Sprint Review e Retrospective}: Al termine dello Sprint, si svolge una riunione sulla revisione dell'operato del team rispetto agli obiettivi
+    fissati per il periodo, e si fanno delle considerazioni su vari aspetti per un miglioramento futuro della produttività.
+\end{itemize}
+\section{Pianificazione}
+\label{sec:pianificazione}
+\subsection{Calendario Revisioni del Progetto}
+In questa sezione vengono illustrati le date previste per le revisioni del progetto e del suo conseguente avanzamento, definite in base alla quantità di lavoro da svolgere
+e alle scadenze del corso.
+\subsubsection{Date Avanzamento Progetto - Prima Stesura 29/04/2026}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Revisione} & \textbf{Data Stimata}\\
+    \hline
+    \textit{Requirements and Technology Baseline - RTB} & 2026/05/29\\
+    \hline
+    \textit{Product Baseline - PB} & 2026/09/10\\
+    \hline
+    \end{tabularx}
+    \caption{Calendario Avanzamento Progetto - Prima Stesura}
+\end{table}
+\subsection{Periodo preliminare studio Capitolati (Pre-RTB)}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine} & \textbf{Data Aggiudicazione Appalto}\\
+    \hline
+    06/03/2026 & 24/03/2026 & 26/03/2026\\
+    \hline
+    \end{tabularx}
+    \caption{Periodo pre-RTB}
+\end{table}
 
-\subsection{Test di accettazione}
-I test di accettazione verificano che il sistema soddisfi i requisiti utente relativi al capitolato d'appalto. Ogni test è associato al caso d'uso di riferimento.
+\subsubsection{Attività}
+\label{sec:prertb_attivita}
+Nella fase preliminare, con tutti i membri del team, si ha una discussione sull'opzione più interessante e fattibile a livello di tempi e costi.
+Durante questa fase, il team prepara i documenti necessari per la candidatura e, conseguentemente, l'aggiudicazione dell'appalto, oltre ad un primo brainstorming sulle varie
+task del capitolato scelto.
+\subsubsection{Costruzione Candidatura}
+\label{sec:costruzione_candidatura}
+Nel periodo iniziale, il team \textit{aLittleByte} si è concentrato nella costruzione di una linea guida, per avere una coesione e comprensione reciproca sul lavoro da svolgere,
+con l'obiettivo comune di eseguire un lavoro efficiente e preciso.
+Nella fase a seguire, ogni membro ha contribuito nella stesura delle \textit{Norme di Progetto}, analizzando i vari capitolati proposti dalle aziende proponenti e condividendo
+con tutti i propri interessi, dubbi ed incertezze su ogni capitolato. Dopo aver trovato i capitolati di maggior interesse e fattibilità, il team ha fissato dei colloqui con le aziende, per esporre le domande emerse durante le riunioni interne e maggiori specifiche organizzative e tecnologiche.
+Parallelamente vengono svolte altre mansioni minori ma comunque essenziali, come la scelta del nome del gruppo, il logo, la creazione sia di una mail di riferimento che di una repository su
+GitHub dove andranno inseriti i vari file da presentare per la candidatura.
 
-\renewcommand{\arraystretch}{1.15}
-\rowcolors{2}{gray!8}{white}
-\begin{longtable}{|p{2.2cm}|p{9.5cm}|p{2.3cm}|p{1.5cm}|}
-    \caption{Test di accettazione} \label{tab:ta} \\
+\subsection{Requirements and Technology Baseline - RTB}
+\label{sec:RTB}
+\subsubsection{Obiettivi}
+Durante questa fase, il team si impegna a redarre tutti i documenti necessari, ossia:
+\begin{itemize}
+    \item \textit{Norme di Progetto}
+    \item \textit{Analisi dei Requisiti}
+    \item \textit{Piano di Progetto}
+    \item \textit{Piano di Qualifica}
+    \item \textit{Glossario}
+\end{itemize}
+affinchè si abbia una chiara comprensione del capitolato scelto, e in certe situazioni si richiede all'azienda proponente incontri per un maggior riscontro sulle scelte attuate e su
+eventuali compromessi tecnologici. Inoltre, tramite le scelte effettuate, verrà sviluppato un \textit{Proof of Concept}, ossia un prototipo funzionale in cui vengono inseriti i vari obiettivi indicati e le 
+varie attività che deve svolgere, per valutarne quindi la complessità, fattibilità tecnologica e per avere un esempio tangibile delle varie soluzioni proposte.
+Quindi i punti chiave in questa \textit{Requirements and Technology Baseline} sono essenzialmente:
+\begin{itemize}
+    \item \textbf{Stesura Documentazione}: Il gruppo si suddivide la creazione e la stesura della documentazione necessaria allo sviluppo del prodotto
+    \item \textbf{Analisi}: Al proponente vengono richiesti incontri per un maggiore riscontro sullo sviluppo del Proof of Concept, affinchè si evitino ambiguità e si trovino compromessi o soluzioni migliori
+    \item \textbf{Sviluppo del \textit{Proof of Concept}}: Viene quindi iniziato a sviluppare un prototipo del prodotto, per testarne funzionalità, attività e complessità.
+\end{itemize}
+\subsubsection{Periodi}
+La fase RTB è suddivisa in 4 iterazioni (Sprint).
+\label{sec:rtb_primoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Sprint} & \textbf{Data Inizio} & \textbf{Data Fine}\\
     \hline
-    \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    Sprint 1 & 30/03/2026 & 12/04/2026\\
     \hline
-    \endfirsthead
+    Sprint 2 & 13/04/2026 & 26/04/2026\\
     \hline
-    \rowcolor{gray!20}
-    \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
+    Sprint 3 & 27/04/2026 & 10/05/2026\\
     \hline
-    \endhead
+    Sprint 4 & 11/05/2026 & 24/05/2026\\
     \hline
-    \endfoot
-    \hline
-    \endlastfoot
-    TA-001 & Verifica che il sistema permetta al Redattore di configurare completamente i parametri del prompt (tono, stile, lunghezza) e avviare la generazione AI con successo. & UC-1 & NI \\
-    \hline
-    TA-002 & Verifica che il sistema notifichi il Redattore qualora tenti di avviare la generazione con il campo prompt assente o insufficiente. & UC-1 & NI \\
-    \hline
-    TA-003 & Verifica che il sistema visualizzi correttamente l'anteprima della bozza generata con titolo, testo e immagine di copertina. & UC-2 & NI \\
-    \hline
-    TA-004 & Verifica che il sistema permetta al Redattore di modificare manualmente il titolo e il testo della bozza e di visualizzare il contenuto aggiornato. & UC-2 & NI \\
-    \hline
-    TA-005 & Verifica che il sistema permetta al Redattore di rigenerare la bozza mantenendo la configurazione del prompt corrente. & UC-2 & NI \\
-    \hline
-    TA-006 & Verifica che il sistema permetta al Redattore di eliminare la bozza generata corrente. & UC-2 & NI \\
-    \hline
-    TA-007 & Verifica che il sistema permetta il salvataggio del documento finalizzato come bozza nello storico. & UC-3 & NI \\
-    \hline
-    TA-008 & Verifica che il sistema permetta l'esportazione del documento finalizzato in formato PDF, con anteprima pre-esportazione. & UC-3 & NI \\
-    \hline
-    TA-009 & Verifica che il sistema permetta l'inoltro del documento finalizzato via e-mail e notifichi il Redattore in caso di indirizzo non valido. & UC-3 & NI \\
-    \hline
-    TA-010 & Verifica che il sistema visualizzi la libreria personale con lo storico delle generazioni e i prompt salvati, con possibilità di eliminazione. & UC-4 & NI \\
-    \hline
-    TA-011 & Verifica che il sistema permetta la ricerca, il filtraggio e il riutilizzo di una configurazione prompt dalla libreria personale. & UC-4 & NI \\
-    \hline
-    TA-012 & Verifica che il sistema permetta al Redattore di inserire e inviare una valutazione qualitativa con rating numerico sulla bozza generata. & UC-5 & NI \\
-    \hline
-    TA-013 & Verifica che il sistema notifichi il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & UC-5 & NI \\
-    \hline
-    TA-014 & Verifica che il sistema esponga all'Analista dati la dashboard AI Assistant con panoramica dell'attività complessiva e statistiche di utilizzo. & UC-6 & NI \\
-    \hline
-    TA-015 & Verifica che il sistema visualizzi nella dashboard AI Assistant il rating medio delle bozze e permetta la consultazione dei feedback testuali. & UC-6 & NI \\
-    \hline
-    TA-016 & Verifica che il sistema permetta al Consulente del lavoro di caricare un singolo documento nel repository con classificazione automatica tramite AI Analyst. & UC-7, UC-8 & NI \\
-    \hline
-    TA-017 & Verifica che il sistema permetta l'upload di un lotto di documenti e rilevi i duplicati richiedendo conferma al Consulente del lavoro. & UC-7 & NI \\
-    \hline
-    TA-018 & Verifica che il sistema rilevi un file in formato non supportato durante l'upload e notifichi il Consulente del lavoro. & UC-7 & NI \\
-    \hline
-    TA-019 & Verifica che il sistema visualizzi al Consulente del lavoro lo storico dei documenti analizzati e notifichi in caso di assenza di risultati. & UC-9, UC-9.E1 & NI \\
-    \hline
-    TA-020 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la combinazione di più criteri contemporaneamente. & UC-10 & NI \\
-    \hline
-    TA-021 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la barra di ricerca testuale. & UC-11 & NI \\
-    \hline
-    TA-022 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & UC-12 & NI \\
-    \hline
-    TA-023 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & UC-13 & NI \\
-    \hline
-    TA-024 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & UC-14 & NI \\
-    \hline
-    TA-025 & Verifica che il sistema visualizzi i dettagli completi di un documento dallo storico, inclusi i metadati associati e la versione splittata del documento originale. & UC-15 & NI \\
-    \hline
-    TA-026 & Verifica che il sistema permetta la modifica dei metadati principali di un documento (nome destinatario, azienda, data, tipologia, descrizione) e il relativo salvataggio. & UC-16 & NI \\
-    \hline
-    TA-027 & Verifica che il sistema notifichi il Consulente del lavoro in caso di e-mail o codice fiscale in formato non valido durante la modifica dei metadati. & UC-16 & NI \\
-    \hline
-    TA-028 & Verifica che il sistema generi automaticamente il messaggio di invio per il documento selezionato e ne visualizzi destinatario, oggetto e testo. & UC-17 & NI \\
-    \hline
-    TA-029 & Verifica che il sistema permetta la modifica del contenuto del messaggio di invio generato e la conferma della spedizione al destinatario. & UC-18 & NI \\
-    \hline
-    TA-030 & Verifica che il sistema esponga all'Analista dati la dashboard Co-Pilot con metriche di monitoraggio dell'analisi documentale (totale documenti, classificazioni corrette, documenti sotto soglia, destinatari riconosciuti, tempo medio di analisi). & UC-19 & NI \\
-    \hline
-\end{longtable}
 
-\subsection{Tracciamento}
-La tabella seguente riporta la corrispondenza tra i test di sistema e i requisiti coperti, e tra i test di accettazione e i casi d'uso di riferimento.
+    \end{tabularx}
+\end{table}
 
-{\footnotesize
-\renewcommand{\arraystretch}{1.1}
-\rowcolors{2}{gray!8}{white}
-\begin{longtable}{|p{2.5cm}|p{2.2cm}|p{2.5cm}|p{2.2cm}|}
-    \caption{Tracciamento test di sistema -- requisiti} \label{tab:tracciamento-ts} \\
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice test} & \textbf{Requisito} & \textbf{Codice test} & \textbf{Requisito} \\
-    \hline
-    \endfirsthead
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice test} & \textbf{Requisito} & \textbf{Codice test} & \textbf{Requisito} \\
-    \hline
-    \endhead
-    \hline
-    \endfoot
-    \hline
-    \endlastfoot
-    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Funzionali}} \\
-    \hline
-    TS-F-001 & RF1-OB & TS-F-002 & RF2-OB \\
-    \hline
-    TS-F-003 & RF3-OB & TS-F-004 & RF4-OP \\
-    \hline
-    TS-F-005 & RF5-OB & TS-F-006 & RF6-OB \\
-    \hline
-    TS-F-007 & RF7-OB & TS-F-008 & RF8-OB \\
-    \hline
-    TS-F-009 & RF9-OB & TS-F-010 & RF10-OB \\
-    \hline
-    TS-F-011 & RF11-OB & TS-F-012 & RF12-OB \\
-    \hline
-    TS-F-013 & RF13-OB & TS-F-014 & RF14-OB \\
-    \hline
-    TS-F-015 & RF15-OB & TS-F-016 & RF16-OB \\
-    \hline
-    TS-F-017 & RF17-OB & TS-F-018 & RF18-OB \\
-    \hline
-    TS-F-019 & RF19-OB & TS-F-020 & RF20-OP \\
-    \hline
-    TS-F-021 & RF21-OB & TS-F-022 & RF22-OB \\
-    \hline
-    TS-F-023 & RF23-OB & TS-F-024 & RF24-OB \\
-    \hline
-    TS-F-025 & RF25-OB & TS-F-026 & RF26-OP \\
-    \hline
-    TS-F-027 & RF27-OB & TS-F-028 & RF28-OB \\
-    \hline
-    TS-F-029 & RF29-OB & TS-F-030 & RF30-OB \\
-    \hline
-    TS-F-031 & RF31-OB & TS-F-032 & RF32-OB \\
-    \hline
-    TS-F-033 & RF33-OP & TS-F-034 & RF34-OB \\
-    \hline
-    TS-F-035 & RF35-OB & TS-F-036 & RF36-OB \\
-    \hline
-    TS-F-037 & RF37-OB & TS-F-038 & RF38-OB \\
-    \hline
-    TS-F-039 & RF39-OB & TS-F-040 & RF40-OB \\
-    \hline
-    TS-F-041 & RF41-OB & TS-F-042 & RF42-OB \\
-    \hline
-    TS-F-043 & RF43-OB & TS-F-044 & RF44-OB \\
-    \hline
-    TS-F-045 & RF45-OB & TS-F-046 & RF46-OB \\
-    \hline
-    TS-F-047 & RF47-OB & TS-F-048 & RF48-OB \\
-    \hline
-    TS-F-049 & RF49-OB & TS-F-050 & RF50-OB \\
-    \hline
-    TS-F-051 & RF51-OB & TS-F-052 & RF52-OB \\
-    \hline
-    TS-F-053 & RF53-OB & TS-F-054 & RF54-OB \\
-    \hline
-    TS-F-055 & RF55-OB & TS-F-056 & RF56-OB \\
-    \hline
-    TS-F-057 & RF57-OB & TS-F-058 & RF58-OB \\
-    \hline
-    TS-F-059 & RF59-OB & TS-F-060 & RF60-OB \\
-    \hline
-    TS-F-061 & RF61-OB & TS-F-062 & RF62-OB \\
-    \hline
-    TS-F-063 & RF63-OB & TS-F-064 & RF64-OB \\
-    \hline
-    TS-F-065 & RF65-OB & TS-F-066 & RF66-OB \\
-    \hline
-    TS-F-067 & RF67-OB & TS-F-068 & RF68-OP \\
-    \hline
-    TS-F-069 & RF69-OP & TS-F-070 & RF70-OP \\
-    \hline
-    TS-F-071 & RF71-OP & TS-F-072 & RF72-OB \\
-    \hline
-    TS-F-073 & RF73-OB & TS-F-074 & RF74-OB \\
-    \hline
-    TS-F-075 & RF75-OB & TS-F-076 & RF76-OB \\
-    \hline
-    TS-F-077 & RF77-OB & TS-F-078 & RF78-OB \\
-    \hline
-    TS-F-079 & RF79-OB & TS-F-080 & RF80-OB \\
-    \hline
-    TS-F-081 & RF81-OB & TS-F-082 & RF82-OB \\
-    \hline
-    TS-F-083 & RF83-OB & TS-F-084 & RF84-OP \\
-    \hline
-    TS-F-085 & RF85-OP & TS-F-086 & RF86-OP \\
-    \hline
-    TS-F-087 & RF87-OP & TS-F-088 & RF88-OP \\
-    \hline
-    TS-F-089 & RF89-OB & TS-F-090 & RF90-OB \\
-    \hline
-    TS-F-091 & RF91-OB & TS-F-092 & RF92-OB \\
-    \hline
-    TS-F-093 & RF93-OB & TS-F-094 & RF94-OB \\
-    \hline
-    TS-F-095 & RF95-OB & TS-F-096 & RF96-OB \\
-    \hline
-    TS-F-097 & RF97-OB & TS-F-098 & RF98-OB \\
-    \hline
-    TS-F-099 & RF99-OB & TS-F-100 & RF100-OB \\
-    \hline
-    TS-F-101 & RF101-OB & TS-F-102 & RF102-OB \\
-    \hline
-    TS-F-103 & RF103-OB & & \\
-    \hline
-    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Qualità}} \\
-    \hline
-    TS-Q-001 & RQ1-OB & TS-Q-002 & RQ2-OB \\
-    \hline
-    TS-Q-003 & RQ3-OB & TS-Q-004 & RQ4-OB \\
-    \hline
-    TS-Q-005 & RQ5-OB & TS-Q-006 & RQ6-OB \\
-    \hline
-    TS-Q-007 & MPD11 & & \\
-    \hline
-    \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Vincolo}} \\
-    \hline
-    TS-V-001 & RVC1-OB & TS-V-002 & RVC2-OB \\
-    \hline
-    TS-V-003 & RVC3-OB & TS-V-004 & RVC4-OB \\
-    \hline
-    TS-V-005 & RVC5-OB & TS-V-006 & RVC6-OB \\
-    \hline
-    TS-V-007 & RVC7-OB & TS-V-008 & RVC8-OB \\
-    \hline
-    TS-V-009 & RVC9-OB & TS-V-010 & RVC10-OB \\
-    \hline
-    TS-V-011 & RVC11-OP & TS-V-012 & RVC12-OB \\
-    \hline
-    TS-V-013 & RVC13-OB & TS-V-014 & RVC14-OB \\
-    \hline
-    TS-V-015 & RVC15-OB & TS-V-016 & RVC16-OB \\
-    \hline
-\end{longtable}
-}
-
-{\footnotesize
-\renewcommand{\arraystretch}{1.1}
-\rowcolors{2}{gray!8}{white}
-\begin{longtable}{|p{2.5cm}|p{2.2cm}|p{2.5cm}|p{2.2cm}|}
-    \caption{Tracciamento test di accettazione -- casi d'uso} \label{tab:tracciamento-ta} \\
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice test} & \textbf{Caso d'uso} & \textbf{Codice test} & \textbf{Caso d'uso} \\
-    \hline
-    \endfirsthead
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Codice test} & \textbf{Caso d'uso} & \textbf{Codice test} & \textbf{Caso d'uso} \\
-    \hline
-    \endhead
-    \hline
-    \endfoot
-    \hline
-    \endlastfoot
-    TA-001 & UC-1 & TA-002 & UC-1 \\
-    \hline
-    TA-003 & UC-2 & TA-004 & UC-2 \\
-    \hline
-    TA-005 & UC-2 & TA-006 & UC-2 \\
-    \hline
-    TA-007 & UC-3 & TA-008 & UC-3 \\
-    \hline
-    TA-009 & UC-3 & TA-010 & UC-4 \\
-    \hline
-    TA-011 & UC-4 & TA-012 & UC-5 \\
-    \hline
-    TA-013 & UC-5 & TA-014 & UC-6 \\
-    \hline
-    TA-015 & UC-6 & TA-016 & UC-7, UC-8 \\
-    \hline
-    TA-017 & UC-7 & TA-018 & UC-7 \\
-    \hline
-    TA-019 & UC-9, UC-9.E1 & TA-020 & UC-10 \\
-    \hline
-    TA-021 & UC-11 & TA-022 & UC-12 \\
-    \hline
-    TA-023 & UC-13 & TA-024 & UC-14 \\
-    \hline
-    TA-025 & UC-15 & TA-026 & UC-16 \\
-    \hline
-    TA-027 & UC-16 & TA-028 & UC-17 \\
-    \hline
-    TA-029 & UC-18 & TA-030 & UC-19 \\
-    \hline
-\end{longtable}
-}
-
-
-\section{Cruscotto di qualità}
-
-Il cruscotto di qualità raccoglie i dati misurati nelle diverse iterazioni del progetto, mettendoli in relazione con le soglie accettabili e ottimali definite nella sezione \emph{Qualità di processo}. L'obiettivo è fornire una visione sintetica e aggiornata dello stato qualitativo del prodotto e dei processi, permettendo di identificare tempestivamente eventuali aree di miglioramento.
-
-Le misurazioni si riferiscono ai quattro sprint del periodo RTB:
+\subsubsection{Chiave di lettura dei periodi di Sprint}
+Per garantire la massima trasparenza e agevolare la consultazione del documento, la rendicontazione di ciascuno Sprint è stata strutturata secondo il seguente schema standard:
 
 \begin{itemize}
-    \item \textbf{Sprint 1 (S1):} 30/03/2026 – 12/04/2026
-    \item \textbf{Sprint 2 (S2):} 13/04/2026 – 26/04/2026
-    \item \textbf{Sprint 3 (S3):} 27/04/2026 – 10/05/2026
-    \item \textbf{Sprint 4 (S4):} 11/05/2026 – 24/05/2026
+    \item \textbf{Sintesi del periodo:} Un breve paragrafo introduttivo che riassume le principali attività affrontate dal team e gli obiettivi generali perseguiti durante l'iterazione.
+    
+    \item \textbf{Attività Pianificate (Sprint Backlog):} Una tabella di dettaglio che elenka i task assegnati ai vari ruoli, confrontando le ore preventivate con quelle effettivamente consumate a consuntivo. Ogni attività è accompagnata dal relativo stato di avanzamento, indicato con le diciture ``\textit{Completata}'' o ``\textit{In corso}''.
+    \begin{quote}
+        \textit{Nota bene:} È fondamentale precisare che tali stati si riferiscono \textbf{esclusivamente agli incrementi e agli aggiornamenti pianificati per lo specifico Sprint}, e non al completamento assoluto dell'intera attività o del documento a cui fanno riferimento. (A titolo di esempio, lo stato ``Completata'' per la voce ``Stesura Analisi dei Requisiti'' indica unicamente che il team ha portato a termine il carico di lavoro prefissato per quella specifica iterazione, non che il documento sia da considerarsi concluso o in versione definitiva).
+    \end{quote}
+    
+    \item \textbf{Considerazioni (Sprint Review e Retrospective):} Una sezione conclusiva in cui vengono analizzati criticamente i risultati raggiunti, evidenziando eventuali problematiche riscontrate durante lo sviluppo e formalizzando le azioni correttive adottate per le iterazioni successive.
 \end{itemize}
 
-Il Budget At Completion (BAC) dell'intero progetto è pari a \EUR{12.575,00}.
+\subsubsubsection{Primo Periodo}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\subsection{Processi primari — Fornitura}
-
-\subsubsection{MPC-EV e MPC-PV — Earned Value e Planned Value}
-
-Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare entro ciascuno sprint, estratto dai preventivi del Piano di Progetto. L'Earned Value (EV) rappresenta il valore del lavoro effettivamente completato. Nella fase RTB si assume che gli obiettivi di ogni sprint siano stati completamente raggiunti (come risulta dalle retrospettive nel Piano di Progetto), pertanto $\text{EV} = \text{PV}$ per tutti gli sprint.
-
+\label{sec:rtb_primoperiodo}
 \begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|r|r|r|}
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
     \hline
-    \rowcolor{gray!35}
-    \textbf{Sprint} & \textbf{PV (\euro)} & \textbf{EV (\euro)} & \textbf{PV cum.\ (\euro)} & \textbf{EV cum.\ (\euro)} \\
+    30/03/2026 & 12/04/2026\\
     \hline
-    S1 & 670,00  & 670,00  & 670,00  & 670,00  \\
-    S2 & 565,00  & 565,00  & 1.235,00 & 1.235,00 \\
-    S3 & 750,00  & 750,00  & 1.985,00 & 1.985,00 \\
-    S4 & 850,00  & 850,00  & 2.835,00 & 2.835,00 \\
-    \hline
-\end{tabular}
-\caption{Andamento MPC-EV e MPC-PV per sprint (fase RTB)}
-\end{table}
 
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    title={Andamento MPC-EV e MPC-PV Cumulativi},
-    xlabel={Sprint},
-    ylabel={Valore (\euro)},
-    symbolic x coords={S1, S2, S3, S4},
-    xtick=data,
-    ymin=0, ymax=3200,
-    grid=both,
-    grid style={dashed, gray!30},
-    legend pos=north west,
-    width=0.85\textwidth,
-    height=6.5cm
-]
-\addplot[color=blue, mark=o, thick, dashed] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835)};
-\addlegendentry{PV Cumulativo}
-\addplot[color=teal, mark=x, thick] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835)};
-\addlegendentry{EV Cumulativo}
-\end{axis}
-\end{tikzpicture}
-\caption{Grafico dell'andamento cumulativo di Planned Value ed Earned Value per sprint.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} Entrambi i valori sono $\geq 0$ per tutti gli sprint (\emph{soglia accettabile} raggiunta). Il PV cumulativo è $\leq \text{BAC} = \EUR{12.575,00}$ (\emph{soglia ottimale per MPC-PV} raggiunta); l'EV cumulativo è $\leq \text{EAC}$ (\emph{soglia ottimale per MPC-EV} raggiunta).
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-AC — Actual Cost}
-
-L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro completato in ciascuno sprint, ricavato dai consuntivi del Piano di Progetto.
-
-\begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|r|}
-    \hline
-    \rowcolor{gray!35}
-    \textbf{Sprint} & \textbf{AC (\euro)} & \textbf{AC cumulativo (\euro)} \\
-    \hline
-    S1 & 705,00  & 705,00  \\
-    S2 & 625,00  & 1.330,00 \\
-    S3 & 830,00  & 2.160,00 \\
-    S4 & 975,00  & 3.135,00 \\
-    \hline
-\end{tabular}
-\caption{Andamento MPC-AC per sprint (fase RTB)}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    title={Andamento MPC-AC Cumulativo},
-    xlabel={Sprint},
-    ylabel={Costo Effettivo (\euro)},
-    symbolic x coords={S1, S2, S3, S4},
-    xtick=data,
-    ymin=0, ymax=3500,
-    grid=both,
-    grid style={dashed, gray!30},
-    legend pos=north west,
-    width=0.85\textwidth,
-    height=6.5cm
-]
-\addplot[color=red!80!black, mark=square*, thick] coordinates {(S1,705) (S2,1330) (S3,2160) (S4,3135)};
-\addlegendentry{AC Cumulativo}
-\end{axis}
-\end{tikzpicture}
-\caption{Grafico dell'andamento dei costi effettivi cumulati.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} I costi effettivi sono positivi in tutti gli sprint (\emph{soglia accettabile} raggiunta). Rispetto al PV si osserva un lieve sforamento in ogni sprint, indicando costi leggermente superiori a quelli pianificati.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-CPI e MPC-SPI — Cost Performance Index e Schedule Performance Index}
-
-Il Cost Performance Index misura l'efficienza dei costi:
-\[
-  \text{CPI} = \frac{\text{EV}_\text{cum}}{\text{AC}_\text{cum}}
-\]
-Lo Schedule Performance Index misura l'efficienza del tempo:
-\[
-  \text{SPI} = \frac{\text{EV}_\text{cum}}{\text{PV}_\text{cum}}
-\]
-
-\begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|r|}
-    \hline
-    \rowcolor{gray!35}
-    \textbf{Sprint} & \textbf{CPI} & \textbf{SPI} \\
-    \hline
-    S1 & 0,950 & 1,000 \\
-    S2 & 0,929 & 1,000 \\
-    S3 & 0,919 & 1,000 \\
-    S4 & 0,904 & 1,000 \\
-    \hline
-\end{tabular}
-\caption{Andamento MPC-CPI e MPC-SPI per sprint (fase RTB)}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    title={Andamento indici CPI e SPI},
-    xlabel={Sprint},
-    ylabel={Indice},
-    symbolic x coords={S1, S2, S3, S4},
-    xtick=data,
-    ymin=0.8, ymax=1.1,
-    grid=both,
-    grid style={dashed, gray!30},
-    legend pos=south west,
-    width=0.85\textwidth,
-    height=6.5cm
-]
-\addplot[color=orange, mark=violet, thick] coordinates {(S1,0.950) (S2,0.929) (S3,0.919) (S4,0.904)};
-\addlegendentry{CPI}
-\addplot[color=cyan!80!black, mark=triangle*, thick] coordinates {(S1,1.000) (S2,1.000) (S3,1.000) (S4,1.000)};
-\addlegendentry{SPI}
-\draw[red, thick, dashed] (axis cs:S1,0.9) -- (axis cs:S4,0.9);
-\node[red, anchor=south west] at (axis cs:S1,0.9) {\footnotesize Soglia Accettabile (0.9)};
-\end{axis}
-\end{tikzpicture}
-\caption{Confronto tra Cost Performance Index e Schedule Performance Index.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} Il CPI risulta in lieve calo progressivo ma rimane $\geq 0{,}9$ (\emph{soglia accettabile} raggiunta) per tutti gli sprint. Il valore a S4 di 0,904 indica che per ogni euro pianificato si è sostenuto un costo di circa \EUR{1,11}. L'SPI pari a 1,000 in tutti gli sprint conferma il pieno rispetto delle scadenze pianificate (\emph{soglia ottimale} raggiunta).
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-EAC e MPC-ETC — Estimated At Completion e Estimate To Complete}
-
-L'Estimated At Completion stima il costo totale del progetto proiettando la performance corrente:
-\[
-  \text{EAC} = \frac{\text{BAC}}{\text{CPI}}
-\]
-L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento:
-\[
-  \text{ETC} = \text{EAC} - \text{AC}_\text{cum}
-\]
-
-\begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|r|}
-    \hline
-    \rowcolor{gray!35}
-    \textbf{Sprint} & \textbf{EAC (\euro)} & \textbf{ETC (\euro)} \\
-    \hline
-    S1 & 13.231,00 & 12.526,00 \\
-    S2 & 13.544,00 & 12.214,00 \\
-    S3 & 13.683,00 & 11.523,00 \\
-    S4 & 13.906,00 & 10.771,00 \\
-    \hline
-\end{tabular}
-\caption{Andamento MPC-EAC e MPC-ETC per sprint (fase RTB)}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    title={Andamento EAC e ETC rispetto al BAC},
-    xlabel={Sprint},
-    ylabel={Valore (\euro)},
-    symbolic x coords={S1, S2, S3, S4},
-    xtick=data,
-    ymin=9000, ymax=15000,
-    grid=both,
-    grid style={dashed, gray!30},
-    legend pos=east,
-    width=0.85\textwidth,
-    height=6.5cm
-]
-\addplot[color=blue, mark=purple, thick] coordinates {(S1,13231) (S2,13544) (S3,13683) (S4,13906)};
-\addlegendentry{EAC}
-\addplot[color=olive, mark=diamond*, thick] coordinates {(S1,12526) (S2,12214) (S3,11523) (S4,10771)};
-\addlegendentry{ETC}
-\draw[green!60!black, ultra thick, dotted] (axis cs:S1,12575) -- (axis cs:S4,12575);
-\node[green!60!black, anchor=north west] at (axis cs:S1,12575) {\footnotesize BAC (12.575 \euro)};
-\end{axis}
-\end{tikzpicture}
-\caption{Proiezione dei costi finali (EAC) e costi a finire (ETC) rispetto al budget.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} L'EAC stimato supera il BAC di \EUR{12.575,00} in tutti gli sprint e si attesta a \EUR{13.906,00} a S4, con uno scostamento del $+10{,}6\%$ rispetto al BAC — superiore alla soglia accettabile di $\pm 5\%$ (\emph{soglia non raggiunta} per MPC-EAC). L'ETC è positivo per tutti gli sprint (\emph{soglia accettabile} raggiunta per MPC-ETC). Il trend crescente dell'EAC richiede un monitoraggio rigoroso dei costi nelle fasi successive.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-TEAC — Time Estimate At Completion}
-
-Il Time Estimate At Completion stima la durata totale del progetto a partire dalla performance di avanzamento. Calcolato come $\text{TEAC} = \text{Durata pianificata} / \text{SPI}$: poiché $\text{SPI} = 1{,}000$ per tutti gli sprint, il progetto procede esattamente in linea con il calendario.
-
-\begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|r|}
-    \hline
-    \rowcolor{gray!35}
-    \textbf{Sprint} & \textbf{SPI} & \textbf{TEAC (settimane)} \\
-    \hline
-    S1 & 1,000 & 8,0 \\
-    S2 & 1,000 & 8,0 \\
-    S3 & 1,000 & 8,0 \\
-    S4 & 1,000 & 8,0 \\
-    \hline
-\end{tabular}
-\caption{Andamento MPC-TEAC per sprint (fase RTB — durata pianificata RTB: 8 settimane)}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    title={Andamento Time Estimate At Completion},
-    xlabel={Sprint},
-    ylabel={Settimane},
-    symbolic x coords={S1, S2, S3, S4},
-    xtick=data,
-    ymin=0, ymax=10,
-    grid=both,
-    grid style={dashed, gray!30},
-    legend pos=north west,
-    width=0.85\textwidth,
-    height=6.5cm
-]
-\addplot[color=violet, mark=*, thick] coordinates {(S1,8.0) (S2,8.0) (S3,8.0) (S4,8.0)};
-\addlegendentry{TEAC}
-\draw[gray, thick, dashed] (axis cs:S1,8.0) -- (axis cs:S4,8.0);
-\node[gray, anchor=south west] at (axis cs:S1,8.0) {\footnotesize Durata Pianificata (8 sett.)};
-\end{axis}
-\end{tikzpicture}
-\caption{Stima del tempo finale di conclusione delle attività.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} TEAC = durata pianificata (8 settimane) in tutti gli sprint (\emph{soglia ottimale} raggiunta). Il progetto non presenta ritardi di pianificazione nella fase RTB.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsection{Processi primari — Sviluppo}
-
-\subsubsection{MPC-RSI — Requirements Stability Index}
-
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-RSI (Dati non ancora disponibili)]
-Il Requirements Stability Index verrà calcolato al termine della fase RTB confrontando il numero di requisiti aggiunti, modificati o eliminati rispetto alla versione iniziale dell'Analisi dei Requisiti.
-
-\medskip
-\textbf{Formula:} $\displaystyle\text{RSI} = \left(1 - \frac{N_\text{modificati} + N_\text{eliminati} + N_\text{aggiunti}}{N_\text{totali iniziali}}\right) \times 100\%$
-
-\medskip
-\textbf{Soglie:} accettabile $\geq 70\%$, ottimale $= 100\%$.
-\end{tcolorbox}
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsection{Processi di supporto — Documentazione}
-
-\subsubsection{MPC-IG — Indice di Gulpease}
-
-L'Indice di Gulpease misura la leggibilità dei documenti in lingua italiana secondo la formula:
-\[
-  G = 89 - \frac{10 \cdot L}{P} + \frac{300 \cdot F}{P}
-\]
-dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di frasi. Il calcolo è stato effettuato tramite estrazione del testo con \texttt{detex} e script Python.
-
-\begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|c|c|}
-    \hline
-    \rowcolor{gray!35}
-    \textbf{Documento} & \textbf{Indice di Gulpease} & \textbf{Soglia accettabile} & \textbf{Esito} \\
-    \hline
-    Analisi dei Requisiti & 59,7 & $\geq 60$ & Borderline \\
-    Norme di Progetto     & 45,9 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
-    Piano di Progetto     & 47,7 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
-    Piano di Qualifica    & 55,8 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
-    \hline
-\end{tabular}
-\caption{Indice di Gulpease dei documenti RTB}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    title={Indice di Gulpease per Documento},
-    ylabel={Punteggio Indice},
-    symbolic x coords={AdR, NdP, PdP, PdQ},
-    xtick=data,
-    ymin=0, ymax=80,
-    ybar,
-    bar width=20pt,
-    grid=major,
-    grid style={dashed, gray!30},
-    width=0.85\textwidth,
-    height=6.5cm,
-    nodes near coords,
-    nodes near coords align={vertical}
-]
-\addplot[fill=skyblue!60!white, draw=black] coordinates {
-    (AdR,59.7) 
-    (NdP,45.9) 
-    (PdP,47.7) 
-    (PdQ,55.8)
-};
-\draw[red, thick, dashed] (axis cs:AdR,60) -- (axis cs:PdQ,60);
-\node[red, anchor=south east] at (axis cs:PdQ,60) {\footnotesize Soglia Accettabile (60)};
-\end{axis}
-\end{tikzpicture}
-\caption{Livello di leggibilità dei documenti calcolato tramite Indice di Gulpease.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} I documenti tecnici mostrano punteggi compresi tra 45,9 e 59,7, al di sotto della soglia accettabile di 60 (\emph{soglia non raggiunta}). Questo risultato è strutturalmente atteso: la terminologia tecnica specialistica, gli acronimi e i costrutti formali riducono l'indice di leggibilità nei documenti ingegneristici. Si raccomanda di semplificare ove possibile la struttura delle frasi nelle prossime revisioni.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-CO — Correttezza ortografica}
-
-La verifica è stata condotta tramite estrazione del testo con \texttt{detex} e analisi automatica della correttezza ortografica.
-
-\begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|r|c|}
-    \hline
-    \rowcolor{gray!35}
-    \textbf{Documento} & \textbf{Errori ortografici} & \textbf{Esito} \\
-    \hline
-    Analisi dei Requisiti & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    Norme di Progetto     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    Piano di Progetto     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    Piano di Qualifica    & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    \hline
-\end{tabular}
-\caption{Correttezza ortografica dei documenti RTB}
+    \end{tabularx}
 \end{table}
 
 
+A seguito dell'aggiudicazione del capitolato, le attività del primo Sprint si sono concentrate sull'analisi approfondita della documentazione e sul confronto con l'azienda proponente in merito alle scelte tecnologiche. Parallelamente, il team ha proceduto con l'individuazione dei \textit{casi d'uso} e ha avviato la stesura dell'\textit{Analisi dei Requisiti}, seguita dalle \textit{Norme di Progetto} e da una prima bozza del \textit{Glossario}. Infine, è stata iniziata la realizzazione di un mock-up grafico, che fungerà da riferimento strutturale e visivo per le successive fasi di sviluppo.
 
-
-\noindent\textbf{Valutazione:} Tutti i documenti presentano 0 errori ortografici (\emph{soglia ottimale} raggiunta).
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsection{Processi di supporto — Verifica}
-
-\subsubsection{MPC-CC e MPC-TSR — Code Coverage e Test Success Rate}
-
-Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono applicabili nella fase RTB in quanto lo sviluppo del codice sorgente non è ancora iniziato. La misurazione di queste metriche è prevista a partire dalla fase PB (Product Baseline), quando saranno disponibili i test automatici e il codice da verificare.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\subsection{Processi di supporto — Gestione della qualità}
-
-\subsubsection{MPC-QMS — Quality Metrics Satisfied}
-
-Il Quality Metrics Satisfied misura la percentuale di metriche di processo che soddisfano la soglia accettabile nel periodo di riferimento:
-\[
-  \text{QMS} = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%
-\]
-
-La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase RTB (sono escluse le metriche per le quali non sono ancora disponibili i dati: MPC-RSI, MPC-TE, MPC-PRI, MPC-LE, MPC-CC, MPC-TSR).
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
+\end{center}
+Di seguito vengono dettagliate le singole attività pianificate per l'iterazione, con il relativo confronto tra le ore stimate in sede di Sprint Planning e le ore effettivamente impiegate a consuntivo.
 
 \begin{table}[H]
-\centering
-\rowcolors{2}{gray!15}{white}
-\begin{tabular}{|l|p{3.5cm}|p{3cm}|c|}
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
     \hline
-    \rowcolor{gray!35}
-    \textbf{Metrica} & \textbf{Valore misurato} & \textbf{Soglia accettabile} & \textbf{Esito} \\
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
     \hline
-    MPC-EV  & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-PV  & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-AC  & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-CPI & 0,904 (S4)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-SPI & 1,000 (tutti gli sprint) & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-EAC & $+10{,}6\%$ dal BAC (S4) & $\pm 5\%$ dal BAC & \textcolor{red!70!black}{Non soddisfatta} \\
-    MPC-ETC & $\geq 0$ tutti gli sprint & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-TEAC & 8 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-IG  & 45,9 – 59,7             & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
-    MPC-CO  & 0 errori                 & 0 errori & \textcolor{green!60!black}{Soddisfatta} \\
+    Aggiornamento sito web per visualizzazione doc. & Programmatore & 1 & 1 & Completata \\
     \hline
-    \rowcolor{gray!25}
-    \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{8 / 10} \\
+    Inizio stesura Glossario & Analista & 3 & 3 & Completata \\
     \hline
-    \rowcolor{gray!25}
-    \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{80\%} \\
+    Inizio stesura Analisi dei Requisiti & Analista & 6 & 7 & Completata\\
     \hline
-\end{tabular}
-\caption{Calcolo MPC-QMS per la fase RTB}
+    Inizio stesura Norme di Progetto & Amministratore & 6 & 6 & Completata \\
+    \hline
+    Costruzione Mock-up & Progettista & 4 & 5 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & Verificatore & 4 & 3 & Completata \\
+    \hline
+    Redazione verbali interni durante le riunioni & Responsabile & 5 & 5 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{29} & \textbf{30} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 1}
+    \label{tab:task_sprint1}
 \end{table}
 
-L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) grazie al pieno rispetto degli obiettivi di progetto e alla qualità della documentazione. In S2, S3, S4, il valore si stabilizza all'80\% (\emph{soglia accettabile}) a causa del superamento della soglia del $+5\%$ per l'EAC e del punteggio IG inferiore a 60 in Analisi Requisiti. Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis} [
-    title={Andamento MPC-QMS per Sprint rispetto alle Soglie},
-    ylabel={Percentuale soddisfazione (\%)},
-    symbolic x coords={S1, S2, S3, S4},
-    xtick=data,
-    ymin=0, ymax=100,
-    ytick={0, 20, 40, 60, 80, 100},
-    grid=major,
-    grid style={dashed, gray!30},
-    bar width=18pt, 
-    legend style={at={(0.5,-0.20)}, anchor=north, legend columns=-1, draw=none} 
-]
-
-
-\addplot[ybarStacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20)};
-
-
-\addplot[ybarStacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80)};
-
-
-\addplot[ybar, fill=blue!70!white, draw=none, bar width=10pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0)};
-
-
-\addplot[ybar, fill=green!60!black, draw=none, bar width=10pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,80)};
-
-
-\addplot[draw=blue!70!white, thick, fill=none] coordinates {}; \addlegendentry{Valore Rilevato}
-
-
-\addplot[pattern=dots, pattern color=black!40, fill=none] coordinates {}; \addlegendentry{Valore Accettabile (Soglia 80\%)}
-
-\addplot[fill=gray!8, pattern=crosshatch, pattern color=black!40] coordinates {}; \addlegendentry{Valore Ottimale (Soglia 100\%)}
-
-\end{axis}
-\end{tikzpicture}
-\caption{Grafico percentuale di metriche soddisfatte (MPC-QMS) per sprint confrontato con le soglie regionali.}
-\end{figure}
-
-\noindent\textbf{Valutazione:} Il QMS al termine della fase RTB è pari all'80\%, corrispondente alla \emph{soglia accettabile} ($\geq 80\%$). Le due metriche non soddisfatte richiedono interventi correttivi:
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
 \begin{itemize}
-    \item \textbf{MPC-EAC:} il costo stimato a completamento supera il BAC del 10,6\%. Nelle fasi successive è necessario un controllo più rigoroso dei costi, con revisione periodica delle stime e delle allocazioni orarie.
-    \item \textbf{MPC-IG:} i documenti tecnici presentano indici di leggibilità al di sotto della soglia di 60. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi ove possibile senza compromettere la precisione tecnica.
+    \item \textbf{Analisi dei Risultati:} Avvio efficace delle attività fondanti del progetto, con la configurazione dell'ambiente di lavoro, la prima stesura della documentazione principale (Glossario, Analisi dei Requisiti, Norme di Progetto) e la realizzazione della prima versione del mock-up grafico.
+    \item \textbf{Problematiche Riscontrate:} Lieve rallentamento fisiologico per i ruoli di Analista e Progettista, dovuto alla curva di apprendimento nell'utilizzo dei tool grafici e alla fase di rodaggio nella stesura dei requisiti.
+    \item \textbf{Azioni Correttive:} Maggiore accortezza nelle stime per le attività di Analisi e Progettazione durante i prossimi Sprint Planning; introduzione dell'obbligo di avviso tempestivo al Responsabile in caso di ritardi per consentire una rapida redistribuzione del carico.
+\end{itemize}
+\newpage
+
+\subsubsubsection{Secondo Periodo}
+
+\label{sec:rtb_secondoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    13/04/2026 & 26/04/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Durante il secondo Sprint, l'obiettivo principale del team è stato il consolidamento e l'allineamento della documentazione per prevenire future incomprensioni sui requisiti. Si è proceduto con l'avvio della stesura del \textit{Piano di Progetto} e con il continuo aggiornamento dell'\textit{Analisi dei Requisiti} (tramite l'estensione dei casi d'uso) e del \textit{Glossario}. Sul fronte progettuale, il mock-up è stato ultimato e presentato all'azienda proponente. A seguito del feedback ricevuto, sono state recepite le richieste per alcune modifiche minori; la revisione finale e la relativa approvazione del mock-up sono state riprogrammate per lo Sprint successivo.\\
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Inizio stesura Piano di Progetto & Responsabile & 3 & 3 & Completata \\
+    \hline
+    Aggiornamento Glossario & Analista & 3 & 4 & Completata \\
+    \hline
+    Aggiornamento Norme di Progetto & Amministratore & 6 & 5 & Completata \\
+    \hline
+    Aggiornamento Analisi dei Requisiti & Analista & 5 & 6 & In corso \\
+    \hline
+    Rifinitura Mock-up & Progettista & 2 & 2 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & Verificatore & 3 & 5 & Completata \\
+    \hline
+    Redazione verbali interni e verbale esterno & Responsabile & 2 & 2 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{24} & \textbf{27} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 2}
+    \label{tab:task_sprint2}
+\end{table}
+
+
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Ultimazione e presentazione del mock-up grafico all'azienda proponente; buon avanzamento nel consolidamento e nell'allineamento della documentazione per prevenire ambiguità.
+    \item \textbf{Problematiche Riscontrate:} Emersione di richieste per modifiche minori sul mock-up da parte del proponente e incremento imprevisto del carico di lavoro per i ruoli di Analista (estensione casi d'uso) e Verificatore. Le attività di Analisi dei Requisiti hanno subito un momentaneo stallo a causa della necessità di acquisire dal proponente dei file di esempio (es. cedolini, comunicazioni). Tali documenti si sono rivelati un prerequisito indispensabile per poter estrarre e mappare correttamente i dati necessari alla descrizione dettagliata dei casi d'uso, generando un rallentamento rispetto alle stime iniziali.
+    Come azione correttiva, il team ha riassegnato temporaneamente gli Analisti ad altre attività documentali (ovvero la correzione dello stesso documento) in attesa della ricezione dei file, per poi concentrare lo sforzo sui casi d'uso non appena i materiali sono stati resi disponibili
+    \item \textbf{Azioni Correttive:} Ottimizzazione della pianificazione interna per riassorbire lo sforzo orario extra e impegno del team nell'affinare le metriche di stima a partire dall'iterazione successiva.
+\end{itemize}
+\newpage
+
+\subsubsubsection{Terzo Periodo}
+\label{sec:rtb_terzoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    27/04/2026 & 10/05/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Durante il terzo Sprint, il team ha proseguito attivamente con la stesura della documentazione, concentrandosi in particolar modo sul consolidamento dell'\textit{Analisi dei Requisiti} (estensione dei casi d'uso e diagrammazione), sull'ampliamento del \textit{Piano di Progetto} e sull'aggiornamento continuo del \textit{Glossario}. Inoltre, è stata iniziata la stesura del \textit{Piano di Qualifica}. Dal punto di vista tecnico, è stata ultimata la revisione del mock-up per il proponente ed è iniziata la fase di autoformazione sui framework scelti per lo sviluppo (Laravel e Filament).
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento Piano di Progetto & Responsabile & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento Glossario & Analista & 2 & 3 & Completata \\
+    \hline
+    Aggiornamento Norme di Progetto & Amministratore & 3 & 3 & Completata \\
+    \hline
+    Aggiornamento Analisi dei Requisiti & Analista & 7 & 9 & Completata \\
+    \hline
+    Inizio stesura Piano di Qualifica & Responsabile & 1 & 1 & Completata \\
+    \hline
+    Rifinitura Mock-up & Programmatore & 0 & 2 & Completata \\
+    \hline
+    Studio delle tecnologie adottate & Progettista & 12 & 11 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & Verificatore & 3 & 3 & Completata \\
+    \hline
+    Redazione verbali interni e verbale esterno & Responsabile & 2 & 2 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{31} & \textbf{35} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 3}
+    \label{tab:task_sprint3}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Approvazione finale del mock-up da parte del proponente, forte progressione nella stesura dei casi d'uso (AdR) e avvio efficace della fase di autoformazione sui framework tecnologici Laravel e Filament.
+    \item \textbf{Problematiche Riscontrate:} Sottostima iniziale dell'intensità del lavoro richiesto per la diagrammazione dei requisiti ed emersione di attività tecniche non preventivate (ruolo del Programmatore) necessarie alla rifinitura del mock-up.
+    \item \textbf{Azioni Correttive:} Gestione flessibile e tempestiva del budget orario, attuando una riduzione mirata sulle ore del Progettista per supportare i ruoli che hanno portato via più tempo del necessario (Analista e Programmatore).
+\end{itemize}
+\newpage
+
+\subsubsubsection{Quarto Periodo}
+
+\label{sec:rtb_quartoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    11/05/2026 & 24/05/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il quarto periodo di Sprint ha rappresentato il momento di convergenza e finalizzazione di tutte le attività legate alla fase di RTB. Sul piano documentale, il team si è focalizzato sulla chiusura formale dell'Analisi dei Requisiti e del Glossario, integrando gli ultimi raffinamenti emersi dalle verifiche interne. Il nucleo operativo dell'iterazione è stato tuttavia assorbito dalle attività tecniche, con la definizione teorica e la successiva implementazione pratica del PoC. Sfruttando lo stack tecnologico concordato il gruppo ha sviluppato un prototipo funzionante mirato a validare la fattibilità delle architetture e a minimizzare i rischi tecnologici individuati. 
+
+A conclusione dell'iterazione, il team ha organizzato un incontro ufficiale con l'azienda proponente Eggon per presentare una demo operativa del PoC. Il colloquio ha permesso di mostrare le soluzioni software realizzate, ricevendo un riscontro estremamente positivo da parte del committente; questo passaggio ha sancito il superamento dei criteri di accettazione interni e ha confermato la solidità del lavoro svolto in preparazione al colloquio di revisione RTB.
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(Sprint Backlog)}}\\
+\end{center}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento Piano di Progetto & Responsabile & 1 & 1 & Completata \\
+    \hline
+    Stesura e incremento Piano di Qualifica & Responsabile & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento Norme di Progetto & Amministratore & 1 & 1 & Completata \\
+    \hline
+    Conclusione Analisi dei Requisiti e Glossario & Analista & 1 & 1 & Completata \\
+    \hline
+    Definizione del PoC & Progettista & 13 & 15 & Completata \\
+    \hline
+    Implementazione del PoC & Programmatore & 16 & 18 & Completata \\
+    \hline
+    Verifica della documentazione e del PoC & Verificatore & 8 & 11 & Completata \\
+    \hline
+    Redazione verbali interni ed esterni & Responsabile & 1 & 1 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{43} & \textbf{50} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 4}
+    \label{tab:task_sprint4}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Chiusura definitiva dell'Analisi dei Requisiti e sviluppo completato del Proof of Concept (PoC) utilizzando le tecnologie designate; Completati Norme di progetto, piano di qualifica, piano di progetto e glossario in vista dell'RTB.
+    \item \textbf{Problematiche Riscontrate:} Sul piano tecnico, lo sviluppo del PoC ha subito un momentaneo stallo a causa di una dipendenza esterna legata all'infrastruttura cloud di \textbf{AWS}. Il team si è trovato bloccato in attesa di poter richiedere e ottenere le credenziali e le risorse necessarie direttamente dall'azienda proponente. Questo periodo di attesa forzata ha costretto i ruoli tecnici (Progettista, Programmatore e Verificatore) a condensare l'intera fase di implementazione e collaudo in un arco di tempo molto più ristretto rispetto a quanto pianificato. Per recuperare il tempo latente e garantire la consegna del PoC entro i termini dello Sprint, il team ha dovuto svolgere sessioni di lavoro straordinarie e intensive, generando così lo scostamento complessivo di +7 ore.
+    \item \textbf{Azioni Correttive:} Trattandosi dell'ultimo Sprint della fase RTB, il gruppo utilizzerà le criticità per il preventivo delle ore del PoC per stilare una pianificazione oraria post-RTB estremamente accurata, prevedendo \textit{buffer} di rischio più ampi per la fase di coding.
 \end{itemize}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\subsection{Processi organizzativi — Gestione dei processi}
+\subsection{Pianificazione a Lungo Termine (Verso la PB)}
+La programmazione analitica dei singoli Sprint e delle scadenze intermedie verrà ufficializzata e integrata nella release v2.0.0 del presente documento, dopo aver superato la RTB. Nonostante ciò, il team ha delineato subito una strategia di sviluppo a lungo termine da poter seguire. Questo approccio, articolato in 4 macro-fasi sequenziali, è concepito per assicurare un rilascio incrementale, isolando le criticità architetturali.
 
-\subsubsection{MPC-TE — Time Efficiency}
+\subsubsection{Macro-fase 1: Consolidamento Architetturale e Infrastrutturale (Post-RTB)}
+Questa fase segna il passaggio dallo sviluppo sperimentale PoC alla progettazione ingegneristica rigorosa del sistema.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Stabilizzare l'architettura di base e predisporre l'ambiente cloud definitivo, garantendo che le fondamenta del software siano scalabili e sicure per il trattamento di dati aziendali.
+    \item \textbf{Attività chiave:} Stesura del \textit{Technical Design} definitivo (diagrammi UML avanzati), configurazione strutturata dei database e dello storage cloud per i documenti, implementazione dei protocolli di sicurezza per i dati sensibili in conformità al GDPR e setup della pipeline automatizzata di CI/CD.
+\end{itemize}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-TE (Dati non ancora disponibili)]
-Il Time Efficiency verrà calcolato confrontando le ore produttive effettivamente rendicontate con il totale delle ore disponibili in ciascuno sprint. I dati di dettaglio sulle ore non produttive (assenze, interruzioni non pianificate) non sono stati raccolti sistematicamente nella fase RTB.
+\subsubsection{Macro-fase 2: Sviluppo del Core del Prodotto (Fase MVP)}
+Fase interamente focalizzata sulla realizzazione del nucleo funzionale essenziale per la piattaforma, al fine di soddisfare tutti i requisiti classificati come obbligatori.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Rilasciare un \textit{Minimum Viable Product} (MVP) stabile, in grado di dimostrare l'interoperabilità di base tra le interfacce utente e i servizi di backend.
+    \item \textbf{Attività chiave:} Sviluppo delle API principali di comunicazione, implementazione delle componenti core per la dashboard amministrativa e le interfacce lato dipendente, e prima integrazione stabile dei motori di Intelligenza Artificiale per l'elaborazione dei testi e il riconoscimento documentale di base.
+\end{itemize}
 
-\medskip
-\textbf{Formula:} $\displaystyle\text{TE} = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$
+\subsubsection{Macro-fase 3: Estensione Funzionale, Ottimizzazione e Sicurezza}
+Fase orientata al completamento dei requisiti desiderabili e opzionali, focalizzandosi sull'efficienza e sulla rifinitura dell'esperienza utente (UX).
+\begin{itemize}
+    \item \textbf{Obiettivo:} Raggiungere la piena copertura funzionale del capitolato, ottimizzando i costi operativi legati alle chiamate AI e perfezionando le logiche di automazione.
+    \item \textbf{Attività chiave:} Estensione delle funzionalità AI (raffinamento dei prompt e dei meccanismi di smistamento automatico), implementazione di sistemi di caching per minimizzare le richieste esterne, definizione granulare del controllo accessi basato sui ruoli (RBAC) e rifinitura grafica delle interfacce \textit{Nexum}.
+\end{itemize}
 
-\medskip
-\textbf{Soglie:} accettabile $\geq 50\%$, ottimale $= 100\%$.
-\end{tcolorbox}
+\subsubsection{Macro-fase 4: Validazione, Quality Assurance e Rilascio}
+L'ultimo periodo prima della consegna ufficiale, dedicato esclusivamente alle attività di verifica approfondita e alla preparazione del deployment finale.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Certificare la conformità totale del prodotto rispetto ai requisiti qualitativi, prestazionali e di sicurezza concordati con la proponente.
+    \item \textbf{Attività chiave:} Esecuzione intensiva dei \textit{System Test} e dei test di integrazione, sessioni di \textit{User Acceptance Test} (UAT) in coordinamento con Eggon, stesura e validazione della manualistica finale (Manuale Utente e Manuale Amministratore) e rilascio del codice in ambiente di produzione.
+\end{itemize}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-PRI — Percentuale Rischi Inattesi}
+\newpage
+\section{Preventivo e Consuntivo dei Periodi}
+\label{sec:preventivo_e_consuntivo}
+\subsection{Primo Periodo: Sprint 30/03/2026 - 12/04/2026}
+\label{sec:pec_primoperiodo}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-PRI (Dati non ancora disponibili)]
-La Percentuale di Rischi Inattesi verrà calcolata al termine della fase RTB confrontando i rischi effettivamente manifestatisi con quelli identificati nel registro dei rischi del Piano di Progetto.
+\vspace{0.5em}
 
-\medskip
-\textbf{Formula:} $\displaystyle\text{PRI} = \frac{N_\text{rischi inattesi}}{N_\text{rischi totali manifestati}} \times 100\%$
+\begin{table}[H]
+\centering
+\label{tab:preventivo-sprint1}
+\vspace{2mm}
 
-\medskip
-\textbf{Soglie:} accettabile $\leq 20\%$, ottimale $= 0\%$.
-\end{tcolorbox}
+\begin{center}
+    
+\noindent\textbf{Preventivo}
+\end{center}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{MPC-LE — Labor Efficiency}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & 5 & - & 1 & - & - & - & 6\\
+Eleonora Bellet & - & 3 & - & - & - & - & 3\\
+Alex Oloni & - & - & 1 & 2 & - & - & 3\\
+Diego Belluz & - & 3 & - & - & - & - & 3\\
+Angela Maule & - & - & 2 & - & - & 1 & 3\\
+Leonardo Soligo & - & - & 3 & 2 & 1 & - & 6\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 3 & 5\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 6 & 9 & 4 & 1 & 4 & 29\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Primo Sprint}
+\end{table}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-LE (Dati non ancora disponibili)]
-Il Labor Efficiency confronta le ore dedicate ad attività a valore aggiunto con il totale delle ore lavorate. Il calcolo richiede un tracciamento puntuale delle ore per tipologia di attività, che verrà implementato nelle fasi successive al RTB.
+\begin{center}
+    
+\noindent\textbf{Consuntivo}
+\end{center}
 
-\medskip
-\textbf{Formula:} $\displaystyle\text{LE} = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & 5 & - & 2 & - & - & - & 7\\
+Eleonora Bellet & - & 3 & - & - & - & - & 3\\
+Alex Oloni & - & - & 1 & 2 & - & - & 3\\
+Diego Belluz & - & 3 & - & - & - & - & 3\\
+Angela Maule & - & - & 3 & - & - & 1 & 4\\
+Leonardo Soligo & - & - & 2 & 3 & 1 & - & 6 \\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 2 & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 6 & 10 & 5 & 1 & 3 & 30\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Primo Sprint}
+\end{table}
 
-\medskip
-\textbf{Soglie:} accettabile $\geq 70\%$, ottimale $\geq 100\%$.
-\end{tcolorbox}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            7.7/Responsabile,
+            23/Amministratore,
+            38.5/Analista,
+            19.2/Progettista,
+            3.9/Programmatore,
+            7.7/Verificatore
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Primo Sprint}
+\end{figure}
+
+\vspace{0.5cm}
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\label{tab:risorse-rimanenti}
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  150 \euro& 120 \euro & 250 \euro & 125 \euro & 15 \euro & 45 \euro & 705 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1530 \euro & 900 \euro & 1250 \euro & 3450 \euro & 2385 \euro & 2355 \euro & \cellcolor{yellow!50} 11.870 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Primo Sprint }
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 1}
+Al termine del primo Sprint, viene effettuato il calcolo del \textit{Preventivo a Finire} (EAC - \textit{Estimate at Completion}) per monitorare proattivamente l'andamento economico del progetto. Questa metrica proietta il costo totale finale sulla base degli scostamenti registrati nell'iterazione appena conclusa.
+
+Rispetto al preventivo iniziale dello Sprint 1, si è registrato un lieve scostamento in eccesso per i ruoli di Analista (+1 ora) e Progettista (+1 ora), parzialmente compensato da un risparmio nel ruolo di Verificatore (-1 ora). Di seguito viene presentata la proiezione aggiornata sull'intero ciclo di vita del progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro \\
+    \hline
+    Amministratore & 52 & +0 & 52 & 1.020,00 \euro & 0,00 \euro\\
+    \hline
+    Analista & 59 & +1 & 60 & 1.500,00 \euro & -25,00 \euro\\
+    \hline
+    Progettista & 143 & +1 & 144 & 3.575,00 \euro & -25,00 \euro\\
+    \hline
+    Programmatore & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro\\
+    \hline
+    Verificatore & 160 & -1 & 159 & 2.400,00 \euro & +15,00 \euro \\
+    \hline
+    \rowcolor{green!50!black!20!white}
+   \textbf{Totale} & \textbf{630} & \textbf{+1} & \textbf{631} & \textbf{12.605,00 \euro} & \textbf{-35,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza al termine dello Sprint 1}
+    \label{tab:eac_sprint1}
+\end{table}
+
+Come si nota dalla Tabella~\ref{tab:eac_sprint1}, il bilancio a finire proietta un totale di 631 ore con un costo complessivo stimato di € 12.610,00. La Varianza a Finire (VAC) risulta essere leggermente negativa e pari a € -35,00. Essendo il primo Sprint di progetto, questo scostamento è considerato del tutto fisiologico e legato alla fase di rodaggio del team; esso verrà tenuto in considerazione nelle prossime pianificazioni per riportare il bilancio in perfetto equilibrio.
+
+\newpage
+\subsection{Secondo Periodo: Sprint 13/04/2026 - 26/04/2026}
+\label{sec:pec_secondoperiodo}
+
+\vspace{0.5em}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+
+\begin{center}
+    
+\noindent\textbf{Preventivo}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 3 & - & - & - & 3\\
+Eleonora Bellet & - & 3 & - & - & - & 1 & 4\\
+Alex Oloni & - & 3 & - & - & - & - & 3\\
+Diego Belluz & - & - & 2 & - & - & - & 2\\
+Angela Maule & 5 & - & 1 & - & - & - & 6\\
+Leonardo Soligo & - & - & - & 2 & - & - & 2\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 2 & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 6 & 8 & 2 & 0 & 3 & 24\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Secondo Sprint}
+\end{table}
+
+\begin{center}
+    
+\noindent\textbf{Consuntivo}
+\end{center}
+
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 4 & - & - & - & 4\\
+Eleonora Bellet & - & 3 & - & - & - & 2 & 5\\
+Alex Oloni & - & 2 & - & - & - & - & 2\\
+Diego Belluz & - & - & 2 & - & - & - & 2\\
+Angela Maule & 5 & - & 2 & - & - & - & 7\\
+Leonardo Soligo & - & - & - & 2 & - & - & 2\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 3 & 5\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 5 & 10 & 2 & 0 & 5 & 27\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Secondo Sprint}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, orange!60}
+        ]{
+            21.7/Responsabile,
+            21.7/Amministratore,
+            43.5/Analista,
+            8.7/Progettista,
+            4.4/Verificatore
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Secondo Sprint}
+\end{figure}
+
+
+\vspace{0.5cm}
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  150 \euro& 100 \euro & 250 \euro & 50 \euro & 0 \euro & 75 \euro & 625\euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1380 \euro & 800 \euro & 1000 \euro & 3400 \euro & 2385 \euro & 2280 \euro & \cellcolor{yellow!50} 11.245 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Secondo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 2}
+Al termine del secondo Sprint, il \textit{Preventivo a Finire} (EAC) è stato ricalcolato tenendo conto degli scostamenti cumulativi registrati nelle prime due iterazioni di progetto. 
+
+Nello Sprint appena concluso si è verificato un lieve scostamento in eccesso rispetto alle stime, principalmente dovuto all'aumento delle ore necessarie per l'Analisi dei Requisiti e per le attività di Verifica, parzialmente mitigate da un risparmio nel ruolo di Amministratore. Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    Amministratore & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro \\
+    \hline
+    Analista & 59 & +3 & 62 & 1.550,00 \euro & -75,00 \euro \\
+    \hline
+    Progettista & 143 & +1 & 144 & 3.600,00 \euro & -25,00 \euro\\
+    \hline
+    Programmatore & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro \\
+    \hline
+    Verificatore & 160 & +1 & 161 & 2.415,00 \euro & -15,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+4} & \textbf{634} & \textbf{12.665,00 \euro} & \textbf{-95,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 2}
+    \label{tab:eac_sprint2}
+\end{table}
+
+Come mostrato nella Tabella~\ref{tab:eac_sprint2}, lo scostamento cumulativo totale si attesta a +4 ore rispetto al piano originale. La Varianza a Finire (VAC) registra un valore di € -95,00. Il team ha preso atto di questa tendenza al rialzo, dovuta principalmente al consolidamento della documentazione; verranno pertanto pianificate delle azioni di ottimizzazione nelle successive iterazioni tecniche per riassorbire tale scostamento e rientrare nel budget stabilito.
+
+\newpage
+
+\subsection{Terzo Periodo: Sprint 27/04/2026 - 10/05/2026}
+\label{sec:pec_terzoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{Preventivo}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 2 & 3 & - & - & 5\\
+Eleonora Bellet      & - & - & 1 & 3 & - & 2 & 6\\
+Alex Oloni           & 4 & - & - & - & - & - & 4\\
+Diego Belluz         & - & 3 & - & 3 & - & - & 6\\
+Angela Maule         & - & - & 2 & - & - & - & 2\\
+Leonardo Soligo      & - & - & 2 & 3 & - & - & 5\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 3 & 9 & 12 & 0 & 3 & 31\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Terzo sprint}
+\end{table}
+
+\begin{center}
+\noindent\textbf{Consuntivo}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 3 & 4 & - & - & 7\\
+Eleonora Bellet & - & - & 3 & 1 & - & 2 & 6\\
+Alex Oloni & 4 & - & - & 1 & - & - & 5\\
+Diego Belluz & - & 3 & - & 3 & - & - & 6\\
+Angela Maule & - & - & 2 & - & - & - & 2\\
+Leonardo Soligo & - &  - & 2 & 2 & 2 & - & 6\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 4 & 3 & 12 & 11 & 2 & 3 & 35\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Terzo Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            14.4/Responsabile,
+            7.2/Amministratore,
+            36.1/Analista,
+            33.1/Progettista,
+            3.6/Programmatore,
+            5.4/Verificatore
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Terzo Sprint}
+\end{figure}
+
+\vspace{0.5cm}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 60 \euro & 300 \euro & 275 \euro & 30 \euro & 45 \euro &  830\euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1260 \euro & 740 \euro & 700 \euro & 3125 \euro & 2355 \euro & 2235 \euro & \cellcolor{yellow!50} 10.415 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Terzo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 3}
+Al termine del terzo Sprint, il Responsabile ha proceduto al ricalcolo del \textit{Preventivo a Finire}. Questa analisi predittiva valuta l'impatto degli scostamenti cumulativi registrati fin dall'inizio del progetto rispetto al budget aggiornato in fase di avvio.
+
+Durante quest'ultima iterazione, il team ha compensato lo scostamento in eccesso registrato precedentemente sul ruolo di Progettista, riportando il suo bilancio cumulativo in perfetto equilibrio. Tuttavia, il perdurare di un intenso carico di lavoro sull'Analisi dei Requisiti e l'avvio delle attività di Programmazione per la chiusura del Mock-up e l'inizio del Poc hanno generato un ulteriore assorbimento di risorse. Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    Amministratore & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro \\
+    \hline
+    Analista & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro \\
+    \hline
+    Progettista & 143 & +0 & 143 & 3.575,00 \euro & 0,00 \euro \\
+    \hline
+    Programmatore & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro\\
+    \hline
+    Verificatore & 160 & +1 & 161 & 2.415,00 \euro & -15,00 \euro \\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+8} & \textbf{638} & \textbf{12.745,00 \euro} & \textbf{-175,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 3}
+    \label{tab:eac_sprint3}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint3}, il bilancio a finire proietta attualmente un totale di 638 ore, con una Varianza (VAC) complessiva di -175,00 \euro dovuta quasi interamente alle stime al ribasso per il ruolo di Analista nelle fasi iniziali. Tale scostamento impone al team un'attenta ripianificazione nelle prossime settimane: l'ottimizzazione e il risparmio delle ore di Analista e Responsabile durante la fase di PB saranno essenziali per garantire un rientro all'interno del tetto massimo di spesa.
+
+\newpage
+\subsection{Quarto Periodo: Sprint 11/05/2026 - 24/05/2026}
+\label{sec:pec_quartoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{Preventivo}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & 2 & 4 & - & 6\\
+Eleonora Bellet      & 4 & - & - & - & - & 2 & 6\\
+Alex Oloni           & - & - & - & 2 & 4 & - & 6\\
+Diego Belluz         & - & 1 & - & 3 & - & 2 & 6\\
+Angela Maule         & - & - & 1 & 2 & 4 & - & 7\\
+Leonardo Soligo      & - & - & - & 2 & 4 & - & 6\\
+V.Y. Kaneda Fernandes & - & - & - & 2 & - & 4 & 6\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 1 & 1 & 13 & 16 & 8 & 43\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Quarto Sprint}
+\end{table}
+
+\begin{center}
+\noindent\textbf{Consuntivo}
+\end{center}
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+    Angelica Gastaldello & & & & 3 & 5 & & 8 \\
+    \hline
+    Eleonora Bellet & 4 & & & & & 3 & 7 \\
+    \hline
+    Alex Oloni & & & & 2 & 4 & & 6 \\
+    \hline
+    Diego Belluz & & 1 & & 2 & & 3 & 6 \\
+    \hline
+    Angela Maule & & & 1 & 3 & 4 & & 8 \\
+    \hline
+    Leonardo Soligo & & & & 3 & 5 & & 8 \\
+    \hline
+    V.Y. Kaneda Fernandes & & & & 2 & & 5 & 7 \\
+    \hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+    Totale & 4 & 1 & 1 & 15 & 18 & 11 & 50 \\
+    \hline
+   \end{tabular}
+\caption{Consuntivo ore per componente - Quarto sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            hide number,
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            12.31/Responsabile,
+            2.05/Amministratore,
+            2.56/Analista,
+            38.46/Progettista,
+            27.70/Programmatore,
+            16.92/Verificatore
+        }
+        \node at (22:1.6) {12.31\%};  
+        \node at (130:1.6) {38.46\%};
+        \node at (249:1.6) {27.70\%}; 
+        \node at (330:1.6) {16.92\%}; 
+
+        \draw[<-] (48:2.9) -- (48:4.2) node[right] {2.05\%};
+        
+        \draw[<-] (56:2.9) -- (56:4.6) node[above right] {2.56\%};
+
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Quarto Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 20 \euro & 25 \euro & 375 \euro & 270 \euro & 165 \euro &  975 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1140 \euro & 720 \euro & 675 \euro & 2750 \euro & 2085 \euro & 2070 \euro & \cellcolor{yellow!50} 9.440 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Quarto Sprint}
+\end{table}
+
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 4 (Chiusura RTB)}
+Al termine del quarto e ultimo Sprint della fase di pre-qualifica, viene rendicontato il \textit{Preventivo a Finire} (EAC) finale per la \textit{Requirements and Technology Baseline} (RTB).
+
+La realizzazione e il collaudo del Proof of Concept (PoC) hanno richiesto un effort tecnico superiore alle stime (complessive +7 ore sui ruoli di Progettazione, Programmazione e Verifica). Questo scostamento, sommato a quelli delle iterazioni precedenti, porta la Varianza a Finire complessiva a -300,00 \euro. Trattandosi della chiusura di una macro-fase, il team ha assorbito tale varianza all'interno del margine di rischio concordato; la futura pianificazione della fase di \textit{Product Baseline} (PB) sarà calibrata su metriche più conservative per garantire l'assoluto rispetto del tetto di spesa.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    Responsabile & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    Amministratore & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    Analista & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro\\
+    \hline
+    Progettista & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    Programmatore & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro \\
+    \hline
+    Verificatore & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+15} & \textbf{645} & \textbf{12.870,00 \euro} & \textbf{-300,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Preventivo a Finire e Varianza cumulativa finale per la fase RTB}
+    \label{tab:eac_sprint4}
+\end{table}
+
+\subsection{Rendiconto ore rimanenti}
+Come si può osservare nella tabella sottostante, il documento riporta il dettaglio delle ore rimanenti a disposizione. I dati sono suddivisi per ogni singolo componente del gruppo e per le rispettive mansioni, mostrando il monte ore residuo calcolato al termine dei quattro sprint di progetto.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 0 & 14 & 17 & 23 & 64 \\
+\hline
+E. Bellet & 4 & 1 & 5 & 19 & 23 & 17 & 69 \\
+\hline
+A.Oloni & 4 & 6 & 7 & 15 & 19 & 23 & 74 \\
+\hline
+D. Belluz & 8 & 0 & 7 & 16 & 23 & 19 & 73 \\
+\hline
+A. Maule & 3 & 8 & 0 & 18 & 19 & 21 & 69 \\
+\hline
+L. Soligo & 8 & 7 & 5 & 10 & 15 & 23 & 68 \\
+\hline
+V. Y. K. Fernandes & 8 & 8 & 2 & 18 & 23 & 12 & 71 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{38} & \textbf{37} & \textbf{26} & \textbf{110} & \textbf{139} & \textbf{138} & \textbf{488} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti}
+\end{table}
 
 \end{document}
