@@ -1,0 +1,148 @@
+  \documentclass[a4paper,11pt]{letter}
+  \usepackage[utf8]{inputenc}
+  \usepackage[italian]{babel}
+  \usepackage[margin=2.5cm]{geometry}
+  \usepackage{graphicx}
+  \usepackage{xcolor}
+  \usepackage{colortbl}
+  \usepackage{tcolorbox}
+  \usepackage{enumitem}
+  \usepackage{amssymb}
+  \usepackage{tabularx}
+  \usepackage{hyperref}
+  \usepackage{eurosym}
+  \usepackage{multicol}
+
+    \definecolor{primarycolor}{RGB}{112,66,20}
+    \definecolor{secondarycolor}{RGB}{156,101,52}
+    \definecolor{lightgray}{RGB}{242,239,234}
+    \definecolor{darkgray}{RGB}{70,56,43}
+    \definecolor{softsand}{RGB}{248,243,236}
+
+  \hypersetup{
+      colorlinks=true,
+      linkcolor=primarycolor,
+      urlcolor=secondarycolor,
+      citecolor=primarycolor
+  }
+
+  \graphicspath{{./}{../../.github/site-src/assets/}}
+
+  \newcommand{\GruppoFirma}{aLittleByte\\Gruppo 19\\alittlebyte.swe@gmail.com}
+  \newcommand{\TODO}{\textcolor{red}{\textbf{[???]}}}
+
+  \begin{document}
+
+  \begin{letter}{Prof. Tullio Vardanega\\Prof. Riccardo Cardin\\Università degli Studi di Padova\\Dipartimento di Matematica\\Via Trieste, 63\\35121 Padova}
+
+  \begin{tcolorbox}[
+      colback=softsand,
+      colframe=primarycolor!45,
+      coltext=darkgray,
+      arc=1.8mm,
+      boxrule=0.6pt,
+      left=14pt,
+      right=14pt,
+      top=11pt,
+      bottom=11pt
+  ]
+      \begin{minipage}[c]{0.72\textwidth}
+          {\color{primarycolor}\large\bfseries Lettera di Presentazione RTB}\\[0.10em]
+          {\color{darkgray}\normalsize Capitolato C5 -- Nexum}
+      \end{minipage}\hfill
+      \begin{minipage}[c]{0.23\textwidth}
+          \raggedleft
+          \IfFileExists{../../.github/site-src/assets/logo_alittlebyte.png}{%
+              \fcolorbox{primarycolor!35}{softsand}{\includegraphics[width=2.4cm,height=2.4cm,keepaspectratio]{../../.github/site-src/assets/logo_alittlebyte.png}}
+          }{%
+              \fcolorbox{primarycolor!35}{softsand}{\parbox[c][2.4cm][c]{2.4cm}{\centering\tiny\color{black}Logo\\non trovato}}
+          }
+      \end{minipage}
+    \\[0.8em]
+      \textcolor{secondarycolor}{\rule{\linewidth}{0.4pt}}\\[0.6em]
+      \begin{tabularx}{\textwidth}{@{}lX@{}}
+          \textcolor{darkgray}{\textbf{Gruppo}} & aLittleByte (Gruppo 19) \\
+          \textcolor{darkgray}{\textbf{Email}} & \href{mailto:alittlebyte.swe@gmail.com}{alittlebyte.swe@gmail.com}
+      \end{tabularx}
+  \end{tcolorbox}
+
+  \vspace{1.5em}
+
+  \date{29 maggio 2026}
+
+  \opening{Egregio Prof. Vardanega,\\Egregio Prof. Cardin,}
+
+  con il presente documento il gruppo \textit{aLittleByte} intende comunicare la propria volontà di
+  sottoporsi alla revisione della \textit{Requirements and Technology Baseline} riguardo al lavoro
+  svolto nella realizzazione del capitolato proposto da \textbf{Eggon S.r.l.} con titolo:
+
+  \begin{center}
+      \textbf{Nexum}
+  \end{center}
+
+  Segue la documentazione a sostegno di tale candidatura, disponibile al sito web ufficiale del
+  gruppo\footnote{\href{https://alittlebyte-19.github.io/Documentazione/}{https://alittlebyte-19.github.io/Documentazione/}}:
+
+  \vspace{0.3em}
+
+  \begin{multicols}{2}
+  \begin{itemize}[noitemsep, topsep=0pt]
+      \item \href{LINK_ADR}{Analisi dei Requisiti \TODO} % LINK: URL PDF Analisi dei Requisiti; TODO: versione (es. v1.0.0)
+      \item \href{LINK_GLOSSARIO}{Glossario \TODO}        % LINK: URL PDF Glossario; TODO: versione
+      \item \href{LINK_NDP}{Norme di Progetto \TODO}      % LINK: URL PDF Norme di Progetto; TODO: versione
+      \item \href{LINK_PDP}{Piano di Progetto \TODO}      % LINK: URL PDF Piano di Progetto; TODO: versione
+      \item \href{LINK_PDQ}{Piano di Qualifica \TODO}     % LINK: URL PDF Piano di Qualifica; TODO: versione
+      \item \href{LINK_VE_20260506}{Verbale Esterno 06/05/2026} % LINK: URL PDF verbale esterno 06/05/2026
+      \item \href{LINK_VE_20260420}{Verbale Esterno 20/04/2026} % LINK: URL PDF verbale esterno 20/04/2026
+      \item \href{LINK_VI_20260504}{Verbale Interno 04/05/2026}  % LINK: URL PDF verbale interno 04/05/2026
+      \item \href{LINK_VI_20260427}{Verbale Interno 27/04/2026}  % LINK: URL PDF verbale interno 27/04/2026
+      \item \href{LINK_VI_20260413}{Verbale Interno 13/04/2026}  % LINK: URL PDF verbale interno 13/04/2026
+      \item \href{LINK_VI_20260409}{Verbale Interno 09/04/2026}  % LINK: URL PDF verbale interno 09/04/2026
+      \item \href{LINK_VI_20260330}{Verbale Interno 30/03/2026}  % LINK: URL PDF verbale interno 30/03/2026
+  \end{itemize}
+  \end{multicols}
+
+  \vspace{0.3em}
+
+  Il gruppo \textit{aLittleByte} ha sviluppato un \textit{Proof of Concept}, reperibile al
+  repository\footnote{\href{https://github.com/aLittleByte-19/PoC}{https://github.com/aLittleByte-19/PoC}} dedicato.
+
+  Infine, intendiamo comunicare che la data ultima di consegna del prodotto finale è il \textbf{10 settembre 2026}, con
+  costo stimato massimo di \textbf{Euro 12.575}.
+
+  \vspace{1em}
+
+  \textbf{Membri del gruppo}
+  \begin{center}
+  \setlength{\arrayrulewidth}{0.8pt}
+  \arrayrulecolor{black}
+  \begin{tabular}{|l|l|r|}
+  \hline
+  \rowcolor{primarycolor!20}
+  \textcolor{black}{\textbf{Cognome}} & \textcolor{black}{\textbf{Nome}} & \textcolor{black}{\textbf{Matricola}} \\
+  \hline
+  Bellet & Eleonora & 2111002\\
+  \hline
+  Belluz & Diego & 2043361\\
+  \hline
+  Gastaldello & Angelica & 2111003\\
+  \hline
+  Kaneda Fernandes & Vinicius Yuri & 2082856 \\
+  \hline
+  Maule & Angela & 2110991\\
+  \hline
+  Oloni & Alex & 2080046\\
+  \hline
+  Soligo & Leonardo & 2111042\\
+  \hline
+  \end{tabular}
+  \arrayrulecolor{black}
+  \end{center}
+
+  \vspace{0.8em}
+
+  \closing{Cordiali saluti, \vspace{1.2em} \\ \GruppoFirma}
+
+  \end{letter}
+
+  \end{document}
