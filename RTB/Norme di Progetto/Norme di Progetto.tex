@@ -9,10 +9,12 @@
 \usepackage[most]{tcolorbox}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{longtable}
 
 \newcommand{\groupmail}{alittlebyte19@gmail.com}
-\newcommand{\grouplogo}{.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
 
 
 \geometry{
@@ -97,52 +99,61 @@
 \vspace{0.35cm}
 
 \renewcommand{\arraystretch}{1.35}
-\rowcolors{2}{gray!8}{white}
-\begin{center}
-    {\footnotesize
-    \begin{tabularx}{\textwidth}{|p{1.4cm}|p{1.8cm}|X|p{2.4cm}|p{2.3cm}|p{2.3cm}|}
+{\footnotesize
+    \setlength{\LTleft}{\fill}
+    \setlength{\LTright}{\fill}
+    \rowcolors{2}{gray!8}{white}
+    \begin{longtable}{|p{1.1cm}|p{2.0cm}|p{4.3cm}|p{2.8cm}|p{2.0cm}|p{2.0cm}|}
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
         \hline
-        0.14.0 & 20/05/2026 & Aggiunta sezione metriche & Diego Belluz & Eleonora Bellet & - \\
+        \endfirsthead
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        \endhead
+        \hline
+        \endfoot
+        \hline
+        \endlastfoot
+        1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Angelica Gastaldello \\
+        \hline
+        0.14.0 & 20/05/2026 & Aggiunta sezione metriche & Diego Belluz & V.Y. Kaneda Fernandes & - \\
         
         \hline 
         0.13.0 & 18/05/2026 & Aggiunta sezione qualità del software & Diego Belluz & Eleonora Bellet & - \\
         \hline 
-        0.12.0 & 8/05/2026 & Struttura dei diari di bordo & Eleonora Bellet & Diego Belluz & - \\
+        0.12.0 & 8/05/2026 & Struttura dei diari di bordo & Diego Belluz & Eleonora Bellet & - \\
         \hline
-        0.11.2 & 7/05/2026 & Corretti errori di sintassi & Eleonora Bellet & Diego Belluz & - \\
+        0.11.2 & 7/05/2026 & Corretti errori di sintassi & Diego Belluz & V.Y. Kaneda Fernandes & - \\
         \hline 
-        0.11.1 & 22/04/2026 & Aggiornate e corrette alcune sezioni delle norme & Diego Belluz & Eleonora Bellet & - \\
+        0.11.1 & 22/04/2026 & Aggiornate e corrette alcune sezioni delle norme & Alex Oloni & Eleonora Bellet & - \\
         \hline 
-        0.11.0 & 19/04/2026 & Tracciamento delle azioni, comunicazione, riunioni & Eleonora Bellet & Diego Belluz & - \\
+        0.11.0 & 19/04/2026 & Tracciamento delle azioni, comunicazione, riunioni & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
         \hline
-        0.10.0 & 18/04/2026 & Processi Organizzativi (Definizione e scopo, gestione degli sprint, ruoli) & Eleonora Bellet & Diego Belluz & - \\
+        0.10.0 & 18/04/2026 & Processi Organizzativi (Definizione e scopo, gestione degli sprint, ruoli) & Alex Oloni & Eleonora Bellet & - \\
         \hline 
-        0.9.0 & 17/04/2026 & Validazione, Processo di Validazione, Processo di validazione & Eleonora Bellet & Diego Belluz & - \\
+        0.9.0 & 17/04/2026 & Validazione, Processo di Validazione, Processo di validazione & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
         \hline 
-        0.8.0 & 16/04/2026 & Controllo della configurazione, Stato della configurazione, Attività di Verifica, Analisi Statica & Eleonora Bellet & Diego Belluz & - \\
+        0.8.0 & 16/04/2026 & Controllo della configurazione, Stato della configurazione, Attività di Verifica, Analisi Statica & Alex Oloni & Eleonora Bellet & - \\
         \hline
-        0.7.0 & 14/04/2026 & Denominazione dei documenti, Produzione e Gestione della configurazione & Eleonora Bellet & Diego Belluz & - \\
+        0.7.0 & 14/04/2026 & Denominazione dei documenti, Produzione e Gestione della configurazione & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
         \hline 
-        0.6.0 & 11/04/2026 & Processi di supporto (scopo, strumenti utilizzati, documenti prodotti, struttura dei documenti) & Eleonora Bellet & Diego Belluz & - \\
+        0.6.0 & 11/04/2026 & Processi di supporto (scopo, strumenti utilizzati, documenti prodotti, struttura dei documenti) & Diego Belluz & Angela Maule & - \\
         \hline
-        0.5.0 & 9/04/2026 & Processi di sviluppo & Diego Belluz & Eleonora Bellet & - \\
+        0.5.0 & 9/04/2026 & Processi di sviluppo & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
         \hline
-        0.4.0 & 8/04/2026 & Processi di fornitura & Diego Belluz & Eleonora Bellet & - \\
+        0.4.0 & 8/04/2026 & Processi di fornitura & Diego Belluz & Angela Maule & - \\
         \hline
-        0.3.0 & 4/04/2026 & Architettura dei processi & Diego Belluz & Eleonora Bellet & - \\
+        0.3.0 & 4/04/2026 & Architettura dei processi & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
         \hline
-        0.2.0 & 31/03/2026 & Scopo del documento e scopo del prodotto & Eleonora Bellet & Diego Belluz & - \\
+        0.2.0 & 31/03/2026 & Scopo del documento e scopo del prodotto & Diego Belluz & Angela Maule & - \\
         \hline
-        0.1.0 & 31/03/2026 & Struttura del documento & Eleonora Bellet & Diego Belluz & - \\
-        \hline
-        
-    \end{tabularx}
-    }
-    
-\end{center}
+        0.1.0 & 31/03/2026 & Struttura del documento & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+    \end{longtable}
+}
 \newpage
 
 \begin{center} 
@@ -226,7 +237,7 @@ In questa sezione viene descritto come nasce il software. I processi primari ind
 \subsubsection{Processi di fornitura}
 I processi di fornitura comprendono tutte le attività preliminari che permettono di avviare lo sviluppo del progetto, in particolar modo la pianificazione: suddivisione del lavoro in fasi e milestone come rtb e pb, l’analisi: come vengono analizzati i capitolati, la stima: come si stimano vari costi e stime.
 
-\paragraph{Scopo e obbiettivi}
+\paragraph{Scopo e obiettivi}
 Il processo di fornitura definisce le procedure e le attività che il gruppo mette in atto per stabilire un accordo operativo con la proponente (\textit{Eggon}). L'obiettivo è trasformare le necessità espresse nel capitolato C5 in un insieme di requisiti tecnici e vincoli contrattuali ben definiti. In questa fase si stabiliscono le basi metodologiche del \textit{"Way of Working''} del team, garantendo che ogni attività sia pianificata, tracciabile e verificabile.
 
 \paragraph{Attività Operative}
@@ -304,7 +315,7 @@ La progettazione traduce le specifiche in un'infrastruttura flessibile e scalabi
 Questa è la fase di traduzione dei modelli architetturali in sorgente eseguibile.
 \begin{itemize}
     \item \textbf{Modularità e Riuso:} Suddivisione del codice in moduli con responsabilità singola (es. libreria dei prompt separata dal motore di generazione). Applicazione di pattern architetturali per evitare dipendenze dirette e favorire la manutenibilità.
-    \item \textbf{Gestione degli Errori e Resilienza:} mplementazione di meccanismi robusti per la gestione di anomalie, retry di rete e fallback nel caso in cui i servizi AI esterni non siano temporaneamente disponibili (come mappato negli scenari alternativi dei casi d'uso).
+    \item \textbf{Gestione degli Errori e Resilienza:} Implementazione di meccanismi robusti per la gestione di anomalie, retry di rete e fallback nel caso in cui i servizi AI esterni non siano temporaneamente disponibili (come mappato negli scenari alternativi dei casi d'uso).
     \item \textbf{Tracciabilità e Qualità:} Versionamento continuo del codice, revisione tra pari (\textit{Code Review}) e test automatizzati per validare non solo le logiche applicative, ma anche l'integrazione corretta dei parametri (tono, stile, metadati) passati ai core di intelligenza artificiale.
 
 \end{itemize}
@@ -320,7 +331,7 @@ Lo scopo del processo di documentazione è stabilire regole e metodologie pratic
 Per gestire in modo efficiente la stesura, la revisione e il versionamento della documentazione, il gruppo \textit{aLittleByte} ha scelto di utilizzare i seguenti strumenti:
 \begin{itemize}
     \item \textbf{GitHub:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e pull request per garantire che ogni modifica venga revisionata in modo asincrono da un altro membro prima di essere integrata nella versione definitiva. Utilizziamo inoltre le issue per pianificare e monitorare le attività legate alla documentazione.
-    \item \textbf{Latex:} Scelto per la stesura di tutti i documenti tecnici e formali. Questo strumento ci garantisce un'impaginazione professionale, rigorosa e visivamente uniforme in tutto il progetto, grazie all'impiego di template e stili predefiniti condivisi all'interno del gruppo.
+    \item \textbf{LaTeX:} Scelto per la stesura di tutti i documenti tecnici e formali. Questo strumento ci garantisce un'impaginazione professionale, rigorosa e visivamente uniforme in tutto il progetto, grazie all'impiego di template e stili predefiniti condivisi all'interno del gruppo.
 \end{itemize}
 
 \paragraph{Documenti Prodotti}
@@ -341,7 +352,7 @@ Tutti i documenti (eccetto i verbali e i diari di bordo) hanno la seguente strut
     \item \textbf{Copertina:} Riporta il logo, l'indirizzo email del gruppo, il titolo del documento, il nome del gruppo e i metadati essenziali (redattori, verificatori, destinatari e data).
     \item \textbf{Registro delle modifiche:} Tabella posta all'inizio del file per il tracciamento delle versioni. Per ogni aggiornamento indica: numero di versione, data, descrizione della modifica, redattore e approvatore/verificatore.
     \item \textbf{Indice:} Elenco gerarchico dei contenuti con rinvii numerici alle pagine, per favorire una navigazione rapida e mirata.
-    \item \textbf{Introduzione:} Contiente lo scopo del documento, glossario e riferimenti. 
+    \item \textbf{Introduzione:} Contiene lo scopo del documento, glossario e riferimenti. 
     \item \textbf{Contenuto:} Corpo centrale del testo organizzato in sezioni e sottosezioni numerate (es. 1, 1.1), redatto in stile chiaro e esecutivo.
 \end{itemize}
 
@@ -361,13 +372,13 @@ I Diari di Bordo sono delle diapositive realizzate per gli incontri settimanali 
 Sono documenti brevi che trattano dei seguenti argomenti:
 
 \begin{itemize}
-    \item \textbf{Copertina:} Riporta le informazioni identificative di base, ovvero il logo del team, la data della presentatione, il numero del gruppo e i nomi dei componenti.
+    \item \textbf{Copertina:} Riporta le informazioni identificative di base, ovvero il logo del team, la data della presentazione, il numero del gruppo e i nomi dei componenti.
     
     \item \textbf{Cosa abbiamo fatto:} Un riepilogo sintetico e puntato delle attività concluse nell'ultimo periodo.
     
     \item \textbf{Cosa faremo:} La pianificazione operativa per i giorni successivi, indicando i prossimi \textit{task} da completare.
     
-    \item \textbf{Difficoltà e dubbi:} Una sezione in cui vengono elencati i problemi affrontati dal team  e i dubbi da sottoporre all'attenzione del corpo docente.
+    \item \textbf{Difficoltà e dubbi:} Una sezione in cui vengono elencati i problemi affrontati dal team e i dubbi da sottoporre all'attenzione del corpo docente.
 \end{itemize}
 
 Questa suddivisione in sezioni permette di ottimizzare i tempi della presentazione, garantendo che i messaggi chiave arrivino in modo chiaro e che ci si possa concentrare immediatamente sulla discussione e risoluzione dei problemi.
@@ -720,90 +731,349 @@ In questo progetto, tale obiettivo viene perseguito attraverso una precisa delin
 Al fine di assicurare un monitoraggio imparziale, il gruppo ha stabilito specifiche metriche di processo, dettagliate all'interno del \textit{Piano di Qualifica}. Tali indicatori permettono di misurare l'efficienza del ciclo di sviluppo, focalizzandosi su variabili critiche quali la puntualità nelle consegne, l'aderenza al budget stabilito, la frequenza di anomalie rilevate, l'estensione dei test e la conformità complessiva ai criteri prefissati.
 
 \section{Metriche}
-Questa sezione definisce in modo formale tutte le metriche adottate dal gruppo per quantificare la qualità del processo di sviluppo e del prodotto software finale. I valori di soglia (accettabili e ottimali) e i risultati effettivi delle misurazioni sono demandati e documentati all'interno del \textit{Piano di Qualifica}.
+Questa sezione definisce in modo formale tutte le metriche adottate dal gruppo per quantificare la qualità del processo di sviluppo e del prodotto software finale. I valori di soglia (accettabili e ottimali) e i risultati effettivi delle misurazioni sono documentati nel \textit{Piano di Qualifica}, che contiene il cruscotto di valutazione con l'andamento storico delle misurazioni.
 
+Ogni metrica è descritta in termini di:
+\begin{itemize}
+    \item \textbf{Identificativo:} codice univoco della metrica;
+    \item \textbf{Nome:} denominazione della metrica;
+    \item \textbf{Descrizione:} definizione operativa dello scopo della metrica;
+    \item \textbf{Formula:} espressione matematica per il calcolo del valore;
+    \item \textbf{Unità di misura:} unità in cui il valore è espresso.
+\end{itemize}
+
+Le metriche di processo sono identificate dalla sigla \textbf{MPC} (Metrica di Processo e Controllo), mentre le metriche di prodotto dalla sigla \textbf{MPD} (Metrica di Prodotto).
+
+% ─────────────────────────────────────────────────────────────────────────────
 \subsection{Metriche per la qualità di processo}
-Queste metriche (identificate dalla sigla MPC) misurano l'efficacia, l'efficienza e il controllo delle attività necessarie per sviluppare il prodotto.
+Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attività necessarie per sviluppare il prodotto. Il riferimento metodologico adottato è lo standard ISO/IEC 12207, adattato al Way of Working del gruppo. Le metriche non valutano il prodotto finito, ma il modo in cui esso viene realizzato.
 
-\subsubsection{Processi di Fornitura e Sviluppo}
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi primari --- Fornitura}
+
+\paragraph{MPC-EV --- Earned Value}
 \begin{itemize}
-    \item \textbf{MPC-EV - Earned Value}: Rappresenta il valore del lavoro effettivamente completato.
-    \item \textbf{MPC-PV - Planned Value}: Rappresenta il valore pianificato del lavoro da completare entro ciascuno sprint.
-    \item \textbf{MPC-AC - Actual Cost}: Rappresenta il costo effettivo sostenuto per il lavoro completato in ciascuno sprint.
-    \item \textbf{MPC-CPI - Cost Performance Index}: Misura l'efficienza dei costi. Si calcola come: 
-    $$CPI = \frac{EV_{cum}}{AC_{cum}}$$
-    \item \textbf{MPC-SPI - Schedule Performance Index}: Misura l'efficienza del tempo. Si calcola come: 
-    $$SPI = \frac{EV_{cum}}{PV_{cum}}$$
-    \item \textbf{MPC-EAC - Estimated At Completion}: Stima il costo totale del progetto proiettando la performance corrente. Si calcola come: 
-    $$EAC = \frac{BAC}{CPI}$$
-    \item \textbf{MPC-ETC - Estimate To Complete}: Rappresenta la stima dei costi rimanenti al completamento. Si calcola come: 
-    $$ETC = EAC - AC_{cum}$$ 
-    \item \textbf{MPC-TEAC - Time Estimate At Completion}: Stima la durata totale del progetto a partire dalla performance di avanzamento. Si calcola come: 
-    $$TEAC = \frac{\text{Durata pianificata}}{SPI}$$
-    \item \textbf{MPC-RSI - Requirements Stability Index}: Calcolato confrontando il numero di requisiti aggiunti, modificati o eliminati rispetto alla versione iniziale. Formula: 
-    $$RSI = \left(1 - \frac{N_{modificati} + N_{eliminati} + N_{aggiunti}}{N_{totali\_iniziali}}\right) \times 100\%$$
+    \item \textbf{Descrizione:} Valore del lavoro effettivamente completato, misurato come la quota di valore pianificato corrispondente alle attività portate a termine nello sprint.
+    \item \textbf{Formula:}
+    $$\text{EV} = \text{PV} \times \frac{\text{Ore Completate}}{\text{Ore Pianificate}}$$
+    \item \textbf{Unità di misura:} Euro
 \end{itemize}
 
-\subsubsection{Processi di Supporto}
+\paragraph{MPC-PV --- Planned Value}
 \begin{itemize}
-    \item \textbf{MPC-IG - Indice di Gulpease}: Misura la leggibilità dei documenti in lingua italiana. Formula: 
+    \item \textbf{Descrizione:} Valore economico del lavoro pianificato per lo sprint, estratto dai preventivi del Piano di Progetto. Rappresenta il costo previsto per le attività programmate.
+    \item \textbf{Formula:}
+    $$\text{PV} = \sum_{i=1}^{n} (\text{Ore Previste}_i \times \text{Tariffa Oraria}_i)$$
+    dove $n$ è il numero di task pianificate nello sprint e la tariffa oraria corrisponde al ruolo assegnato alla task.
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-AC --- Actual Cost}
+\begin{itemize}
+    \item \textbf{Descrizione:} Costo effettivamente sostenuto per le ore lavorate nello sprint, ricavato dai consuntivi del Piano di Progetto.
+    \item \textbf{Formula:}
+    $$\text{AC} = \sum_{i=1}^{n} (\text{Ore Effettive}_i \times \text{Tariffa Oraria}_i)$$
+    dove $n$ è il numero di task completate nello sprint e la tariffa oraria corrisponde al ruolo assegnato alla task.
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-CPI --- Cost Performance Index}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura l'efficienza dei costi del progetto. Un valore inferiore a 1 indica che il progetto sta spendendo più del valore prodotto; un valore pari a 1 indica perfetta efficienza di costo.
+    \item \textbf{Formula:}
+    $$\text{CPI} = \frac{\text{EV}_{\text{cum}}}{\text{AC}_{\text{cum}}}$$
+    dove i valori cumulativi sommano tutti gli sprint dall'inizio del progetto.
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item CPI $> 1$: il progetto produce valore a un costo inferiore al previsto
+        \item CPI $= 1$: il progetto è in linea con il budget
+        \item CPI $< 1$: il progetto sta spendendo più del valore prodotto
+    \end{itemize}
+    \item \textbf{Unità di misura:} adimensionale
+\end{itemize}
+
+\paragraph{MPC-SPI --- Schedule Performance Index}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura l'efficienza della pianificazione temporale. Un valore inferiore a 1 indica ritardo rispetto al piano; un valore pari a 1 indica perfetto rispetto delle scadenze.
+    \item \textbf{Formula:}
+    $$\text{SPI} = \frac{\text{EV}_{\text{cum}}}{\text{PV}_{\text{cum}}}$$
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item SPI $> 1$: il progetto è in anticipo rispetto al piano
+        \item SPI $= 1$: il progetto è in linea con il piano
+        \item SPI $< 1$: il progetto è in ritardo rispetto al piano
+    \end{itemize}
+    \item \textbf{Unità di misura:} adimensionale
+\end{itemize}
+
+\paragraph{MPC-EAC --- Estimated At Completion}
+\begin{itemize}
+    \item \textbf{Descrizione:} Stima del costo totale finale del progetto proiettando l'efficienza di costo corrente (CPI) sull'intero budget rimanente.
+    \item \textbf{Formula:}
+    $$\text{EAC} = \frac{\text{BAC}}{\text{CPI}}$$
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item EAC $<$ BAC: il progetto si concluderà sotto budget
+        \item EAC $=$ BAC: il progetto rispetterà il budget
+        \item EAC $>$ BAC: il progetto supererà il budget
+    \end{itemize}
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-ETC --- Estimate To Complete}
+\begin{itemize}
+    \item \textbf{Descrizione:} Stima del costo rimanente necessario per completare il progetto a partire dallo sprint corrente, ottenuta sottraendo il costo cumulativo effettivo dalla stima a completamento.
+    \item \textbf{Formula:}
+    $$\text{ETC} = \text{EAC} - \text{AC}_{\text{cum}}$$
+    dove $\text{AC}_{\text{cum}}$ è la somma dei costi effettivi sostenuti dall'inizio del progetto fino allo sprint corrente.
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-TEAC --- Time Estimate At Completion}
+\begin{itemize}
+    \item \textbf{Descrizione:} Stima della durata totale del progetto a partire dalla performance di avanzamento misurata dallo SPI. Se SPI $= 1$, il progetto terminerà esattamente nei tempi pianificati.
+    \item \textbf{Formula:}
+    $$\text{TEAC} = \frac{\text{Durata pianificata}}{\text{SPI}}$$
+    \item \textbf{Unità di misura:} settimane
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi primari --- Sviluppo}
+
+\paragraph{MPC-RSI --- Requirements Stability Index}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura la stabilità dei requisiti nel tempo, confrontando il numero di requisiti modificati, eliminati o aggiunti rispetto alla baseline iniziale dell'Analisi dei Requisiti. Valori prossimi al 100\% indicano un documento dei requisiti stabile e maturo.
+    \item \textbf{Formula:}
+    $$\text{RSI} = \left(1 - \frac{N_{\text{modificati}} + N_{\text{eliminati}} + N_{\text{aggiunti}}}{N_{\text{totali iniziali}}}\right) \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi di supporto --- Documentazione}
+
+\paragraph{MPC-IG --- Indice di Gulpease}
+\begin{itemize}
+    \item \textbf{Descrizione:} Indice di leggibilità calibrato per la lingua italiana. Valuta la complessità del testo in base alla lunghezza delle parole e delle frasi rispetto al numero totale di parole. Valori più alti indicano maggiore leggibilità. Il calcolo viene effettuato tramite estrazione del testo con \texttt{detex} e script Python.
+    \item \textbf{Formula:}
     $$G = 89 - \frac{10 \cdot L}{P} + \frac{300 \cdot F}{P}$$
-    \item \textbf{MPC-CO - Correttezza ortografica}: Analisi automatica della correttezza ortografica per individuare errori di battitura o sintassi.
-    \item \textbf{MPC-CC - Code Coverage}: Misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici.
-    \item \textbf{MPC-TSR - Test Success Rate}: Percentuale di test automatici che hanno restituito un esito positivo in fase di esecuzione.
-    \item \textbf{MPC-QMS - Quality Metrics Satisfied}: Misura la percentuale di metriche di processo che soddisfano la soglia accettabile. Formula: 
-    $$QMS = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%$$ 
+    dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di frasi.
+    \item \textbf{Unità di misura:} adimensionale (scala 0--100)
 \end{itemize}
 
-\subsubsection{Processi Organizzativi}
+\paragraph{MPC-CO --- Correttezza Ortografica}
 \begin{itemize}
-    \item \textbf{MPC-TE - Time Efficiency}: Calcolato confrontando le ore produttive effettivamente rendicontate con il totale delle ore disponibili. Formula: 
-    $$TE = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$$ 
-    \item \textbf{MPC-PRI - Percentuale Rischi Inattesi}: Confronta i rischi effettivamente manifestatisi con quelli identificati nel registro dei rischi. Formula: 
-    $$PRI = \frac{N_{rischi\_inattesi}}{N_{rischi\_totali\_manifestati}} \times 100\%$$ 
-    \item \textbf{MPC-LE - Labor Efficiency}: Confronta le ore dedicate ad attività a valore aggiunto con il totale delle ore lavorate. Formula: 
-    $$LE = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$$ 
+    \item \textbf{Descrizione:} Numero di errori grammaticali o di battitura rilevati nei documenti tramite strumenti automatici di controllo ortografico. La verifica viene condotta tramite estrazione del testo con \texttt{detex} e analisi automatica. Il valore accettabile e ottimale è zero errori.
+    \item \textbf{Formula:}
+    $$\text{CO} = \text{Numero di Errori Ortografici Rilevati}$$
+    \item \textbf{Unità di misura:} numero intero (conteggio assoluto)
 \end{itemize}
 
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi di supporto --- Verifica}
+
+\paragraph{MPC-CC --- Code Coverage}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di righe di codice sorgente effettivamente eseguite durante i test automatici. Misura il grado di copertura complessivo della suite di test. La metrica è applicabile a partire dalla fase PB, quando sarà disponibile il codice sorgente.
+    \item \textbf{Formula:}
+    $$\text{CC} = \frac{\text{Linee di Codice Eseguite dai Test}}{\text{Linee di Codice Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPC-TSR --- Test Success Rate}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di test automatici che hanno restituito un esito positivo sul totale dei test eseguiti. Un valore del 100\% indica l'assenza di regressioni nella suite corrente.
+    \item \textbf{Formula:}
+    $$\text{TSR} = \frac{\text{Test Superati}}{\text{Test Eseguiti}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi di supporto --- Gestione della qualità}
+
+\paragraph{MPC-QMS --- Quality Metrics Satisfied}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di metriche di qualità (di processo e di prodotto) che rientrano nel range accettabile definito nel Piano di Qualifica. Rappresenta un indicatore sintetico della salute complessiva del progetto al termine di ciascuno sprint.
+    \item \textbf{Formula:}
+    $$\text{QMS} = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi organizzativi --- Gestione dei processi}
+
+\paragraph{MPC-TE --- Time Efficiency}
+\begin{itemize}
+    \item \textbf{Descrizione:} Rapporto tra le ore dedicate ad attività produttive effettivamente rendicontabili e le ore totali disponibili nello sprint. Indica quanta parte del tempo disponibile si traduce direttamente in avanzamento del progetto.
+    \item \textbf{Formula:}
+    $$\text{TE} = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPC-PRI --- Percentuale Rischi Inattesi}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di rischi effettivamente manifestatisi che non erano stati identificati nel registro dei rischi del Piano di Progetto. Valori bassi indicano una pianificazione del rischio efficace e un registro dei rischi completo.
+    \item \textbf{Formula:}
+    $$\text{PRI} = \frac{N_{\text{rischi inattesi}}}{N_{\text{rischi totali manifestati}}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPC-LE --- Labor Efficiency}
+\begin{itemize}
+    \item \textbf{Descrizione:} Rapporto tra le ore dedicate ad attività a valore aggiunto (che producono direttamente un output di progetto) e il totale delle ore lavorate. Misura l'efficienza nell'impiego del lavoro del team, escludendo le attività non direttamente produttive.
+    \item \textbf{Formula:}
+    $$\text{LE} = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
 \subsection{Metriche per la qualità di prodotto}
-Queste metriche (identificate dalla sigla MPD) misurano le proprietà interne ed esterne del software finale per garantire che il sistema rispetti i requisiti.
+Queste metriche misurano le proprietà interne ed esterne del software finale per garantire che il sistema rispetti i requisiti. Lo standard di riferimento è ISO/IEC 9126, adottato come base per la classificazione delle caratteristiche di qualità del prodotto.
 
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Funzionalità}
+
+\paragraph{MPD01 --- Requisiti Obbligatori Soddisfatti}
 \begin{itemize}
-    \item \textbf{Funzionalità}:
-    \begin{itemize}
-        \item \textbf{MPD01}: Requisiti obbligatori soddisfatti
-        \item \textbf{MPD02}: Requisiti opzionali soddisfatti.
-        \item \textbf{MPD03}: AI Acceptance Rate (rating $\ge 3/5$)
-    \end{itemize}
-    \item \textbf{Affidabilità}:
-    \begin{itemize}
-        \item \textbf{MPD04}: Branch Coverage
-        \item \textbf{MPD05}: Defect Density (Densità dei difetti per KLOC).
-    \end{itemize}
-    \item \textbf{Efficienza}:
-    \begin{itemize}
-        \item \textbf{MPD06}: Latenza interfaccia utente.
-        \item \textbf{MPD07}: Latenza generazione testo AI Assistant.
-        \item \textbf{MPD08}: Latenza generazione immagine AI Assistant.
-        \item \textbf{MPD09}: Latenza analisi documentale AI Co-Pilot.
-    \end{itemize}
-    \item \textbf{Usabilità}:
-    \begin{itemize}
-        \item \textbf{MPD10}: Profondità Massima di Navigazione (numero di livelli).
-        \item \textbf{MPD11}: Learning Time (tempo di apprendimento per le funzioni principali).
+    \item \textbf{Descrizione:} Percentuale di requisiti obbligatori correttamente implementati e verificati rispetto al totale dei requisiti obbligatori rilevati nell'Analisi dei Requisiti. Un requisito è considerato soddisfatto quando il relativo test di sistema risulta superato.
+    \item \textbf{Formula:}
+    $$\text{MPD01} = \frac{\text{Requisiti Obbligatori Soddisfatti}}{\text{Requisiti Obbligatori Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
 \end{itemize}
-\newpage
 
-    \item \textbf{Mantenibilità}:
+\paragraph{MPD02 --- Requisiti Opzionali Soddisfatti}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di requisiti opzionali correttamente implementati e verificati rispetto al totale dei requisiti opzionali rilevati. Un requisito è considerato soddisfatto quando il relativo test di sistema risulta superato.
+    \item \textbf{Formula:}
+    $$\text{MPD02} = \frac{\text{Requisiti Opzionali Soddisfatti}}{\text{Requisiti Opzionali Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPD03 --- AI Acceptance Rate}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di generazioni AI valutate dagli utenti con un rating pari o superiore a 3 su 5 rispetto al totale delle generazioni valutate. Misura la qualità percepita delle risposte prodotte dai moduli AI Assistant e AI Co-Pilot del sistema.
+    \item \textbf{Formula:}
+    $$\text{MPD03} = \frac{\text{Generazioni con rating} \geq 3/5}{\text{Generazioni totali valutate}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Affidabilità}
+
+\paragraph{MPD04 --- Branch Coverage}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di rami decisionali (ad esempio i rami \textit{true} e \textit{false} di un costrutto \texttt{if}) eseguiti durante i test automatici. Garantisce che tutte le possibili direzioni del flusso logico siano state verificate dalla suite di test.
+    \item \textbf{Formula:}
+    $$\text{MPD04} = \frac{\text{Rami Decisionali Eseguiti}}{\text{Rami Decisionali Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPD05 --- Defect Density}
+\begin{itemize}
+    \item \textbf{Descrizione:} Densità di difetti nel codice sorgente, calcolata come numero di difetti rilevati per ogni KLOC (migliaia di righe di codice). Valori bassi indicano maggiore qualità del codice prodotto e minore frequenza di anomalie.
+    \item \textbf{Formula:}
+    $$\text{MPD05} = \frac{\text{Numero di Difetti Rilevati}}{\text{KLOC}}$$
+    dove $\text{KLOC} = \text{Righe di Codice Totali} / 1000$.
+    \item \textbf{Unità di misura:} difetti per KLOC
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Efficienza}
+
+\paragraph{MPD06 --- Latenza Interfaccia Utente}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo di risposta del sistema a un'interazione dell'utente sull'interfaccia, misurato come intervallo tra l'invio della richiesta e la ricezione della risposta completa per le operazioni generali dell'applicazione (escluse le chiamate ai moduli AI).
+    \item \textbf{Formula:}
+    $$\text{MPD06} = T_{\text{risposta}} - T_{\text{richiesta}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+\paragraph{MPD07 --- Latenza Generazione Testo AI Assistant}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo intercorso tra l'invio del prompt al modulo AI Post Generator e la ricezione del testo della bozza completa generata dal servizio AI.
+    \item \textbf{Formula:}
+    $$\text{MPD07} = T_{\text{risposta AI}} - T_{\text{invio prompt}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+\paragraph{MPD08 --- Latenza Generazione Immagine AI Assistant}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo intercorso tra la richiesta di generazione dell'immagine di copertina al modulo AI Assistant e la ricezione dell'immagine generata e pronta per la visualizzazione.
+    \item \textbf{Formula:}
+    $$\text{MPD08} = T_{\text{ricezione immagine}} - T_{\text{richiesta immagine}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+\paragraph{MPD09 --- Latenza Analisi Documentale AI Co-Pilot}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo intercorso tra il caricamento di un documento e la restituzione dei metadati classificati dal modulo AI Analyst (classificazione tipologia, estrazione destinatario, livello di confidenza).
+    \item \textbf{Formula:}
+    $$\text{MPD09} = T_{\text{risultato analisi}} - T_{\text{caricamento documento}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Usabilità}
+
+\paragraph{MPD10 --- Profondità Massima di Navigazione}
+\begin{itemize}
+    \item \textbf{Descrizione:} Numero massimo di livelli gerarchici che un utente deve attraversare per raggiungere qualsiasi funzionalità del sistema a partire dalla schermata principale. Valori bassi indicano un'interfaccia piatta e facilmente accessibile.
+    \item \textbf{Formula:}
+    $$\text{MPD10} = \max \left\{ \text{Livelli di navigazione necessari per raggiungere la funzionalità } f,\ \forall f \right\}$$
+    \item \textbf{Unità di misura:} livelli di navigazione
+\end{itemize}
+
+\paragraph{MPD11 --- Learning Time}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo medio necessario a un utente privo di esperienza pregressa con il sistema per apprendere le funzionalità principali in modo autonomo, misurato tramite sessioni di user testing. La verifica avviene confrontando il tempo con la soglia accettabile di 30 minuti.
+    \item \textbf{Formula:}
+    $$\text{MPD11} = \frac{\displaystyle\sum_{i=1}^{n} T_{\text{apprendimento}_i}}{n}$$
+    dove $n$ è il numero di utenti coinvolti nella sessione di test e $T_{\text{apprendimento}_i}$ è il tempo impiegato dall'utente $i$ per completare le funzionalità principali senza assistenza.
+    \item \textbf{Unità di misura:} minuti
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Mantenibilità}
+
+\paragraph{MPD12 --- Code Smell}
+\begin{itemize}
+    \item \textbf{Descrizione:} Numero di code smell rilevati nel codice sorgente tramite analisi statica. I code smell sono indicatori di progettazione debole (metodi troppo lunghi, classi troppo grandi, duplicazione di codice) che, pur non essendo errori bloccanti, rendono il sistema fragile e difficile da manutenere nel tempo.
+    \item \textbf{Formula:}
+    $$\text{MPD12} = \text{Numero di Code Smell Rilevati}$$
+    \item \textbf{Unità di misura:} numero intero (conteggio assoluto)
+\end{itemize}
+
+\paragraph{MPD13 --- Coefficient of Coupling}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura il grado di interdipendenza tra i moduli del software. Un accoppiamento elevato implica che una modifica in un modulo rischi di propagarsi ad altri (effetto a catena), riducendo la manutenibilità del sistema.
+    \item \textbf{Formula:}
+    $$\text{MPD13} = \frac{\text{Dipendenze Effettive tra Moduli}}{n \times (n - 1)}$$
+    dove $n$ è il numero totale di moduli del sistema e $n \times (n-1)$ rappresenta il numero massimo di dipendenze direzionali possibili. Una dipendenza sussiste quando un modulo importa, invoca o referenzia direttamente un altro modulo.
+    \item \textbf{Interpretazione:}
     \begin{itemize}
-        \item \textbf{MPD12}: Code Smell.
-        \item \textbf{MPD13}: Coefficient of Coupling.
-        \item \textbf{MPD14}: Cyclomatic Complexity (complessità per singolo metodo).
+        \item MPD13 $= 0$: nessun accoppiamento (moduli completamente indipendenti)
+        \item MPD13 $= 1$: accoppiamento massimo (ogni modulo dipende da tutti gli altri)
     \end{itemize}
-    \item \textbf{Portabilità}:
-    \begin{itemize}
-        \item \textbf{MPD15}: Compatibilità Cross-Browser.
-    \end{itemize}
+    \item \textbf{Unità di misura:} adimensionale (scala 0--1)
+\end{itemize}
+
+\paragraph{MPD14 --- Cyclomatic Complexity}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura la complessità logica del codice contando il numero di percorsi linearmente indipendenti attraverso il flusso di controllo (costrutti \texttt{if}, \texttt{switch}, cicli). Valori elevati indicano codice difficile da testare e comprendere. Il valore riportato nel cruscotto è riferito al singolo metodo.
+    \item \textbf{Formula:}
+    $$M = E - N + 2P$$
+    dove $E$ è il numero di archi nel grafo di controllo del flusso, $N$ il numero di nodi (istruzioni) e $P$ il numero di componenti connesse del grafo (solitamente $P = 1$ per una singola funzione).
+    \item \textbf{Unità di misura:} numero intero (adimensionale)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Portabilità}
+
+\paragraph{MPD15 --- Compatibilità Cross-Browser}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di browser target (principali browser moderni evergreen nelle ultime due versioni stabili) sui quali il sistema funziona correttamente senza degradazione delle funzionalità o dell'interfaccia utente.
+    \item \textbf{Formula:}
+    $$\text{MPD15} = \frac{\text{Browser Supportati correttamente}}{\text{Browser Target Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
 \end{itemize}
 
 \end{document}
