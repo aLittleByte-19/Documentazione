@@ -15,8 +15,10 @@
 \usepackage{eurosym}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+\usetikzlibrary{patterns}
+\graphicspath{{./}{../../}}
 
-\newcommand{\groupmail}{alittlebyte19@gmail.com}
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
 \newcommand{\grouplogo}{.github/site-src/assets/logo_alittlebyte.png}
 \newcommand{\groupsymbol}{.github/site-src/assets/solo_logo.png}
 
@@ -87,8 +89,8 @@
             Redattori   & Eleonora Bellet, Diego Belluz \\
             Verificatori& Leonardo Soligo, Angelica Gastaldello\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Versione    & 0.5.1 \\
-            Data        & 17/05/2026 \\
+            Versione    & 0.6.0 \\
+            Data        & 28/05/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -111,6 +113,10 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.6.0 & 28/05/2026 & Aggiunta sezione 6 - Iniziative di miglioramento. & - & - & - \\
+        \hline
+        0.5.2 & 28/05/2026 & Correzione applicabilità metriche MPC-CC e MPC-TSR. & - & - & - \\
         \hline
         0.5.1 & 17/05/2026 & Aggiornamento metriche RSI, PRI, TE, LE e ricalcolo QMS. & - & - & - \\
         \hline
@@ -150,7 +156,9 @@
 
 \vspace{0.6cm}
 
-\tableofcontents
+\makeatletter
+\@starttoc{toc}
+\makeatother
 
 \newpage
 \pagenumbering{arabic}
@@ -1286,7 +1294,7 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
     ymin=9000, ymax=15000,
     grid=both,
     grid style={dashed, gray!30},
-    legend pos=east,
+    legend pos=north east,
     width=0.85\textwidth,
     height=6.5cm
 ]
@@ -1448,7 +1456,7 @@ dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di fra
     nodes near coords,
     nodes near coords align={vertical}
 ]
-\addplot[fill=skyblue!60!white, draw=black] coordinates {
+\addplot[fill=blue!35!white, draw=black] coordinates {
     (AdR,59.7) 
     (NdP,45.9) 
     (PdP,47.7) 
@@ -1492,7 +1500,7 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{detex} e 
 
 \subsubsection{MPC-CC e MPC-TSR — Code Coverage e Test Success Rate}
 
-Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono applicabili nella fase RTB in quanto lo sviluppo del codice sorgente non è ancora iniziato. La misurazione di queste metriche è prevista a partire dalla fase PB (Product Baseline), quando saranno disponibili i test automatici e il codice da verificare.
+Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono ancora considerate pienamente applicabili nella fase RTB, poiché il codice realizzato in RTB ha natura dimostrativa e non coincide con una baseline stabile di prodotto. La misurazione sistematica di tali metriche è prevista a partire dalla fase PB (Product Baseline), quando verrà sviluppata e consolidata la baseline di riferimento e i test automatici potranno essere utilizzati come criterio continuativo di verifica.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Gestione della qualità}
@@ -1555,9 +1563,9 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     legend style={at={(0.5,-0.20)}, anchor=north, legend columns=-1, draw=none} 
 ]
 
-\addplot[ybarStacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20)};
+\addplot[ybar stacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20)};
 
-\addplot[ybarStacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80)};
+\addplot[ybar stacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80)};
 
 \addplot[ybar, fill=blue!70!white, draw=none, bar width=10pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0)};
 
@@ -1565,15 +1573,18 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
 
 \addplot[ybar, fill=orange!80!white, draw=none, bar width=10pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,75)};
 
-\addplot[draw=blue!70!white, thick, fill=none] coordinates {}; \addlegendentry{Valore Rilevato}
+\addlegendimage{ybar, fill=blue!70!white, draw=none}
+\addlegendentry{Valore Rilevato}
 
-\addplot[pattern=dots, pattern color=black!40, fill=none] coordinates {}; \addlegendentry{Valore Accettabile (Soglia 80\%)}
+\addlegendimage{area legend, pattern=dots, pattern color=black!40, fill=none}
+\addlegendentry{Valore Accettabile (Soglia 80\%)}
 
-\addplot[fill=gray!8, pattern=crosshatch, pattern color=black!40] coordinates {}; \addlegendentry{Valore Ottimale (Soglia 100\%)}
+\addlegendimage{area legend, fill=gray!8, pattern=crosshatch, pattern color=black!40}
+\addlegendentry{Valore Ottimale (Soglia 100\%)}
 
 \end{axis}
 \end{tikzpicture}
-\caption{Grafico percentuale di metriche soddisfatte (MPC-QMS) per sprint confrontato con le soglie regionali.}
+\caption{Grafico percentuale di metriche soddisfatte (MPC-QMS) per sprint confrontato con le soglie di riferimento.}
 \end{figure}
 
 \noindent\textbf{Valutazione:} Il QMS complessivo al termine della fase RTB è pari al 75\%, al di sotto della \emph{soglia accettabile} ($\geq 80\%$). Le tre metriche non soddisfatte richiedono interventi correttivi:
@@ -1638,5 +1649,203 @@ La metrica valuta la capacità del team di prevedere e mitigare i rischi. I dati
 \subsubsection{MPC-LE — Labor Efficiency}
 
 Come per la metrica MPC-TE, l'assenza di un tracciamento puntuale delle ore spese in attività a valore aggiunto rispetto al tempo totale lavorato (incluso overhead) rende impossibile il calcolo per la fase RTB. Il valore è quindi \textbf{N/A}. Le misurazioni inizieranno formalmente con la fase PB.
+
+\section{Iniziative di miglioramento}
+
+Le valutazioni riportate nel cruscotto di qualità evidenziano alcuni ambiti sui quali il gruppo intende intervenire nella fase PB. Il valore finale di MPC-QMS è pari al 75\%, inferiore alla soglia accettabile, e segnala la necessità di trasformare le criticità rilevate in azioni operative verificabili. Gli interventi previsti non introducono nuove metriche, ma utilizzano quelle già definite nel presente documento come riferimento per controllare l'efficacia delle correzioni.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|p{3.1cm}|X|X|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Ambito} & \textbf{Evidenza rilevata in RTB} & \textbf{Obiettivo per la fase PB} \\
+        \hline
+        Pianificazione & MPC-EAC non soddisfatta, con EAC superiore al BAC del 10,6\%. & Raffinare le stime e controllare con maggiore frequenza le previsioni a finire. \\
+        \hline
+        Gestione dei rischi & MPC-PRI non soddisfatta, con 2 rischi inattesi su 4 e valore pari al 50\%. & Rendere più sistematica l'identificazione dei rischi tecnici, organizzativi ed esterni. \\
+        \hline
+        Qualità documentale & MPC-IG sotto soglia per la leggibilità dei documenti. & Ridurre la densità testuale e migliorare la distinzione tra definizioni, motivazioni e conseguenze. \\
+        \hline
+        Tracciamento operativo & MPC-TE e MPC-LE non misurabili in RTB per assenza di tracciamento granulare. & Distinguere le ore per tipologia di attività, ruolo, sprint e issue di riferimento. \\
+        \hline
+        Verifica e testing & MPC-CC e MPC-TSR non ancora misurabili su una baseline stabile di prodotto, da sviluppare in PB. & Introdurre quality gate e tracciamento continuativo dei test a partire dai componenti stabilizzati. \\
+        \hline
+    \end{tabularx}
+    \caption{Sintesi delle criticità RTB e degli obiettivi di miglioramento per PB}
+\end{table}
+
+Le azioni descritte nelle sottosezioni seguenti sono state definite a partire dagli esiti delle metriche e dalle evidenze emerse durante gli sprint RTB. Per ciascun ambito sono indicati la criticità rilevata, l'intervento previsto e il criterio con cui il gruppo intende verificarne l'efficacia nella fase successiva.
+
+\subsection{Miglioramento della pianificazione e del controllo dei costi}
+
+Lo scostamento rilevato tramite MPC-EAC evidenzia che alcune attività sono state stimate con un livello di dettaglio non sufficiente rispetto all'impegno effettivo richiesto. La criticità riguarda in particolare le attività tecniche e documentali, che nella fase RTB hanno richiesto più tempo rispetto a quanto preventivato.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|p{3cm}|X|X|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Aspetto} & \textbf{Criticità rilevata} & \textbf{Intervento previsto in PB} \\
+        \hline
+        Stima delle attività & Alcune attività sono state valutate in modo troppo aggregato, rendendo meno visibili dipendenze e sottoattività. & Scomporre le attività più ampie in task verificabili e associare a ciascuno una stima oraria più esplicita. \\
+        \hline
+        Controllo dello sprint & Lo scostamento è emerso soprattutto a consuntivo, quando l'impatto sul costo stimato a completamento era già visibile. & Confrontare a fine sprint ore preventivate e consuntivate, motivando gli scostamenti principali. \\
+        \hline
+        Previsione a finire & L'EAC ha superato il BAC del 10,6\%, oltre la soglia accettabile prevista. & Aggiornare con maggiore frequenza le previsioni a finire, tenendo conto dei dati consuntivi più recenti. \\
+        \hline
+    \end{tabularx}
+    \caption{Azioni di miglioramento per MPC-EAC}
+\end{table}
+
+Per evitare che il controllo dei costi resti limitato al solo consuntivo, il gruppo intende applicare un controllo regolare sulle stime ancora aperte. Tale controllo sarà svolto in corrispondenza della chiusura degli sprint e dovrà rendere esplicite le cause dello scostamento, distinguendo tra sottostima iniziale, attività non previste, dipendenze esterne e riallocazione delle risorse.
+
+\paragraph*{Criticità rilevata:} MPC-EAC non soddisfatta, con EAC superiore al BAC del 10,6\%.
+
+\paragraph*{Azione prevista:} Confronto sistematico tra ore preventivate e ore consuntivate, con aggiornamento delle previsioni a finire sulla base degli scostamenti rilevati.
+
+\paragraph*{Metriche monitorate:} MPC-EAC, con supporto delle metriche MPC-AC, MPC-CPI e MPC-ETC.
+
+\subsection{Miglioramento della gestione dei rischi}
+
+Il valore di MPC-PRI mostra una capacità di previsione dei rischi ancora incompleta. In RTB alcuni eventi sono stati gestiti nel corso dello sprint, ma non erano stati descritti in modo sufficientemente esplicito nel registro dei rischi. Per la fase PB il gruppo intende quindi rendere più puntuale la classificazione dei rischi e collegarla alle retrospettive.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|p{3.2cm}|X|X|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Rischio emerso} & \textbf{Lettura del problema} & \textbf{Trattamento previsto} \\
+        \hline
+        Attività tecniche sottostimate & Alcune attività implementative e di integrazione hanno richiesto approfondimenti non completamente previsti. & Esplicitare nel registro i rischi legati alla complessità tecnica e indicare una mitigazione tramite spike o task preliminari. \\
+        \hline
+        Attese per credenziali & L'accesso a risorse esterne può incidere direttamente sulla continuità delle attività tecniche. & Registrare le dipendenze da credenziali e ambienti esterni, indicando responsabile del sollecito e data limite interna. \\
+        \hline
+        Dipendenze esterne & File, servizi o informazioni provenienti dal proponente possono introdurre ritardi non controllabili dal gruppo. & Associare alle dipendenze esterne un impatto previsto e una possibile attività alternativa in caso di blocco. \\
+        \hline
+    \end{tabularx}
+    \caption{Rischi da esplicitare nel registro per la fase PB}
+\end{table}
+
+L'aggiornamento del registro non sarà limitato all'aggiunta di nuove voci, ma dovrà migliorare la qualità informativa dei rischi già presenti. In particolare, durante le retrospettive il gruppo dovrà verificare se gli eventi emersi nello sprint erano stati previsti, se la mitigazione era applicabile e se l'impatto rilevato corrispondeva a quello stimato.
+
+\paragraph*{Criticità rilevata:} MPC-PRI non soddisfatta, con presenza di rischi inattesi durante la fase RTB.
+
+\paragraph*{Azione prevista:} Aggiornamento del registro rischi durante le retrospettive, indicando causa, impatto, mitigazione e responsabile per ciascun rischio significativo.
+
+\paragraph*{Metriche monitorate:} MPC-PRI, con attenzione alla riduzione dei rischi inattesi e alla tempestività delle azioni di mitigazione.
+
+\subsection{Miglioramento della qualità documentale}
+
+L'indice di Gulpease sotto soglia non implica necessariamente la presenza di documenti errati, ma segnala una leggibilità inferiore a quella attesa. La criticità principale riguarda la densità dei periodi e l'uso frequente di terminologia tecnica, specialmente nelle sezioni in cui vengono motivate scelte architetturali o descritte metriche di controllo.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|p{3.2cm}|X|X|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Aspetto documentale} & \textbf{Criticità rilevata} & \textbf{Criterio di revisione} \\
+        \hline
+        Struttura dei periodi & Frasi lunghe e ricche di incisi riducono la chiarezza, pur mantenendo corretto il contenuto. & Semplificare i periodi più densi e separare le informazioni che hanno funzione diversa. \\
+        \hline
+        Terminologia tecnica & Alcuni concetti vengono spiegati più volte all'interno dei documenti, aumentando la complessità di lettura. & Usare il Glossario per alleggerire le spiegazioni ripetute e mantenere nei documenti solo il contesto necessario. \\
+        \hline
+        Organizzazione logica & Definizioni, motivazioni e conseguenze talvolta compaiono nello stesso paragrafo. & Distinguere meglio le parti descrittive da quelle valutative, così da rendere più immediata la consultazione. \\
+        \hline
+    \end{tabularx}
+    \caption{Azioni di miglioramento per la qualità documentale}
+\end{table}
+
+Il miglioramento della leggibilità dovrà mantenere invariato il livello formale dei documenti. L'obiettivo non è ridurre il contenuto tecnico, ma renderlo più consultabile e meno concentrato in paragrafi estesi. Per questo motivo, nelle prossime revisioni sarà utile intervenire soprattutto sulle sezioni più dense, evitando riscritture generalizzate quando il testo risulta già chiaro e coerente.
+
+\paragraph*{Criticità rilevata:} MPC-IG sotto soglia, con indice di Gulpease inferiore al valore accettabile previsto.
+
+\paragraph*{Azione prevista:} Revisione mirata dei periodi più complessi, migliore separazione tra definizioni, motivazioni e conseguenze, uso più sistematico del Glossario.
+
+\paragraph*{Metriche monitorate:} MPC-IG, verificando l'andamento dell'indice nelle revisioni successive dei documenti principali.
+
+\subsection{Miglioramento del tracciamento operativo}
+
+Le metriche MPC-TE e MPC-LE non sono state calcolabili in RTB perché il tracciamento orario non distingue ancora in modo sufficiente le diverse categorie di lavoro. Il gruppo ha registrato le ore necessarie al controllo dei costi, ma non ha separato con granularità adeguata attività produttive, verifica, riunioni, studio, overhead e blocchi.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|p{3.1cm}|X|X|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Categoria} & \textbf{Descrizione operativa} & \textbf{Utilità per le metriche} \\
+        \hline
+        Attività produttive & Sviluppo, documentazione, configurazione e attività direttamente collegate agli obiettivi dello sprint. & Permette di stimare le ore a valore aggiunto necessarie per MPC-TE e MPC-LE. \\
+        \hline
+        Verifica & Revisione dei documenti, controllo del codice, validazione dei test e correzione dei difetti rilevati. & Consente di valutare il peso della verifica rispetto al lavoro complessivo. \\
+        \hline
+        Riunioni e coordinamento & Incontri interni, retrospettive, pianificazione e coordinamento operativo tra membri del gruppo. & Rende visibile il tempo di organizzazione necessario al completamento delle attività. \\
+        \hline
+        Studio e approfondimento & Analisi di tecnologie, librerie, servizi esterni e strumenti necessari alla realizzazione della PoC o del prodotto. & Distingue il tempo di apprendimento dal tempo di produzione diretta. \\
+        \hline
+        Overhead e blocchi & Attese, problemi di accesso, dipendenze esterne e attività non produttive ma necessarie alla gestione del lavoro. & Permette di individuare le cause che riducono l'efficienza operativa. \\
+        \hline
+    \end{tabularx}
+    \caption{Categorie operative per il tracciamento delle ore in PB}
+\end{table}
+
+La rendicontazione prevista per PB dovrà collegare ogni registrazione allo sprint, all'issue di riferimento, al ruolo coinvolto, alle ore preventivate e alle ore effettive. Questo consentirà di analizzare gli scostamenti non solo a livello complessivo, ma anche per tipologia di attività e per responsabilità operative.
+
+\paragraph*{Criticità rilevata:} MPC-TE e MPC-LE non misurabili in RTB per mancanza di tracciamento granulare.
+
+\paragraph*{Azione prevista:} Introduzione di una rendicontazione collegata a sprint, issue, ruolo, categoria dell'attività, ore preventivate e ore effettive.
+
+\paragraph*{Metriche monitorate:} MPC-TE e MPC-LE, con supporto dei dati consuntivi utilizzati anche per il controllo di MPC-EAC.
+
+\subsection{Miglioramento della verifica e del testing}
+
+Durante la fase RTB molti test risultano ancora NI o non pienamente misurabili, poiché la PoC ha avuto finalità dimostrativa e ha consentito di verificare la fattibilità dei flussi principali. La baseline stabile di prodotto verrà sviluppata e consolidata nella fase PB, prendendo come riferimento lo stack effettivamente adottato: Laravel con viste Blade, CSS e JavaScript custom. Le tecnologie valutate inizialmente ma non adottate nella realizzazione RTB non saranno considerate nel consolidamento previsto per la PB.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|p{3.3cm}|X|X|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Flusso principale} & \textbf{Aspetto da consolidare} & \textbf{Controllo previsto} \\
+        \hline
+        Caricamento PDF & Validazione del formato, gestione degli errori e tracciamento dell'esito del caricamento. & Test automatici sui casi validi e sui casi di errore più significativi. \\
+        \hline
+        Salvataggio documenti & Persistenza dei dati generati e recupero corretto delle informazioni associate. & Verifica di creazione, aggiornamento e recupero dei documenti salvati. \\
+        \hline
+        Elaborazione asincrona & Esecuzione tramite worker e coda Redis, con gestione degli stati intermedi. & Test sui passaggi di stato e sui casi di elaborazione fallita o ritentata. \\
+        \hline
+        Integrazione con MinIO & Gestione dei file e coerenza tra metadati applicativi e oggetti salvati. & Controlli su caricamento, lettura e assenza di riferimenti non validi. \\
+        \hline
+        Uso di Bedrock o dei fallback simulati & Continuità del flusso anche in presenza di limiti o indisponibilità del servizio generativo. & Verifica dei percorsi alternativi e della corretta segnalazione degli errori. \\
+        \hline
+        Generazione dei contenuti & Produzione e salvataggio dei contenuti generati a partire dai dati estratti. & Test sui risultati attesi e sulle condizioni in cui i dati di partenza sono incompleti. \\
+        \hline
+    \end{tabularx}
+    \caption{Flussi da consolidare nel processo di verifica PB}
+\end{table}
+
+In PB il gruppo intende collegare il tracciamento dei test ai quality gate automatici, così che gli esiti non restino informazioni isolate. Il consolidamento dovrà riguardare sia i test che verificano il comportamento applicativo, sia i controlli di integrazione sui servizi previsti dalla baseline di riferimento.
+
+\paragraph*{Criticità rilevata:} MPC-CC e MPC-TSR non ancora pienamente applicabili in RTB, poiché la baseline stabile di prodotto verrà sviluppata e consolidata in PB.
+
+\paragraph*{Azione prevista:} Consolidamento dei quality gate automatici e tracciamento degli esiti dei test sui flussi principali del prodotto.
+
+\paragraph*{Metriche monitorate:} MPC-CC e MPC-TSR, da misurare in modo sistematico dopo il consolidamento dei componenti principali.
+
+\bigskip
+
+\noindent\textbf{Sintesi conclusiva:} Le iniziative descritte hanno lo scopo di trasformare le criticità emerse durante la fase RTB in azioni operative per la fase PB. In particolare, il gruppo intende migliorare la precisione della pianificazione, rendere più sistematica la gestione dei rischi, aumentare la qualità della documentazione e consolidare il processo di verifica del codice. Tali interventi saranno monitorati attraverso le metriche già definite nel presente documento, con particolare attenzione a MPC-EAC, MPC-PRI, MPC-IG, MPC-TE, MPC-LE, MPC-CC e MPC-TSR.
 
 \end{document}
