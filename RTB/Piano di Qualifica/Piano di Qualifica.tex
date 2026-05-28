@@ -87,7 +87,7 @@
             Redattori   & Eleonora Bellet, Diego Belluz \\
             Verificatori& Leonardo Soligo, Angelica Gastaldello\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Versione    & 0.5.0 \\
+            Versione    & 0.5.1 \\
             Data        & 17/05/2026 \\
         \end{tabularx}
     \end{tcolorbox}
@@ -111,6 +111,8 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        0.5.1 & 17/05/2026 & Aggiornamento metriche RSI, PRI, TE, LE e ricalcolo QMS. & - & - & - \\
         \hline
         0.5.0 & 17/05/2026 & Aggiunta sezione 5 - Cruscotto di qualità & - & - & - \\
         \hline
@@ -1355,15 +1357,50 @@ Il Time Estimate At Completion stima la durata totale del progetto a partire dal
 
 \subsubsection{MPC-RSI — Requirements Stability Index}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-RSI (Dati non ancora disponibili)]
-Il Requirements Stability Index verrà calcolato al termine della fase RTB confrontando il numero di requisiti aggiunti, modificati o eliminati rispetto alla versione iniziale dell'Analisi dei Requisiti.
+Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La baseline dei requisiti è stata consolidata al termine dello Sprint 3 con un totale di 131 requisiti (109 funzionali, 6 di qualità, 16 di vincolo). Durante lo Sprint 4 sono state apportate correzioni ad alcuni requisiti esistenti.
 
-\medskip
-\textbf{Formula:} $\displaystyle\text{RSI} = \left(1 - \frac{N_\text{modificati} + N_\text{eliminati} + N_\text{aggiunti}}{N_\text{totali iniziali}}\right) \times 100\%$
+\begin{table}[H]
+    \centering
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabular}{|l|c|c|c|c|c|c|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Sprint} & \textbf{Baseline} & \textbf{Aggiunti} & \textbf{Modificati} & \textbf{Eliminati} & \textbf{RSI (\%)} & \textbf{Esito} \\
+        \hline
+        S1 & N/A & N/A & N/A & N/A & N/A & N/A \\
+        S2 & N/A & N/A & N/A & N/A & N/A & N/A \\
+        S3 & 131 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
+        S4 & 131 & 0 & 4 & 0 & 96{,}9\% & \textcolor{green!60!black}{Accettabile} \\
+        \hline
+    \end{tabular}
+    \caption{Andamento MPC-RSI per sprint}
+\end{table}
 
-\medskip
-\textbf{Soglie:} accettabile $\geq 70\%$, ottimale $= 100\%$.
-\end{tcolorbox}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Andamento Requirements Stability Index},
+    xlabel={Sprint},
+    ylabel={RSI (\%)},
+    symbolic x coords={S1, S2, S3, S4},
+    xtick=data,
+    ymin=70, ymax=105,
+    grid=both,
+    grid style={dashed, gray!30},
+    width=0.85\textwidth,
+    height=6.5cm
+]
+\addplot[color=teal, mark=*, thick] coordinates {(S3,100) (S4,96.9)};
+\addlegendentry{RSI Rilevato}
+\draw[red, thick, dashed] (axis cs:S1,70) -- (axis cs:S4,70);
+\node[red, anchor=south west] at (axis cs:S1,70) {\footnotesize Soglia Accettabile (70\%)};
+\end{axis}
+\end{tikzpicture}
+\caption{Grafico della stabilità dei requisiti post-consolidamento.}
+\end{figure}
+
+\noindent\textbf{Valutazione:} La misurazione inizia formalmente dallo Sprint 3, momento di consolidamento della baseline. Nello Sprint 4 sono state effettuate 4 correzioni formali. Il valore si attesta al 96,9\%, mantenendosi ampiamente sopra la soglia accettabile del 70\% (\emph{soglia accettabile} raggiunta).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Documentazione}
@@ -1448,9 +1485,6 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{detex} e 
 \caption{Correttezza ortografica dei documenti RTB}
 \end{table}
 
-
-
-
 \noindent\textbf{Valutazione:} Tutti i documenti presentano 0 errori ortografici (\emph{soglia ottimale} raggiunta).
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -1470,7 +1504,7 @@ Il Quality Metrics Satisfied misura la percentuale di metriche di processo che s
   \text{QMS} = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%
 \]
 
-La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase RTB (sono escluse le metriche per le quali non sono ancora disponibili i dati: MPC-RSI, MPC-TE, MPC-PRI, MPC-LE, MPC-CC, MPC-TSR).
+La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase RTB. Con l'inclusione delle metriche MPC-RSI e MPC-PRI, le metriche misurate passano a 12.
 
 \begin{table}[H]
 \centering
@@ -1490,18 +1524,20 @@ La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase 
     MPC-TEAC & 8 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-IG  & 45,9 – 59,7             & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
     MPC-CO  & 0 errori                 & 0 errori & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-RSI & 96,9\% (S4)              & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-PRI & 50\% (fase RTB)          & $\leq 20\%$ & \textcolor{red!70!black}{Non soddisfatta} \\
     \hline
     \rowcolor{gray!25}
-    \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{8 / 10} \\
+    \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{9 / 12} \\
     \hline
     \rowcolor{gray!25}
-    \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{80\%} \\
+    \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{75\%} \\
     \hline
 \end{tabular}
-\caption{Calcolo MPC-QMS per la fase RTB}
+\caption{Calcolo MPC-QMS per la fase RTB aggiornato con RSI e PRI}
 \end{table}
 
-L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) grazie al pieno rispetto degli obiettivi di progetto e alla qualità della documentazione. In S2, S3, S4, il valore si stabilizza all'80\% (\emph{soglia accettabile}) a causa del superamento della soglia del $+5\%$ per l'EAC e del punteggio IG inferiore a 60 in Analisi Requisiti. Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
+L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) per i dati valutati in quel frangente. Nei successivi S2 e S3 il valore si stabilizza all'80\%. Nello Sprint 4, con l'inclusione delle metriche globali RSI e PRI del periodo RTB, il QMS scende al 75\% (essendo MPC-PRI non soddisfatta). Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
 
 \begin{figure}[H]
 \centering
@@ -1519,21 +1555,17 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     legend style={at={(0.5,-0.20)}, anchor=north, legend columns=-1, draw=none} 
 ]
 
-
 \addplot[ybarStacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20)};
-
 
 \addplot[ybarStacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=24pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80)};
 
-
 \addplot[ybar, fill=blue!70!white, draw=none, bar width=10pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0)};
 
+\addplot[ybar, fill=green!60!black, draw=none, bar width=10pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,0)};
 
-\addplot[ybar, fill=green!60!black, draw=none, bar width=10pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,80)};
-
+\addplot[ybar, fill=orange!80!white, draw=none, bar width=10pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,75)};
 
 \addplot[draw=blue!70!white, thick, fill=none] coordinates {}; \addlegendentry{Valore Rilevato}
-
 
 \addplot[pattern=dots, pattern color=black!40, fill=none] coordinates {}; \addlegendentry{Valore Accettabile (Soglia 80\%)}
 
@@ -1544,10 +1576,11 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
 \caption{Grafico percentuale di metriche soddisfatte (MPC-QMS) per sprint confrontato con le soglie regionali.}
 \end{figure}
 
-\noindent\textbf{Valutazione:} Il QMS al termine della fase RTB è pari all'80\%, corrispondente alla \emph{soglia accettabile} ($\geq 80\%$). Le due metriche non soddisfatte richiedono interventi correttivi:
+\noindent\textbf{Valutazione:} Il QMS complessivo al termine della fase RTB è pari al 75\%, al di sotto della \emph{soglia accettabile} ($\geq 80\%$). Le tre metriche non soddisfatte richiedono interventi correttivi:
 \begin{itemize}
     \item \textbf{MPC-EAC:} il costo stimato a completamento supera il BAC del 10,6\%. Nelle fasi successive è necessario un controllo più rigoroso dei costi, con revisione periodica delle stime e delle allocazioni orarie.
-    \item \textbf{MPC-IG:} i documenti tecnici presentano indici di leggibilità al di sotto della soglia di 60. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi ove possibile senza compromettere la precisione tecnica.
+    \item \textbf{MPC-PRI:} il verificarsi di imprevisti bloccanti (50\% rispetto ai rischi emersi) suggerisce che il registro dei rischi necessiti di un ampliamento e aggiornamento in vista dello sviluppo operativo PB.
+    \item \textbf{MPC-IG:} i documenti tecnici presentano indici di leggibilità al di sotto della soglia di 60. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi.
 \end{itemize}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -1555,40 +1588,55 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
 
 \subsubsection{MPC-TE — Time Efficiency}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-TE (Dati non ancora disponibili)]
-Il Time Efficiency verrà calcolato confrontando le ore produttive effettivamente rendicontate con il totale delle ore disponibili in ciascuno sprint. I dati di dettaglio sulle ore non produttive (assenze, interruzioni non pianificate) non sono stati raccolti sistematicamente nella fase RTB.
+Durante la fase RTB, il tracciamento orario si è concentrato esclusivamente sullo scostamento tra le ore previste e le ore effettivamente impiegate per il completamento dei task. Non è stata effettuata una misurazione granulare per distinguere le ore produttive da quelle di \textit{overhead}. Pertanto, questa metrica risulta \textbf{N/A} per gli sprint S1-S4.
 
-\medskip
-\textbf{Formula:} $\displaystyle\text{TE} = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$
-
-\medskip
-\textbf{Soglie:} accettabile $\geq 50\%$, ottimale $= 100\%$.
-\end{tcolorbox}
+\noindent\textbf{Azioni di miglioramento:} Il team introdurrà un sistema di \textit{time-tracking} granulare a partire dalla fase di Product Baseline (PB).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-PRI — Percentuale Rischi Inattesi}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-PRI (Dati non ancora disponibili)]
-La Percentuale di Rischi Inattesi verrà calcolata al termine della fase RTB confrontando i rischi effettivamente manifestatisi con quelli identificati nel registro dei rischi del Piano di Progetto.
+La metrica valuta la capacità del team di prevedere e mitigare i rischi. I dati sono stati estratti dalle retrospettive dei quattro sprint di progetto.
 
-\medskip
-\textbf{Formula:} $\displaystyle\text{PRI} = \frac{N_\text{rischi inattesi}}{N_\text{rischi totali manifestati}} \times 100\%$
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabularx}{\textwidth}{|l|X|c|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Sprint} & \textbf{Problema Emerso} & \textbf{Classificazione} \\
+        \hline
+        S1 & Difficoltà nell'apprendimento di nuovi tool grafici per il mock-up. & Previsto (RT1) \\
+        \hline
+        S2 & Stallo per attesa file di esempio dal proponente. & Previsto (RR1 / RO5) \\
+        \hline
+        S3 & Sottostima del lavoro per diagrammazione e attività tecniche non preventivate. & Inatteso \\
+        \hline
+        S4 & Blocco per attesa credenziali infrastruttura cloud AWS. & Inatteso \\
+        \hline
+    \end{tabularx}
+    \caption{Tracciamento dei rischi manifestati per sprint}
+\end{table}
 
-\medskip
-\textbf{Soglie:} accettabile $\leq 20\%$, ottimale $= 0\%$.
-\end{tcolorbox}
+\begin{table}[H]
+    \centering
+    \rowcolors{2}{gray!15}{white}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \rowcolor{gray!35}
+        \textbf{Sprint} & \textbf{Rischi Totali} & \textbf{Rischi Inattesi} & \textbf{PRI (\%)} & \textbf{Esito} \\
+        \hline
+        Fase RTB & 4 & 2 & 50\% & \textcolor{red!70!black}{Non soddisfatta} \\
+        \hline
+    \end{tabular}
+    \caption{Calcolo MPC-PRI per la fase RTB}
+\end{table}
+
+\noindent\textbf{Valutazione:} Durante la fase RTB sono emersi 4 problemi principali. Due di questi non erano stati esplicitamente previsti. Il valore PRI si attesta al 50\%, superando la soglia accettabile del $\leq 20\%$ (\emph{soglia non raggiunta}). Sarà necessaria un'integrazione del registro dei rischi per la fase PB.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-LE — Labor Efficiency}
 
-\begin{tcolorbox}[colback=yellow!10, colframe=orange!70!black, title=Segnaposto — MPC-LE (Dati non ancora disponibili)]
-Il Labor Efficiency confronta le ore dedicate ad attività a valore aggiunto con il totale delle ore lavorate. Il calcolo richiede un tracciamento puntuale delle ore per tipologia di attività, che verrà implementato nelle fasi successive al RTB.
-
-\medskip
-\textbf{Formula:} $\displaystyle\text{LE} = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$
-
-\medskip
-\textbf{Soglie:} accettabile $\geq 70\%$, ottimale $\geq 100\%$.
-\end{tcolorbox}
+Come per la metrica MPC-TE, l'assenza di un tracciamento puntuale delle ore spese in attività a valore aggiunto rispetto al tempo totale lavorato (incluso overhead) rende impossibile il calcolo per la fase RTB. Il valore è quindi \textbf{N/A}. Le misurazioni inizieranno formalmente con la fase PB.
 
 \end{document}
