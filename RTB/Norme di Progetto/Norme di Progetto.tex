@@ -121,7 +121,6 @@
         1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Angelica Gastaldello \\
         \hline
         0.14.0 & 20/05/2026 & Aggiunta sezione metriche & Diego Belluz & V.Y. Kaneda Fernandes & - \\
-        
         \hline 
         0.13.0 & 18/05/2026 & Aggiunta sezione qualità del software & Diego Belluz & Eleonora Bellet & - \\
         \hline 
@@ -196,10 +195,6 @@ Al fine di prevenire qualsiasi ambiguità linguistica o concettuale tra i membri
 
 \newpage
 \subsection{Riferimenti}
-
-
-
-
 
 \subsubsection{Normativi}
 \begin{itemize}
@@ -328,10 +323,13 @@ I processi di supporto comprendono tutte le attività, i metodi e gli strumenti 
 Lo scopo del processo di documentazione è stabilire regole e metodologie pratiche per la creazione, la gestione e l'aggiornamento continuo dei documenti di progetto. Per il nostro gruppo, impegnarci a produrre materiale che si mantenga costantemente chiaro, accessibile e aggiornato ci permette di agevolare e rendere trasparente la comunicazione interna tra i membri del gruppo. Inoltre, una repository ben strutturata facilita notevolmente il confronto e l'allineamento con gli stakeholder esterni e l'azienda \textit{Eggon}. Questo approccio rigoroso garantisce un'accurata tracciabilità delle decisioni organizzative e progettuali prese nel corso dello sviluppo, assicurando al contempo che l'intero progetto venga gestito in piena conformità agli standard di qualità che ci siamo prefissati di rispettare.
 
 \paragraph{Strumenti Utilizzati}
-Per gestire in modo efficiente la stesura, la revisione e il versionamento della documentazione, il gruppo \textit{aLittleByte} ha scelto di utilizzare i seguenti strumenti:
+Per gestire in modo efficiente la stesura, la revisione, l'automazione e il versionamento della documentazione, il gruppo \textit{aLittleByte} ha scelto di utilizzare i seguenti strumenti:
 \begin{itemize}
-    \item \textbf{GitHub:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e pull request per garantire che ogni modifica venga revisionata in modo asincrono da un altro membro prima di essere integrata nella versione definitiva. Utilizziamo inoltre le issue per pianificare e monitorare le attività legate alla documentazione.
-    \item \textbf{LaTeX:} Scelto per la stesura di tutti i documenti tecnici e formali. Questo strumento ci garantisce un'impaginazione professionale, rigorosa e visivamente uniforme in tutto il progetto, grazie all'impiego di template e stili predefiniti condivisi all'interno del gruppo.
+    \item \textbf{GitHub:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e pull request per garantire che ogni modifica venga revisionata in modo asincrono.
+    \item \textbf{GitHub Projects:} Utilizzato come strumento principale di project management. Il team gestisce il flusso di lavoro tramite una board Kanban dedicata (''aLittleByte - Dashboard'') che permette di visualizzare lo stato di tutte le attività.
+    \item \textbf{GitHub Actions e GitHub Pages:} Impiegati per l'automazione (Continuous Integration/Continuous Deployment) e per la pubblicazione automatica e trasparente del sito web documentale.
+    \item \textbf{LaTeX:} Scelto per la stesura di tutti i documenti tecnici e formali, garantendo un'impaginazione professionale.
+    \item \textbf{Python:} Linguaggio di scripting utilizzato per automatizzare task specifici, come la generazione dinamica della struttura del sito web tramite script proprietari.
 \end{itemize}
 
 \paragraph{Documenti Prodotti}
@@ -452,6 +450,28 @@ Dove:
     \item \textbf{Z:} Rappresenta modifiche di dettaglio, correzioni di refusi o aggiornamenti minimi eseguiti durante la stesura o lo sviluppo.
 \end{itemize}
 
+\paragraph{Automazione e Rilascio Continuo (CI/CD)}
+Per assicurare che la documentazione fornita agli stakeholder sia costantemente aggiornata e pubblica, il gruppo ha implementato un processo di \textit{Continuous Deployment} tramite GitHub Actions.
+Il workflow principale, nominato \texttt{Site Deploy}, regola il ciclo di vita della pubblicazione del sito web e si attiva in automatico ad ogni evento di push o pull request verso il branch \texttt{main} (ignorando i file non critici come \texttt{README.md} e \texttt{.gitignore}).
+
+Il processo automatizzato prevede:
+\begin{enumerate}
+    \item Il setup dell'ambiente virtuale e del linguaggio Python.
+    \item L'esecuzione dello script proprietario \texttt{.github/site-src/update\_index.py}, che genera dinamicamente la struttura statica del sito (HTML, CSS e asset associati).
+    \item Il caricamento e rilascio automatico (Deploy) del risultato sull'ambiente \texttt{github-pages}.
+\end{enumerate}
+
+\paragraph{Nomenclatura dei Branch e Alberatura}
+A differenza dell'utilizzo di identificativi numerici, il gruppo \textit{aLittleByte} adotta una convenzione di nomenclatura descrittiva per i branch, in modo da rendere immediatamente esplicito l'oggetto del lavoro.
+La convenzione principale prevede l'uso dello \textit{snake\_case} (tutto minuscolo con trattini bassi) per i documenti generali (es. \texttt{piano\_di\_progetto}, \texttt{norme\_di\_progetto}, \texttt{analisi\_dei\_requisiti}). Vengono tollerate eccezioni descrittive per i verbali o attività specifiche di sviluppo (es. \texttt{VerbaleEsterno\_YYYY\_MM\_DD} o \texttt{develop-sito}).
+
+L'alberatura della repository documentale è strutturata in modo logico e gerarchico per separare le fasi del progetto didattico. Le directory principali includono:
+\begin{itemize}
+    \item \texttt{.github}: Contiene i workflow di automazione e gli script Python necessari al rilascio.
+    \item \texttt{candidatura}: Contiene i documenti relativi alla fase di candidatura.
+    \item \texttt{RTB}: Contiene la documentazione in sviluppo per la \textit{Requirements and Technology Baseline}. Al suo interno è prevista un'ulteriore categorizzazione rigida, come ad esempio la separazione dei verbali in \texttt{RTB/Verbali/Verbali Interni} e \texttt{RTB/Verbali/Verbali Esterni}.
+\end{itemize}
+
 \subsubsection{Qualifica}
 
 \paragraph{Verifica}
@@ -552,6 +572,16 @@ L'organizzazione di ogni singola iterazione è scandita da una riunione, organiz
     \item \textbf{Sprint Review:} Si analizza lo sprint appena concluso per la verifica concreta dei risultati prodotti. Costituisce l'occasione per valutare il lavoro completato, discutere le criticità tecniche emerse e misurare l'avanzamento effettivo rispetto al piano generale.
     
     \item \textbf{Sprint Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo.
+\end{itemize}
+
+\paragraph{Gestione del Flusso di Lavoro tramite Kanban}
+Per garantire un controllo visivo e immediato sullo stato di avanzamento delle singole Issue associate al progetto, il gruppo gestisce i task tramite la board GitHub Projects ''aLittleByte - Dashboard''.
+La bacheca è modellata secondo i principi Kanban e si articola nelle seguenti colonne operative:
+\begin{itemize}
+    \item \textbf{Todo:} Task selezionati e pronti per essere affrontati nel ciclo di lavoro corrente.
+    \item \textbf{In Progress:} Attività su cui il team sta lavorando attivamente (le issue sono formalmente assegnate ai membri tramite il campo \textit{Assignee}).
+    \item \textbf{In Review:} Task completati nello sviluppo o nella stesura e attualmente in attesa di \textit{Peer Review} tramite l'approvazione della relativa \textit{Pull Request}.
+    \item \textbf{Done:} Lavoro verificato, approvato e unito definitivamente al branch principale.
 \end{itemize}
 
 \subsubsection{Ruoli}
