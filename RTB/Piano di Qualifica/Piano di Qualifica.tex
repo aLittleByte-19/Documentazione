@@ -170,7 +170,7 @@
 \section{Introduzione}
 
 \subsection{Finalità del documento}
-Il presente documento, denominato \textit{Piano di Qualifica}, ha lo scopo di definire le strategie, le procedure e le metriche adottate dal gruppo \textit{aLittleByte} per garantire la qualità del prodotto software e dei processi produttivi relativi al progetto C5 (\glslink{nexum}{NEXUM}), proposto dall'azienda \textit{Eggon}.
+Il presente documento, denominato \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}, ha lo scopo di definire le strategie, le procedure e le metriche adottate dal gruppo \textit{aLittleByte} per garantire la qualità del prodotto software e dei processi produttivi relativi al progetto C5 (\glslink{nexum}{NEXUM}), proposto dall'azienda \textit{Eggon}.
 
 In particolare, questo documento si prefigge di:
 \begin{itemize}
@@ -181,8 +181,8 @@ In particolare, questo documento si prefigge di:
 \end{itemize}
 
 \subsection{Glossario}
-Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, è stato redatto un documento esterno denominato \textit{Glossario}.
-I termini tecnici, gli acronimi e le parole con un significato specifico all'interno del progetto sono contrassegnati nel testo da una ``G'' in pedice (es. parola\textsubscript{\scalebox{0.6}{\textbf{G}}}). La loro definizione completa è consultabile nel \textit{Glossario}.
+Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, è stato redatto un documento esterno denominato \textit{\glslink{glossario}{Glossario}}.
+I termini tecnici, gli acronimi e le parole con un significato specifico all'interno del progetto sono contrassegnati nel testo da una ``G'' in pedice (es. parola\textsubscript{\scalebox{0.6}{\textbf{G}}}). La loro definizione completa è consultabile nel \textit{\glslink{glossario}{Glossario}}.
 
 \subsection{Riferimenti}
 \subsubsection{Riferimenti normativi}
@@ -190,21 +190,21 @@ I termini tecnici, gli acronimi e le parole con un significato specifico all'int
     \item \textbf{\glslink{capitolato}{Capitolato} d'appalto C5 - \glslink{nexum}{NEXUM} (Eggon):}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
 
-    \item \textbf{Norme di Progetto:}\\
+    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto}:}\\
     Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative.\\
     \url{https://github.com/aLittleByte-19/Documentazione}
 
     \item \textbf{Regolamento del progetto didattico:}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}
 
-    \item \textbf{Piano di Progetto:}\\
+    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto}:}\\
     Documento interno del gruppo \textit{aLittleByte}.\\
     \url{https://github.com/aLittleByte-19/Documentazione}
 \end{itemize}
 
 \subsubsection{Riferimenti informativi}
 \begin{itemize}
-    \item \textbf{Glossario:}\\
+    \item \textbf{\glslink{glossario}{Glossario}:}\\
     Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici.\\
     \url{https://github.com/aLittleByte-19/Documentazione}
 
@@ -241,14 +241,14 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        \glslink{earned-value-mpc-ev}{MPC-EV} & \glslink{earned-value-mpc-ev}{Earned Value} & $\geq 0$ & $\leq$ EAC \\
-        \glslink{planned-value-mpc-pv}{MPC-PV} & \glslink{planned-value-mpc-pv}{Planned Value} & $\geq 0$ & $\leq$ BAC \\
-        \glslink{actual-cost-mpc-ac}{MPC-AC} & \glslink{actual-cost-mpc-ac}{Actual Cost} & $\geq 0$ & $\leq$ EAC \\
-        \glslink{cost-performance-index-mpc-cpi}{MPC-CPI} & \glslink{cost-performance-index-mpc-cpi}{Cost Performance Index} & $\geq 0,9$ & $1$ \\
-        \glslink{schedule-performance-index-mpc-spi}{MPC-SPI} & \glslink{schedule-performance-index-mpc-spi}{Schedule Performance Index} & $\geq 0,9$ & $1$ \\
-        \glslink{estimated-at-completion-mpc-eac}{MPC-EAC} & \glslink{estimated-at-completion-mpc-eac}{Estimated At Completion} & $\pm 5\%$ rispetto al BAC & BAC \\
-        \glslink{estimate-to-complete-mpc-etc}{MPC-ETC} & \glslink{estimate-to-complete-mpc-etc}{Estimate To Complete} & $\geq 0$ & $\leq$ EAC \\
-        \glslink{time-estimate-at-completion-mpc-teac}{MPC-TEAC} & \glslink{time-estimate-at-completion-mpc-teac}{Time Estimate At Completion} & $\geq 0$ & $\leq$ Durata pianificata \\
+        MPC-EV & Earned Value & $\geq 0$ & $\leq$ EAC \\
+        MPC-PV & Planned Value & $\geq 0$ & $\leq$ BAC \\
+        MPC-AC & Actual Cost & $\geq 0$ & $\leq$ EAC \\
+        MPC-CPI & Cost Performance Index & $\geq 0,9$ & $1$ \\
+        MPC-SPI & Schedule Performance Index & $\geq 0,9$ & $1$ \\
+        MPC-EAC & Estimated At Completion & $\pm 5\%$ rispetto al BAC & BAC \\
+        MPC-ETC & Estimate To Complete & $\geq 0$ & $\leq$ EAC \\
+        MPC-TEAC & Time Estimate At Completion & $\geq 0$ & $\leq$ Durata pianificata \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della fornitura.}
@@ -264,7 +264,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        \glslink{requirements-stability-index-mpc-rsi}{MPC-RSI} & \glslink{requirements-stability-index-mpc-rsi}{Requirements Stability Index} & $\geq 70\%$ & $100\%$ \\
+        MPC-RSI & Requirements Stability Index & $\geq 70\%$ & $100\%$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dello sviluppo.}
@@ -281,7 +281,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPC-IG & Indice di Gulpease del documento & $\geq 60$ & $\geq 80$ \\
+        \glslink{indice-di-gulpease-mpc-ig}{MPC-IG} & \glslink{indice-di-gulpease-mpc-ig}{Indice di Gulpease} del documento & $\geq 60$ & $\geq 80$ \\
         MPC-CO & Correttezza ortografica & $0$ errori & $0$ errori \\
         \hline
     \end{tabularx}
@@ -298,7 +298,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPC-CC & \glslink{code-coverage}{Code Coverage} & $\geq 80\%$ & $100\%$ \\
+        MPC-CC & Code Coverage & $\geq 80\%$ & $100\%$ \\
         MPC-TSR & Test Success Rate & $100\%$ & $100\%$ \\
         \hline
     \end{tabularx}
@@ -315,7 +315,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        \glslink{quality-metrics-satisfied-mpc-qms}{MPC-QMS} & \glslink{quality-metrics-satisfied-mpc-qms}{Quality Metrics Satisfied} & $\geq 80\%$ & $100\%$ \\
+        MPC-QMS & Quality Metrics Satisfied & $\geq 80\%$ & $100\%$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della gestione della qualità.}
@@ -332,9 +332,9 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        \glslink{time-efficiency-mpc-te}{MPC-TE} & \glslink{time-efficiency-mpc-te}{Time Efficiency} & $\geq 50\%$ & $100\%$ \\
+        MPC-TE & Time Efficiency & $\geq 50\%$ & $100\%$ \\
         MPC-PRI & Percentuale Rischi Inattesi & $\leq 20\%$ & $0\%$ \\
-        \glslink{labor-efficiency-mpc-le}{MPC-LE} & \glslink{labor-efficiency-mpc-le}{Labor Efficiency} & $\geq 70\%$ & $\geq 100\%$ \\
+        MPC-LE & Labor Efficiency & $\geq 70\%$ & $\geq 100\%$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della gestione dei processi.}
@@ -358,7 +358,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \hline
         MPD01 & Requisiti obbligatori soddisfatti & $100\%$ & $100\%$ \\
         MPD02 & Requisiti opzionali soddisfatti & $0\%$ & $100\%$ \\
-        \glslink{ai-acceptance-rate-mpd03}{MPD03} & \glslink{ai-acceptance-rate-mpd03}{AI Acceptance Rate} (\glslink{rating}{rating} $\geq 3/5$) & $\geq 60\%$ & $\geq 80\%$ \\
+        MPD03 & \glslink{intelligenza-artificiale-ai}{AI} Acceptance Rate (\glslink{rating}{rating} $\geq 3/5$) & $\geq 60\%$ & $\geq 80\%$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità delle funzionalità.}
@@ -374,8 +374,8 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        \glslink{branch-coverage-mpd04}{MPD04} & \glslink{branch-coverage-mpd04}{Branch Coverage} & $\geq 70\%$ & $\geq 85\%$ \\
-        MPD05 & \glslink{defect-density}{Defect Density} & $\leq 3$ / \glslink{kloc}{KLOC} & $\leq 1$ / \glslink{kloc}{KLOC} \\
+        MPD04 & \glslink{branch}{Branch} Coverage & $\geq 70\%$ & $\geq 85\%$ \\
+        MPD05 & Defect Density & $\leq 3$ / \glslink{kloc}{KLOC} & $\leq 1$ / \glslink{kloc}{KLOC} \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dell'affidabilità.}
@@ -391,10 +391,10 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPD06 & Latenza interfaccia utente & $\leq 2$ sec & $\leq 0,5$ sec \\
-        MPD07 & Latenza generazione testo \glslink{ai-intelligenza-artificiale}{AI} Assistant & $\leq 5$ sec & $\leq 3$ sec \\
-        MPD08 & Latenza generazione immagine \glslink{ai-intelligenza-artificiale}{AI} Assistant & $\leq 10$ sec & $\leq 5$ sec \\
-        MPD09 & Latenza analisi documentale \glslink{ai-co-pilot}{AI Co-Pilot} & $\leq 10$ sec & $\leq 5$ sec \\
+        MPD06 & \glslink{latenza}{Latenza} interfaccia utente & $\leq 2$ sec & $\leq 0,5$ sec \\
+        MPD07 & \glslink{latenza}{Latenza} generazione testo \glslink{intelligenza-artificiale-ai}{AI} Assistant & $\leq 5$ sec & $\leq 3$ sec \\
+        MPD08 & \glslink{latenza}{Latenza} generazione immagine \glslink{intelligenza-artificiale-ai}{AI} Assistant & $\leq 10$ sec & $\leq 5$ sec \\
+        MPD09 & \glslink{latenza}{Latenza} analisi documentale \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot & $\leq 10$ sec & $\leq 5$ sec \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dell'efficienza.}
@@ -411,7 +411,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
         MPD10 & Profondità Massima di Navigazione & $\leq 5$ livelli & $\leq 3$ livelli \\
-        \glslink{learning-time-mpd11}{MPD11} & \glslink{learning-time-mpd11}{Learning Time} (funzioni principali) & $\leq 30$ min & $\leq 15$ min \\
+        MPD11 & Learning Time (funzioni principali) & $\leq 30$ min & $\leq 15$ min \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità dell'usabilità.}
@@ -428,8 +428,8 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
         MPD12 & Code Smell & $\leq 5$ & $0$ \\
-        \glslink{coefficient-of-coupling-mpd13}{MPD13} & \glslink{coefficient-of-coupling-mpd13}{Coefficient of Coupling} & $\leq 0{,}7$ & $\leq 0{,}4$ \\
-        \glslink{cyclomatic-complexity-mpd14}{MPD14} & \glslink{cyclomatic-complexity-mpd14}{Cyclomatic Complexity} (per metodo) & $\leq 15$ & $\leq 10$ \\
+        MPD13 & Coefficient of Coupling & $\leq 0{,}7$ & $\leq 0{,}4$ \\
+        MPD14 & Cyclomatic Complexity (per metodo) & $\leq 15$ & $\leq 10$ \\
         \hline
     \end{tabularx}
     \caption{Valori per misurare la qualità della mantenibilità.}
@@ -464,11 +464,11 @@ I test avranno un codice univoco, la descrizione, il requisito di riferimento e 
 \end{itemize}
 
 \subsection{Copertura del codice}
-La copertura del codice (\glslink{code-coverage}{Code Coverage}) misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici. Tale metrica consente di valutare il grado di verifica del software ed è direttamente collegata alla metrica \textbf{MPC-CC}.
+La copertura del codice (Code Coverage) misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici. Tale metrica consente di valutare il grado di verifica del software ed è direttamente collegata alla metrica \textbf{MPC-CC}.
 Il valore minimo accettabile è fissato all'80\%.
 
 \subsection{Test unitari}
-I test unitari verificano il corretto funzionamento delle singole unità software in isolamento. L'attenzione è rivolta alle componenti critiche del backend: logica di elaborazione dei \glslink{prompt}{prompt}, validazione degli input, gestione dei \glslink{metadati}{metadati} documentali e algoritmi di classificazione \glslink{ai-intelligenza-artificiale}{AI}. I test sono realizzati con il framework \glslink{pest}{Pest} e contribuiscono al miglioramento delle metriche \textbf{MPC-TSR} e \textbf{MPC-CC}.
+I test unitari verificano il corretto funzionamento delle singole unità software in isolamento. L'attenzione è rivolta alle componenti critiche del backend: logica di elaborazione dei \glslink{prompt}{prompt}, validazione degli input, gestione dei \glslink{metadati}{metadati} documentali e algoritmi di classificazione \glslink{intelligenza-artificiale-ai}{AI}. I test sono realizzati con il framework \glslink{pest}{Pest} e contribuiscono al miglioramento delle metriche \textbf{MPC-TSR} e \textbf{MPC-CC}.
 
 \subsection{Test di integrazione}
 I \glslink{test-di-integrazione}{test di integrazione} verificano il corretto comportamento delle interazioni tra i componenti del sistema. Considerata la natura distribuita dell'architettura, tali test risultano fondamentali per il raggiungimento di un solido risultato.
@@ -491,17 +491,17 @@ I \glslink{test-di-integrazione}{test di integrazione} verificano il corretto co
     \endfoot
     \hline
     \endlastfoot
-    TI-001 & Verifica che il sistema scambi correttamente i dati tra frontend e backend tramite API REST. & UI (Blade) $\leftrightarrow$ Laravel 12 & NI \\
+    TI-001 & Verifica che il sistema scambi correttamente i dati tra frontend e backend tramite API REST. & UI (Blade) $\leftrightarrow$ \glslink{laravel}{Laravel} 12 & NI \\
     \hline
-    TI-002 & Verifica che il sistema invii il \glslink{prompt}{prompt} e riceva la risposta generata dal servizio \glslink{ai-intelligenza-artificiale}{AI}. & Backend $\leftrightarrow$ \glslink{amazon-bedrock}{Amazon Bedrock} & NI \\
+    TI-002 & Verifica che il sistema invii il \glslink{prompt}{prompt} e riceva la risposta generata dal servizio \glslink{intelligenza-artificiale-ai}{AI}. & Backend $\leftrightarrow$ \glslink{amazon-bedrock}{Amazon Bedrock} & NI \\
     \hline
     TI-003 & Verifica che il sistema persista e recuperi correttamente i dati applicativi dal database. & Backend $\leftrightarrow$ \glslink{postgresql}{PostgreSQL} & NI \\
     \hline
     TI-004 & Verifica che il sistema esegua la pipeline \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e la classificazione dei documenti tramite \glslink{ai-analyst}{AI Analyst}. & Backend $\leftrightarrow$ \glslink{ai-analyst}{AI Analyst} & NI \\
     \hline
-    TI-005 & Verifica che il sistema gestisca correttamente l'upload, lo storage e l'accesso \glslink{ai-intelligenza-artificiale}{ai} file. & Backend $\leftrightarrow$ \glslink{minio}{MinIO} (S3) & NI \\
+    TI-005 & Verifica che il sistema gestisca correttamente l'upload, lo storage e l'accesso \glslink{intelligenza-artificiale-ai}{ai} file. & Backend $\leftrightarrow$ \glslink{minio}{MinIO} (S3) & NI \\
     \hline
-    TI-006 & Verifica che il sistema esegua correttamente i job in modalità asincrona tramite le code. & Backend $\leftrightarrow$ \glslink{redis-queue-rq}{Redis Queue} & NI \\
+    TI-006 & Verifica che il sistema esegua correttamente i job in modalità asincrona tramite le code. & Backend $\leftrightarrow$ \glslink{redis}{Redis} Queue & NI \\
     \hline
 \end{longtable}
 
@@ -509,7 +509,7 @@ I \glslink{test-di-integrazione}{test di integrazione} verificano il corretto co
 I \glslink{test-di-regressione}{test di regressione} vengono eseguiti al termine di ogni \glslink{sprint}{sprint}, dopo l'integrazione di nuove funzionalità o la correzione di difetti, con lo scopo di accertare che il comportamento già verificato non sia stato compromesso. Consistono nella riesecuzione automatica dell'intera suite di test unitari e di integrazione preesistente. Un aumento dei fallimenti costituisce un indicatore di instabilità che richiede analisi e risoluzione prima del rilascio.
 
 \subsection{Test di sistema}
-I test di sistema verificano il corretto comportamento complessivo dell'applicazione in un ambiente il più possibile simile a quello di utilizzo reale. La tabella seguente raccoglie in modo unitario tutti i test di sistema, raggruppati per tipologia di requisito: funzionali, di qualità e di vincolo.
+I \glslink{test-di-sistema}{test di sistema} verificano il corretto comportamento complessivo dell'applicazione in un ambiente il più possibile simile a quello di utilizzo reale. La tabella seguente raccoglie in modo unitario tutti i \glslink{test-di-sistema}{test di sistema}, raggruppati per tipologia di requisito: funzionali, di qualità e di vincolo.
 
 \renewcommand{\arraystretch}{1.15}
 \rowcolors{2}{gray!8}{white}
@@ -547,9 +547,9 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-F-008 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora il campo \glslink{prompt}{prompt} sia assente o insufficiente prima dell'avvio della generazione. & RF8-OB & NI \\
     \hline
-    TS-F-009 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la generazione iniziale del contenuto tramite \glslink{ai-intelligenza-artificiale}{AI}. & RF9-OB & NI \\
+    TS-F-009 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la generazione iniziale del contenuto tramite \glslink{intelligenza-artificiale-ai}{AI}. & RF9-OB & NI \\
     \hline
-    TS-F-010 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la rigenerazione del contenuto tramite \glslink{ai-intelligenza-artificiale}{AI}. & RF10-OB & NI \\
+    TS-F-010 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la rigenerazione del contenuto tramite \glslink{intelligenza-artificiale-ai}{AI}. & RF10-OB & NI \\
     \hline
     TS-F-011 & Verifica che il sistema visualizzi un'anteprima della \glslink{bozza-draft}{bozza} generata. & RF11-OB & NI \\
     \hline
@@ -609,11 +609,11 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-F-039 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora il commento testuale superi il limite di caratteri consentito. & RF39-OB & NI \\
     \hline
-    TS-F-040 & Verifica che il sistema fornisca all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di utilizzo del modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo. & RF40-OB & NI \\
+    TS-F-040 & Verifica che il sistema fornisca all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di utilizzo del modulo \glslink{ai-assistant-generativo}{AI Assistant Generativo}. & RF40-OB & NI \\
     \hline
-    TS-F-041 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} una panoramica dell'attività complessiva del modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant. & RF41-OB & NI \\
+    TS-F-041 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} una panoramica dell'attività complessiva del modulo \glslink{intelligenza-artificiale-ai}{AI} Assistant. & RF41-OB & NI \\
     \hline
-    TS-F-042 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} le statistiche di utilizzo del modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant. & RF42-OB & NI \\
+    TS-F-042 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} le statistiche di utilizzo del modulo \glslink{intelligenza-artificiale-ai}{AI} Assistant. & RF42-OB & NI \\
     \hline
     TS-F-043 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} il \glslink{rating}{rating} medio delle bozze generate. & RF43-OB & NI \\
     \hline
@@ -621,7 +621,7 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-F-045 & Verifica che il sistema notifichi l'\glslink{analista-dati}{Analista dati} qualora i dati non siano disponibili per l'esportazione del report. & RF45-OB & NI \\
     \hline
-    TS-F-046 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare singoli documenti o lotti nel repository dedicato. & RF46-OB & NI \\
+    TS-F-046 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare singoli documenti o lotti nel \glslink{repository}{repository} dedicato. & RF46-OB & NI \\
     \hline
     TS-F-047 & Verifica che il sistema rilevi i documenti duplicati durante l'upload e notifichi il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} richiedendone conferma. & RF47-OB & NI \\
     \hline
@@ -631,7 +631,7 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-F-050 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di visualizzare lo storico dei documenti analizzati. & RF50-OB & NI \\
     \hline
-    TS-F-051 & Verifica che il sistema notifichi l'utente quando nessun documento corrisponde \glslink{ai-intelligenza-artificiale}{ai} criteri di visualizzazione dello storico. & RF51-OB & NI \\
+    TS-F-051 & Verifica che il sistema notifichi l'utente quando nessun documento corrisponde \glslink{intelligenza-artificiale-ai}{ai} criteri di visualizzazione dello storico. & RF51-OB & NI \\
     \hline
     TS-F-052 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite criteri multipli. & RF52-OB & NI \\
     \hline
@@ -639,7 +639,7 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-F-054 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & RF54-OB & NI \\
     \hline
-    TS-F-055 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{ai-intelligenza-artificiale}{AI}. & RF55-OB & NI \\
+    TS-F-055 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{intelligenza-artificiale-ai}{AI}. & RF55-OB & NI \\
     \hline
     TS-F-056 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di visualizzare i dettagli di un singolo documento dallo storico. & RF56-OB & NI \\
     \hline
@@ -725,7 +725,7 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-F-097 & Verifica che il sistema permetta la modifica del testo del messaggio di invio. & RF97-OB & NI \\
     \hline
-    TS-F-098 & Verifica che il sistema fornisca all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di monitoraggio del modulo \glslink{ai-co-pilot}{AI Co-Pilot}. & RF98-OB & NI \\
+    TS-F-098 & Verifica che il sistema fornisca all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di monitoraggio del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot. & RF98-OB & NI \\
     \hline
     TS-F-099 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} del Co-Pilot il numero totale di documenti analizzati. & RF99-OB & NI \\
     \hline
@@ -739,33 +739,33 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di qualità}} \\
     \hline
-    TS-Q-001 & Verifica che l'Analisi dei Requisiti sia completa di casi d'uso modellati tramite UML. & RQ1-OB & NI \\
+    TS-Q-001 & Verifica che l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} sia completa di casi d'uso modellati tramite UML. & RQ1-OB & NI \\
     \hline
-    TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle Norme di Progetto adottate dal gruppo. & RQ2-OB & NI \\
+    TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle \glslink{norme-di-progetto}{Norme di Progetto} adottate dal gruppo. & RQ2-OB & NI \\
     \hline
     TS-Q-003 & Verifica che il prodotto superi tutti i test automatizzati con una copertura del codice non inferiore all'80\%. & RQ3-OB & NI \\
     \hline
-    TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle Norme di Progetto. & RQ4-OB & NI \\
+    TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle \glslink{norme-di-progetto}{Norme di Progetto}. & RQ4-OB & NI \\
     \hline
-    TS-Q-005 & Verifica che il sorgente sia gestito tramite un sistema di versionamento con istruzioni di setup incluse nel repository. & RQ5-OB & NI \\
+    TS-Q-005 & Verifica che il sorgente sia gestito tramite un sistema di versionamento con istruzioni di setup incluse nel \glslink{repository}{repository}. & RQ5-OB & NI \\
     \hline
     TS-Q-006 & Verifica che il manuale utente del prodotto sia prodotto e aggiornato. & RQ6-OB & NI \\
     \hline
-    TS-Q-007 & Verifica tramite sessione di user testing che gli utenti siano in grado di apprendere le funzionalità principali del sistema in meno di 30 minuti. & \glslink{learning-time-mpd11}{MPD11} & NI \\
+    TS-Q-007 & Verifica tramite sessione di user testing che gli utenti siano in grado di apprendere le funzionalità principali del sistema in meno di 30 minuti. & MPD11 & NI \\
     \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di vincolo}} \\
     \hline
-    TS-V-001 & Verifica che il codice sorgente sia versionato tramite \glslink{git}{Git} su un repository condiviso. & RVC1-OB & NI \\
+    TS-V-001 & Verifica che il codice sorgente sia versionato tramite \glslink{git}{Git} su un \glslink{repository}{repository} condiviso. & RVC1-OB & NI \\
     \hline
-    TS-V-002 & Verifica che il codice sorgente rispetti le regole di formattazione definite da Laravel Pint. & RVC2-OB & NI \\
+    TS-V-002 & Verifica che il codice sorgente rispetti le regole di formattazione definite da \glslink{laravel}{Laravel} Pint. & RVC2-OB & NI \\
     \hline
     TS-V-003 & Verifica che la suite di test automatizzati sia scritta con il framework \glslink{pest}{Pest}. & RVC3-OB & NI \\
     \hline
-    TS-V-004 & Verifica che il backend sia sviluppato con il framework Laravel 12 su PHP 8.4. & RVC4-OB & NI \\
+    TS-V-004 & Verifica che il backend sia sviluppato con il framework \glslink{laravel}{Laravel} 12 su PHP 8.4. & RVC4-OB & NI \\
     \hline
     TS-V-005 & Verifica che il database relazionale del sistema sia \glslink{postgresql}{PostgreSQL}. & RVC5-OB & NI \\
     \hline
-    TS-V-006 & Verifica che le code asincrone e la gestione dei job in background utilizzino Redis. & RVC6-OB & NI \\
+    TS-V-006 & Verifica che le code asincrone e la gestione dei job in background utilizzino \glslink{redis}{Redis}. & RVC6-OB & NI \\
     \hline
     TS-V-007 & Verifica che il frontend delle interfacce utente sia realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & RVC7-OB & NI \\
     \hline
@@ -775,7 +775,7 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-V-010 & Verifica che lo storage dei file caricati nel sistema utilizzi \glslink{minio}{MinIO}, servizio compatibile con le API Amazon S3. & RVC10-OB & NI \\
     \hline
-    TS-V-011 & Verifica che i modelli di \glslink{ai-intelligenza-artificiale}{intelligenza artificiale} generativa possano essere erogati tramite \glslink{amazon-bedrock}{Amazon Bedrock}. & RVC11-OP & NI \\
+    TS-V-011 & Verifica che i modelli di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale} generativa possano essere erogati tramite \glslink{amazon-bedrock}{Amazon Bedrock}. & RVC11-OP & NI \\
     \hline
     TS-V-012 & Verifica che il sistema superi i controlli di accessibilità automatizzati tramite pa11y e axe sulle interfacce principali. & RVC12-OB & NI \\
     \hline
@@ -785,12 +785,12 @@ I test di sistema verificano il corretto comportamento complessivo dell'applicaz
     \hline
     TS-V-015 & Verifica che la configurazione minima del server rispetti i requisiti di 2 vCPU, 4 GB di RAM e 10 GB di spazio disco. & RVC15-OB & NI \\
     \hline
-    TS-V-016 & Verifica che l'utilizzo delle funzionalità \glslink{ai-intelligenza-artificiale}{AI} richieda credenziali AWS valide e accesso outbound ad \glslink{amazon-bedrock}{Amazon Bedrock}. & RVC16-OB & NI \\
+    TS-V-016 & Verifica che l'utilizzo delle funzionalità \glslink{intelligenza-artificiale-ai}{AI} richieda credenziali AWS valide e accesso outbound ad \glslink{amazon-bedrock}{Amazon Bedrock}. & RVC16-OB & NI \\
     \hline
 \end{longtable}
 
 \subsection{Test di accettazione}
-I test di accettazione verificano che il sistema soddisfi i requisiti utente relativi al \glslink{capitolato}{capitolato} d'appalto. Ogni test è associato al \glslink{caso-d-uso-uc}{caso d'uso} di riferimento.
+I \glslink{test-di-accettazione}{test di accettazione} verificano che il sistema soddisfi i requisiti utente relativi al \glslink{capitolato}{capitolato} d'appalto. Ogni test è associato al \glslink{caso-d-uso-uc}{caso d'uso} di riferimento.
 
 \renewcommand{\arraystretch}{1.15}
 \rowcolors{2}{gray!8}{white}
@@ -810,7 +810,7 @@ I test di accettazione verificano che il sistema soddisfi i requisiti utente rel
     \endfoot
     \hline
     \endlastfoot
-    TA-001 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di configurare completamente i parametri del \glslink{prompt}{prompt} (tono, stile, lunghezza) e avviare la generazione \glslink{ai-intelligenza-artificiale}{AI} con successo. & UC-1 & NI \\
+    TA-001 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di configurare completamente i parametri del \glslink{prompt}{prompt} (tono, stile, lunghezza) e avviare la generazione \glslink{intelligenza-artificiale-ai}{AI} con successo. & UC-1 & NI \\
     \hline
     TA-002 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora tenti di avviare la generazione con il campo \glslink{prompt}{prompt} assente o insufficiente. & UC-1 & NI \\
     \hline
@@ -836,11 +836,11 @@ I test di accettazione verificano che il sistema soddisfi i requisiti utente rel
     \hline
     TA-013 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora tenti di inviare la valutazione senza aver assegnato un \glslink{rating}{rating}. & UC-5 & NI \\
     \hline
-    TA-014 & Verifica che il sistema esponga all'\glslink{analista-dati}{Analista dati} la \glslink{dashboard}{dashboard} \glslink{ai-intelligenza-artificiale}{AI} Assistant con panoramica dell'attività complessiva e statistiche di utilizzo. & UC-6 & NI \\
+    TA-014 & Verifica che il sistema esponga all'\glslink{analista-dati}{Analista dati} la \glslink{dashboard}{dashboard} \glslink{intelligenza-artificiale-ai}{AI} Assistant con panoramica dell'attività complessiva e statistiche di utilizzo. & UC-6 & NI \\
     \hline
-    TA-015 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} \glslink{ai-intelligenza-artificiale}{AI} Assistant il \glslink{rating}{rating} medio delle bozze e permetta la consultazione dei feedback testuali. & UC-6 & NI \\
+    TA-015 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} \glslink{intelligenza-artificiale-ai}{AI} Assistant il \glslink{rating}{rating} medio delle bozze e permetta la consultazione dei feedback testuali. & UC-6 & NI \\
     \hline
-    TA-016 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare un singolo documento nel repository con classificazione automatica tramite \glslink{ai-analyst}{AI Analyst}. & UC-7, UC-8 & NI \\
+    TA-016 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare un singolo documento nel \glslink{repository}{repository} con classificazione automatica tramite \glslink{ai-analyst}{AI Analyst}. & UC-7, UC-8 & NI \\
     \hline
     TA-017 & Verifica che il sistema permetta l'upload di un lotto di documenti e rilevi i duplicati richiedendo conferma al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}. & UC-7 & NI \\
     \hline
@@ -854,7 +854,7 @@ I test di accettazione verificano che il sistema soddisfi i requisiti utente rel
     \hline
     TA-022 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & UC-12 & NI \\
     \hline
-    TA-023 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{ai-intelligenza-artificiale}{AI}. & UC-13 & NI \\
+    TA-023 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{intelligenza-artificiale-ai}{AI}. & UC-13 & NI \\
     \hline
     TA-024 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & UC-14 & NI \\
     \hline
@@ -873,7 +873,7 @@ I test di accettazione verificano che il sistema soddisfi i requisiti utente rel
 \end{longtable}
 
 \subsection{Tracciamento}
-La tabella seguente riporta la corrispondenza tra i test di sistema e i requisiti coperti, e tra i test di accettazione e i casi d'uso di riferimento.
+La tabella seguente riporta la corrispondenza tra i \glslink{test-di-sistema}{test di sistema} e i requisiti coperti, e tra i \glslink{test-di-accettazione}{test di accettazione} e i casi d'uso di riferimento.
 
 {\footnotesize
 \renewcommand{\arraystretch}{1.1}
@@ -1008,7 +1008,7 @@ La tabella seguente riporta la corrispondenza tra i test di sistema e i requisit
     \hline
     TS-Q-005 & RQ5-OB & TS-Q-006 & RQ6-OB \\
     \hline
-    TS-Q-007 & \glslink{learning-time-mpd11}{MPD11} & & \\
+    TS-Q-007 & MPD11 & & \\
     \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Vincolo}} \\
     \hline
@@ -1088,7 +1088,7 @@ La tabella seguente riporta la corrispondenza tra i test di sistema e i requisit
 
 Il cruscotto di qualità raccoglie i dati misurati nelle diverse iterazioni del progetto, mettendoli in relazione con le soglie accettabili e ottimali definite nella sezione \emph{Qualità di processo}. L'obiettivo è fornire una visione sintetica e aggiornata dello stato qualitativo del prodotto e dei processi, permettendo di identificare tempestivamente eventuali aree di miglioramento.
 
-Le misurazioni si riferiscono \glslink{ai-intelligenza-artificiale}{ai} quattro \glslink{sprint}{sprint} del periodo \glslink{rtb-requirements-and-technology-baseline}{RTB}:
+Le misurazioni si riferiscono \glslink{intelligenza-artificiale-ai}{ai} quattro \glslink{sprint}{sprint} del periodo \glslink{rtb-requirements-and-technology-baseline}{RTB}:
 
 \begin{itemize}
     \item \textbf{\glslink{sprint}{Sprint} 1 (S1):} 30/03/2026 – 12/04/2026
@@ -1104,7 +1104,7 @@ Il Budget At Completion (BAC) dell'intero progetto è pari a \EUR{12.575,00}.
 
 \subsubsection{MPC-EV e MPC-PV — Earned Value e Planned Value}
 
-Il \glslink{planned-value-mpc-pv}{Planned Value} (PV) rappresenta il valore pianificato del lavoro da completare entro ciascuno \glslink{sprint}{sprint}, estratto dai preventivi del Piano di Progetto. L'\glslink{earned-value-mpc-ev}{Earned Value} (EV) rappresenta il valore del lavoro effettivamente completato. Nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB} si assume che gli obiettivi di ogni \glslink{sprint}{sprint} siano stati completamente raggiunti (come risulta dalle retrospettive nel Piano di Progetto), pertanto $\text{EV} = \text{PV}$ per tutti gli \glslink{sprint}{sprint}.
+Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare entro ciascuno \glslink{sprint}{sprint}, estratto dai preventivi del \glslink{piano-di-progetto}{Piano di Progetto}. L'Earned Value (EV) rappresenta il valore del lavoro effettivamente completato. Nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB} si assume che gli obiettivi di ogni \glslink{sprint}{sprint} siano stati completamente raggiunti (come risulta dalle retrospettive nel \glslink{piano-di-progetto}{Piano di Progetto}), pertanto $\text{EV} = \text{PV}$ per tutti gli \glslink{sprint}{sprint}.
 
 \begin{table}[H]
 \centering
@@ -1127,7 +1127,7 @@ Il \glslink{planned-value-mpc-pv}{Planned Value} (PV) rappresenta il valore pian
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Andamento \glslink{earned-value-mpc-ev}{MPC-EV} e \glslink{planned-value-mpc-pv}{MPC-PV} Cumulativi},
+    title={Andamento MPC-EV e MPC-PV Cumulativi},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Valore (\euro)},
     symbolic x coords={S1, S2, S3, S4},
@@ -1148,12 +1148,12 @@ Il \glslink{planned-value-mpc-pv}{Planned Value} (PV) rappresenta il valore pian
 \caption{Grafico dell'andamento cumulativo di Planned Value ed Earned Value per sprint.}
 \end{figure}
 
-\noindent\textbf{Valutazione:} Entrambi i valori sono $\geq 0$ per tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta). Il PV cumulativo è $\leq \text{BAC} = \EUR{12.575,00}$ (\emph{soglia ottimale per \glslink{planned-value-mpc-pv}{MPC-PV}} raggiunta); l'EV cumulativo è $\leq \text{EAC}$ (\emph{soglia ottimale per \glslink{earned-value-mpc-ev}{MPC-EV}} raggiunta).
+\noindent\textbf{Valutazione:} Entrambi i valori sono $\geq 0$ per tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta). Il PV cumulativo è $\leq \text{BAC} = \EUR{12.575,00}$ (\emph{soglia ottimale per MPC-PV} raggiunta); l'EV cumulativo è $\leq \text{EAC}$ (\emph{soglia ottimale per MPC-EV} raggiunta).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-AC — Actual Cost}
 
-L'\glslink{actual-cost-mpc-ac}{Actual Cost} (AC) rappresenta il costo effettivo sostenuto per il lavoro completato in ciascuno \glslink{sprint}{sprint}, ricavato dai consuntivi del Piano di Progetto.
+L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro completato in ciascuno \glslink{sprint}{sprint}, ricavato dai consuntivi del \glslink{piano-di-progetto}{Piano di Progetto}.
 
 \begin{table}[H]
 \centering
@@ -1176,7 +1176,7 @@ L'\glslink{actual-cost-mpc-ac}{Actual Cost} (AC) rappresenta il costo effettivo 
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Andamento \glslink{actual-cost-mpc-ac}{MPC-AC} Cumulativo},
+    title={Andamento MPC-AC Cumulativo},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Costo Effettivo (\euro)},
     symbolic x coords={S1, S2, S3, S4},
@@ -1200,11 +1200,11 @@ L'\glslink{actual-cost-mpc-ac}{Actual Cost} (AC) rappresenta il costo effettivo 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-CPI e MPC-SPI — Cost Performance Index e Schedule Performance Index}
 
-Il \glslink{cost-performance-index-mpc-cpi}{Cost Performance Index} misura l'efficienza dei costi:
+Il Cost Performance Index misura l'efficienza dei costi:
 \[
   \text{CPI} = \frac{\text{EV}_\text{cum}}{\text{AC}_\text{cum}}
 \]
-Lo \glslink{schedule-performance-index-mpc-spi}{Schedule Performance Index} misura l'efficienza del tempo:
+Lo Schedule Performance Index misura l'efficienza del tempo:
 \[
   \text{SPI} = \frac{\text{EV}_\text{cum}}{\text{PV}_\text{cum}}
 \]
@@ -1258,11 +1258,11 @@ Lo \glslink{schedule-performance-index-mpc-spi}{Schedule Performance Index} misu
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-EAC e MPC-ETC — Estimated At Completion e Estimate To Complete}
 
-L'\glslink{estimated-at-completion-mpc-eac}{Estimated At Completion} stima il costo totale del progetto proiettando la performance corrente:
+L'Estimated At Completion stima il costo totale del progetto proiettando la performance corrente:
 \[
   \text{EAC} = \frac{\text{BAC}}{\text{CPI}}
 \]
-L'\glslink{estimate-to-complete-mpc-etc}{Estimate To Complete} rappresenta la stima dei costi rimanenti al completamento:
+L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento:
 \[
   \text{ETC} = \text{EAC} - \text{AC}_\text{cum}
 \]
@@ -1311,12 +1311,12 @@ L'\glslink{estimate-to-complete-mpc-etc}{Estimate To Complete} rappresenta la st
 \caption{Proiezione dei costi finali (EAC) e costi a finire (ETC) rispetto al budget.}
 \end{figure}
 
-\noindent\textbf{Valutazione:} L'EAC stimato supera il BAC di \EUR{12.575,00} in tutti gli \glslink{sprint}{sprint} e si attesta a \EUR{13.906,00} a S4, con uno scostamento del $+10{,}6\%$ rispetto al BAC — superiore alla soglia accettabile di $\pm 5\%$ (\emph{soglia non raggiunta} per \glslink{estimated-at-completion-mpc-eac}{MPC-EAC}). L'ETC è positivo per tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta per \glslink{estimate-to-complete-mpc-etc}{MPC-ETC}). Il trend crescente dell'EAC richiede un monitoraggio rigoroso dei costi nelle fasi successive.
+\noindent\textbf{Valutazione:} L'EAC stimato supera il BAC di \EUR{12.575,00} in tutti gli \glslink{sprint}{sprint} e si attesta a \EUR{13.906,00} a S4, con uno scostamento del $+10{,}6\%$ rispetto al BAC — superiore alla soglia accettabile di $\pm 5\%$ (\emph{soglia non raggiunta} per MPC-EAC). L'ETC è positivo per tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta per MPC-ETC). Il trend crescente dell'EAC richiede un monitoraggio rigoroso dei costi nelle fasi successive.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-TEAC — Time Estimate At Completion}
 
-Il \glslink{time-estimate-at-completion-mpc-teac}{Time Estimate At Completion} stima la durata totale del progetto a partire dalla performance di avanzamento. Calcolato come $\text{TEAC} = \text{Durata pianificata} / \text{SPI}$: poiché $\text{SPI} = 1{,}000$ per tutti gli \glslink{sprint}{sprint}, il progetto procede esattamente in linea con il calendario.
+Il Time Estimate At Completion stima la durata totale del progetto a partire dalla performance di avanzamento. Calcolato come $\text{TEAC} = \text{Durata pianificata} / \text{SPI}$: poiché $\text{SPI} = 1{,}000$ per tutti gli \glslink{sprint}{sprint}, il progetto procede esattamente in linea con il calendario.
 
 \begin{table}[H]
 \centering
@@ -1339,7 +1339,7 @@ Il \glslink{time-estimate-at-completion-mpc-teac}{Time Estimate At Completion} s
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Andamento \glslink{time-estimate-at-completion-mpc-teac}{Time Estimate At Completion}},
+    title={Andamento Time Estimate At Completion},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Settimane},
     symbolic x coords={S1, S2, S3, S4},
@@ -1367,7 +1367,7 @@ Il \glslink{time-estimate-at-completion-mpc-teac}{Time Estimate At Completion} s
 
 \subsubsection{MPC-RSI — Requirements Stability Index}
 
-Il \glslink{requirements-stability-index-mpc-rsi}{Requirements Stability Index} valuta la stabilità dei requisiti nel tempo. La baseline dei requisiti è stata consolidata al termine dello \glslink{sprint}{Sprint} 3 con un totale di 131 requisiti (109 funzionali, 6 di qualità, 16 di vincolo). Durante lo \glslink{sprint}{Sprint} 4 sono state apportate correzioni ad alcuni requisiti esistenti.
+Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La baseline dei requisiti è stata consolidata al termine dello \glslink{sprint}{Sprint} 3 con un totale di 131 requisiti (109 funzionali, 6 di qualità, 16 di vincolo). Durante lo \glslink{sprint}{Sprint} 4 sono state apportate correzioni ad alcuni requisiti esistenti.
 
 \begin{table}[H]
     \centering
@@ -1390,7 +1390,7 @@ Il \glslink{requirements-stability-index-mpc-rsi}{Requirements Stability Index} 
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Andamento \glslink{requirements-stability-index-mpc-rsi}{Requirements Stability Index}},
+    title={Andamento Requirements Stability Index},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={RSI (\%)},
     symbolic x coords={S1, S2, S3, S4},
@@ -1417,7 +1417,7 @@ Il \glslink{requirements-stability-index-mpc-rsi}{Requirements Stability Index} 
 
 \subsubsection{MPC-IG — Indice di Gulpease}
 
-L'Indice di Gulpease misura la leggibilità dei documenti in lingua italiana secondo la formula:
+L'\glslink{indice-di-gulpease-mpc-ig}{Indice di Gulpease} misura la leggibilità dei documenti in lingua italiana secondo la formula:
 \[
   G = 89 - \frac{10 \cdot L}{P} + \frac{300 \cdot F}{P}
 \]
@@ -1429,12 +1429,12 @@ dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di fra
 \begin{tabular}{|l|r|c|c|}
     \hline
     \rowcolor{gray!35}
-    \textbf{Documento} & \textbf{Indice di Gulpease} & \textbf{Soglia accettabile} & \textbf{Esito} \\
+    \textbf{Documento} & \textbf{\glslink{indice-di-gulpease-mpc-ig}{Indice di Gulpease}} & \textbf{Soglia accettabile} & \textbf{Esito} \\
     \hline
-    Analisi dei Requisiti & 59,7 & $\geq 60$ & Borderline \\
-    Norme di Progetto     & 45,9 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
-    Piano di Progetto     & 47,7 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
-    Piano di Qualifica    & 55,8 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & 59,7 & $\geq 60$ & Borderline \\
+    \glslink{norme-di-progetto}{Norme di Progetto}     & 45,9 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    \glslink{piano-di-progetto}{Piano di Progetto}     & 47,7 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    \glslink{piano-di-qualifica}{Piano di Qualifica}    & 55,8 & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
     \hline
 \end{tabular}
 \caption{Indice di Gulpease dei documenti RTB}
@@ -1444,9 +1444,9 @@ dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di fra
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Indice di Gulpease per Documento},
+    title={\glslink{indice-di-gulpease-mpc-ig}{Indice di Gulpease} per Documento},
     ylabel={Punteggio Indice},
-    symbolic x coords={AdR, NdP, PdP, PdQ},
+    symbolic x coords={\glslink{analisi-dei-requisiti-adr}{AdR}, NdP, PdP, PdQ},
     xtick=data,
     ymin=0, ymax=80,
     ybar,
@@ -1459,7 +1459,7 @@ dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di fra
     nodes near coords align={vertical}
 ]
 \addplot[fill=blue!35!white, draw=black] coordinates {
-    (AdR,59.7) 
+    (\glslink{analisi-dei-requisiti-adr}{AdR},59.7) 
     (NdP,45.9) 
     (PdP,47.7) 
     (PdQ,55.8)
@@ -1486,10 +1486,10 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{\glslink{
     \rowcolor{gray!35}
     \textbf{Documento} & \textbf{Errori ortografici} & \textbf{Esito} \\
     \hline
-    Analisi dei Requisiti & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    Norme di Progetto     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    Piano di Progetto     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
-    Piano di Qualifica    & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    \glslink{norme-di-progetto}{Norme di Progetto}     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    \glslink{piano-di-progetto}{Piano di Progetto}     & 0 & \textcolor{green!60!black}{Soddisfatta} \\
+    \glslink{piano-di-qualifica}{Piano di Qualifica}    & 0 & \textcolor{green!60!black}{Soddisfatta} \\
     \hline
 \end{tabular}
 \caption{Correttezza ortografica dei documenti RTB}
@@ -1502,19 +1502,19 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{\glslink{
 
 \subsubsection{MPC-CC e MPC-TSR — Code Coverage e Test Success Rate}
 
-Le metriche MPC-CC (\glslink{code-coverage}{Code Coverage}) e MPC-TSR (Test Success Rate) non sono ancora considerate pienamente applicabili nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, poiché il codice realizzato in \glslink{rtb-requirements-and-technology-baseline}{RTB} ha natura dimostrativa e non coincide con una baseline stabile di prodotto. La misurazione sistematica di tali metriche è prevista a partire dalla fase \glslink{pb-product-baseline}{PB (Product Baseline)}, quando verrà sviluppata e consolidata la baseline di riferimento e i test automatici potranno essere utilizzati come criterio continuativo di verifica.
+Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono ancora considerate pienamente applicabili nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, poiché il codice realizzato in \glslink{rtb-requirements-and-technology-baseline}{RTB} ha natura dimostrativa e non coincide con una baseline stabile di prodotto. La misurazione sistematica di tali metriche è prevista a partire dalla fase \glslink{pb-product-baseline}{PB (Product Baseline)}, quando verrà sviluppata e consolidata la baseline di riferimento e i test automatici potranno essere utilizzati come criterio continuativo di verifica.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Gestione della qualità}
 
 \subsubsection{MPC-QMS — Quality Metrics Satisfied}
 
-Il \glslink{quality-metrics-satisfied-mpc-qms}{Quality Metrics Satisfied} misura la percentuale di metriche di processo che soddisfano la soglia accettabile nel periodo di riferimento:
+Il Quality Metrics Satisfied misura la percentuale di metriche di processo che soddisfano la soglia accettabile nel periodo di riferimento:
 \[
   \text{QMS} = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%
 \]
 
-La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB}. Con l'\glslink{inclusione}{inclusione} delle metriche \glslink{requirements-stability-index-mpc-rsi}{MPC-RSI} e MPC-PRI, le metriche misurate passano a 12.
+La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB}. Con l'inclusione delle metriche MPC-RSI e MPC-PRI, le metriche misurate passano a 12.
 
 \begin{table}[H]
 \centering
@@ -1524,36 +1524,36 @@ La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase 
     \rowcolor{gray!35}
     \textbf{Metrica} & \textbf{Valore misurato} & \textbf{Soglia accettabile} & \textbf{Esito} \\
     \hline
-    \glslink{earned-value-mpc-ev}{MPC-EV}  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{planned-value-mpc-pv}{MPC-PV}  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{actual-cost-mpc-ac}{MPC-AC}  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{cost-performance-index-mpc-cpi}{MPC-CPI} & 0,904 (S4)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{schedule-performance-index-mpc-spi}{MPC-SPI} & 1,000 (tutti gli \glslink{sprint}{sprint}) & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{estimated-at-completion-mpc-eac}{MPC-EAC} & $+10{,}6\%$ dal BAC (S4) & $\pm 5\%$ dal BAC & \textcolor{red!70!black}{Non soddisfatta} \\
-    \glslink{estimate-to-complete-mpc-etc}{MPC-ETC} & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{time-estimate-at-completion-mpc-teac}{MPC-TEAC} & 8 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-IG  & 45,9 – 59,7             & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
+    MPC-EV  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-PV  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-AC  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-CPI & 0,904 (S4)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-SPI & 1,000 (tutti gli \glslink{sprint}{sprint}) & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-EAC & $+10{,}6\%$ dal BAC (S4) & $\pm 5\%$ dal BAC & \textcolor{red!70!black}{Non soddisfatta} \\
+    MPC-ETC & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-TEAC & 8 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}  & 45,9 – 59,7             & $\geq 60$ & \textcolor{red!70!black}{Non soddisfatta} \\
     MPC-CO  & 0 errori                 & 0 errori & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{requirements-stability-index-mpc-rsi}{MPC-RSI} & 96,9\% (S4)              & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-RSI & 96,9\% (S4)              & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-PRI & 50\% (fase \glslink{rtb-requirements-and-technology-baseline}{RTB})          & $\leq 20\%$ & \textcolor{red!70!black}{Non soddisfatta} \\
     \hline
     \rowcolor{gray!25}
     \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{9 / 12} \\
     \hline
     \rowcolor{gray!25}
-    \multicolumn{3}{|l|}{\textbf{\glslink{quality-metrics-satisfied-mpc-qms}{MPC-QMS}}} & \textbf{75\%} \\
+    \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{75\%} \\
     \hline
 \end{tabular}
 \caption{Calcolo MPC-QMS per la fase RTB aggiornato con RSI e PRI}
 \end{table}
 
-L'indice \glslink{quality-metrics-satisfied-mpc-qms}{MPC-QMS} riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) per i dati valutati in quel frangente. Nei successivi S2 e S3 il valore si stabilizza all'80\%. Nello \glslink{sprint}{Sprint} 4, con l'\glslink{inclusione}{inclusione} delle metriche globali RSI e PRI del periodo \glslink{rtb-requirements-and-technology-baseline}{RTB}, il QMS scende al 75\% (essendo MPC-PRI non soddisfatta). Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
+L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) per i dati valutati in quel frangente. Nei successivi S2 e S3 il valore si stabilizza all'80\%. Nello \glslink{sprint}{Sprint} 4, con l'inclusione delle metriche globali RSI e PRI del periodo \glslink{rtb-requirements-and-technology-baseline}{RTB}, il QMS scende al 75\% (essendo MPC-PRI non soddisfatta). Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis} [
-    title={Andamento \glslink{quality-metrics-satisfied-mpc-qms}{MPC-QMS} per \glslink{sprint}{Sprint} rispetto alle Soglie},
+    title={Andamento MPC-QMS per \glslink{sprint}{Sprint} rispetto alle Soglie},
     ylabel={Percentuale soddisfazione (\%)},
     symbolic x coords={S1, S2, S3, S4},
     xtick=data,
@@ -1591,9 +1591,9 @@ L'indice \glslink{quality-metrics-satisfied-mpc-qms}{MPC-QMS} riflette la confor
 
 \noindent\textbf{Valutazione:} Il QMS complessivo al termine della fase \glslink{rtb-requirements-and-technology-baseline}{RTB} è pari al 75\%, al di sotto della \emph{soglia accettabile} ($\geq 80\%$). Le tre metriche non soddisfatte richiedono interventi correttivi:
 \begin{itemize}
-    \item \textbf{\glslink{estimated-at-completion-mpc-eac}{MPC-EAC}:} il costo stimato a completamento supera il BAC del 10,6\%. Nelle fasi successive è necessario un controllo più rigoroso dei costi, con revisione periodica delle stime e delle allocazioni orarie.
-    \item \textbf{MPC-PRI:} il verificarsi di imprevisti bloccanti (50\% rispetto \glslink{ai-intelligenza-artificiale}{ai} rischi emersi) suggerisce che il registro dei rischi necessiti di un ampliamento e aggiornamento in vista dello sviluppo operativo \glslink{pb-product-baseline}{PB}.
-    \item \textbf{MPC-IG:} i documenti tecnici presentano indici di leggibilità al di sotto della soglia di 60. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi.
+    \item \textbf{MPC-EAC:} il costo stimato a completamento supera il BAC del 10,6\%. Nelle fasi successive è necessario un controllo più rigoroso dei costi, con revisione periodica delle stime e delle allocazioni orarie.
+    \item \textbf{MPC-PRI:} il verificarsi di imprevisti bloccanti (50\% rispetto \glslink{intelligenza-artificiale-ai}{ai} rischi emersi) suggerisce che il registro \glslink{mitigazione-dei-rischi}{dei rischi} necessiti di un ampliamento e aggiornamento in vista dello sviluppo operativo \glslink{pb-product-baseline}{PB}.
+    \item \textbf{\glslink{indice-di-gulpease-mpc-ig}{MPC-IG}:} i documenti tecnici presentano indici di leggibilità al di sotto della soglia di 60. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi.
 \end{itemize}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -1621,7 +1621,7 @@ La metrica valuta la capacità del team di prevedere e mitigare i rischi. I dati
         \hline
         S1 & Difficoltà nell'apprendimento di nuovi tool grafici per il mock-up. & Previsto (RT1) \\
         \hline
-        S2 & Stallo per attesa file di esempio dal \glslink{committente-o-proponente}{proponente}. & Previsto (RR1 / RO5) \\
+        S2 & Stallo per attesa file di esempio dal \glslink{committente-proponente}{proponente}. & Previsto (RR1 / RO5) \\
         \hline
         S3 & Sottostima del lavoro per diagrammazione e attività tecniche non preventivate. & Inatteso \\
         \hline
@@ -1645,16 +1645,16 @@ La metrica valuta la capacità del team di prevedere e mitigare i rischi. I dati
     \caption{Calcolo MPC-PRI per la fase RTB}
 \end{table}
 
-\noindent\textbf{Valutazione:} Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} sono emersi 4 problemi principali. Due di questi non erano stati esplicitamente previsti. Il valore PRI si attesta al 50\%, superando la soglia accettabile del $\leq 20\%$ (\emph{soglia non raggiunta}). Sarà necessaria un'integrazione del registro dei rischi per la fase \glslink{pb-product-baseline}{PB}.
+\noindent\textbf{Valutazione:} Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} sono emersi 4 problemi principali. Due di questi non erano stati esplicitamente previsti. Il valore PRI si attesta al 50\%, superando la soglia accettabile del $\leq 20\%$ (\emph{soglia non raggiunta}). Sarà necessaria un'integrazione del registro \glslink{mitigazione-dei-rischi}{dei rischi} per la fase \glslink{pb-product-baseline}{PB}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-LE — Labor Efficiency}
 
-Come per la metrica \glslink{time-efficiency-mpc-te}{MPC-TE}, l'assenza di un tracciamento puntuale delle ore spese in attività a valore aggiunto rispetto al tempo totale lavorato (incluso overhead) rende impossibile il calcolo per la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}. Il valore è quindi \textbf{N/A}. Le misurazioni inizieranno formalmente con la fase \glslink{pb-product-baseline}{PB}.
+Come per la metrica MPC-TE, l'assenza di un tracciamento puntuale delle ore spese in attività a valore aggiunto rispetto al tempo totale lavorato (incluso overhead) rende impossibile il calcolo per la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}. Il valore è quindi \textbf{N/A}. Le misurazioni inizieranno formalmente con la fase \glslink{pb-product-baseline}{PB}.
 
 \section{Iniziative di miglioramento}
 
-Le valutazioni riportate nel cruscotto di qualità evidenziano alcuni ambiti sui quali il gruppo intende intervenire nella fase \glslink{pb-product-baseline}{PB}. Il valore finale di \glslink{quality-metrics-satisfied-mpc-qms}{MPC-QMS} è pari al 75\%, inferiore alla soglia accettabile, e segnala la necessità di trasformare le criticità rilevate in azioni operative verificabili. Gli interventi previsti non introducono nuove metriche, ma utilizzano quelle già definite nel presente documento come riferimento per controllare l'efficacia delle correzioni.
+Le valutazioni riportate nel cruscotto di qualità evidenziano alcuni ambiti sui quali il gruppo intende intervenire nella fase \glslink{pb-product-baseline}{PB}. Il valore finale di MPC-QMS è pari al 75\%, inferiore alla soglia accettabile, e segnala la necessità di trasformare le criticità rilevate in azioni operative verificabili. Gli interventi previsti non introducono nuove metriche, ma utilizzano quelle già definite nel presente documento come riferimento per controllare l'efficacia delle correzioni.
 
 \begin{table}[H]
     \centering
@@ -1665,13 +1665,13 @@ Le valutazioni riportate nel cruscotto di qualità evidenziano alcuni ambiti sui
         \rowcolor{gray!35}
         \textbf{Ambito} & \textbf{Evidenza rilevata in \glslink{rtb-requirements-and-technology-baseline}{RTB}} & \textbf{Obiettivo per la fase \glslink{pb-product-baseline}{PB}} \\
         \hline
-        \glslink{pianificazione}{Pianificazione} & \glslink{estimated-at-completion-mpc-eac}{MPC-EAC} non soddisfatta, con EAC superiore al BAC del 10,6\%. & Raffinare le stime e controllare con maggiore frequenza le previsioni a finire. \\
+        \glslink{pianificazione}{Pianificazione} & MPC-EAC non soddisfatta, con EAC superiore al BAC del 10,6\%. & Raffinare le stime e controllare con maggiore frequenza le previsioni a finire. \\
         \hline
-        Gestione dei rischi & MPC-PRI non soddisfatta, con 2 rischi inattesi su 4 e valore pari al 50\%. & Rendere più sistematica l'identificazione dei rischi tecnici, organizzativi ed esterni. \\
+        Gestione \glslink{mitigazione-dei-rischi}{dei rischi} & MPC-PRI non soddisfatta, con 2 rischi inattesi su 4 e valore pari al 50\%. & Rendere più sistematica l'identificazione \glslink{mitigazione-dei-rischi}{dei rischi} tecnici, organizzativi ed esterni. \\
         \hline
-        Qualità documentale & MPC-IG sotto soglia per la leggibilità dei documenti. & Ridurre la densità testuale e migliorare la distinzione tra definizioni, motivazioni e conseguenze. \\
+        Qualità documentale & \glslink{indice-di-gulpease-mpc-ig}{MPC-IG} sotto soglia per la leggibilità dei documenti. & Ridurre la densità testuale e migliorare la distinzione tra definizioni, motivazioni e conseguenze. \\
         \hline
-        Tracciamento operativo & \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency-mpc-le}{MPC-LE} non misurabili in \glslink{rtb-requirements-and-technology-baseline}{RTB} per assenza di tracciamento granulare. & Distinguere le ore per tipologia di attività, ruolo, \glslink{sprint}{sprint} e \glslink{issue}{issue} di riferimento. \\
+        Tracciamento operativo & MPC-TE e MPC-LE non misurabili in \glslink{rtb-requirements-and-technology-baseline}{RTB} per assenza di tracciamento granulare. & Distinguere le ore per tipologia di attività, ruolo, \glslink{sprint}{sprint} e \glslink{issue}{issue} di riferimento. \\
         \hline
         Verifica e testing & MPC-CC e MPC-TSR non ancora misurabili su una baseline stabile di prodotto, da sviluppare in \glslink{pb-product-baseline}{PB}. & Introdurre quality gate e tracciamento continuativo dei test a partire dai componenti stabilizzati. \\
         \hline
@@ -1683,7 +1683,7 @@ Le azioni descritte nelle sottosezioni seguenti sono state definite a partire da
 
 \subsection{Miglioramento della pianificazione e del controllo dei costi}
 
-Lo scostamento rilevato tramite \glslink{estimated-at-completion-mpc-eac}{MPC-EAC} evidenzia che alcune attività sono state stimate con un livello di dettaglio non sufficiente rispetto all'impegno effettivo richiesto. La criticità riguarda in particolare le attività tecniche e documentali, che nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB} hanno richiesto più tempo rispetto a quanto preventivato.
+Lo scostamento rilevato tramite MPC-EAC evidenzia che alcune attività sono state stimate con un livello di dettaglio non sufficiente rispetto all'impegno effettivo richiesto. La criticità riguarda in particolare le attività tecniche e documentali, che nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB} hanno richiesto più tempo rispetto a quanto preventivato.
 
 \begin{table}[H]
     \centering
@@ -1706,15 +1706,15 @@ Lo scostamento rilevato tramite \glslink{estimated-at-completion-mpc-eac}{MPC-EA
 
 Per evitare che il controllo dei costi resti limitato al solo \glslink{consuntivo}{consuntivo}, il gruppo intende applicare un controllo regolare sulle stime ancora aperte. Tale controllo sarà svolto in corrispondenza della chiusura degli \glslink{sprint}{sprint} e dovrà rendere esplicite le cause dello scostamento, distinguendo tra sottostima iniziale, attività non previste, dipendenze esterne e riallocazione delle risorse.
 
-\paragraph*{Criticità rilevata:} \glslink{estimated-at-completion-mpc-eac}{MPC-EAC} non soddisfatta, con EAC superiore al BAC del 10,6\%.
+\paragraph*{Criticità rilevata:} MPC-EAC non soddisfatta, con EAC superiore al BAC del 10,6\%.
 
 \paragraph*{Azione prevista:} Confronto sistematico tra ore preventivate e ore consuntivate, con aggiornamento delle previsioni a finire sulla base degli scostamenti rilevati.
 
-\paragraph*{Metriche monitorate:} \glslink{estimated-at-completion-mpc-eac}{MPC-EAC}, con supporto delle metriche \glslink{actual-cost-mpc-ac}{MPC-AC}, \glslink{cost-performance-index-mpc-cpi}{MPC-CPI} e \glslink{estimate-to-complete-mpc-etc}{MPC-ETC}.
+\paragraph*{Metriche monitorate:} MPC-EAC, con supporto delle metriche MPC-AC, MPC-CPI e MPC-ETC.
 
 \subsection{Miglioramento della gestione dei rischi}
 
-Il valore di MPC-PRI mostra una capacità di previsione dei rischi ancora incompleta. In \glslink{rtb-requirements-and-technology-baseline}{RTB} alcuni eventi sono stati gestiti nel corso dello \glslink{sprint}{sprint}, ma non erano stati descritti in modo sufficientemente esplicito nel registro dei rischi. Per la fase \glslink{pb-product-baseline}{PB} il gruppo intende quindi rendere più puntuale la classificazione dei rischi e collegarla alle retrospettive.
+Il valore di MPC-PRI mostra una capacità di previsione \glslink{mitigazione-dei-rischi}{dei rischi} ancora incompleta. In \glslink{rtb-requirements-and-technology-baseline}{RTB} alcuni eventi sono stati gestiti nel corso dello \glslink{sprint}{sprint}, ma non erano stati descritti in modo sufficientemente esplicito nel registro \glslink{mitigazione-dei-rischi}{dei rischi}. Per la fase \glslink{pb-product-baseline}{PB} il gruppo intende quindi rendere più puntuale la classificazione \glslink{mitigazione-dei-rischi}{dei rischi} e collegarla alle retrospettive.
 
 \begin{table}[H]
     \centering
@@ -1723,29 +1723,29 @@ Il valore di MPC-PRI mostra una capacità di previsione dei rischi ancora incomp
     \begin{tabularx}{\textwidth}{|p{3.2cm}|X|X|}
         \hline
         \rowcolor{gray!35}
-        \textbf{Rischio emerso} & \textbf{Lettura del problema} & \textbf{Trattamento previsto} \\
+        \textbf{\glslink{rischio}{Rischio} emerso} & \textbf{Lettura del problema} & \textbf{Trattamento previsto} \\
         \hline
-        Attività tecniche sottostimate & Alcune attività implementative e di integrazione hanno richiesto approfondimenti non completamente previsti. & Esplicitare nel registro i rischi legati alla complessità tecnica e indicare una mitigazione tramite spike o task preliminari. \\
+        Attività tecniche sottostimate & Alcune attività implementative e di integrazione hanno richiesto approfondimenti non completamente previsti. & Esplicitare nel registro i rischi legati alla complessità tecnica e indicare una \glslink{mitigazione-dei-rischi}{mitigazione} tramite spike o task preliminari. \\
         \hline
         Attese per credenziali & L'accesso a risorse esterne può incidere direttamente sulla continuità delle attività tecniche. & Registrare le dipendenze da credenziali e ambienti esterni, indicando \glslink{responsabile}{responsabile} del sollecito e data limite interna. \\
         \hline
-        Dipendenze esterne & File, servizi o informazioni provenienti dal \glslink{committente-o-proponente}{proponente} possono introdurre ritardi non controllabili dal gruppo. & Associare alle dipendenze esterne un impatto previsto e una possibile attività alternativa in caso di blocco. \\
+        Dipendenze esterne & File, servizi o informazioni provenienti dal \glslink{committente-proponente}{proponente} possono introdurre ritardi non controllabili dal gruppo. & Associare alle dipendenze esterne un impatto previsto e una possibile attività alternativa in caso di blocco. \\
         \hline
     \end{tabularx}
     \caption{Rischi da esplicitare nel registro per la fase PB}
 \end{table}
 
-L'aggiornamento del registro non sarà limitato all'aggiunta di nuove voci, ma dovrà migliorare la qualità informativa dei rischi già presenti. In particolare, durante le retrospettive il gruppo dovrà verificare se gli eventi emersi nello \glslink{sprint}{sprint} erano stati previsti, se la mitigazione era applicabile e se l'impatto rilevato corrispondeva a quello stimato.
+L'aggiornamento del registro non sarà limitato all'aggiunta di nuove voci, ma dovrà migliorare la qualità informativa \glslink{mitigazione-dei-rischi}{dei rischi} già presenti. In particolare, durante le retrospettive il gruppo dovrà verificare se gli eventi emersi nello \glslink{sprint}{sprint} erano stati previsti, se la \glslink{mitigazione-dei-rischi}{mitigazione} era applicabile e se l'impatto rilevato corrispondeva a quello stimato.
 
 \paragraph*{Criticità rilevata:} MPC-PRI non soddisfatta, con presenza di rischi inattesi durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}.
 
-\paragraph*{Azione prevista:} Aggiornamento del registro rischi durante le retrospettive, indicando causa, impatto, mitigazione e \glslink{responsabile}{responsabile} per ciascun rischio significativo.
+\paragraph*{Azione prevista:} Aggiornamento del registro rischi durante le retrospettive, indicando causa, impatto, \glslink{mitigazione-dei-rischi}{mitigazione} e \glslink{responsabile}{responsabile} per ciascun \glslink{rischio}{rischio} significativo.
 
-\paragraph*{Metriche monitorate:} MPC-PRI, con attenzione alla riduzione dei rischi inattesi e alla tempestività delle azioni di mitigazione.
+\paragraph*{Metriche monitorate:} MPC-PRI, con attenzione alla riduzione \glslink{mitigazione-dei-rischi}{dei rischi} inattesi e alla tempestività delle azioni di \glslink{mitigazione-dei-rischi}{mitigazione}.
 
 \subsection{Miglioramento della qualità documentale}
 
-L'indice di Gulpease sotto soglia non implica necessariamente la presenza di documenti errati, ma segnala una leggibilità inferiore a quella attesa. La criticità principale riguarda la densità dei periodi e l'uso frequente di terminologia tecnica, specialmente nelle sezioni in cui vengono motivate scelte architetturali o descritte metriche di controllo.
+L'\glslink{indice-di-gulpease-mpc-ig}{indice di Gulpease} sotto soglia non implica necessariamente la presenza di documenti errati, ma segnala una leggibilità inferiore a quella attesa. La criticità principale riguarda la densità dei periodi e l'uso frequente di terminologia tecnica, specialmente nelle sezioni in cui vengono motivate scelte architetturali o descritte metriche di controllo.
 
 \begin{table}[H]
     \centering
@@ -1758,7 +1758,7 @@ L'indice di Gulpease sotto soglia non implica necessariamente la presenza di doc
         \hline
         Struttura dei periodi & Frasi lunghe e ricche di incisi riducono la chiarezza, pur mantenendo corretto il contenuto. & Semplificare i periodi più densi e separare le informazioni che hanno funzione diversa. \\
         \hline
-        Terminologia tecnica & Alcuni concetti vengono spiegati più volte all'interno dei documenti, aumentando la complessità di lettura. & Usare il Glossario per alleggerire le spiegazioni ripetute e mantenere nei documenti solo il contesto necessario. \\
+        Terminologia tecnica & Alcuni concetti vengono spiegati più volte all'interno dei documenti, aumentando la complessità di lettura. & Usare il \glslink{glossario}{Glossario} per alleggerire le spiegazioni ripetute e mantenere nei documenti solo il contesto necessario. \\
         \hline
         Organizzazione logica & Definizioni, motivazioni e conseguenze talvolta compaiono nello stesso paragrafo. & Distinguere meglio le parti descrittive da quelle valutative, così da rendere più immediata la consultazione. \\
         \hline
@@ -1768,15 +1768,15 @@ L'indice di Gulpease sotto soglia non implica necessariamente la presenza di doc
 
 Il miglioramento della leggibilità dovrà mantenere invariato il livello formale dei documenti. L'obiettivo non è ridurre il contenuto tecnico, ma renderlo più consultabile e meno concentrato in paragrafi estesi. Per questo motivo, nelle prossime revisioni sarà utile intervenire soprattutto sulle sezioni più dense, evitando riscritture generalizzate quando il testo risulta già chiaro e coerente.
 
-\paragraph*{Criticità rilevata:} MPC-IG sotto soglia, con indice di Gulpease inferiore al valore accettabile previsto.
+\paragraph*{Criticità rilevata:} \glslink{indice-di-gulpease-mpc-ig}{MPC-IG} sotto soglia, con \glslink{indice-di-gulpease-mpc-ig}{indice di Gulpease} inferiore al valore accettabile previsto.
 
-\paragraph*{Azione prevista:} Revisione mirata dei periodi più complessi, migliore separazione tra definizioni, motivazioni e conseguenze, uso più sistematico del Glossario.
+\paragraph*{Azione prevista:} Revisione mirata dei periodi più complessi, migliore separazione tra definizioni, motivazioni e conseguenze, uso più sistematico del \glslink{glossario}{Glossario}.
 
-\paragraph*{Metriche monitorate:} MPC-IG, verificando l'andamento dell'indice nelle revisioni successive dei documenti principali.
+\paragraph*{Metriche monitorate:} \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}, verificando l'andamento dell'indice nelle revisioni successive dei documenti principali.
 
 \subsection{Miglioramento del tracciamento operativo}
 
-Le metriche \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency-mpc-le}{MPC-LE} non sono state calcolabili in \glslink{rtb-requirements-and-technology-baseline}{RTB} perché il tracciamento orario non distingue ancora in modo sufficiente le diverse categorie di lavoro. Il gruppo ha registrato le ore necessarie al controllo dei costi, ma non ha separato con granularità adeguata attività produttive, verifica, riunioni, studio, overhead e blocchi.
+Le metriche MPC-TE e MPC-LE non sono state calcolabili in \glslink{rtb-requirements-and-technology-baseline}{RTB} perché il tracciamento orario non distingue ancora in modo sufficiente le diverse categorie di lavoro. Il gruppo ha registrato le ore necessarie al controllo dei costi, ma non ha separato con granularità adeguata attività produttive, verifica, riunioni, studio, overhead e blocchi.
 
 \begin{table}[H]
     \centering
@@ -1787,7 +1787,7 @@ Le metriche \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency
         \rowcolor{gray!35}
         \textbf{Categoria} & \textbf{Descrizione operativa} & \textbf{Utilità per le metriche} \\
         \hline
-        Attività produttive & Sviluppo, documentazione, configurazione e attività direttamente collegate agli obiettivi dello \glslink{sprint}{sprint}. & Permette di stimare le ore a valore aggiunto necessarie per \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency-mpc-le}{MPC-LE}. \\
+        Attività produttive & Sviluppo, documentazione, configurazione e attività direttamente collegate agli obiettivi dello \glslink{sprint}{sprint}. & Permette di stimare le ore a valore aggiunto necessarie per MPC-TE e MPC-LE. \\
         \hline
         Verifica & Revisione dei documenti, controllo del codice, validazione dei test e correzione dei difetti rilevati. & Consente di valutare il peso della verifica rispetto al lavoro complessivo. \\
         \hline
@@ -1803,15 +1803,15 @@ Le metriche \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency
 
 La rendicontazione prevista per \glslink{pb-product-baseline}{PB} dovrà collegare ogni registrazione allo \glslink{sprint}{sprint}, all'\glslink{issue}{issue} di riferimento, al ruolo coinvolto, alle ore preventivate e alle ore effettive. Questo consentirà di analizzare gli scostamenti non solo a livello complessivo, ma anche per tipologia di attività e per responsabilità operative.
 
-\paragraph*{Criticità rilevata:} \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency-mpc-le}{MPC-LE} non misurabili in \glslink{rtb-requirements-and-technology-baseline}{RTB} per mancanza di tracciamento granulare.
+\paragraph*{Criticità rilevata:} MPC-TE e MPC-LE non misurabili in \glslink{rtb-requirements-and-technology-baseline}{RTB} per mancanza di tracciamento granulare.
 
 \paragraph*{Azione prevista:} Introduzione di una rendicontazione collegata a \glslink{sprint}{sprint}, \glslink{issue}{issue}, ruolo, categoria dell'attività, ore preventivate e ore effettive.
 
-\paragraph*{Metriche monitorate:} \glslink{time-efficiency-mpc-te}{MPC-TE} e \glslink{labor-efficiency-mpc-le}{MPC-LE}, con supporto dei dati consuntivi utilizzati anche per il controllo di \glslink{estimated-at-completion-mpc-eac}{MPC-EAC}.
+\paragraph*{Metriche monitorate:} MPC-TE e MPC-LE, con supporto dei dati consuntivi utilizzati anche per il controllo di MPC-EAC.
 
 \subsection{Miglioramento della verifica e del testing}
 
-Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti test risultano ancora NI o non pienamente misurabili, poiché la PoC ha avuto finalità dimostrativa e ha consentito di verificare la fattibilità dei flussi principali. La baseline stabile di prodotto verrà sviluppata e consolidata nella fase \glslink{pb-product-baseline}{PB}, prendendo come riferimento lo stack effettivamente adottato: Laravel con viste Blade, CSS e JavaScript custom. Le tecnologie valutate inizialmente ma non adottate nella realizzazione \glslink{rtb-requirements-and-technology-baseline}{RTB} non saranno considerate nel consolidamento previsto per la \glslink{pb-product-baseline}{PB}.
+Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti test risultano ancora NI o non pienamente misurabili, poiché la PoC ha avuto finalità dimostrativa e ha consentito di verificare la fattibilità dei flussi principali. La baseline stabile di prodotto verrà sviluppata e consolidata nella fase \glslink{pb-product-baseline}{PB}, prendendo come riferimento lo stack effettivamente adottato: \glslink{laravel}{Laravel} con viste Blade, CSS e JavaScript custom. Le tecnologie valutate inizialmente ma non adottate nella realizzazione \glslink{rtb-requirements-and-technology-baseline}{RTB} non saranno considerate nel consolidamento previsto per la \glslink{pb-product-baseline}{PB}.
 
 \begin{table}[H]
     \centering
@@ -1826,7 +1826,7 @@ Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti te
         \hline
         Salvataggio documenti & Persistenza dei dati generati e recupero corretto delle informazioni associate. & Verifica di creazione, aggiornamento e recupero dei documenti salvati. \\
         \hline
-        Elaborazione asincrona & Esecuzione tramite worker e coda Redis, con gestione degli stati intermedi. & Test sui passaggi di stato e sui casi di elaborazione fallita o ritentata. \\
+        Elaborazione asincrona & Esecuzione tramite worker e coda \glslink{redis}{Redis}, con gestione degli stati intermedi. & Test sui passaggi di stato e sui casi di elaborazione fallita o ritentata. \\
         \hline
         Integrazione con \glslink{minio}{MinIO} & Gestione dei file e coerenza tra \glslink{metadati}{metadati} applicativi e oggetti salvati. & Controlli su caricamento, lettura e assenza di riferimenti non validi. \\
         \hline
@@ -1838,7 +1838,7 @@ Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti te
     \caption{Flussi da consolidare nel processo di verifica PB}
 \end{table}
 
-In \glslink{pb-product-baseline}{PB} il gruppo intende collegare il tracciamento dei test \glslink{ai-intelligenza-artificiale}{ai} quality gate automatici, così che gli esiti non restino informazioni isolate. Il consolidamento dovrà riguardare sia i test che verificano il comportamento applicativo, sia i controlli di integrazione sui servizi previsti dalla baseline di riferimento.
+In \glslink{pb-product-baseline}{PB} il gruppo intende collegare il tracciamento dei test \glslink{intelligenza-artificiale-ai}{ai} quality gate automatici, così che gli esiti non restino informazioni isolate. Il consolidamento dovrà riguardare sia i test che verificano il comportamento applicativo, sia i controlli di integrazione sui servizi previsti dalla baseline di riferimento.
 
 \paragraph*{Criticità rilevata:} MPC-CC e MPC-TSR non ancora pienamente applicabili in \glslink{rtb-requirements-and-technology-baseline}{RTB}, poiché la baseline stabile di prodotto verrà sviluppata e consolidata in \glslink{pb-product-baseline}{PB}.
 
@@ -1848,6 +1848,6 @@ In \glslink{pb-product-baseline}{PB} il gruppo intende collegare il tracciamento
 
 \bigskip
 
-\noindent\textbf{Sintesi conclusiva:} Le iniziative descritte hanno lo scopo di trasformare le criticità emerse durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} in azioni operative per la fase \glslink{pb-product-baseline}{PB}. In particolare, il gruppo intende migliorare la precisione della \glslink{pianificazione}{pianificazione}, rendere più sistematica la gestione dei rischi, aumentare la qualità della documentazione e consolidare il processo di verifica del codice. Tali interventi saranno monitorati attraverso le metriche già definite nel presente documento, con particolare attenzione a \glslink{estimated-at-completion-mpc-eac}{MPC-EAC}, MPC-PRI, MPC-IG, \glslink{time-efficiency-mpc-te}{MPC-TE}, \glslink{labor-efficiency-mpc-le}{MPC-LE}, MPC-CC e MPC-TSR.
+\noindent\textbf{Sintesi conclusiva:} Le iniziative descritte hanno lo scopo di trasformare le criticità emerse durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} in azioni operative per la fase \glslink{pb-product-baseline}{PB}. In particolare, il gruppo intende migliorare la precisione della \glslink{pianificazione}{pianificazione}, rendere più sistematica la gestione \glslink{mitigazione-dei-rischi}{dei rischi}, aumentare la qualità della documentazione e consolidare il processo di verifica del codice. Tali interventi saranno monitorati attraverso le metriche già definite nel presente documento, con particolare attenzione a MPC-EAC, MPC-PRI, \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}, MPC-TE, MPC-LE, MPC-CC e MPC-TSR.
 
 \end{document}
