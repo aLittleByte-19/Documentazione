@@ -185,16 +185,16 @@
 \newpage
 \section{Introduzione}
 \subsection{Scopo del documento}
-Il presente documento di Analisi dei Requisiti ha l'obiettivo di descrivere in modo completo e strutturato i requisiti funzionali e non funzionali del sistema software progettato per il \glslink{committente-o-proponente}{proponente} Eggon S.r.l. .\\
-L'applicazione implementerà i moduli "\glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo" e "\glslink{ai-co-pilot}{AI Co-Pilot} per i Consulenti del Lavoro", permettendo di sperimentare le funzionalità previste in un ambiente controllato.\\
+Il presente documento di \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} ha l'obiettivo di descrivere in modo completo e strutturato i requisiti funzionali e non funzionali del sistema software progettato per il \glslink{committente-proponente}{proponente} Eggon S.r.l. .\\
+L'applicazione implementerà i moduli "\glslink{ai-assistant-generativo}{AI Assistant Generativo}" e "\glslink{intelligenza-artificiale-ai}{AI} Co-Pilot per i Consulenti del Lavoro", permettendo di sperimentare le funzionalità previste in un ambiente controllato.\\
 Il documento descrive in dettaglio i casi d'uso del sistema, che rappresentano la base per l'individuazione dei requisiti, e include i diagrammi dei casi d'uso per rappresentare visivamente le interazioni tra gli attori e il sistema. \\
-I requisiti identificati costituiscono il riferimento per le attività di progettazione, sviluppo e collaudo dell'applicazione, garantendo coerenza con le esigenze del \glslink{committente-o-proponente}{committente} e con gli obiettivi formativi e tecnici del progetto. \\
+I requisiti identificati costituiscono il riferimento per le attività di progettazione, sviluppo e collaudo dell'applicazione, garantendo coerenza con le esigenze del \glslink{committente-proponente}{committente} e con gli obiettivi formativi e tecnici del progetto. \\
 Il documento è destinato a sviluppatori, progettisti e \glslink{stakeholder}{stakeholder}, fornendo una base condivisa per tutte le fasi del ciclo di vita del software.
 Il documento non tratta nel dettaglio le scelte implementative o tecnologiche di basso livello, le quali saranno affrontate nelle successive fasi di progettazione architetturale.
 
 \subsection{Sviluppo del documento}
-Il presente documento è stato redatto adottando un approccio \glslink{incrementale}{incrementale}, con l’obiettivo di consentire aggiornamenti e revisioni nel corso del progetto.\\
-La struttura e i contenuti sono stati definiti in modo da garantire flessibilità, permettendo di recepire eventuali modifiche derivanti dall’evoluzione dei requisiti o dal confronto con il \glslink{committente-o-proponente}{committente}.\\
+Il presente documento è stato redatto adottando un \glslink{approccio-incrementale}{approccio incrementale}, con l’obiettivo di consentire aggiornamenti e revisioni nel corso del progetto.\\
+La struttura e i contenuti sono stati definiti in modo da garantire flessibilità, permettendo di recepire eventuali modifiche derivanti dall’evoluzione dei requisiti o dal confronto con il \glslink{committente-proponente}{committente}.\\
 Il documento è pertanto soggetto a un processo di revisione continua, finalizzato a mantenerne coerenza, completezza e allineamento con gli obiettivi progettuali.
 
 \subsection{Riferimenti}
@@ -203,7 +203,7 @@ Il documento è pertanto soggetto a un processo di revisione continua, finalizza
     \item \textbf{\glslink{capitolato}{Capitolato} d'appalto C5 - \glslink{nexum}{NEXUM} (Eggon):}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
 
-    \item \textbf{Norme di Progetto:}\\
+    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto}:}\\
     Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative.\\
     \url{https://github.com/aLittleByte-19/Documentazione}
 
@@ -212,7 +212,7 @@ Il documento è pertanto soggetto a un processo di revisione continua, finalizza
 \end{itemize}
 \subsubsection{Riferimenti informativi}
 \begin{itemize}
-    \item \textbf{Glossario:}\\
+    \item \textbf{\glslink{glossario}{Glossario}:}\\
     Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici.\\
     \url{https://github.com/aLittleByte-19/Documentazione}
 
@@ -235,15 +235,15 @@ Il documento è pertanto soggetto a un processo di revisione continua, finalizza
 
 \subsection{Obiettivi del prodotto}
 
-L'obiettivo del progetto è potenziare i processi HR e documentali dei consulenti del lavoro con strumenti intelligenti mantenendo la soluzione autonoma rispetto \glslink{ai-intelligenza-artificiale}{ai} canali \glslink{nexum}{NEXUM} esistenti. In particolare il prodotto mira a:
+L'obiettivo del progetto è potenziare i processi HR e documentali dei consulenti del lavoro con strumenti intelligenti mantenendo la soluzione autonoma rispetto \glslink{intelligenza-artificiale-ai}{ai} canali \glslink{nexum}{NEXUM} esistenti. In particolare il prodotto mira a:
 \begin{itemize}
     \item migliorare l'efficienza della comunicazione aziendale tramite generazione assistita di contenuti coerenti con tono e stile dell'organizzazione;
-    \item ridurre tempi di gestione ed errori nella classificazione, suddivisione e distribuzione dei documenti massivi destinati \glslink{ai-intelligenza-artificiale}{ai} dipendenti;
+    \item ridurre tempi di gestione ed errori nella classificazione, suddivisione e distribuzione dei documenti massivi destinati \glslink{intelligenza-artificiale-ai}{ai} dipendenti;
     \item fornire \glslink{workflow}{workflow} tracciabili e conformi alle normative vigenti (sicurezza, \glslink{gdpr}{GDPR});
-    \item abilitare un'evoluzione \glslink{data-driven}{data-driven} dei moduli \glslink{ai-intelligenza-artificiale}{AI} attraverso metriche di utilizzo, qualità e performance;
+    \item abilitare un'evoluzione data-driven dei moduli \glslink{intelligenza-artificiale-ai}{AI} attraverso metriche di utilizzo, qualità e performance;
     \item mantenere un'architettura modulare e scalabile che possa in futuro interoperare con l'ecosistema \glslink{nexum}{NEXUM} senza dipenderne.
 \end{itemize}
-La soluzione viene realizzata come piattaforma stand-alone, concordata appositamente per operare in modo indipendente dai canali applicativi di \glslink{nexum}{NEXUM} (\glslink{dashboard-amministrativa}{dashboard amministrativa} e \glslink{pwa-progressive-web-app}{PWA}). Pur restando allineata alle linee guida tecnologiche del \glslink{capitolato}{capitolato}, la piattaforma mantiene un proprio ciclo di vita applicativo e integra solo i servizi necessari per l'elaborazione intelligente dei contenuti e dei documenti.
+La soluzione viene realizzata come piattaforma stand-alone, concordata appositamente per operare in modo indipendente dai canali applicativi di \glslink{nexum}{NEXUM} (\glslink{dashboard}{dashboard} amministrativa e \glslink{pwa-progressive-web-app}{PWA}). Pur restando allineata alle linee guida tecnologiche del \glslink{capitolato}{capitolato}, la piattaforma mantiene un proprio ciclo di vita applicativo e integra solo i servizi necessari per l'elaborazione intelligente dei contenuti e dei documenti.
 
 
 \subsection{Funzionalità del prodotto}
@@ -261,19 +261,19 @@ Il prodotto è articolato in due macro-componenti funzionali, supportate da serv
 
 \paragraph{AI Co-Pilot per Consulenti del Lavoro}
 \begin{itemize}
-    \item Upload singolo o massivo dei documenti nel repository dedicato con controlli su duplicati e formati supportati.
-    \item Riconoscimento tipologico tramite \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e classificazione \glslink{ai-intelligenza-artificiale}{AI} con popolamento automatico dei \glslink{metadati}{metadati} principali.
+    \item Upload singolo o massivo dei documenti nel \glslink{repository}{repository} dedicato con controlli su duplicati e formati supportati.
+    \item Riconoscimento tipologico tramite \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e classificazione \glslink{intelligenza-artificiale-ai}{AI} con popolamento automatico dei \glslink{metadati}{metadati} principali.
     \item Estrazione e associazione dei destinatari sfruttando algoritmi di \glslink{entity-resolution}{entity resolution} e gestione delle ambiguità.
     \item \glslink{split-automatico}{Split automatico} dei documenti multi-destinatario con tracciabilità tra originale e \glslink{copie-atomiche}{copie atomiche}.
     \item Revisione \glslink{human-in-the-loop}{human-in-the-loop} per casi a bassa \glslink{confidenza-confidence-score}{confidenza}, con log delle correzioni.
-    \item Composizione assistita della \glslink{lista-di-dispaccio}{lista di dispaccio} e dei messaggi di invio, compresi template riutilizzabili.
+    \item Composizione assistita della lista di \glslink{dispaccio}{dispaccio} e dei messaggi di invio, compresi template riutilizzabili.
     \item Tracciamento dell'invio e delle letture, con notifica delle anomalie.
 \end{itemize}
 
 \paragraph{Funzionalità trasversali}
 \begin{itemize}
     \item \glslink{esecuzione-asincrona}{Esecuzione asincrona} delle operazioni time-consuming per garantire fluidità dell'interfaccia.
-    \item Raccolta centralizzata di metriche operative a supporto della governance e del miglioramento continuo dei modelli \glslink{ai-intelligenza-artificiale}{AI}.
+    \item Raccolta centralizzata di metriche operative a supporto della governance e del miglioramento continuo dei modelli \glslink{intelligenza-artificiale-ai}{AI}.
     \item Configurazione dei parametri di qualità (soglie di \glslink{confidenza-confidence-score}{confidenza}, regole di split, template di messaggio).
 \end{itemize}
 
@@ -283,7 +283,7 @@ Le seguenti funzionalità sono state identificate come potenzialmente rilevanti 
 \begin{itemize}
     \item \textbf{Prove di consegna e tracciamento letture}: visualizzazione dello stato di consegna dei documenti inviati e conferma di lettura da parte dei destinatari.
     \item \textbf{Gestione retry e anomalie di invio}: meccanismi automatici di ritentativo in caso di fallimento dell'invio, con log delle anomalie.
-    \item \textbf{\glslink{audit-trail}{Audit trail}}: registro navigabile delle operazioni effettuate sul sistema, a supporto di attività di controllo e conformità normativa.
+    \item \textbf{Audit trail}: registro navigabile delle operazioni effettuate sul sistema, a supporto di attività di controllo e conformità normativa.
     \item \textbf{Policy di conservazione configurabili}: regole personalizzabili per la durata di conservazione dei documenti e dei log operativi.
     \item \textbf{Gestione avanzata di ruoli, permessi e policy di sicurezza}: configurazione granulare dei profili utente, dei privilegi di accesso e delle policy di sicurezza dedicate alla piattaforma.
 \end{itemize}
@@ -292,9 +292,9 @@ Le seguenti funzionalità sono state identificate come potenzialmente rilevanti 
 
 Il prodotto si rivolge a più categorie di utenti, ciascuna con responsabilità specifiche nel ciclo di vita dei contenuti e dei documenti.
 \begin{itemize}
-    \item \textbf{Amministratori e \glslink{hr-manager}{HR Manager} aziendali}: utilizzano l'\glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo per creare, revisionare e pubblicare comunicazioni interne coerenti con le linee guida editoriali.
-    \item \textbf{Operatori e referenti degli studi dei Consulenti del Lavoro}: presidiano l'\glslink{ai-co-pilot}{AI Co-Pilot} per caricare, riconoscere, suddividere e distribuire documenti \glslink{ai-intelligenza-artificiale}{ai} destinatari corretti.
-    \item \textbf{Figure di controllo e governance}: monitorano metriche e qualità dei moduli \glslink{ai-intelligenza-artificiale}{AI} per garantire conformità e miglioramento continuo.
+    \item \textbf{Amministratori e HR Manager aziendali}: utilizzano l'\glslink{ai-assistant-generativo}{AI Assistant Generativo} per creare, revisionare e pubblicare comunicazioni interne coerenti con le linee guida editoriali.
+    \item \textbf{Operatori e referenti degli studi dei Consulenti del Lavoro}: presidiano l'\glslink{intelligenza-artificiale-ai}{AI} Co-Pilot per caricare, riconoscere, suddividere e distribuire documenti \glslink{intelligenza-artificiale-ai}{ai} destinatari corretti.
+    \item \textbf{Figure di controllo e governance}: monitorano metriche e qualità dei moduli \glslink{intelligenza-artificiale-ai}{AI} per garantire conformità e miglioramento continuo.
 \end{itemize}
 
 \section{Casi d'uso}
@@ -318,15 +318,15 @@ Ogni \glslink{caso-d-uso-uc}{caso d'uso} è documentato attraverso un diagramma 
 Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi esterni che interagiscono direttamente con l'applicazione. Sulla base dell'analisi dei processi aziendali e dei flussi operativi previsti, sono stati identificati i seguenti attori:
 \subsubsection{Utenti operativi}
 \begin{itemize}
-    \item \textbf{\glslink{amministratore}{Amministratore}}:Ha il compito di configurare l'ambiente \glslink{standalone}{standalone}. Si occupa di assegnare i privilegi operativi \glslink{ai-intelligenza-artificiale}{ai} vari account e di definire le policy globali dell'applicativo.
-    \item \textbf{\glslink{redattore}{Redattore}}:È la figura aziendale delegata alla creazione delle comunicazioni interne. Interagisce in modo diretto con il Modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo per fornire i \glslink{prompt}{prompt} di base, calibrare il tono di voce desiderato e confermare la bontà dei contenuti proposti dal sistema.
-    \item \textbf{\glslink{analista-dati}{Analista dati}}: Supervisiona l'efficienza dell'applicativo. Accede alle sezioni analitiche per valutare le performance dell'\glslink{ai-intelligenza-artificiale}{intelligenza artificiale}, esaminando i feedback forniti dagli operatori e le metriche di successo del riconoscimento documentale.
-    \item \textbf{\glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}}:È l'utilizzatore primario del Modulo \glslink{ai-co-pilot}{AI Co-Pilot}. Il suo ruolo consiste nel caricare i lotti documentali (come i \glslink{cedolini-massivi}{cedolini massivi}), revisionare le estrazioni per correggere eventuali imperfezioni e validare le code di invio.
+    \item \textbf{\glslink{amministratore}{Amministratore}}:Ha il compito di configurare l'ambiente \glslink{standalone}{standalone}. Si occupa di assegnare i privilegi operativi \glslink{intelligenza-artificiale-ai}{ai} vari account e di definire le policy globali dell'applicativo.
+    \item \textbf{\glslink{redattore}{Redattore}}:È la figura aziendale delegata alla creazione delle comunicazioni interne. Interagisce in modo diretto con il Modulo \glslink{ai-assistant-generativo}{AI Assistant Generativo} per fornire i \glslink{prompt}{prompt} di base, calibrare il tono di voce desiderato e confermare la bontà dei contenuti proposti dal sistema.
+    \item \textbf{\glslink{analista-dati}{Analista dati}}: Supervisiona l'efficienza dell'applicativo. Accede alle sezioni analitiche per valutare le performance dell'\glslink{intelligenza-artificiale-ai}{intelligenza artificiale}, esaminando i feedback forniti dagli operatori e le metriche di successo del riconoscimento documentale.
+    \item \textbf{\glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}}:È l'utilizzatore primario del Modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot. Il suo ruolo consiste nel caricare i lotti documentali (come i \glslink{cedolini-massivi}{cedolini massivi}), revisionare le estrazioni per correggere eventuali imperfezioni e validare le code di invio.
 \end{itemize}
 \subsubsection{Moduli esterni}
 \begin{itemize}
-    \item \textbf{\glslink{ai-post-generator}{AI Post Generator}}:Il core di \glslink{ai-intelligenza-artificiale}{intelligenza artificiale} che elabora le richieste del \glslink{redattore}{redattore}. Agisce come \glslink{attore}{attore} di sistema restituendo i testi formattati, i titoli e le immagini per le comunicazioni aziendali.
-    \item \textbf{\glslink{ai-analyst}{AI Analyst}}:Costituisce il nucleo elaborativo del modulo \glslink{ai-co-pilot}{AI Co-Pilot}. Prende in carico i lotti di file caricati dall'operatore ed esegue in autonomia le operazioni di classificazione documentale, estrazione del testo e associazione \glslink{ai-intelligenza-artificiale}{ai} rispettivi destinatari.
+    \item \textbf{\glslink{ai-post-generator}{AI Post Generator}}:Il core di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale} che elabora le richieste del \glslink{redattore}{redattore}. Agisce come \glslink{attore}{attore} di sistema restituendo i testi formattati, i titoli e le immagini per le comunicazioni aziendali.
+    \item \textbf{\glslink{ai-analyst}{AI Analyst}}:Costituisce il nucleo elaborativo del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot. Prende in carico i lotti di file caricati dall'operatore ed esegue in autonomia le operazioni di classificazione documentale, estrazione del testo e associazione \glslink{intelligenza-artificiale-ai}{ai} rispettivi destinatari.
 \end{itemize}
 
 \subsection{AI Assistant Generativo}
@@ -344,15 +344,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[\glslink{attore-secondario}{Attore Secondario}] \glslink{ai-post-generator}{AI Post Generator}
     
-    \item[\glslink{trigger}{Trigger}] Il \glslink{redattore}{Redattore} seleziona la funzione di creazione di un nuovo contenuto supportato dall'\glslink{ai-intelligenza-artificiale}{AI}.
+    \item[\glslink{trigger}{Trigger}] Il \glslink{redattore}{Redattore} seleziona la funzione di creazione di un nuovo contenuto supportato dall'\glslink{intelligenza-artificiale-ai}{AI}.
     
-    \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "\glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo", preimpostando i parametri di tono, stile e lunghezza sui valori di default.
+    \item[Pre-condizioni]Il sistema ha inizializzato e reso operativo il modulo "\glslink{ai-assistant-generativo}{AI Assistant Generativo}", preimpostando i parametri di tono, stile e lunghezza sui valori di default.
 
     \item[Post-condizioni] Il sistema mostra l'anteprima del contenuto generato (comprendente titolo, testo e immagine di copertina) e abilita le funzionalità di revisione.
     
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{redattore}{Redattore} accede all'interfaccia dell'\glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo, dove il sistema rende visibile l'area di lavoro.
+        \item Il \glslink{redattore}{Redattore} accede all'interfaccia dell'\glslink{ai-assistant-generativo}{AI Assistant Generativo}, dove il sistema rende visibile l'area di lavoro.
         \item Il \glslink{redattore}{Redattore} compila il campo relativo al \glslink{prompt}{prompt} testuale (\textbf{UC-1.1}).
         \item Il \glslink{redattore}{Redattore} imposta il tono desiderato (\textbf{UC-1.2}).
         \item Il \glslink{redattore}{Redattore} imposta lo \glslink{stile-editoriale}{stile editoriale} (\textbf{UC-1.3}).
@@ -365,7 +365,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
          \item \textbf{1a. Il \glslink{redattore}{Redattore} decide di svuotare i campi prima di iniziare}: viene eseguito \textbf{UC-1.5}.
          \item \textbf{5a. Il \glslink{redattore}{Redattore} decide di salvare la configurazione inserita}: viene eseguito \textbf{UC-1.4}.
          \item \textbf{6a. \glslink{prompt}{Prompt} mancante o insufficiente}: Il sistema rileva che il campo \glslink{prompt}{prompt} è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
-         \item \textbf{6b. Fallimento modulo \glslink{ai-intelligenza-artificiale}{AI}}: Il sistema rileva un errore di \glslink{timeout}{timeout} o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
+         \item \textbf{6b. Fallimento modulo \glslink{intelligenza-artificiale-ai}{AI}}: Il sistema rileva un errore di \glslink{timeout}{timeout} o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
     \end{itemize}
 
     \item[Relazioni]
@@ -472,11 +472,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}
     \item[Pre-condizioni] Il \glslink{redattore}{Redattore} ha compilato parzialmente o totalmente i campi di configurazione.
-    \item[Post-condizioni] Il sistema ha ripristinato tutti i campi \glslink{ai-intelligenza-artificiale}{ai} valori predefiniti o vuoti.
+    \item[Post-condizioni] Il sistema ha ripristinato tutti i campi \glslink{intelligenza-artificiale-ai}{ai} valori predefiniti o vuoti.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{redattore}{Redattore} seleziona il comando rapido di azzeramento (es. "Svuota campi").
-        \item Il sistema cancella il testo inserito nel \glslink{prompt}{prompt} e ripristina le selezioni di tono e stile \glslink{ai-intelligenza-artificiale}{ai} valori di default.
+        \item Il sistema cancella il testo inserito nel \glslink{prompt}{prompt} e ripristina le selezioni di tono e stile \glslink{intelligenza-artificiale-ai}{ai} valori di default.
     \end{enumerate}
 \end{description}
 
@@ -528,7 +528,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}, \glslink{ai-post-generator}{AI Post Generator}
-    \item[Pre-condizioni] Il sistema ha inviato i parametri al motore \glslink{ai-intelligenza-artificiale}{AI}, ma si verifica un \glslink{timeout}{timeout} o un errore di connessione.
+    \item[Pre-condizioni] Il sistema ha inviato i parametri al motore \glslink{intelligenza-artificiale-ai}{AI}, ma si verifica un \glslink{timeout}{timeout} o un errore di connessione.
     \item[Post-condizioni] Il sistema notifica il fallimento e mantiene i dati inseriti nell'interfaccia.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -564,7 +564,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il \glslink{redattore}{Redattore} modifica manualmente il titolo (\textbf{UC-2.4}).
         \item Il \glslink{redattore}{Redattore} modifica manualmente il testo (\textbf{UC-2.5}).
         \item Il \glslink{redattore}{Redattore} sostituisce l'immagine di copertina suggerita con un file locale (\textbf{UC-2.6}).
-        \item Il \glslink{redattore}{Redattore} richiede la rigenerazione totale della \glslink{bozza-draft}{bozza} all'\glslink{ai-intelligenza-artificiale}{AI} (\textbf{UC-2.7}).
+        \item Il \glslink{redattore}{Redattore} richiede la rigenerazione totale della \glslink{bozza-draft}{bozza} all'\glslink{intelligenza-artificiale-ai}{AI} (\textbf{UC-2.7}).
         \item Il \glslink{redattore}{Redattore} scarta la \glslink{bozza-draft}{bozza} corrente (\textbf{UC-2.8}).
         \item Il \glslink{redattore}{Redattore} annulla le modifiche manuali per ripristinare la \glslink{bozza-draft}{bozza} originale (\textbf{UC-2.9}).
     \end{enumerate}
@@ -744,7 +744,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Fallimento modulo \glslink{ai-intelligenza-artificiale}{AI}}: Il sistema rileva un errore di rete o di API durante la richiesta della variante; viene eseguito \textbf{UC-2.7.E1}.
+        \item \textbf{1a. Fallimento modulo \glslink{intelligenza-artificiale-ai}{AI}}: Il sistema rileva un errore di rete o di API durante la richiesta della variante; viene eseguito \textbf{UC-2.7.E1}.
     \end{itemize}
 
     \item[Relazioni] 
@@ -786,11 +786,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}
     \item[Pre-condizioni] Il \glslink{redattore}{Redattore} ha apportato modifiche manuali alla \glslink{bozza-draft}{bozza} (UC-2.4 o UC-2.5).
-    \item[Post-condizioni] Il sistema ha ripristinato la \glslink{bozza-draft}{bozza} alla versione originariamente generata dall'\glslink{ai-intelligenza-artificiale}{AI}.
+    \item[Post-condizioni] Il sistema ha ripristinato la \glslink{bozza-draft}{bozza} alla versione originariamente generata dall'\glslink{intelligenza-artificiale-ai}{AI}.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{redattore}{Redattore} seleziona il comando "Annulla modifiche".
-        \item Il sistema sovrascrive le modifiche manuali e ricarica a schermo la \glslink{bozza-draft}{bozza} originale elaborata dal modulo \glslink{ai-intelligenza-artificiale}{AI}.
+        \item Il sistema sovrascrive le modifiche manuali e ricarica a schermo la \glslink{bozza-draft}{bozza} originale elaborata dal modulo \glslink{intelligenza-artificiale-ai}{AI}.
     \end{enumerate}
 \end{description}
 
@@ -871,7 +871,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Pre-condizioni] La \glslink{bozza-draft}{bozza} revisionata (UC-2) è pronta per l'approvazione.
     
-    \item[Post-condizioni] Il sistema ha promosso la \glslink{bozza-draft}{bozza} a documento e lo ha archiviato, esportato o inoltrato con successo; nei casi di esportazione e inoltro il documento riporta in calce il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{ai-intelligenza-artificiale}{AI} Assistant''.
+    \item[Post-condizioni] Il sistema ha promosso la \glslink{bozza-draft}{bozza} a documento e lo ha archiviato, esportato o inoltrato con successo; nei casi di esportazione e inoltro il documento riporta in calce il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{intelligenza-artificiale-ai}{AI} Assistant''.
     
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
@@ -939,7 +939,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione.
-    \item[Post-condizioni] Il sistema ha generato un file PDF scaricabile comprensivo del \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{ai-intelligenza-artificiale}{AI} Assistant''.
+    \item[Post-condizioni] Il sistema ha generato un file PDF scaricabile comprensivo del \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{intelligenza-artificiale-ai}{AI} Assistant''.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{redattore}{Redattore} seleziona il comando di esportazione PDF.
@@ -959,7 +959,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}
     \item[Pre-condizioni] Il sistema espone il campo per l'inserimento dell'indirizzo del destinatario.
-    \item[Post-condizioni] Il documento è stato trasmesso con successo all'indirizzo specificato, con il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{ai-intelligenza-artificiale}{AI} Assistant''.
+    \item[Post-condizioni] Il documento è stato trasmesso con successo all'indirizzo specificato, con il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{intelligenza-artificiale-ai}{AI} Assistant''.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{redattore}{Redattore} seleziona l'opzione di invio e inserisce l'indirizzo e-mail di destinazione.
@@ -988,7 +988,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}
     \item[Pre-condizioni] Il sistema mostra i comandi di finalizzazione e il \glslink{redattore}{Redattore} intende esportare il documento.
-    \item[Post-condizioni] Il \glslink{redattore}{Redattore} ha visualizzato a schermo l'aspetto del documento finale, comprensivo del \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{ai-intelligenza-artificiale}{AI} Assistant''.
+    \item[Post-condizioni] Il \glslink{redattore}{Redattore} ha visualizzato a schermo l'aspetto del documento finale, comprensivo del \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} ``Creato da \glslink{intelligenza-artificiale-ai}{AI} Assistant''.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{redattore}{Redattore} seleziona il comando di anteprima di stampa/esportazione.
@@ -1080,7 +1080,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{redattore}{Redattore}
     \item[Pre-condizioni] Il \glslink{redattore}{Redattore} visualizza l'elenco cronologico.
-    \item[Post-condizioni] Il sistema aggiorna la lista in base \glslink{ai-intelligenza-artificiale}{ai} criteri inseriti.
+    \item[Post-condizioni] Il sistema aggiorna la lista in base \glslink{intelligenza-artificiale-ai}{ai} criteri inseriti.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{redattore}{Redattore} inserisce una parola chiave nel campo di ricerca o seleziona un filtro (tono, stile o data).
@@ -1361,9 +1361,9 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
     
-    \item[\glslink{trigger}{Trigger}] L'\glslink{analista-dati}{Analista dati} accede all'area analitica per monitorare le performance e l'utilizzo dell'\glslink{ai-intelligenza-artificiale}{AI} Assistant.
+    \item[\glslink{trigger}{Trigger}] L'\glslink{analista-dati}{Analista dati} accede all'area analitica per monitorare le performance e l'utilizzo dell'\glslink{intelligenza-artificiale-ai}{AI} Assistant.
 
-    \item[Pre-condizioni] Il sistema ha archiviato i dati di utilizzo dell'Assistente \glslink{ai-intelligenza-artificiale}{AI} e le valutazioni qualitative degli utenti.
+    \item[Pre-condizioni] Il sistema ha archiviato i dati di utilizzo dell'Assistente \glslink{intelligenza-artificiale-ai}{AI} e le valutazioni qualitative degli utenti.
     
     \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} ha consultato le metriche e ha avuto la possibilità di filtrare o esportare i dati analitici.
     
@@ -1373,7 +1373,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item L'\glslink{analista-dati}{Analista dati} consulta le statistiche operative di utilizzo (\textbf{UC-6.2}).
         \item L'\glslink{analista-dati}{Analista dati} monitora il livello di \glslink{rating}{rating} medio (\textbf{UC-6.3}).
         \item L'\glslink{analista-dati}{Analista dati} consulta la lista dei feedback testuali (\textbf{UC-6.4}).
-        \item L'\glslink{analista-dati}{Analista dati} applica filtri dinamici \glslink{ai-intelligenza-artificiale}{ai} dati visualizzati (\textbf{UC-6.5}).
+        \item L'\glslink{analista-dati}{Analista dati} applica filtri dinamici \glslink{intelligenza-artificiale-ai}{ai} dati visualizzati (\textbf{UC-6.5}).
         \item L'\glslink{analista-dati}{Analista dati} richiede l'esportazione del report analitico (\textbf{UC-6.6}).
     \end{enumerate}
 
@@ -1399,7 +1399,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Il sistema espone l'interfaccia riepilogativa delle metriche.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema presenta a schermo l'interfaccia di monitoraggio con i principali indicatori di performance dell'\glslink{ai-intelligenza-artificiale}{AI} Assistant.
+        \item Il sistema presenta a schermo l'interfaccia di monitoraggio con i principali indicatori di performance dell'\glslink{intelligenza-artificiale-ai}{AI} Assistant.
     \end{enumerate}
 \end{description}
 
@@ -1437,7 +1437,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Il sistema mostra l'indicatore della qualità percepita.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza il valore medio delle valutazioni a stelle ricevute per misurare l'efficacia dell'\glslink{ai-intelligenza-artificiale}{AI}.
+        \item Il sistema visualizza il valore medio delle valutazioni a stelle ricevute per misurare l'efficacia dell'\glslink{intelligenza-artificiale-ai}{AI}.
     \end{enumerate}
 \end{description}
 
@@ -1471,15 +1471,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
     \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza i dati all'interno della \glslink{dashboard}{dashboard}.
-    \item[Post-condizioni] Il sistema aggiorna la visualizzazione in base \glslink{ai-intelligenza-artificiale}{ai} parametri selezionati.
+    \item[Post-condizioni] Il sistema aggiorna la visualizzazione in base \glslink{intelligenza-artificiale-ai}{ai} parametri selezionati.
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item L'\glslink{analista-dati}{Analista dati} imposta parametri specifici di filtro (es. intervallo di date, tono, stile).
-        \item Il sistema aggiorna istantaneamente la visualizzazione in base \glslink{ai-intelligenza-artificiale}{ai} criteri scelti.
+        \item Il sistema aggiorna istantaneamente la visualizzazione in base \glslink{intelligenza-artificiale-ai}{ai} criteri scelti.
     \end{enumerate}
     \item[Scenari Alternativi] 
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{2a. Dati non disponibili}: Il sistema rileva l'assenza di record corrispondenti \glslink{ai-intelligenza-artificiale}{ai} filtri applicati; viene eseguito \textbf{UC-6.E1}.
+        \item \textbf{2a. Dati non disponibili}: Il sistema rileva l'assenza di record corrispondenti \glslink{intelligenza-artificiale-ai}{ai} filtri applicati; viene eseguito \textbf{UC-6.E1}.
     \end{itemize}
     \item[Relazioni] 
     \begin{itemize}[leftmargin=*, nosep]
@@ -1553,16 +1553,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende caricare uno o più documenti nel sistema.
     
-    \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{ai-co-pilot}{AI Co-Pilot}.
+    \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
     
-    \item[Post-condizioni]Il documento è caricato e analizzato dall'\glslink{ai-intelligenza-artificiale}{AI} (estrazione \glslink{metadati}{metadati}, classificazione e split in sotto-documenti per destinatario).
+    \item[Post-condizioni]Il documento è caricato e analizzato dall'\glslink{intelligenza-artificiale-ai}{AI} (estrazione \glslink{metadati}{metadati}, classificazione e split in sotto-documenti per destinatario).
    
     \item[\glslink{scenario-principale}{Scenario Principale}] 
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il file dal proprio dispositivo.
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento.
         \item Il sistema verifica formato e duplicati.
-        \item Il sistema completa il caricamento, notifica l'esito positivo e avvia l'analisi \glslink{ai-intelligenza-artificiale}{AI} del documento.
+        \item Il sistema completa il caricamento, notifica l'esito positivo e avvia l'analisi \glslink{intelligenza-artificiale-ai}{AI} del documento.
     \end{enumerate}
 
     \item[Scenari Alternativi]
@@ -1633,8 +1633,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{attore}{Attore} Principale] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
     \item[\glslink{attore-secondario}{Attore Secondario}] \glslink{ai-analyst}{AI Analyst}
     \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende caricare uno o più documenti nel sistema impostando manualmente classificazione e \glslink{metadati}{metadati}.
-    \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{ai-co-pilot}{AI Co-Pilot}.   
-    \item[Post-condizioni] Il documento è caricato e analizzato dall'\glslink{ai-intelligenza-artificiale}{AI}; classificazione e \glslink{metadati}{metadati} inseriti manualmente non vengono ricalcolati mentre viene già eseguito lo split (del documento in sotto-documenti per destinatario).
+    \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.   
+    \item[Post-condizioni] Il documento è caricato e analizzato dall'\glslink{intelligenza-artificiale-ai}{AI}; classificazione e \glslink{metadati}{metadati} inseriti manualmente non vengono ricalcolati mentre viene già eseguito lo split (del documento in sotto-documenti per destinatario).
 
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1643,7 +1643,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il formato file tra le opzioni disponibili: PDF, PNG, JPG e TIFF.
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} inserisce i \glslink{metadati}{metadati} richiesti (mese, anno, azienda).
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento dopodiché il sistema verifica formato e duplicati.
-        \item Il sistema completa il caricamento, avvia l'analisi \glslink{ai-intelligenza-artificiale}{AI} del documento e mantiene i campi inseriti dall'utente.
+        \item Il sistema completa il caricamento, avvia l'analisi \glslink{intelligenza-artificiale-ai}{AI} del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1668,8 +1668,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende consultare lo storico dei documenti analizzati nel modulo \glslink{ai-co-pilot}{AI Co-Pilot}.
-    \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nel modulo \glslink{ai-co-pilot}{AI Co-Pilot} e apre la sezione "Storico documenti".
+    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende consultare lo storico dei documenti analizzati nel modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
+    \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nel modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot e apre la sezione "Storico documenti".
     \item[Post-condizioni] Il sistema mostra l'elenco dei documenti analizzati e permette la consultazione del dettaglio del singolo elemento selezionato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1872,7 +1872,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona un documento dall'elenco dello storico.
-        \item Il sistema apre la vista di dettaglio con \glslink{layout-affiancato}{layout affiancato}: documento originale a sinistra e dati estratti a destra.
+        \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
         \item Il sistema mostra il documento originale splittato relativo al dipendente selezionato (\textbf{UC-15.1}).
         \item Il sistema mostra il documento originale non splittato (\textbf{UC-15.2}).
         \item Il sistema mostra i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-15.3}), azienda (\textbf{UC-15.4}), nome del file (\textbf{UC-15.5}), data del documento (\textbf{UC-15.6}), numero di pagine (\textbf{UC-15.7}), tipologia del documento (\textbf{UC-15.8}), breve descrizione del documento (\textbf{UC-15.9}), \glslink{confidenza-confidence-score}{confidenza} in percentuale (\textbf{UC-15.10}), stato di invio del documento (\textbf{UC-15.11}), email destinatario (\textbf{UC-15.12}), codice fiscale (\textbf{UC-15.13}), matricola dipendente (\textbf{UC-15.14}) e data/ora caricamento (\textbf{UC-15.15}).
@@ -2111,7 +2111,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Il sistema mostra il valore del campo \glslink{confidenza-confidence-score}{confidenza} in percentuale.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza nel pannello dati estratti la \glslink{confidenza-confidence-score}{confidenza} in percentuale (da 0 a 100\%) che indica l'affidabilità dei dati estratti dall'\glslink{ai-intelligenza-artificiale}{AI} per il documento analizzato.
+        \item Il sistema visualizza nel pannello dati estratti la \glslink{confidenza-confidence-score}{confidenza} in percentuale (da 0 a 100\%) che indica l'affidabilità dei dati estratti dall'\glslink{intelligenza-artificiale-ai}{AI} per il documento analizzato.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2352,7 +2352,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{attore}{Attore} Principale] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
     \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende modificare uno o più campi editabili del documento selezionato.
     \item[Pre-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella vista di dettaglio del singolo documento (UC-15).
-    \item[Post-condizioni] Il sistema salva le modifiche apportate \glslink{ai-intelligenza-artificiale}{ai} campi editabili del documento selezionato.
+    \item[Post-condizioni] Il sistema salva le modifiche apportate \glslink{intelligenza-artificiale-ai}{ai} campi editabili del documento selezionato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
 \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona l'azione di modifica del documento.
@@ -2656,7 +2656,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[Pre-condizioni] Il sistema ha accesso \glslink{ai-intelligenza-artificiale}{ai} \glslink{metadati}{metadati} principali del documento selezionato.
+    \item[Pre-condizioni] Il sistema ha accesso \glslink{intelligenza-artificiale-ai}{ai} \glslink{metadati}{metadati} principali del documento selezionato.
     \item[Post-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza l'oggetto proposto nel campo dedicato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2676,7 +2676,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[Pre-condizioni] Il sistema ha accesso \glslink{ai-intelligenza-artificiale}{ai} dati estratti dal documento selezionato.
+    \item[Pre-condizioni] Il sistema ha accesso \glslink{intelligenza-artificiale-ai}{ai} dati estratti dal documento selezionato.
     \item[Post-condizioni] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il testo proposto nel campo dedicato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2805,16 +2805,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
-    \item[\glslink{trigger}{Trigger}] L'\glslink{analista-dati}{Analista dati} intende consultare la \glslink{dashboard}{dashboard} delle metriche del modulo \glslink{ai-co-pilot}{AI Co-Pilot}.
-    \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} è entrato nella sezione dedicata alle metriche del modulo \glslink{ai-co-pilot}{AI Co-Pilot}.
-    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} ha visualizzato in \glslink{dashboard}{dashboard} i principali \glslink{kpi-key-performance-indicator}{KPI} del modulo \glslink{ai-co-pilot}{AI Co-Pilot}.
+    \item[\glslink{trigger}{Trigger}] L'\glslink{analista-dati}{Analista dati} intende consultare la \glslink{dashboard}{dashboard} delle metriche del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
+    \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} è entrato nella sezione dedicata alle metriche del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
+    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} ha visualizzato in \glslink{dashboard}{dashboard} i principali \glslink{kpi-key-performance-indicator}{KPI} del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema espone il numero totale di documenti analizzati; l'\glslink{analista-dati}{Analista dati} consulta il valore (\textbf{UC-19.1}).
         \item Il sistema espone la percentuale di classificazioni corrette; l'\glslink{analista-dati}{Analista dati} verifica il valore (\textbf{UC-19.2}).
         \item Il sistema espone la percentuale di documenti sotto \glslink{soglia-di-confidenza}{soglia di confidenza}; l'\glslink{analista-dati}{Analista dati} monitora il dato (\textbf{UC-19.3}).
         \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'\glslink{analista-dati}{Analista dati} verifica il valore (\textbf{UC-19.4}).
-        \item Il sistema espone i tempi medi di analisi dell'\glslink{ai-intelligenza-artificiale}{intelligenza artificiale}; l'\glslink{analista-dati}{Analista dati} controlla il dato (\textbf{UC-19.5}).
+        \item Il sistema espone i tempi medi di analisi dell'\glslink{intelligenza-artificiale-ai}{intelligenza artificiale}; l'\glslink{analista-dati}{Analista dati} controlla il dato (\textbf{UC-19.5}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2834,11 +2834,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
     \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} si trova all'interno della \glslink{dashboard}{dashboard} delle metriche.
-    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza il numero totale dei documenti analizzati dal modulo \glslink{ai-co-pilot}{AI Co-Pilot}.
+    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza il numero totale dei documenti analizzati dal modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza il numero totale complessivo di tutti i documenti processati dall'\glslink{ai-intelligenza-artificiale}{intelligenza artificiale}.
-        \item L'\glslink{analista-dati}{Analista dati} osserva l'indicatore relativo \glslink{ai-intelligenza-artificiale}{ai} volumi di utilizzo.
+        \item Il sistema visualizza il numero totale complessivo di tutti i documenti processati dall'\glslink{intelligenza-artificiale-ai}{intelligenza artificiale}.
+        \item L'\glslink{analista-dati}{Analista dati} osserva l'indicatore relativo \glslink{intelligenza-artificiale-ai}{ai} volumi di utilizzo.
     \end{enumerate}
 \end{description}
 
@@ -2854,11 +2854,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
     \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} si trova all'interno della \glslink{dashboard}{dashboard} delle metriche.
-    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza la percentuale di classificazioni corrette effettuate automaticamente dall'\glslink{ai-intelligenza-artificiale}{AI}.
+    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza la percentuale di classificazioni corrette effettuate automaticamente dall'\glslink{intelligenza-artificiale-ai}{AI}.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza la percentuale complessiva di documenti classificati correttamente dall'\glslink{ai-intelligenza-artificiale}{AI} sul totale analizzato, calcolata considerando solo i casi che non hanno richiesto alcun intervento manuale da parte degli operatori.
-        \item L'\glslink{analista-dati}{Analista dati} osserva la metrica relativa all'\glslink{accuratezza}{accuratezza} del sistema.
+        \item Il sistema visualizza la percentuale complessiva di documenti classificati correttamente dall'\glslink{intelligenza-artificiale-ai}{AI} sul totale analizzato, calcolata considerando solo i casi che non hanno richiesto alcun intervento manuale da parte degli operatori.
+        \item L'\glslink{analista-dati}{Analista dati} osserva la metrica relativa all'accuratezza del sistema.
     \end{enumerate}
 \end{description}
 
@@ -2877,8 +2877,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza numero e percentuale dei documenti con \glslink{confidenza-confidence-score}{confidenza} inferiore alla soglia prevista.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza il numero totale e la relativa percentuale dei documenti per i quali l'\glslink{ai-intelligenza-artificiale}{AI} ha stimato una \glslink{confidenza-confidence-score}{confidenza} inferiore all'80\%, e che per questo motivo hanno richiesto una revisione umana.
-        \item L'\glslink{analista-dati}{Analista dati} osserva le percentuali relative all'\glslink{accuratezza}{accuratezza} del sistema.
+        \item Il sistema visualizza il numero totale e la relativa percentuale dei documenti per i quali l'\glslink{intelligenza-artificiale-ai}{AI} ha stimato una \glslink{confidenza-confidence-score}{confidenza} inferiore all'80\%, e che per questo motivo hanno richiesto una revisione umana.
+        \item L'\glslink{analista-dati}{Analista dati} osserva le percentuali relative all'accuratezza del sistema.
     \end{enumerate}
 \end{description}
 \newpage
@@ -2894,10 +2894,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
     \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} si trova all'interno della \glslink{dashboard}{dashboard} delle metriche.
-    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza la percentuale di associazioni destinatario-anagrafica risolte automaticamente e correttamente dall'\glslink{ai-intelligenza-artificiale}{AI}.
+    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza la percentuale di associazioni destinatario-anagrafica risolte automaticamente e correttamente dall'\glslink{intelligenza-artificiale-ai}{AI}.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza la percentuale complessiva di documenti in cui l'associazione tra il destinatario e la sua anagrafica è stata risolta in modo automatico e corretto dall'\glslink{ai-intelligenza-artificiale}{AI}.
+        \item Il sistema visualizza la percentuale complessiva di documenti in cui l'associazione tra il destinatario e la sua anagrafica è stata risolta in modo automatico e corretto dall'\glslink{intelligenza-artificiale-ai}{AI}.
         \item L'\glslink{analista-dati}{Analista dati} osserva il dato relativo allo smistamento dei file.
     \end{enumerate}
 \end{description}
@@ -2914,10 +2914,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore}{Attore} Principale] \glslink{analista-dati}{Analista dati}
     \item[Pre-condizioni] L'\glslink{analista-dati}{Analista dati} si trova all'interno della \glslink{dashboard}{dashboard} delle metriche.
-    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza il tempo medio necessario all'\glslink{ai-intelligenza-artificiale}{AI} per completare l'analisi di un documento.
+    \item[Post-condizioni] L'\glslink{analista-dati}{Analista dati} visualizza il tempo medio necessario all'\glslink{intelligenza-artificiale-ai}{AI} per completare l'analisi di un documento.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema visualizza il tempo medio impiegato dall'\glslink{ai-intelligenza-artificiale}{AI} per elaborare interamente un documento caricato e restituirne l'analisi completa all'utente.
+        \item Il sistema visualizza il tempo medio impiegato dall'\glslink{intelligenza-artificiale-ai}{AI} per elaborare interamente un documento caricato e restituirne l'analisi completa all'utente.
         \item L'\glslink{analista-dati}{Analista dati} osserva l'indicatore delle prestazioni di sistema.
     \end{enumerate}
 \end{description}
@@ -2932,7 +2932,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 Questa sezione raccoglie i requisiti individuati a partire dall'analisi dei casi d'uso descritti nelle sezioni precedenti. I requisiti sono organizzati nelle seguenti categorie:
 \begin{itemize}
     \item \textbf{Requisiti funzionali} (RF): descrivono le funzionalità che il sistema deve offrire agli utenti;
-    \item \textbf{Requisiti di qualità} (\glslink{redis-queue-rq}{RQ}): definiscono gli standard di processo e di prodotto che il gruppo deve rispettare;
+    \item \textbf{Requisiti di qualità} (RQ): definiscono gli standard di processo e di prodotto che il gruppo deve rispettare;
     \item \textbf{Requisiti di vincolo} (RVC): specificano i limiti tecnologici entro cui il sistema deve essere sviluppato.
 \end{itemize}
 
@@ -2968,7 +2968,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     \endlastfoot
 
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo}} \\
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-assistant-generativo}{AI Assistant Generativo}}} \\
     \hline
     RF1-OB & Il sistema deve permettere al \glslink{redattore}{Redattore} di compilare il \glslink{prompt}{prompt} testuale descrittivo del contenuto da generare. & \hyperref[fig:uc-1.1]{UC-1.1} \\
     \hline
@@ -2986,9 +2986,9 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF8-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} qualora il campo \glslink{prompt}{prompt} sia assente o insufficiente prima dell'avvio della generazione. & \hyperref[fig:uc-1.e1]{UC-1.E1} \\
     \hline
-    RF9-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la generazione iniziale del contenuto tramite \glslink{ai-intelligenza-artificiale}{AI}. & \hyperref[fig:uc-1.e2]{UC-1.E2} \\
+    RF9-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la generazione iniziale del contenuto tramite \glslink{intelligenza-artificiale-ai}{AI}. & \hyperref[fig:uc-1.e2]{UC-1.E2} \\
     \hline
-    RF10-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la rigenerazione del contenuto tramite \glslink{ai-intelligenza-artificiale}{AI}. & \hyperref[fig:uc-2.7.e1]{UC-2.7.E1} \\
+    RF10-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} in caso di errore interno o \glslink{timeout}{timeout} durante la rigenerazione del contenuto tramite \glslink{intelligenza-artificiale-ai}{AI}. & \hyperref[fig:uc-2.7.e1]{UC-2.7.E1} \\
     \hline
     RF11-OB & Il sistema deve visualizzare un'anteprima della \glslink{bozza-draft}{bozza} generata. & \hyperref[fig:uc-2]{UC-2} \\
     \hline
@@ -3056,26 +3056,26 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF43-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} qualora il commento testuale superi il limite di caratteri consentito. & \hyperref[fig:uc-5.3.e1]{UC-5.3.E1} \\
     \hline
-    RF44-OB & Il sistema deve fornire all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di utilizzo del modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo. & \hyperref[fig:uc-6]{UC-6} \\
+    RF44-OB & Il sistema deve fornire all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di utilizzo del modulo \glslink{ai-assistant-generativo}{AI Assistant Generativo}. & \hyperref[fig:uc-6]{UC-6} \\
     \hline
-    RF45-OB & Il sistema deve visualizzare nella \glslink{dashboard}{dashboard} una panoramica dell'attività complessiva del modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant. & \hyperref[fig:uc-6.1]{UC-6.1} \\
+    RF45-OB & Il sistema deve visualizzare nella \glslink{dashboard}{dashboard} una panoramica dell'attività complessiva del modulo \glslink{intelligenza-artificiale-ai}{AI} Assistant. & \hyperref[fig:uc-6.1]{UC-6.1} \\
     \hline
-    RF46-OB & Il sistema deve visualizzare nella \glslink{dashboard}{dashboard} le statistiche di utilizzo del modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant. & \hyperref[fig:uc-6.2]{UC-6.2} \\
+    RF46-OB & Il sistema deve visualizzare nella \glslink{dashboard}{dashboard} le statistiche di utilizzo del modulo \glslink{intelligenza-artificiale-ai}{AI} Assistant. & \hyperref[fig:uc-6.2]{UC-6.2} \\
     \hline
     RF47-OB & Il sistema deve visualizzare nella \glslink{dashboard}{dashboard} il \glslink{rating}{rating} medio delle bozze generate. & \hyperref[fig:uc-6.3]{UC-6.3} \\
     \hline
     RF48-OB & Il sistema deve permettere all'\glslink{analista-dati}{Analista dati} di consultare i feedback testuali ricevuti dagli utenti. & \hyperref[fig:uc-6.4]{UC-6.4} \\
     \hline
-    RF49-OB & Il sistema deve permettere all'\glslink{analista-dati}{Analista dati} di applicare filtri dinamici \glslink{ai-intelligenza-artificiale}{ai} dati visualizzati nella \glslink{dashboard}{dashboard} analitica (es. intervallo di date, tono, stile). & \hyperref[fig:uc-6.5]{UC-6.5} \\
+    RF49-OB & Il sistema deve permettere all'\glslink{analista-dati}{Analista dati} di applicare filtri dinamici \glslink{intelligenza-artificiale-ai}{ai} dati visualizzati nella \glslink{dashboard}{dashboard} analitica (es. intervallo di date, tono, stile). & \hyperref[fig:uc-6.5]{UC-6.5} \\
     \hline
     RF50-OB & Il sistema deve permettere all'\glslink{analista-dati}{Analista dati} di esportare un report riepilogativo dei dati analitici in formato scaricabile. & \hyperref[fig:uc-6.6]{UC-6.6} \\
     \hline
     RF51-OB & Il sistema deve notificare l'\glslink{analista-dati}{Analista dati} qualora i dati non siano disponibili per l'esportazione del report. & \hyperref[fig:uc-6.6.e1]{UC-6.6.E1} \\
     \hline
 
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-co-pilot}{AI Co-Pilot} per Consulenti del Lavoro}} \\
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per Consulenti del Lavoro}}} \\
     \hline
-    RF52-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare singoli documenti o lotti nel repository dedicato. & \hyperref[fig:uc-7]{UC-7} \\
+    RF52-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare singoli documenti o lotti nel \glslink{repository}{repository} dedicato. & \hyperref[fig:uc-7]{UC-7} \\
     \hline
     RF53-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}, richiedendone conferma prima del caricamento. & \hyperref[fig:uc-7.e1]{UC-7.E1} \\
     \hline
@@ -3085,7 +3085,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF56-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-9]{UC-9} \\
     \hline
-    RF57-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde \glslink{ai-intelligenza-artificiale}{ai} criteri di visualizzazione dello storico. & \hyperref[fig:uc-9.e1]{UC-9.E1} \\
+    RF57-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde \glslink{intelligenza-artificiale-ai}{ai} criteri di visualizzazione dello storico. & \hyperref[fig:uc-9.e1]{UC-9.E1} \\
     \hline
     RF58-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite criteri multipli. & \hyperref[fig:uc-10]{UC-10} \\
     \hline
@@ -3093,7 +3093,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF60-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di invio. & \hyperref[fig:uc-12]{UC-12} \\
     \hline
-    RF61-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{ai-intelligenza-artificiale}{AI}. & \hyperref[fig:uc-13]{UC-13} \\
+    RF61-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{intelligenza-artificiale-ai}{AI}. & \hyperref[fig:uc-13]{UC-13} \\
     \hline
     RF62-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & \hyperref[fig:uc-14]{UC-14} \\
     \hline
@@ -3181,7 +3181,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF104-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-18.3]{UC-18.3} \\
     \hline
-    RF105-OB & Il sistema deve fornire all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di monitoraggio del modulo \glslink{ai-co-pilot}{AI Co-Pilot}. & \hyperref[fig:uc-19]{UC-19} \\
+    RF105-OB & Il sistema deve fornire all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di monitoraggio del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot. & \hyperref[fig:uc-19]{UC-19} \\
     \hline
     RF106-OB & Il sistema deve visualizzare nella \glslink{dashboard}{dashboard} del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-19.1]{UC-19.1} \\
     \hline
@@ -3205,7 +3205,7 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
 {\small
 \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{2.5cm}|p{9.5cm}|p{3.5cm}|}
-    \caption{Requisiti di qualità} \label{tab:redis-queue-rq} \\
+    \caption{Requisiti di qualità} \label{tab:rq} \\
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\
@@ -3221,25 +3221,25 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     \endlastfoot
 
-    RQ1-OB & Redazione dell'Analisi dei Requisiti comprensiva di casi d'uso modellati tramite UML. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ1-OB & Redazione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} comprensiva di casi d'uso modellati tramite UML. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ2-OB & Le pratiche di sviluppo devono essere conformi alle Norme di Progetto adottate dal gruppo. & Interna \\
+    RQ2-OB & Le pratiche di sviluppo devono essere conformi alle \glslink{norme-di-progetto}{Norme di Progetto} adottate dal gruppo. & Interna \\
     \hline
     RQ3-OB & Il prodotto deve superare tutti i test automatizzati con una copertura del codice (statement coverage) non inferiore all'80\%. & Interna \\
     \hline
-    RQ4-OB & La documentazione del codice sorgente deve rispettare le convenzioni definite nelle Norme di Progetto. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato}, Interna \\
+    RQ4-OB & La documentazione del codice sorgente deve rispettare le convenzioni definite nelle \glslink{norme-di-progetto}{Norme di Progetto}. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato}, Interna \\
     \hline
-    RQ5-OB & Il sorgente deve essere gestito tramite un sistema di versionamento, con istruzioni di setup incluse nel repository. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ5-OB & Il sorgente deve essere gestito tramite un sistema di versionamento, con istruzioni di setup incluse nel \glslink{repository}{repository}. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
     RQ6-OB & Produzione di un manuale utente per il prodotto sviluppato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ7-OB & Il modulo \glslink{ai-co-pilot}{AI Co-Pilot} deve raggiungere una \glslink{confidenza-confidence-score}{confidenza} media \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} $\geq$ 90\% e un'\glslink{accuratezza}{accuratezza} di mapping del codice fiscale $\geq$ 99\%; i documenti con \glslink{confidenza-confidence-score}{confidenza} inferiore alla soglia devono essere indirizzati alla revisione \glslink{human-in-the-loop}{human-in-the-loop}. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ7-OB & Il modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot deve raggiungere una \glslink{confidenza-confidence-score}{confidenza} media \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} $\geq$ 90\% e un'accuratezza di mapping del codice fiscale $\geq$ 99\%; i documenti con \glslink{confidenza-confidence-score}{confidenza} inferiore alla soglia devono essere indirizzati alla revisione \glslink{human-in-the-loop}{human-in-the-loop}. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ8-OB & La qualità percepita dei contenuti generati dal modulo \glslink{ai-intelligenza-artificiale}{AI} Assistant deve risultare $\geq$ 4/5 nel sistema di \glslink{rating}{rating} utenti integrato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ8-OB & La qualità percepita dei contenuti generati dal modulo \glslink{intelligenza-artificiale-ai}{AI} Assistant deve risultare $\geq$ 4/5 nel sistema di \glslink{rating}{rating} utenti integrato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
     RQ9-OB & L'interfaccia utente deve rimanere fluida e reattiva in ogni momento, anche durante l'elaborazione di operazioni in background. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ10-OB & Le operazioni computazionalmente onerose (classificazione \glslink{ai-intelligenza-artificiale}{AI}, generazione di contenuti, split documentale) devono essere eseguite in modo asincrono, senza bloccare l'interfaccia utente. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ10-OB & Le operazioni computazionalmente onerose (classificazione \glslink{intelligenza-artificiale-ai}{AI}, generazione di contenuti, split documentale) devono essere eseguite in modo asincrono, senza bloccare l'interfaccia utente. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
 
 \end{longtable}
@@ -3247,7 +3247,7 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
 \newpage
 \subsection{Requisiti di vincolo}
 
-I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema deve essere sviluppato, derivanti dalle scelte architetturali concordate con il \glslink{committente-o-proponente}{proponente} Eggon S.r.l.
+I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema deve essere sviluppato, derivanti dalle scelte architetturali concordate con il \glslink{committente-proponente}{proponente} Eggon S.r.l.
 
 \vspace{0.4cm}
 {\small
@@ -3271,58 +3271,58 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Controllo versione e qualità del codice}} \\
     \hline
-    RVC1-OB & Il codice sorgente deve essere versionato tramite \glslink{git}{Git} su un repository condiviso. & \glslink{committente-o-proponente}{Proponente} \\
+    RVC1-OB & Il codice sorgente deve essere versionato tramite \glslink{git}{Git} su un \glslink{repository}{repository} condiviso. & \glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC2-OB & Il codice sorgente deve rispettare le regole di formattazione definite da Laravel Pint. & Interna \\
+    RVC2-OB & Il codice sorgente deve rispettare le regole di formattazione definite da \glslink{laravel}{Laravel} Pint. & Interna \\
     \hline
     RVC3-OB & La suite di test automatizzati deve essere scritta con il framework \glslink{pest}{Pest}. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Backend}} \\
     \hline
-    RVC4-OB & Il backend deve essere sviluppato con il framework Laravel 12 su PHP 8.4. & Interna \\
+    RVC4-OB & Il backend deve essere sviluppato con il framework \glslink{laravel}{Laravel} 12 su PHP 8.4. & Interna \\
     \hline
     RVC5-OB & Il database relazionale del sistema deve essere \glslink{postgresql}{PostgreSQL}. & Interna \\
     \hline
-    RVC6-OB & Le code asincrone e la gestione dei job in background devono utilizzare Redis. & Interna \\
+    RVC6-OB & Le code asincrone e la gestione dei job in background devono utilizzare \glslink{redis}{Redis}. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Frontend}} \\
     \hline
-    RVC7-OB & Il frontend delle interfacce utente deve essere realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC7-OB & Il frontend delle interfacce utente deve essere realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Infrastruttura}} \\
     \hline
-    RVC8-OB & L'ambiente di sviluppo e di esecuzione del sistema deve essere containerizzato tramite Docker e orchestrato con Docker Compose. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC8-OB & L'ambiente di sviluppo e di esecuzione del sistema deve essere containerizzato tramite Docker e orchestrato con Docker Compose. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC9-OB & Il web server dell'applicazione deve essere Nginx. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC9-OB & Il web server dell'applicazione deve essere Nginx. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC10-OB & Lo storage dei file caricati nel sistema deve utilizzare \glslink{minio}{MinIO}, servizio compatibile con le API Amazon S3. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC10-OB & Lo storage dei file caricati nel sistema deve utilizzare \glslink{minio}{MinIO}, servizio compatibile con le API Amazon S3. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Modelli \glslink{ai-intelligenza-artificiale}{AI}}} \\
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Modelli \glslink{intelligenza-artificiale-ai}{AI}}} \\
     \hline
-    RVC11-OP & I modelli di \glslink{ai-intelligenza-artificiale}{intelligenza artificiale} generativa possono essere erogati tramite \glslink{amazon-bedrock}{Amazon Bedrock}. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC11-OP & I modelli di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale} generativa possono essere erogati tramite \glslink{amazon-bedrock}{Amazon Bedrock}. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Accessibilità}} \\
     \hline
-    RVC12-OB & Il sistema deve superare i controlli di accessibilità automatizzati eseguiti tramite lo strumento pa11y e axe sulle interfacce utente principali tramite Playwright su Chromium. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC12-OB & Il sistema deve superare i controlli di accessibilità automatizzati eseguiti tramite lo strumento pa11y e axe sulle interfacce utente principali tramite Playwright su Chromium. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Browser supportati}} \\
     \hline
-    RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Requisiti minimi di sistema}} \\
     \hline
-    RVC14-OB & L'ambiente di esecuzione deve essere containerizzato con Docker Compose. Lo stack comprende: Nginx, PHP-FPM 8.4, Laravel 12, \glslink{postgresql}{PostgreSQL} 16, Redis 7 e storage S3-compatible (\glslink{minio}{MinIO}). & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC14-OB & L'ambiente di esecuzione deve essere containerizzato con Docker Compose. Lo stack comprende: Nginx, PHP-FPM 8.4, \glslink{laravel}{Laravel} 12, \glslink{postgresql}{PostgreSQL} 16, \glslink{redis}{Redis} 7 e storage S3-compatible (\glslink{minio}{MinIO}). & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC15-OB & La configurazione minima del server richiede 2 vCPU, 4 GB di RAM e 10 GB di spazio disco, con porta HTTP esposta su 8080 o reverse proxy HTTPS. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC15-OB & La configurazione minima del server richiede 2 vCPU, 4 GB di RAM e 10 GB di spazio disco, con porta HTTP esposta su 8080 o reverse proxy HTTPS. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC16-OB & L'utilizzo delle funzionalità \glslink{ai-intelligenza-artificiale}{AI} richiede credenziali AWS valide e accesso outbound ad \glslink{amazon-bedrock}{Amazon Bedrock}. & Interna/\glslink{committente-o-proponente}{Proponente} \\
+    RVC16-OB & L'utilizzo delle funzionalità \glslink{intelligenza-artificiale-ai}{AI} richiede credenziali AWS valide e accesso outbound ad \glslink{amazon-bedrock}{Amazon Bedrock}. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
 \end{longtable}
@@ -3352,7 +3352,7 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     \endlastfoot
 
-    \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-intelligenza-artificiale}{AI} Assistant Generativo}} \\
+    \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-assistant-generativo}{AI Assistant Generativo}}} \\
     \hline
     UC-1 & RF7-OB \\
     \hline
@@ -3457,7 +3457,7 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     UC-6.6.E1 & RF51-OB \\
     \hline
 
-    \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-co-pilot}{AI Co-Pilot} per Consulenti del Lavoro}} \\
+    \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per Consulenti del Lavoro}}} \\
     \hline
     UC-7 & RF52-OB \\
     \hline
