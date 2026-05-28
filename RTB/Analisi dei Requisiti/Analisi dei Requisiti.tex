@@ -242,7 +242,7 @@ L'obiettivo del progetto è potenziare i processi HR e documentali dei consulent
 \begin{itemize}
     \item migliorare l'efficienza della comunicazione aziendale tramite generazione assistita di contenuti coerenti con tono e stile dell'organizzazione;
     \item ridurre tempi di gestione ed errori nella classificazione, suddivisione e distribuzione dei documenti massivi destinati ai dipendenti;
-    \item fornire workflow pienamente tracciabili, auditabili e conformi alle normative (sicurezza, ruoli, GDPR);
+    \item fornire workflow tracciabili e conformi alle normative vigenti (sicurezza, GDPR);
     \item abilitare un'evoluzione data-driven dei moduli AI attraverso metriche di utilizzo, qualità e performance;
     \item mantenere un'architettura modulare e scalabile che possa in futuro interoperare con l'ecosistema NEXUM senza dipenderne.
 \end{itemize}
@@ -270,9 +270,7 @@ Il prodotto è articolato in due macro-componenti funzionali, supportate da serv
     \item Split automatico dei documenti multi-destinatario con tracciabilità tra originale e copie atomiche.
     \item Revisione human-in-the-loop per casi a bassa confidenza, con log delle correzioni.
     \item Composizione assistita della lista di dispaccio e dei messaggi di invio, compresi template riutilizzabili.
-    \item Tracciamento dell'invio, delle prove di consegna e delle letture, con gestione di retry e anomalie.
-    \item Ricerca avanzata, audit trail e policy di conservazione configurabili.
-    \item Gestione di ruoli, permessi e policy di sicurezza dedicate alla piattaforma.
+    \item Tracciamento dell'invio e delle letture, con notifica delle anomalie.
 \end{itemize}
 
 \paragraph{Funzionalità trasversali}
@@ -282,13 +280,24 @@ Il prodotto è articolato in due macro-componenti funzionali, supportate da serv
     \item Configurazione dei parametri di qualità (soglie di confidenza, regole di split, template di messaggio).
 \end{itemize}
 
+\subsection{Possibili estensioni future}
+
+Le seguenti funzionalità sono state identificate come potenzialmente rilevanti per il sistema ma esulano dallo scope dell'attuale iterazione di sviluppo. Potranno essere valutate in versioni successive del prodotto:
+\begin{itemize}
+    \item \textbf{Prove di consegna e tracciamento letture}: visualizzazione dello stato di consegna dei documenti inviati e conferma di lettura da parte dei destinatari.
+    \item \textbf{Gestione retry e anomalie di invio}: meccanismi automatici di ritentativo in caso di fallimento dell'invio, con log delle anomalie.
+    \item \textbf{Audit trail}: registro navigabile delle operazioni effettuate sul sistema, a supporto di attività di controllo e conformità normativa.
+    \item \textbf{Policy di conservazione configurabili}: regole personalizzabili per la durata di conservazione dei documenti e dei log operativi.
+    \item \textbf{Gestione avanzata di ruoli, permessi e policy di sicurezza}: configurazione granulare dei profili utente, dei privilegi di accesso e delle policy di sicurezza dedicate alla piattaforma.
+\end{itemize}
+
 \subsection{Utenza di riferimento}
 
 Il prodotto si rivolge a più categorie di utenti, ciascuna con responsabilità specifiche nel ciclo di vita dei contenuti e dei documenti.
 \begin{itemize}
     \item \textbf{Amministratori e HR Manager aziendali}: utilizzano l'AI Assistant Generativo per creare, revisionare e pubblicare comunicazioni interne coerenti con le linee guida editoriali.
     \item \textbf{Operatori e referenti degli studi dei Consulenti del Lavoro}: presidiano l'AI Co-Pilot per caricare, riconoscere, suddividere e distribuire documenti ai destinatari corretti.
-    \item \textbf{Figure di controllo e governance}: monitorano metriche, audit trail, policy e qualità dei moduli AI per garantire conformità e miglioramento continuo.
+    \item \textbf{Figure di controllo e governance}: monitorano metriche e qualità dei moduli AI per garantire conformità e miglioramento continuo.
 \end{itemize}
 
 \section{Casi d'uso}
@@ -328,7 +337,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth]{diagrammi_use_case/UC-1.png}
+    \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-1.png}
     \caption{Diagramma del caso d'uso UC-1: Generazione del contenuto tramite AI}
     \label{fig:uc-1}
 \end{figure}
@@ -344,28 +353,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Post-condizioni] Il sistema mostra l'anteprima del contenuto generato (comprendente titolo, testo e immagine di copertina) e abilita le funzionalità di revisione.
     
-    \item[Scenario Principale] 
+    \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-      \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro.
-        \item Il Redattore svuota i campi di configurazione (\textbf{UC-1.5}).
+        \item Il Redattore accede all'interfaccia dell'AI Assistant Generativo, dove il sistema rende visibile l'area di lavoro.
         \item Il Redattore compila il campo relativo al prompt testuale (\textbf{UC-1.1}).
         \item Il Redattore imposta il tono desiderato (\textbf{UC-1.2}).
         \item Il Redattore imposta lo stile editoriale (\textbf{UC-1.3}).
         \item Il Redattore seleziona la lunghezza desiderata per la bozza (\textbf{UC-1.6}).
-        \item Il Redattore salva la configurazione inserita (\textbf{UC-1.4}).
         \item Il Redattore conferma l'avvio della generazione cliccando sul comando "Genera bozza".
         \item Il sistema visualizza a schermo l'anteprima del contenuto generato, comprendente titolo, testo e immagine di copertina (\textbf{UC-2}).
-        \end{enumerate}
-    \item[Scenari Alternativi] 
+    \end{enumerate}
+    \item[Scenari Alternativi]
      \begin{itemize}[leftmargin=*, nosep]
-         \item \textbf{7a/8a. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
-        \item \textbf{8b. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
+         \item \textbf{1a. Il Redattore decide di svuotare i campi prima di iniziare}: viene eseguito \textbf{UC-1.5}.
+         \item \textbf{5a. Il Redattore decide di salvare la configurazione inserita}: viene eseguito \textbf{UC-1.4}.
+         \item \textbf{6a. Prompt mancante o insufficiente}: Il sistema rileva che il campo prompt è vuoto o il testo non è sufficiente; viene eseguito \textbf{UC-1.E1}.
+         \item \textbf{6b. Fallimento modulo AI}: Il sistema rileva un errore di timeout o di rete dal motore di generazione; viene eseguito \textbf{UC-1.E2}.
     \end{itemize}
 
-    \item[Relazioni] 
+    \item[Relazioni]
      \begin{itemize}[leftmargin=*, nosep]
-         \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3, UC-1.4, UC-1.5, UC-1.6 .
-         \item \textbf{Estensioni}: UC-1.E1, UC-1.E2.
+         \item \textbf{Inclusioni}: UC-1.1, UC-1.2, UC-1.3, UC-1.6.
+         \item \textbf{Estensioni}: UC-1.4, UC-1.5, UC-1.E1, UC-1.E2.
      \end{itemize}
 
 \end{description}
@@ -3188,7 +3197,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
 
 \end{longtable}
 }
-
+\newpage
 \subsection{Requisiti di qualità}
 
 I requisiti di qualità definiscono gli standard di processo e di prodotto che il gruppo deve rispettare durante lo sviluppo. Derivano principalmente dal \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato C5} e dalle norme interne adottate dal gruppo.
@@ -3217,7 +3226,7 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     RQ2-OB & Le pratiche di sviluppo devono essere conformi alle Norme di Progetto adottate dal gruppo. & Interna \\
     \hline
-    RQ3-OB & Il prodotto deve superare tutti i test automatizzati con una copertura del codice (statement coverage) non inferiore all'80\%. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ3-OB & Il prodotto deve superare tutti i test automatizzati con una copertura del codice (statement coverage) non inferiore all'80\%. & Interna \\
     \hline
     RQ4-OB & La documentazione del codice sorgente deve rispettare le convenzioni definite nelle Norme di Progetto. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato}, Interna \\
     \hline
@@ -3225,10 +3234,18 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     RQ6-OB & Produzione di un manuale utente per il prodotto sviluppato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
+    RQ7-OB & Il modulo AI Co-Pilot deve raggiungere una confidenza media OCR $\geq$ 90\% e un'accuratezza di mapping del codice fiscale $\geq$ 99\%; i documenti con confidenza inferiore alla soglia devono essere indirizzati alla revisione human-in-the-loop. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    \hline
+    RQ8-OB & La qualità percepita dei contenuti generati dal modulo AI Assistant deve risultare $\geq$ 4/5 nel sistema di rating utenti integrato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    \hline
+    RQ9-OB & L'interfaccia utente deve rimanere fluida e reattiva in ogni momento, anche durante l'elaborazione di operazioni in background. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    \hline
+    RQ10-OB & Le operazioni computazionalmente onerose (classificazione AI, generazione di contenuti, split documentale) devono essere eseguite in modo asincrono, senza bloccare l'interfaccia utente. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    \hline
 
 \end{longtable}
 }
-
+\newpage
 \subsection{Requisiti di vincolo}
 
 I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema deve essere sviluppato, derivanti dalle scelte architetturali concordate con il proponente Eggon S.r.l.
@@ -3297,7 +3314,7 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Browser supportati}} \\
     \hline
-    RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle ultime due versioni stabili: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
+    RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Requisiti minimi di sistema}} \\
@@ -3564,7 +3581,7 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
 
 \end{longtable}
 }
-
+\newpage
 \subsection{Riepilogo dei requisiti}
 
 La tabella seguente riepiloga il numero di requisiti individuati per categoria e grado di obbligatorietà.
@@ -3589,13 +3606,13 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     \endlastfoot
 
-    Funzionali & 96 & 13 & 109 \\
+    Funzionali & 97 & 13 & 110 \\
     \hline
-    Di qualità & 6 & 0 & 6 \\
+    Di qualità & 10 & 0 & 10 \\
     \hline
     Di vincolo & 15 & 1 & 16 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{117} & \textbf{14} & \textbf{131} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{122} & \textbf{14} & \textbf{136} \\
 
 \end{longtable}
 }
