@@ -1,0 +1,1169 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{longtable}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Norme di Progetto}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Norme di Progetto}
+
+    \setcounter{secnumdepth}{4}
+    \setcounter{tocdepth}{4}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Norme di Progetto}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Versione    & 1.0.0 \\
+            Redattori   & Eleonora Bellet, Diego Belluz, Alex Oloni \\
+            Verificatori& V.Y. Kaneda Fernandes, Eleonora Bellet, Angela Maule \\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 28/05/2026 \\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+{\footnotesize
+    \setlength{\LTleft}{\fill}
+    \setlength{\LTright}{\fill}
+    \rowcolors{2}{gray!8}{white}
+    \begin{longtable}{|p{1.1cm}|p{2.0cm}|p{4.3cm}|p{2.8cm}|p{2.0cm}|p{2.0cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        \endfirsthead
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        \hline
+        \endhead
+        \hline
+        \endfoot
+        \hline
+        \endlastfoot
+        1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Angelica Gastaldello \\
+        \hline
+        0.14.0 & 20/05/2026 & Aggiunta sezione metriche & Diego Belluz & V.Y. Kaneda Fernandes & - \\
+        \hline 
+        0.13.0 & 18/05/2026 & Aggiunta sezione qualità del software & Diego Belluz & Eleonora Bellet & - \\
+        \hline 
+        0.12.0 & 8/05/2026 & Struttura dei diari di bordo & Diego Belluz & Eleonora Bellet & - \\
+        \hline
+        0.11.2 & 7/05/2026 & Corretti errori di sintassi & Diego Belluz & V.Y. Kaneda Fernandes & - \\
+        \hline 
+        0.11.1 & 22/04/2026 & Aggiornate e corrette alcune sezioni delle norme & Alex Oloni & Eleonora Bellet & - \\
+        \hline 
+        0.11.0 & 19/04/2026 & Tracciamento delle azioni, comunicazione, riunioni & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+        \hline
+        0.10.0 & 18/04/2026 & Processi Organizzativi (Definizione e scopo, gestione degli sprint, ruoli) & Alex Oloni & Eleonora Bellet & - \\
+        \hline 
+        0.9.0 & 17/04/2026 & Aggiunta sezione Validazione e Processo di Validazione & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+        \hline 
+        0.8.0 & 16/04/2026 & Controllo della configurazione, Stato della configurazione, Attività di Verifica, Analisi Statica & Alex Oloni & Eleonora Bellet & - \\
+        \hline
+        0.7.0 & 14/04/2026 & Denominazione dei documenti, Produzione e Gestione della configurazione & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+        \hline 
+        0.6.0 & 11/04/2026 & Processi di supporto (scopo, strumenti utilizzati, documenti prodotti, struttura dei documenti) & Diego Belluz & Angela Maule & - \\
+        \hline
+        0.5.0 & 9/04/2026 & Processi di sviluppo & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+        \hline
+        0.4.0 & 8/04/2026 & Processi di fornitura & Diego Belluz & Angela Maule & - \\
+        \hline
+        0.3.0 & 4/04/2026 & Architettura dei processi & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+        \hline
+        0.2.0 & 31/03/2026 & Scopo del documento e scopo del prodotto & Diego Belluz & Angela Maule & - \\
+        \hline
+        0.1.0 & 31/03/2026 & Struttura del documento & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+    \end{longtable}
+}
+\newpage
+
+\begin{center} 
+    {\Large \textbf{Indice}}
+\end{center}
+
+\vspace{0.6cm}
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{4}
+\fancyfoot[R]{Norme di Progetto\hspace{0.8em}\thepage}
+
+\section{Introduzione}
+
+\subsection{Scopo del documento}
+Il presente documento ha l'obiettivo di definire e regolamentare il \textit{Way of Working (WoW)} adottato dal gruppo \textit{aLittleByte} per la realizzazione del progetto didattico. Al suo interno sono specificate le procedure operative, gli strumenti adottati e le regole di collaborazione interne al team, al fine di garantire un approccio strutturato, efficiente e tracciabile per l'intero ciclo di vita del progetto Nexum. 
+
+La stesura del seguente documento segue un approccio incrementale: le norme qui descritte verranno costantemente aggiornate e affinate nel tempo, supportando il miglioramento continuo dei processi organizzativi, di sviluppo e di supporto del gruppo.
+
+
+\subsection{Scopo del prodotto}
+Il prodotto da realizzare consiste in una piattaforma software \textit{stand-alone} sviluppata su richiesta dell'azienda proponente \textit{Eggon}, che si affianca a \textit{Nexum} — piattaforma digitale dedicata alla comunicazione interna e alla gestione HR — comunicando con essa tramite API. Il sistema è architetturalmente indipendente da Nexum e comprende due moduli basati sull'Intelligenza Artificiale:
+\begin{itemize}
+    \item \textbf{AI Assistant Generativo:} Un modulo dedicato agli utenti amministrativi (dashboard) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un prompt, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
+    \item \textbf{AI Co-Pilot per Consulenti del Lavoro (CdL):} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di OCR ed \textbf{Entity Resolution}, e automatizzare lo smistamento e il dispaccio massivo.
+\end{itemize}
+
+L'obiettivo finale è migliorare l'efficienza dei processi HR e semplificare l'interoperabilità tra le aziende e gli studi dei Consulenti del Lavoro. Per fare ciò il gruppo aLittleByte si impegna a completare il progetto entro la data fissata 10 Settembre 2026, con un costo totale di budget di 12.575 €. 
+
+Per ulteriori informazioni si rimanda al documento Analisi dei Requisiti. 
+
+
+\subsection{Glossario}
+
+Al fine di prevenire qualsiasi ambiguità linguistica o concettuale tra i membri del team e gli stakeholder, è stato redatto un documento separato denominato Glossario. Esso contiene la spiegazione puntuale di tutti i termini tecnici, di dominio (es. LLM, OCR, Dispaccio, ecc.) e degli acronimi utilizzati all'interno della documentazione di progetto.
+
+\newpage
+\subsection{Riferimenti}
+
+\subsubsection{Normativi}
+\begin{itemize}
+    \item \textbf{Regolamento del Progetto Didattico:} Anno accademico 2025/2026, Corso di Ingegneria del Software, Università di Padova
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}
+    \end{itemize}
+    
+    \item \textbf{Capitolato d'appalto C5:} Nexum - Eggon S.r.l.
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
+    \end{itemize}
+    
+\end{itemize}
+
+\subsubsection{Informativi}
+\begin{itemize}
+    \item \textbf{Glossario:} Documento interno del progetto contenente la definizione dei termini tecnici, di dominio e degli acronimi utilizzati nella documentazione.
+\end{itemize}
+\section{Architettura dei processi}
+Per la realizzazione di un prodotto di qualità che soddisfi le esigenze del cliente e degli utenti, il gruppo aLittleByte ha deciso di adottare un'architettura specifica e suddividere i vari processi di costruzione del software in quattro macro-aree:
+\begin{itemize}
+    \item Processi primari
+    \item Processi di supporto
+    \item Processi organizzativi
+    \item Validazione
+\end{itemize}
+
+\subsection{Processi Primari}
+In questa sezione viene descritto come nasce il software. I processi primari indicano tutte quelle attività che sono direttamente coinvolte nella creazione del prodotto software, è possibile classificare i processi primari in:
+\begin{itemize}
+    \item Processi di fornitura 
+    \item Processi di sviluppo
+\end{itemize}
+
+\subsubsection{Processi di fornitura}
+I processi di fornitura comprendono tutte le attività preliminari che permettono di avviare lo sviluppo del progetto, in particolar modo la pianificazione: suddivisione del lavoro in fasi e milestone come \textit{RTB} e \textit{PB}, l’analisi: come vengono analizzati i capitolati, la stima: come si stimano vari costi e stime.
+
+\paragraph{Scopo e obiettivi}
+Il processo di fornitura definisce le procedure e le attività che il gruppo mette in atto per stabilire un accordo operativo con la proponente (\textit{Eggon}). L'obiettivo è trasformare le necessità espresse nel capitolato C5 in un insieme di requisiti tecnici e vincoli contrattuali ben definiti. In questa fase si stabiliscono le basi metodologiche del \textit{"Way of Working''} del team, garantendo che ogni attività sia pianificata, tracciabile e verificabile.
+
+\paragraph{Attività Operative}
+Il team si impegna nelle seguenti attività chiave:
+\begin{itemize}
+    \item \textbf{Analisi e Valutazione del Capitolato:} Studio critico della proposta C5 per identificare rischi tecnologici, opportunità di apprendimento e coerenza con le competenze del team.
+    \item \textbf{Stima e Pianificazione:} Definizione del budget (12.575€) e delle scadenze temporali (consegna finale entro il 10 settembre 2026), con la suddivisione del lavoro in cicli iterativi (Sprint).
+    \item \textbf{Negoziazione e Definizione dell’MVP:} Collaborazione con \textit{Eggon} per identificare il \textit{Minimum Viable Product}, garantendo che le funzionalità core (AI Assistant e Co-Pilot) siano prioritizzate correttamente.
+    \item \textbf{Accertamento della Qualità:} Definizione degli obiettivi di qualità per i processi e per il prodotto finale.
+\end{itemize}
+
+\paragraph{Documentazione Prodotta (Core della Fornitura)}
+La documentazione non è solo un onere burocratico, ma lo strumento principale per garantire la trasparenza verso i committenti e la coerenza interna. Di seguito sono elencati i documenti redatti e mantenuti dal team:
+\begin{itemize}
+    \item \textbf{Analisi dei Requisiti:} Documento cardine che formalizza le funzionalità del sistema. Include la modellazione degli attori (Redattore, Analista dati, Consulente del lavoro), la descrizione dei casi d'uso (UC) e la classificazione dei requisiti funzionali, qualitativi e di vincolo.
+    \item \textbf{Norme di Progetto:} Definiscono il regolamento interno del gruppo. Contengono gli standard di codifica, le procedure di gestione dei ticket su GitHub, le convenzioni di naming e le metodologie di lavoro adottate.
+    \item \textbf{Piano di Progetto:} Strumento di gestione manageriale che descrive l'allocazione delle risorse, l'analisi dei rischi e il preventivo economico. Viene aggiornato periodicamente con il consuntivo delle ore per monitorare lo stato del budget.
+    \item \textbf{Piano di Qualifica:} Specifica la strategia per garantire che il software sia privo di difetti critici. Definisce le metriche (es. \textit{Code Coverage} $\geq$ 80\%) e i test (unità, integrazione, sistema) necessari alla validazione.
+    \item \textbf{Glossario:} Raccolta di termini tecnici e acronimi per eliminare ambiguità terminologiche tra sviluppatori, committenti e utenti finali.
+    \item \textbf{Specifica Tecnica:} Documento di design che descrive l'architettura di sistema (modello C4), i diagrammi delle classi UML e i design pattern scelti per l'implementazione.
+    \item \textbf{Manuale Utente:}  Guida operativa destinata agli utenti finali per facilitare l'onboarding sulla piattaforma Nexum e spiegare l'utilizzo degli assistenti AI.
+    \item \textbf{Lettera di Candidatura e Presentazione:}  Documenti formali per l'ufficializzazione della partecipazione all'appalto e per la consegna dei vari rilasci (RTB e PB).
+    \item \textbf{Verbali (Interni ed Esterni):} Report che tracciano l'ordine del giorno, le discussioni e le decisioni prese durante le riunioni di team o con i referenti di Eggon.
+\end{itemize}
+
+\paragraph{Comunicazione e Strumenti di Supporto}
+Per la gestione dei processi di fornitura, il gruppo si avvale di:
+
+\begin{itemize}
+    \item \textbf{GitHub:} Per il versionamento della documentazione tramite \textit{Pull Request} e per l'integrazione con il codice preesistente.
+    \item \textbf{Comunicazione Ufficiale:} L'interfaccia con Eggon avviene tramite incontri bisettimanali e via email/Telegram per comunicazioni rapide.
+    \item \textbf{Tracciamento:} Ogni decisione rilevante viene convertita in una \textit{issue} su GitHub per garantirne l'assegnazione e il completamento.
+\end{itemize}
+
+\subsubsection{Processi di Sviluppo}
+Questa sezione codifica l'insieme delle pratiche ingegneristiche e operative indispensabili per costruire materialmente la piattaforma software stand-alone richiesta dal capitolato. L'obiettivo è tradurre i requisiti concordati in un applicativo funzionante e architetturalmente indipendente dal sistema originario (\textit{Nexum}), passando attraverso fasi rigorose di design, programmazione e collaudo.
+
+\paragraph{Attività Operative e Ciclo di Vita}
+Il ciclo di sviluppo per l'integrazione dei modelli di Intelligenza Artificiale richiede una sequenza logica di operazioni ingegneristiche specifiche:
+\begin{itemize}
+    \item \textbf{Analisi e Modellazione del Dominio:} Studio sistemistico per separare nettamente i flussi di lavoro aziendali (creazione contenuti) da quelli consulenziali (gestione documentale massiva).
+    \item \textbf{Progettazione Architetturale:} Definizione di un'infrastruttura \textit{stand-alone} che comunichi in modo asincrono con i moduli esterni di Intelligenza Artificiale (AI Post Generator e AI Analyst), per non bloccare l'interfaccia utente durante le operazioni \textit{time-consuming}.
+    \item \textbf{Sviluppo Modulare:} L'applicativo viene frammentato in macro-componenti indipendenti (es. modulo di rating/feedback, modulo di split documentale, dashboard analitica).
+    \item \textbf{Validazione "Human-in-the-loop":} Implementazione di flussi di sviluppo che prevedano sempre un passaggio di validazione umana per le operazioni AI a bassa confidenza (es. revisione dei destinatari estratti o modifica del testo generato).
+    \item \textbf{Collaudo e Rilascio:} Esecuzione di test formali sulle metriche di qualità (es. tempi di risposta, tasso di successo dell'AI) prima dell'approvazione finale.
+\end{itemize}
+
+\paragraph{Analisi e Tracciamento dei Requisiti}
+Fase nevralgica per la definizione del perimetro del prodotto. Per garantire chiarezza e tracciabilità, il team adotta standard di modellazione e nomenclatura precisi per attori e casi d'uso.
+
+\begin{itemize}
+    \item \textbf{Modellazione degli Attori:} Il sistema riconosce due categorie di attori per separare le responsabilità di business da quelle computazionali:
+    \begin{itemize}
+        \item \textit{Utenti Operativi (Primari):} Utenti umani che innescano le operazioni (Amministratore, Redattore, Analista dati, Consulente del lavoro).
+        \item \textit{Moduli Esterni (Secondari):} Entità di sistema chiamate in causa per completare l'operazione (AI Post Generator, AI Analyst).
+    \end{itemize}
+    \item \textbf{Nomenclatura dei Casi d'Uso (Use Case):} Il team adotta una convenzione basata sui prefissi per separare logicamente le aree dell'applicativo:
+    \begin{itemize}
+        \item UC-[Numero] identifica i casi d'uso relativi all'\textbf{AI Assistant Generativo} (es. \textit{UC-1}).
+        \item UC-CO-[Numero] identifica i casi d'uso relativi all'\textbf{AI Co-Pilot} (es. \textit{UC-CO-1}).
+        \item {} [Caso Padre].[Sottocaso] indica le scomposizioni logiche (es. \textit{UC-1.1} per un sottocaso di \textit{UC-1}).
+    \end{itemize}
+    \item \textbf{Struttura Descrittiva:} Ogni caso d'uso documentato deve presentare una scheda strutturata contenente: Attori coinvolti, Pre e Post-condizioni, Scenario Principale (sequenza ottimale numerata), Scenari Alternativi o di Errore (identificati con codici specifici come UC-1.E1), e Relazioni (Inclusioni, Estensioni).
+\end{itemize}
+
+\paragraph{Progettazione Architetturale}
+La progettazione traduce le specifiche in un'infrastruttura flessibile e scalabile.
+\begin{itemize}
+    \item \textbf{Disaccoppiamento e Asincronia:} Data la natura \textit{data-driven} e i tempi di latenza dell'AI, l'architettura deve garantire l'esecuzione asincrona delle operazioni pesanti (es. elaborazione OCR o entity resolution).
+    \item \textbf{Modellazione Visiva:} La struttura del codice viene rappresentata tramite diagrammi UML per la definizione dei casi d'uso e la struttura statica. Si adotta inoltre un approccio a componenti per isolare le funzionalità trasversali (raccolta log, gestione ruoli, telemetria).
+
+\end{itemize}
+
+\paragraph{Codifica}
+
+\subparagraph{Pattern Architetturali}
+\begin{itemize}
+    \item \textbf{Modularità e Riuso:} Suddivisione del codice in moduli con responsabilità singola (es. libreria dei prompt separata dal motore di generazione). Applicazione di pattern architetturali per evitare dipendenze dirette e favorire la manutenibilità.
+    \item \textbf{Gestione degli Errori e Resilienza:} Implementazione di meccanismi robusti per la gestione di anomalie, retry di rete e fallback nel caso in cui i servizi AI esterni non siano temporaneamente disponibili (come mappato negli scenari alternativi dei casi d'uso).
+    \item \textbf{Tracciabilità e Qualità:} Versionamento continuo del codice, revisione tra pari (\textit{Code Review}) e test automatizzati per validare non solo le logiche applicative, ma anche l'integrazione corretta dei parametri (tono, stile, metadati) passati ai core di intelligenza artificiale.
+\end{itemize}
+
+\subparagraph{Standard Stilistici}
+Il codice PHP prodotto deve essere conforme allo standard \textbf{PSR-12} (\textit{PHP Standards Recommendations 12}), adottato ufficialmente dalla comunità PHP e seguito nativamente da Laravel 12. PSR-12 definisce regole precise su indentazione (4 spazi), apertura delle parentesi, dichiarazione dei tipi e struttura delle classi, garantendo uniformità in tutto il codebase indipendentemente dal membro che scrive il codice.
+
+\subparagraph{Convenzioni di Naming nel Codice}
+Le convenzioni seguono gli standard Laravel e PSR-12:
+\begin{itemize}
+    \item \textbf{Classi:} PascalCase — es. \texttt{UserController}, \texttt{DocumentService}
+    \item \textbf{Metodi e funzioni:} camelCase — es. \texttt{getDocumentById()}, \texttt{processInvoice()}
+    \item \textbf{Variabili:} camelCase — es. \texttt{\$userId}, \texttt{\$documentPath}
+    \item \textbf{Costanti:} UPPER\_SNAKE\_CASE — es. \texttt{MAX\_RETRY\_COUNT}
+    \item \textbf{Tabelle e colonne DB:} snake\_case, tabelle al plurale — es. \texttt{processed\_documents}, \texttt{document\_type}
+    \item \textbf{File Blade:} kebab-case — es. \texttt{invoice-list.blade.php}
+    \item \textbf{Variabili d'ambiente:} UPPER\_SNAKE\_CASE — es. \texttt{MINIO\_BUCKET}, \texttt{DB\_CONNECTION}
+\end{itemize}
+
+\subparagraph{Strumenti di Linting e Formattazione}
+\begin{itemize}
+    \item \textbf{Laravel Pint:} Tool ufficiale di formattazione per Laravel, basato su PHP CS Fixer. Applica automaticamente PSR-12 al codebase. Deve essere eseguito prima di ogni commit; il codice non conforme non può essere integrato nel branch principale.
+    \item \textbf{Larastan:} Estensione di PHPStan ottimizzata per Laravel. Esegue analisi statica del codice per rilevare errori di tipo, chiamate a metodi inesistenti e potenziali bug a runtime, senza eseguire il codice. Il livello minimo di analisi adottato è il \textbf{livello 5}.
+\end{itemize}
+
+\subsection{Processi di supporto}
+I processi di supporto comprendono tutte le attività, i metodi e gli strumenti che non sono direttamente legati alla scrittura del codice, ma che risultano indispensabili per sostenere i processi primari di sviluppo e fornitura. Per il nostro team, definire questi processi significa stabilire delle regole di base condivise, necessarie per collaborare in modo efficiente ed evitare disorganizzazione durante le varie fasi del progetto didattico. Ciò ci permette, a livello pratico, di garantire la tracciabilità di ogni decisione tecnica e organizzativa presa dal gruppo e di assicurare che tutto il materiale prodotto (documenti, codice, issue) sia costantemente coerente, aggiornato e facilmente accessibile a tutti i membri del team e al committente.
+
+\subsubsection{Documentazione}
+
+\paragraph{Scopo}
+Lo scopo del processo di documentazione è stabilire regole e metodologie pratiche per la creazione, la gestione e l'aggiornamento continuo dei documenti di progetto. Per il nostro gruppo, impegnarci a produrre materiale che si mantenga costantemente chiaro, accessibile e aggiornato ci permette di agevolare e rendere trasparente la comunicazione interna tra i membri del gruppo. Inoltre, una repository ben strutturata facilita notevolmente il confronto e l'allineamento con gli stakeholder esterni e l'azienda \textit{Eggon}. Questo approccio rigoroso garantisce un'accurata tracciabilità delle decisioni organizzative e progettuali prese nel corso dello sviluppo, assicurando al contempo che l'intero progetto venga gestito in piena conformità agli standard di qualità che ci siamo prefissati di rispettare.
+
+\paragraph{Strumenti Utilizzati}
+Per gestire in modo efficiente la stesura, la revisione, l'automazione e il versionamento della documentazione, il gruppo \textit{aLittleByte} ha scelto di utilizzare i seguenti strumenti:
+\begin{itemize}
+    \item \textbf{GitHub:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e pull request per garantire che ogni modifica venga revisionata in modo asincrono.
+    \item \textbf{GitHub Projects:} Utilizzato come strumento principale di project management. Il team gestisce il flusso di lavoro tramite una board Kanban dedicata (''aLittleByte - Dashboard'') che permette di visualizzare lo stato di tutte le attività.
+    \item \textbf{GitHub Actions e GitHub Pages:} Impiegati per l'automazione (Continuous Integration/Continuous Deployment) e per la pubblicazione automatica e trasparente del sito web documentale.
+    \item \textbf{LaTeX:} Scelto per la stesura di tutti i documenti tecnici e formali, garantendo un'impaginazione professionale.
+    \item \textbf{Python:} Linguaggio di scripting utilizzato per automatizzare task specifici, come la generazione dinamica della struttura del sito web tramite script proprietari.
+\end{itemize}
+
+\paragraph{Documenti Prodotti}
+I documenti ufficiali previsti per il progetto, i quali saranno costantemente aggiornati e mantenuti sotto controllo di versione all'interno del repository, sono i seguenti: 
+\begin{itemize}
+    \item \textbf{Analisi dei requisiti:} Il documento in cui vengono estrapolati, classificati e descritti tutti i requisiti del sistema (funzionali e non), i casi d'uso individuati e i rispettivi criteri per l'accettazione finale.
+    \item \textbf{Norme di progetto:} Il documento in esame, avente lo scopo di codificare il nostro Way of Working, illustrando nel dettaglio le metodologie operative, gli strumenti scelti e le regole di collaborazione interne al team.
+    \item \textbf{Piano di progetto:} Il piano strategico che scandisce le tempistiche di sviluppo, regola l'allocazione delle risorse umane ed economiche e pianifica le varie fasi di avanzamento del lavoro.
+    \item \textbf{Piano di qualifica:} Il documento volto a fissare le direttive per l'assicurazione della qualità. Al suo interno vengono delineate le metriche di valutazione e le procedure di testing, con l'obiettivo specifico di garantire una copertura del codice non inferiore all'80\%.
+    \item \textbf{Glossario:} Uno strumento di supporto testuale che definisce in modo inequivocabile la terminologia specifica, tecnica e di dominio, oltre agli acronimi impiegati in tutta la documentazione.
+    \item \textbf{Lettera di Presentazione:} La documentazione formale di accompagnamento, debitamente firmata, necessaria per certificare e presentare ufficialmente il RTB al committente.
+    \item \textbf{Verbali:} I Verbali (interni ed esterni) tengono traccia degli incontri e delle decisioni sia tra i membri del gruppo e che tra il gruppo e la proponente.
+\end{itemize}
+
+\paragraph{Struttura dei documenti}
+Tutti i documenti (eccetto i verbali e i diari di bordo) hanno la seguente struttura generale: 
+\begin{itemize}
+    \item \textbf{Copertina:} Riporta il logo, l'indirizzo email del gruppo, il titolo del documento, il nome del gruppo e i metadati essenziali (redattori, verificatori, destinatari e data).
+    \item \textbf{Registro delle modifiche:} Tabella posta all'inizio del file per il tracciamento delle versioni. Per ogni aggiornamento indica: numero di versione, data, descrizione della modifica, redattore e approvatore/verificatore.
+    \item \textbf{Indice:} Elenco gerarchico dei contenuti con rinvii numerici alle pagine, per favorire una navigazione rapida e mirata.
+    \item \textbf{Introduzione:} Contiene lo scopo del documento, glossario e riferimenti. 
+    \item \textbf{Contenuto:} Corpo centrale del testo organizzato in sezioni e sottosezioni numerate (es. 1, 1.1), redatto in stile chiaro e esecutivo.
+\end{itemize}
+
+\paragraph{Struttura dei verbali}\label{sec:documentazione}
+\begin{itemize}
+    \item \textbf{Copertina:} Riporta gli elementi visivi e identificativi del gruppo, il titolo (specificando se verbale interno o esterno e la data), i ruoli assunti per la stesura (redattore e verificatore) e l'elenco dei destinatari.
+    \item \textbf{Indice:} Elenco cliccabile delle sezioni per facilitare la navigazione del documento.
+    \item \textbf{Informazioni generali:} Tabella riassuntiva contenente i dettagli logistici dell'incontro: luogo o piattaforma utilizzata (Discord), orario di inizio e fine, e l'elenco puntuale dei partecipanti.
+    \item \textbf{Ordine del giorno:} Elenco sintetico degli argomenti pianificati e discussi durante la riunione.
+    \item \textbf{Attività svolte:} Resoconto testuale, suddiviso in sottoparagrafi, che descrive in modo oggettivo le discussioni affrontate, le problematiche analizzate e le decisioni prese per ciascun punto all'ordine del giorno.
+    \item \textbf{To-Do List:} Sezione conclusiva dedicata al tracciamento delle azioni da intraprendere a seguito della riunione. Per ogni task viene indicato il responsabile e viene inserito il collegamento ipertestuale diretto alla rispettiva \textit{Issue} GitHub, garantendo tracciabilità completa tra decisione e attività operativa.
+\end{itemize}
+
+\paragraph{Struttura dei diari di bordo}
+I Diari di Bordo sono delle diapositive realizzate per gli incontri settimanali con i docenti per vedere lo stato di avanzamento del lavoro. Il loro scopo principale è condividere rapidamente con i docenti e i colleghi i progressi effettuati e gli ostacoli incontrati dal gruppo \textit{aLittleByte}. 
+
+Sono documenti brevi che trattano dei seguenti argomenti:
+
+\begin{itemize}
+    \item \textbf{Copertina:} Riporta le informazioni identificative di base, ovvero il logo del team, la data della presentazione, il numero del gruppo e i nomi dei componenti.
+    
+    \item \textbf{Cosa abbiamo fatto:} Un riepilogo sintetico e puntato delle attività concluse nell'ultimo periodo.
+    
+    \item \textbf{Cosa faremo:} La pianificazione operativa per i giorni successivi, indicando i prossimi \textit{task} da completare.
+    
+    \item \textbf{Difficoltà e dubbi:} Una sezione in cui vengono elencati i problemi affrontati dal team e i dubbi da sottoporre all'attenzione del corpo docente.
+\end{itemize}
+
+Questa suddivisione in sezioni permette di ottimizzare i tempi della presentazione, garantendo che i messaggi chiave arrivino in modo chiaro e che ci si possa concentrare immediatamente sulla discussione e risoluzione dei problemi.
+
+\paragraph{Denominazione dei documenti}
+
+Il gruppo \textit{aLittleByte} ha adottato una rigorosa politica di denominazione univoca per tutta la documentazione. Tale scelta metodologica è volta a preservare l'uniformità del repository e a ottimizzare le procedure di ricerca e consultazione dei file.
+
+\begin{itemize}
+    \item \textbf{Verbali:} I verbali hanno la seguente denominazione: \\
+    \\
+    \centerline{\texttt{<Tipo>\_<Data>}} \\
+    Dove \texttt{<Tipo>} rappresenta:
+    \begin{itemize}
+        \item \textbf{Verbale\_Interno}
+        \item \textbf{Verbale\_Esterno}
+    \end{itemize}
+    Mentre \texttt{<Data>} è la data della riunione scritta nel formato \texttt{AAAA\_MM\_GG}. Ad esempio, \texttt{Verbale\_Interno\_2026\_04\_13.pdf} rappresenta il verbale interno del giorno 13/04/2026.
+    \\
+    
+    \item \textbf{Diari di Bordo:} Per i Diari di Bordo viene adottato il seguente standard di denominazione: \texttt{Diario\_di\_Bordo\_AAAA\_MM\_GG.pdf}. Ad esempio, \texttt{Diario\_di\_Bordo\_2026\_04\_13.pdf} rappresenta il diario di bordo presentato il giorno 13/04/2026.
+    
+    \item \textbf{Documenti:} I restanti documenti ufficiali seguono una convenzione di denominazione esplicita basata sul loro contenuto, come ad esempio \textit{Norme di Progetto.pdf} o \textit{Analisi dei Requisiti.pdf}. 
+\end{itemize}
+
+\paragraph{Produzione}
+Il ciclo di vita di ogni documento prodotto dal team è regolato da una procedura strutturata, volta a massimizzare la qualità, l'uniformità e la tracciabilità delle informazioni. Il processo si articola nelle seguenti fasi:
+
+\begin{itemize}
+    \item \textbf{Pianificazione:} In corrispondenza delle scadenze di progetto, il gruppo stabilisce quali documenti produrre o aggiornare. Per ogni compito vengono designati un redattore e un verificatore, scelti nel rispetto dei ruoli previsti dal \textit{Way of Working} e garantendo l'assenza di conflitti d'interesse.
+    
+    \item \textbf{Creazione del branch:} Prima di iniziare la stesura, viene aperto un \textit{branch} dedicato nel repository GitHub. Il gruppo \textit{aLittleByte} ha stabilito di creare un ramo separato per ogni singolo file, inclusi i verbali e i diari di bordo, al fine di garantire una gestione granulare delle modifiche e un isolamento totale del lavoro rispetto al ramo principale.
+    
+    \item \textbf{Redazione:} Il redattore incaricato sviluppa il contenuto seguendo i template e le direttive stilistiche definite nelle presenti Norme di Progetto. La scrittura avviene tramite gli strumenti appropriati (ad esempio \textit{LaTeX}), assicurando un output professionale e coerente.
+    
+    \item \textbf{Revisione:} Terminata la stesura, il documento viene sottoposto a una verifica asincrona. Il verificatore analizza il file tramite una \textit{pull request} su GitHub, segnalando eventuali correzioni necessarie o suggerimenti direttamente nei commenti della piattaforma.
+    
+    \item \textbf{Integrazione e Approvazione:} Una volta superata la revisione e ottenuta l'approvazione formale dal Responsabile, il contenuto viene integrato nel \textit{branch main} del repository. In questa fase viene consolidata la versione finale nel registro delle modifiche.
+
+\end{itemize}
+
+\subsubsection{Gestione della configurazione}
+Il processo di Gestione della Configurazione ha l'obiettivo di tracciare, organizzare e controllare in modo sistematico l'evoluzione di tutti gli artefatti di progetto (codice sorgente, documentazione, script). Adottare questo processo permette al gruppo \textit{aLittleByte} di prevenire conflitti, recuperare versioni precedenti in caso di errore e garantire che ogni rilascio sia coerente e verificabile.
+
+\paragraph{Strumenti utilizzati}
+Al fine di implementare correttamente tale processo, il gruppo ha selezionato i seguenti strumenti tecnici:
+\begin{itemize}
+    \item \textbf{Git:} Software per il controllo di versione distribuito che permette di monitorare ogni variazione apportata ai file sorgente e alla documentazione.
+    \item \textbf{GitHub:} Servizio di hosting basato su cloud utilizzato per la gestione centralizzata del repository. Viene impiegato non solo per l'archiviazione, ma anche per la pianificazione operativa tramite le \textit{Issue} e per la revisione del lavoro attraverso le \textit{Pull Request}.
+\end{itemize}
+
+\paragraph{Controllo della configurazione}
+
+Il controllo della configurazione è l'attività preposta alla gestione, tracciabilità e autorizzazione di qualsiasi proposta di modifica del progetto. Per tracciare in modo controllato tutte le modifiche, che vengono approvate o meno, il gruppo \textit{aLittleByte} sfrutta le funzionalità native di GitHub, strutturando il processo attraverso l'uso rigoroso di \textit{Issue} e \textit{Pull Request}:
+
+\begin{itemize}
+    \item \textbf{Issue:} Ogni singola attività (che si tratti della stesura di un documento, dello sviluppo di una funzionalità, della correzione di un errore o anche semplicemente contattare l'azienda) deve essere preventivamente tracciata tramite l'apertura di un'\textit{Issue}. Quest'ultima viene assegnata a uno o più membri incaricati di portarla a termine. Per facilitarne la classificazione, ogni \textit{Issue} è identificata da una nomenclatura univoca (ad esempio per la stesura dei documenti viene usato il tag \textit{documentazione}).
+    
+    \item \textbf{Pull Request:} Rappresenta il meccanismo esclusivo per l'integrazione di qualsiasi modifica all'interno del repository. Al fine di mantenere un elevato standard qualitativo e prevenire errori, il team ha stabilito che nessun componente è autorizzato a effettuare modifiche dirette sul ramo principale (\texttt{main}). Perciò ogni integrazione deve necessariamente passare per una \textit{Pull Request}, la quale richiede obbligatoriamente un processo di revisione incrociata e può essere inserita nel main solo a seguito di almeno una revisione positiva da parte di altri membri del gruppo. 
+\end{itemize}
+
+\paragraph{Registrazione stato di configurazione}
+Ogni documento presenta un \textit{Registro delle modifiche} (eccetto i verbali) per tenere traccia di tutte le modifiche svolte. Il sistema di versionamento è il seguente: \\
+
+\centerline{\textbf{X.Y.Z}}
+
+Dove: 
+\begin{itemize}
+    \item \textbf{X:} Subisce un incremento solo quando il file viene approvato dal membro del gruppo incaricato del ruolo di approvatore;
+    \item \textbf{Y:} Indica un avanzamento significativo, come l'aggiunta di interi capitoli o moduli software che hanno superato positivamente la fase di verifica.
+    \item \textbf{Z:} Rappresenta modifiche di dettaglio, correzioni di refusi o aggiornamenti minimi eseguiti durante la stesura o lo sviluppo.
+\end{itemize}
+
+\paragraph{Automazione e Rilascio Continuo (CI/CD)}
+Per assicurare che la documentazione fornita agli stakeholder sia costantemente aggiornata e pubblica, il gruppo ha implementato un processo di \textit{Continuous Deployment} tramite GitHub Actions.
+Il workflow principale, nominato \texttt{Site Deploy}, regola il ciclo di vita della pubblicazione del sito web e si attiva in automatico ad ogni evento di push o pull request verso il branch \texttt{main} (ignorando i file non critici come \texttt{README.md} e \texttt{.gitignore}).
+
+Il processo automatizzato prevede:
+\begin{enumerate}
+    \item Il setup dell'ambiente virtuale e del linguaggio Python.
+    \item L'esecuzione dello script proprietario \texttt{.github/site-src/update\_index.py}, che genera dinamicamente la struttura statica del sito (HTML, CSS e asset associati).
+    \item Il caricamento e rilascio automatico (Deploy) del risultato sull'ambiente \texttt{github-pages}.
+\end{enumerate}
+
+\paragraph{Nomenclatura dei Branch e Alberatura}
+A differenza dell'utilizzo di identificativi numerici, il gruppo \textit{aLittleByte} adotta una convenzione di nomenclatura descrittiva per i branch, in modo da rendere immediatamente esplicito l'oggetto del lavoro.
+La convenzione principale prevede l'uso dello \textit{snake\_case} (tutto minuscolo con trattini bassi) per i documenti generali (es. \texttt{piano\_di\_progetto}, \texttt{norme\_di\_progetto}, \texttt{analisi\_dei\_requisiti}). Vengono tollerate eccezioni descrittive per i verbali o attività specifiche di sviluppo (es. \texttt{VerbaleEsterno\_YYYY\_MM\_DD} o \texttt{develop-sito}).
+
+L'alberatura della repository documentale è strutturata in modo logico e gerarchico per separare le fasi del progetto didattico. Le directory principali includono:
+\begin{itemize}
+    \item \texttt{.github}: Contiene i workflow di automazione e gli script Python necessari al rilascio.
+    \item \texttt{candidatura}: Contiene i documenti relativi alla fase di candidatura.
+    \item \texttt{RTB}: Contiene la documentazione in sviluppo per la \textit{Requirements and Technology Baseline}. Al suo interno è prevista un'ulteriore categorizzazione rigida, come ad esempio la separazione dei verbali in \texttt{RTB/Verbali/Verbali Interni} e \texttt{RTB/Verbali/Verbali Esterni}.
+\end{itemize}
+
+\subsubsection{Qualifica}
+
+\paragraph{Verifica}
+
+Le attività di verifica hanno lo scopo di garantire l'assenza di difetti e la totale aderenza di ogni componente prodotta (sia essa documentale o codice sorgente) rispetto alle specifiche e ai vincoli stabiliti. Applicando i principi dell'Ingegneria del Software, questa pratica metodologica mira a soddisfare la seguente domanda: \textit{''Did I build the system right?''}.
+
+L'intera reportistica riguardante i controlli effettuati, i parametri misurati e gli esiti dei collaudi è raccolta e analizzata all'interno del \textbf{Piano di Qualifica}. 
+
+\paragraph{Attività di Verifica}
+
+La verifica interviene nelle singole fasi del nostro progetto, con lo scopo di assicurarci che il lavoro appena svolto non abbia introdotto errori. In termini pratici, questa attività serve a controllare che il risultato ottenuto alla fine di una determinata fase sia sempre coerente con le informazioni e i requisiti che avevamo in partenza.
+
+In questa prima parte del lavoro, il gruppo \textit{aLittleByte} si è dedicato principalmente alla verifica della documentazione. Tramite revisioni incrociate tra i membri, ci siamo assicurati che i contenuti fossero corretti e che i testi rispettassero le regole grammaticali, sintattiche e di formattazione che ci siamo dati nelle presenti Norme di Progetto.
+
+Per quanto riguarda invece la verifica del codice sorgente e del prodotto software, ce ne occuperemo nel dettaglio una volta superata la revisione \textit{RTB}. In ogni caso, tutte le decisioni prese, i metodi di controllo utilizzati e i risultati di queste verifiche verranno sempre riportati in modo esaustivo nel documento \textbf{Piano di Qualifica}.
+
+\paragraph{Analisi Statica}
+L'analisi statica è una tecnica di verifica che viene applicata all'oggetto di studio senza richiederne l'esecuzione. Questo approccio ci permette di individuare anomalie e difetti fin dalle primissime fasi del ciclo di vita del software, ben prima che la scrittura del codice sia ultimata.
+
+Questo tipo di analisi può avvenire tramite metodi formali o, più comunemente nel nostro caso, attraverso tecniche di lettura. Il nostro team adotta principalmente due metodologie:
+
+\begin{itemize}
+    \item \textbf{Walkthrough:} Consiste in una revisione estensiva e senza preconcetti. Il verificatore analizza il prodotto passo dopo passo, simulandone mentalmente la logica e verificando che le regole prestabilite siano rispettate. È un approccio molto approfondito ma dispendioso in termini di tempo, e richiede un intervento interamente manuale.
+    
+    \item \textbf{Inspection:} Si tratta di un controllo mirato e guidato dall'esperienza. Il verificatore sa già quali sono le criticità più comuni e utilizza delle liste di controllo (\textit{checklist}) specifiche per scovarle. Pur essendo meno estesa del \textit{walkthrough}, l'ispezione è più rapida e permette di standardizzare la ricerca dei difetti.
+\end{itemize}
+
+Al termine di ogni controllo, le attività svolte e i problemi riscontrati vengono opportunamente documentati. Gli errori vengono discussi in modo costruttivo tra il verificatore e l'autore del documento (o del codice); tuttavia, l'applicazione materiale delle correzioni rimane sempre di competenza dell'autore originale, al fine di garantire coerenza e responsabilità. Tutto ciò viene documentato all'interno della \textit{Pull Request}, che in caso di errori non viene approvata, e nel relativo documento.
+
+\subparagraph{Analisi Statica Automatica}
+In affiancamento alle tecniche manuali, il team adotta \textbf{Larastan} (PHPStan per Laravel) come strumento di analisi statica automatica del codice. Larastan viene eseguito al livello di analisi \textbf{5} e si occupa di rilevare automaticamente i \textit{code smell} tracciati dalla metrica \textbf{MPD12} (es. metodi troppo complessi, variabili non tipizzate, chiamate a metodi inesistenti). L'esecuzione avviene in locale prima di ogni \textit{commit} e nella pipeline di \textit{Continuous Integration}: il codice che non supera l'analisi non può essere integrato nel branch principale.
+
+\paragraph{Analisi Dinamica}
+A differenza della tecnica statica, l'analisi dinamica presuppone l'esecuzione dell'oggetto sottoposto a verifica. Tale approccio esamina le reazioni di specifiche porzioni del software applicandovi un numero definito di "casi prova". Questi test devono possedere i requisiti di ripetibilità e automazione.
+
+Ogni sessione di test è definita dai seguenti stati:
+\begin{itemize}
+    \item \textbf{NI}: non implementato
+    \item \textbf{I}: implementato
+    \item \textbf{S}: superato
+    \item \textbf{NS}: non superato
+\end{itemize}
+
+\paragraph{Test Di Unità}
+I test d'unità si focalizzano sulla verifica isolata di singole componenti software, come funzioni, classi o metodi, separandole dal resto dell'architettura di sistema.
+
+Il fine di questa attività risiede nel confermare che ogni unità generi i risultati previsti partendo da input determinati. Questo processo consente di intercettare precocemente difetti di implementazione o errori nella logica funzionale durante le fasi iniziali della progettazione.
+
+\subparagraph{Ambiente e Procedura Operativa}
+Il framework adottato è \textbf{Pest PHP}, incluso nativamente in Laravel 12. I test risiedono nella directory \texttt{tests/Unit/} del progetto.
+
+Il programmatore è tenuto a seguire questa procedura prima di aprire una \textit{Pull Request}:
+\begin{enumerate}
+    \item Scrivere i test di unità che coprono la logica del codice prodotto.
+    \item Verificare che tutti i test passino in locale con il comando \texttt{./vendor/bin/pest}.
+    \item Calcolare la \textit{code coverage} con \texttt{./vendor/bin/pest -{}-coverage} (richiede il driver \textbf{Xdebug} attivo nel container PHP-FPM). La copertura minima richiesta per ogni unità è dell'\textbf{80\%}, in conformità con la metrica \textbf{MPC-CC}.
+    \item Allegare l'esito del report nella descrizione della \textit{Pull Request}.
+\end{enumerate}
+La pipeline di CI verifica automaticamente questi requisiti a ogni push; una PR con copertura inferiore alla soglia o con test falliti non può essere approvata.
+
+\paragraph{Test di Regressione}
+L'esecuzione dei test di regressione è finalizzata ad accertare che interventi correttivi o evolutivi sul codice non abbiano introdotto nuovi difetti o problemi nelle funzionalità già esistenti.
+
+Non richiedono la scrittura di test ad hoc: sono garantiti dall'esecuzione automatica dell'intera suite Pest PHP (unità + integrazione) nella pipeline di CI ad ogni \textit{push} o apertura di \textit{Pull Request}. Un test precedentemente verde che diventa rosso segnala una regressione e blocca il merge fino alla risoluzione.
+
+\paragraph{Test di Integrazione}
+L'esecuzione dei test d'integrazione è mirata a confermare che le varie componenti del software operino tra loro in modo sinergico e privo di errori.
+
+I test di integrazione sono scritti con \textbf{Pest PHP} e risiedono in \texttt{tests/Feature/}. A differenza dei test di unità, questi test eseguono richieste HTTP reali contro l'applicazione Laravel utilizzando il database PostgreSQL di test (definito in \texttt{.env.testing}), verificando l'interazione tra controller, service layer e database. Anche per questi test vale il requisito di copertura minima dell'\textbf{80\%} e l'obbligo di esecuzione prima di aprire una \textit{Pull Request}.
+
+\paragraph{Test di Sistema}
+I test di sistema hanno l'obiettivo di accertare che il comportamento globale del prodotto rispetti integralmente i requisiti software stabiliti durante l'analisi dei requisiti.
+
+Vengono eseguiti sull'applicazione deployata nell'ambiente Docker Compose completo (Nginx, PHP-FPM, PostgreSQL, Redis, MinIO), simulando scenari end-to-end che attraversano tutti i livelli dello stack. Ogni test di sistema è tracciato a un requisito funzionale dell'Analisi dei Requisiti tramite il codice UC corrispondente. I risultati e lo stato di copertura dei requisiti sono riportati nel \textit{Piano di Qualifica}.
+
+\subsection{Validazione}
+La validazione rappresenta il processo finale che conferma in modo definitivo che le caratteristiche del prodotto software siano pienamente conformi ai bisogni dell'utilizzo finale e agli obiettivi d'uso previsti. L'obiettivo principale è rispondere al quesito: \textit{''Did I build the right system?''} 
+
+Mentre la verifica analizza la correttezza tecnica dell'esecuzione, la validazione si sposta sul piano dell'efficacia, garantendo che le funzionalità sviluppate siano effettivamente idonee a risolvere le problematiche operative individuate e siano allineate con le aspettative del committente.
+
+\paragraph{Processo di Validazione}
+Il gruppo \textit{aLittleByte} ha provveduto a raccogliere, analizzare e formalizzare tutte le necessità espresse dall'azienda proponente \textit{Eggon} all'interno del documento di \textit{Analisi dei Requisiti}. Questa operazione di classificazione è fondamentale per garantire un tracciamento rigoroso delle specifiche e per predisporre i futuri test di accettazione, i quali avranno il compito di accertare che il prodotto software sviluppato rispecchi le richieste del committente.
+
+Gli esiti derivanti da queste procedure di validazione saranno riportati e discussi in modo esaustivo nel \textit{Piano di Qualifica}, all'interno della specifica sezione dedicata ai Test di Accettazione.
+
+Si precisa che, in concomitanza con la pubblicazione dei documenti per l'\textit{RTB}, il progetto si trova in una fase antecedente alla codifica e al collaudo del software. Per tale ragione, lo stato di avanzamento dei test riporterà la dicitura temporanea ''Non Implementato''. I dati e i risultati effettivi dei test verranno integrati in questa sezione solamente in vista della consegna della \textit{PB}.
+
+\subsection{Processi Organizzativi}
+
+\subsubsection{Descrizione e scopo}
+
+In conformità con le direttive tracciate dallo standard ISO/IEC 12207:1997, il processo di gestione comprende l'insieme delle pratiche e delle metodologie necessarie a governare l'intero ciclo di vita del progetto. Lo scopo primario è assicurare il successo dello sviluppo del prodotto software, garantendo che gli obiettivi prefissati vengano raggiunti nel rigoroso rispetto dei vincoli di costo, delle tempistiche stimate e dei requisiti concordati con il proponente.
+
+Per concretizzare tali obiettivi, l'organizzazione del gruppo \textit{aLittleByte} si basa su:
+
+\begin{itemize}
+    \item \textbf{Pianificazione:} delle attività da svolgere, della definizione delle scadenze e della suddivisione dettagliata delle mansioni.
+    
+    \item \textbf{Monitoraggio e controllo:} Supervisione costante dello stato di avanzamento dei lavori
+    
+    \item \textbf{Prevenzione e gestione dei rischi:} Identificazione delle potenziali criticità tecnologiche o organizzative, unita all'adozione di protocolli strutturati per governare le modifiche e per prevenire i possibili imprevisti.
+    
+    \item \textbf{Interventi correttivi:} Prontezza e reattività nell'intervenire qualora le metriche di controllo evidenzino deviazioni significative rispetto al Piano di Progetto.
+    
+    \item \textbf{Organizzazione del team:} Assegnazione trasparente di ruoli e responsabilità ai membri del gruppo, garantendo al contempo il mantenimento di canali di comunicazione efficaci.
+\end{itemize}
+
+In definitiva, l'applicazione metodica di questi processi garantisce al team di mantenere un progetto solido e tracciabile, costituendo il fondamento necessario per assumere decisioni strategiche in qualsiasi momento dello sviluppo.
+
+\subsubsection{Gestione degli sprint}
+
+Come già citato in precedenza, il gruppo ha deciso di adottare un approccio iterativo, suddividendo il ciclo di vita del progetto in sprint della durata fissa di due settimane. In concomitanza con l'avvio di ogni nuovo sprint, il team provvede alla rotazione e all'assegnazione dei ruoli che ciascun membro dovrà ricoprire per l'intera durata dello sprint.
+
+L'organizzazione di ogni singola iterazione è scandita da una riunione, organizzata nel seguente modo:
+
+\begin{itemize}
+    \item \textbf{Pianificazione:} Il team seleziona gli obiettivi operativi da raggiungere, scompone il lavoro in \textit{task} gestibili e li assegna ai vari componenti, cercando di bilanciare equamente i carichi di lavoro.
+    
+    \item \textbf{Sprint Review:} Si analizza lo sprint appena concluso per la verifica concreta dei risultati prodotti. Costituisce l'occasione per valutare il lavoro completato, discutere le criticità tecniche emerse e misurare l'avanzamento effettivo rispetto al piano generale.
+    
+    \item \textbf{Sprint Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo.
+\end{itemize}
+
+\paragraph{Gestione del Flusso di Lavoro tramite Kanban}
+Per garantire un controllo visivo e immediato sullo stato di avanzamento delle singole Issue associate al progetto, il gruppo gestisce i task tramite la board GitHub Projects ''aLittleByte - Dashboard''.
+La bacheca è modellata secondo i principi Kanban e si articola nelle seguenti colonne operative:
+\begin{itemize}
+    \item \textbf{Todo:} Task selezionati e pronti per essere affrontati nel ciclo di lavoro corrente.
+    \item \textbf{In Progress:} Attività su cui il team sta lavorando attivamente (le issue sono formalmente assegnate ai membri tramite il campo \textit{Assignee}).
+    \item \textbf{In Review:} Task completati nello sviluppo o nella stesura e attualmente in attesa di \textit{Peer Review} tramite l'approvazione della relativa \textit{Pull Request}.
+    \item \textbf{Done:} Lavoro verificato, approvato e unito definitivamente al branch principale.
+\end{itemize}
+
+\subsubsection{Ruoli}
+
+\paragraph{Responsabile}
+Il membro che assume il ruolo di Responsabile agisce come vero e proprio \textit{Project Manager} del gruppo. Ha la responsabilità di coordinare il lavoro del team, pianificare le iterazioni di sviluppo, ottimizzare l'uso delle risorse e fungere da referente principale per le comunicazioni ufficiali con l'azienda proponente e il corpo docente.
+
+Dal punto di vista strettamente operativo, il Responsabile si fa carico di distribuire e assegnare i compiti (tramite le \textit{Issue}) ai vari componenti del gruppo. Inoltre, è sua competenza diretta la stesura e il costante aggiornamento dei seguenti documenti:
+
+\begin{itemize}
+    \item \textbf{Verbali (Interni ed Esterni)}
+    \item \textbf{Diario di Bordo}
+    \item \textbf{Piano di Progetto}
+    \item \textbf{Piano di Qualifica}
+\end{itemize}
+
+\paragraph{Amministratore}
+L'Amministratore rappresenta la figura di supporto metodologico e tecnologico del team. Il suo scopo principale è definire, ottimizzare e mantenere sempre operativi i processi e gli strumenti di lavoro, assicurando che l'intero gruppo possa procedere con le attività in modo fluido e senza impedimenti di natura tecnica o organizzativa. 
+
+Oltre a monitorare le scadenze amministrative e a fornire supporto costante ai colleghi, l'Amministratore si fa carico delle seguenti responsabilità operative:
+
+\begin{itemize}
+    \item \textbf{Gestione degli ambienti di lavoro}
+    
+    \item \textbf{Manutenzione degli strumenti:} Supervisionare e aggiornare periodicamente i software e i canali adottati dal gruppo per la comunicazione e la collaborazione asincrona.
+    
+    \item \textbf{Controllo della configurazione:} Garantire la corretta e rigorosa applicazione delle procedure di versionamento per tutti i file e i documenti prodotti dal team.
+    
+    \item \textbf{Norme di Progetto:} Curare la stesura, la revisione e il continuo aggiornamento del presente documento (\textit{Norme di Progetto}), assicurandosi che le regole interne e il \textit{Way of Working} siano sempre allineati alle reali necessità del gruppo.
+\end{itemize}
+
+\paragraph{Progettista}
+
+Il Progettista è la mente tecnica dietro alla struttura del prodotto software. Il suo compito principale è ideare l'architettura del sistema, assicurandosi che sia in grado di soddisfare tutti i requisiti (sia funzionali che di qualità) concordati con il proponente. Lavora a stretto contatto con il resto del gruppo per trasformare le richieste astratte in soluzioni pratiche, efficienti e facili da mantenere nel tempo.
+
+Nello specifico, chi ricopre questo ruolo ha la responsabilità di:
+
+\begin{itemize}
+    \item Valutare e decidere quali linguaggi, \textit{framework} e strumenti tecnici sono più idonei per la realizzazione del progetto.
+    
+    \item \textbf{Disegnare l'architettura:} Definire come sarà strutturato il sistema a livello generale, individuando i macro-componenti e il modo in cui dovranno comunicare tra loro.
+    
+    \item Supervisionare il lavoro di stesura del codice, assicurandosi che l'implementazione pratica rispetti le specifiche tecniche e non si allontani dall'idea progettuale di partenza.
+\end{itemize}
+
+\paragraph{Analista}
+
+L'Analista rappresenta il punto di incontro tra le esigenze dell'azienda proponente e il lavoro tecnico del team di sviluppo. Il suo compito principale è comprendere a fondo il problema, raccogliere le richieste e trasformarle in regole chiare, complete e ben definite, evitando qualsiasi ambiguità. In pratica, lavora per assicurarsi che tutti sappiano esattamente \textit{cosa} deve essere costruito, prima ancora di decidere \textit{come} farlo.
+
+Nello specifico, chi ricopre questo ruolo si fa carico di:
+
+\begin{itemize}
+    \item \textbf{Stesura dell'Analisi dei Requisiti:} Redigere e mantenere costantemente aggiornato il documento che cataloga tutti i casi d'uso e le specifiche del progetto.
+    
+    \item \textbf{Gestione dei dubbi e delle modifiche:} Interfacciarsi direttamente con il proponente per risolvere eventuali incertezze, chiedere chiarimenti o concordare variazioni ai requisiti iniziali.
+    
+    \item \textbf{Supporto al team:} Collaborare con i progettisti e i programmatori per garantire che le specifiche scritte vengano interpretate nel modo corretto e implementate senza deviare dagli obiettivi concordati.
+\end{itemize}
+
+\paragraph{Programmatore}
+
+Il Programmatore è la figura operativa che materialmente "dà vita" al prodotto software. Il suo compito principale è tradurre l'architettura e le specifiche pensate dal Progettista in codice reale e funzionante. Lavora con l'obiettivo di produrre un software non solo corretto, ma anche pulito, efficiente e facile da mantenere o aggiornare in futuro.
+
+Nello specifico, chi ricopre questo ruolo si fa carico di:
+
+\begin{itemize}
+    \item \textbf{Stesura del codice:} Scrivere il codice sorgente rispettando rigorosamente le norme stilistiche e gli standard di qualità definiti dal gruppo.
+    
+    \item \textbf{Testing e collaudo preliminare:} Sviluppare ed eseguire i test per verificare che le singole porzioni di codice si comportino come previsto e garantiscano un'elevata affidabilità.
+    
+    \item \textbf{Risoluzione dei problemi:} Lavorare a stretto contatto con il resto del team per individuare i difetti, correggere i \textit{bug} tecnici e implementare nuove funzionalità in modo armonico e coerente con il resto del sistema.
+\end{itemize}
+
+\paragraph{Verificatore}
+
+Il Verificatore è il "garante della qualità" all'interno del team. Il suo compito è assicurarsi che ogni elemento prodotto, dal singolo documento di testo fino al codice finale, rispetti fedelmente i requisiti stabiliti e gli standard prefissati.
+
+Nello specifico, chi ricopre questo ruolo si fa carico di:
+
+\begin{itemize}
+    \item \textbf{Revisione documentale:} Leggere e controllare i documenti redatti dagli altri membri del team (tramite le \textit{Pull Request}), assicurandosi che siano corretti, completi e privi di ambiguità.
+    
+    \item \textbf{Esecuzione dei collaudi:} Pianificare e condurre le varie fasi di \textit{test} sul software (come i collaudi funzionali, di integrazione e di sistema) per verificare il corretto comportamento delle funzionalità.
+    
+    \item \textbf{Segnalazione e tracciamento:} Registrare accuratamente i risultati delle verifiche, segnalando al più presto i difetti o le non conformità agli sviluppatori o agli analisti per permetterne la correzione.
+    
+    \item \textbf{Miglioramento continuo:} Individuare eventuali punti critici o inefficienze nel modo in cui il team lavora, proponendo soluzioni pratiche per ottimizzare i processi operativi e di sviluppo.
+\end{itemize}
+
+\subsubsection{Tracciamento delle Ore}
+
+Il gruppo \textit{aLittleByte} adotta un sistema di rendicontazione oraria basato su un \textbf{foglio di calcolo condiviso su Google Fogli}, accessibile a tutti i membri del team.
+
+\paragraph{Strumento}
+Le ore vengono registrate all'interno di un foglio Google Fogli condiviso, organizzato per membro e per ruolo ricoperto. Per ciascun task svolto, il membro indica le ore previste e le ore effettivamente impiegate, consentendo il calcolo automatico degli scostamenti e del saldo ore rimanente.
+
+\paragraph{Frequenza di aggiornamento}
+Ogni membro del gruppo aggiorna il proprio registro orario \textbf{entro la fine di ogni settimana}. Il Responsabile di turno effettua una revisione complessiva del bilancio orario al \textbf{termine di ogni Sprint}, verificando che i dati siano completi e coerenti con le attività svolte.
+
+\paragraph{Catalogazione delle ore}
+Le ore sono catalogate secondo due dimensioni:
+\begin{itemize}
+    \item \textbf{Per ruolo:} Responsabile, Amministratore, Analista, Progettista, Programmatore, Verificatore.
+    \item \textbf{Per membro:} ciascun componente del gruppo registra separatamente le ore svolte in ogni ruolo, permettendo di tenere traccia del monte ore residuo individuale per ciascuna figura professionale.
+\end{itemize}
+
+\paragraph{Monitoraggio}
+Il Responsabile ha il compito di controllare, a fine Sprint, che nessun membro abbia esaurito prematuramente le ore assegnate a un determinato ruolo. In caso di criticità, provvede a ridistribuire i task nelle iterazioni successive.
+
+\subsubsection{Tracciamento delle Azioni}
+
+Al termine di ogni riunione, il membro designato redige il verbale seguendo la struttura definita nella sezione~\ref{sec:documentazione}. Ogni compito emerso viene immediatamente trasformato in una \textit{Issue} su GitHub e assegnato al membro o ai membri incaricati. Qualora il componente assegnato riscontri difficoltà, può utilizzare la sezione commenti della \textit{Issue} per chiedere chiarimenti al resto del team.
+
+\subsubsection{Comunicazione}
+\paragraph{Comunicazioni Interne}
+Le comunicazioni interne avvengono tramite: 
+\begin{itemize}
+    \item \textbf{WhatsApp:} Viene utilizzato per le comunicazioni rapide e coordinamento tra i membri del gruppo.
+    \item \textbf{Discussioni GitHub:} Viene utilizzato per discussioni all'interno delle \textit{Issue} e delle \textit{Pull Request}, per garantire il tracciamento delle decisioni. Sono utili in quanto permettono di comunicare solo con i membri del gruppo relativi alla discussione. 
+\end{itemize}
+
+\paragraph{Comunicazioni Esterne}
+
+Per interagire con l'azienda proponente e con il corpo docente, il gruppo ha definito dei canali di comunicazione specifici, differenziati in base al livello di formalità e all'urgenza della richiesta:
+
+\begin{itemize}
+    \item \textbf{E-mail:} Rappresenta il canale ufficiale per le comunicazioni formali, l'invio della documentazione e gli aggiornamenti periodici sullo stato di avanzamento del progetto. Tutte le comunicazioni via posta elettronica vengono gestite tramite l'indirizzo ufficiale del gruppo (\url{alittlebyte.swe@gmail.com}).
+    
+    \item \textbf{Telegram:} Impiegato per scambi di messaggi rapidi, chiarimenti immediati e per il coordinamento logistico direttamente con il referente dell'azienda proponente.
+\end{itemize}
+
+\subsubsection{Riunioni}
+
+\paragraph{Riunioni Interne}
+Gli incontri interni del gruppo \textit{aLittleByte} sono pianificati in modo metodico per mantenere un coordinamento efficace e assicurare un avanzamento costante del progetto. Il team ha strutturato i propri momenti di confronto secondo queste modalità:
+
+\begin{itemize}
+    \item \textbf{Incontro settimanale:} Di norma, il gruppo si riunisce una volta alla settimana (indicativamente il lunedì). Questo momento di allineamento serve per fare il punto della situazione, organizzare i \textit{task} per i giorni successivi e cercare soluzioni condivise agli ostacoli emersi durante il lavoro individuale.
+    
+    \item \textbf{Riunioni straordinarie:} Oltre all'appuntamento fisso, qualora sorgano urgenze, \textit{bug} bloccanti o si debbano prendere decisioni tecniche complesse, i membri interessati possono convocare agilmente degli incontri.
+    
+    \item \textbf{Luoghi e piattaforme:} Per comodità organizzativa e per ottimizzare i tempi, le riunioni si svolgono prevalentemente online utilizzando i canali vocali della piattaforma \textbf{Discord}.
+    
+    \item \textbf{Verbalizzazione:} A garanzia della massima trasparenza operativa, al termine di ogni incontro viene redatto un Verbale Interno.
+\end{itemize}
+
+\paragraph{Riunioni Esterne}
+
+I colloqui con l'azienda proponente sono essenziali per garantire il continuo allineamento sugli obiettivi e raccogliere \textit{feedback} sul lavoro svolto.
+Tutte le sedute si tengono in via telematica sfruttando la piattaforma \textbf{Google Meet}. A conclusione di ogni colloquio, il team si occupa di redigere un Verbale Esterno formale che riepiloga puntualmente le tematiche affrontate, le decisioni prese e le future azioni concordate. Tale documento viene infine inoltrato al referente aziendale per un controllo incrociato e, previa conferma di aderenza con quanto discusso, sottoposto alla sua firma per approvazione definitiva.
+
+\section{Qualità del software}
+Con l'espressione ``qualità del software'' si indica la totalità delle proprietà di un'entità che concorrono a soddisfare le necessità degli utenti, siano esse dichiarate esplicitamente o sottintese. Tale valutazione si focalizza su due direttrici fondamentali: il valore del prodotto finito e l'efficacia del processo di realizzazione.
+
+L'eccellenza del risultato finale scaturisce invariabilmente dal valore del percorso produttivo intrapreso. Per garantire un software di alto livello, la strategia di valutazione deve essere programmata con cura e non limitata ad una sola verifica finale: tale approccio favorisce una gestione proattiva basata sul monitoraggio costante, superando la logica reattiva volta alla semplice risoluzione delle anomalie.
+
+L'intero processo di valutazione si articola in quattro fasi principali (definizione preventiva delle metriche, misurazione, valutazione dei dati e accettazione finale).
+
+\subsection{Qualità del prodotto}
+Per definire e misurare la qualità intrinseca del software, lo standard di riferimento adottato è la serie di norme ISO/IEC 9126. Questo standard internazionale organizza la qualità in due diverse categorie:
+\begin{enumerate}
+    \item \textbf{Qualità del Prodotto}, che analizza le seguenti proprietà intrinseche del software:
+    \begin{itemize}
+        \item Funzionalità;
+        \item Affidabilità;
+        \item Efficienza;
+        \item Usabilità;
+        \item Mantenibilità;
+        \item Portabilità.
+    \end{itemize}
+    \item \textbf{Qualità in Uso}, che valuta la capacità del software di permettere agli utenti di raggiungere i propri obiettivi con efficacia, produttività, sicurezza e soddisfazione in specifici contesti d'uso.
+\end{enumerate}
+
+Al fine di ottenerne una misurazione oggettiva, sono state stabilite specifiche metriche di prodotto, le quali trovano puntuale rendicontazione e misurazione all'interno del \textit{Piano di Qualifica}. Tali metriche consentono di analizzare in termini quantitativi elementi determinanti sia del codice sorgente che dell'applicativo finale, tra cui la funzionalità, l'affidabilità, l'efficienza, l'usabilità, la manutenibilità e la portabilità.
+
+\subsection{Qualità del processo}
+Lo standard di riferimento per la qualità del processo è l'ISO/IEC 12207. Questo standard fornisce le linee guida per la gestione della qualità nei processi di sviluppo, includendo la pianificazione, il controllo e il miglioramento continuo.
+
+Secondo questo standard la qualità del processo si basa su diversi principi fondamentali:
+\begin{itemize}
+    \item \textbf{Focalizzazione su Scopo e Risultati (Purpose and Outcomes):} Questo rappresenta il pilastro fondamentale. Per garantire la qualità, ogni fase (dall'approvvigionamento alla creazione, fino alla verifica) deve avere finalità ben definite e generare esiti attesi che siano concreti, misurabili e verificabili.
+    \item \textbf{Approccio Modulare (Modularity):} La struttura dei processi deve basarsi su componenti caratterizzate da "forte coesione e debole accoppiamento". Ogni singolo modulo deve concentrarsi su un unico traguardo ed essere autonomo, così da limitare le ripercussioni sull'intero ciclo produttivo in caso di variazioni o criticità in un'area specifica.
+    \item \textbf{Attribuzione delle Responsabilità (Responsibility):} Seguendo il principio per cui una responsabilità indistinta equivale a nessuna responsabilità, lo standard richiede che ogni attività sia assegnata a un ruolo preciso (come Sviluppatore, Fornitore, Acquisitore o Verificatore), eliminando incertezze all'interno dell'organizzazione.
+    \item \textbf{Personalizzazione dei Processi (Tailoring):}Data la diversità tra i vari progetti software, lo standard prevede il principio del Tailoring. Le aziende devono adattare i processi alle proprie esigenze, selezionando esclusivamente le procedure pertinenti alla complessità, al rischio e alle risorse disponibili, evitando carichi burocratici superflui.
+    \item \textbf{Evoluzione Continua e Tracciabilità:}È essenziale che ogni intervento, anomalia o variazione sia riconducibile al requisito di partenza. Il sistema non è statico, poiché integra cicli di audit, revisione e gestione delle problematiche. Ciò permette al gruppo di lavoro di ottimizzare costantemente le proprie metodologie, avvalendosi spesso di modelli quali CMMI o SPICE per attestare il livello di maturità raggiunto.
+\end{itemize}
+
+\paragraph{Applicazione del Tailoring}
+Lo standard ISO/IEC 12207:1997 viene adattato al contesto di un team accademico che sviluppa un MVP stand-alone con moduli AI. Sono mantenuti i processi di \textbf{Fornitura} e \textbf{Sviluppo} (adattati con Agile/SCRUM), mentre Acquisizione, Operazione e Manutenzione sono esclusi. La documentazione è ridotta ai soli artefatti richiesti dalla baseline; la gestione della configurazione è delegata a GitHub. L'efficacia del tailoring è monitorata tramite la metrica \textbf{MPC-QMS}: un valore sotto soglia segnala la necessità di rivedere le scelte nell'iterazione successiva.
+
+In questo progetto, tale obiettivo viene perseguito attraverso una precisa delineazione di metodologie e strumenti operativi. Il controllo costante dell'avanzamento è garantito da sistemi di tracciamento dei problemi (\textit{issue tracking}) e da incontri periodici formalizzati, supportati da un'analisi rigorosa dei requisiti e da verifiche regolari sugli standard qualitativi dei risultati ottenuti.
+
+Al fine di assicurare un monitoraggio imparziale, il gruppo ha stabilito specifiche metriche di processo, dettagliate all'interno del \textit{Piano di Qualifica}. Tali indicatori permettono di misurare l'efficienza del ciclo di sviluppo, focalizzandosi su variabili critiche quali la puntualità nelle consegne, l'aderenza al budget stabilito, la frequenza di anomalie rilevate, l'estensione dei test e la conformità complessiva ai criteri prefissati.
+
+\section{Metriche}
+Questa sezione definisce in modo formale tutte le metriche adottate dal gruppo per quantificare la qualità del processo di sviluppo e del prodotto software finale. I valori di soglia (accettabili e ottimali) e i risultati effettivi delle misurazioni sono documentati nel \textit{Piano di Qualifica}, che contiene il cruscotto di valutazione con l'andamento storico delle misurazioni.
+
+Ogni metrica è descritta in termini di:
+\begin{itemize}
+    \item \textbf{Identificativo:} codice univoco della metrica;
+    \item \textbf{Nome:} denominazione della metrica;
+    \item \textbf{Descrizione:} definizione operativa dello scopo della metrica;
+    \item \textbf{Formula:} espressione matematica per il calcolo del valore;
+    \item \textbf{Unità di misura:} unità in cui il valore è espresso.
+\end{itemize}
+
+Le metriche di processo sono identificate dalla sigla \textbf{MPC} (Metrica di Processo e Controllo), mentre le metriche di prodotto dalla sigla \textbf{MPD} (Metrica di Prodotto).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Metriche per la qualità di processo}
+Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attività necessarie per sviluppare il prodotto. Il riferimento metodologico adottato è lo standard ISO/IEC 12207, adattato al Way of Working del gruppo. Le metriche non valutano il prodotto finito, ma il modo in cui esso viene realizzato.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi primari --- Fornitura}
+
+\paragraph{MPC-EV --- Earned Value}
+\begin{itemize}
+    \item \textbf{Descrizione:} Valore del lavoro effettivamente completato, misurato come la quota di valore pianificato corrispondente alle attività portate a termine nello sprint.
+    \item \textbf{Formula:}
+    $$\text{EV} = \text{PV} \times \frac{\text{Ore Completate}}{\text{Ore Pianificate}}$$
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-PV --- Planned Value}
+\begin{itemize}
+    \item \textbf{Descrizione:} Valore economico del lavoro pianificato per lo sprint, estratto dai preventivi del Piano di Progetto. Rappresenta il costo previsto per le attività programmate.
+    \item \textbf{Formula:}
+    $$\text{PV} = \sum_{i=1}^{n} (\text{Ore Previste}_i \times \text{Tariffa Oraria}_i)$$
+    dove $n$ è il numero di task pianificate nello sprint e la tariffa oraria corrisponde al ruolo assegnato alla task.
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-AC --- Actual Cost}
+\begin{itemize}
+    \item \textbf{Descrizione:} Costo effettivamente sostenuto per le ore lavorate nello sprint, ricavato dai consuntivi del Piano di Progetto.
+    \item \textbf{Formula:}
+    $$\text{AC} = \sum_{i=1}^{n} (\text{Ore Effettive}_i \times \text{Tariffa Oraria}_i)$$
+    dove $n$ è il numero di task completate nello sprint e la tariffa oraria corrisponde al ruolo assegnato alla task.
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-CPI --- Cost Performance Index}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura l'efficienza dei costi del progetto. Un valore inferiore a 1 indica che il progetto sta spendendo più del valore prodotto; un valore pari a 1 indica perfetta efficienza di costo.
+    \item \textbf{Formula:}
+    $$\text{CPI} = \frac{\text{EV}_{\text{cum}}}{\text{AC}_{\text{cum}}}$$
+    dove i valori cumulativi sommano tutti gli sprint dall'inizio del progetto.
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item CPI $> 1$: il progetto produce valore a un costo inferiore al previsto
+        \item CPI $= 1$: il progetto è in linea con il budget
+        \item CPI $< 1$: il progetto sta spendendo più del valore prodotto
+    \end{itemize}
+    \item \textbf{Unità di misura:} adimensionale
+\end{itemize}
+
+\paragraph{MPC-SPI --- Schedule Performance Index}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura l'efficienza della pianificazione temporale. Un valore inferiore a 1 indica ritardo rispetto al piano; un valore pari a 1 indica perfetto rispetto delle scadenze.
+    \item \textbf{Formula:}
+    $$\text{SPI} = \frac{\text{EV}_{\text{cum}}}{\text{PV}_{\text{cum}}}$$
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item SPI $> 1$: il progetto è in anticipo rispetto al piano
+        \item SPI $= 1$: il progetto è in linea con il piano
+        \item SPI $< 1$: il progetto è in ritardo rispetto al piano
+    \end{itemize}
+    \item \textbf{Unità di misura:} adimensionale
+\end{itemize}
+
+\paragraph{MPC-EAC --- Estimated At Completion}
+\begin{itemize}
+    \item \textbf{Descrizione:} Stima del costo totale finale del progetto proiettando l'efficienza di costo corrente (CPI) sull'intero budget rimanente.
+    \item \textbf{Formula:}
+    $$\text{EAC} = \frac{\text{BAC}}{\text{CPI}}$$
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item EAC $<$ BAC: il progetto si concluderà sotto budget
+        \item EAC $=$ BAC: il progetto rispetterà il budget
+        \item EAC $>$ BAC: il progetto supererà il budget
+    \end{itemize}
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-ETC --- Estimate To Complete}
+\begin{itemize}
+    \item \textbf{Descrizione:} Stima del costo rimanente necessario per completare il progetto a partire dallo sprint corrente, ottenuta sottraendo il costo cumulativo effettivo dalla stima a completamento.
+    \item \textbf{Formula:}
+    $$\text{ETC} = \text{EAC} - \text{AC}_{\text{cum}}$$
+    dove $\text{AC}_{\text{cum}}$ è la somma dei costi effettivi sostenuti dall'inizio del progetto fino allo sprint corrente.
+    \item \textbf{Unità di misura:} Euro
+\end{itemize}
+
+\paragraph{MPC-TEAC --- Time Estimate At Completion}
+\begin{itemize}
+    \item \textbf{Descrizione:} Stima della durata totale del progetto a partire dalla performance di avanzamento misurata dallo SPI. Se SPI $= 1$, il progetto terminerà esattamente nei tempi pianificati.
+    \item \textbf{Formula:}
+    $$\text{TEAC} = \frac{\text{Durata pianificata}}{\text{SPI}}$$
+    \item \textbf{Unità di misura:} settimane
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi primari --- Sviluppo}
+
+\paragraph{MPC-RSI --- Requirements Stability Index}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura la stabilità dei requisiti nel tempo, confrontando il numero di requisiti modificati, eliminati o aggiunti rispetto alla baseline iniziale dell'Analisi dei Requisiti. Valori prossimi al 100\% indicano un documento dei requisiti stabile e maturo.
+    \item \textbf{Formula:}
+    $$\text{RSI} = \left(1 - \frac{N_{\text{modificati}} + N_{\text{eliminati}} + N_{\text{aggiunti}}}{N_{\text{totali iniziali}}}\right) \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi di supporto --- Documentazione}
+
+\paragraph{MPC-IG --- Indice di Gulpease}
+\begin{itemize}
+    \item \textbf{Descrizione:} Indice di leggibilità calibrato per la lingua italiana. Valuta la complessità del testo in base alla lunghezza delle parole e delle frasi rispetto al numero totale di parole. Valori più alti indicano maggiore leggibilità. Il calcolo viene effettuato tramite estrazione del testo con \texttt{detex} e script Python.
+    \item \textbf{Formula:}
+    $$G = 89 - \frac{10 \cdot L}{P} + \frac{300 \cdot F}{P}$$
+    dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di frasi.
+    \item \textbf{Unità di misura:} adimensionale (scala 0--100)
+\end{itemize}
+
+\paragraph{MPC-CO --- Correttezza Ortografica}
+\begin{itemize}
+    \item \textbf{Descrizione:} Numero di errori grammaticali o di battitura rilevati nei documenti tramite strumenti automatici di controllo ortografico. La verifica viene condotta tramite estrazione del testo con \texttt{detex} e analisi automatica. Il valore accettabile e ottimale è zero errori.
+    \item \textbf{Formula:}
+    $$\text{CO} = \text{Numero di Errori Ortografici Rilevati}$$
+    \item \textbf{Unità di misura:} numero intero (conteggio assoluto)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi di supporto --- Verifica}
+
+\paragraph{MPC-CC --- Code Coverage}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di righe di codice sorgente effettivamente eseguite durante i test automatici. Misura il grado di copertura complessivo della suite di test. La metrica è applicabile a partire dalla fase PB, quando sarà disponibile il codice sorgente.
+    \item \textbf{Formula:}
+    $$\text{CC} = \frac{\text{Linee di Codice Eseguite dai Test}}{\text{Linee di Codice Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPC-TSR --- Test Success Rate}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di test automatici che hanno restituito un esito positivo sul totale dei test eseguiti. Un valore del 100\% indica l'assenza di regressioni nella suite corrente.
+    \item \textbf{Formula:}
+    $$\text{TSR} = \frac{\text{Test Superati}}{\text{Test Eseguiti}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi di supporto --- Gestione della qualità}
+
+\paragraph{MPC-QMS --- Quality Metrics Satisfied}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di metriche di qualità (di processo e di prodotto) che rientrano nel range accettabile definito nel Piano di Qualifica. Rappresenta un indicatore sintetico della salute complessiva del progetto al termine di ciascuno sprint.
+    \item \textbf{Formula:}
+    $$\text{QMS} = \frac{\text{Metriche soddisfatte}}{\text{Metriche misurate}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Processi organizzativi --- Gestione dei processi}
+
+\paragraph{MPC-TE --- Time Efficiency}
+\begin{itemize}
+    \item \textbf{Descrizione:} Rapporto tra le ore dedicate ad attività produttive effettivamente rendicontabili e le ore totali disponibili nello sprint. Indica quanta parte del tempo disponibile si traduce direttamente in avanzamento del progetto.
+    \item \textbf{Formula:}
+    $$\text{TE} = \frac{\text{Ore produttive}}{\text{Ore totali disponibili}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPC-PRI --- Percentuale Rischi Inattesi}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di rischi effettivamente manifestatisi che non erano stati identificati nel registro dei rischi del Piano di Progetto. Valori bassi indicano una pianificazione del rischio efficace e un registro dei rischi completo.
+    \item \textbf{Formula:}
+    $$\text{PRI} = \frac{N_{\text{rischi inattesi}}}{N_{\text{rischi totali manifestati}}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPC-LE --- Labor Efficiency}
+\begin{itemize}
+    \item \textbf{Descrizione:} Rapporto tra le ore dedicate ad attività a valore aggiunto (che producono direttamente un output di progetto) e il totale delle ore lavorate. Misura l'efficienza nell'impiego del lavoro del team, escludendo le attività non direttamente produttive.
+    \item \textbf{Formula:}
+    $$\text{LE} = \frac{\text{Ore a valore aggiunto}}{\text{Ore totali lavorate}} \times 100\%$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection{Metriche per la qualità di prodotto}
+Queste metriche misurano le proprietà interne ed esterne del software finale per garantire che il sistema rispetti i requisiti. Lo standard di riferimento è ISO/IEC 9126, adottato come base per la classificazione delle caratteristiche di qualità del prodotto.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Funzionalità}
+
+\paragraph{MPD01 --- Requisiti Obbligatori Soddisfatti}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di requisiti obbligatori correttamente implementati e verificati rispetto al totale dei requisiti obbligatori rilevati nell'Analisi dei Requisiti. Un requisito è considerato soddisfatto quando il relativo test di sistema risulta superato.
+    \item \textbf{Formula:}
+    $$\text{MPD01} = \frac{\text{Requisiti Obbligatori Soddisfatti}}{\text{Requisiti Obbligatori Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPD02 --- Requisiti Opzionali Soddisfatti}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di requisiti opzionali correttamente implementati e verificati rispetto al totale dei requisiti opzionali rilevati. Un requisito è considerato soddisfatto quando il relativo test di sistema risulta superato.
+    \item \textbf{Formula:}
+    $$\text{MPD02} = \frac{\text{Requisiti Opzionali Soddisfatti}}{\text{Requisiti Opzionali Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPD03 --- AI Acceptance Rate}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di generazioni AI valutate dagli utenti con un rating pari o superiore a 3 su 5 rispetto al totale delle generazioni valutate. Misura la qualità percepita delle risposte prodotte dai moduli AI Assistant e AI Co-Pilot del sistema.
+    \item \textbf{Formula:}
+    $$\text{MPD03} = \frac{\text{Generazioni con rating} \geq 3/5}{\text{Generazioni totali valutate}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Affidabilità}
+
+\paragraph{MPD04 --- Branch Coverage}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di rami decisionali (ad esempio i rami \textit{true} e \textit{false} di un costrutto \texttt{if}) eseguiti durante i test automatici. Garantisce che tutte le possibili direzioni del flusso logico siano state verificate dalla suite di test.
+    \item \textbf{Formula:}
+    $$\text{MPD04} = \frac{\text{Rami Decisionali Eseguiti}}{\text{Rami Decisionali Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\paragraph{MPD05 --- Defect Density}
+\begin{itemize}
+    \item \textbf{Descrizione:} Densità di difetti nel codice sorgente, calcolata come numero di difetti rilevati per ogni KLOC (migliaia di righe di codice). Valori bassi indicano maggiore qualità del codice prodotto e minore frequenza di anomalie.
+    \item \textbf{Formula:}
+    $$\text{MPD05} = \frac{\text{Numero di Difetti Rilevati}}{\text{KLOC}}$$
+    dove $\text{KLOC} = \text{Righe di Codice Totali} / 1000$.
+    \item \textbf{Unità di misura:} difetti per KLOC
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Efficienza}
+
+\paragraph{MPD06 --- Latenza Interfaccia Utente}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo di risposta del sistema a un'interazione dell'utente sull'interfaccia, misurato come intervallo tra l'invio della richiesta e la ricezione della risposta completa per le operazioni generali dell'applicazione (escluse le chiamate ai moduli AI).
+    \item \textbf{Formula:}
+    $$\text{MPD06} = T_{\text{risposta}} - T_{\text{richiesta}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+\paragraph{MPD07 --- Latenza Generazione Testo AI Assistant}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo intercorso tra l'invio del prompt al modulo AI Post Generator e la ricezione del testo della bozza completa generata dal servizio AI.
+    \item \textbf{Formula:}
+    $$\text{MPD07} = T_{\text{risposta AI}} - T_{\text{invio prompt}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+\paragraph{MPD08 --- Latenza Generazione Immagine AI Assistant}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo intercorso tra la richiesta di generazione dell'immagine di copertina al modulo AI Assistant e la ricezione dell'immagine generata e pronta per la visualizzazione.
+    \item \textbf{Formula:}
+    $$\text{MPD08} = T_{\text{ricezione immagine}} - T_{\text{richiesta immagine}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+\paragraph{MPD09 --- Latenza Analisi Documentale AI Co-Pilot}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo intercorso tra il caricamento di un documento e la restituzione dei metadati classificati dal modulo AI Analyst (classificazione tipologia, estrazione destinatario, livello di confidenza).
+    \item \textbf{Formula:}
+    $$\text{MPD09} = T_{\text{risultato analisi}} - T_{\text{caricamento documento}}$$
+    \item \textbf{Unità di misura:} secondi (s)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Usabilità}
+
+\paragraph{MPD10 --- Profondità Massima di Navigazione}
+\begin{itemize}
+    \item \textbf{Descrizione:} Numero massimo di livelli gerarchici che un utente deve attraversare per raggiungere qualsiasi funzionalità del sistema a partire dalla schermata principale. Valori bassi indicano un'interfaccia piatta e facilmente accessibile.
+    \item \textbf{Formula:}
+    $$\text{MPD10} = \max \left\{ \text{Livelli di navigazione necessari per raggiungere la funzionalità } f,\ \forall f \right\}$$
+    \item \textbf{Unità di misura:} livelli di navigazione
+\end{itemize}
+
+\paragraph{MPD11 --- Learning Time}
+\begin{itemize}
+    \item \textbf{Descrizione:} Tempo medio necessario a un utente privo di esperienza pregressa con il sistema per apprendere le funzionalità principali in modo autonomo, misurato tramite sessioni di user testing. La verifica avviene confrontando il tempo con la soglia accettabile di 30 minuti.
+    \item \textbf{Formula:}
+    $$\text{MPD11} = \frac{\displaystyle\sum_{i=1}^{n} T_{\text{apprendimento}_i}}{n}$$
+    dove $n$ è il numero di utenti coinvolti nella sessione di test e $T_{\text{apprendimento}_i}$ è il tempo impiegato dall'utente $i$ per completare le funzionalità principali senza assistenza.
+    \item \textbf{Unità di misura:} minuti
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Mantenibilità}
+
+\paragraph{MPD12 --- Code Smell}
+\begin{itemize}
+    \item \textbf{Descrizione:} Numero di code smell rilevati nel codice sorgente tramite analisi statica. I code smell sono indicatori di progettazione debole (metodi troppo lunghi, classi troppo grandi, duplicazione di codice) che, pur non essendo errori bloccanti, rendono il sistema fragile e difficile da manutenere nel tempo.
+    \item \textbf{Formula:}
+    $$\text{MPD12} = \text{Numero di Code Smell Rilevati}$$
+    \item \textbf{Unità di misura:} numero intero (conteggio assoluto)
+\end{itemize}
+
+\paragraph{MPD13 --- Coefficient of Coupling}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura il grado di interdipendenza tra i moduli del software. Un accoppiamento elevato implica che una modifica in un modulo rischi di propagarsi ad altri (effetto a catena), riducendo la manutenibilità del sistema.
+    \item \textbf{Formula:}
+    $$\text{MPD13} = \frac{\text{Dipendenze Effettive tra Moduli}}{n \times (n - 1)}$$
+    dove $n$ è il numero totale di moduli del sistema e $n \times (n-1)$ rappresenta il numero massimo di dipendenze direzionali possibili. Una dipendenza sussiste quando un modulo importa, invoca o referenzia direttamente un altro modulo.
+    \item \textbf{Interpretazione:}
+    \begin{itemize}
+        \item MPD13 $= 0$: nessun accoppiamento (moduli completamente indipendenti)
+        \item MPD13 $= 1$: accoppiamento massimo (ogni modulo dipende da tutti gli altri)
+    \end{itemize}
+    \item \textbf{Unità di misura:} adimensionale (scala 0--1)
+\end{itemize}
+
+\paragraph{MPD14 --- Cyclomatic Complexity}
+\begin{itemize}
+    \item \textbf{Descrizione:} Misura la complessità logica del codice contando il numero di percorsi linearmente indipendenti attraverso il flusso di controllo (costrutti \texttt{if}, \texttt{switch}, cicli). Valori elevati indicano codice difficile da testare e comprendere. Il valore riportato nel cruscotto è riferito al singolo metodo.
+    \item \textbf{Formula:}
+    $$M = E - N + 2P$$
+    dove $E$ è il numero di archi nel grafo di controllo del flusso, $N$ il numero di nodi (istruzioni) e $P$ il numero di componenti connesse del grafo (solitamente $P = 1$ per una singola funzione).
+    \item \textbf{Unità di misura:} numero intero (adimensionale)
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection{Portabilità}
+
+\paragraph{MPD15 --- Compatibilità Cross-Browser}
+\begin{itemize}
+    \item \textbf{Descrizione:} Percentuale di browser target (principali browser moderni evergreen nelle ultime due versioni stabili) sui quali il sistema funziona correttamente senza degradazione delle funzionalità o dell'interfaccia utente.
+    \item \textbf{Formula:}
+    $$\text{MPD15} = \frac{\text{Browser Supportati correttamente}}{\text{Browser Target Totali}} \times 100$$
+    \item \textbf{Unità di misura:} percentuale (\%)
+\end{itemize}
+
+\end{document}
