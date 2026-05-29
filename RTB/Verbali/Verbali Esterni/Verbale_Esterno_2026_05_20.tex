@@ -4,11 +4,25 @@
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage{geometry}
-\usepackage{tabularx}
+\usepackage{tabularx} % Per l'ambiente tabularx (tabelle)
+\usepackage{calc} % Sempre per le tabelle
 \usepackage[table]{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{xcolor}  
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{colortbl}
+\usepackage{eurosym}
+\usepackage[dvipsnames]{xcolor}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
 \newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
@@ -32,7 +46,7 @@
 \renewcommand{\footrulewidth}{0.4pt}
 \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
 \fancyfoot[C]{\thepage}
-\fancyfoot[R]{Verbale 2026-05-06}
+\fancyfoot[R]{Verbale 2026-05-20}
 
 \fancypagestyle{firstpage}{
     \fancyhf{}
@@ -48,7 +62,7 @@
     }
     \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
     \fancyfoot[C]{\thepage}
-    \fancyfoot[R]{Verbale  2026-05-06}
+    \fancyfoot[R]{Verbale 2026-05-20}
 }
 
 \providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
@@ -60,7 +74,7 @@
 \vspace*{0.5cm}
 
 \begin{center}
-    {\LARGE \textbf{Verbale Esterno - 2026-05-06}}
+    {\LARGE \textbf{Verbale Esterno - 2026-05-20}}
 \end{center}
 
 \vspace{1.5cm}
@@ -78,10 +92,10 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Redattore   & Alex Oloni \\
-            Verificatori& E. Bellet\\
+            Redattore   & E. Bellet \\
+            Verificatori& A. Oloni\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 2026-05-06\\
+            Data        & 2026-05-20\\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -100,23 +114,23 @@
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
 Luogo Riunione & Google Meet \\[6pt]
 
-Orario (Inizio - Fine) & 15:00 -- 15:20 \\[6pt]
+Orario (Inizio - Fine) & 14:30 -- 14.50 \\[6pt]
 
 \glslink{redattore}{Redattore} &
-A. Oloni\\[6pt]
+E. Bellet\\[6pt]
 
 \glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
 \glslink{verificatore}{Verificatore} &
-E. Bellet\\[6pt]
+A. Oloni\\[6pt]
 
 Partecipanti &
   A. Oloni\\ &
   A. Gastaldello\\ &
   E. Bellet\\ & 
   D. Belluz\\ &
-  A. Maule\\[6pt]
+  L. Soligo\\[6pt]
 
   Partecipanti Esterni &
   Luca Iuzzolino\\ &
@@ -126,38 +140,41 @@ Partecipanti &
 
 
 \section{Ordine del Giorno}
-\begin{itemize}
-    \item Discussione e conferma delle tecnologie per lo sviluppo del PoC.
-    \item Chiarimenti sulla gestione delle credenziali e degli accessi AWS.
-    \item Approvazione dei \glslink{mockup}{mockup} e dell'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti}.
-\end{itemize}
+    \begin{itemize}
+    \item Mostrare le tecnologie usate
+    \item Esposizione del PoC
+    \item Conclusioni e Richiesta del Bucket
+    \end{itemize}
 
 
 \section{Attività svolte}
-Di seguito vengono riportate le richieste effettuate dal gruppo e le risposte fornite dal referente aziendale.
+\subsection{Esposizione del PoC}
+\textbf{Angelica Gastaldello}, con la presenza della maggior parte del gruppo, ha mostrato il \textit{Proof of Concept} all'azienda, nel quale sono stati mostrati i principali casi d'uso, il quale l'azienda ha dato esito positivo, sia a livello di utilizzo che per quanto riguarda l'interfaccia grafica.
 
-\subsection{Scelte Tecnologiche per il PoC}
-Il gruppo ha proposto l'utilizzo di \textbf{\glslink{laravel}{Laravel}} e \textbf{\glslink{filament}{Filament}} per lo sviluppo del frontend e del backend. Il \glslink{committente-proponente}{proponente} ha confermato che non vi sono vincoli tecnologici e ha approvato pienamente la scelta, sottolineando che l'azienda dispone già di diversi progetti interni basati su questo stack.
+\subsection{Spiegazione delle tecnologie usate}
+\textbf{Leonardo Soligo} nell'esposizione ha spiegato le varie tecnologie usate, ossia:
+\begin{itemize}
+    \item Lo stack tecnologico include \glslink{redis}{Redis} per \glslink{metadati}{metadati} e cache, e \glslink{minio}{Minio} per lo storage di documenti originali e suddivisi.
+    \item È stata sviluppata un'interfaccia admin per la gestione delle credenziali e per simulare risposte \glslink{intelligenza-artificiale-ai}{AI}, testando \glslink{workflow}{workflow} di keytab.
+    \item L'elaborazione dei PDF viene delegata a un worker tramite coda \glslink{redis}{Redis}, senza bloccare la richiesta, e i documenti vengono salvati su \glslink{minio}{Minio}.
+    \item L'assistente generativo permette di impostare tono e stile per generare bozze, con l'elaborazione dei PDF che delega il contenuto testuale a Bedrock.
+    \item Sono emerse limitazioni nell'estrazione dati dai PDF, potenzialmente legate all'uso di Bedrock rispetto a un \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} più preciso, e si è discusso della necessità di identificare l'utente destinatario.
+\end{itemize}
 
-\subsection{Gestione Account e Credenziali AWS}
-È stata discussa la modalità di accesso alle risorse cloud. L'azienda fornirà al gruppo un account dedicato all'interno della propria organization AWS. Questo permetterà l'utilizzo di \glslink{amazon-bedrock}{Amazon Bedrock} e degli altri strumenti di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale} necessari. Eventuali necessità di permessi aggiuntivi potranno essere gestite su richiesta.
-
-\subsection{Approvazione Analisi dei Requisiti e Mockup}
-Il \glslink{committente-proponente}{proponente} ha confermato di aver visionato l'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti} inviata tramite i canali di comunicazione informali. L'azienda ha espresso parere positivo, ritenendo il materiale prodotto esaustivo e corretto. Non è stata richiesta una firma formale sui documenti, poiché l'analisi è considerata uno strumento di gestione interna del gruppo.
-
-\subsection{Presentazione dell'Interfaccia}
-Durante l'incontro è stato mostrato il \glslink{mockup}{mockup} dell'applicativo, includendo la landing page e i due moduli core (\textit{IA Assistant} e \textit{Copilot}). Il referente ha apprezzato la chiarezza dell'interfaccia e la coerenza con le funzionalità attese (gestione \glslink{prompt}{prompt}, verifica manuale \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}, metriche).
+\subsection{Conclusioni e Richiesta del Bucket}
+La dimostrazione ha avuto successo nel mostrare le funzionalità dell'applicazione e l'integrazione delle tecnologie. È stata confermata la disponibilità a fornire il bucket S3 richiesto per facilitare i test futuri. Ulteriori sviluppi potrebbero includere l'identificazione dell'utente e l'affinamento dei \glslink{prompt}{prompt} per migliorare l'estrazione dei dati dai documenti.
 
 \section{To-Do List}
 \begin{table}[h]
     \centering
-    \begin{tabular}{|l|p{5cm}|l|}
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
         \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
-        \textit{Alex Oloni} & Redigere il verbale 2026-05-06 & \href{https://github.com/aLittleByte-19/Documentazione/issues/80}{\#80}\\
+        \textit{Eleonora Bellet} & Redigere il verbale 2026-05-20 & \href{https://github.com/aLittleByte-19/Documentazione/issues/94}{\#94} \\
     \hline
     \end{tabular}
+    \label{tab:placeholder}
 \end{table}
 
 \end{document}

@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../../../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../../../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -50,6 +50,8 @@
     \fancyfoot[C]{\thepage}
     \fancyfoot[R]{Verbale  2026-04-20}
 }
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -100,13 +102,13 @@ Luogo Riunione & Google Meet \\[6pt]
 
 Orario (Inizio - Fine) & 16:00 -- 16:30 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
 A. Maule\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 A. Oloni\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 E. Bellet\\[6pt]
 
 Partecipanti &
@@ -125,7 +127,7 @@ Partecipanti &
 
 \section{Ordine del Giorno}
     \begin{itemize}
-    \item  Presentazione e revisione della bozza del mockup dell'interfaccia grafica.
+    \item  Presentazione e revisione della \glslink{bozza-draft}{bozza} del \glslink{mockup}{mockup} dell'interfaccia grafica.
     \item Chiarimenti sui requisiti di estrazione dati e perimetro del progetto.
     \end{itemize}
 
@@ -134,18 +136,18 @@ Di seguito vengono riportate le richieste da noi effettuate, i materiali present
 \subsection{Documenti di prova ed estrazione dati}
 Il gruppo ha richiesto all'azienda di poter visionare dei documenti di prova (es. cedolini o buste paga) per capire con precisione quali campi l'AI Copilot dovrà estrarre. Il referente ha suggerito di cercare autonomamente dei "fac-simile di busta paga" su internet, poiché i formati standard reperibili online sono sufficienti per i test. L'azienda si impegna inoltre a fornire ulteriore documentazione tecnica inoltrandola sul gruppo Telegram condiviso.
 \subsection{Organizzazione e priorità di sviluppo}
-È stato chiesto all'azienda quali funzionalità dovessero avere la priorità nello sviluppo. Il referente ha chiarito che il gruppo deve agire in totale autonomia, ponendosi come "fornitore" nei confronti dell'azienda. Di conseguenza, la gestione delle priorità dei task e la pianificazione degli sviluppi sono interamente a discrezione del team.
+È stato chiesto all'azienda quali funzionalità dovessero avere la priorità nello sviluppo. Il referente ha chiarito che il gruppo deve agire in totale autonomia, ponendosi come "fornitore" nei confronti dell'azienda. Di conseguenza, la gestione delle priorità dei task e la \glslink{pianificazione}{pianificazione} degli sviluppi sono interamente a discrezione del team.
 \subsection{Autenticazione e gestione utenti}
-Sono stati richiesti chiarimenti in merito alla necessità di implementare un sistema di login e di gestione degli utenti. L'azienda ha precisato che il progetto trattandosi di un di un Proof of Concept (PoC) destinato a integrarsi ipoteticamente nella piattaforma Nexum, lo sviluppo di sistemi di autenticazione e di gestione dei ruoli utente è del tutto escluso dai requisiti tecnici richiesti.
+Sono stati richiesti chiarimenti in merito alla necessità di implementare un sistema di login e di gestione degli utenti. L'azienda ha precisato che il progetto trattandosi di un di un Proof of Concept (PoC) destinato a integrarsi ipoteticamente nella piattaforma \glslink{nexum}{Nexum}, lo sviluppo di sistemi di autenticazione e di gestione dei ruoli utente è del tutto escluso dai requisiti tecnici richiesti.
 \subsection{Revisione mockup dell'interfaccia grafica}
-Il gruppo ha condiviso lo schermo per presentare un mockup in HTML dell'applicativo . L'azienda ha apprezzato il lavoro visivo. Per quanto riguarda lo "storico" nella parte di AI Assistant, è stato concordato che, trattandosi di un PoC, sarà sufficiente mostrare solo gli ultimi tre documenti elaborati. Il referente ha infine ribadito che l'obiettivo primario non è la perfezione della User Experience o del design, ma il corretto funzionamento delle logiche e delle funzionalità dell'Intelligenza Artificiale.
+Il gruppo ha condiviso lo schermo per presentare un \glslink{mockup}{mockup} in HTML dell'applicativo . L'azienda ha apprezzato il lavoro visivo. Per quanto riguarda lo "storico" nella parte di \glslink{intelligenza-artificiale-ai}{AI} Assistant, è stato concordato che, trattandosi di un PoC, sarà sufficiente mostrare solo gli ultimi tre documenti elaborati. Il referente ha infine ribadito che l'obiettivo primario non è la perfezione della User Experience o del design, ma il corretto funzionamento delle logiche e delle funzionalità dell'\glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}.
 \newpage
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit{Angela Maule} & Redigere il verbale 2026-04-20 & \href{https://github.com/aLittleByte-19/Documentazione/issues/67}{\#67}\\
     \hline
