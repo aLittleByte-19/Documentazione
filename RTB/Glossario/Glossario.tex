@@ -1,0 +1,514 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Glossario}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Glossario}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Glossario}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & V. Y. Kaneda Fernandes \\
+            Verificatori & Alex Oloni, Diego Belluz \\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-03-30
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+\fancyfoot[R]{Glossario\hspace{0.8em}}
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white}
+\begin{center}
+    {\footnotesize
+    \begin{tabularx}{\textwidth}{|l|l|X|p{2cm}|p{2cm}|p{2cm}|}
+        \hline
+        \rowcolor{gray!20}
+        \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        0.3.1 & 2026-05-22 & Aggiunti termini del Piano di Qualifica, Analisi dei Requisiti e Norme di Progetto. & V. Y. Kaneda Fernandes & - & - \\
+        0.3.0 & 2026-05-09 & Aggiunti termini dell'Analisi dei Requisiti, Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
+        0.2.3 & 2026-05-01 & Aggiunti termini dell'Analisi dei Requisiti & Eleonora Bellet & - & - \\
+        0.2.2 & 2026-04-27 & Aggiunta di alcuni termini delle Norme di Progetto e Piano di Progetto & V. Y. Kaneda Fernandes & - & - \\
+        0.2.1 & 2026-04-22 & Aggiunta di alcuni termini della Analisi dei Requisiti& V. Y. Kaneda Fernandes & - & - \\
+        0.2.0 & 2026-04-12 & Aggiunta termini al documento & V. Y. Kaneda Fernandes & - & - \\
+        0.1.0 & 2026-03-30 & Prima stesura del documento & V. Y. Kaneda Fernandes & - & - \\
+        \hline 
+    \end{tabularx}
+    }
+\end{center}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyfoot[R]{Glossario\hspace{0.8em}\thepage}
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+\section{A}
+
+\subsection{Agile}
+Modello di sviluppo basato su sprint bisettimanali, adottato dal team.
+
+\subsection{AI Analyst}
+Nucleo elaborativo del modulo AI Co-Pilot che esegue autonomamente classificazione documentale, OCR ed estrazione dati.
+
+\subsection{AI Assistant Generativo}
+Modulo che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini) a partire da un prompt.
+
+\subsection{AI Co-Pilot per Consulenti del Lavoro (CdL)}
+Sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati, estrarre i destinatari tramite OCR ed Entity Resolution.
+
+\subsection{AI Post Generator}
+Modulo esterno (attore di sistema) che costituisce il nucleo di intelligenza artificiale per l'elaborazione di testi, titoli e immagini.
+
+\subsection{Amazon Bedrock}
+Servizio AWS che rende disponibili modelli di fondazione (FM) tramite API, utilizzato per l'integrazione di funzionalità AI.
+
+\subsection{Amministratore}
+Ruolo responsabile della configurazione dell'ambiente standalone, della gestione dei privilegi e della definizione delle policy globali.
+
+\subsection{Analisi dei Requisiti (AdR)}
+Documento che formalizza le funzionalità del sistema, inclusa la modellazione degli attori, la descrizione dei casi d'uso e la classificazione dei requisiti.
+
+\subsection{Analisi dei Rischi}
+Processo strutturato per identificare, classificare e valutare potenziali eventi critici.
+
+\subsection{Analisi Dinamica}
+Attività di verifica del codice eseguita durante la sua esecuzione.
+
+\subsection{Analisi Statica}
+Attività di verifica del codice eseguita senza la sua esecuzione.
+
+\subsection{Analista}
+Ruolo incaricato dell'analisi dei requisiti e del dominio.
+
+\subsection{Analista Dati}
+Figura che supervisiona l'efficienza del sistema, monitorando le performance dell'IA attraverso feedback e metriche.
+
+\subsection{Approccio Incrementale}
+Metodo di stesura e sviluppo in cui i documenti e il prodotto vengono costantemente aggiornati e affinati nel tempo.
+
+\subsection{Attore}
+Ruolo ricoperto da un utente o da un sistema esterno che interagisce con l'applicazione.
+
+\subsection{Attore Primario}
+L'utente umano o il sistema esterno che avvia attivamente un caso d'uso.
+
+\subsection{Attore Secondario}
+Entità o sistema terzo coinvolto passivamente nel processo.
+
+\section{B}
+\subsection{Bookmark}
+Funzionalità che permette di contrassegnare e salvare i prompt preferiti.
+
+\subsection{Bozza (Draft)}
+Stato temporaneo di un documento salvato prima della validazione o invio definitivo.
+
+\subsection{Branch}
+Ramificazione del repository Git per lo sviluppo isolato.
+
+
+\section{C}
+\subsection{Capitolato}
+Documento tecnico fornito dal proponente che definisce requisiti e obiettivi.
+
+\subsection{Caso d'Uso (UC)}
+Descrizione di un'interazione tra un attore e il sistema.
+
+\subsection{Cedolini Massivi}
+File contenente le buste paga di più dipendenti, da suddividere automaticamente.
+
+\subsection{Ciclo Iterativo}
+Suddivisione del lavoro in periodi ricorrenti (sprint).
+
+\subsection{Code Review}
+Revisione del codice effettuata tra pari.
+
+
+\subsection{Committente (Proponente)}
+Azienda che ha commissionato il progetto (Eggon S.r.l.).
+
+\subsection{Confidenza (Confidence Score)}
+Percentuale che indica l'affidabilità del riconoscimento automatico.
+
+\subsection{Consulente del Lavoro (CdL)}
+Attore principale che utilizza l'AI Co-Pilot per gestire documenti.
+
+\subsection{Consuntivo}
+Rendiconto delle ore effettivamente impiegate e dei costi sostenuti.
+
+\subsection{Copie Atomiche}
+Singole parti risultanti dallo split di un documento massivo.
+
+
+\section{D}
+\subsection{Dashboard}
+Interfaccia grafica per visualizzare metriche e statistiche.
+
+\subsection{Discord}
+Piattaforma di comunicazione digitale utilizzata dal team per il coordinamento rapido, canali testuali/vocali e riunioni interne.
+
+\subsection{Detex}
+Strumento per rimuovere sintassi LaTeX ed estrarre testo puro.
+
+\subsection{Diagramma delle classi UML}
+Rappresentazione della struttura statica del sistema.
+
+\subsection{Diario di Bordo}
+Documento per il tracciamento settimanale delle attività.
+
+\subsection{Dispaccio}
+Processo automatico di invio dei documenti ai destinatari.
+
+\section{E}
+
+\subsection{Entity Resolution}
+Processo di riconoscimento e associazione dei destinatari ai documenti.
+
+\subsection{Esecuzione Asincrona}
+Modalità di esecuzione di operazioni lunghe in background.
+
+\section{F}
+\subsection{Figma}
+Strumento per la progettazione di mockup interattivi.
+
+\subsection{Filament}
+Framework PHP per interfacce amministrative, parte dello stack tecnologico.
+
+\subsection{Filtro dinamico}
+Strumento che aggiorna istantaneamente i dati visualizzati.
+
+\section{G}
+\subsection{GDPR}
+Regolamento europeo sulla protezione dei dati personali.
+
+\subsection{Git}
+Software per il controllo di versione distribuito.
+
+\subsection{GitHub}
+Piattaforma per hosting e gestione collaborativa di repository.
+
+\subsection{Glossario}
+Documento che definisce i termini tecnici e ambigui del progetto.
+
+\section{H}
+\subsection{Human-in-the-loop}
+Approccio con revisione umana per casi a bassa confidenza dell'AI.
+
+\section{I}
+\subsection{Indice di Gulpease (MPC-IG)}
+Indice di leggibilità per testi in italiano.
+
+\subsection{Intelligenza Artificiale (AI)}
+Tecnologie che permettono ai computer di svolgere attività che richiederebbero l'intelligenza umana, come l'apprendimento, il riconoscimento di pattern, la comprensione del linguaggio naturale e la generazione di contenuti.
+
+\subsection{Issue}
+Strumento per tracciare task su GitHub.
+
+\section{K}
+\subsection{KLOC}
+Migliaia di linee di codice.
+
+\subsection{KPI (Key Performance Indicator)}
+Indicatori numerici per misurare le performance del sistema.
+
+\section{L}
+
+\subsection{LaTeX}
+Linguaggio di composizione per documenti professionali.
+
+\subsection{Laravel}
+Framework PHP per lo sviluppo del backend.
+
+\subsection{Latenza}
+Tempo di risposta del sistema a una richiesta.
+
+
+\subsection{LLM (Large Language Model)}
+Modello di linguaggio di grandi dimensioni per la generazione di testo.
+
+\subsection{Lotto Documentale}
+Insieme di file caricati simultaneamente nel sistema.
+
+\section{M}
+\subsection{Marcatore di trasparenza}
+Dicitura "Creato da AI Assistant" inserita nei contenuti esportati.
+
+\subsection{Metadati}
+Informazioni di contesto associate a un file.
+
+\subsection{Milestone}
+Traguardo significativo nel cronoprogramma (RTB, PB).
+
+\subsection{MinIO}
+Storage compatibile con API S3 per la gestione dei file.
+
+\subsection{Mitigazione (dei rischi)}
+Azioni per ridurre probabilità o impatto di un rischio.
+
+\subsection{Mockup}
+Prototipo grafico dell'interfaccia utente.
+
+\subsection{Modello C4}
+Modello per descrivere l'architettura del sistema.
+
+\subsection{Modello di Sviluppo}
+Approccio metodologico adottato (Agile/SCRUM).
+
+\subsection{Moduli Esterni}
+Sistemi terzi con cui il software scambia dati (AI Analyst, AI Post Generator).
+
+\subsection{MVP (Minimum Viable Product)}
+Versione con funzionalità minime necessarie.
+
+\section{N}
+\subsection{Nexum}
+Piattaforma digitale di Eggon per comunicazione e gestione HR.
+
+\subsection{Norme di Progetto}
+Documento che definisce Way of Working, ruoli, strumenti e procedure.
+
+\section{O}
+\subsection{OCR (Riconoscimento Ottico dei Caratteri)}
+Tecnologia per estrarre testo da immagini o PDF scannerizzati.
+
+\section{P}
+\subsection{PB (Product Baseline)}
+Fase finale del progetto per lo sviluppo e la consegna del prodotto.
+
+\subsection{Penpot}
+Strumento open source scelto per la progettazione di mockup.
+
+\subsection{Pest}
+Framework di testing per PHP.
+
+\subsection{Pianificazione}
+Attività di definizione di compiti, scadenze e responsabilità.
+
+\subsection{Piano di Progetto}
+Documento con pianificazione, rischi, preventivi e consuntivi.
+
+\subsection{Piano di Qualifica}
+Documento con metriche, test e obiettivi di qualità.
+
+
+\subsection{Postcondizioni}
+Stato finale del sistema dopo un caso d'uso.
+
+\subsection{PostgreSQL}
+Database relazionale del sistema.
+
+\subsection{Precondizioni}
+Stato obbligatorio prima di un caso d'uso.
+
+\subsection{Preventivo}
+Stima delle ore e dei costi prima dello sprint.
+
+\subsection{Progettista}
+Ruolo responsabile dell'architettura del sistema.
+
+\subsection{Programmatore}
+Ruolo responsabile della codifica.
+
+\subsection{Prompt}
+Testo fornito all'AI per generare un contenuto.
+
+\subsection{Pull Request}
+Richiesta di integrazione di modifiche su GitHub.
+
+\subsection{PWA (Progressive Web App)}
+Applicazione web con esperienza simile a un'app nativa.
+
+\section{R}
+\subsection{Rating}
+Punteggio assegnato dall'utente al contenuto generato.
+
+\subsection{RBAC (Role-Based Access Control)}
+Controllo degli accessi basato sui ruoli.
+
+\subsection{Redattore}
+Utente che utilizza l'AI Assistant per creare comunicazioni.
+
+\subsection{Redis}
+Sistema per code asincrone e caching.
+
+\subsection{Requisiti Funzionali}
+Specifiche che descrivono i comportamenti, i servizi e le funzioni che il sistema deve eseguire per soddisfare i bisogni dell'utente.
+
+\subsection{Requisiti opzionali}
+Funzionalità accessorie che possono essere implementate solo se le risorse e i tempi lo permettono, senza impattare sugli obiettivi primari
+
+\subsection{Responsabile}
+Ruolo di project manager: coordina, pianifica e approva.
+
+\subsection{Repository}
+Archivio digitale per documenti e codice.
+
+\subsection{Rischio}
+ Evento o condizione incerta la cui occorrenza può influire (positivamente o negativamente) su costi, tempi o qualità degli obiettivi di progetto.
+
+\subsection{RTB (Requirements and Technology Baseline)}
+Milestone di progetto finalizzata alla validazione dei requisiti analizzati e al consolidamento dell'architettura tecnologica tramite prototipazione (PoC).
+
+\section{S}
+\subsection{Scenario Alternativo}
+Percorso di gestione di errori o eccezioni.
+
+\subsection{Scenario Principale}
+Sequenza ottimale di interazioni.
+
+\subsection{Soglia di Confidenza}
+Valore limite per l'intervento manuale (es. 80\%).
+
+\subsection{Sottocaso}
+Scomposizione di un caso d'uso complesso.
+
+\subsection{Split Automatico}
+Suddivisione di documenti multi-destinatario.
+
+\subsection{Sprint}
+Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi
+
+\subsection{Stakeholder}
+Soggetti con interesse nel progetto (committente, docenti, utenti).
+
+\subsection{Standalone}
+Applicazione che funziona in modo indipendente.
+
+\subsection{Stile Editoriale}
+Parametro che calibra lo stile di scrittura dell'AI.
+
+\section{T}
+\subsection{Test di Accettazione}
+Test che validano il sistema rispetto al capitolato.
+
+\subsection{Test di Integrazione}
+Test tra più moduli.
+
+\subsection{Test di Regressione}
+Test per rilevare nuovi errori dopo modifiche.
+
+\subsection{Test di Sistema}
+Test end-to-end in ambiente simulato.
+
+\subsection{Test di Unità}
+Test su singole funzioni in isolamento.
+
+\subsection{Timeout}
+Interruzione di un'operazione che supera il tempo massimo.
+
+\subsection{Tono Comunicativo}
+Parametro che calibra il tono dell'AI.
+
+\subsection{Trigger}
+Evento che innesca un caso d'uso.
+
+\section{U}
+\subsection{Utente Operativo}
+Utente autorizzato alle funzionalità ordinarie.
+
+\section{V}
+\subsection{Verbale Esterno}
+Resoconto di riunione con il proponente.
+
+\subsection{Verbale Interno}
+Resoconto di riunione del team.
+
+\subsection{Verificatore}
+Ruolo responsabile della verifica di documenti e codice.
+
+\subsection{Versioning}
+Sistema che tiene traccia delle versioni.
+
+\section{W}
+\subsection{Walkthrough}
+Metodo di revisione informale di documenti o codice.
+
+\subsection{Way of Working (WoW)}
+Insieme di norme, strumenti e procedure del gruppo.
+
+\subsection{Workflow}
+Sequenza automatica di passaggi per l'elaborazione.
+
+\end{document}
