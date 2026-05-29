@@ -133,6 +133,10 @@ def main():
     css_src = os.path.join(SITE_SRC, 'style.css')
     if os.path.exists(css_src):
         shutil.copy2(css_src, os.path.join(BUILD_DIR, 'style.css'))
+
+    glossary_src = os.path.join(SITE_SRC, 'glossario.html')
+    if os.path.exists(glossary_src):
+        shutil.copy2(glossary_src, os.path.join(BUILD_DIR, 'glossario.html'))
     
     # Asset (Logo ecc)
     assets_src = os.path.join(SITE_SRC, 'assets')
