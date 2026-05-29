@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{Immagini/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+\newcommand{\grouplogo}{assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -50,6 +50,8 @@
         \fancyfoot[C]{\thepage}
     \fancyfoot[R]{Verbale 2026-05-04}
 }
+
+\providecommand{\glslink}[2]{\href{http://127.0.0.1:8765/glossary-html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 15:00 -- 16.00 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
   A. Oloni\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 V. Y. Kaneda Fernandes\\[6pt]
 
 Partecipanti &
@@ -120,26 +122,26 @@ Partecipanti &
 
 \section{Ordine del Giorno}
     \begin{itemize}
-    \item Approvazione e integrazione immagini nel documento ADR  
+    \item Approvazione e integrazione immagini nel documento \glslink{analisi-dei-requisiti-adr}{ADR}  
     \item Gestione dei Requisiti (Opzionali e Proof of Concept)  
-    \item Presentazione del foglio Excel automatizzato per il Consuntivo  
-    \item Revisione del Piano di Progetto e distribuzione ore per ruolo  
-    \item Workflow su GitHub e grafici automatici
+    \item Presentazione del foglio Excel automatizzato per il \glslink{consuntivo}{Consuntivo}  
+    \item Revisione del \glslink{piano-di-progetto}{Piano di Progetto} e distribuzione ore per ruolo  
+    \item \glslink{workflow}{Workflow} su \glslink{github}{GitHub} e grafici automatici
     \end{itemize}
 
 
 \section{Attività svolte}
 \subsection{Documentazione Analisi dei Requisiti (ADR)}
-Il team ha quasi terminato l'inserimento di tutte le immagini e degli schemi necessari nel documento ADR. È stata identificata una sezione finale sui requisiti ancora da integrare. È emersa una discussione anche sulla mancanza di requisiti opzionali. Si è deciso di procedere inserendo solo quanto strettamente necessario per ora, riservandosi di aggiungere ulteriori specifiche dopo un confronto con l'azienda durante la fase di PoC (Proof of Concept).
+Il team ha quasi terminato l'inserimento di tutte le immagini e degli schemi necessari nel documento \glslink{analisi-dei-requisiti-adr}{ADR}. È stata identificata una sezione finale sui requisiti ancora da integrare. È emersa una discussione anche sulla mancanza di \glslink{requisiti-opzionali}{requisiti opzionali}. Si è deciso di procedere inserendo solo quanto strettamente necessario per ora, riservandosi di aggiungere ulteriori specifiche dopo un confronto con l'azienda durante la fase di PoC (Proof of Concept).
 
 \subsection{Strumenti di Monitoraggio e Piano di Progetto}
-È stato mostrato un nuovo foglio Excel automatizzato per la gestione economica: il sistema permette di aggiornare i costi e le ore in uno Sprint (es. Sprint 1) riflettendo automaticamente le modifiche sul saldo rimanente e sulle proiezioni degli Sprint futuri. Il Piano di Progetto è stato esteso per includere anche il periodo di pianificazione antecedente alla candidatura e le attività legate all'RTP. Si è ribadita la necessità di chiudere le Issue su GitHub correttamente, poiché i diagrammi di Gantt e i report "Insights" vengono generati automaticamente per essere poi incollati nel Piano di Progetto.
+È stato mostrato un nuovo foglio Excel automatizzato per la gestione economica: il sistema permette di aggiornare i costi e le ore in uno \glslink{sprint}{Sprint} (es. \glslink{sprint}{Sprint} 1) riflettendo automaticamente le modifiche sul saldo rimanente e sulle proiezioni degli \glslink{sprint}{Sprint} futuri. Il \glslink{piano-di-progetto}{Piano di Progetto} è stato esteso per includere anche il periodo di \glslink{pianificazione}{pianificazione} antecedente alla candidatura e le attività legate all'RTP. Si è ribadita la necessità di chiudere le \glslink{issue}{Issue} su \glslink{github}{GitHub} correttamente, poiché i diagrammi di Gantt e i report "Insights" vengono generati automaticamente per essere poi incollati nel \glslink{piano-di-progetto}{Piano di Progetto}.
 
 \subsection{Bilancio delle Ore e dei Ruoli}
 Si è discusso della ripartizione del carico di lavoro tra i vari ruoli per ottimizzare il budget:
 \begin{itemize}
-    \item Analista: Le ore preventivate risultano molto sollecitate in questa fase .
-    \item Progettista: Si è proposto di spostare alcune ore da questo ruolo a quello di Analista per compensare l'attuale carico dell'ADR, prevedendo che il lavoro del progettista si intensificherà solo dopo l'RTB.
+    \item \glslink{analista}{Analista}: Le ore preventivate risultano molto sollecitate in questa fase .
+    \item \glslink{progettista}{Progettista}: Si è proposto di spostare alcune ore da questo ruolo a quello di \glslink{analista}{Analista} per compensare l'attuale carico dell'\glslink{analisi-dei-requisiti-adr}{ADR}, prevedendo che il lavoro del \glslink{progettista}{progettista} si intensificherà solo dopo l'\glslink{rtb-requirements-and-technology-baseline}{RTB}.
     \end{itemize}
 
 
@@ -149,25 +151,25 @@ Si è discusso della ripartizione del carico di lavoro tra i vari ruoli per otti
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit {Leonardo Soligo} &  Presentazione del Mock-up per l'azienda & \href{https://github.com/aLittleByte-19/Documentazione/issues/74}{\#74}\\
     \hline
-        \textit{Angelica Gastaldello e Angela Maule} &  Inizio studi Backend in Laravel & \href{https://github.com/aLittleByte-19/Documentazione/issues/82}{\#82}\\
+        \textit{Angelica Gastaldello e Angela Maule} &  Inizio studi Backend in \glslink{laravel}{Laravel} & \href{https://github.com/aLittleByte-19/Documentazione/issues/82}{\#82}\\
     \hline
-        \textit{V. Y. Kaneda Fernandes} & Continuazione della stesura del Glossario & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
+        \textit{V. Y. Kaneda Fernandes} & Continuazione della stesura del \glslink{glossario}{Glossario} & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
     \hline
-        \textit{Eleonora Bellet e Diego Belluz} & Inizio studi frontend in Filament & \href{https://github.com/aLittleByte-19/Documentazione/issues/83}{\#83}\\
+        \textit{Eleonora Bellet e Diego Belluz} & Inizio studi frontend in \glslink{filament}{Filament} & \href{https://github.com/aLittleByte-19/Documentazione/issues/83}{\#83}\\
     \hline 
-        \textit{Alex Oloni} & Inizio stesura del Piano di Qualifica &
+        \textit{Alex Oloni} & Inizio stesura del \glslink{piano-di-qualifica}{Piano di Qualifica} &
         \href{https://github.com/aLittleByte-19/Documentazione/issues/92}{\#92}\\
     \hline
-        \textit{Alex Oloni} & Continuazione della stesura del Piano di Progetto &
+        \textit{Alex Oloni} & Continuazione della stesura del \glslink{piano-di-progetto}{Piano di Progetto} &
         \href{https://github.com/aLittleByte-19/Documentazione/issues/63}{\#63}\\
     \hline
         \textit{Alex Oloni} & Continuazione della stesura del File Excel per le ore & \href{https://github.com/aLittleByte-19/Documentazione/issues/70}{\#70}\\
     \hline 
-        \textit{Alex Oloni} & Stesura Verbale Interno 04/05/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/78}{\#78}\\
+        \textit{Alex Oloni} & Stesura \glslink{verbale-interno}{Verbale Interno} 04/05/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/78}{\#78}\\
     \hline
     \end{tabular}
     \label{tab:placeholder}

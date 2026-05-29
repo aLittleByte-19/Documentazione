@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{Immagini/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+\newcommand{\grouplogo}{assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -50,6 +50,8 @@
         \fancyfoot[C]{\thepage}
     \fancyfoot[R]{Verbale 2026-05-11}
 }
+
+\providecommand{\glslink}[2]{\href{http://127.0.0.1:8765/glossary-html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 15:00 -- 15:40 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
   E. Bellet\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 V. Y. Kaneda Fernandes\\[6pt]
 
 Partecipanti &
@@ -123,47 +125,47 @@ Partecipanti &
 
 \section{Ordine del Giorno}
     \begin{itemize}
-    \item Pianificazione architettura e tecnologie per il Proof of Concept (POC)
-    \item Stato di avanzamento del Glossario e delle correzioni manuali
-    \item Verifica delle sezioni mancanti nelle Norme di Progetto (Way of Working e Test)
-    \item Organizzazione del diario di bordo e flussi di caricamento su Repository
+    \item \glslink{pianificazione}{Pianificazione} architettura e tecnologie per il Proof of Concept (POC)
+    \item Stato di avanzamento del \glslink{glossario}{Glossario} e delle correzioni manuali
+    \item Verifica delle sezioni mancanti nelle \glslink{norme-di-progetto}{Norme di Progetto} (\glslink{way-of-working-wow}{Way of Working} e Test)
+    \item Organizzazione del \glslink{diario-di-bordo}{diario di bordo} e flussi di caricamento su \glslink{repository}{Repository}
 \end{itemize}
 
 
 \section{Attività svolte}
 \subsection{Piano su POC e Scelte Tecnologiche}
-Il team ha discusso l'architettura tecnica per lo sviluppo del Proof of Concept (POC). Lo stack principale si baserà su Laravel e Filament. Per quanto riguarda lo storage e la simulazione degli ambienti cloud (AWS-like), Leonardo ha proposto l'adozione di MinIO, data la sua piena compatibilità con le API S3; questo permetterà di lavorare in locale in modo replicabile tramite container Docker, facilitando l'integrazione immediata non appena saranno attive le credenziali definitive (il cui link di invito ha una validità di una settimana).
-Dal punto di vista metodologico, si darà priorità al networking e alla configurazione dell'environment prima di procedere all'integrazione applicativa nei container. Angelica ha confermato di aver avviato lo sviluppo e mostrato una prima demo con Filament. L'integrazione di componenti di intelligenza artificiale rimarrà minimale in questa fase (es. prompt per generazione automatica di titoli e contenuti).
+Il team ha discusso l'architettura tecnica per lo sviluppo del Proof of Concept (POC). Lo stack principale si baserà su \glslink{laravel}{Laravel} e \glslink{filament}{Filament}. Per quanto riguarda lo storage e la simulazione degli ambienti cloud (AWS-like), Leonardo ha proposto l'adozione di \glslink{minio}{MinIO}, data la sua piena compatibilità con le API S3; questo permetterà di lavorare in locale in modo replicabile tramite container Docker, facilitando l'integrazione immediata non appena saranno attive le credenziali definitive (il cui link di invito ha una validità di una settimana).
+Dal punto di vista metodologico, si darà priorità al networking e alla configurazione dell'environment prima di procedere all'integrazione applicativa nei container. Angelica ha confermato di aver avviato lo sviluppo e mostrato una prima demo con \glslink{filament}{Filament}. L'integrazione di componenti di intelligenza artificiale rimarrà minimale in questa fase (es. \glslink{prompt}{prompt} per generazione automatica di titoli e contenuti).
 
 \subsection{Glossario e Diario di Bordo (DR)}
 Leonardo ha terminato la stesura delle ultime voci del glossary-link raccogliendo i feedback inviati da Yuri. Attualmente si rende necessario un test di carico sui documenti più pesanti per verificare la corretta tenuta e il funzionamento dei link di navigazione interna. Eventuali fix rapidi verranno applicati non appena saranno inserite le nuove sezioni testuali.
-In merito ai colloqui documentati nel diario di bordo con il Prof. Cardin, è stato chiarito che tali incontri hanno natura prettamente informativa e di allineamento preliminare, senza che vi sia l'aspettativa di correzioni formali immediate. Nuovi quesiti tecnici verranno formalizzati solo a seguito delle prime evidenze riscontrate durante il setup del POC.
+In merito ai colloqui documentati nel \glslink{diario-di-bordo}{diario di bordo} con il Prof. Cardin, è stato chiarito che tali incontri hanno natura prettamente informativa e di allineamento preliminare, senza che vi sia l'aspettativa di correzioni formali immediate. Nuovi quesiti tecnici verranno formalizzati solo a seguito delle prime evidenze riscontrate durante il setup del POC.
 
 
 \subsection{Avanzamento Norme di Progetto}
-È stato rilevato un gap documentale all'interno delle Norme di Progetto (Norme/Way of Working). Il team ha aperto un confronto per identificare se la mancanza risieda nella sezione dedicata alle strategie di Test o in una sottoparte dei processi di lavoro operativi. È stato richiesto un controllo ispettivo immediato per sbloccare la stesura e permettere l'avanzamento delle attività incrementali.
+È stato rilevato un gap documentale all'interno delle \glslink{norme-di-progetto}{Norme di Progetto} (Norme/\glslink{way-of-working-wow}{Way of Working}). Il team ha aperto un confronto per identificare se la mancanza risieda nella sezione dedicata alle strategie di Test o in una sottoparte dei processi di lavoro operativi. È stato richiesto un controllo ispettivo immediato per sbloccare la stesura e permettere l'avanzamento delle attività incrementali.
 
 \subsection{Gestione Repository e Flusso Documentale}
-Per la gestione del diario di bordo, Alex ha proposto una struttura rigorosa all'interno della repository con una cartella dedicata e un naming standardizzato basato sul formato data lineare (Anno-Mese-Giorno). Viene categoricamente stabilito che tutti i diari e i verbali ufficiali debbano essere pubblicati sul sito web del gruppo e non semplicemente condivisi sui canali di messaggistica interni.
+Per la gestione del \glslink{diario-di-bordo}{diario di bordo}, Alex ha proposto una struttura rigorosa all'interno della \glslink{repository}{repository} con una cartella dedicata e un naming standardizzato basato sul formato data lineare (Anno-Mese-Giorno). Viene categoricamente stabilito che tutti i diari e i verbali ufficiali debbano essere pubblicati sul sito web del gruppo e non semplicemente condivisi sui canali di messaggistica interni.
 
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit {Alex Oloni e Vinicius Yuri Kaneda Fernandes} & Studio Tecnologie da Implementare & \href{https://github.com/aLittleByte-19/Documentazione/issues/87}{\#87}\\
     \hline
          \textit {Angelica Gastaldello e Leonardo Soligo} & Sviluppo POC& \href{https://github.com/aLittleByte-19/Documentazione/issues/86}{\#86}\\
     \hline
-        \textit{Angela Maule} &  Continuazione della stesura dell'Analisi dei Requisiti & \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
+        \textit{Angela Maule} &  Continuazione della stesura dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
     \hline
-        \textit{Diego Belluz} &  Continuazione della stesura di Norme di Progetto& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
+        \textit{Diego Belluz} &  Continuazione della stesura di \glslink{norme-di-progetto}{Norme di Progetto}& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
     \hline
-        \textit{Eleonora Bellet} & Continuzione stesura piano di qualifica & \href{https://github.com/aLittleByte-19/Documentazione/issues/92}{\#92}\\
+        \textit{Eleonora Bellet} & Continuzione stesura \glslink{piano-di-qualifica}{piano di qualifica} & \href{https://github.com/aLittleByte-19/Documentazione/issues/92}{\#92}\\
     \hline
-        \textit{Eleonora Bellet} & Stesura Verbale Interno 11/05/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/85}{\#85}\\
+        \textit{Eleonora Bellet} & Stesura \glslink{verbale-interno}{Verbale Interno} 11/05/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/85}{\#85}\\
     \hline
     \end{tabular}
     \label{tab:placeholder}
