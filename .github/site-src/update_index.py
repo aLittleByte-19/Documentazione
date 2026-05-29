@@ -13,6 +13,47 @@ TEMPLATE_PATH = os.path.join(SITE_SRC, 'index_template.html')
 # Cartelle e file da escludere dalla scansione e dal deploy finale
 EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
+ROOT_SECTION_ORDER = {'rtb': 0, 'diapositive': 1, 'candidatura': 2}
+ACRONYMS = {'adr': 'AdR', 'pb': 'PB', 'poc': 'PoC', 'rtb': 'RTB'}
+LOWERCASE_TITLE_WORDS = {
+    'a', 'ad', 'al', 'allo', 'ai', 'agli', 'alla', 'alle',
+    'con', 'da', 'dal', 'dallo', 'dai', 'dagli', 'dalla', 'dalle',
+    'de', 'del', 'dello', 'dei', 'degli', 'della', 'delle',
+    'di', 'e', 'in', 'nel', 'nello', 'nei', 'negli', 'nella', 'nelle',
+    'o', 'per', 'su', 'sul', 'sullo', 'sui', 'sugli', 'sulla', 'sulle',
+    'tra', 'fra'
+}
+
+def format_dir_title(dirname):
+    text = dirname.replace('-', ' ').replace('_', ' ')
+    tokens = re.split(r'(\s+)', text.strip())
+    formatted = []
+    word_index = 0
+
+    for token in tokens:
+        if not token or token.isspace():
+            formatted.append(token)
+            continue
+
+        normalized = token.lower()
+        if normalized in ACRONYMS:
+            formatted.append(ACRONYMS[normalized])
+        elif word_index > 0 and normalized in LOWERCASE_TITLE_WORDS:
+            formatted.append(normalized)
+        else:
+            formatted.append(normalized.capitalize())
+        word_index += 1
+
+    return ''.join(formatted)
+
+def get_dir_id(relative_path):
+    slug = relative_path.replace(os.sep, ' ').lower()
+    slug = re.sub(r'[^a-z0-9]+', '-', slug).strip('-')
+    return slug
+
+def sort_root_sections(item):
+    normalized = item.lower()
+    return (ROOT_SECTION_ORDER.get(normalized, len(ROOT_SECTION_ORDER)), normalized)
 
 def build_html_tree(base_path, relative_path=""):
     html_output = ""
@@ -23,6 +64,9 @@ def build_html_tree(base_path, relative_path=""):
 
     # Ottieni cartelle e file, ignorando file nascosti e cartelle escluse
     items = sorted([i for i in os.listdir(current_dir) if not i.startswith('.')])
+
+    if not relative_path:
+        items.sort(key=sort_root_sections)
     
     # Assicura che la Lettera di Presentazione sia in cima
     for i, item in enumerate(items):
@@ -62,12 +106,13 @@ def build_html_tree(base_path, relative_path=""):
             else:
                 file_path = f
             name_without_ext = os.path.splitext(f)[0]
-            html_output += f'        <p><a href="{file_path}" target="_blank">{name_without_ext}</a></p>\n'
+            html_output += f'        <p><a href="{file_path}" target="_blank" rel="noopener noreferrer">{name_without_ext}</a></p>\n'
         html_output += '    </div>\n'
 
     # 2. Esplora ricorsivamente
     for d in dirs:
-        dir_title = d.replace('-', ' ').title()
+        dir_title = format_dir_title(d)
+        dir_id = get_dir_id(os.path.join(relative_path, d))
         depth = len(relative_path.split(os.sep)) if relative_path else 0
         header_level = min(depth + 2, 6) 
         
@@ -75,7 +120,7 @@ def build_html_tree(base_path, relative_path=""):
         
         if sub_content.strip():
             # Implementazione cartelle collassabili
-            html_output += f'\n    <details class="dir-container">\n'
+            html_output += f'\n    <details id="{dir_id}" class="dir-container">\n'
             html_output += f'        <summary class="dir-title"><h{header_level}>{dir_title}</h{header_level}></summary>\n'
             html_output += f'        <div class="dir-content">\n'
             html_output += sub_content
