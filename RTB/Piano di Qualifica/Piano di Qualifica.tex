@@ -9,7 +9,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{float}
 \usepackage{fancyhdr}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks, pdfnewwindow]{hyperref}
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{eurosym}
@@ -65,7 +65,7 @@
 
 \begin{document}
 
-\hypersetup{pageanchor=false}
+\hypersetup{pageanchor=false, pdfnewwindow=true}
 
 \thispagestyle{firstpage}
 
@@ -168,7 +168,7 @@
 
 \newpage
 \pagenumbering{arabic}
-\hypersetup{pageanchor=true}
+\hypersetup{pageanchor=true, pdfnewwindow=true}
 \setcounter{page}{4}
 \fancyfoot[R]{Piano di Qualifica\hspace{0.8em}\thepage}
 
