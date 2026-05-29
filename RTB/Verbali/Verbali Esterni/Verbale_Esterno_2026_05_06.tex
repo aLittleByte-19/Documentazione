@@ -51,6 +51,8 @@
     \fancyfoot[R]{Verbale  2026-05-06}
 }
 
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
+
 \begin{document}
 
 \thispagestyle{firstpage}
@@ -100,13 +102,13 @@ Luogo Riunione & Google Meet \\[6pt]
 
 Orario (Inizio - Fine) & 15:00 -- 15:20 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
 A. Oloni\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 E. Bellet\\[6pt]
 
 Partecipanti &
@@ -127,7 +129,7 @@ Partecipanti &
 \begin{itemize}
     \item Discussione e conferma delle tecnologie per lo sviluppo del PoC.
     \item Chiarimenti sulla gestione delle credenziali e degli accessi AWS.
-    \item Approvazione dei mockup e dell'analisi dei requisiti.
+    \item Approvazione dei \glslink{mockup}{mockup} e dell'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti}.
 \end{itemize}
 
 
@@ -135,23 +137,23 @@ Partecipanti &
 Di seguito vengono riportate le richieste effettuate dal gruppo e le risposte fornite dal referente aziendale.
 
 \subsection{Scelte Tecnologiche per il PoC}
-Il gruppo ha proposto l'utilizzo di \textbf{Laravel} e \textbf{Filament} per lo sviluppo del frontend e del backend. Il proponente ha confermato che non vi sono vincoli tecnologici e ha approvato pienamente la scelta, sottolineando che l'azienda dispone già di diversi progetti interni basati su questo stack.
+Il gruppo ha proposto l'utilizzo di \textbf{\glslink{laravel}{Laravel}} e \textbf{\glslink{filament}{Filament}} per lo sviluppo del frontend e del backend. Il \glslink{committente-proponente}{proponente} ha confermato che non vi sono vincoli tecnologici e ha approvato pienamente la scelta, sottolineando che l'azienda dispone già di diversi progetti interni basati su questo stack.
 
 \subsection{Gestione Account e Credenziali AWS}
-È stata discussa la modalità di accesso alle risorse cloud. L'azienda fornirà al gruppo un account dedicato all'interno della propria organization AWS. Questo permetterà l'utilizzo di Amazon Bedrock e degli altri strumenti di intelligenza artificiale necessari. Eventuali necessità di permessi aggiuntivi potranno essere gestite su richiesta.
+È stata discussa la modalità di accesso alle risorse cloud. L'azienda fornirà al gruppo un account dedicato all'interno della propria organization AWS. Questo permetterà l'utilizzo di \glslink{amazon-bedrock}{Amazon Bedrock} e degli altri strumenti di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale} necessari. Eventuali necessità di permessi aggiuntivi potranno essere gestite su richiesta.
 
 \subsection{Approvazione Analisi dei Requisiti e Mockup}
-Il proponente ha confermato di aver visionato l'analisi dei requisiti inviata tramite i canali di comunicazione informali. L'azienda ha espresso parere positivo, ritenendo il materiale prodotto esaustivo e corretto. Non è stata richiesta una firma formale sui documenti, poiché l'analisi è considerata uno strumento di gestione interna del gruppo.
+Il \glslink{committente-proponente}{proponente} ha confermato di aver visionato l'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti} inviata tramite i canali di comunicazione informali. L'azienda ha espresso parere positivo, ritenendo il materiale prodotto esaustivo e corretto. Non è stata richiesta una firma formale sui documenti, poiché l'analisi è considerata uno strumento di gestione interna del gruppo.
 
 \subsection{Presentazione dell'Interfaccia}
-Durante l'incontro è stato mostrato il mockup dell'applicativo, includendo la landing page e i due moduli core (\textit{IA Assistant} e \textit{Copilot}). Il referente ha apprezzato la chiarezza dell'interfaccia e la coerenza con le funzionalità attese (gestione prompt, verifica manuale OCR, metriche).
+Durante l'incontro è stato mostrato il \glslink{mockup}{mockup} dell'applicativo, includendo la landing page e i due moduli core (\textit{IA Assistant} e \textit{Copilot}). Il referente ha apprezzato la chiarezza dell'interfaccia e la coerenza con le funzionalità attese (gestione \glslink{prompt}{prompt}, verifica manuale \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}, metriche).
 
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit{Alex Oloni} & Redigere il verbale 2026-05-06 & \href{https://github.com/aLittleByte-19/Documentazione/issues/80}{\#80}\\
     \hline

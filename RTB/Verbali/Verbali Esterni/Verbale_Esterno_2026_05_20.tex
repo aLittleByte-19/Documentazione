@@ -25,8 +25,8 @@
 \usepackage[dvipsnames]{xcolor}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../../../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../../../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -62,8 +62,10 @@
     }
     \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
     \fancyfoot[C]{\thepage}
-    \fancyfoot[R]{Verbale  2026-05-06}
+    \fancyfoot[R]{Verbale 2026-05-20}
 }
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -114,13 +116,13 @@ Luogo Riunione & Google Meet \\[6pt]
 
 Orario (Inizio - Fine) & 14:30 -- 14.50 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
 E. Bellet\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 A. Oloni\\[6pt]
 
 Partecipanti &
@@ -152,22 +154,22 @@ Partecipanti &
 \subsection{Spiegazione delle tecnologie usate}
 \textbf{Leonardo Soligo} nell'esposizione ha spiegato le varie tecnologie usate, ossia:
 \begin{itemize}
-    \item Lo stack tecnologico include Redis per metadati e cache, e Minio per lo storage di documenti originali e suddivisi.
-    \item È stata sviluppata un'interfaccia admin per la gestione delle credenziali e per simulare risposte AI, testando workflow di keytab.
-    \item L'elaborazione dei PDF viene delegata a un worker tramite coda Redis, senza bloccare la richiesta, e i documenti vengono salvati su Minio.
+    \item Lo stack tecnologico include \glslink{redis}{Redis} per \glslink{metadati}{metadati} e cache, e \glslink{minio}{Minio} per lo storage di documenti originali e suddivisi.
+    \item È stata sviluppata un'interfaccia admin per la gestione delle credenziali e per simulare risposte \glslink{intelligenza-artificiale-ai}{AI}, testando \glslink{workflow}{workflow} di keytab.
+    \item L'elaborazione dei PDF viene delegata a un worker tramite coda \glslink{redis}{Redis}, senza bloccare la richiesta, e i documenti vengono salvati su \glslink{minio}{Minio}.
     \item L'assistente generativo permette di impostare tono e stile per generare bozze, con l'elaborazione dei PDF che delega il contenuto testuale a Bedrock.
-    \item Sono emerse limitazioni nell'estrazione dati dai PDF, potenzialmente legate all'uso di Bedrock rispetto a un OCR più preciso, e si è discusso della necessità di identificare l'utente destinatario.
+    \item Sono emerse limitazioni nell'estrazione dati dai PDF, potenzialmente legate all'uso di Bedrock rispetto a un \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} più preciso, e si è discusso della necessità di identificare l'utente destinatario.
 \end{itemize}
 
 \subsection{Conclusioni e Richiesta del Bucket}
-La dimostrazione ha avuto successo nel mostrare le funzionalità dell'applicazione e l'integrazione delle tecnologie. È stata confermata la disponibilità a fornire il bucket S3 richiesto per facilitare i test futuri. Ulteriori sviluppi potrebbero includere l'identificazione dell'utente e l'affinamento dei prompt per migliorare l'estrazione dei dati dai documenti.
+La dimostrazione ha avuto successo nel mostrare le funzionalità dell'applicazione e l'integrazione delle tecnologie. È stata confermata la disponibilità a fornire il bucket S3 richiesto per facilitare i test futuri. Ulteriori sviluppi potrebbero includere l'identificazione dell'utente e l'affinamento dei \glslink{prompt}{prompt} per migliorare l'estrazione dei dati dai documenti.
 
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit{Eleonora Bellet} & Redigere il verbale 2026-05-20 & \href{https://github.com/aLittleByte-19/Documentazione/issues/94}{\#94} \\
     \hline
