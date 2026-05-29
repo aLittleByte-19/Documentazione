@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{Immagini/Logo_Progetto-ezgif.com-crop.png}
-\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -50,6 +50,8 @@
         \fancyfoot[C]{\thepage}
     \fancyfoot[R]{Verbale 2026-04-09}
 }
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 15:00 -- 15:45 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
   A. Gastaldello\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 V. Y. Kaneda Fernandes\\[6pt]
 
 Partecipanti &
@@ -124,43 +126,43 @@ Assenti e motivazione&
 
 \section{Ordine del Giorno}
     \begin{itemize}
-    \item Progettazione e revisione del mockup interfaccia grafica
-    \item Aggiornamenti su documentazione, casi d'uso e glossario
+    \item Progettazione e revisione del \glslink{mockup}{mockup} interfaccia grafica
+    \item Aggiornamenti su documentazione, casi d'uso e \glslink{glossario}{glossario}
     \item Preparazione alla riunione con l'azienda e avanzamento lavoro
     \end{itemize}
 
 
 \section{Attività svolte}
 \subsection{Progettazione e revisione del mockup interfaccia grafica}
-\textbf{Alex Oloni} ha presentato una prima bozza del mockup dell'interfaccia, basata in parte su un lavoro precedente condiviso da Angelica.
-Riguardo il mockup, si è parlato di ricevere feedback per migliorare l'interfaccia, distinguendo le sezioni, modificando la tendina e l'icona in alto a sinistra. 
+\textbf{Alex Oloni} ha presentato una prima \glslink{bozza-draft}{bozza} del \glslink{mockup}{mockup} dell'interfaccia, basata in parte su un lavoro precedente condiviso da Angelica.
+Riguardo il \glslink{mockup}{mockup}, si è parlato di ricevere feedback per migliorare l'interfaccia, distinguendo le sezioni, modificando la tendina e l'icona in alto a sinistra. 
 \textbf{Leonardo Soligo} ha collaborato e pianificato di aggiungere ulteriori elementi. 
-Si è stabilito di continuare a lavorare sul mockup, raccogliere feedback interni da tutti i membri del gruppo e dall'azienda nella riunione futura per eventuali correzioni.
+Si è stabilito di continuare a lavorare sul \glslink{mockup}{mockup}, raccogliere feedback interni da tutti i membri del gruppo e dall'azienda nella riunione futura per eventuali correzioni.
 \subsection{Aggiornamenti su documentazione, casi d'uso e glossario}
-Abbiamo discusso dell'avanzamento nella stesura dei casi d'uso, piano di qualifica, glossario e altre documentazioni necessarie per l'RTB. 
+Abbiamo discusso dell'avanzamento nella stesura dei casi d'uso, \glslink{piano-di-qualifica}{piano di qualifica}, \glslink{glossario}{glossario} e altre documentazioni necessarie per l'\glslink{rtb-requirements-and-technology-baseline}{RTB}. 
 È stata evidenziata la necessità di velocizzare il lavoro, distribuendo i compiti tra i membri. Si è discusso dell'importanza di coordinare i contributi e documentare progressivamente l'evoluzione del progetto. 
 
 \subsection{Preparazione alla riunione con l'azienda e avanzamento lavoro}
-Il team ha pianificato di fissare una riunione con l'azienda per chiedere chiarimenti sui dubbi riguardanti il mockup e i requisiti. 
+Il team ha pianificato di fissare una riunione con l'azienda per chiedere chiarimenti sui dubbi riguardanti il \glslink{mockup}{mockup} e i requisiti. 
 Si è concordata di proporre una riunione per la prossima settimana e si è ribadita l'importanza di proseguire i lavori autonomamente durante il fine settimana per avere materiali concreti da presentare. 
-È stata anche discussa la possibilità di condividere immagini del mockup nel gruppo per facilitare i feedback.
+È stata anche discussa la possibilità di condividere immagini del \glslink{mockup}{mockup} nel gruppo per facilitare i feedback.
 
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit {Alex Oloni e Leonardo Soligo} & Continuazione del Mock-up & \href{https://github.com/aLittleByte-19/Documentazione/issues/50}{\#50}\\
     \hline
-        \textit{Angelica Gastaldello e Angela Maule} &  Continuazione Stesura Analisi dei Requisiti& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
+        \textit{Angelica Gastaldello e Angela Maule} &  Continuazione Stesura \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
     \hline
-        \textit{Diego Belluz e Eleonora Bellet} &  Continuazione Stesura Norme di Progetto& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
+        \textit{Diego Belluz e Eleonora Bellet} &  Continuazione Stesura \glslink{norme-di-progetto}{Norme di Progetto}& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
     \hline
-        \textit{Vinicius Yuri Kaneda Fernandes} & Continuazione Stesura Glossario & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
+        \textit{Vinicius Yuri Kaneda Fernandes} & Continuazione Stesura \glslink{glossario}{Glossario} & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
     \hline
-        \textit{Angelica Gastaldello} & Stesura Verbale Interno 09/04/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/60}{\#60}\\
+        \textit{Angelica Gastaldello} & Stesura \glslink{verbale-interno}{Verbale Interno} 09/04/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/60}{\#60}\\
     \hline
     \end{tabular}
     \label{tab:placeholder}

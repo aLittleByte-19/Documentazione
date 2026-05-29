@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{Immagini/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -50,6 +50,8 @@
         \fancyfoot[C]{\thepage}
     \fancyfoot[R]{Verbale 2026-04-27}
 }
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 15:30 -- 16.15 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
   A. Oloni\\[6pt]
   
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
     D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
     Y.Y. Kaneda Fernandes\\[6pt]
 
 Partecipanti &
@@ -123,34 +125,34 @@ Partecipanti &
 \section{Ordine del Giorno}
     \begin{itemize}
     \item Stato di avanzamento dei casi d'uso e dei documenti di progetto
-    \item Definizione del modello di sviluppo e organizzazione degli sprint
-    \item Gestione e conteggio delle ore nei vari sprint
-    \item Organizzazione e aggiornamento del Glossario
+    \item Definizione del \glslink{modello-di-sviluppo}{modello di sviluppo} e organizzazione degli \glslink{sprint}{sprint}
+    \item Gestione e conteggio delle ore nei vari \glslink{sprint}{sprint}
+    \item Organizzazione e aggiornamento del \glslink{glossario}{Glossario}
     \item Continuazione e gestione del Mock-up
     \end{itemize}
 
 
 \section{Attività svolte}
 \subsection{Stato di avanzamento dei casi d'uso e dei documenti di progetto}
-Il team ha effettuato un aggiornamento generale sui documenti di progetto, confermando il completamento dei casi d'uso per l'Analisi dei Requisiti, alla quale mancano solamente i diagrammi. 
-È stata confermata anche la sistemazione delle Norme di Progetto. La sezione relativa alla qualità del software e ai test è stata rimandata a una fase successiva.
+Il team ha effettuato un aggiornamento generale sui documenti di progetto, confermando il completamento dei casi d'uso per l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, alla quale mancano solamente i diagrammi. 
+È stata confermata anche la sistemazione delle \glslink{norme-di-progetto}{Norme di Progetto}. La sezione relativa alla qualità del software e ai test è stata rimandata a una fase successiva.
 
 \subsection{Definizione del modello di sviluppo e organizzazione degli sprint}
-È stata discussa la scelta del ciclo di vita del software, confrontando il modello incrementale con quello Agile. La decisione finale è ricaduta sull'adozione del modello Agile, basato su sprint bisettimanali, come già scelto in precedenza. 
-Si è inoltre stabilito di tenere traccia puntuale delle date e dell'organizzazione degli sprint all'interno del piano di progetto.
+È stata discussa la scelta del ciclo di vita del software, confrontando il modello incrementale con quello \glslink{agile}{Agile}. La decisione finale è ricaduta sull'adozione del modello \glslink{agile}{Agile}, basato su \glslink{sprint}{sprint} bisettimanali, come già scelto in precedenza. 
+Si è inoltre stabilito di tenere traccia puntuale delle date e dell'organizzazione degli \glslink{sprint}{sprint} all'interno del \glslink{piano-di-progetto}{piano di progetto}.
 
 \subsection{Gestione e conteggio delle ore nei vari sprint}
 Il team ha esaminato la distribuzione delle ore lavorate. 
-Per rendere il conteggio più flessibile rispetto alla modifica diretta sul piano di progetto, si è deciso di utilizzare un foglio Excel condiviso. 
-È stata ribadita l'importanza di allineare le ore al piano di qualifica dei ruoli, con l'obiettivo di far raggiungere a ciascun membro un totale di 90 ore lavorative entro il mese di settembre. 
-Il responsabile del piano di progetto si farà carico di questa gestione su Excel.
+Per rendere il conteggio più flessibile rispetto alla modifica diretta sul \glslink{piano-di-progetto}{piano di progetto}, si è deciso di utilizzare un foglio Excel condiviso. 
+È stata ribadita l'importanza di allineare le ore al \glslink{piano-di-qualifica}{piano di qualifica} dei ruoli, con l'obiettivo di far raggiungere a ciascun membro un totale di 90 ore lavorative entro il mese di settembre. 
+Il \glslink{responsabile}{responsabile} del \glslink{piano-di-progetto}{piano di progetto} si farà carico di questa gestione su Excel.
 
 \subsection{Organizzazione e aggiornamento del Glossario}
-È stata definita una procedura condivisa per l'aggiornamento del glossario: i termini tecnici o ambigui verranno identificati direttamente durante la revisione dei documenti. 
-Inoltre, il team sta valutando l'introduzione di automatismi, tramite strumenti di LaTeX o GitHub, per collegare automaticamente le parole presenti nei documenti al glossario.
+È stata definita una procedura condivisa per l'aggiornamento del \glslink{glossario}{glossario}: i termini tecnici o ambigui verranno identificati direttamente durante la revisione dei documenti. 
+Inoltre, il team sta valutando l'introduzione di automatismi, tramite strumenti di \glslink{latex}{LaTeX} o \glslink{github}{GitHub}, per collegare automaticamente le parole presenti nei documenti al \glslink{glossario}{glossario}.
 
 \subsection{Continuazione e gestione del Mock-up}
-Si è discusso del Mock-up realizzato da \textbf{Leonardo Soligo}, stabilendo che necessita di una verifica accurata per assicurare l'allineamento con le indicazioni dell'analisi dei requisiti.
+Si è discusso del Mock-up realizzato da \textbf{Leonardo Soligo}, stabilendo che necessita di una verifica accurata per assicurare l'allineamento con le indicazioni dell'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti}.
 
 \newpage
 \section{To-Do List}
@@ -158,15 +160,15 @@ Si è discusso del Mock-up realizzato da \textbf{Leonardo Soligo}, stabilendo ch
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit {Leonardo Soligo} &  Presentazione del Mock-up per l'azienda & \href{https://github.com/aLittleByte-19/Documentazione/issues/74}{\#74}\\
     \hline
-        \textit{Angelica Gastaldello e Angela Maule} &  Completare i diagrammi per l'Analisi dei Requisiti& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
+        \textit{Angelica Gastaldello e Angela Maule} &  Completare i diagrammi per l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
     \hline
-        \textit{Vinicius Yuri Kaneda Fernandes, Diego Belluz ed Eleonora Bellet} & Continuazione e sistemazione Glossario & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
+        \textit{Vinicius Yuri Kaneda Fernandes, Diego Belluz ed Eleonora Bellet} & Continuazione e sistemazione \glslink{glossario}{Glossario} & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
     \hline
-        \textit{Alex Oloni} & Continuazione Stesura Piano di Progetto &
+        \textit{Alex Oloni} & Continuazione Stesura \glslink{piano-di-progetto}{Piano di Progetto} &
         \href{https://github.com/aLittleByte-19/Documentazione/issues/63}{\#63}\\
     \hline
         \textit{Alex Oloni} & Creare il file Excel condiviso e aggiornare le ore di lavoro & \href{https://github.com/aLittleByte-19/Documentazione/issues/70}{\#70}\\
@@ -177,7 +179,7 @@ Si è discusso del Mock-up realizzato da \textbf{Leonardo Soligo}, stabilendo ch
         \textit{Tutti i pertecipanti} & Domande da porre alla azienda per la prossima riunione& 
         \href{https://github.com/aLittleByte-19/Documentazione/issues/72}{\#72}\\
     \hline
-        \textit{Alex Oloni} & Stesura Verbale Interno 27/04/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/73}{\#73}\\
+        \textit{Alex Oloni} & Stesura \glslink{verbale-interno}{Verbale Interno} 27/04/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/73}{\#73}\\
     \hline
     \end{tabular}
     \label{tab:placeholder}

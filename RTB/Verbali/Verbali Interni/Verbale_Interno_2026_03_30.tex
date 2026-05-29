@@ -11,8 +11,8 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{Immagini/Logo_Progetto-ezgif.com-crop.png}
-\newcommand{\groupsymbol}{Immagini/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -50,6 +50,8 @@
         \fancyfoot[C]{\thepage}
     \fancyfoot[R]{Verbale 2026-03-30}
 }
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
 
 \begin{document}
 
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 10:00 -- 10:45 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
   A. Gastaldello\\[6pt]
 
-Amministratore & 
+\glslink{amministratore}{Amministratore} & 
 D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
 V. Y. Kaneda Fernandes\\[6pt]
 
 Partecipanti &
@@ -123,7 +125,7 @@ Partecipanti &
 
 \section{Ordine del Giorno}
     \begin{itemize}
-    \item Pianificazione contatto iniziale con l'azienda
+    \item \glslink{pianificazione}{Pianificazione} contatto iniziale con l'azienda
     \item Assegnazione e organizzazione del lavoro sui documenti di progetto
     \item Scelta degli strumenti per la realizzazione del mock-up
     \end{itemize}
@@ -137,42 +139,42 @@ previsto entro lo stesso pomeriggio della giornata della riunione. Si è stabili
 affinché venga informata sulla modalità di lavoro adottata dal gruppo e si possano ricevere suggerimenti o approvazioni.
 \subsection{Assegnazione e organizzazione del lavoro sui documenti di progetto}
 È stata fatta una revisione e divisione dei documenti da preparare: 
-analisi dei requisiti, norme di progetto, glossario, lista dei quesiti e mock-up. Vista la complessità e la lunghezza di alcuni documenti, 
-si è convenuto che l'analisi dei requisiti sarà sviluppata da due persone (Angelica e Angela) per evitare perdita di tempo e facilitarne la stesura. 
-Le norme di progetto saranno gestite da Diego ed Eleonora, mentre Yuri si occuperà del glossario. 
-È stato discusso che il piano di progetto e il piano di qualifica saranno affrontati più avanti, considerati meno immediati. 
+\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti}, \glslink{norme-di-progetto}{norme di progetto}, \glslink{glossario}{glossario}, lista dei quesiti e mock-up. Vista la complessità e la lunghezza di alcuni documenti, 
+si è convenuto che l'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti} sarà sviluppata da due persone (Angelica e Angela) per evitare perdita di tempo e facilitarne la stesura. 
+Le \glslink{norme-di-progetto}{norme di progetto} saranno gestite da Diego ed Eleonora, mentre Yuri si occuperà del \glslink{glossario}{glossario}. 
+È stato discusso che il \glslink{piano-di-progetto}{piano di progetto} e il \glslink{piano-di-qualifica}{piano di qualifica} saranno affrontati più avanti, considerati meno immediati. 
 Per i mock-up si è deciso di iniziare presto, coinvolgendo Leonardo Soligo e Alex Oloni per ottenere prima un prodotto da sottoporre all'azienda per una validazione preliminare.
 Quindi i documenti che saranno iniziati a scrivere saranno:
 \begin{itemize}
-    \item Analisi dei requisiti
-    \item Norme di progetto
-    \item Glossario
-    \item Piano di Progetto
+    \item \glslink{analisi-dei-requisiti-adr}{Analisi dei requisiti}
+    \item \glslink{norme-di-progetto}{Norme di progetto}
+    \item \glslink{glossario}{Glossario}
+    \item \glslink{piano-di-progetto}{Piano di Progetto}
 \end{itemize}
 
 \subsection{Scelta degli strumenti per la realizzazione dei mock-up}
-Si è discusso l'uso di strumenti per la progettazione dei mock-up, con un confronto tra Canva e Figma. 
-Figma è stato indicato come preferibile per la sua versatilità, disponibilità di librerie e possibilità di collaborazione, 
+Si è discusso l'uso di strumenti per la progettazione dei mock-up, con un confronto tra Canva e \glslink{figma}{Figma}. 
+\glslink{figma}{Figma} è stato indicato come preferibile per la sua versatilità, disponibilità di librerie e possibilità di collaborazione, 
 anche se nella versione gratuita con alcune limitazioni. 
-È stato menzionato un'alternativa open source, Penpot, che gestisce file SVG, permettendo la gestione delle modifiche tramite commit in repository. 
-Si è concordato di utilizzare \textbf{Penpot} come programma per il mock-up.
+È stato menzionato un'alternativa open source, \glslink{penpot}{Penpot}, che gestisce file SVG, permettendo la gestione delle modifiche tramite commit in \glslink{repository}{repository}. 
+Si è concordato di utilizzare \textbf{\glslink{penpot}{Penpot}} come programma per il mock-up.
 
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
         \textit {Alex Oloni e Leonardo Soligo} & Creazione Mock-up & \href{https://github.com/aLittleByte-19/Documentazione/issues/50}{\#50}\\
     \hline
-         \textit {Angelica Gastaldello e Angela Maule} & Inizio stesura Analisi dei Requisiti& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
+         \textit {Angelica Gastaldello e Angela Maule} & Inizio stesura \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}& \href{https://github.com/aLittleByte-19/Documentazione/issues/51}{\#51}\\
     \hline
-        \textit{Diego Belluz e Eleonora Bellet} &  Inizio stesura Norme di Progetto& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
+        \textit{Diego Belluz e Eleonora Bellet} &  Inizio stesura \glslink{norme-di-progetto}{Norme di Progetto}& \href{https://github.com/aLittleByte-19/Documentazione/issues/52}{\#52}\\
     \hline
-        \textit{Vinicius Yuri Kaneda Fernandes} & Inizio stesura Glossario & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
+        \textit{Vinicius Yuri Kaneda Fernandes} & Inizio stesura \glslink{glossario}{Glossario} & \href{https://github.com/aLittleByte-19/Documentazione/issues/53}{\#53}\\
     \hline
-        \textit{Angelica Gastaldello} & Stesura Verbale Interno 30/03/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/54}{\#54}\\
+        \textit{Angelica Gastaldello} & Stesura \glslink{verbale-interno}{Verbale Interno} 30/03/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/54}{\#54}\\
     \hline
         \textit {Angelica Gastaldello}  &  Scrittura email all'azienda & \href{https://github.com/aLittleByte-19/Documentazione/issues/55}{\#55}\\
     \hline
