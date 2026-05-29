@@ -1,0 +1,178 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx} % Per l'ambiente tabularx (tabelle)
+\usepackage{calc} % Sempre per le tabelle
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{xcolor}  
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{colortbl}
+\usepackage{eurosym}
+\usepackage[dvipsnames]{xcolor}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-05-20}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale  2026-05-06}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Esterno - 2026-05-20}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & E. Bellet \\
+            Verificatori& A. Oloni\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-05-20\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Google Meet \\[6pt]
+
+Orario (Inizio - Fine) & 14:30 -- 14.50 \\[6pt]
+
+Redattore &
+E. Bellet\\[6pt]
+
+Amministratore & 
+D. Belluz\\[6pt]
+
+Verificatore &
+A. Oloni\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  A. Gastaldello\\ &
+  E. Bellet\\ & 
+  D. Belluz\\ &
+  L. Soligo\\[6pt]
+
+  Partecipanti Esterni &
+  Luca Iuzzolino\\ &
+  GianPaolo Ferrarin\\ [6pt]
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Mostrare le tecnologie usate
+    \item Esposizione del PoC
+    \item Conclusioni e Richiesta del Bucket
+    \end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Esposizione del PoC}
+\textbf{Angelica Gastaldello}, con la presenza della maggior parte del gruppo, ha mostrato il \textit{Proof of Concept} all'azienda, nel quale sono stati mostrati i principali casi d'uso, il quale l'azienda ha dato esito positivo, sia a livello di utilizzo che per quanto riguarda l'interfaccia grafica.
+
+\subsection{Spiegazione delle tecnologie usate}
+\textbf{Leonardo Soligo} nell'esposizione ha spiegato le varie tecnologie usate, ossia:
+\begin{itemize}
+    \item Lo stack tecnologico include Redis per metadati e cache, e Minio per lo storage di documenti originali e suddivisi.
+    \item È stata sviluppata un'interfaccia admin per la gestione delle credenziali e per simulare risposte AI, testando workflow di keytab.
+    \item L'elaborazione dei PDF viene delegata a un worker tramite coda Redis, senza bloccare la richiesta, e i documenti vengono salvati su Minio.
+    \item L'assistente generativo permette di impostare tono e stile per generare bozze, con l'elaborazione dei PDF che delega il contenuto testuale a Bedrock.
+    \item Sono emerse limitazioni nell'estrazione dati dai PDF, potenzialmente legate all'uso di Bedrock rispetto a un OCR più preciso, e si è discusso della necessità di identificare l'utente destinatario.
+\end{itemize}
+
+\subsection{Conclusioni e Richiesta del Bucket}
+La dimostrazione ha avuto successo nel mostrare le funzionalità dell'applicazione e l'integrazione delle tecnologie. È stata confermata la disponibilità a fornire il bucket S3 richiesto per facilitare i test futuri. Ulteriori sviluppi potrebbero includere l'identificazione dell'utente e l'affinamento dei prompt per migliorare l'estrazione dei dati dai documenti.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit{Eleonora Bellet} & Redigere il verbale 2026-05-20 & \href{https://github.com/aLittleByte-19/Documentazione/issues/94}{\#94} \\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
