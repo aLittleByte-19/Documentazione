@@ -5,6 +5,12 @@
     --text-dark: #2b3035;   
     --white: #ffffff;
     --dir-open-bg: rgba(179, 139, 54, 0.05);
+    --scroll-offset: 110px;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--scroll-offset);
 }
 
 * {
@@ -73,6 +79,13 @@ nav {
     border-bottom: 2px solid var(--accent-gold);
 }
 
+a:focus-visible,
+.dir-title:focus-visible {
+    outline: 3px solid rgba(179, 139, 54, 0.45);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
 section {
     background-color: var(--white);
     max-width: 900px;
@@ -80,6 +93,7 @@ section {
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    scroll-margin-top: var(--scroll-offset);
 }
 
 h1 {
@@ -103,6 +117,7 @@ h3 { font-size: 1.3rem; }
 .dir-container {
     margin: 4px 0;
     transition: background-color 0.3s ease;
+    scroll-margin-top: var(--scroll-offset);
 }
 
 .dir-title {
@@ -189,15 +204,107 @@ a[href$=".md"]:hover {
     background-color: rgba(179, 139, 54, 0.05);
 }
 
+#contatti,
+#about {
+    padding-top: 36px;
+}
+
+.contact-list {
+    display: grid;
+    gap: 14px;
+}
+
+.contact-item {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.contact-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.contact-label {
+    color: #5f6872;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.contact-item a {
+    width: fit-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-weight: 600;
+}
+
+.about-lead {
+    max-width: 72ch;
+    margin-bottom: 28px;
+    font-size: 1.05rem;
+}
+
+.about-members-title {
+    margin: 0 0 10px;
+    color: #5f6872;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.member-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.member-list li {
+    margin: 0;
+}
+
+.member-list a {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 0;
+    color: var(--primary-blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.member-list a:hover {
+    color: var(--accent-gold);
+    text-decoration: underline;
+}
+
+.member-name {
+    line-height: 1.25;
+}
+
+.member-username {
+    color: #5f6872;
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
 #last-update {
     text-align: center;
-    color: #888;
+    color: #5f6872;
     font-size: 0.9rem;
     margin-top: 50px;
     font-style: italic;
 }
 
 @media screen and (max-width: 850px) {
+    :root {
+        --scroll-offset: 230px;
+    }
+
     nav {
         flex-direction: column; 
         padding: 20px;
@@ -219,5 +326,11 @@ a[href$=".md"]:hover {
         justify-content: center; 
         flex-wrap: wrap; 
         gap: 15px; 
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
 }

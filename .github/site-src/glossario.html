@@ -4,19 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Glossario</title>
+  <link rel="icon" type="image/png" href="assets/solo_logo.png">
   <style>
     :root { color-scheme: light; --primary-blue: #153c5e; --accent-gold: #b38b36; --bg-gray: #f0f4f8; --text-dark: #2b3035; --muted: #5f6975; --line: #dfe7ee; --white: #ffffff; }
     * { box-sizing: border-box; }
-    html { scroll-padding-top: 74px; scroll-behavior: smooth; }
+    html { scroll-padding-top: 110px; scroll-behavior: smooth; }
     body { margin: 0; color: var(--text-dark); background: var(--bg-gray); font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
     button { font: inherit; }
     .glossary-navbar { position: sticky; top: 0; z-index: 5; background: rgba(255, 255, 255, .97); border-bottom: 3px solid var(--accent-gold); box-shadow: 0 8px 18px rgb(21 60 94 / 8%); backdrop-filter: blur(10px); }
-    .nav-shell { display: flex; gap: 24px; align-items: center; justify-content: space-between; width: min(100% - 32px, 1120px); margin: 0 auto; padding: 8px 0; }
-    .brand-title { color: var(--primary-blue); font-size: 1.5rem; font-weight: 850; white-space: nowrap; }
-    .glossary-tools { display: flex; align-items: center; justify-content: flex-end; width: min(390px, 100%); min-width: 260px; }
+    .nav-shell { display: flex; align-items: center; max-width: 100%; margin: 0 auto; padding: 10px 50px; }
+    .glossary-brand-wrap { display: flex; align-items: center; flex: 0 0 auto; color: var(--primary-blue); }
+    .glossary-brand { display: flex; align-items: center; color: var(--primary-blue); text-decoration: none; }
+    .glossary-brand:hover { color: var(--accent-gold); text-decoration: none; }
+    .glossary-brand:focus-visible { outline: 3px solid rgba(179, 139, 54, .45); outline-offset: 3px; border-radius: 4px; }
+    .glossary-brand-logo { max-height: 70px; object-fit: contain; margin-right: 5px; margin-bottom: 5px; }
+    .glossary-brand-name { margin-top: 10px; color: inherit; font-size: 1.8rem; font-weight: 700; letter-spacing: 0; }
+    .glossary-brand-suffix { margin-top: 10px; margin-left: 10px; color: var(--muted); font-size: 1.8rem; font-weight: 600; }
+    .glossary-tools { display: flex; align-items: center; justify-content: flex-end; width: min(390px, 100%); min-width: 260px; margin-left: auto; }
     .search-box { width: 100%; min-width: 0; }
     .search-control { position: relative; }
-    .search-control input { width: 100%; min-height: 36px; padding: 7px 104px 7px 12px; color: var(--text-dark); font: inherit; border: 1px solid var(--line); border-radius: 6px; }
+    .search-control::before { position: absolute; top: 50%; left: 14px; width: 14px; height: 14px; content: ""; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235f6975' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4.2-4.2'/%3E%3C/svg%3E") center / contain no-repeat; transform: translateY(-50%); pointer-events: none; }
+    .search-control input { width: 100%; min-height: 36px; padding: 7px 104px 7px 38px; color: var(--text-dark); font: inherit; border: 1px solid var(--line); border-radius: 6px; }
     .search-control input:focus { border-color: var(--primary-blue); outline: 3px solid rgb(21 60 94 / 14%); }
     .clear-search { position: absolute; top: 50%; right: 6px; display: grid; width: 26px; height: 26px; padding: 0; color: var(--muted); place-items: center; cursor: pointer; background: transparent; border: 0; border-radius: 50%; opacity: 0; transform: translateY(-50%); pointer-events: none; }
     .clear-search:hover { color: var(--primary-blue); background: #eef4f9; }
@@ -57,13 +65,19 @@
     .back-to-top.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; white-space: nowrap; border: 0; clip: rect(0, 0, 0, 0); }
     .is-hidden { display: none !important; }
-    @media (max-width: 760px) { html { scroll-padding-top: 116px; } .nav-shell { width: min(100% - 20px, 1120px); flex-direction: column; gap: 8px; align-items: stretch; } .glossary-tools { align-items: stretch; width: 100%; min-width: 0; } main { width: min(100% - 20px, 1040px); margin: 20px auto; padding: 24px; } .entry-head { grid-template-columns: 1fr; } .copy-link { justify-self: start; } }
+    @media (max-width: 850px) { html { scroll-padding-top: 230px; } .nav-shell { flex-direction: column; padding: 20px; text-align: center; } .glossary-brand-wrap { justify-content: center; } .glossary-brand { justify-content: center; } .glossary-brand-logo { margin-right: 0; margin-bottom: 5px; } .glossary-brand-name, .glossary-brand-suffix { margin-top: 0; margin-bottom: 15px; } .glossary-tools { align-items: stretch; width: 100%; min-width: 0; margin-left: 0; } main { width: min(100% - 20px, 1040px); margin: 20px auto; padding: 24px; } .entry-head { grid-template-columns: 1fr; } .copy-link { justify-self: start; } }
   </style>
 </head>
 <body>
   <header class="glossary-navbar">
     <div class="nav-shell">
-      <div class="brand-title">aLittleByte - Glossario</div>
+      <div class="glossary-brand-wrap">
+        <a class="glossary-brand" href="index.html" aria-label="aLittleByte - torna alla pagina principale">
+          <img class="glossary-brand-logo" src="assets/logo.png" alt="">
+          <span class="glossary-brand-name">aLittleByte</span>
+        </a>
+        <span class="glossary-brand-suffix"> - Glossario</span>
+      </div>
       <div class="glossary-tools">
         <div class="search-box">
           <div class="search-control">
