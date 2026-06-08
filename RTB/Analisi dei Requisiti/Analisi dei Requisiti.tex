@@ -125,11 +125,11 @@
     \hline
     \rowcolor{gray!8} 0.15.1 & 09/05/2026 & Requisiti funzionali (prima stesura RF) & Angela Maule & Eleonora Bellet & - \\
     \hline
-    0.15.0 & 07/05/2026 & UC-19 (scenari e relazioni) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
+    0.15.0 & 07/05/2026 & UC-29 (scenari e relazioni) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
     \hline
     \rowcolor{gray!8} 0.14.0 & 05/05/2026 & UC-18 (scheda e diagramma) & Leonardo Soligo & Eleonora Bellet & - \\
     \hline
-    0.13.0 & 03/05/2026 & UC-17 (scheda e scenari) & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+    0.13.0 & 03/05/2026 & UC-24 (scheda e scenari) & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
     \hline
     \rowcolor{gray!8} 0.12.1 & 02/05/2026 & Diagrammi UC-15, UC-16 (figure UML) & Eleonora Bellet & Eleonora Bellet & - \\
     \hline
@@ -1487,13 +1487,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \newpage
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
-\subsubsection{UC-7: Upload del documento}
+\subsubsection{UC-7: Caricamento documento per analisi AI automatica}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_7.png}
-    \caption{Diagramma del caso d'uso UC-7: Upload del documento}
+    \caption{Diagramma del caso d'uso UC-7: Caricamento documento per analisi AI automatica}
     \label{fig:uc-7}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -1570,13 +1570,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-8: Upload documento con classificazione e metadati}
+\subsubsection{UC-8: Caricamento documento con classificazione e metadati manuali}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_8.png}
-    \caption{Diagramma del caso d'uso UC-8: Upload documento con classificazione e metadati}
+    \caption{Diagramma del caso d'uso UC-8: Caricamento documento con classificazione e metadati manuali}
     \label{fig:uc-8}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -1589,21 +1589,119 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
-        \item Il Consulente del lavoro seleziona la tipologia del documento tra le opzioni disponibili: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
-        \item Il Consulente del lavoro seleziona il formato file tra le opzioni disponibili: PDF, PNG, JPG e TIFF.
-        \item Il Consulente del lavoro inserisce i metadati richiesti (mese, anno, azienda).
+        \item Il Consulente del lavoro seleziona la tipologia del documento (\textbf{UC-8.1}).
+        \item Il Consulente del lavoro seleziona il formato file (\textbf{UC-8.2}).
+        \item Il Consulente del lavoro inserisce il mese di riferimento (\textbf{UC-8.3}).
+        \item Il Consulente del lavoro inserisce l'anno di riferimento (\textbf{UC-8.4}).
+        \item Il Consulente del lavoro inserisce l'azienda (\textbf{UC-8.5}).
         \item Il Consulente del lavoro conferma il caricamento dopodiché il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 4a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito UC-7.E1.
-        \item 4b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito UC-7.E2.
+        \item 7a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito UC-7.E1.
+        \item 7b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito UC-7.E2.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Inclusioni}: UC-8.1, UC-8.2, UC-8.3, UC-8.4, UC-8.5.
         \item \textbf{Estensioni}: UC-7.E1, UC-7.E2.
     \end{itemize}
+\end{description}
+
+\paragraph{UC-8.1: Selezione della tipologia del documento}
+\mbox{} \\
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.1.png}
+%    \caption{Diagramma del caso d'uso UC-8.1: Selezione della tipologia del documento}
+%    \label{fig:uc-8.1}
+%\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema espone il menu di selezione della tipologia, impostato sul valore di default.
+    \item[Post-condizioni] Il parametro relativo alla tipologia del documento è stato impostato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona la tipologia del documento tramite il relativo menu a scelta: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-8.2: Selezione del formato file}
+\mbox{} \\
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.2.png}
+%    \caption{Diagramma del caso d'uso UC-8.2: Selezione del formato file}
+%    \label{fig:uc-8.2}
+%\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema espone il menu di selezione del formato file, impostato sul valore di default.
+    \item[Post-condizioni] Il parametro relativo al formato file è stato impostato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro seleziona il formato del file tramite il relativo menu a scelta: PDF, PNG, JPG, TIFF.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-8.3: Inserimento del mese di riferimento}
+\mbox{} \\
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.3.png}
+%    \caption{Diagramma del caso d'uso UC-8.3: Inserimento del mese di riferimento}
+%    \label{fig:uc-8.3}
+%\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema è in attesa dell'inserimento del mese di riferimento del documento.
+    \item[Post-condizioni] Il parametro relativo al mese di riferimento è stato registrato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro inserisce o seleziona il mese di riferimento del documento nell'apposito campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-8.4: Inserimento dell'anno di riferimento}
+\mbox{} \\
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.4.png}
+%    \caption{Diagramma del caso d'uso UC-8.4: Inserimento dell'anno di riferimento}
+%    \label{fig:uc-8.4}
+%\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema è in attesa dell'inserimento dell'anno di riferimento del documento.
+    \item[Post-condizioni] Il parametro relativo all'anno di riferimento è stato registrato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro inserisce o seleziona l'anno di riferimento del documento nell'apposito campo.
+    \end{enumerate}
+\end{description}
+
+\paragraph{UC-8.5: Inserimento dell'azienda di riferimento}
+\mbox{} \\
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.5.png}
+%    \caption{Diagramma del caso d'uso UC-8.5: Inserimento dell'azienda di riferimento}
+%    \label{fig:uc-8.5}
+%\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema è in attesa dell'inserimento dell'azienda associata al documento.
+    \item[Post-condizioni] Il parametro relativo all'azienda di riferimento è stato registrato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Consulente del lavoro inserisce il nome dell'azienda di riferimento nell'apposito campo di testo.
+    \end{enumerate}
 \end{description}
 
 
@@ -1833,13 +1931,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\paragraph{UC-15.1: Visualizzazione documento originale splittato}
+\paragraph{UC-15.1: Visualizzazione della porzione di documento relativa al dipendente}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.1.png}
-    \caption{Diagramma del caso d'uso UC-15.1: Visualizzazione documento originale splittato}
+    \caption{Diagramma del caso d'uso UC-15.1: Visualizzazione della porzione di documento relativa al dipendente}
     \label{fig:uc-15.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -1853,13 +1951,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-15.2: Visualizzazione documento originale non splittato}
+\paragraph{UC-15.2: Visualizzazione del documento originale completo}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.2.png}
-    \caption{Diagramma del caso d'uso UC-15.2: Visualizzazione documento originale non splittato}
+    \caption{Diagramma del caso d'uso UC-15.2: Visualizzazione del documento originale completo}
     \label{fig:uc-15.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2289,235 +2387,219 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-16: Modifica del singolo documento dallo storico} % dividere tutte le modifice 
-\mbox{} \\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.png}
-    \caption{Diagramma del caso d'uso UC-16: Modifica del singolo documento dallo storico}
-    \label{fig:uc-16}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro intende modificare uno o più campi editabili del documento selezionato.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del singolo documento (UC-15).
-    \item[Post-condizioni] Il sistema salva le modifiche apportate ai campi editabili del documento selezionato.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-\item Il Consulente del lavoro seleziona l'azione di modifica del documento.
-        \item Il sistema abilita la modalità di modifica dei campi consentiti.
-        \item Il Consulente del lavoro modifica nome e cognome del dipendente (\textbf{UC-16.1}).
-        \item Il Consulente del lavoro modifica azienda (\textbf{UC-16.2}).
-        \item Il Consulente del lavoro modifica data del documento (\textbf{UC-16.3}).
-        \item Il Consulente del lavoro modifica tipologia del documento (\textbf{UC-16.4}).
-        \item Il Consulente del lavoro modifica breve descrizione del documento (\textbf{UC-16.5}).
-        \item Il Consulente del lavoro modifica email destinatario (\textbf{UC-16.6}).
-        \item Il Consulente del lavoro modifica codice fiscale (\textbf{UC-16.7}).
-        \item Il Consulente del lavoro modifica matricola dipendente (\textbf{UC-16.8}).
-        \item Il Consulente del lavoro conferma il salvataggio.
-        \item Il sistema valida i dati inseriti e salva le modifiche.
-    \end{enumerate}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-16.1, UC-16.2, UC-16.3, UC-16.4, UC-16.5, UC-16.6, UC-16.7, UC-16.8.
-    \end{itemize}
-\end{description}
-
-\paragraph{UC-16.1: Modifica nome e cognome del dipendente}
+\subsubsection{UC-16: Modifica nome e cognome del dipendente}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_16.1.png}
-    \caption{Diagramma del caso d'uso UC-16.1: Modifica nome e cognome del dipendente}
-    \label{fig:uc-16.1}
+    \caption{Diagramma del caso d'uso UC-16: Modifica nome e cognome del dipendente}
+    \label{fig:uc-16}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo nome e cognome del dipendente.
+    \item[Trigger] Il Consulente del lavoro decide di correggere il nome e cognome del dipendente associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo valore del campo nome e cognome del dipendente.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro inserisce il nuovo valore nel campo nome e cognome.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il Consulente del lavoro seleziona il campo nome e cognome per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce il nuovo valore.
+        \item Il sistema valida il dato e salva il valore aggiornato.
+        \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
 \end{description}
 \newpage
-\paragraph{UC-16.2: Modifica azienda}
+\subsubsection{UC-17: Modifica azienda}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.2.png}
-    \caption{Diagramma del caso d'uso UC-16.2: Modifica azienda}
-    \label{fig:uc-16.2}
+    \caption{Diagramma del caso d'uso UC-17: Modifica azienda}
+    \label{fig:uc-17}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo azienda.
+    \item[Trigger] Il Consulente del lavoro decide di correggere l'azienda associata al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo valore del campo azienda.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro inserisce il nuovo valore nel campo azienda.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il Consulente del lavoro seleziona il campo azienda per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce il nuovo valore.
+        \item Il sistema valida il dato e salva il valore aggiornato.
+        \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-16.3: Modifica data del documento}
+\subsubsection{UC-18: Modifica data del documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.3.png}
-    \caption{Diagramma del caso d'uso UC-16.3: Modifica data del documento}
-    \label{fig:uc-16.3}
+    \caption{Diagramma del caso d'uso UC-18: Modifica data del documento}
+    \label{fig:uc-18}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo data del documento.
+    \item[Trigger] Il Consulente del lavoro decide di correggere la data del documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo valore del campo data del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro inserisce o seleziona il nuovo valore nel campo data del documento.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il Consulente del lavoro seleziona il campo data del documento per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce o seleziona il nuovo valore tramite il selettore di data.
+        \item Il sistema valida il dato e salva il valore aggiornato.
+        \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-16.4: Modifica tipologia del documento}
+\subsubsection{UC-19: Modifica tipologia del documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.4.png}
-    \caption{Diagramma del caso d'uso UC-16.4: Modifica tipologia del documento}
-    \label{fig:uc-16.4}
+    \caption{Diagramma del caso d'uso UC-19: Modifica tipologia del documento}
+    \label{fig:uc-19}
     \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo tipologia del documento.
+    \item[Trigger] Il Consulente del lavoro decide di correggere la tipologia del documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo valore del campo tipologia del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro seleziona il nuovo valore nel campo tipologia del documento tra le opzioni disponibili: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il Consulente del lavoro seleziona il campo tipologia del documento per abilitarne la modifica.
+        \item Il Consulente del lavoro seleziona il nuovo valore tra le opzioni disponibili: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
+        \item Il sistema salva il valore aggiornato.
+        \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-16.5: Modifica breve descrizione del documento}
+\subsubsection{UC-20: Modifica breve descrizione del documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_16.5.png}
-    \caption{Diagramma del caso d'uso UC-16.5: Modifica breve descrizione del documento}
-    \label{fig:uc-16.5}
+    \caption{Diagramma del caso d'uso UC-20: Modifica breve descrizione del documento}
+    \label{fig:uc-20}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16).
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo breve descrizione del documento.
+    \item[Trigger] Il Consulente del lavoro decide di correggere la breve descrizione del documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo valore del campo breve descrizione del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro inserisce il nuovo valore nel campo breve descrizione del documento.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il Consulente del lavoro seleziona il campo breve descrizione per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce il nuovo testo descrittivo.
+        \item Il sistema valida il dato e salva il valore aggiornato.
+        \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-16.6: Modifica email destinatario}
+\subsubsection{UC-21: Modifica email destinatario}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.6.png}
-    \caption{Diagramma del caso d'uso UC-16.6: Modifica email destinatario}
-    \label{fig:uc-16.6}
+    \caption{Diagramma del caso d'uso UC-21: Modifica email destinatario}
+    \label{fig:uc-21}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16) e il campo email è visibile nel pannello dati estratti.
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo email destinatario e lo registra in attesa del salvataggio finale.
+    \item[Trigger] Il Consulente del lavoro decide di correggere l'indirizzo e-mail del destinatario associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo indirizzo e-mail del destinatario.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro seleziona il campo email destinatario.
+        \item Il Consulente del lavoro seleziona il campo email destinatario per abilitarne la modifica.
         \item Il Consulente del lavoro inserisce o modifica l'indirizzo e-mail.
-        \item Il sistema esegue una validazione formale del formato e segnala eventuali errori.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il sistema esegue una validazione formale del formato.
+        \item Il sistema salva il valore aggiornato e fornisce un feedback visivo di conferma.
     \end{enumerate}
-        \item[Scenari Alternativi]
+    \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Formato e-mail non valido: il sistema intercetta un indirizzo sintatticamente errato; viene eseguito \textbf{UC-16.6.E1}.
+        \item 3a. Formato e-mail non valido: il sistema intercetta un indirizzo sintatticamente errato; viene eseguito \textbf{UC-21.E1}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-16.6.E1.
+        \item \textbf{Estensioni}: UC-21.E1.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-16.7: Modifica codice fiscale}
+\subsubsection{UC-22: Modifica codice fiscale}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.7.png}
-    \caption{Diagramma del caso d'uso UC-16.7: Modifica codice fiscale}
-    \label{fig:uc-16.7}
+    \caption{Diagramma del caso d'uso UC-22: Modifica codice fiscale}
+    \label{fig:uc-22}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16) e il campo codice fiscale è visibile nel pannello dati estratti.
-    \item[Post-condizioni] Il sistema aggiorna il valore del campo codice fiscale e lo registra in attesa del salvataggio finale.
+    \item[Trigger] Il Consulente del lavoro decide di correggere il codice fiscale del dipendente associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato il nuovo codice fiscale del dipendente.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro seleziona il campo codice fiscale.
+        \item Il Consulente del lavoro seleziona il campo codice fiscale per abilitarne la modifica.
         \item Il Consulente del lavoro inserisce o corregge il codice fiscale.
-        \item Il sistema esegue un controllo di validità formale (checksum) e segnala eventuali incongruenze.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il sistema esegue un controllo di validità formale (checksum).
+        \item Il sistema salva il valore aggiornato e fornisce un feedback visivo di conferma.
     \end{enumerate}
-        \item[Scenari Alternativi]
+    \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Codice fiscale non valido: il sistema rileva che il valore inserito non supera il controllo di validità formale (checksum); viene eseguito \textbf{UC-16.7.E1}.
+        \item 3a. Codice fiscale non valido: il sistema rileva che il valore inserito non supera il controllo di validità formale (checksum); viene eseguito \textbf{UC-22.E1}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: UC-16.7.E1.
+        \item \textbf{Estensioni}: UC-22.E1.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-16.8: Modifica matricola dipendente}
+\subsubsection{UC-23: Modifica matricola dipendente}
 \mbox{} \\
 
 \begin{figure}[H]
 \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.8.png}
-    \caption{Diagramma del caso d'uso UC-16.8: Modifica matricola dipendente}
-    \label{fig:uc-16.8}
+    \caption{Diagramma del caso d'uso UC-23: Modifica matricola dipendente}
+    \label{fig:uc-23}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema è in modalità modifica del documento (UC-16) e il campo matricola è visibile nel pannello dati estratti.
-    \item[Post-condizioni] Il sistema aggiorna la matricola del dipendente e la registra in attesa del salvataggio finale; eventuale link alla scheda dipendente viene aggiornato.
+    \item[Trigger] Il Consulente del lavoro decide di correggere la matricola del dipendente associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-15).
+    \item[Post-condizioni] Il sistema ha salvato la nuova matricola del dipendente.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro seleziona il campo matricola.
+        \item Il Consulente del lavoro seleziona il campo matricola per abilitarne la modifica.
         \item Il Consulente del lavoro inserisce o modifica la matricola.
-        \item Il sistema verifica l'unicità o la corrispondenza con la scheda dipendente e segnala eventuali conflitti.
-        \item Il sistema registra il valore aggiornato in attesa del salvataggio finale.
+        \item Il sistema verifica la corrispondenza con la scheda dipendente e segnala eventuali conflitti.
+        \item Il sistema salva il valore aggiornato e fornisce un feedback visivo di conferma.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-16.6.E1: Errore - Formato email non valido}
+\paragraph{UC-21.E1: Errore - Formato email non valido}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.6.E1.png}
-    \caption{Diagramma del caso d'uso UC-16.6.E1: Errore per formato email non valido}
-    \label{fig:uc-16.6.e1}
+    \caption{Diagramma del caso d'uso UC-21.E1: Errore per formato email non valido}
+    \label{fig:uc-21.e1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo email destinatario (UC-16.6) e ha inserito un indirizzo con formato non valido.
+    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo email destinatario (UC-21) e ha inserito un indirizzo con formato non valido.
     \item[Post-condizioni] Il sistema segnala l'errore e non registra il valore finché non viene fornito un indirizzo e-mail con formato corretto.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2526,18 +2608,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-16.7.E1: Errore - Codice fiscale non valido}
+\paragraph{UC-22.E1: Errore - Codice fiscale non valido}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.7.E1.png}
-    \caption{Diagramma del caso d'uso UC-16.7.E1: Errore per codice fiscale non valido}
-    \label{fig:uc-16.7.e1}
+    \caption{Diagramma del caso d'uso UC-22.E1: Errore per codice fiscale non valido}
+    \label{fig:uc-22.e1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo codice fiscale (UC-16.7) e il valore inserito non supera il controllo di validità formale (checksum).
+    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo codice fiscale (UC-22) e il valore inserito non supera il controllo di validità formale (checksum).
     \item[Post-condizioni] Il sistema segnala l'incongruenza e non registra il valore finché non viene fornito un codice fiscale corretto.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2546,43 +2628,42 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-17: Generazione contenuto per l'invio}
+\subsubsection{UC-24: Visualizzazione del messaggio di invio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_17.png}
-    \caption{Diagramma del caso d'uso UC-17: Generazione contenuto per l'invio}
-    \label{fig:uc-17}
+    \caption{Diagramma del caso d'uso UC-24: Visualizzazione del messaggio di invio precompilato}
+    \label{fig:uc-24}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Dopo la visualizzazione del singolo documento (UC-15), il Consulente del lavoro seleziona il comando di invio.
     \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-15).
-    \item[Post-condizioni] Il sistema invia il documento allegato al destinatario selezionato, utilizzando oggetto e testo confermati dal Consulente del lavoro.
+    \item[Post-condizioni] Il sistema ha predisposto la bozza di invio con destinatario, oggetto e testo pronti per la revisione e conferma da parte del Consulente del lavoro.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro clicca il tasto "Invia" dalla vista di dettaglio del documento.
         \item Il sistema apre la sezione di generazione per l'invio e allega automaticamente il documento che era in visualizzazione.
-        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-17.1}).
-        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-17.2}).
-        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-17.3}).
-        \item Il Consulente del lavoro conferma l'invio e il sistema esegue la spedizione del messaggio (\textbf{UC-17.4}).
+        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-24.1}).
+        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-24.2}).
+        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-24.3}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-17.1, UC-17.2, UC-17.3, UC-17.4.
+        \item \textbf{Inclusioni}: UC-24.1, UC-24.2, UC-24.3.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-17.1: Visualizzazione del destinatario}
+\paragraph{UC-24.1: Visualizzazione del destinatario del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.1.png}
-    \caption{Diagramma del caso d'uso UC-17.1: Visualizzazione del destinatario}
-    \label{fig:uc-17.1}
+    \caption{Diagramma del caso d'uso UC-24.1: Visualizzazione del destinatario del messaggio di invio}
+    \label{fig:uc-24.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2595,14 +2676,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-17.2: Visualizzazione dell'oggetto}
+\paragraph{UC-24.2: Visualizzazione dell'oggetto del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.2.png}
-    \caption{Diagramma del caso d'uso UC-17.2: Visualizzazione dell'oggetto}
-    \label{fig:uc-17.2}
+    \caption{Diagramma del caso d'uso UC-24.2: Visualizzazione dell'oggetto del messaggio di invio}
+    \label{fig:uc-24.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2615,14 +2696,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-17.3: Visualizzazione del testo}
+\paragraph{UC-24.3: Visualizzazione del testo del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.3.png}
-    \caption{Diagramma del caso d'uso UC-17.3: Visualizzazione del testo}
-    \label{fig:uc-17.3}
+    \caption{Diagramma del caso d'uso UC-24.3: Visualizzazione del testo del messaggio di invio}
+    \label{fig:uc-24.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2635,123 +2716,104 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-17.4: Conferma e invio del messaggio}
+\subsubsection{UC-25: Conferma e invio del messaggio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.4.png}
-    \caption{Diagramma del caso d'uso UC-17.4: Conferma e invio del messaggio}
-    \label{fig:uc-17.4}
+    \caption{Diagramma del caso d'uso UC-25: Conferma e invio del messaggio}
+    \label{fig:uc-25}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha confermato destinatario, oggetto e testo nella schermata di invio.
-    \item[Post-condizioni] Il sistema invia il messaggio con il documento allegato e notifica l'esito dell'operazione.
+    \item[Trigger] Il Consulente del lavoro decide di confermare e inviare il messaggio al destinatario dopo aver verificato i campi nella schermata di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) e ha verificato i campi destinatario, oggetto e testo.
+    \item[Post-condizioni] Il sistema ha inviato il messaggio con il documento allegato e notificato l'esito dell'operazione al Consulente del lavoro.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro seleziona l'invio definitivo del messaggio.
+        \item Il Consulente del lavoro seleziona il comando di invio definitivo del messaggio.
         \item Il sistema acquisisce i campi confermati e il documento allegato dalla schermata di invio.
         \item Il sistema invia il messaggio al destinatario indicato.
         \item Il sistema notifica al Consulente del lavoro l'esito dell'invio.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-18: Modifica contenuto generato per l'invio}
-\mbox{} \\
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_18.png}
-    \caption{Diagramma del caso d'uso UC-18: Modifica contenuto generato per l'invio}
-    \label{fig:uc-18}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro intende personalizzare la bozza di invio generata automaticamente (UC-17).
-    \item[Pre-condizioni] Il sistema ha già predisposto la bozza di invio con destinatario, oggetto e testo.
-    \item[Post-condizioni] Il sistema aggiorna i campi destinatario, oggetto e testo secondo le modifiche del Consulente del lavoro, rendendoli disponibili per l'invio in UC-17.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro modifica il destinatario proposto dal sistema (\textbf{UC-18.1}).
-        \item Il Consulente del lavoro modifica l'oggetto proposto dal sistema (\textbf{UC-18.2}).
-        \item Il Consulente del lavoro modifica il testo proposto dal sistema (\textbf{UC-18.3}).
-        \item Il Consulente del lavoro conferma i campi aggiornati e ritorna al flusso di invio (UC-17).
-    \end{enumerate}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-18.1, UC-18.2, UC-18.3.
-    \end{itemize}
-\end{description}
-
-\paragraph{UC-18.1: Modifica del destinatario}
+\subsubsection{UC-26: Modifica del destinatario del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_18.1.png}
-    \caption{Diagramma del caso d'uso UC-18.1: Modifica del destinatario}
-    \label{fig:uc-18.1}
+    \caption{Diagramma del caso d'uso UC-26: Modifica del destinatario del messaggio di invio}
+    \label{fig:uc-26}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema mostra un destinatario precompilato nella bozza di invio.
-    \item[Post-condizioni] Il campo destinatario contiene il valore aggiornato.
+    \item[Trigger] Il Consulente del lavoro decide di modificare il destinatario del messaggio di invio proposto dal sistema.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo destinatario precompilato dal sistema.
+    \item[Post-condizioni] Il sistema ha aggiornato il campo destinatario nella bozza di invio con il valore inserito dal Consulente del lavoro.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro sostituisce o integra il destinatario proposto.
-        \item Il sistema aggiorna il campo destinatario nella bozza.
+        \item Il Consulente del lavoro seleziona il campo destinatario.
+        \item Il Consulente del lavoro sostituisce o integra il valore proposto dal sistema.
+        \item Il sistema aggiorna il campo destinatario nella bozza di invio.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-18.2: Modifica dell'oggetto}
+\subsubsection{UC-27: Modifica dell'oggetto del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_18.2.png}
-    \caption{Diagramma del caso d'uso UC-18.2: Modifica dell'oggetto}
-    \label{fig:uc-18.2}
+    \caption{Diagramma del caso d'uso UC-27: Modifica dell'oggetto del messaggio di invio}
+    \label{fig:uc-27}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema mostra un oggetto precompilato nella bozza di invio.
-    \item[Post-condizioni] Il campo oggetto contiene il valore aggiornato.
+    \item[Trigger] Il Consulente del lavoro decide di modificare l'oggetto del messaggio di invio proposto dal sistema.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo oggetto precompilato dal sistema.
+    \item[Post-condizioni] Il sistema ha aggiornato il campo oggetto nella bozza di invio con il valore inserito dal Consulente del lavoro.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro modifica l'oggetto del messaggio.
-        \item Il sistema aggiorna il campo oggetto nella bozza.
+        \item Il Consulente del lavoro seleziona il campo oggetto.
+        \item Il Consulente del lavoro modifica il testo dell'oggetto.
+        \item Il sistema aggiorna il campo oggetto nella bozza di invio.
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-18.3: Modifica del testo}
+\subsubsection{UC-28: Modifica del testo del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_18.3.png}
-    \caption{Diagramma del caso d'uso UC-18.3: Modifica del testo}
-    \label{fig:uc-18.3}
+    \caption{Diagramma del caso d'uso UC-28: Modifica del testo del messaggio di invio}
+    \label{fig:uc-28}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il sistema mostra un testo precompilato nella bozza di invio.
-    \item[Post-condizioni] Il campo testo contiene il valore aggiornato.
+    \item[Trigger] Il Consulente del lavoro decide di modificare il testo del messaggio di invio proposto dal sistema.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo testo precompilato dal sistema.
+    \item[Post-condizioni] Il sistema ha aggiornato il campo testo nella bozza di invio con il valore inserito dal Consulente del lavoro.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro modifica il testo del messaggio.
-        \item Il sistema aggiorna il campo testo nella bozza.
+        \item Il Consulente del lavoro seleziona il campo testo.
+        \item Il Consulente del lavoro modifica il corpo del messaggio.
+        \item Il sistema aggiorna il campo testo nella bozza di invio.
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-19: Dashboard metriche e monitoraggio AI Co-Pilot}
+\subsubsection{UC-29: Consultazione metriche del modulo AI Co-Pilot}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_19.png}
-    \caption{Diagramma del caso d'uso UC-19: Dashboard metriche e monitoraggio AI Co-Pilot}
-    \label{fig:uc-19}
+    \caption{Diagramma del caso d'uso UC-29: Consultazione metriche del modulo AI Co-Pilot}
+    \label{fig:uc-29}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2760,26 +2822,26 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] L'Analista dati ha visualizzato in dashboard i principali KPI del modulo AI Co-Pilot.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-19.1}).
-        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-19.2}).
-        \item Il sistema espone la percentuale di documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-19.3}).
-        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-19.4}).
-        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-19.5}).
+        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-29.1}).
+        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-29.2}).
+        \item Il sistema espone la percentuale di documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-29.3}).
+        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-29.4}).
+        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-29.5}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-19.1, UC-19.2, UC-19.3, UC-19.4, UC-19.5.
+        \item \textbf{Inclusioni}: UC-29.1, UC-29.2, UC-29.3, UC-29.4, UC-29.5.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-19.1: Visualizzazione numero totale di documenti analizzati}
+\paragraph{UC-29.1: Visualizzazione numero totale di documenti analizzati}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.1.png}
-    \caption{Diagramma del caso d'uso UC-19.1: Visualizzazione numero totale di documenti analizzati}
-    \label{fig:uc-19.1}
+    \caption{Diagramma del caso d'uso UC-29.1: Visualizzazione numero totale di documenti analizzati}
+    \label{fig:uc-29.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2792,14 +2854,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-19.2: Visualizzazione percentuale di classificazioni corrette}
+\paragraph{UC-29.2: Visualizzazione percentuale di classificazioni corrette}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.2.png}
-    \caption{Diagramma del caso d'uso UC-19.2: Visualizzazione percentuale di classificazioni corrette}
-    \label{fig:uc-19.2}
+    \caption{Diagramma del caso d'uso UC-29.2: Visualizzazione percentuale di classificazioni corrette}
+    \label{fig:uc-29.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2812,14 +2874,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-19.3: Visualizzazione documenti sotto soglia di confidenza}
+\paragraph{UC-29.3: Visualizzazione documenti sotto soglia di confidenza}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.3.png}
-    \caption{Diagramma del caso d'uso UC-19.3: Visualizzazione documenti sotto soglia di confidenza}
-    \label{fig:uc-19.3}
+    \caption{Diagramma del caso d'uso UC-29.3: Visualizzazione documenti sotto soglia di confidenza}
+    \label{fig:uc-29.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2832,14 +2894,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\paragraph{UC-19.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+\paragraph{UC-29.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{diagrammi_use_case/uc_19.4.png}
-    \caption{Diagramma del caso d'uso UC-19.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
-    \label{fig:uc-19.4}
+    \caption{Diagramma del caso d'uso UC-29.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+    \label{fig:uc-29.4}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2852,14 +2914,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-19.5: Visualizzazione tempo medio di analisi dei documenti}
+\paragraph{UC-29.5: Visualizzazione tempo medio di analisi dei documenti}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.5.png}
-    \caption{Diagramma del caso d'uso UC-19.5: Visualizzazione tempo medio di analisi dei documenti}
-    \label{fig:uc-19.5}
+    \caption{Diagramma del caso d'uso UC-29.5: Visualizzazione tempo medio di analisi dei documenti}
+    \label{fig:uc-29.5}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -3093,55 +3155,55 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF85-OB & Il sistema deve permettere al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-16]{UC-16} \\
     \hline
-    RF86-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-16.1]{UC-16.1} \\
+    RF86-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-16]{UC-16} \\
     \hline
-    RF87-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & \hyperref[fig:uc-16.2]{UC-16.2} \\
+    RF87-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & \hyperref[fig:uc-17]{UC-17} \\
     \hline
-    RF88-OB & Il sistema deve permettere la modifica della data del documento. & \hyperref[fig:uc-16.3]{UC-16.3} \\
+    RF88-OB & Il sistema deve permettere la modifica della data del documento. & \hyperref[fig:uc-18]{UC-18} \\
     \hline
-    RF89-OB & Il sistema deve permettere la modifica della tipologia del documento. & \hyperref[fig:uc-16.4]{UC-16.4} \\
+    RF89-OB & Il sistema deve permettere la modifica della tipologia del documento. & \hyperref[fig:uc-19]{UC-19} \\
     \hline
-    RF90-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & \hyperref[fig:uc-16.5]{UC-16.5} \\
+    RF90-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & \hyperref[fig:uc-20]{UC-20} \\
     \hline
-    RF91-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & \hyperref[fig:uc-16.6]{UC-16.6} \\
+    RF91-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & \hyperref[fig:uc-21]{UC-21} \\
     \hline
-    RF92-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & \hyperref[fig:uc-16.7]{UC-16.7} \\
+    RF92-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & \hyperref[fig:uc-22]{UC-22} \\
     \hline
-    RF93-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-16.8]{UC-16.8} \\
+    RF93-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-23]{UC-23} \\
     \hline
-    RF94-OP & Il sistema deve notificare il Consulente del lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[fig:uc-16.6.e1]{UC-16.6.E1} \\
+    RF94-OP & Il sistema deve notificare il Consulente del lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[fig:uc-21.e1]{UC-21.E1} \\
     \hline
-    RF95-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[fig:uc-16.7.e1]{UC-16.7.E1} \\
+    RF95-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[fig:uc-22.e1]{UC-22.E1} \\
     \hline
-    RF96-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-17]{UC-17} \\
+    RF96-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-24]{UC-24} \\
     \hline
-    RF97-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-17.1]{UC-17.1} \\
+    RF97-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-24.1]{UC-24.1} \\
     \hline
-    RF98-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-17.2]{UC-17.2} \\
+    RF98-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-24.2]{UC-24.2} \\
     \hline
-    RF99-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-17.3]{UC-17.3} \\
+    RF99-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-24.3]{UC-24.3} \\
     \hline
-    RF100-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-17.4]{UC-17.4} \\
+    RF100-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
     RF101-OB & Il sistema deve permettere al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-18]{UC-18} \\
     \hline
-    RF102-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-18.1]{UC-18.1} \\
+    RF102-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-26]{UC-26} \\
     \hline
-    RF103-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-18.2]{UC-18.2} \\
+    RF103-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-27]{UC-27} \\
     \hline
-    RF104-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-18.3]{UC-18.3} \\
+    RF104-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-28]{UC-28} \\
     \hline
-    RF105-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & \hyperref[fig:uc-19]{UC-19} \\
+    RF105-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & \hyperref[fig:uc-29]{UC-29} \\
     \hline
-    RF106-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-19.1]{UC-19.1} \\
+    RF106-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-29.1]{UC-29.1} \\
     \hline
-    RF107-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & \hyperref[fig:uc-19.2]{UC-19.2} \\
+    RF107-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & \hyperref[fig:uc-29.2]{UC-29.2} \\
     \hline
-    RF108-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & \hyperref[fig:uc-19.3]{UC-19.3} \\
+    RF108-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & \hyperref[fig:uc-29.3]{UC-29.3} \\
     \hline
-    RF109-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & \hyperref[fig:uc-19.4]{UC-19.4} \\
+    RF109-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & \hyperref[fig:uc-29.4]{UC-29.4} \\
     \hline
-    RF110-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & \hyperref[fig:uc-19.5]{UC-19.5} \\
+    RF110-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & \hyperref[fig:uc-29.5]{UC-29.5} \\
     \hline
 
 \end{longtable}
@@ -3473,55 +3535,55 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-16 & RF85-OB \\
     \hline
-    UC-16.1 & RF86-OB \\
+    UC-16 & RF86-OB \\
     \hline
-    UC-16.2 & RF87-OB \\
+    UC-17 & RF87-OB \\
     \hline
-    UC-16.3 & RF88-OB \\
+    UC-18 & RF88-OB \\
     \hline
-    UC-16.4 & RF89-OB \\
+    UC-19 & RF89-OB \\
     \hline
-    UC-16.5 & RF90-OB \\
+    UC-20 & RF90-OB \\
     \hline
-    UC-16.6 & RF91-OP \\
+    UC-21 & RF91-OP \\
     \hline
-    UC-16.6.E1 & RF94-OP \\
+    UC-21.E1 & RF94-OP \\
     \hline
-    UC-16.7 & RF92-OP \\
+    UC-22 & RF92-OP \\
     \hline
-    UC-16.7.E1 & RF95-OP \\
+    UC-22.E1 & RF95-OP \\
     \hline
-    UC-16.8 & RF93-OP \\
+    UC-23 & RF93-OP \\
     \hline
-    UC-17 & RF96-OB \\
+    UC-24 & RF96-OB \\
     \hline
-    UC-17.1 & RF97-OB \\
+    UC-24.1 & RF97-OB \\
     \hline
-    UC-17.2 & RF98-OB \\
+    UC-24.2 & RF98-OB \\
     \hline
-    UC-17.3 & RF99-OB \\
+    UC-24.3 & RF99-OB \\
     \hline
-    UC-17.4 & RF100-OB \\
+    UC-25 & RF100-OB \\
     \hline
     UC-18 & RF101-OB \\
     \hline
-    UC-18.1 & RF102-OB \\
+    UC-26 & RF102-OB \\
     \hline
-    UC-18.2 & RF103-OB \\
+    UC-27 & RF103-OB \\
     \hline
-    UC-18.3 & RF104-OB \\
+    UC-28 & RF104-OB \\
     \hline
-    UC-19 & RF105-OB \\
+    UC-29 & RF105-OB \\
     \hline
-    UC-19.1 & RF106-OB \\
+    UC-29.1 & RF106-OB \\
     \hline
-    UC-19.2 & RF107-OB \\
+    UC-29.2 & RF107-OB \\
     \hline
-    UC-19.3 & RF108-OB \\
+    UC-29.3 & RF108-OB \\
     \hline
-    UC-19.4 & RF109-OB \\
+    UC-29.4 & RF109-OB \\
     \hline
-    UC-19.5 & RF110-OB \\
+    UC-29.5 & RF110-OB \\
     \hline
 
 \end{longtable}
