@@ -1433,8 +1433,8 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Documento duplicato: Il sistema rileva che il file è già presente; viene eseguito UC-7.E1.
-        \item 3b. Formato non valido: Il sistema rileva un formato non supportato; viene eseguito UC-7.E2.
+        \item 3a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito UC-7.E1.
+        \item 3b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito UC-7.E2.
     \end{itemize}
 
     \item[Relazioni]
@@ -1460,7 +1460,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Il sistema gestisce la scelta dell'utente: in caso di conferma il documento viene caricato, altrimenti l'archivio resta invariato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema segnala che il documento risulta gia' presente in archivio.
+        \item Il sistema segnala che il documento risulta già presente in archivio.
         \item Il sistema richiede conferma per procedere con il caricamento del duplicato.
         \item Il Consulente del lavoro conferma o annulla il caricamento.
     \end{enumerate}
@@ -1500,16 +1500,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Attore Secondario] AI Analyst
     \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema impostando manualmente classificazione e metadati.
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.   
-    \item[Post-condizioni] Il Consulente del lavoro può consultare nello storico i risultati dell'analisi AI — estrazione dati e split in sotto-documenti per destinatario — con la garanzia che classificazione e metadati inseriti manualmente siano stati preservati senza essere sovrascritti dall'AI.
+    \item[Post-condizioni] Il Consulente del lavoro può consultare nello storico i risultati dell'analisi AI (estrazione dati e split in sotto-documenti per destinatario) con la garanzia che classificazione e metadati inseriti manualmente siano stati preservati senza essere sovrascritti dall'AI.
 
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
         \item Il Consulente del lavoro seleziona la tipologia del documento (\textbf{UC-8.1}).
-        \item Il Consulente del lavoro inserisce il mese di riferimento (\textbf{UC-8.3}).
-        \item Il Consulente del lavoro inserisce l'anno di riferimento (\textbf{UC-8.4}).
-        \item Il Consulente del lavoro inserisce l'azienda (\textbf{UC-8.5}).
-        \item Il Consulente del lavoro conferma il caricamento dopodiché il sistema verifica formato e duplicati.
+        \item Il Consulente del lavoro inserisce il mese di riferimento (\textbf{UC-8.2}).
+        \item Il Consulente del lavoro inserisce l'anno di riferimento (\textbf{UC-8.3}).
+        \item Il Consulente del lavoro inserisce l'azienda (\textbf{UC-8.4}).
+        \item Il Consulente del lavoro conferma il caricamento; dopodiché il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
@@ -1519,7 +1519,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-8.1, UC-8.3, UC-8.4, UC-8.5.
+        \item \textbf{Inclusioni}: UC-8.1, UC-8.2, UC-8.3, UC-8.4.
         \item \textbf{Estensioni}: UC-7.E1, UC-7.E2.
     \end{itemize}
 \end{description}
@@ -1543,14 +1543,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-8.3: Inserimento del mese di riferimento}
+\paragraph{UC-8.2: Inserimento del mese di riferimento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
-%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.3.png}
-%    \caption{Diagramma del caso d'uso UC-8.3: Inserimento del mese di riferimento}
-%    \label{fig:uc-8.3}
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.2.png}
+%    \caption{Diagramma del caso d'uso UC-8.2: Inserimento del mese di riferimento}
+%    \label{fig:uc-8.2}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1562,14 +1562,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-8.4: Inserimento dell'anno di riferimento}
+\paragraph{UC-8.3: Inserimento dell'anno di riferimento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
-%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.4.png}
-%    \caption{Diagramma del caso d'uso UC-8.4: Inserimento dell'anno di riferimento}
-%    \label{fig:uc-8.4}
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.3.png}
+%    \caption{Diagramma del caso d'uso UC-8.3: Inserimento dell'anno di riferimento}
+%    \label{fig:uc-8.3}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1581,14 +1581,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-8.5: Inserimento dell'azienda di riferimento}
+\paragraph{UC-8.4: Inserimento dell'azienda di riferimento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
-%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.5.png}
-%    \caption{Diagramma del caso d'uso UC-8.5: Inserimento dell'azienda di riferimento}
-%    \label{fig:uc-8.5}
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.4.png}
+%    \caption{Diagramma del caso d'uso UC-8.4: Inserimento dell'azienda di riferimento}
+%    \label{fig:uc-8.4}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1613,7 +1613,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende consultare lo storico dei documenti analizzati nel modulo AI Co-Pilot.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nel modulo AI Co-Pilot e apre la sezione "Storico documenti".
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nel modulo AI Co-Pilot e apre la sezione "Storico documenti analizzati".
     \item[Post-condizioni] Il Consulente del lavoro visualizza l'elenco dei documenti analizzati e può selezionarne uno per consultarne il dettaglio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1683,20 +1683,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-11: Filtro storico con barra di ricerca}
+\subsubsection{UC-11: Filtraggio storico con barra di ricerca}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_11.png}
-    \caption{Diagramma del caso d'uso UC-11: Filtro storico con barra di ricerca}
+    \caption{Diagramma del caso d'uso UC-11: Filtraggio storico con barra di ricerca}
     \label{fig:uc-11}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
     \item[Pre-condizioni]  Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti il cui nome/cognome dipendente o azienda corrisponde al testo cercato.
+    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti il cui nome/cognome del dipendente o azienda corrisponde al testo cercato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro inserisce un testo nella barra di ricerca unica.
@@ -1712,13 +1712,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-12: Filtro storico per stato invio}
+\subsubsection{UC-12: Filtraggio storico per stato invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_12.png}
-    \caption{Diagramma del caso d'uso UC-12: Filtro storico per stato invio}
+    \caption{Diagramma del caso d'uso UC-12: Filtraggio storico per stato invio}
     \label{fig:uc-12}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -1741,13 +1741,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-13: Filtro storico per confidenza}
+\subsubsection{UC-13: Filtraggio storico per confidenza}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_13.png}
-    \caption{Diagramma del caso d'uso UC-13: Filtro storico per confidenza}
+    \caption{Diagramma del caso d'uso UC-13: Filtraggio storico per confidenza}
     \label{fig:uc-13}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -1770,13 +1770,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-14: Filtro storico per mese e anno}
+\subsubsection{UC-14: Filtraggio storico per mese e anno}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_14.png}
-    \caption{Diagramma del caso d'uso UC-14: Filtro storico per mese e anno}
+    \caption{Diagramma del caso d'uso UC-14: Filtraggio storico per mese e anno}
     \label{fig:uc-14}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2101,8 +2101,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema recupera l'indirizzo e-mail estratto associato al documento.
-        \item Il Consulente del lavoro visualizza l'indirizzo e-mail nel pannello dati estratti, con eventuale icona per copiarlo o avviare un invio rapido.
+        \item Il Consulente del lavoro visualizza l'indirizzo e-mail nel pannello dati estratti, con un'eventuale icona per copiarlo o avviare un invio rapido.
     \end{enumerate}
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 1a. Email destinatario non disponibile: il sistema non dispone del dato estratto; viene eseguito UC-15.12.E1.
+    \end{itemize}
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: UC-15.12.E1.
+    \end{itemize}
 \end{description}
 
 
@@ -2282,15 +2290,35 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
+
+\paragraph{UC-15.12.E1: Email destinatario non disponibile}
+\mbox{} \\
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.12.E1.png}
+%    \caption{Diagramma del caso d'uso UC-15.12.E1: Email destinatario non disponibile}
+%    \label{fig:uc-15.12.e1}
+%\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo email destinatario (UC-15.12) e il dato non è disponibile.
+    \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo email destinatario non è valorizzato.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema rileva che il campo email destinatario non è disponibile.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+    \end{enumerate}
+\end{description}
 \newpage
 
-\subsubsection{UC-16: Modifica nome e cognome del dipendente}
+\subsubsection{UC-16: Modifica nome e cognome del dipendente nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_16.1.png}
-    \caption{Diagramma del caso d'uso UC-16: Modifica nome e cognome del dipendente}
+    \caption{Diagramma del caso d'uso UC-16: Modifica nome e cognome del dipendente nel singolo documento}
     \label{fig:uc-16}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2307,13 +2335,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-17: Modifica azienda}
+\subsubsection{UC-17: Modifica azienda nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.2.png}
-    \caption{Diagramma del caso d'uso UC-17: Modifica azienda}
+    \caption{Diagramma del caso d'uso UC-17: Modifica azienda nel singolo documento}
     \label{fig:uc-17}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2330,13 +2358,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-18: Modifica data del documento}
+\subsubsection{UC-18: Modifica data nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.3.png}
-    \caption{Diagramma del caso d'uso UC-18: Modifica data del documento}
+    \caption{Diagramma del caso d'uso UC-18: Modifica data nel singolo documento}
     \label{fig:uc-18}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2353,13 +2381,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-19: Modifica tipologia del documento}
+\subsubsection{UC-19: Modifica tipologia nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.4.png}
-    \caption{Diagramma del caso d'uso UC-19: Modifica tipologia del documento}
+    \caption{Diagramma del caso d'uso UC-19: Modifica tipologia nel singolo documento}
     \label{fig:uc-19}
     \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2376,13 +2404,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-20: Modifica breve descrizione del documento}
+\subsubsection{UC-20: Modifica breve descrizione nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_16.5.png}
-    \caption{Diagramma del caso d'uso UC-20: Modifica breve descrizione del documento}
+    \caption{Diagramma del caso d'uso UC-20: Modifica breve descrizione nel singolo documento}
     \label{fig:uc-20}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2399,13 +2427,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-21: Modifica email destinatario}
+\subsubsection{UC-21: Modifica email destinatario nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.6.png}
-    \caption{Diagramma del caso d'uso UC-21: Modifica email destinatario}
+    \caption{Diagramma del caso d'uso UC-21: Modifica email destinatario nel singolo documento}
     \label{fig:uc-21}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2430,13 +2458,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-22: Modifica codice fiscale}
+\subsubsection{UC-22: Modifica codice fiscale nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.7.png}
-    \caption{Diagramma del caso d'uso UC-22: Modifica codice fiscale}
+    \caption{Diagramma del caso d'uso UC-22: Modifica codice fiscale nel singolo documento}
     \label{fig:uc-22}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2461,13 +2489,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-23: Modifica matricola dipendente}
+\subsubsection{UC-23: Modifica matricola dipendente nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
 \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.8.png}
-    \caption{Diagramma del caso d'uso UC-23: Modifica matricola dipendente}
+    \caption{Diagramma del caso d'uso UC-23: Modifica matricola dipendente nel singolo documento}
     \label{fig:uc-23}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -2646,13 +2674,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro decide di modificare il destinatario del messaggio di invio proposto dal sistema.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo destinatario precompilato dal sistema.
-    \item[Post-condizioni] Il Consulente del lavoro ha sostituito il destinatario proposto dal sistema con quello da lui scelto.
+    \item[Trigger] Il Consulente del lavoro decide di modificare il destinatario del messaggio di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo destinatario valorizzato.
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il valore del campo destinatario nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il campo destinatario.
-        \item Il Consulente del lavoro sostituisce o integra il valore proposto dal sistema.
+        \item Il Consulente del lavoro sostituisce o integra il valore presente nel campo.
         \item Il sistema aggiorna il campo destinatario nella bozza di invio.
     \end{enumerate}
 \end{description}
@@ -2668,9 +2696,9 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro decide di modificare l'oggetto del messaggio di invio proposto dal sistema.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo oggetto precompilato dal sistema.
-    \item[Post-condizioni] Il Consulente del lavoro ha sostituito l'oggetto proposto dal sistema con quello da lui scelto.
+    \item[Trigger] Il Consulente del lavoro decide di modificare l'oggetto del messaggio di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo oggetto valorizzato.
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il testo del campo oggetto nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il campo oggetto.
@@ -2690,9 +2718,9 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Trigger] Il Consulente del lavoro decide di modificare il testo del messaggio di invio proposto dal sistema.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo testo precompilato dal sistema.
-    \item[Post-condizioni] Il Consulente del lavoro ha modificato il testo di accompagnamento proposto dal sistema con quello da lui scritto.
+    \item[Trigger] Il Consulente del lavoro decide di modificare il testo del messaggio di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-24) con il campo testo valorizzato.
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il testo di accompagnamento nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il campo testo.
