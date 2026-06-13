@@ -125,33 +125,33 @@
     \hline
     \rowcolor{gray!8} 0.15.1 & 09/05/2026 & Requisiti funzionali (prima stesura RF) & Angela Maule & Eleonora Bellet & - \\
     \hline
-    0.15.0 & 07/05/2026 & UC-52 (scenari e relazioni) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
+    0.15.0 & 07/05/2026 & UC-54 (scenari e relazioni) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
     \hline
-    \rowcolor{gray!8} 0.14.0 & 05/05/2026 & UC-41 (scheda e diagramma) & Leonardo Soligo & Eleonora Bellet & - \\
+    \rowcolor{gray!8} 0.14.0 & 05/05/2026 & UC-43 (scheda e diagramma) & Leonardo Soligo & Eleonora Bellet & - \\
     \hline
-    0.13.0 & 03/05/2026 & UC-47 (scheda e scenari) & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
+    0.13.0 & 03/05/2026 & UC-49 (scheda e scenari) & Eleonora Bellet & V.Y. Kaneda Fernandes & - \\
     \hline
-    \rowcolor{gray!8} 0.12.1 & 02/05/2026 & Diagrammi UC-38, UC-39 (figure UML) & Eleonora Bellet & Eleonora Bellet & - \\
+    \rowcolor{gray!8} 0.12.1 & 02/05/2026 & Diagrammi UC-40, UC-41 (figure UML) & Eleonora Bellet & Eleonora Bellet & - \\
     \hline
-    0.12.0 & 30/04/2026 & UC-39 (dettaglio modifica metadati) & Angelica Gastaldello & V.Y. Kaneda Fernandes & - \\
+    0.12.0 & 30/04/2026 & UC-41 (dettaglio modifica metadati) & Angelica Gastaldello & V.Y. Kaneda Fernandes & - \\
     \hline
-    \rowcolor{gray!8} 0.11.0 & 28/04/2026 & UC-38 (storico e dettaglio) & Angela Maule & Eleonora Bellet & - \\
+    \rowcolor{gray!8} 0.11.0 & 28/04/2026 & UC-40 (storico e dettaglio) & Angela Maule & Eleonora Bellet & - \\
     \hline
-    \rowcolor{gray!8} 0.10.1 & 25/04/2026 & Diagrammi UC-35/13/14 (figure UML) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
+    \rowcolor{gray!8} 0.10.1 & 25/04/2026 & Diagrammi UC-37/13/14 (figure UML) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
     \hline
-    0.10.0 & 24/04/2026 & UC-35/13/14 (filtri di ricerca) & Diego Belluz & Eleonora Bellet & - \\
+    0.10.0 & 24/04/2026 & UC-37/13/14 (filtri di ricerca) & Diego Belluz & Eleonora Bellet & - \\
     \hline
-    \rowcolor{gray!8} 0.9.0 & 21/04/2026 & UC-33/11 (filtro storico) & Angelica Gastaldello & V.Y. Kaneda Fernandes & - \\
+    \rowcolor{gray!8} 0.9.0 & 21/04/2026 & UC-35/11 (filtro storico) & Angelica Gastaldello & V.Y. Kaneda Fernandes & - \\
     \hline
-    \rowcolor{gray!8} 0.8.0 & 17/04/2026 & UC-31/9 (upload con metadati e storico) & Yuri Kaneda Fernandes & Eleonora Bellet & - \\
+    \rowcolor{gray!8} 0.8.0 & 17/04/2026 & UC-33/9 (upload con metadati e storico) & Yuri Kaneda Fernandes & Eleonora Bellet & - \\
     \hline
-    0.7.0 & 14/04/2026 & UC-30 (upload documento) & Diego Belluz & V.Y. Kaneda Fernandes & - \\
+    0.7.0 & 14/04/2026 & UC-32 (upload documento) & Diego Belluz & V.Y. Kaneda Fernandes & - \\
     \hline
-    0.6.3 & 12/04/2026 & Correzione UC-42/6 (allineamento testo) & Alex Oloni & Angela Maule & - \\
+    0.6.3 & 12/04/2026 & Correzione UC-44/6 (allineamento testo) & Alex Oloni & Angela Maule & - \\
     \hline
-    \rowcolor{gray!8} 0.6.2 & 11/04/2026 & UC-43 (export dati) & Leonardo Soligo & V.Y. Kaneda Fernandes & - \\
+    \rowcolor{gray!8} 0.6.2 & 11/04/2026 & UC-45 (export dati) & Leonardo Soligo & V.Y. Kaneda Fernandes & - \\
     \hline
-    0.6.1 & 10/04/2026 & UC-42 (reportistica) & Alex Oloni & Angela Maule & - \\
+    0.6.1 & 10/04/2026 & UC-44 (reportistica) & Alex Oloni & Angela Maule & - \\
     \hline
     \rowcolor{gray!8} 0.6.0 & 09/04/2026 & UC-3/4 (attori e flussi) & Yuri Kaneda Fernandes & V.Y. Kaneda Fernandes & - \\
     \hline
@@ -340,11 +340,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
 
-    \item[Attore Principale] Redattores
+    \item[Attore Principale] Redattore
 
     \item[Attore Secondario] AI Post Generator
 
-    \item[Trigger] Il Redattore avvia la creazione di un nuovo contenuto con l'AI.
+    \item[Trigger] Il Redattore decide di creare un nuovo contenuto con l'AI.
 
     \item[Pre-condizioni] Il modulo AI Assistant Generativo è operativo, con tono, stile e lunghezza impostati sui valori di default.
 
@@ -384,11 +384,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
      \begin{itemize}[leftmargin=*, nosep]
-         \item \textbf{1a. Prompt mancante o insufficiente}: il prompt è vuoto o insufficiente; viene eseguito \hyperref[errore-uc-53]{\textbf{UC-53}}.
+         \item 1a. Prompt mancante o insufficiente: il prompt è vuoto o insufficiente; viene eseguito \hyperref[errore-uc-55]{UC-55}.
     \end{itemize}
     \item[Relazioni]
      \begin{itemize}[leftmargin=*, nosep]
-         \item \textbf{Estensioni}: \hyperref[errore-uc-53]{UC-53}.
+         \item \textbf{Estensioni}: \hyperref[errore-uc-55]{UC-55}.
      \end{itemize}
 \end{description}
 
@@ -402,7 +402,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] È disponibile l'elenco dei toni selezionabili, impostato sul valore di default.
+    \item[Pre-condizioni] È disponibile l'elenco dei toni selezionabili (chiaro e diretto, più istuzionale, più sintetico, empatico e tecnico), impostato sul valore di default.
     \item[Post-condizioni] Il tono è stato impostato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -420,7 +420,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] È disponibile l'elenco degli stili selezionabili, impostato sul valore di default.
+    \item[Pre-condizioni] È disponibile l'elenco degli stili selezionabili (testo informativo, avviso operativo, aggiornamento breve), impostato sul valore di default.
     \item[Post-condizioni] Lo stile è stato impostato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -457,9 +457,9 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
 
-    \item[Trigger] Il Redattore consulta la bozza appena generata nell'area di revisione.
+    \item[Trigger] Il Redattore vuole consultare la bozza generata nell'area di revisione.
 
-    \item[Pre-condizioni] La bozza generata (titolo, testo e immagine di copertina) è disponibile nell'area di revisione (UC-1).
+    \item[Pre-condizioni] Dopo la compilazione e la selezione dei campi (UC-1), la bozza generata (titolo, testo e immagine di copertina) è disponibile nell'area di revisione.
 
     \item[Post-condizioni] Il Redattore ha consultato l'anteprima completa della bozza.
 
@@ -597,11 +597,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Formato immagine non valido}: il file caricato non è supportato o supera i limiti di dimensione; viene eseguito \hyperref[errore-uc-55]{\textbf{UC-55}}.
+        \item 1a. Formato immagine non valido: il file caricato non è supportato o supera i limiti di dimensione; viene eseguito \hyperref[errore-uc-56]{UC-56}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-55]{UC-55}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-56]{UC-56}.
     \end{itemize}
 \end{description}
 \newpage
@@ -627,14 +627,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Redattore richiede una nuova variante della bozza.
         \item Il sistema produce la nuova bozza e ne mostra l'anteprima.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Generazione non riuscita}: la nuova variante non può essere prodotta; viene eseguito \hyperref[errore-uc-54]{\textbf{UC-54}}.
-    \end{itemize}
-    \item[Relazioni]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-54]{UC-54}.
-    \end{itemize}
 \end{description}
 
 \subsubsection{UC-7: Scarto della bozza}
@@ -708,14 +700,37 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-10: Esportazione documento in PDF}
+\subsubsection{UC-10: Visualizzazione anteprima documento finale}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.5.png}
+    \caption{Diagramma del caso d'uso UC-10: Visualizzazione anteprima documento finale}
+    \label{fig:uc-10}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+
+    \item[Trigger] Il Redattore decide di verificare l'aspetto del documento finale prima di esportarlo o inviarlo.
+
+    \item[Pre-condizioni] La bozza è disponibile nell'area di revisione.
+    \item[Post-condizioni] Il Redattore ha visualizzato l'anteprima del documento finale impaginato, con il marcatore di trasparenza ``Creato da AI Assistant''.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore richiede l'anteprima del documento finale.
+        \item Il sistema mostra l'anteprima del documento impaginato, con il marcatore di trasparenza visibile.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-11: Esportazione documento in PDF}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.3.png}
-    \caption{Diagramma del caso d'uso UC-10: Esportazione documento in PDF}
-    \label{fig:uc-10}
+    \caption{Diagramma del caso d'uso UC-11: Esportazione documento in PDF}
+    \label{fig:uc-11}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -731,14 +746,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-11: Inoltro documento via e-mail}
+\subsubsection{UC-12: Inoltro documento via e-mail}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-3.4.png}
-    \caption{Diagramma del caso d'uso UC-11: Inoltro documento via e-mail}
-    \label{fig:uc-11}
+    \caption{Diagramma del caso d'uso UC-12: Inoltro documento via e-mail}
+    \label{fig:uc-12}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -755,35 +770,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Indirizzo e-mail non valido}: l'indirizzo inserito non rispetta il formato standard; viene eseguito \hyperref[errore-uc-56]{\textbf{UC-56}}.
+        \item 1a. Indirizzo e-mail non valido: l'indirizzo inserito non rispetta il formato standard; viene eseguito \hyperref[errore-uc-57]{UC-57}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-56]{UC-56}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
     \end{itemize}
-\end{description}
-
-\subsubsection{UC-12: Visualizzazione anteprima documento finale}
-\mbox{} \\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.5.png}
-    \caption{Diagramma del caso d'uso UC-12: Visualizzazione anteprima documento finale}
-    \label{fig:uc-12}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
-    \item[Attore Principale] Redattore
-
-    \item[Trigger] Il Redattore decide di verificare l'aspetto del documento finale prima di esportarlo o inviarlo.
-
-    \item[Pre-condizioni] La bozza è disponibile nell'area di revisione.
-    \item[Post-condizioni] Il Redattore ha visualizzato l'anteprima del documento finale impaginato, con il marcatore di trasparenza ``Creato da AI Assistant''.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore richiede l'anteprima del documento finale.
-        \item Il sistema mostra l'anteprima del documento impaginato, con il marcatore di trasparenza visibile.
-    \end{enumerate}
 \end{description}
 
 \newpage
@@ -804,6 +796,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema mostra le generazioni in ordine cronologico decrescente, con anteprima del prompt, tono e data.
+        \item Il Redattore visualizza l'elenco delle generazioni archiviate.
     \end{enumerate}
 \end{description}
 
@@ -823,17 +816,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Lo storico mostra solo le generazioni che soddisfano il criterio applicato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore applica un filtro allo storico secondo uno dei criteri disponibili (parola chiave, tono, stile, data).
+        \item Il Redattore applica uno o più filtri allo storico tra i criteri disponibili: parola chiave (\textbf{UC-15}), tono (\textbf{UC-16}), stile (\textbf{UC-17}), data (\textbf{UC-18}).
         \item Il sistema aggiorna l'elenco mostrando le generazioni compatibili con il criterio scelto.
+        \item Il Redattore visualizza lo storico delle generazioni filtrato secondo il criterio scelto.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{2a. Nessun risultato}: nessuna generazione soddisfa il criterio applicato; viene eseguito \hyperref[errore-uc-57]{\textbf{UC-57}}.
+        \item 2a. Nessun risultato: nessuna generazione soddisfa il criterio applicato; viene eseguito \hyperref[errore-uc-58]{UC-58}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Generalizzazioni}: UC-15 (Filtraggio storico per parola chiave), UC-16 (Filtraggio storico per tono), UC-17 (Filtraggio storico per stile), UC-18 (Filtraggio storico per data).
-        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
+        \item \textbf{Generalizzazioni}: UC-15, UC-16, UC-17, UC-18.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-58]{UC-58}.
     \end{itemize}
 \end{description}
 
@@ -855,10 +849,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore inserisce una parola chiave nel campo di ricerca.
         \item Il sistema aggiorna l'elenco mostrando le generazioni corrispondenti.
+        \item Il Redattore visualizza lo storico delle generazioni filtrato per la parola chiave inserita.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-58]{UC-58}.
     \end{itemize}
 \end{description}
 
@@ -874,16 +869,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Trigger] Il Redattore decide di filtrare lo storico in base al tono comunicativo.
-    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni.
+    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni; è disponibile il filtro per tono con i valori selezionabili (chiaro e diretto, più istuzionale, più sintetico, empatico e tecnico).
     \item[Post-condizioni] Lo storico mostra solo le generazioni associate al tono selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona un tono nel filtro dedicato.
         \item Il sistema aggiorna l'elenco mostrando le generazioni con il tono scelto.
+        \item Il Redattore visualizza lo storico delle generazioni filtrato per il tono selezionato.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-58]{UC-58}.
     \end{itemize}
 \end{description}
 
@@ -899,16 +895,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Trigger] Il Redattore decide di filtrare lo storico in base allo stile editoriale.
-    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni.
+    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni; è disponibile il filtro per stile con i valori selezionabili (testo informativo, avviso operativo, aggiornamento breve).
     \item[Post-condizioni] Lo storico mostra solo le generazioni associate allo stile selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona uno stile nel filtro dedicato.
         \item Il sistema aggiorna l'elenco mostrando le generazioni con lo stile scelto.
+        \item Il Redattore visualizza lo storico delle generazioni filtrato per lo stile selezionato.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-58]{UC-58}.
     \end{itemize}
 \end{description}
 
@@ -930,86 +927,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Redattore seleziona una data o un intervallo temporale nel filtro dedicato.
         \item Il sistema aggiorna l'elenco mostrando le generazioni del periodo scelto.
+        \item Il Redattore visualizza lo storico delle generazioni filtrato per il periodo selezionato.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-58]{UC-58}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-19: Riutilizzo configurazione di una generazione archiviata}
-\mbox{} \\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{diagrammi_use_case/UC-4.3.png}
-    \caption{Diagramma del caso d'uso UC-19: Riutilizzo configurazione di una generazione archiviata}
-    \label{fig:uc-19}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Redattore
-    \item[Trigger] Il Redattore decide di riutilizzare la configurazione di una generazione archiviata.
-    \item[Pre-condizioni] Il Redattore ha individuato una generazione d'interesse nello storico.
-    \item[Post-condizioni] I parametri del prompt selezionato sono caricati nei campi di configurazione, pronti per una nuova generazione (UC-1).
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore seleziona il comando di riutilizzo su una generazione archiviata.
-        \item Il sistema carica i parametri del prompt selezionato nei campi di configurazione.
-    \end{enumerate}
-\end{description}
-
-\subsubsection{UC-20: Gestione preferiti dello storico generazioni}
-\mbox{} \\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.4.png}
-    \caption{Diagramma del caso d'uso UC-20: Gestione preferiti dello storico generazioni}
-    \label{fig:uc-20}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Redattore
-    \item[Trigger] Il Redattore decide di aggiungere una generazione ai preferiti o di rimuoverla.
-    \item[Pre-condizioni] Il Redattore visualizza lo storico delle generazioni.
-    \item[Post-condizioni] Lo stato di preferita della generazione selezionata risulta aggiornato.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore attiva il contrassegno di preferita su una generazione non preferita, oppure lo rimuove da una già preferita.
-        \item Il sistema aggiorna e conferma il nuovo stato della generazione.
-    \end{enumerate}
-\end{description}
-
-\subsubsection{UC-21: Eliminazione generazione dallo storico}
-\mbox{} \\
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-4.5.png}
-    \caption{Diagramma del caso d'uso UC-21: Eliminazione generazione dallo storico}
-    \label{fig:uc-21}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
-    \item[Attore Principale] Redattore
-    \item[Trigger] Il Redattore decide di rimuovere definitivamente una generazione dallo storico.
-    \item[Pre-condizioni] Il Redattore ha individuato nello storico l'elemento da rimuovere.
-    \item[Post-condizioni] L'elemento selezionato è stato rimosso definitivamente dallo storico.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore richiede l'eliminazione di un elemento dello storico.
-        \item Il sistema chiede conferma dell'operazione.
-        \item Il Redattore conferma.
-        \item Il sistema rimuove l'elemento e aggiorna l'elenco.
-    \end{enumerate}
-\end{description}
-
-\subsubsection{UC-22: Salvataggio configurazione del prompt}
+\subsubsection{UC-19: Salvataggio configurazione del prompt}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-4.6.png}
-%    \caption{Diagramma del caso d'uso UC-22: Salvataggio configurazione del prompt}
-%    \label{fig:uc-22}
+%    \caption{Diagramma del caso d'uso UC-19: Salvataggio configurazione del prompt}
+%    \label{fig:uc-19}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -1026,59 +959,172 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Prompt mancante}: il testo del prompt è vuoto; viene eseguito \hyperref[errore-uc-53]{\textbf{UC-53}}.
+        \item 1a. Prompt mancante: il testo del prompt è vuoto; viene eseguito \hyperref[errore-uc-55]{UC-55}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-53]{UC-53}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-55]{UC-55}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-24: Valutazione della bozza generata}
+\subsubsection{UC-20: Riutilizzo configurazione di una generazione archiviata}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{diagrammi_use_case/UC-4.3.png}
+    \caption{Diagramma del caso d'uso UC-20: Riutilizzo configurazione di una generazione archiviata}
+    \label{fig:uc-20}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Trigger] Il Redattore decide di riutilizzare la configurazione di una generazione archiviata.
+    \item[Pre-condizioni] Il Redattore ha individuato una generazione d'interesse nello storico.
+    \item[Post-condizioni] I parametri del prompt selezionato sono caricati nei campi di configurazione, pronti per una nuova generazione (UC-1).
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore seleziona il comando di riutilizzo su una generazione archiviata.
+        \item Il sistema carica i parametri del prompt selezionato nei campi di configurazione.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-21: Aggiunta generazione ai preferiti}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.4.png}
+    \caption{Diagramma del caso d'uso UC-21: Aggiunta generazione ai preferiti}
+    \label{fig:uc-21}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Trigger] Il Redattore decide di aggiungere una generazione ai preferiti.
+    \item[Pre-condizioni] Il Redattore visualizza lo storico delle generazioni e la generazione selezionata non è contrassegnata come preferita.
+    \item[Post-condizioni] La generazione selezionata risulta contrassegnata come preferita.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore attiva il contrassegno di preferita sulla generazione selezionata.
+        \item Il sistema aggiorna lo stato e conferma l'aggiunta ai preferiti.
+        \item Il Redattore visualizza la generazione contrassegnata come preferita.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-22: Rimozione generazione dai preferiti}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.4.png}
+    \caption{Diagramma del caso d'uso UC-22: Rimozione generazione dai preferiti}
+    \label{fig:uc-22}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Trigger] Il Redattore decide di rimuovere una generazione dai preferiti.
+    \item[Pre-condizioni] Il Redattore visualizza lo storico delle generazioni e la generazione selezionata è contrassegnata come preferita.
+    \item[Post-condizioni] La generazione selezionata non risulta più contrassegnata come preferita.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore rimuove il contrassegno di preferita dalla generazione selezionata.
+        \item Il sistema aggiorna lo stato e conferma la rimozione dai preferiti.
+        \item Il Redattore visualizza la generazione senza il contrassegno di preferita.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-23: Eliminazione generazione dallo storico}
+\mbox{} \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-4.5.png}
+    \caption{Diagramma del caso d'uso UC-23: Eliminazione generazione dallo storico}
+    \label{fig:uc-23}
+\end{figure}
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+    \item[Trigger] Il Redattore decide di rimuovere definitivamente una generazione dallo storico.
+    \item[Pre-condizioni] Il Redattore ha individuato nello storico l'elemento da rimuovere.
+    \item[Post-condizioni] L'elemento selezionato è stato rimosso definitivamente dallo storico.
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il Redattore richiede l'eliminazione di un elemento dello storico.
+        \item Il sistema chiede conferma dell'operazione.
+        \item Il Redattore conferma.
+        \item Il sistema rimuove l'elemento e aggiorna l'elenco.
+    \end{enumerate}
+\end{description}
+
+\subsubsection{UC-25: Assegnazione punteggio alla bozza generata}
 \mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-5.png}
-    \caption{Diagramma del caso d'uso UC-24: Valutazione della bozza generata}
-    \label{fig:uc-24}
+    \caption{Diagramma del caso d'uso UC-25: Assegnazione punteggio alla bozza generata}
+    \label{fig:uc-25}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
 
-    \item[Trigger] Il Redattore decide di fornire un riscontro qualitativo sulla bozza generata.
+    \item[Trigger] Il Redattore decide di assegnare un punteggio alla bozza generata.
 
     \item[Pre-condizioni] La bozza è stata generata (UC-1) ed è disponibile il modulo di valutazione. La valutazione è opzionale.
 
-    \item[Post-condizioni] La valutazione (punteggio ed eventuale commento) è archiviata in associazione alla bozza, e il modulo di valutazione risulta disabilitato per la generazione corrente.
+    \item[Post-condizioni] Il punteggio assegnato (da 1 a 5 stelle) è archiviato in associazione alla bozza, e il modulo di valutazione risulta disabilitato per la generazione corrente.
 
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Redattore assegna un punteggio da 1 a 5 alla bozza e, facoltativamente, aggiunge un commento qualitativo.
-        \item Il Redattore invia la valutazione.
-        \item Il sistema acquisisce la valutazione e ne conferma la ricezione.
+        \item Il sistema visualizza il modulo di valutazione con la scala a 5 stelle.
+        \item Il Redattore seleziona un numero di stelle da 1 a 5.
+        \item Il sistema acquisisce il punteggio e ne conferma la ricezione.
         \item Il sistema disabilita il modulo di valutazione per la generazione corrente, per evitare valutazioni multiple.
     \end{enumerate}
 
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{1a. Superamento limite caratteri}: il commento eccede la lunghezza massima consentita; viene eseguito \hyperref[errore-uc-58]{\textbf{UC-58}}.
-    \end{itemize}
-
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-58]{UC-58}.
+        \item \textbf{Estensioni}: UC-26.
     \end{itemize}
 \end{description}
 
 \newpage
-\subsubsection{UC-25: Consultazione metriche dell'AI Assistant}
+\subsubsection{UC-26: Aggiunta commento qualitativo alla valutazione}
+\mbox{} \\
+\begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
+    \item[Attore Principale] Redattore
+
+    \item[Trigger] Il Redattore decide di aggiungere un commento testuale alla valutazione.
+
+    \item[Pre-condizioni] Il Redattore sta effettuando una valutazione della bozza (UC-25). Il campo commento è facoltativo.
+
+    \item[Post-condizioni] Il commento qualitativo è archiviato insieme alla valutazione della bozza.
+
+    \item[Scenario Principale]
+    \begin{enumerate}[leftmargin=*, nosep]
+        \item Il sistema visualizza il campo di testo per il commento.
+        \item Il Redattore inserisce un commento qualitativo.
+        \item Il sistema mostra il testo inserito.
+    \end{enumerate}
+
+    \item[Scenari Alternativi]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item 2a. Superamento limite caratteri: il commento eccede la lunghezza massima consentita; viene eseguito \hyperref[errore-uc-59]{UC-59}.
+    \end{itemize}
+
+    \item[Relazioni]
+    \begin{itemize}[leftmargin=*, nosep]
+        \item \textbf{Estensioni}: \hyperref[errore-uc-59]{UC-59}.
+    \end{itemize}
+\end{description}
+
+\newpage
+\subsubsection{UC-27: Consultazione metriche dell'AI Assistant}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.png}
-    \caption{Diagramma del caso d'uso UC-25: Consultazione metriche dell'AI Assistant}
-    \label{fig:uc-25}
+    \caption{Diagramma del caso d'uso UC-27: Consultazione metriche dell'AI Assistant}
+    \label{fig:uc-27}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -1091,25 +1137,25 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati consulta le statistiche di utilizzo (\textbf{UC-25.1}).
-        \item L'Analista dati consulta il rating medio (\textbf{UC-25.2}).
-        \item L'Analista dati consulta i feedback testuali (\textbf{UC-25.3}).
+        \item L'Analista dati consulta le statistiche di utilizzo (\textbf{UC-27.1}).
+        \item L'Analista dati consulta il rating medio (\textbf{UC-27.2}).
+        \item L'Analista dati consulta i feedback testuali (\textbf{UC-27.3}).
     \end{enumerate}
 
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-25.1, UC-25.2, UC-25.3.
+        \item \textbf{Inclusioni}: UC-27.1, UC-27.2, UC-27.3.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-25.1: Visualizzazione statistiche di utilizzo}
+\paragraph{UC-27.1: Visualizzazione statistiche di utilizzo}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-6.2.png}
-    \caption{Diagramma del caso d'uso UC-25.1: Visualizzazione statistiche di utilizzo}
-    \label{fig:uc-25.1}
+    \caption{Diagramma del caso d'uso UC-27.1: Visualizzazione statistiche di utilizzo}
+    \label{fig:uc-27.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -1121,18 +1167,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-25.2: Visualizzazione del rating medio}
+\paragraph{UC-27.2: Visualizzazione del rating medio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-6.3.png}
-    \caption{Diagramma del caso d'uso UC-25.2: Visualizzazione del rating medio}
-    \label{fig:uc-25.2}
+    \caption{Diagramma del caso d'uso UC-27.2: Visualizzazione del rating medio}
+    \label{fig:uc-27.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
-    \item[Pre-condizioni] Il sistema dispone delle valutazioni espresse dai Redattori (UC-24).
+    \item[Pre-condizioni] Il sistema dispone delle valutazioni espresse dai Redattori (UC-25).
     \item[Post-condizioni] L'Analista dati ha visualizzato il rating medio delle bozze generate.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1140,14 +1186,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-25.3: Visualizzazione dei feedback testuali}
+\paragraph{UC-27.3: Visualizzazione dei feedback testuali}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-6.4.png}
-    \caption{Diagramma del caso d'uso UC-25.3: Visualizzazione dei feedback testuali}
-    \label{fig:uc-25.3}
+    \caption{Diagramma del caso d'uso UC-27.3: Visualizzazione dei feedback testuali}
+    \label{fig:uc-27.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -1159,13 +1205,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-26: Visualizzazione dati analitici con filtri}
+\subsubsection{UC-28: Visualizzazione dati analitici con filtri}
 \mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-6.5.png}
-    \caption{Diagramma del caso d'uso UC-26: Visualizzazione dati analitici con filtri}
-    \label{fig:uc-26}
+    \caption{Diagramma del caso d'uso UC-28: Visualizzazione dati analitici con filtri}
+    \label{fig:uc-28}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -1174,28 +1220,29 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] La visualizzazione mostra solo i dati che soddisfano il criterio applicato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item L'Analista dati applica un filtro secondo uno dei criteri disponibili (data, tono, stile).
+        \item L'Analista dati applica uno o più filtri tra i criteri disponibili: data (\textbf{UC-29}), tono (\textbf{UC-30}), stile (\textbf{UC-31}).
         \item Il sistema aggiorna la visualizzazione in base al criterio scelto.
+        \item L'Analista dati visualizza i dati analitici filtrati secondo il criterio scelto.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{2a. Dati non disponibili}: nessun dato corrisponde al criterio applicato; viene eseguito \hyperref[errore-uc-59]{\textbf{UC-59}}.
+        \item 2a. Dati non disponibili: nessun dato corrisponde al criterio applicato; viene eseguito \hyperref[errore-uc-60]{UC-60}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-59]{UC-59}.
-        \item \textbf{Generalizzazioni}: UC-27 (Filtraggio dati analitici per data), UC-28 (Filtraggio dati analitici per tono), UC-29 (Filtraggio dati analitici per stile).
+        \item \textbf{Estensioni}: \hyperref[errore-uc-60]{UC-60}.
+        \item \textbf{Generalizzazioni}: UC-29, UC-30, UC-31.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-27: Filtraggio dati analitici per data}
+\subsubsection{UC-29: Filtraggio dati analitici per data}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.5.1.png}
-%    \caption{Diagramma del caso d'uso UC-27: Filtraggio dati analitici per data}
-%    \label{fig:uc-27}
+%    \caption{Diagramma del caso d'uso UC-29: Filtraggio dati analitici per data}
+%    \label{fig:uc-29}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -1206,73 +1253,76 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item L'Analista dati seleziona una data o un intervallo temporale nel filtro dedicato.
         \item Il sistema aggiorna la visualizzazione mostrando i dati del periodo scelto.
+        \item L'Analista dati visualizza i dati analitici filtrati per il periodo selezionato.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-59]{UC-59}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-60]{UC-60}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-28: Filtraggio dati analitici per tono}
+\subsubsection{UC-30: Filtraggio dati analitici per tono}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.5.2.png}
-%    \caption{Diagramma del caso d'uso UC-28: Filtraggio dati analitici per tono}
-%    \label{fig:uc-28}
+%    \caption{Diagramma del caso d'uso UC-30: Filtraggio dati analitici per tono}
+%    \label{fig:uc-30}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Trigger] L'Analista dati decide di filtrare i dati analitici per tono comunicativo.
-    \item[Pre-condizioni] Il sistema dispone dei dati analitici dell'AI Assistant nell'area analitica.
+    \item[Pre-condizioni] L'Analista dati si trova nell'area analitica dell'AI Assistant; è disponibile il filtro per tono con i valori selezionabili (chiaro e diretto, più istuzionale, più sintetico, empatico e tecnico).
     \item[Post-condizioni] La visualizzazione mostra solo i dati associati al tono selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item L'Analista dati seleziona un tono nel filtro dedicato.
         \item Il sistema aggiorna la visualizzazione mostrando i dati con il tono scelto.
+        \item L'Analista dati visualizza i dati analitici filtrati per il tono selezionato.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-59]{UC-59}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-60]{UC-60}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-29: Filtraggio dati analitici per stile}
+\subsubsection{UC-31: Filtraggio dati analitici per stile}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-6.5.3.png}
-%    \caption{Diagramma del caso d'uso UC-29: Filtraggio dati analitici per stile}
-%    \label{fig:uc-29}
+%    \caption{Diagramma del caso d'uso UC-31: Filtraggio dati analitici per stile}
+%    \label{fig:uc-31}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Trigger] L'Analista dati decide di filtrare i dati analitici per stile editoriale.
-    \item[Pre-condizioni] Il sistema dispone dei dati analitici dell'AI Assistant nell'area analitica.
+    \item[Pre-condizioni] L'Analista dati si trova nell'area analitica dell'AI Assistant; è disponibile il filtro per stile con i valori selezionabili (testo informativo, avviso operativo, aggiornamento breve).
     \item[Post-condizioni] La visualizzazione mostra solo i dati associati allo stile selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item L'Analista dati seleziona uno stile nel filtro dedicato.
         \item Il sistema aggiorna la visualizzazione mostrando i dati con lo stile scelto.
+        \item L'Analista dati visualizza i dati analitici filtrati per lo stile selezionato.
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-59]{UC-59}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-60]{UC-60}.
     \end{itemize}
 \end{description}
 \newpage
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
-\subsubsection{UC-30: Caricamento documento per analisi AI automatica}
+\subsubsection{UC-32: Caricamento documento per analisi AI automatica}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_7.png}
-    \caption{Diagramma del caso d'uso UC-30: Caricamento documento per analisi AI automatica}
-    \label{fig:uc-30}
+    \caption{Diagramma del caso d'uso UC-32: Caricamento documento per analisi AI automatica}
+    \label{fig:uc-32}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
@@ -1283,7 +1333,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     
     \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.
     
-    \item[Post-condizioni] Il Consulente del lavoro può consultare nello storico i risultati dell'analisi AI: metadati estratti, classificazione e sotto-documenti suddivisi per destinatario.
+    \item[Post-condizioni] Il documento viene suddiviso per destinatario e ogni sotto-documento appare come voce distinta nello storico, con nome del documento e data di analisi come campi visibili.
 
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1291,30 +1341,31 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il Consulente del lavoro conferma il caricamento.
         \item Il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento e avvia l'analisi AI del documento; il Consulente del lavoro riceve notifica dell'esito e può seguire l'avanzamento dell'elaborazione.
+        \item Il sistema suddivide il documento per destinatario e aggiunge allo storico una voce distinta per ciascun sotto-documento, mostrando nome del documento e data di analisi.
     \end{enumerate}
 
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito \hyperref[errore-uc-60]{UC-60}.
-        \item 3b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-61]{UC-61}.
+        \item 3a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito \hyperref[errore-uc-61]{UC-61}.
+        \item 3b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
 
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Generalizzazioni}: UC-31.
-        \item \textbf{Estensioni}: \hyperref[errore-uc-60]{UC-60}, \hyperref[errore-uc-61]{UC-61}.
+        \item \textbf{Generalizzazioni}: UC-33.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-61]{UC-61}, \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
 
 \end{description}
 
-\subsubsection{UC-31: Caricamento documento con classificazione e metadati manuali}
+\subsubsection{UC-33: Caricamento documento con classificazione e metadati manuali}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_8.png}
-    \caption{Diagramma del caso d'uso UC-31: Caricamento documento con classificazione e metadati manuali}
-    \label{fig:uc-31}
+    \caption{Diagramma del caso d'uso UC-33: Caricamento documento con classificazione e metadati manuali}
+    \label{fig:uc-33}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1326,33 +1377,33 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
-        \item Il Consulente del lavoro seleziona la tipologia del documento (\textbf{UC-35.1}).
-        \item Il Consulente del lavoro inserisce il mese di riferimento (\textbf{UC-35.2}).
-        \item Il Consulente del lavoro inserisce l'anno di riferimento (\textbf{UC-35.3}).
-        \item Il Consulente del lavoro inserisce l'azienda (\textbf{UC-35.4}).
+        \item Il Consulente del lavoro seleziona la tipologia del documento (\textbf{UC-37.1}).
+        \item Il Consulente del lavoro inserisce il mese di riferimento (\textbf{UC-37.2}).
+        \item Il Consulente del lavoro inserisce l'anno di riferimento (\textbf{UC-37.3}).
+        \item Il Consulente del lavoro inserisce l'azienda (\textbf{UC-37.4}).
         \item Il Consulente del lavoro conferma il caricamento; dopodiché il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 6a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito \hyperref[errore-uc-60]{UC-60}.
-        \item 6b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-61]{UC-61}.
+        \item 6a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito \hyperref[errore-uc-61]{UC-61}.
+        \item 6b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-35.1, UC-35.2, UC-35.3, UC-35.4.
-        \item \textbf{Estensioni}: \hyperref[errore-uc-60]{UC-60}, \hyperref[errore-uc-61]{UC-61}.
+        \item \textbf{Inclusioni}: UC-37.1, UC-37.2, UC-37.3, UC-37.4.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-61]{UC-61}, \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-35.1: Selezione della tipologia del documento}
+\paragraph{UC-37.1: Selezione della tipologia del documento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.1.png}
-%    \caption{Diagramma del caso d'uso UC-35.1: Selezione della tipologia del documento}
-%    \label{fig:uc-35.1}
+%    \caption{Diagramma del caso d'uso UC-37.1: Selezione della tipologia del documento}
+%    \label{fig:uc-37.1}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1364,14 +1415,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-35.2: Inserimento del mese di riferimento}
+\paragraph{UC-37.2: Inserimento del mese di riferimento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.2.png}
-%    \caption{Diagramma del caso d'uso UC-35.2: Inserimento del mese di riferimento}
-%    \label{fig:uc-35.2}
+%    \caption{Diagramma del caso d'uso UC-37.2: Inserimento del mese di riferimento}
+%    \label{fig:uc-37.2}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1383,14 +1434,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-35.3: Inserimento dell'anno di riferimento}
+\paragraph{UC-37.3: Inserimento dell'anno di riferimento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.3.png}
-%    \caption{Diagramma del caso d'uso UC-35.3: Inserimento dell'anno di riferimento}
-%    \label{fig:uc-35.3}
+%    \caption{Diagramma del caso d'uso UC-37.3: Inserimento dell'anno di riferimento}
+%    \label{fig:uc-37.3}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1402,14 +1453,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-35.4: Inserimento dell'azienda di riferimento}
+\paragraph{UC-37.4: Inserimento dell'azienda di riferimento}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_8.4.png}
-%    \caption{Diagramma del caso d'uso UC-35.4: Inserimento dell'azienda di riferimento}
-%    \label{fig:uc-35.4}
+%    \caption{Diagramma del caso d'uso UC-37.4: Inserimento dell'azienda di riferimento}
+%    \label{fig:uc-37.4}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1422,14 +1473,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 
-\subsubsection{UC-32: Visualizzazione storico documenti analizzati}
+\subsubsection{UC-34: Visualizzazione storico documenti analizzati}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_9.png}
-    \caption{Diagramma del caso d'uso UC-32: Visualizzazione storico documenti analizzati}
-    \label{fig:uc-32}
+    \caption{Diagramma del caso d'uso UC-34: Visualizzazione storico documenti analizzati}
+    \label{fig:uc-34}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1440,29 +1491,29 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro accede alla sezione "Storico documenti analizzati".
         \item Il Consulente del lavoro visualizza di default i documenti più recentemente analizzati, ordinati dal più recente al meno recente.
-        \item Il Consulente del lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-38}).
+        \item Il Consulente del lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-40}).
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti corrispondenti nello storico; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti corrispondenti nello storico; viene eseguito \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-38.
-        \item \textbf{Generalizzazioni}: UC-33.
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Inclusioni}: UC-40.
+        \item \textbf{Generalizzazioni}: UC-35.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
 \newpage
 \newpage
-\subsubsection{UC-33: Visualizzazione storico con filtri}
+\subsubsection{UC-35: Visualizzazione storico con filtri}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/uc_10.png}
-    \caption{Diagramma del caso d'uso UC-33: Visualizzazione storico con filtri}
-    \label{fig:uc-33}
+    \caption{Diagramma del caso d'uso UC-35: Visualizzazione storico con filtri}
+    \label{fig:uc-35}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1471,28 +1522,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti dello storico che soddisfano i criteri da lui impostati.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del lavoro imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-34}), stato invio (\textbf{UC-35}), confidenza rispetto a soglia (\textbf{UC-36}), mese e anno (\textbf{UC-37}).
+        \item Il Consulente del lavoro imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-36}), stato invio (\textbf{UC-37}), confidenza rispetto a soglia (\textbf{UC-38}), mese e anno (\textbf{UC-39}).
         \item Il Consulente del lavoro visualizza la lista aggiornata con i soli documenti che soddisfano i criteri selezionati.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con i filtri impostati; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con i filtri impostati; viene eseguito \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Generalizzazioni}: UC-34, UC-35, UC-36, UC-37.
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Generalizzazioni}: UC-36, UC-37, UC-38, UC-39.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-34: Filtraggio storico con barra di ricerca}
+\subsubsection{UC-36: Filtraggio storico con barra di ricerca}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_11.png}
-    \caption{Diagramma del caso d'uso UC-34: Filtraggio storico con barra di ricerca}
-    \label{fig:uc-34}
+    \caption{Diagramma del caso d'uso UC-36: Filtraggio storico con barra di ricerca}
+    \label{fig:uc-36}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1506,22 +1557,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con la ricerca; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con la ricerca; viene eseguito \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-35: Filtraggio storico per stato invio}
+\subsubsection{UC-37: Filtraggio storico per stato invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_12.png}
-    \caption{Diagramma del caso d'uso UC-35: Filtraggio storico per stato invio}
-    \label{fig:uc-35}
+    \caption{Diagramma del caso d'uso UC-37: Filtraggio storico per stato invio}
+    \label{fig:uc-37}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1535,22 +1586,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il filtro selezionato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il filtro selezionato; viene eseguito \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-36: Filtraggio storico per confidenza}
+\subsubsection{UC-38: Filtraggio storico per confidenza}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_13.png}
-    \caption{Diagramma del caso d'uso UC-36: Filtraggio storico per confidenza}
-    \label{fig:uc-36}
+    \caption{Diagramma del caso d'uso UC-38: Filtraggio storico per confidenza}
+    \label{fig:uc-38}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1564,22 +1615,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il filtro impostato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il filtro impostato; viene eseguito \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-37: Filtraggio storico per mese e anno}
+\subsubsection{UC-39: Filtraggio storico per mese e anno}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_14.png}
-    \caption{Diagramma del caso d'uso UC-37: Filtraggio storico per mese e anno}
-    \label{fig:uc-37}
+    \caption{Diagramma del caso d'uso UC-39: Filtraggio storico per mese e anno}
+    \label{fig:uc-39}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1593,22 +1644,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il periodo selezionato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 2a. Nessun elemento individuato: il sistema non trova documenti compatibili con il periodo selezionato; viene eseguito \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
 \newpage
-\subsubsection{UC-38: Visualizzazione singolo documento dallo storico}
+\subsubsection{UC-40: Visualizzazione singolo documento dallo storico}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_15.png}
-    \caption{Diagramma del caso d'uso UC-38: Visualizzazione singolo documento dallo storico}
-    \label{fig:uc-38}
+    \caption{Diagramma del caso d'uso UC-40: Visualizzazione singolo documento dallo storico}
+    \label{fig:uc-40}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1619,28 +1670,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro seleziona un documento dall'elenco dello storico.
         \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
-        \item Il Consulente del lavoro visualizza la porzione di documento relativa al dipendente selezionato (\textbf{UC-42.1}).
-        \item Il Consulente del lavoro visualizza il documento originale completo (\textbf{UC-42.2}).
-        \item Il Consulente del lavoro visualizza i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-42.3}), azienda (\textbf{UC-42.4}), nome del file (\textbf{UC-42.5}), data del documento (\textbf{UC-42.6}), numero di pagine (\textbf{UC-42.7}), tipologia del documento (\textbf{UC-42.8}), breve descrizione del documento (\textbf{UC-42.9}), confidenza in percentuale (\textbf{UC-42.10}), stato di invio del documento (\textbf{UC-42.11}), email destinatario (\textbf{UC-42.12}), codice fiscale (\textbf{UC-42.13}), matricola dipendente (\textbf{UC-42.14}) e data/ora caricamento (\textbf{UC-42.15}).
+        \item Il Consulente del lavoro visualizza la porzione di documento relativa al dipendente selezionato (\textbf{UC-44.1}).
+        \item Il Consulente del lavoro visualizza il documento originale completo (\textbf{UC-44.2}).
+        \item Il Consulente del lavoro visualizza i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-44.3}), azienda (\textbf{UC-44.4}), nome del file (\textbf{UC-44.5}), data del documento (\textbf{UC-44.6}), numero di pagine (\textbf{UC-44.7}), tipologia del documento (\textbf{UC-44.8}), breve descrizione del documento (\textbf{UC-44.9}), confidenza in percentuale (\textbf{UC-44.10}), stato di invio del documento (\textbf{UC-44.11}), email destinatario (\textbf{UC-44.12}), codice fiscale (\textbf{UC-44.13}), matricola dipendente (\textbf{UC-44.14}) e data/ora caricamento (\textbf{UC-44.15}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-42.1, UC-42.2, UC-42.3, UC-42.4, UC-42.5, UC-42.6, UC-42.7, UC-42.8, UC-42.9, UC-42.10, UC-42.11, UC-42.12, UC-42.13, UC-42.14, UC-42.15.
+        \item \textbf{Inclusioni}: UC-44.1, UC-44.2, UC-44.3, UC-44.4, UC-44.5, UC-44.6, UC-44.7, UC-44.8, UC-44.9, UC-44.10, UC-44.11, UC-44.12, UC-44.13, UC-44.14, UC-44.15.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-42.1: Visualizzazione della porzione di documento relativa al dipendente}
+\paragraph{UC-44.1: Visualizzazione della porzione di documento relativa al dipendente}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.1.png}
-    \caption{Diagramma del caso d'uso UC-42.1: Visualizzazione della porzione di documento relativa al dipendente}
-    \label{fig:uc-42.1}
+    \caption{Diagramma del caso d'uso UC-44.1: Visualizzazione della porzione di documento relativa al dipendente}
+    \label{fig:uc-44.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro può visualizzare la porzione di documento relativa al dipendente selezionato e verificare che lo split eseguito dall'AI sia corretto e completo.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1649,18 +1700,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.2: Visualizzazione del documento originale completo}
+\paragraph{UC-44.2: Visualizzazione del documento originale completo}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.2.png}
-    \caption{Diagramma del caso d'uso UC-42.2: Visualizzazione del documento originale completo}
-    \label{fig:uc-42.2}
+    \caption{Diagramma del caso d'uso UC-44.2: Visualizzazione del documento originale completo}
+    \label{fig:uc-44.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro può consultare il documento originale completo e confrontarlo con i sotto-documenti generati dallo split, verificando la correttezza della suddivisione.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1669,14 +1720,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.3: Visualizzazione nome e cognome del dipendente}
+\paragraph{UC-44.3: Visualizzazione nome e cognome del dipendente}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_15.3.png}
-    \caption{Diagramma del caso d'uso UC-42.3: Visualizzazione nome e cognome del dipendente}
-    \label{fig:uc-42.3}
+    \caption{Diagramma del caso d'uso UC-44.3: Visualizzazione nome e cognome del dipendente}
+    \label{fig:uc-44.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1688,22 +1739,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Nome e cognome non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-63]{UC-63}.
+        \item 1a. Nome e cognome non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-64]{UC-64}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-64]{UC-64}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-42.4: Visualizzazione azienda}
+\paragraph{UC-44.4: Visualizzazione azienda}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_15.4.png}
-    \caption{Diagramma del caso d'uso UC-42.4: Visualizzazione azienda}
-    \label{fig:uc-42.4}
+    \caption{Diagramma del caso d'uso UC-44.4: Visualizzazione azienda}
+    \label{fig:uc-44.4}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1715,22 +1766,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Azienda non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-64]{UC-64}.
+        \item 1a. Azienda non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-65]{UC-65}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-64]{UC-64}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-65]{UC-65}.
     \end{itemize}
 \end{description}
 \newpage
-\paragraph{UC-42.5: Visualizzazione nome del file}
+\paragraph{UC-44.5: Visualizzazione nome del file}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.5.png}
-    \caption{Diagramma del caso d'uso UC-42.5: Visualizzazione nome del file}
-    \label{fig:uc-42.5}
+    \caption{Diagramma del caso d'uso UC-44.5: Visualizzazione nome del file}
+    \label{fig:uc-44.5}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1742,14 +1793,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.6: Visualizzazione data del documento}
+\paragraph{UC-44.6: Visualizzazione data del documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_15.6.png}
-    \caption{Diagramma del caso d'uso UC-42.6: Visualizzazione data del documento}
-    \label{fig:uc-42.6}
+    \caption{Diagramma del caso d'uso UC-44.6: Visualizzazione data del documento}
+    \label{fig:uc-44.6}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1761,22 +1812,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Data del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-65]{UC-65}.
+        \item 1a. Data del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-66]{UC-66}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-65]{UC-65}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-66]{UC-66}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-42.7: Visualizzazione numero di pagine}
+\paragraph{UC-44.7: Visualizzazione numero di pagine}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_15.7.png}
-    \caption{Diagramma del caso d'uso UC-42.7: Visualizzazione numero di pagine}
-    \label{fig:uc-42.7}
+    \caption{Diagramma del caso d'uso UC-44.7: Visualizzazione numero di pagine}
+    \label{fig:uc-44.7}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1788,14 +1839,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.8: Visualizzazione tipologia del documento}
+\paragraph{UC-44.8: Visualizzazione tipologia del documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_15.8.png}
-    \caption{Diagramma del caso d'uso UC-42.8: Visualizzazione tipologia del documento}
-    \label{fig:uc-42.8}
+    \caption{Diagramma del caso d'uso UC-44.8: Visualizzazione tipologia del documento}
+    \label{fig:uc-44.8}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1807,22 +1858,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Tipologia del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-66]{UC-66}.
+        \item 1a. Tipologia del documento non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-67]{UC-67}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-66]{UC-66}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-67]{UC-67}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-42.9: Visualizzazione breve descrizione del documento}
+\paragraph{UC-44.9: Visualizzazione breve descrizione del documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_15.9.png}
-    \caption{Diagramma del caso d'uso UC-42.9: Visualizzazione breve descrizione del documento}
-    \label{fig:uc-42.9}
+    \caption{Diagramma del caso d'uso UC-44.9: Visualizzazione breve descrizione del documento}
+    \label{fig:uc-44.9}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1834,22 +1885,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Breve descrizione non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-67]{UC-67}.
+        \item 1a. Breve descrizione non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-68]{UC-68}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-67]{UC-67}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-68]{UC-68}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-42.10: Visualizzazione confidenza in percentuale per documento}
+\paragraph{UC-44.10: Visualizzazione confidenza in percentuale per documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_15.10.png}
-    \caption{Diagramma del caso d'uso UC-42.10: Visualizzazione confidenza in percentuale per documento}
-    \label{fig:uc-42.10}
+    \caption{Diagramma del caso d'uso UC-44.10: Visualizzazione confidenza in percentuale per documento}
+    \label{fig:uc-44.10}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1861,22 +1912,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Confidenza non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-68]{UC-68}.
+        \item 1a. Confidenza non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-69]{UC-69}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-68]{UC-68}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-69]{UC-69}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-42.11: Visualizzazione stato invio documento}
+\paragraph{UC-44.11: Visualizzazione stato invio documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_15.11.png}
-    \caption{Diagramma del caso d'uso UC-42.11: Visualizzazione stato invio documento}
-    \label{fig:uc-42.11}
+    \caption{Diagramma del caso d'uso UC-44.11: Visualizzazione stato invio documento}
+    \label{fig:uc-44.11}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1888,13 +1939,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.12: Visualizzazione email destinatario}
+\paragraph{UC-44.12: Visualizzazione email destinatario}
 \mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.12.png}
-    \caption{Diagramma del caso d'uso UC-42.12: Visualizzazione email destinatario}
-    \label{fig:uc-42.12}
+    \caption{Diagramma del caso d'uso UC-44.12: Visualizzazione email destinatario}
+    \label{fig:uc-44.12}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1907,22 +1958,22 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Email destinatario non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-69]{UC-69}.
+        \item 1a. Email destinatario non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-70]{UC-70}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-69]{UC-69}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-70]{UC-70}.
     \end{itemize}
 \end{description}
 
 
-\paragraph{UC-42.13: Visualizzazione codice fiscale}
+\paragraph{UC-44.13: Visualizzazione codice fiscale}
 \mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.13.png}
-    \caption{Diagramma del caso d'uso UC-42.13: Visualizzazione codice fiscale}
-    \label{fig:uc-42.13}
+    \caption{Diagramma del caso d'uso UC-44.13: Visualizzazione codice fiscale}
+    \label{fig:uc-44.13}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1935,13 +1986,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.14: Visualizzazione matricola dipendente}
+\paragraph{UC-44.14: Visualizzazione matricola dipendente}
 \mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.14.png}
-    \caption{Diagramma del caso d'uso UC-42.14: Visualizzazione matricola dipendente}
-    \label{fig:uc-42.14}
+    \caption{Diagramma del caso d'uso UC-44.14: Visualizzazione matricola dipendente}
+    \label{fig:uc-44.14}
     \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1954,13 +2005,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-42.15: Visualizzazione data/ora caricamento}
+\paragraph{UC-44.15: Visualizzazione data/ora caricamento}
 \mbox{} \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.15.png}
-    \caption{Diagramma del caso d'uso UC-42.15: Visualizzazione data/ora caricamento}
-    \label{fig:uc-42.15}
+    \caption{Diagramma del caso d'uso UC-44.15: Visualizzazione data/ora caricamento}
+    \label{fig:uc-44.15}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -1974,19 +2025,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 \newpage
 
-\subsubsection{UC-39: Modifica nome e cognome del dipendente nel singolo documento}
+\subsubsection{UC-41: Modifica nome e cognome del dipendente nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_16.1.png}
-    \caption{Diagramma del caso d'uso UC-39: Modifica nome e cognome del dipendente nel singolo documento}
-    \label{fig:uc-39}
+    \caption{Diagramma del caso d'uso UC-41: Modifica nome e cognome del dipendente nel singolo documento}
+    \label{fig:uc-41}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere il nome e cognome del dipendente associato al documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto il nome e cognome del dipendente, aggiornando l'associazione del documento all'anagrafica corretta.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1997,19 +2048,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-40: Modifica azienda nel singolo documento}
+\subsubsection{UC-42: Modifica azienda nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.2.png}
-    \caption{Diagramma del caso d'uso UC-40: Modifica azienda nel singolo documento}
-    \label{fig:uc-40}
+    \caption{Diagramma del caso d'uso UC-42: Modifica azienda nel singolo documento}
+    \label{fig:uc-42}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere l'azienda associata al documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto l'azienda, garantendo la corretta attribuzione del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2020,19 +2071,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-41: Modifica data nel singolo documento}
+\subsubsection{UC-43: Modifica data nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.3.png}
-    \caption{Diagramma del caso d'uso UC-41: Modifica data nel singolo documento}
-    \label{fig:uc-41}
+    \caption{Diagramma del caso d'uso UC-43: Modifica data nel singolo documento}
+    \label{fig:uc-43}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere la data del documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto la data del documento, allineandola al periodo di riferimento corretto.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2043,19 +2094,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-42: Modifica tipologia nel singolo documento}
+\subsubsection{UC-44: Modifica tipologia nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.4.png}
-    \caption{Diagramma del caso d'uso UC-42: Modifica tipologia nel singolo documento}
-    \label{fig:uc-42}
+    \caption{Diagramma del caso d'uso UC-44: Modifica tipologia nel singolo documento}
+    \label{fig:uc-44}
     \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere la tipologia del documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto la tipologia del documento, assicurando una classificazione accurata.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2066,19 +2117,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-43: Modifica breve descrizione nel singolo documento}
+\subsubsection{UC-45: Modifica breve descrizione nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_16.5.png}
-    \caption{Diagramma del caso d'uso UC-43: Modifica breve descrizione nel singolo documento}
-    \label{fig:uc-43}
+    \caption{Diagramma del caso d'uso UC-45: Modifica breve descrizione nel singolo documento}
+    \label{fig:uc-45}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere la breve descrizione del documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha aggiornato la descrizione del documento, migliorandone la leggibilità nello storico.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2089,19 +2140,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-44: Modifica email destinatario nel singolo documento}
+\subsubsection{UC-46: Modifica email destinatario nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.6.png}
-    \caption{Diagramma del caso d'uso UC-44: Modifica email destinatario nel singolo documento}
-    \label{fig:uc-44}
+    \caption{Diagramma del caso d'uso UC-46: Modifica email destinatario nel singolo documento}
+    \label{fig:uc-46}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere l'indirizzo e-mail del destinatario associato al documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto l'indirizzo e-mail del destinatario, assicurando il corretto recapito del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2112,27 +2163,27 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Formato e-mail non valido: il sistema intercetta un indirizzo sintatticamente errato; viene eseguito \hyperref[errore-uc-56]{\textbf{UC-56}}.
+        \item 3a. Formato e-mail non valido: il sistema intercetta un indirizzo sintatticamente errato; viene eseguito \hyperref[errore-uc-57]{UC-57}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-56]{UC-56}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-57]{UC-57}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-45: Modifica codice fiscale nel singolo documento}
+\subsubsection{UC-47: Modifica codice fiscale nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_16.7.png}
-    \caption{Diagramma del caso d'uso UC-45: Modifica codice fiscale nel singolo documento}
-    \label{fig:uc-45}
+    \caption{Diagramma del caso d'uso UC-47: Modifica codice fiscale nel singolo documento}
+    \label{fig:uc-47}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere il codice fiscale del dipendente associato al documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto il codice fiscale del dipendente, garantendo la corretta identificazione anagrafica.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2143,27 +2194,27 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3a. Codice fiscale non valido: il sistema rileva che il valore inserito non supera il controllo di validità formale (checksum); viene eseguito \hyperref[errore-uc-70]{\textbf{UC-70}}.
+        \item 3a. Codice fiscale non valido: il sistema rileva che il valore inserito non supera il controllo di validità formale (checksum); viene eseguito \hyperref[errore-uc-71]{UC-71}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-70]{UC-70}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-71]{UC-71}.
     \end{itemize}
 \end{description}
 
-\subsubsection{UC-46: Modifica matricola dipendente nel singolo documento}
+\subsubsection{UC-48: Modifica matricola dipendente nel singolo documento}
 \mbox{} \\
 
 \begin{figure}[H]
 \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.8.png}
-    \caption{Diagramma del caso d'uso UC-46: Modifica matricola dipendente nel singolo documento}
-    \label{fig:uc-46}
+    \caption{Diagramma del caso d'uso UC-48: Modifica matricola dipendente nel singolo documento}
+    \label{fig:uc-48}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di correggere la matricola del dipendente associato al documento.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-38).
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro ha corretto la matricola del dipendente associata al documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2173,42 +2224,42 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-47: Visualizzazione del messaggio di invio precompilato}
+\subsubsection{UC-49: Visualizzazione del messaggio di invio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/uc_17.png}
-    \caption{Diagramma del caso d'uso UC-47: Visualizzazione del messaggio di invio precompilato}
-    \label{fig:uc-47}
+    \caption{Diagramma del caso d'uso UC-49: Visualizzazione del messaggio di invio precompilato}
+    \label{fig:uc-49}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-38), il Consulente del lavoro seleziona il comando di invio.
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-38).
+    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-40), il Consulente del lavoro seleziona il comando di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-40).
     \item[Post-condizioni] Il Consulente del lavoro visualizza la bozza di invio precompilata dal sistema con destinatario, oggetto e testo.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il Consulente del lavoro clicca il tasto "Invia" dalla vista di dettaglio del documento.
         \item Il sistema apre la sezione di generazione per l'invio e allega automaticamente il documento che era in visualizzazione.
-        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-51.1}).
-        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-51.2}).
-        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-51.3}).
+        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-53.1}).
+        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-53.2}).
+        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-53.3}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-51.1, UC-51.2, UC-51.3.
+        \item \textbf{Inclusioni}: UC-53.1, UC-53.2, UC-53.3.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-51.1: Visualizzazione del destinatario del messaggio di invio}
+\paragraph{UC-53.1: Visualizzazione del destinatario del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.1.png}
-    \caption{Diagramma del caso d'uso UC-51.1: Visualizzazione del destinatario del messaggio di invio}
-    \label{fig:uc-51.1}
+    \caption{Diagramma del caso d'uso UC-53.1: Visualizzazione del destinatario del messaggio di invio}
+    \label{fig:uc-53.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2221,14 +2272,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-51.2: Visualizzazione dell'oggetto del messaggio di invio}
+\paragraph{UC-53.2: Visualizzazione dell'oggetto del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.2.png}
-    \caption{Diagramma del caso d'uso UC-51.2: Visualizzazione dell'oggetto del messaggio di invio}
-    \label{fig:uc-51.2}
+    \caption{Diagramma del caso d'uso UC-53.2: Visualizzazione dell'oggetto del messaggio di invio}
+    \label{fig:uc-53.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2241,14 +2292,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-51.3: Visualizzazione del testo del messaggio di invio}
+\paragraph{UC-53.3: Visualizzazione del testo del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.3.png}
-    \caption{Diagramma del caso d'uso UC-51.3: Visualizzazione del testo del messaggio di invio}
-    \label{fig:uc-51.3}
+    \caption{Diagramma del caso d'uso UC-53.3: Visualizzazione del testo del messaggio di invio}
+    \label{fig:uc-53.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2261,19 +2312,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-48: Conferma e invio del messaggio}
+\subsubsection{UC-50: Conferma e invio del messaggio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_17.4.png}
-    \caption{Diagramma del caso d'uso UC-48: Conferma e invio del messaggio}
-    \label{fig:uc-48}
+    \caption{Diagramma del caso d'uso UC-50: Conferma e invio del messaggio}
+    \label{fig:uc-50}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di confermare e inviare il messaggio al destinatario dopo aver verificato i campi nella schermata di invio.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-47) e ha verificato i campi destinatario, oggetto e testo.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-49) e ha verificato i campi destinatario, oggetto e testo.
     \item[Post-condizioni] Il Consulente del lavoro ha inviato il documento al destinatario e riceve conferma dell'esito dell'operazione.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2285,19 +2336,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{description}
 
 
-\subsubsection{UC-49: Modifica del destinatario del messaggio di invio}
+\subsubsection{UC-51: Modifica del destinatario del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_18.1.png}
-    \caption{Diagramma del caso d'uso UC-49: Modifica del destinatario del messaggio di invio}
-    \label{fig:uc-49}
+    \caption{Diagramma del caso d'uso UC-51: Modifica del destinatario del messaggio di invio}
+    \label{fig:uc-51}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di modificare il destinatario del messaggio di invio.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-47) con il campo destinatario valorizzato.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-49) con il campo destinatario valorizzato.
     \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il valore del campo destinatario nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2307,19 +2358,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-50: Modifica dell'oggetto del messaggio di invio}
+\subsubsection{UC-52: Modifica dell'oggetto del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_18.2.png}
-    \caption{Diagramma del caso d'uso UC-50: Modifica dell'oggetto del messaggio di invio}
-    \label{fig:uc-50}
+    \caption{Diagramma del caso d'uso UC-52: Modifica dell'oggetto del messaggio di invio}
+    \label{fig:uc-52}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di modificare l'oggetto del messaggio di invio.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-47) con il campo oggetto valorizzato.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-49) con il campo oggetto valorizzato.
     \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il testo del campo oggetto nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2329,19 +2380,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-51: Modifica del testo del messaggio di invio}
+\subsubsection{UC-53: Modifica del testo del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_18.3.png}
-    \caption{Diagramma del caso d'uso UC-51: Modifica del testo del messaggio di invio}
-    \label{fig:uc-51}
+    \caption{Diagramma del caso d'uso UC-53: Modifica del testo del messaggio di invio}
+    \label{fig:uc-53}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
     \item[Trigger] Il Consulente del lavoro decide di modificare il testo del messaggio di invio.
-    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-47) con il campo testo valorizzato.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-49) con il campo testo valorizzato.
     \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il testo di accompagnamento nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2351,14 +2402,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-52: Consultazione metriche del modulo AI Co-Pilot}
+\subsubsection{UC-54: Consultazione metriche del modulo AI Co-Pilot}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{diagrammi_use_case/uc_19.png}
-    \caption{Diagramma del caso d'uso UC-52: Consultazione metriche del modulo AI Co-Pilot}
-    \label{fig:uc-52}
+    \caption{Diagramma del caso d'uso UC-54: Consultazione metriche del modulo AI Co-Pilot}
+    \label{fig:uc-54}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2367,26 +2418,26 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[Post-condizioni] L'Analista dati ha una visione d'insieme delle principali metriche operative del modulo AI Co-Pilot.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-56.1}).
-        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-56.2}).
-        \item Il sistema espone la percentuale di documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-56.3}).
-        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-56.4}).
-        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-56.5}).
+        \item Il sistema espone il numero totale di documenti analizzati; l'Analista dati consulta il valore (\textbf{UC-58.1}).
+        \item Il sistema espone la percentuale di classificazioni corrette; l'Analista dati verifica il valore (\textbf{UC-58.2}).
+        \item Il sistema espone la percentuale di documenti sotto soglia di confidenza; l'Analista dati monitora il dato (\textbf{UC-58.3}).
+        \item Il sistema espone la percentuale di destinatari riconosciuti automaticamente; l'Analista dati verifica il valore (\textbf{UC-58.4}).
+        \item Il sistema espone i tempi medi di analisi dell'intelligenza artificiale; l'Analista dati controlla il dato (\textbf{UC-58.5}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-56.1, UC-56.2, UC-56.3, UC-56.4, UC-56.5.
+        \item \textbf{Inclusioni}: UC-58.1, UC-58.2, UC-58.3, UC-58.4, UC-58.5.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-56.1: Visualizzazione numero totale di documenti analizzati}
+\paragraph{UC-58.1: Visualizzazione numero totale di documenti analizzati}
 \mbox{} \\
 
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.1.png}
-    \caption{Diagramma del caso d'uso UC-56.1: Visualizzazione numero totale di documenti analizzati}
-    \label{fig:uc-56.1}
+    \caption{Diagramma del caso d'uso UC-58.1: Visualizzazione numero totale di documenti analizzati}
+    \label{fig:uc-57.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2399,14 +2450,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-56.2: Visualizzazione percentuale di classificazioni corrette}
+\paragraph{UC-58.2: Visualizzazione percentuale di classificazioni corrette}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.2.png}
-    \caption{Diagramma del caso d'uso UC-56.2: Visualizzazione percentuale di classificazioni corrette}
-    \label{fig:uc-56.2}
+    \caption{Diagramma del caso d'uso UC-58.2: Visualizzazione percentuale di classificazioni corrette}
+    \label{fig:uc-57.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2419,14 +2470,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-56.3: Visualizzazione documenti sotto soglia di confidenza}
+\paragraph{UC-58.3: Visualizzazione documenti sotto soglia di confidenza}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.3.png}
-    \caption{Diagramma del caso d'uso UC-56.3: Visualizzazione documenti sotto soglia di confidenza}
-    \label{fig:uc-56.3}
+    \caption{Diagramma del caso d'uso UC-58.3: Visualizzazione documenti sotto soglia di confidenza}
+    \label{fig:uc-57.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2439,14 +2490,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\paragraph{UC-56.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+\paragraph{UC-58.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{diagrammi_use_case/uc_19.4.png}
-    \caption{Diagramma del caso d'uso UC-56.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
-    \label{fig:uc-56.4}
+    \caption{Diagramma del caso d'uso UC-58.4: Visualizzazione percentuale di destinatari riconosciuti automaticamente}
+    \label{fig:uc-57.4}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2459,14 +2510,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-56.5: Visualizzazione tempo medio di analisi dei documenti}
+\paragraph{UC-58.5: Visualizzazione tempo medio di analisi dei documenti}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_19.5.png}
-    \caption{Diagramma del caso d'uso UC-56.5: Visualizzazione tempo medio di analisi dei documenti}
-    \label{fig:uc-56.5}
+    \caption{Diagramma del caso d'uso UC-58.5: Visualizzazione tempo medio di analisi dei documenti}
+    \label{fig:uc-57.5}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2484,13 +2535,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 
 
-\subsubsection{UC-53: Errore - Prompt mancante o insufficiente}
+\subsubsection{UC-55: Errore - Prompt mancante o insufficiente}
 \mbox{}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-1.E1.png}
-    \caption{Diagramma del caso d'uso UC-53: Errore per prompt mancante o insufficiente}
-    \label{errore-uc-53}
+    \caption{Diagramma del caso d'uso UC-55: Errore per prompt mancante o insufficiente}
+    \label{errore-uc-55}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -2503,33 +2554,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-54: Errore - Generazione non riuscita}
-\mbox{}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-1.E2.png}
-    \caption{Diagramma del caso d'uso UC-54: Errore per generazione non riuscita}
-    \label{errore-uc-54}
-\end{figure}
-\begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Redattore, AI Post Generator
-    \item[Pre-condizioni] Il Redattore ha avviato la generazione, ma non può essere completata.
-    \item[Post-condizioni] Il mancato completamento è segnalato e i parametri inseriti sono conservati per un nuovo tentativo.
-    \item[Scenario Principale]
-    \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema rileva l'impossibilità di completare la generazione.
-        \item Il sistema informa il Redattore che la bozza non è stata generata e lo invita a riprovare.
-    \end{enumerate}
-\end{description}
-
-\subsubsection{UC-55: Errore - Formato immagine non valido}
+\subsubsection{UC-56: Errore - Formato immagine non valido}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
   %  \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-2.6.E1.png}
-    \caption{Diagramma del caso d'uso UC-55: Errore per formato immagine non valido}
-    \label{errore-uc-55}
+    \caption{Diagramma del caso d'uso UC-56: Errore per formato immagine non valido}
+    \label{errore-uc-56}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -2542,14 +2574,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-56: Errore - Indirizzo e-mail non valido}
+\subsubsection{UC-57: Errore - Indirizzo e-mail non valido}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
    % \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-3.4.E1.png}
-    \caption{Diagramma del caso d'uso UC-56: Errore per indirizzo e-mail non valido}
-    \label{errore-uc-56}
+    \caption{Diagramma del caso d'uso UC-57: Errore per indirizzo e-mail non valido}
+    \label{errore-uc-57}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore, Consulente del lavoro
@@ -2562,14 +2594,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-57: Errore - Nessun risultato trovato nello storico generazioni}
+\subsubsection{UC-58: Errore - Nessun risultato trovato nello storico generazioni}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{diagrammi_use_case/UC-4.E1.png}
-    \caption{Diagramma del caso d'uso UC-57: Errore per nessun risultato trovato nello storico generazioni}
-    \label{errore-uc-57}
+    \caption{Diagramma del caso d'uso UC-58: Errore per nessun risultato trovato nello storico generazioni}
+    \label{errore-uc-58}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -2582,14 +2614,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-58: Errore - Superamento limite caratteri}
+\subsubsection{UC-59: Errore - Superamento limite caratteri}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-5.E2.png}
-    \caption{Diagramma del caso d'uso UC-58: Errore per superamento limite caratteri}
-    \label{errore-uc-58}
+    \caption{Diagramma del caso d'uso UC-59: Errore per superamento limite caratteri}
+    \label{errore-uc-59}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
@@ -2602,14 +2634,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-59: Errore - Dati analitici non disponibili}
+\subsubsection{UC-60: Errore - Dati analitici non disponibili}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-6.E1.png}
-    \caption{Diagramma del caso d'uso UC-59: Errore per dati analitici non disponibili}
-    \label{errore-uc-59}
+    \caption{Diagramma del caso d'uso UC-60: Errore per dati analitici non disponibili}
+    \label{errore-uc-60}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Analista dati
@@ -2622,14 +2654,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-60: Errore - Documento duplicato}
+\subsubsection{UC-61: Errore - Documento duplicato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_7.E1.png}
-    \caption{Diagramma del caso d'uso UC-60: Errore per documento duplicato}
-    \label{errore-uc-60}
+    \caption{Diagramma del caso d'uso UC-61: Errore per documento duplicato}
+    \label{errore-uc-61}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2643,14 +2675,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-61: Errore - Formato documento non valido per il caricamento}
+\subsubsection{UC-62: Errore - Formato documento non valido per il caricamento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_7.E2.png}
-    \caption{Diagramma del caso d'uso UC-61: Errore per formato documento non valido per il caricamento}
-    \label{errore-uc-61}
+    \caption{Diagramma del caso d'uso UC-62: Errore per formato documento non valido per il caricamento}
+    \label{errore-uc-62}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2663,14 +2695,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-62: Errore - Nessun documento individuato nello storico}
+\subsubsection{UC-63: Errore - Nessun documento individuato nello storico}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_9.E1.png}
-    \caption{Diagramma del caso d'uso UC-62: Errore per nessun documento individuato nello storico}
-    \label{errore-uc-62}
+    \caption{Diagramma del caso d'uso UC-63: Errore per nessun documento individuato nello storico}
+    \label{errore-uc-63}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
@@ -2683,18 +2715,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-63: Errore - Nome e cognome del dipendente non disponibile}
+\subsubsection{UC-64: Errore - Nome e cognome del dipendente non disponibile}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{diagrammi_use_case/uc_15.3.E1.png}
-    \caption{Diagramma del caso d'uso UC-63: Errore per nome e cognome del dipendente non disponibile}
-    \label{errore-uc-63}
+    \caption{Diagramma del caso d'uso UC-64: Errore per nome e cognome del dipendente non disponibile}
+    \label{errore-uc-64}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-42.3) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-44.3) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo nome e cognome del dipendente non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2703,18 +2735,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-64: Errore - Azienda non disponibile}
+\subsubsection{UC-65: Errore - Azienda non disponibile}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.4.E1.png}
-    \caption{Diagramma del caso d'uso UC-64: Errore per azienda non disponibile}
-    \label{errore-uc-64}
+    \caption{Diagramma del caso d'uso UC-65: Errore per azienda non disponibile}
+    \label{errore-uc-65}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-42.4) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-44.4) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo azienda non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2723,18 +2755,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-65: Errore - Data del documento non disponibile}
+\subsubsection{UC-66: Errore - Data del documento non disponibile}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.6.E1.png}
-    \caption{Diagramma del caso d'uso UC-65: Errore per data del documento non disponibile}
-    \label{errore-uc-65}
+    \caption{Diagramma del caso d'uso UC-66: Errore per data del documento non disponibile}
+    \label{errore-uc-66}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-42.6) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-44.6) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo data del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2743,18 +2775,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-66: Errore - Tipologia del documento non disponibile}
+\subsubsection{UC-67: Errore - Tipologia del documento non disponibile}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.8.E1.png}
-    \caption{Diagramma del caso d'uso UC-66: Errore per tipologia del documento non disponibile}
-    \label{errore-uc-66}
+    \caption{Diagramma del caso d'uso UC-67: Errore per tipologia del documento non disponibile}
+    \label{errore-uc-67}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-42.8) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-44.8) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo tipologia del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2763,18 +2795,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-67: Errore - Breve descrizione del documento non disponibile}
+\subsubsection{UC-68: Errore - Breve descrizione del documento non disponibile}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{diagrammi_use_case/uc_15.9.E1.png}
-    \caption{Diagramma del caso d'uso UC-67: Errore per breve descrizione del documento non disponibile}
-    \label{errore-uc-67}
+    \caption{Diagramma del caso d'uso UC-68: Errore per breve descrizione del documento non disponibile}
+    \label{errore-uc-68}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-42.9) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-44.9) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo breve descrizione del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2783,18 +2815,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-68: Errore - Confidenza non disponibile}
+\subsubsection{UC-69: Errore - Confidenza non disponibile}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.10.E1.png}
-    \caption{Diagramma del caso d'uso UC-68: Errore per confidenza non disponibile}
-    \label{errore-uc-68}
+    \caption{Diagramma del caso d'uso UC-69: Errore per confidenza non disponibile}
+    \label{errore-uc-69}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-42.10) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-44.10) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo confidenza non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2803,18 +2835,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-69: Errore - Email destinatario non disponibile}
+\subsubsection{UC-70: Errore - Email destinatario non disponibile}
 \mbox{} \\
 
 %\begin{figure}[H]
 %    \centering
 %    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/uc_15.12.E1.png}
-%    \caption{Diagramma del caso d'uso UC-69: Errore per email destinatario non disponibile}
-%    \label{errore-uc-69}
+%    \caption{Diagramma del caso d'uso UC-70: Errore per email destinatario non disponibile}
+%    \label{errore-uc-70}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo email destinatario (UC-42.12) e il dato non è disponibile.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo email destinatario (UC-44.12) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo email destinatario non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2823,18 +2855,18 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-70: Errore - Codice fiscale non valido}
+\subsubsection{UC-71: Errore - Codice fiscale non valido}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{diagrammi_use_case/uc_16.7.E1.png}
-    \caption{Diagramma del caso d'uso UC-70: Errore per codice fiscale non valido}
-    \label{errore-uc-70}
+    \caption{Diagramma del caso d'uso UC-71: Errore per codice fiscale non valido}
+    \label{errore-uc-71}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Consulente del lavoro
-    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo codice fiscale (UC-45) e il valore inserito non supera il controllo di validità formale (checksum).
+    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo codice fiscale (UC-47) e il valore inserito non supera il controllo di validità formale (checksum).
     \item[Post-condizioni] Il sistema segnala l'incongruenza e non registra il valore finché non viene fornito un codice fiscale corretto.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -2894,17 +2926,17 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF4-OP & Il sistema deve permettere al Redattore di selezionare la lunghezza desiderata per la bozza da generare. & \hyperref[fig:uc-1.4]{UC-1.4} \\
     \hline
-    RF5-OB & Il sistema deve permettere al Redattore di salvare la configurazione corrente del prompt nella libreria personale, assegnandole un nome identificativo. & \hyperref[fig:uc-22]{UC-22} \\
+    RF5-OB & Il sistema deve permettere al Redattore di salvare la configurazione corrente del prompt nella libreria personale, assegnandole un nome identificativo. & \hyperref[fig:uc-19]{UC-19} \\
     \hline
     RF6-OB & Il sistema deve permettere al Redattore di svuotare i campi di configurazione, ripristinando i valori predefiniti. & \hyperref[fig:uc-1.4]{UC-1.4} \\
     \hline
     RF7-OB & Il sistema deve avviare la generazione del contenuto tramite il modulo AI Post Generator a partire dal prompt e dai parametri configurati. & \hyperref[fig:uc-1]{UC-1} \\
     \hline
-    RF8-OB & Il sistema deve notificare il Redattore qualora il campo prompt sia assente o insufficiente prima dell'avvio della generazione. & \hyperref[errore-uc-57]{UC-57} \\
+    RF8-OB & Il sistema deve notificare il Redattore qualora il campo prompt sia assente o insufficiente prima dell'avvio della generazione. & \hyperref[errore-uc-58]{UC-58} \\
     \hline
-    RF9-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la generazione iniziale del contenuto tramite AI. & \hyperref[errore-uc-58]{UC-58} \\
+    RF9-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la generazione iniziale del contenuto tramite AI. & \hyperref[errore-uc-59]{UC-59} \\
     \hline
-    RF10-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la rigenerazione del contenuto tramite AI. & \hyperref[errore-uc-58]{UC-58} \\
+    RF10-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la rigenerazione del contenuto tramite AI. & \hyperref[errore-uc-59]{UC-59} \\
     \hline
     RF11-OB & Il sistema deve visualizzare un'anteprima della bozza generata. & \hyperref[fig:uc-2]{UC-2} \\
     \hline
@@ -2920,7 +2952,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF17-OB & Il sistema deve permettere al Redattore di sostituire l'immagine di copertina della bozza con un file caricato localmente. & \hyperref[fig:uc-5]{UC-5} \\
     \hline
-    RF18-OB & Il sistema deve notificare il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & \hyperref[errore-uc-59]{UC-59} \\
+    RF18-OB & Il sistema deve notificare il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & \hyperref[errore-uc-60]{UC-60} \\
     \hline
     RF19-OB & Il sistema deve permettere al Redattore di richiedere la rigenerazione della bozza mantenendo i parametri di configurazione. & \hyperref[fig:uc-6]{UC-6} \\
     \hline
@@ -2930,184 +2962,184 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF22-OB & Il sistema deve notificare il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & \hyperref[fig:uc-2.e1]{UC-2.E1} \\
     \hline
-    RF23-OB & Il sistema deve permettere al Redattore di approvare e finalizzare il documento generato. & UC-9, UC-10, UC-11 \\
+    RF23-OB & Il sistema deve permettere al Redattore di approvare e finalizzare il documento generato. & UC-9, UC-11, UC-12 \\
     \hline
     RF24-OB & Il sistema deve visualizzare le opzioni disponibili per la finalizzazione del documento (salvataggio in bozza, esportazione, inoltro). & -- (UC-3.1 eliminato) \\
     \hline
     RF25-OB & Il sistema deve permettere il salvataggio del documento come bozza nello storico. & \hyperref[fig:uc-9]{UC-9} \\
     \hline
-    RF26-OB & Il sistema deve permettere l'esportazione del documento finalizzato in formato PDF. & \hyperref[fig:uc-10]{UC-10} \\
+    RF26-OB & Il sistema deve permettere l'esportazione del documento finalizzato in formato PDF. & \hyperref[fig:uc-11]{UC-11} \\
     \hline
-    RF27-OB & Il sistema deve permettere al Redattore di inoltrare il documento finalizzato tramite posta elettronica. & \hyperref[fig:uc-11]{UC-11} \\
+    RF27-OB & Il sistema deve permettere al Redattore di inoltrare il documento finalizzato tramite posta elettronica. & \hyperref[fig:uc-12]{UC-12} \\
     \hline
-    RF28-OP & Il sistema deve permettere al Redattore di visualizzare un'anteprima del documento prima dell'esportazione definitiva. & \hyperref[fig:uc-12]{UC-12} \\
+    RF28-OP & Il sistema deve permettere al Redattore di visualizzare un'anteprima del documento prima dell'esportazione definitiva. & \hyperref[fig:uc-10]{UC-10} \\
     \hline
-    RF29-OB & Il sistema deve notificare il Redattore in caso di indirizzo e-mail non valido durante l'inoltro. & \hyperref[errore-uc-60]{UC-60} \\
+    RF29-OB & Il sistema deve notificare il Redattore in caso di indirizzo e-mail non valido durante l'inoltro. & \hyperref[errore-uc-61]{UC-61} \\
     \hline
-    RF30-OB & Il sistema deve fornire al Redattore una libreria personale dei prompt con il relativo storico delle generazioni passate. & UC-13, UC-15, UC-19, UC-20, UC-21, UC-22, UC-16, UC-17, UC-18, UC-23 \\
+    RF30-OB & Il sistema deve fornire al Redattore una libreria personale dei prompt con il relativo storico delle generazioni passate. & UC-13, UC-15, UC-20, UC-21, UC-23, UC-19, UC-16, UC-17, UC-18, UC-24 \\
     \hline
     RF31-OB & Il sistema deve permettere al Redattore di visualizzare l'elenco delle generazioni passate e i prompt salvati nella libreria personale. & \hyperref[fig:uc-13]{UC-13} \\
     \hline
     RF32-OB & Il sistema deve permettere la ricerca e il filtraggio dello storico dei prompt e delle generazioni passate. & \hyperref[fig:uc-15]{UC-15}, UC-16, UC-17, UC-18 \\
     \hline
-    RF33-OB & Il sistema deve avvisare l'utente quando la ricerca nello storico non produce risultati. & \hyperref[errore-uc-61]{UC-61} \\
+    RF33-OB & Il sistema deve avvisare l'utente quando la ricerca nello storico non produce risultati. & \hyperref[errore-uc-62]{UC-62} \\
     \hline
-    RF34-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione prompt dalla libreria personale. & \hyperref[fig:uc-19]{UC-19} \\
+    RF34-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione prompt dalla libreria personale. & \hyperref[fig:uc-20]{UC-20} \\
     \hline
-    RF35-OB & Il sistema deve permettere al Redattore di contrassegnare o rimuovere una generazione come preferita nella libreria personale. & \hyperref[fig:uc-20]{UC-20}, UC-23 \\
+    RF35-OB & Il sistema deve permettere al Redattore di contrassegnare o rimuovere una generazione come preferita nella libreria personale. & \hyperref[fig:uc-21]{UC-21}, UC-24 \\
     \hline
-    RF36-OP & Il sistema deve permettere l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & \hyperref[fig:uc-21]{UC-21} \\
+    RF36-OP & Il sistema deve permettere l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & \hyperref[fig:uc-23]{UC-23} \\
     \hline
-    RF37-OB & Il sistema deve fornire un modulo di valutazione qualitativa delle bozze generate. & \hyperref[fig:uc-24]{UC-24} \\
+    RF37-OB & Il sistema deve fornire un modulo di valutazione qualitativa delle bozze generate. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF38-OB & Il sistema deve permettere al Redattore di accedere al modulo di valutazione qualitativa della bozza generata. & \hyperref[fig:uc-24]{UC-24} \\
+    RF38-OB & Il sistema deve permettere al Redattore di accedere al modulo di valutazione qualitativa della bozza generata. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF39-OB & Il sistema deve permettere al Redattore di assegnare un rating numerico alla bozza generata. & \hyperref[fig:uc-24]{UC-24} \\
+    RF39-OB & Il sistema deve permettere al Redattore di assegnare un rating numerico alla bozza generata. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF40-OB & Il sistema deve permettere al Redattore di inserire un commento testuale opzionale nell'ambito della valutazione della bozza. & \hyperref[fig:uc-24]{UC-24} \\
+    RF40-OB & Il sistema deve permettere al Redattore di inserire un commento testuale opzionale nell'ambito della valutazione della bozza. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF41-OB & Il sistema deve permettere al Redattore di inviare la valutazione al sistema. & \hyperref[fig:uc-24]{UC-24} \\
+    RF41-OB & Il sistema deve permettere al Redattore di inviare la valutazione al sistema. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF42-OB & Il sistema deve notificare il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & \hyperref[fig:uc-24.e1]{UC-24.E1} \\
+    RF42-OB & Il sistema deve notificare il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & \hyperref[fig:uc-25.e1]{UC-25.E1} \\
     \hline
-    RF43-OB & Il sistema deve notificare il Redattore qualora il commento testuale superi il limite di caratteri consentito. & \hyperref[errore-uc-62]{UC-62} \\
+    RF43-OB & Il sistema deve notificare il Redattore qualora il commento testuale superi il limite di caratteri consentito. & \hyperref[errore-uc-63]{UC-63} \\
     \hline
-    RF44-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di utilizzo del modulo AI Assistant Generativo. & \hyperref[fig:uc-25]{UC-25} \\
+    RF44-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di utilizzo del modulo AI Assistant Generativo. & \hyperref[fig:uc-27]{UC-27} \\
     \hline
-    RF45-OB & Il sistema deve visualizzare nella dashboard una panoramica dell'attività complessiva del modulo AI Assistant. & \hyperref[fig:uc-25]{UC-25} \\
+    RF45-OB & Il sistema deve visualizzare nella dashboard una panoramica dell'attività complessiva del modulo AI Assistant. & \hyperref[fig:uc-27]{UC-27} \\
     \hline
-    RF46-OB & Il sistema deve visualizzare nella dashboard le statistiche di utilizzo del modulo AI Assistant. & \hyperref[fig:uc-25.1]{UC-25.1} \\
+    RF46-OB & Il sistema deve visualizzare nella dashboard le statistiche di utilizzo del modulo AI Assistant. & \hyperref[fig:uc-27.1]{UC-27.1} \\
     \hline
-    RF47-OB & Il sistema deve visualizzare nella dashboard il rating medio delle bozze generate. & \hyperref[fig:uc-25.2]{UC-25.2} \\
+    RF47-OB & Il sistema deve visualizzare nella dashboard il rating medio delle bozze generate. & \hyperref[fig:uc-27.2]{UC-27.2} \\
     \hline
-    RF48-OB & Il sistema deve permettere all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & \hyperref[fig:uc-25.3]{UC-25.3} \\
+    RF48-OB & Il sistema deve permettere all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & \hyperref[fig:uc-27.3]{UC-27.3} \\
     \hline
-    RF49-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica (intervallo di date, tono, stile). & \hyperref[fig:uc-26]{UC-26} \\
+    RF49-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica (intervallo di date, tono, stile). & \hyperref[fig:uc-28]{UC-28} \\
     \hline
-    RF50-OB & Il sistema deve permettere all'Analista dati di esportare un report riepilogativo dei dati analitici in formato scaricabile. & \hyperref[errore-uc-57]{UC-57} \\
+    RF50-OB & Il sistema deve permettere all'Analista dati di esportare un report riepilogativo dei dati analitici in formato scaricabile. & \hyperref[errore-uc-58]{UC-58} \\
     \hline
-    RF51-OB & Il sistema deve notificare l'Analista dati qualora i dati non siano disponibili per i criteri selezionati. & \hyperref[errore-uc-63]{UC-63} \\
+    RF51-OB & Il sistema deve notificare l'Analista dati qualora i dati non siano disponibili per i criteri selezionati. & \hyperref[errore-uc-64]{UC-64} \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{AI Co-Pilot per Consulenti del Lavoro}} \\
     \hline
-    RF52-OB & Il sistema deve permettere al Consulente del lavoro di caricare singoli documenti o lotti nel repository dedicato. & \hyperref[fig:uc-34]{UC-34} \\
+    RF52-OB & Il sistema deve permettere al Consulente del lavoro di caricare singoli documenti o lotti nel repository dedicato. & \hyperref[fig:uc-36]{UC-36} \\
     \hline
-    RF53-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il Consulente del lavoro, richiedendone conferma prima del caricamento. & \hyperref[errore-uc-64]{UC-64} \\
+    RF53-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il Consulente del lavoro, richiedendone conferma prima del caricamento. & \hyperref[errore-uc-65]{UC-65} \\
     \hline
-    RF54-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del lavoro. & \hyperref[errore-uc-65]{UC-65} \\
+    RF54-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del lavoro. & \hyperref[errore-uc-66]{UC-66} \\
     \hline
-    RF55-OB & Il sistema deve classificare automaticamente i documenti caricati e popolare i metadati associati tramite il modulo AI Analyst. & \hyperref[fig:uc-35]{UC-35} \\
+    RF55-OB & Il sistema deve classificare automaticamente i documenti caricati e popolare i metadati associati tramite il modulo AI Analyst. & \hyperref[fig:uc-37]{UC-37} \\
     \hline
-    RF56-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-36]{UC-36} \\
+    RF56-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-38]{UC-38} \\
     \hline
-    RF57-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & \hyperref[errore-uc-66]{UC-66} \\
+    RF57-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & \hyperref[errore-uc-67]{UC-67} \\
     \hline
-    RF58-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite criteri multipli. & \hyperref[fig:uc-37]{UC-37} \\
+    RF58-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite criteri multipli. & \hyperref[fig:uc-39]{UC-39} \\
     \hline
-    RF59-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite barra di ricerca testuale. & \hyperref[fig:uc-38]{UC-38} \\
+    RF59-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite barra di ricerca testuale. & \hyperref[fig:uc-40]{UC-40} \\
     \hline
-    RF60-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di invio. & \hyperref[fig:uc-39]{UC-39} \\
+    RF60-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di invio. & \hyperref[fig:uc-41]{UC-41} \\
     \hline
-    RF61-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & \hyperref[fig:uc-40]{UC-40} \\
+    RF61-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & \hyperref[fig:uc-42]{UC-42} \\
     \hline
-    RF62-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & \hyperref[fig:uc-41]{UC-41} \\
+    RF62-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & \hyperref[fig:uc-43]{UC-43} \\
     \hline
-    RF63-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & \hyperref[fig:uc-42]{UC-42} \\
+    RF63-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & \hyperref[fig:uc-44]{UC-44} \\
     \hline
-    RF64-OB & Il sistema deve permettere la visualizzazione del documento originale nella versione splittata. & \hyperref[fig:uc-42.1]{UC-42.1} \\
+    RF64-OB & Il sistema deve permettere la visualizzazione del documento originale nella versione splittata. & \hyperref[fig:uc-44.1]{UC-44.1} \\
     \hline
-    RF65-OB & Il sistema deve permettere la visualizzazione del documento originale non splittato. & \hyperref[fig:uc-42.2]{UC-42.2} \\
+    RF65-OB & Il sistema deve permettere la visualizzazione del documento originale non splittato. & \hyperref[fig:uc-44.2]{UC-44.2} \\
     \hline
-    RF66-OB & Il sistema deve visualizzare il nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-42.3]{UC-42.3} \\
+    RF66-OB & Il sistema deve visualizzare il nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-44.3]{UC-44.3} \\
     \hline
-    RF67-OB & Il sistema deve visualizzare l'azienda associata al documento. & \hyperref[fig:uc-42.4]{UC-42.4} \\
+    RF67-OB & Il sistema deve visualizzare l'azienda associata al documento. & \hyperref[fig:uc-44.4]{UC-44.4} \\
     \hline
-    RF68-OB & Il sistema deve visualizzare il nome del file del documento. & \hyperref[fig:uc-42.5]{UC-42.5} \\
+    RF68-OB & Il sistema deve visualizzare il nome del file del documento. & \hyperref[fig:uc-44.5]{UC-44.5} \\
     \hline
-    RF69-OB & Il sistema deve visualizzare la data del documento. & \hyperref[fig:uc-42.6]{UC-42.6} \\
+    RF69-OB & Il sistema deve visualizzare la data del documento. & \hyperref[fig:uc-44.6]{UC-44.6} \\
     \hline
-    RF70-OB & Il sistema deve visualizzare il numero di pagine del documento. & \hyperref[fig:uc-42.7]{UC-42.7} \\
+    RF70-OB & Il sistema deve visualizzare il numero di pagine del documento. & \hyperref[fig:uc-44.7]{UC-44.7} \\
     \hline
-    RF71-OB & Il sistema deve visualizzare la tipologia del documento. & \hyperref[fig:uc-42.8]{UC-42.8} \\
+    RF71-OB & Il sistema deve visualizzare la tipologia del documento. & \hyperref[fig:uc-44.8]{UC-44.8} \\
     \hline
-    RF72-OB & Il sistema deve visualizzare la breve descrizione del documento. & \hyperref[fig:uc-42.9]{UC-42.9} \\
+    RF72-OB & Il sistema deve visualizzare la breve descrizione del documento. & \hyperref[fig:uc-44.9]{UC-44.9} \\
     \hline
-    RF73-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & \hyperref[fig:uc-42.10]{UC-42.10} \\
+    RF73-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & \hyperref[fig:uc-44.10]{UC-44.10} \\
     \hline
-    RF74-OB & Il sistema deve visualizzare lo stato di invio del documento. & \hyperref[fig:uc-42.11]{UC-42.11} \\
+    RF74-OB & Il sistema deve visualizzare lo stato di invio del documento. & \hyperref[fig:uc-44.11]{UC-44.11} \\
     \hline
-    RF75-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-42.12]{UC-42.12} \\
+    RF75-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-44.12]{UC-44.12} \\
     \hline
-    RF76-OP & Il sistema deve visualizzare il codice fiscale del destinatario. & \hyperref[fig:uc-42.13]{UC-42.13} \\
+    RF76-OP & Il sistema deve visualizzare il codice fiscale del destinatario. & \hyperref[fig:uc-44.13]{UC-44.13} \\
     \hline
-    RF77-OP & Il sistema deve visualizzare la matricola del dipendente. & \hyperref[fig:uc-42.14]{UC-42.14} \\
+    RF77-OP & Il sistema deve visualizzare la matricola del dipendente. & \hyperref[fig:uc-44.14]{UC-44.14} \\
     \hline
-    RF78-OP & Il sistema deve visualizzare la data e ora di caricamento del documento. & \hyperref[fig:uc-42.15]{UC-42.15} \\
+    RF78-OP & Il sistema deve visualizzare la data e ora di caricamento del documento. & \hyperref[fig:uc-44.15]{UC-44.15} \\
     \hline
-    RF79-OB & Il sistema deve gestire il caso in cui il nome e cognome del destinatario non siano disponibili, visualizzando un opportuno indicatore. & \hyperref[errore-uc-67]{UC-67} \\
+    RF79-OB & Il sistema deve gestire il caso in cui il nome e cognome del destinatario non siano disponibili, visualizzando un opportuno indicatore. & \hyperref[errore-uc-68]{UC-68} \\
     \hline
-    RF80-OB & Il sistema deve gestire il caso in cui l'azienda non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-68]{UC-68} \\
+    RF80-OB & Il sistema deve gestire il caso in cui l'azienda non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-69]{UC-69} \\
     \hline
-    RF81-OB & Il sistema deve gestire il caso in cui la data del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-69]{UC-69} \\
+    RF81-OB & Il sistema deve gestire il caso in cui la data del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-70]{UC-70} \\
     \hline
-    RF82-OB & Il sistema deve gestire il caso in cui la tipologia del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-56]{UC-56} \\
+    RF82-OB & Il sistema deve gestire il caso in cui la tipologia del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-57]{UC-57} \\
     \hline
-    RF83-OB & Il sistema deve gestire il caso in cui la breve descrizione non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-56]{UC-56} \\
+    RF83-OB & Il sistema deve gestire il caso in cui la breve descrizione non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-57]{UC-57} \\
     \hline
     RF84-OB & Il sistema deve gestire il caso in cui il livello di confidenza non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-72]{UC-72} \\
     \hline
-    RF85-OB & Il sistema deve permettere al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-43]{UC-43} \\
+    RF85-OB & Il sistema deve permettere al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-45]{UC-45} \\
     \hline
-    RF86-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-43]{UC-43} \\
+    RF86-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-45]{UC-45} \\
     \hline
-    RF87-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & \hyperref[fig:uc-44]{UC-44} \\
+    RF87-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & \hyperref[fig:uc-46]{UC-46} \\
     \hline
-    RF88-OB & Il sistema deve permettere la modifica della data del documento. & \hyperref[fig:uc-45]{UC-45} \\
+    RF88-OB & Il sistema deve permettere la modifica della data del documento. & \hyperref[fig:uc-47]{UC-47} \\
     \hline
-    RF89-OB & Il sistema deve permettere la modifica della tipologia del documento. & \hyperref[fig:uc-46]{UC-46} \\
+    RF89-OB & Il sistema deve permettere la modifica della tipologia del documento. & \hyperref[fig:uc-48]{UC-48} \\
     \hline
-    RF90-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & \hyperref[fig:uc-47]{UC-47} \\
+    RF90-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & \hyperref[fig:uc-49]{UC-49} \\
     \hline
-    RF91-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & \hyperref[fig:uc-48]{UC-48} \\
+    RF91-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & \hyperref[fig:uc-50]{UC-50} \\
     \hline
-    RF92-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & \hyperref[fig:uc-49]{UC-49} \\
+    RF92-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & \hyperref[fig:uc-51]{UC-51} \\
     \hline
-    RF93-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-50]{UC-50} \\
+    RF93-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-52]{UC-52} \\
     \hline
     RF94-OP & Il sistema deve notificare il Consulente del lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[errore-uc-74]{UC-74} \\
     \hline
     RF95-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[errore-uc-75]{UC-75} \\
     \hline
-    RF96-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-51]{UC-51} \\
+    RF96-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-53]{UC-53} \\
     \hline
-    RF97-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-51.1]{UC-51.1} \\
+    RF97-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-53.1]{UC-53.1} \\
     \hline
-    RF98-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-51.2]{UC-51.2} \\
+    RF98-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-53.2]{UC-53.2} \\
     \hline
-    RF99-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-51.3]{UC-51.3} \\
+    RF99-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-53.3]{UC-53.3} \\
     \hline
-    RF100-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-52]{UC-52} \\
+    RF100-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-54]{UC-54} \\
     \hline
-    RF101-OB & Il sistema deve permettere al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-45]{UC-45} \\
+    RF101-OB & Il sistema deve permettere al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-47]{UC-47} \\
     \hline
-    RF102-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-53]{UC-53} \\
+    RF102-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-54]{UC-55} \\
     \hline
-    RF103-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-54]{UC-54} \\
+    RF103-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-55]{UC-56} \\
     \hline
-    RF104-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-55]{UC-55} \\
+    RF104-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-56]{UC-57} \\
     \hline
-    RF105-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & \hyperref[fig:uc-56]{UC-56} \\
+    RF105-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & \hyperref[fig:uc-57]{UC-58} \\
     \hline
-    RF106-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-56.1]{UC-56.1} \\
+    RF106-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-57.1]{UC-58.1} \\
     \hline
-    RF107-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & \hyperref[fig:uc-56.2]{UC-56.2} \\
+    RF107-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & \hyperref[fig:uc-57.2]{UC-58.2} \\
     \hline
-    RF108-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & \hyperref[fig:uc-56.3]{UC-56.3} \\
+    RF108-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & \hyperref[fig:uc-57.3]{UC-58.3} \\
     \hline
-    RF109-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & \hyperref[fig:uc-56.4]{UC-56.4} \\
+    RF109-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & \hyperref[fig:uc-57.4]{UC-58.4} \\
     \hline
-    RF110-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & \hyperref[fig:uc-56.5]{UC-56.5} \\
+    RF110-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & \hyperref[fig:uc-57.5]{UC-58.5} \\
     \hline
 
 \end{longtable}
@@ -3278,15 +3310,15 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-1.3 & RF3-OB \\
     \hline
-    UC-22 & RF5-OB \\
+    UC-19 & RF5-OB \\
     \hline
     UC-1.4 & RF6-OB \\
     \hline
     UC-1.4 & RF4-OP \\
     \hline
-    UC-57 & RF8-OB \\
+    UC-58 & RF8-OB \\
     \hline
-    UC-58 & RF9-OB \\
+    UC-59 & RF9-OB \\
     \hline
     UC-2 & RF11-OB \\
     \hline
@@ -3302,11 +3334,11 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-5 & RF17-OB \\
     \hline
-    UC-59 & RF18-OB \\
+    UC-60 & RF18-OB \\
     \hline
     UC-6 & RF19-OB \\
     \hline
-    UC-58 & RF10-OB \\
+    UC-59 & RF10-OB \\
     \hline
     UC-7 & RF20-OB \\
     \hline
@@ -3314,19 +3346,19 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-2.E1 & RF22-OB \\
     \hline
-    UC-9, UC-10, UC-11 & RF23-OB \\
+    UC-9, UC-11, UC-12 & RF23-OB \\
     \hline
     -- & RF24-OB \\
     \hline
     UC-9 & RF25-OB \\
     \hline
-    UC-10 & RF26-OB \\
+    UC-11 & RF26-OB \\
     \hline
-    UC-11 & RF27-OB \\
+    UC-12 & RF27-OB \\
     \hline
-    UC-60 & RF29-OB \\
+    UC-61 & RF29-OB \\
     \hline
-    UC-12 & RF28-OP \\
+    UC-10 & RF28-OP \\
     \hline
     UC-13 & RF31-OB \\
     \hline
@@ -3338,156 +3370,156 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-18 & RF32-OB \\
     \hline
-    UC-61 & RF33-OB \\
+    UC-62 & RF33-OB \\
     \hline
-    UC-19 & RF34-OB \\
+    UC-20 & RF34-OB \\
     \hline
-    UC-20 & RF35-OB \\
+    UC-21 & RF35-OB \\
     \hline
-    UC-23 & RF35-OB \\
+    UC-24 & RF35-OB \\
     \hline
-    UC-21 & RF36-OP \\
+    UC-23 & RF36-OP \\
     \hline
-    UC-24 & RF37-OB, RF38-OB, RF39-OB, RF40-OB, RF41-OB \\
+    UC-25 & RF37-OB, RF38-OB, RF39-OB, RF40-OB, RF41-OB \\
     \hline
-    UC-24.E1 & RF42-OB \\
+    UC-25.E1 & RF42-OB \\
     \hline
-    UC-62 & RF43-OB \\
+    UC-63 & RF43-OB \\
     \hline
-    UC-25 & RF44-OB, RF45-OB \\
+    UC-27 & RF44-OB, RF45-OB \\
     \hline
-    UC-25.1 & RF46-OB \\
+    UC-27.1 & RF46-OB \\
     \hline
-    UC-25.2 & RF47-OB \\
+    UC-27.2 & RF47-OB \\
     \hline
-    UC-25.3 & RF48-OB \\
+    UC-27.3 & RF48-OB \\
     \hline
-    UC-26 & RF49-OB \\
+    UC-28 & RF49-OB \\
     \hline
-    UC-57 & RF50-OB \\
+    UC-58 & RF50-OB \\
     \hline
-    UC-63 & RF51-OB \\
+    UC-64 & RF51-OB \\
     \hline
 
     \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{AI Co-Pilot per Consulenti del Lavoro}} \\
     \hline
-    UC-34 & RF52-OB \\
+    UC-36 & RF52-OB \\
     \hline
-    UC-64 & RF53-OB \\
+    UC-65 & RF53-OB \\
     \hline
-    UC-65 & RF54-OB \\
+    UC-66 & RF54-OB \\
     \hline
-    UC-35 & RF55-OB \\
+    UC-37 & RF55-OB \\
     \hline
-    UC-36 & RF56-OB \\
+    UC-38 & RF56-OB \\
     \hline
-    UC-66 & RF57-OB \\
+    UC-67 & RF57-OB \\
     \hline
-    UC-37 & RF58-OB \\
+    UC-39 & RF58-OB \\
     \hline
-    UC-38 & RF59-OB \\
+    UC-40 & RF59-OB \\
     \hline
-    UC-39 & RF60-OB \\
+    UC-41 & RF60-OB \\
     \hline
-    UC-40 & RF61-OB \\
+    UC-42 & RF61-OB \\
     \hline
-    UC-41 & RF62-OB \\
+    UC-43 & RF62-OB \\
     \hline
-    UC-42 & RF63-OB \\
+    UC-44 & RF63-OB \\
     \hline
-    UC-42.1 & RF64-OB \\
+    UC-44.1 & RF64-OB \\
     \hline
-    UC-42.2 & RF65-OB \\
+    UC-44.2 & RF65-OB \\
     \hline
-    UC-42.3 & RF66-OB \\
+    UC-44.3 & RF66-OB \\
     \hline
-    UC-67 & RF79-OB \\
+    UC-68 & RF79-OB \\
     \hline
-    UC-42.4 & RF67-OB \\
+    UC-44.4 & RF67-OB \\
     \hline
-    UC-68 & RF80-OB \\
+    UC-69 & RF80-OB \\
     \hline
-    UC-42.5 & RF68-OB \\
+    UC-44.5 & RF68-OB \\
     \hline
-    UC-42.6 & RF69-OB \\
+    UC-44.6 & RF69-OB \\
     \hline
-    UC-69 & RF81-OB \\
+    UC-70 & RF81-OB \\
     \hline
-    UC-42.7 & RF70-OB \\
+    UC-44.7 & RF70-OB \\
     \hline
-    UC-42.8 & RF71-OB \\
+    UC-44.8 & RF71-OB \\
     \hline
-    UC-70 & RF82-OB \\
+    UC-71 & RF82-OB \\
     \hline
-    UC-42.9 & RF72-OB \\
+    UC-44.9 & RF72-OB \\
     \hline
     UC-71 & RF83-OB \\
     \hline
-    UC-42.10 & RF73-OB \\
+    UC-44.10 & RF73-OB \\
     \hline
     UC-72 & RF84-OB \\
     \hline
-    UC-42.11 & RF74-OB \\
+    UC-44.11 & RF74-OB \\
     \hline
-    UC-42.12 & RF75-OP \\
+    UC-44.12 & RF75-OP \\
     \hline
-    UC-42.13 & RF76-OP \\
+    UC-44.13 & RF76-OP \\
     \hline
-    UC-42.14 & RF77-OP \\
+    UC-44.14 & RF77-OP \\
     \hline
-    UC-42.15 & RF78-OP \\
+    UC-44.15 & RF78-OP \\
     \hline
-    UC-43 & RF85-OB \\
+    UC-45 & RF85-OB \\
     \hline
-    UC-43 & RF86-OB \\
+    UC-45 & RF86-OB \\
     \hline
-    UC-44 & RF87-OB \\
+    UC-46 & RF87-OB \\
     \hline
-    UC-45 & RF88-OB \\
+    UC-47 & RF88-OB \\
     \hline
-    UC-46 & RF89-OB \\
+    UC-48 & RF89-OB \\
     \hline
-    UC-47 & RF90-OB \\
+    UC-49 & RF90-OB \\
     \hline
-    UC-48 & RF91-OP \\
+    UC-50 & RF91-OP \\
     \hline
     UC-74 & RF94-OP \\
     \hline
-    UC-49 & RF92-OP \\
+    UC-51 & RF92-OP \\
     \hline
     UC-75 & RF95-OP \\
     \hline
-    UC-50 & RF93-OP \\
+    UC-52 & RF93-OP \\
     \hline
-    UC-51 & RF96-OB \\
+    UC-53 & RF96-OB \\
     \hline
-    UC-51.1 & RF97-OB \\
+    UC-53.1 & RF97-OB \\
     \hline
-    UC-51.2 & RF98-OB \\
+    UC-53.2 & RF98-OB \\
     \hline
-    UC-51.3 & RF99-OB \\
+    UC-53.3 & RF99-OB \\
     \hline
-    UC-52 & RF100-OB \\
+    UC-54 & RF100-OB \\
     \hline
-    UC-45 & RF101-OB \\
+    UC-47 & RF101-OB \\
     \hline
-    UC-53 & RF102-OB \\
+    UC-55 & RF102-OB \\
     \hline
-    UC-54 & RF103-OB \\
+    UC-56 & RF103-OB \\
     \hline
-    UC-55 & RF104-OB \\
+    UC-57 & RF104-OB \\
     \hline
-    UC-56 & RF105-OB \\
+    UC-58 & RF105-OB \\
     \hline
-    UC-56.1 & RF106-OB \\
+    UC-58.1 & RF106-OB \\
     \hline
-    UC-56.2 & RF107-OB \\
+    UC-58.2 & RF107-OB \\
     \hline
-    UC-56.3 & RF108-OB \\
+    UC-58.3 & RF108-OB \\
     \hline
-    UC-56.4 & RF109-OB \\
+    UC-58.4 & RF109-OB \\
     \hline
-    UC-56.5 & RF110-OB \\
+    UC-58.5 & RF110-OB \\
     \hline
 
 \end{longtable}
