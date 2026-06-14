@@ -81,11 +81,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione    & 1.1.0 \\
+            Versione    & 1.0.0 \\
             Redattori   & Angela Maule, Angelica Gastaldello, Vinicius Yuri Kaneda Fernandes, Leonardo Soligo, Eleonora Bellet, Diego Belluz, Alex Oloni\\
             Verificatori& Angela Maule, Eleonora Bellet, Diego Belluz, Vinicius Yuri Kaneda Fernandes\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 14/06/2026\\
+            Data        & 27/05/2026\\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -104,8 +104,7 @@
 {\small
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
-\setlength{\tabcolsep}{1.5pt}
-\begin{longtable}{|>{\raggedright\arraybackslash}p{1.65cm}|>{\raggedright\arraybackslash}p{1.95cm}|>{\raggedright\arraybackslash}p{3.65cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{2.25cm}|>{\raggedright\arraybackslash}p{2.65cm}|}
+\begin{longtable}{|p{1.2cm}|p{1.9cm}|p{4.3cm}|p{2.8cm}|p{2.1cm}|p{2.1cm}|}
     \hline
     \rowcolor{gray!20}
     \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
@@ -116,14 +115,6 @@
     \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
     \hline
     \endhead
-    \rowcolor{gray!8} 1.1.0 & 14/06/2026 & Aggiornamento vincoli tecnologici e servizi cloud & Leonardo Soligo & - & - \\
-    \hline
-    1.0.3 & 14/06/2026 & Riclassificazione dettaglio documento e requisiti collegati & Leonardo Soligo & - & - \\
-    \hline
-    \rowcolor{gray!8} 1.0.2 & 14/06/2026 & Workflow AI Co-Pilot: stati, asincronia ed errori & Leonardo Soligo & - & - \\
-    \hline
-    1.0.1 & 14/06/2026 & Tono, stile e pubblicazione AI Assistant & Leonardo Soligo & - & - \\
-    \hline
     1.0.0 & 27/05/2026 & Approvazione versione 1.0.0 & - & - & Leonardo Soligo \\
     \hline
     \rowcolor{gray!8} 0.15.4 & 17/05/2026 & Correzione requisiti (coerenza RF e UC) & Angela Maule & Diego Belluz & - \\
@@ -248,7 +239,7 @@ L'obiettivo del progetto è potenziare i processi HR e documentali dei consulent
 \begin{itemize}
     \item migliorare l'efficienza della comunicazione aziendale tramite generazione assistita di contenuti coerenti con tono e stile dell'organizzazione;
     \item ridurre tempi di gestione ed errori nella classificazione, suddivisione e distribuzione dei documenti massivi destinati ai dipendenti;
-    \item fornire workflow tracciabili e conformi alle normative vigenti (sicurezza, GDPR), con catena di audit delle operazioni documentali, controllo degli accessi basato sui ruoli (Admin CdL, Editor, Viewer, Auditor), politiche di retention per tipologia documentale e gestione del diritto all'oblio;
+    \item fornire workflow tracciabili e conformi alle normative vigenti (sicurezza, GDPR);
     \item abilitare un'evoluzione data-driven dei moduli AI attraverso metriche di utilizzo, qualità e performance;
     \item mantenere un'architettura modulare e scalabile che possa in futuro interoperare con l'ecosistema NEXUM senza dipenderne.
 \end{itemize}
@@ -262,8 +253,8 @@ Il prodotto è articolato in due macro-componenti funzionali, supportate da serv
 \paragraph{AI Assistant Generativo}
 \begin{itemize}
     \item Generazione di titolo, corpo del testo e immagine di copertina a partire da prompt inseriti dall'utente.
-    \item Selezione guidata del tono (formale, informale, neutro, empatico, tecnico) e dello stile (istituzionale, empatico, tecnico) per calibrare i contenuti al registro aziendale.
-    \item Anteprima con possibilità di modifica manuale, rigenerazione o pubblicazione finale e salvataggio nello storico dei contenuti.
+    \item Selezione guidata di tono e stile (formale, informale, neutro, empatico, tecnico) per calibrare i contenuti al registro aziendale.
+    \item Anteprima con possibilità di modifica manuale, rigenerazione o approvazione finale e salvataggio nello storico dei contenuti.
     \item Catalogazione dei prompt con filtri e duplicazione rapida per mantenere coerenza editoriale.
     \item Sistema di valutazione qualitativa (rating e feedback) e dashboard di analytics sull'utilizzo dello strumento.
 \end{itemize}
@@ -292,7 +283,8 @@ Le seguenti funzionalità sono state identificate come potenzialmente rilevanti 
 \begin{itemize}
     \item \textbf{Prove di consegna e tracciamento letture}: visualizzazione dello stato di consegna dei documenti inviati e conferma di lettura da parte dei destinatari.
     \item \textbf{Gestione retry e anomalie di invio}: meccanismi automatici di ritentativo in caso di fallimento dell'invio, con log delle anomalie.
-    \item \textbf{Policy di conservazione configurabili}: regole personalizzabili dall'utente per la durata di conservazione dei documenti e dei log operativi, in aggiunta alle politiche di retention di base previste dal modello di governance.
+    \item \textbf{Audit trail}: registro navigabile delle operazioni effettuate sul sistema, a supporto di attività di controllo e conformità normativa.
+    \item \textbf{Policy di conservazione configurabili}: regole personalizzabili per la durata di conservazione dei documenti e dei log operativi.
     \item \textbf{Gestione avanzata di ruoli, permessi e policy di sicurezza}: configurazione granulare dei profili utente, dei privilegi di accesso e delle policy di sicurezza dedicate alla piattaforma.
 \end{itemize}
 
@@ -329,7 +321,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item \textbf{Amministratore}:Ha il compito di configurare l'ambiente standalone. Si occupa di assegnare i privilegi operativi ai vari account e di definire le policy globali dell'applicativo.
     \item \textbf{Redattore}:È la figura aziendale delegata alla creazione delle comunicazioni interne. Interagisce in modo diretto con il Modulo AI Assistant Generativo per fornire i prompt di base, calibrare il tono di voce desiderato e confermare la bontà dei contenuti proposti dal sistema.
     \item \textbf{Analista dati}: Supervisiona l'efficienza dell'applicativo. Accede alle sezioni analitiche per valutare le performance dell'intelligenza artificiale, esaminando i feedback forniti dagli operatori e le metriche di successo del riconoscimento documentale.
-    \item \textbf{Consulente del Lavoro}:È l'utilizzatore primario del Modulo AI Co-Pilot. Il suo ruolo consiste nel caricare i lotti documentali (come i cedolini massivi), revisionare le estrazioni per correggere eventuali imperfezioni e validare le code di invio.
+    \item \textbf{Consulente del lavoro}:È l'utilizzatore primario del Modulo AI Co-Pilot. Il suo ruolo consiste nel caricare i lotti documentali (come i cedolini massivi), revisionare le estrazioni per correggere eventuali imperfezioni e validare le code di invio.
 \end{itemize}
 \subsubsection{Moduli esterni}
 \begin{itemize}
@@ -354,7 +346,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
     \item[Trigger] Il Redattore decide di creare un nuovo contenuto con l'AI.
 
-    \item[Pre-condizioni] Il modulo AI Assistant Generativo è operativo, con tono e stile impostati sui valori di default.
+    \item[Pre-condizioni] Il modulo AI Assistant Generativo è operativo, con tono, stile e lunghezza impostati sui valori di default.
 
     \item[Post-condizioni] La bozza generata (titolo, testo e immagine di copertina) è disponibile nell'area di revisione.
 
@@ -410,7 +402,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] È disponibile l'elenco dei toni selezionabili (formale, informale, neutro, empatico, tecnico), impostato sul valore di default.
+    \item[Pre-condizioni] È disponibile l'elenco dei toni selezionabili (chiaro e diretto, più istuzionale, più sintetico, empatico e tecnico), impostato sul valore di default.
     \item[Post-condizioni] Il tono è stato impostato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -428,7 +420,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Pre-condizioni] È disponibile l'elenco degli stili selezionabili (istituzionale, empatico, tecnico), impostato sul valore di default.
+    \item[Pre-condizioni] È disponibile l'elenco degli stili selezionabili (testo informativo, avviso operativo, aggiornamento breve), impostato sul valore di default.
     \item[Post-condizioni] Lo stile è stato impostato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -446,7 +438,6 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
-    \item[Note] La selezione della lunghezza è un'estensione opzionale non prevista dal capitolato, che limita la configurazione di base a prompt, tono e stile.
     \item[Pre-condizioni] È disponibile l'elenco delle lunghezze selezionabili, impostato sul valore di default.
     \item[Post-condizioni] La lunghezza è stata impostata.
     \item[Scenario Principale]
@@ -800,7 +791,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Trigger] Il Redattore decide di consultare le generazioni archiviate nelle sessioni precedenti.
-    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni. Il sistema salva automaticamente, ad ogni generazione, prompt, tono, timestamp e risultato, senza richiedere un'azione di salvataggio esplicita.
+    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni.
     \item[Post-condizioni] Lo storico mostra l'elenco delle generazioni archiviate.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -891,7 +882,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Trigger] Il Redattore decide di filtrare lo storico in base al tono comunicativo.
-    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni; è disponibile il filtro per tono con i valori selezionabili (formale, informale, neutro, empatico, tecnico).
+    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni; è disponibile il filtro per tono con i valori selezionabili (chiaro e diretto, più istuzionale, più sintetico, empatico e tecnico).
     \item[Post-condizioni] Lo storico mostra solo le generazioni associate al tono selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -921,7 +912,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[Attore Principale] Redattore
     \item[Trigger] Il Redattore decide di filtrare lo storico in base allo stile editoriale.
-    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni; è disponibile il filtro per stile con i valori selezionabili (istituzionale, empatico, tecnico).
+    \item[Pre-condizioni] Il Redattore si trova nella sezione dello storico delle generazioni; è disponibile il filtro per stile con i valori selezionabili (testo informativo, avviso operativo, aggiornamento breve).
     \item[Post-condizioni] Lo storico mostra solo le generazioni associate allo stile selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1329,7 +1320,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Trigger] L'Analista dati decide di filtrare i dati analitici per tono comunicativo.
-    \item[Pre-condizioni] L'Analista dati si trova nell'area analitica dell'AI Assistant; è disponibile il filtro per tono con i valori selezionabili (formale, informale, neutro, empatico, tecnico).
+    \item[Pre-condizioni] L'Analista dati si trova nell'area analitica dell'AI Assistant; è disponibile il filtro per tono con i valori selezionabili (chiaro e diretto, più istuzionale, più sintetico, empatico e tecnico).
     \item[Post-condizioni] La visualizzazione mostra solo i dati associati al tono selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1360,7 +1351,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Analista dati
     \item[Trigger] L'Analista dati decide di filtrare i dati analitici per stile editoriale.
-    \item[Pre-condizioni] L'Analista dati si trova nell'area analitica dell'AI Assistant; è disponibile il filtro per stile con i valori selezionabili (istituzionale, empatico, tecnico).
+    \item[Pre-condizioni] L'Analista dati si trova nell'area analitica dell'AI Assistant; è disponibile il filtro per stile con i valori selezionabili (testo informativo, avviso operativo, aggiornamento breve).
     \item[Post-condizioni] La visualizzazione mostra solo i dati associati allo stile selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
@@ -1392,29 +1383,28 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Attore Secondario] AI Analyst
     
-    \item[Trigger] Il Consulente del Lavoro intende caricare uno o più documenti nel sistema.
+    \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema.
     
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella sezione di upload del modulo AI Co-Pilot.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.
     
     \item[Post-condizioni] Il documento viene suddiviso per destinatario e ogni sotto-documento appare come voce distinta nello storico, con nome del documento e data di analisi come campi visibili.
 
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il file dal proprio dispositivo.
-        \item Il Consulente del Lavoro conferma il caricamento.
+        \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
+        \item Il Consulente del lavoro conferma il caricamento.
         \item Il sistema verifica formato e duplicati.
-        \item Il sistema completa il caricamento e accoda l'analisi AI come elaborazione asincrona, assegnando un identificativo di lavorazione (job-id); il documento entra nello stato di lavorazione \emph{in elaborazione} (pending, quindi processing). Il Consulente del Lavoro riceve notifica dell'esito e può seguire l'avanzamento progressivo fino al completamento dell'analisi (completed).
-        \item Una volta riconosciuto il documento, il sistema lo suddivide per destinatario (atomizzazione) e aggiunge allo storico una voce distinta per ciascun sotto-documento, mostrando nome del documento e data di analisi.
+        \item Il sistema completa il caricamento e avvia l'analisi AI del documento; il Consulente del lavoro riceve notifica dell'esito e può seguire l'avanzamento dell'elaborazione.
+        \item Il sistema suddivide il documento per destinatario e aggiunge allo storico una voce distinta per ciascun sotto-documento, mostrando nome del documento e data di analisi.
     \end{enumerate}
 
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
         \item 3a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito \hyperref[errore-uc-59]{UC-59}.
         \item 3b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-60]{UC-60}.
-        \item 4a. Estrazione fallita: l'analisi AI termina in stato \emph{fallito} (failed); lo split del documento resta comunque visibile nello storico, corredato da una nota d'errore, senza esporre dettagli tecnici all'utente.
     \end{itemize}
 
     \item[Relazioni]
@@ -1436,20 +1426,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-32}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Attore Secondario] AI Analyst
-    \item[Trigger] Il Consulente del Lavoro intende caricare uno o più documenti nel sistema impostando manualmente classificazione e metadati.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella sezione di upload del modulo AI Co-Pilot.   
-    \item[Post-condizioni] Il Consulente del Lavoro può consultare nello storico i risultati dell'analisi AI (estrazione dati e split in sotto-documenti per destinatario) con la garanzia che classificazione e metadati inseriti manualmente siano stati preservati senza essere sovrascritti dall'AI.
+    \item[Trigger] Il Consulente del lavoro intende caricare uno o più documenti nel sistema impostando manualmente classificazione e metadati.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione di upload del modulo AI Co-Pilot.   
+    \item[Post-condizioni] Il Consulente del lavoro può consultare nello storico i risultati dell'analisi AI (estrazione dati e split in sotto-documenti per destinatario) con la garanzia che classificazione e metadati inseriti manualmente siano stati preservati senza essere sovrascritti dall'AI.
 
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il file dal proprio dispositivo.
-        \item Il Consulente del Lavoro seleziona la tipologia del documento (\textbf{UC-32.1}).
-        \item Il Consulente del Lavoro inserisce il mese di riferimento (\textbf{UC-32.2}).
-        \item Il Consulente del Lavoro inserisce l'anno di riferimento (\textbf{UC-32.3}).
-        \item Il Consulente del Lavoro inserisce l'azienda (\textbf{UC-32.4}).
-        \item Il Consulente del Lavoro conferma il caricamento; dopodiché il sistema verifica formato e duplicati.
+        \item Il Consulente del lavoro seleziona il file dal proprio dispositivo.
+        \item Il Consulente del lavoro seleziona la tipologia del documento (\textbf{UC-32.1}).
+        \item Il Consulente del lavoro inserisce il mese di riferimento (\textbf{UC-32.2}).
+        \item Il Consulente del lavoro inserisce l'anno di riferimento (\textbf{UC-32.3}).
+        \item Il Consulente del lavoro inserisce l'azienda (\textbf{UC-32.4}).
+        \item Il Consulente del lavoro conferma il caricamento; dopodiché il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento, avvia l'analisi AI del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[Scenari Alternativi]
@@ -1475,12 +1465,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 %    \label{fig:uc-32.1}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema espone il menu di selezione della tipologia, impostato sul valore di default.
     \item[Post-condizioni] Il parametro relativo alla tipologia del documento è stato impostato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona la tipologia del documento tramite il relativo menu a scelta: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
+        \item Il Consulente del lavoro seleziona la tipologia del documento tramite il relativo menu a scelta: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
     \end{enumerate}
 \end{description}
 
@@ -1495,12 +1485,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 %    \label{fig:uc-32.2}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in attesa dell'inserimento del mese di riferimento del documento.
     \item[Post-condizioni] Il parametro relativo al mese di riferimento è stato registrato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro inserisce o seleziona il mese di riferimento del documento nell'apposito campo.
+        \item Il Consulente del lavoro inserisce o seleziona il mese di riferimento del documento nell'apposito campo.
     \end{enumerate}
 \end{description}
 
@@ -1515,12 +1505,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 %    \label{fig:uc-32.3}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in attesa dell'inserimento dell'anno di riferimento del documento.
     \item[Post-condizioni] Il parametro relativo all'anno di riferimento è stato registrato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro inserisce o seleziona l'anno di riferimento del documento nell'apposito campo.
+        \item Il Consulente del lavoro inserisce o seleziona l'anno di riferimento del documento nell'apposito campo.
     \end{enumerate}
 \end{description}
 
@@ -1535,12 +1525,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 %    \label{fig:uc-32.4}
 %\end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema è in attesa dell'inserimento dell'azienda associata al documento.
     \item[Post-condizioni] Il parametro relativo all'azienda di riferimento è stato registrato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro inserisce il nome dell'azienda di riferimento nell'apposito campo di testo.
+        \item Il Consulente del lavoro inserisce il nome dell'azienda di riferimento nell'apposito campo di testo.
     \end{enumerate}
 \end{description}
 
@@ -1556,15 +1546,15 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-33}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende consultare lo storico dei documenti analizzati nel modulo AI Co-Pilot.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nel modulo AI Co-Pilot e apre la sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza l'elenco dei documenti analizzati e può selezionarne uno per consultarne il dettaglio.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende consultare lo storico dei documenti analizzati nel modulo AI Co-Pilot.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nel modulo AI Co-Pilot e apre la sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il Consulente del lavoro visualizza l'elenco dei documenti analizzati e può selezionarne uno per consultarne il dettaglio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro accede alla sezione "Storico documenti analizzati".
-        \item Il Consulente del Lavoro visualizza di default i documenti più recentemente analizzati, ordinati dal più recente al meno recente.
-        \item Il Consulente del Lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-39}).
+        \item Il Consulente del lavoro accede alla sezione "Storico documenti analizzati".
+        \item Il Consulente del lavoro visualizza di default i documenti più recentemente analizzati, ordinati dal più recente al meno recente.
+        \item Il Consulente del lavoro seleziona un elemento della lista per consultarne i dettagli (\textbf{UC-39}).
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1590,14 +1580,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-34}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza solo i documenti dello storico che soddisfano i criteri da lui impostati.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende restringere lo storico dei documenti analizzati applicando uno o più filtri.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti dello storico che soddisfano i criteri da lui impostati.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-35}), stato invio (\textbf{UC-36}), confidenza rispetto a soglia (\textbf{UC-37}), mese e anno (\textbf{UC-38}).
-        \item Il Consulente del Lavoro visualizza la lista aggiornata con i soli documenti che soddisfano i criteri selezionati.
+        \item Il Consulente del lavoro imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-35}), stato invio (\textbf{UC-36}), confidenza rispetto a soglia (\textbf{UC-37}), mese e anno (\textbf{UC-38}).
+        \item Il Consulente del lavoro visualizza la lista aggiornata con i soli documenti che soddisfano i criteri selezionati.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1621,14 +1611,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-35}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
-    \item[Pre-condizioni]  Il Consulente del Lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza solo i documenti il cui nome/cognome del dipendente o azienda corrisponde al testo cercato.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende cercare rapidamente documenti nello storico tramite una barra di ricerca unica.
+    \item[Pre-condizioni]  Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti il cui nome/cognome del dipendente o azienda corrisponde al testo cercato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro inserisce un testo nella barra di ricerca unica.
-        \item Il Consulente del Lavoro visualizza la lista filtrata in base alla corrispondenza con i campi nome e cognome del dipendente e azienda.
+        \item Il Consulente del lavoro inserisce un testo nella barra di ricerca unica.
+        \item Il Consulente del lavoro visualizza la lista filtrata in base alla corrispondenza con i campi nome e cognome del dipendente e azienda.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1651,14 +1641,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-36}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende visualizzare solo documenti inviati o non inviati.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza solo i documenti con lo stato di invio da lui selezionato.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende visualizzare solo documenti inviati o non inviati.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti con lo stato di invio da lui selezionato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il filtro di stato invio scegliendo tra "Inviato" e "Non inviato".
-        \item Il Consulente del Lavoro visualizza la lista aggiornata con i soli documenti coerenti con lo stato selezionato.
+        \item Il Consulente del lavoro seleziona il filtro di stato invio scegliendo tra "Inviato" e "Non inviato".
+        \item Il Consulente del lavoro visualizza la lista aggiornata con i soli documenti coerenti con lo stato selezionato.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1681,14 +1671,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-37}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende filtrare lo storico in base alla confidenza dei dati estratti rispetto a una soglia.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza solo i documenti con confidenza maggiore o minore della soglia da lui impostata.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende filtrare lo storico in base alla confidenza dei dati estratti rispetto a una soglia.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti con confidenza maggiore o minore della soglia da lui impostata.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro imposta una soglia di confidenza e seleziona il criterio (maggiore di soglia o minore di soglia).
-        \item Il Consulente del Lavoro visualizza la lista aggiornata con i soli documenti che rispettano il criterio scelto.
+        \item Il Consulente del lavoro imposta una soglia di confidenza e seleziona il criterio (maggiore di soglia o minore di soglia).
+        \item Il Consulente del lavoro visualizza la lista aggiornata con i soli documenti che rispettano il criterio scelto.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1711,14 +1701,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-38}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende visualizzare i documenti relativi a uno specifico mese e anno.
-    \item[Pre-condizioni]  Il Consulente del Lavoro si trova nella sezione "Storico documenti analizzati".
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza solo i documenti riferiti al mese e all'anno da lui selezionati.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende visualizzare i documenti relativi a uno specifico mese e anno.
+    \item[Pre-condizioni]  Il Consulente del lavoro si trova nella sezione "Storico documenti analizzati".
+    \item[Post-condizioni] Il Consulente del lavoro visualizza solo i documenti riferiti al mese e all'anno da lui selezionati.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona mese e anno nel filtro temporale.
-        \item Il Consulente del Lavoro visualizza la lista aggiornata con i soli documenti compatibili con il periodo selezionato.
+        \item Il Consulente del lavoro seleziona mese e anno nel filtro temporale.
+        \item Il Consulente del lavoro visualizza la lista aggiornata con i soli documenti compatibili con il periodo selezionato.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1741,21 +1731,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro intende consultare il dettaglio di un documento selezionato dallo storico.
-    \item[Pre-condizioni] Lo storico contiene almeno un documento e il Consulente del Lavoro ha selezionato una riga della lista.
-    \item[Post-condizioni] Il Consulente del Lavoro può esaminare tutti i dati estratti dal documento e visualizzare il documento stesso, valutando la correttezza dell'analisi AI e decidendo se apportare correzioni o procedere con l'invio.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro intende consultare il dettaglio di un documento selezionato dallo storico.
+    \item[Pre-condizioni] Lo storico contiene almeno un documento e il Consulente del lavoro ha selezionato una riga della lista.
+    \item[Post-condizioni] Il Consulente del lavoro può esaminare tutti i dati estratti dal documento e visualizzare il documento stesso, valutando la correttezza dell'analisi AI e decidendo se apportare correzioni o procedere con l'invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona un documento dall'elenco dello storico.
+        \item Il Consulente del lavoro seleziona un documento dall'elenco dello storico.
         \item Il sistema apre la vista di dettaglio con layout affiancato: documento originale a sinistra e dati estratti a destra.
-        \item Il Consulente del Lavoro visualizza la porzione di documento relativa al dipendente selezionato (\textbf{UC-39.1}).
-        \item Il Consulente del Lavoro visualizza il documento originale completo (\textbf{UC-39.2}).
-        \item Il Consulente del Lavoro consulta i dati del documento, organizzati in gruppi distinti: \begin{itemize}[leftmargin=*, nosep]
-            \item \textbf{Campi estratti/risolti dall'AI}: nome e cognome del dipendente (\textbf{UC-39.3}), azienda (\textbf{UC-39.4}), data del documento (\textbf{UC-39.6}), tipologia del documento (\textbf{UC-39.8}), breve descrizione del documento (\textbf{UC-39.9}), confidenza in percentuale (\textbf{UC-39.10}), email destinatario (\textbf{UC-39.12}), codice fiscale (\textbf{UC-39.13}) e matricola dipendente (\textbf{UC-39.14}). L'insieme dei campi risolti per l'identificazione del destinatario comprende inoltre il reparto e l'app-id NEXUM.
-            \item \textbf{Metadati di sistema/derivati}: nome del file (\textbf{UC-39.5}), numero di pagine (\textbf{UC-39.7}) e data/ora di caricamento (\textbf{UC-39.15}).
-            \item \textbf{Stato del documento (lifecycle)}: stato di revisione e stato di invio (\textbf{UC-39.11}), che sono stati di processo e non attributi estratti dall'OCR.
-        \end{itemize}
+        \item Il Consulente del lavoro visualizza la porzione di documento relativa al dipendente selezionato (\textbf{UC-39.1}).
+        \item Il Consulente del lavoro visualizza il documento originale completo (\textbf{UC-39.2}).
+        \item Il Consulente del lavoro visualizza i campi estratti del documento: nome e cognome del dipendente (\textbf{UC-39.3}), azienda (\textbf{UC-39.4}), nome del file (\textbf{UC-39.5}), data del documento (\textbf{UC-39.6}), numero di pagine (\textbf{UC-39.7}), tipologia del documento (\textbf{UC-39.8}), breve descrizione del documento (\textbf{UC-39.9}), confidenza in percentuale (\textbf{UC-39.10}), stato di invio del documento (\textbf{UC-39.11}), email destinatario (\textbf{UC-39.12}), codice fiscale (\textbf{UC-39.13}), matricola dipendente (\textbf{UC-39.14}) e data/ora caricamento (\textbf{UC-39.15}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1774,13 +1760,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro ha aperto il dettaglio di un documento dallo storico (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro può visualizzare la porzione di documento relativa al dipendente selezionato e verificare che lo split eseguito dall'AI sia corretto e completo.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro può visualizzare la porzione di documento relativa al dipendente selezionato e verificare che lo split eseguito dall'AI sia corretto e completo.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema carica la porzione splittata del file originale associata al dipendente selezionato.
-        \item Il Consulente del Lavoro visualizza la porzione del documento in anteprima nel pannello dedicato.
+        \item Il Consulente del lavoro visualizza la porzione del documento in anteprima nel pannello dedicato.
     \end{enumerate}
 \end{description}
 
@@ -1795,18 +1781,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro ha aperto il dettaglio di un documento dallo storico (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro può consultare il documento originale completo e confrontarlo con i sotto-documenti generati dallo split, verificando la correttezza della suddivisione.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro ha aperto il dettaglio di un documento dallo storico (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro può consultare il documento originale completo e confrontarlo con i sotto-documenti generati dallo split, verificando la correttezza della suddivisione.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema carica il file originale completo associato al record selezionato.
-        \item Il Consulente del Lavoro visualizza il documento completo in anteprima nel pannello dedicato.
+        \item Il Consulente del lavoro visualizza il documento completo in anteprima nel pannello dedicato.
     \end{enumerate}
-    \item[Scenari Alternativi]
-    \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Anteprima non disponibile o storage non raggiungibile: il sistema mostra uno stato applicativo leggibile (es.\ ``Anteprima non disponibile'') senza esporre dettagli tecnici all'utente, registrando l'errore nei log lato server.
-    \end{itemize}
 \end{description}
 
 \paragraph{UC-39.3: Visualizzazione nome e cognome del dipendente}
@@ -1820,12 +1802,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce il nome e cognome del dipendente a cui il documento è associato.
+    \item[Post-condizioni] Il Consulente del lavoro conosce il nome e cognome del dipendente a cui il documento è associato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti il nome e cognome del dipendente associato al documento.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti il nome e cognome del dipendente associato al documento.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1848,12 +1830,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.4}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce l'azienda a cui il documento è attribuito.
+    \item[Post-condizioni] Il Consulente del lavoro conosce l'azienda a cui il documento è attribuito.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti l'azienda associata al documento.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti l'azienda associata al documento.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1876,12 +1858,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.5}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro sa a quale file originale il documento è riconducibile.
+    \item[Post-condizioni] Il Consulente del lavoro sa a quale file originale il documento è riconducibile.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti il nome del file originale da cui il documento è stato estratto.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti il nome del file originale da cui il documento è stato estratto.
     \end{enumerate}
 \end{description}
 
@@ -1896,12 +1878,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.6}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce la data del documento estratta dall'AI.
+    \item[Post-condizioni] Il Consulente del lavoro conosce la data del documento estratta dall'AI.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti la data del documento.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti la data del documento.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1924,12 +1906,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.7}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce il numero di pagine del sotto-documento generato per quel dipendente.
+    \item[Post-condizioni] Il Consulente del lavoro conosce il numero di pagine del sotto-documento generato per quel dipendente.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti il numero di pagine del documento.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti il numero di pagine del documento.
     \end{enumerate}
 \end{description}
 
@@ -1944,12 +1926,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.8}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce la tipologia assegnata dall'AI al documento.
+    \item[Post-condizioni] Il Consulente del lavoro conosce la tipologia assegnata dall'AI al documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti la tipologia del documento classificata dall'AI.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti la tipologia del documento classificata dall'AI.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -1972,12 +1954,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.9}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro ha un'anteprima testuale del contenuto del documento senza doverlo aprire integralmente.
+    \item[Post-condizioni] Il Consulente del lavoro ha un'anteprima testuale del contenuto del documento senza doverlo aprire integralmente.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti la breve descrizione del documento generata dall'AI.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti la breve descrizione del documento generata dall'AI.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2000,12 +1982,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.10}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i dati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro sa con quale grado di affidabilità l'AI ha estratto i dati del documento, potendo valutare se sia necessaria una revisione manuale.
+    \item[Post-condizioni] Il Consulente del lavoro sa con quale grado di affidabilità l'AI ha estratto i dati del documento, potendo valutare se sia necessaria una revisione manuale.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello dati estratti la confidenza in percentuale (da 0 a 100\%) che indica l'affidabilità dei dati estratti dall'AI per il documento analizzato.
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti la confidenza in percentuale (da 0 a 100\%) che indica l'affidabilità dei dati estratti dall'AI per il documento analizzato.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2017,24 +1999,23 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 
-\paragraph{UC-39.11: Visualizzazione stato del documento}
+\paragraph{UC-39.11: Visualizzazione stato invio documento}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     % TODO: inserire immagine UC-39.11.png
     %  \includegraphics[width=0.65\textwidth]{diagrammi_use_case/UC-39.11.png}
-    \caption{Diagramma del caso d'uso UC-39.11: Visualizzazione stato del documento}
+    \caption{Diagramma del caso d'uso UC-39.11: Visualizzazione stato invio documento}
     \label{fig:uc-39.11}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il sistema dispone delle informazioni di stato di revisione e di stato di invio del documento selezionato. Tali valori sono stati di processo, non campi estratti dall'OCR. Lo stato di revisione è assegnato automaticamente: validato automaticamente se la confidenza è maggiore o uguale alla soglia operativa configurabile; in quarantena se la confidenza è inferiore alla soglia, in presenza di ambiguità o se l'output AI non supera la validazione di schema; da revisionare negli altri casi. La correzione dell'operatore porta allo stato validato dall'operatore.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce lo stato di revisione del documento e sa se è già stato inviato al destinatario o è ancora in attesa.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il sistema dispone delle informazioni di stato invio del documento selezionato.
+    \item[Post-condizioni] Il Consulente del lavoro sa se il documento è già stato inviato al destinatario o è ancora in attesa.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro visualizza nel pannello di dettaglio lo stato di revisione del documento (da revisionare, validato automaticamente, in quarantena o validato dall'operatore).
-        \item Il Consulente del Lavoro visualizza lo stato di invio del documento con un valore tra "Inviato" e "Non inviato".
+        \item Il Consulente del lavoro visualizza nel pannello dati estratti lo stato di invio del documento con un valore tra "Inviato" e "Non inviato".
     \end{enumerate}
 \end{description}
 
@@ -2048,13 +2029,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.12}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha eseguito l'estrazione dei metadati dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce l'indirizzo e-mail a cui il documento sarà recapitato.
+    \item[Post-condizioni] Il Consulente del lavoro conosce l'indirizzo e-mail a cui il documento sarà recapitato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema recupera l'indirizzo e-mail estratto associato al documento.
-        \item Il Consulente del Lavoro visualizza l'indirizzo e-mail nel pannello dati estratti, con un'eventuale icona per copiarlo o avviare un invio rapido.
+        \item Il Consulente del lavoro visualizza l'indirizzo e-mail nel pannello dati estratti, con un'eventuale icona per copiarlo o avviare un invio rapido.
     \end{enumerate}
     \item[Scenari Alternativi]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2077,13 +2058,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.13}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto i metadati anagrafici dal documento.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce il codice fiscale del dipendente e sa se supera il controllo di validità formale.
+    \item[Post-condizioni] Il Consulente del lavoro conosce il codice fiscale del dipendente e sa se supera il controllo di validità formale.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema recupera il codice fiscale estratto.
-        \item Il Consulente del Lavoro visualizza il codice fiscale con l'esito del controllo di validità formale (checksum).
+        \item Il Consulente del lavoro visualizza il codice fiscale con l'esito del controllo di validità formale (checksum).
     \end{enumerate}
 \end{description}
 
@@ -2097,13 +2078,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.14}
     \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha estratto o associato l'identificativo interno (matricola) al documento.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce la matricola del dipendente associata al documento.
+    \item[Post-condizioni] Il Consulente del lavoro conosce la matricola del dipendente associata al documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema recupera la matricola associata al record.
-        \item Il Consulente del Lavoro visualizza la matricola nel pannello dati estratti.
+        \item Il Consulente del lavoro visualizza la matricola nel pannello dati estratti.
     \end{enumerate}
 \end{description}
 
@@ -2117,13 +2098,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-39.15}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il record del documento contiene il timestamp di caricamento.
-    \item[Post-condizioni] Il Consulente del Lavoro sa quando il documento è stato caricato ed elaborato dal sistema.
+    \item[Post-condizioni] Il Consulente del lavoro sa quando il documento è stato caricato ed elaborato dal sistema.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema legge il timestamp di caricamento associato al documento.
-        \item Il Consulente del Lavoro visualizza la data e l'ora di caricamento nel pannello dati estratti e nel sommario dello storico.
+        \item Il Consulente del lavoro visualizza la data e l'ora di caricamento nel pannello dati estratti e nel sommario dello storico.
     \end{enumerate}
 \end{description}
 \newpage
@@ -2139,14 +2120,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-40}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere il nome e cognome del dipendente associato al documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto il nome e cognome del dipendente, aggiornando l'associazione del documento all'anagrafica corretta.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere il nome e cognome del dipendente associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto il nome e cognome del dipendente, aggiornando l'associazione del documento all'anagrafica corretta.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo nome e cognome per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce il nuovo valore.
+        \item Il Consulente del lavoro seleziona il campo nome e cognome per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce il nuovo valore.
         \item Il sistema valida il dato e salva il valore aggiornato.
         \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
@@ -2163,14 +2144,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-41}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere l'azienda associata al documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto l'azienda, garantendo la corretta attribuzione del documento.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere l'azienda associata al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto l'azienda, garantendo la corretta attribuzione del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo azienda per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce il nuovo valore.
+        \item Il Consulente del lavoro seleziona il campo azienda per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce il nuovo valore.
         \item Il sistema valida il dato e salva il valore aggiornato.
         \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
@@ -2187,14 +2168,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-42}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere la data del documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto la data del documento, allineandola al periodo di riferimento corretto.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere la data del documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto la data del documento, allineandola al periodo di riferimento corretto.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo data del documento per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce o seleziona il nuovo valore tramite il selettore di data.
+        \item Il Consulente del lavoro seleziona il campo data del documento per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce o seleziona il nuovo valore tramite il selettore di data.
         \item Il sistema valida il dato e salva il valore aggiornato.
         \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
@@ -2210,14 +2191,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-43}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere la tipologia del documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto la tipologia del documento, assicurando una classificazione accurata.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere la tipologia del documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto la tipologia del documento, assicurando una classificazione accurata.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo tipologia del documento per abilitarne la modifica.
-        \item Il Consulente del Lavoro seleziona il nuovo valore tra le opzioni disponibili: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
+        \item Il Consulente del lavoro seleziona il campo tipologia del documento per abilitarne la modifica.
+        \item Il Consulente del lavoro seleziona il nuovo valore tra le opzioni disponibili: cedolino, CU, comunicazione, documento da firmare, lettera, altro.
         \item Il sistema salva il valore aggiornato.
         \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
@@ -2233,14 +2214,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-44}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere la breve descrizione del documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha aggiornato la descrizione del documento, migliorandone la leggibilità nello storico.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere la breve descrizione del documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato la descrizione del documento, migliorandone la leggibilità nello storico.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo breve descrizione per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce il nuovo testo descrittivo.
+        \item Il Consulente del lavoro seleziona il campo breve descrizione per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce il nuovo testo descrittivo.
         \item Il sistema valida il dato e salva il valore aggiornato.
         \item Il sistema fornisce un feedback visivo di conferma del salvataggio.
     \end{enumerate}
@@ -2256,14 +2237,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-45}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere l'indirizzo e-mail del destinatario associato al documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto l'indirizzo e-mail del destinatario, assicurando il corretto recapito del documento.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere l'indirizzo e-mail del destinatario associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto l'indirizzo e-mail del destinatario, assicurando il corretto recapito del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo email destinatario per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce o modifica l'indirizzo e-mail.
+        \item Il Consulente del lavoro seleziona il campo email destinatario per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce o modifica l'indirizzo e-mail.
         \item Il sistema esegue una validazione formale del formato.
         \item Il sistema salva il valore aggiornato e fornisce un feedback visivo di conferma.
     \end{enumerate}
@@ -2287,14 +2268,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-46}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere il codice fiscale del dipendente associato al documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto il codice fiscale del dipendente, garantendo la corretta identificazione anagrafica.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere il codice fiscale del dipendente associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto il codice fiscale del dipendente, garantendo la corretta identificazione anagrafica.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo codice fiscale per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce o corregge il codice fiscale.
+        \item Il Consulente del lavoro seleziona il campo codice fiscale per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce o corregge il codice fiscale.
         \item Il sistema esegue un controllo di validità formale (checksum).
         \item Il sistema salva il valore aggiornato e fornisce un feedback visivo di conferma.
     \end{enumerate}
@@ -2318,14 +2299,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-47}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di correggere la matricola del dipendente associato al documento.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella vista di dettaglio del documento (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro ha corretto la matricola del dipendente associata al documento.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di correggere la matricola del dipendente associato al documento.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella vista di dettaglio del documento (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro ha corretto la matricola del dipendente associata al documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo matricola per abilitarne la modifica.
-        \item Il Consulente del Lavoro inserisce o modifica la matricola.
+        \item Il Consulente del lavoro seleziona il campo matricola per abilitarne la modifica.
+        \item Il Consulente del lavoro inserisce o modifica la matricola.
         \item Il sistema salva il valore aggiornato e fornisce un feedback visivo di conferma.
     \end{enumerate}
 \end{description}
@@ -2340,17 +2321,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-48}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-39), il Consulente del Lavoro seleziona il comando di invio.
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il dettaglio di un documento nello storico (UC-39).
-    \item[Post-condizioni] Il Consulente del Lavoro visualizza la bozza di invio precompilata dal sistema con destinatario, oggetto e testo.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Dopo la visualizzazione del singolo documento (UC-39), il Consulente del lavoro seleziona il comando di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il dettaglio di un documento nello storico (UC-39).
+    \item[Post-condizioni] Il Consulente del lavoro visualizza la bozza di invio precompilata dal sistema con destinatario, oggetto e testo.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro clicca il tasto "Invia" dalla vista di dettaglio del documento.
+        \item Il Consulente del lavoro clicca il tasto "Invia" dalla vista di dettaglio del documento.
         \item Il sistema apre la sezione di generazione per l'invio e allega automaticamente il documento che era in visualizzazione.
-        \item Il Consulente del Lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-48.1}).
-        \item Il Consulente del Lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-48.2}).
-        \item Il Consulente del Lavoro visualizza il testo proposto dal sistema (\textbf{UC-48.3}).
+        \item Il Consulente del lavoro visualizza il destinatario proposto dal sistema (\textbf{UC-48.1}).
+        \item Il Consulente del lavoro visualizza l'oggetto proposto dal sistema (\textbf{UC-48.2}).
+        \item Il Consulente del lavoro visualizza il testo proposto dal sistema (\textbf{UC-48.3}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2368,13 +2349,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-48.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema dispone del nome e cognome estratti dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce il destinatario proposto dal sistema per l'invio del documento.
+    \item[Post-condizioni] Il Consulente del lavoro conosce il destinatario proposto dal sistema per l'invio del documento.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema propone il destinatario sulla base dei dati estratti dal documento.
-        \item Il Consulente del Lavoro visualizza il valore del campo destinatario.
+        \item Il Consulente del lavoro visualizza il valore del campo destinatario.
     \end{enumerate}
 \end{description}
 
@@ -2388,13 +2369,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-48.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha accesso ai metadati principali del documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce l'oggetto proposto dal sistema per il messaggio di invio.
+    \item[Post-condizioni] Il Consulente del lavoro conosce l'oggetto proposto dal sistema per il messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema propone un oggetto coerente con il documento in invio.
-        \item Il Consulente del Lavoro visualizza il valore del campo oggetto.
+        \item Il Consulente del lavoro visualizza il valore del campo oggetto.
     \end{enumerate}
 \end{description}
 
@@ -2408,13 +2389,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-48.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Il sistema ha accesso ai dati estratti dal documento selezionato.
-    \item[Post-condizioni] Il Consulente del Lavoro conosce il testo di accompagnamento proposto dal sistema per il documento in invio.
+    \item[Post-condizioni] Il Consulente del lavoro conosce il testo di accompagnamento proposto dal sistema per il documento in invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema propone un testo di accompagnamento del documento allegato.
-        \item Il Consulente del Lavoro visualizza il valore del campo testo.
+        \item Il Consulente del lavoro visualizza il valore del campo testo.
     \end{enumerate}
 \end{description}
 
@@ -2428,16 +2409,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-49}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di confermare e inviare il messaggio al destinatario dopo aver verificato i campi nella schermata di invio.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella schermata di generazione per l'invio (UC-48) e ha verificato i campi destinatario, oggetto e testo.
-    \item[Post-condizioni] Il Consulente del Lavoro ha inviato il documento al destinatario e riceve conferma dell'esito dell'operazione.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di confermare e inviare il messaggio al destinatario dopo aver verificato i campi nella schermata di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-48) e ha verificato i campi destinatario, oggetto e testo.
+    \item[Post-condizioni] Il Consulente del lavoro ha inviato il documento al destinatario e riceve conferma dell'esito dell'operazione.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il comando di invio definitivo del messaggio.
+        \item Il Consulente del lavoro seleziona il comando di invio definitivo del messaggio.
         \item Il sistema acquisisce i campi confermati e il documento allegato dalla schermata di invio.
         \item Il sistema invia il messaggio al destinatario indicato.
-        \item Il sistema notifica al Consulente del Lavoro l'esito dell'invio.
+        \item Il sistema notifica al Consulente del lavoro l'esito dell'invio.
     \end{enumerate}
 \end{description}
 
@@ -2452,14 +2433,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-50}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di modificare il destinatario del messaggio di invio.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella schermata di generazione per l'invio (UC-48) con il campo destinatario valorizzato.
-    \item[Post-condizioni] Il Consulente del Lavoro ha aggiornato il valore del campo destinatario nel messaggio di invio.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di modificare il destinatario del messaggio di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-48) con il campo destinatario valorizzato.
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il valore del campo destinatario nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo destinatario.
-        \item Il Consulente del Lavoro sostituisce o integra il valore presente nel campo.
+        \item Il Consulente del lavoro seleziona il campo destinatario.
+        \item Il Consulente del lavoro sostituisce o integra il valore presente nel campo.
         \item Il sistema aggiorna il campo destinatario nella bozza di invio.
     \end{enumerate}
 \end{description}
@@ -2474,14 +2455,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-51}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di modificare l'oggetto del messaggio di invio.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella schermata di generazione per l'invio (UC-48) con il campo oggetto valorizzato.
-    \item[Post-condizioni] Il Consulente del Lavoro ha aggiornato il testo del campo oggetto nel messaggio di invio.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di modificare l'oggetto del messaggio di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-48) con il campo oggetto valorizzato.
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il testo del campo oggetto nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo oggetto.
-        \item Il Consulente del Lavoro modifica il testo dell'oggetto.
+        \item Il Consulente del lavoro seleziona il campo oggetto.
+        \item Il Consulente del lavoro modifica il testo dell'oggetto.
         \item Il sistema aggiorna il campo oggetto nella bozza di invio.
     \end{enumerate}
 \end{description}
@@ -2496,14 +2477,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{fig:uc-52}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Trigger] Il Consulente del Lavoro decide di modificare il testo del messaggio di invio.
-    \item[Pre-condizioni] Il Consulente del Lavoro si trova nella schermata di generazione per l'invio (UC-48) con il campo testo valorizzato.
-    \item[Post-condizioni] Il Consulente del Lavoro ha aggiornato il testo di accompagnamento nel messaggio di invio.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Trigger] Il Consulente del lavoro decide di modificare il testo del messaggio di invio.
+    \item[Pre-condizioni] Il Consulente del lavoro si trova nella schermata di generazione per l'invio (UC-48) con il campo testo valorizzato.
+    \item[Post-condizioni] Il Consulente del lavoro ha aggiornato il testo di accompagnamento nel messaggio di invio.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il Consulente del Lavoro seleziona il campo testo.
-        \item Il Consulente del Lavoro modifica il corpo del messaggio.
+        \item Il Consulente del lavoro seleziona il campo testo.
+        \item Il Consulente del lavoro modifica il corpo del messaggio.
         \item Il sistema aggiorna il campo testo nella bozza di invio.
     \end{enumerate}
 \end{description}
@@ -2671,7 +2652,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-55}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Redattore, Consulente del Lavoro
+    \item[Attore Principale] Redattore, Consulente del lavoro
     \item[Pre-condizioni] L'utente inserisce un indirizzo e-mail in formato non valido.
     \item[Post-condizioni] L'operazione è bloccata e l'anomalia è segnalata all'utente.
     \item[Scenario Principale]
@@ -2751,14 +2732,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-59}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il documento è già presente in archivio.
     \item[Post-condizioni] Il sistema gestisce la scelta dell'utente: in caso di conferma il documento viene caricato, altrimenti l'archivio resta invariato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema segnala che il documento risulta già presente in archivio.
         \item Il sistema richiede conferma per procedere con il caricamento del duplicato.
-        \item Il Consulente del Lavoro conferma o annulla il caricamento.
+        \item Il Consulente del lavoro conferma o annulla il caricamento.
     \end{enumerate}
 \end{description}
 
@@ -2772,13 +2753,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-60}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
+    \item[Attore Principale] Consulente del lavoro
     \item[Pre-condizioni] Durante la verifica di caricamento, il sistema rileva che il formato del file non è supportato.
     \item[Post-condizioni] Il documento non viene caricato e il sistema richiede un nuovo file in formato valido.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema interrompe la procedura di caricamento del documento.
-        \item Il Consulente del Lavoro visualizza un messaggio di errore con i formati supportati: PDF, PNG, JPG, TIFF.
+        \item Il Consulente del lavoro visualizza un messaggio di errore con i formati supportati: PDF, PNG, JPG, TIFF.
     \end{enumerate}
 \end{description}
 
@@ -2792,13 +2773,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-61}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
-    \item[Post-condizioni] Il Consulente del Lavoro è informato dell'assenza di documenti e sa come procedere.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro accede allo storico o applica filtri e non è presente alcun documento corrispondente.
+    \item[Post-condizioni] Il Consulente del lavoro è informato dell'assenza di documenti e sa come procedere.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che non c'è alcun elemento individuato.
-        \item Il Consulente del Lavoro visualizza un avviso di storico vuoto e può scegliere se caricare nuovi documenti o azzerare i filtri applicati.
+        \item Il Consulente del lavoro visualizza un avviso di storico vuoto e può scegliere se caricare nuovi documenti o azzerare i filtri applicati.
     \end{enumerate}
 \end{description}
 
@@ -2812,13 +2793,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-62}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo nome e cognome del dipendente (UC-39.3) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo nome e cognome del dipendente (UC-39.3) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo nome e cognome del dipendente non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo nome e cognome del dipendente non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2832,13 +2813,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-63}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo azienda (UC-39.4) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo azienda (UC-39.4) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo azienda non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo azienda non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2852,13 +2833,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-64}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo data del documento (UC-39.6) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo data del documento (UC-39.6) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo data del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo data del documento non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2872,13 +2853,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-65}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo tipologia del documento (UC-39.8) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo tipologia del documento (UC-39.8) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo tipologia del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo tipologia del documento non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2892,13 +2873,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-66}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo breve descrizione del documento (UC-39.9) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo breve descrizione del documento (UC-39.9) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo breve descrizione del documento non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo breve descrizione del documento non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2912,13 +2893,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-67}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo confidenza in percentuale (UC-39.10) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo confidenza in percentuale (UC-39.10) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo confidenza non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo confidenza non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2932,13 +2913,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-68}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta visualizzando il campo email destinatario (UC-39.12) e il dato non è disponibile.
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta visualizzando il campo email destinatario (UC-39.12) e il dato non è disponibile.
     \item[Post-condizioni] Il sistema mantiene aperta la vista di dettaglio e segnala che il campo email destinatario non è valorizzato.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il campo email destinatario non è disponibile.
-        \item Il Consulente del Lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
+        \item Il Consulente del lavoro visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
 
@@ -2952,13 +2933,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \label{errore-uc-69}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
-    \item[Attore Principale] Consulente del Lavoro
-    \item[Pre-condizioni] Il Consulente del Lavoro sta modificando il campo codice fiscale (UC-46) e il valore inserito non supera il controllo di validità formale (checksum).
+    \item[Attore Principale] Consulente del lavoro
+    \item[Pre-condizioni] Il Consulente del lavoro sta modificando il campo codice fiscale (UC-46) e il valore inserito non supera il controllo di validità formale (checksum).
     \item[Post-condizioni] Il sistema segnala l'incongruenza e non registra il valore finché non viene fornito un codice fiscale corretto.
     \item[Scenario Principale]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema rileva che il codice fiscale inserito non supera il controllo di validità formale (checksum).
-        \item Il Consulente del Lavoro visualizza il campo evidenziato con la segnalazione dell'incongruenza e la richiesta di correzione.
+        \item Il Consulente del lavoro visualizza il campo evidenziato con la segnalazione dell'incongruenza e la richiesta di correzione.
     \end{enumerate}
 \end{description}
 
@@ -3031,7 +3012,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF3-OB & Il sistema deve permettere al Redattore di selezionare lo stile editoriale della bozza da generare. & \hyperref[fig:uc-1.3]{UC-1.3} \\
     \hline
-    RF4-OP & Il sistema deve permettere al Redattore di selezionare la lunghezza desiderata per la bozza da generare (estensione opzionale non prevista dal capitolato). & \hyperref[fig:uc-1.4]{UC-1.4} \\
+    RF4-OP & Il sistema deve permettere al Redattore di selezionare la lunghezza desiderata per la bozza da generare. & \hyperref[fig:uc-1.4]{UC-1.4} \\
     \hline
     RF5-OB & Il sistema deve permettere al Redattore di salvare la configurazione corrente del prompt nella libreria personale, assegnandole un nome identificativo. & \hyperref[fig:uc-19]{UC-19} \\
     \hline
@@ -3069,7 +3050,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF22-OB & Il sistema deve notificare il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & \hyperref[fig:uc-2.e1]{UC-2.E1} \\
     \hline
-    RF23-OB & Il sistema deve permettere al Redattore di pubblicare e finalizzare il documento generato, portandolo dallo stato di bozza allo stato di pubblicato. & UC-9, UC-11, UC-12 \\
+    RF23-OB & Il sistema deve permettere al Redattore di approvare e finalizzare il documento generato. & UC-9, UC-11, UC-12 \\
     \hline
     RF24-OB & Il sistema deve visualizzare le opzioni disponibili per la finalizzazione del documento (salvataggio in bozza, esportazione, inoltro). & -- (UC-3.1 eliminato) \\
     \hline
@@ -3130,15 +3111,15 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{AI Co-Pilot per Consulenti del Lavoro}} \\
     \hline
-    RF52-OB & Il sistema deve permettere al Consulente del Lavoro di caricare singoli documenti o lotti nel repository dedicato. & \hyperref[fig:uc-36]{UC-36} \\
+    RF52-OB & Il sistema deve permettere al Consulente del lavoro di caricare singoli documenti o lotti nel repository dedicato. & \hyperref[fig:uc-36]{UC-36} \\
     \hline
-    RF53-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il Consulente del Lavoro, richiedendone conferma prima del caricamento. & \hyperref[errore-uc-64]{UC-64} \\
+    RF53-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il Consulente del lavoro, richiedendone conferma prima del caricamento. & \hyperref[errore-uc-64]{UC-64} \\
     \hline
-    RF54-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del Lavoro. & \hyperref[errore-uc-65]{UC-65} \\
+    RF54-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del lavoro. & \hyperref[errore-uc-65]{UC-65} \\
     \hline
     RF55-OB & Il sistema deve classificare automaticamente i documenti caricati e popolare i metadati associati tramite il modulo AI Analyst. & \hyperref[fig:uc-37]{UC-37} \\
     \hline
-    RF56-OB & Il sistema deve permettere al Consulente del Lavoro di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-38]{UC-38} \\
+    RF56-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-38]{UC-38} \\
     \hline
     RF57-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & \hyperref[errore-uc-66]{UC-66} \\
     \hline
@@ -3152,7 +3133,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF62-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & \hyperref[fig:uc-43]{UC-43} \\
     \hline
-    RF63-OB & Il sistema deve permettere al Consulente del Lavoro di visualizzare i dettagli di un singolo documento dallo storico. & \hyperref[fig:uc-44]{UC-44} \\
+    RF63-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & \hyperref[fig:uc-44]{UC-44} \\
     \hline
     RF64-OB & Il sistema deve permettere la visualizzazione del documento originale nella versione splittata. & \hyperref[fig:uc-40.1]{UC-40.1} \\
     \hline
@@ -3174,7 +3155,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF73-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & \hyperref[fig:uc-40.10]{UC-40.10} \\
     \hline
-    RF74-OB & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di invio. & \hyperref[fig:uc-40.11]{UC-40.11} \\
+    RF74-OB & Il sistema deve visualizzare lo stato di invio del documento. & \hyperref[fig:uc-40.11]{UC-40.11} \\
     \hline
     RF75-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-40.12]{UC-40.12} \\
     \hline
@@ -3196,7 +3177,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF84-OB & Il sistema deve gestire il caso in cui il livello di confidenza non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-68]{UC-68} \\
     \hline
-    RF85-OB & Il sistema deve permettere al Consulente del Lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-45]{UC-45} \\
+    RF85-OB & Il sistema deve permettere al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-45]{UC-45} \\
     \hline
     RF86-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-45]{UC-45} \\
     \hline
@@ -3214,9 +3195,9 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF93-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-52]{UC-52} \\
     \hline
-    RF94-OP & Il sistema deve notificare il Consulente del Lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[errore-uc-73]{UC-73} \\
+    RF94-OP & Il sistema deve notificare il Consulente del lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[errore-uc-73]{UC-73} \\
     \hline
-    RF95-OP & Il sistema deve notificare il Consulente del Lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[errore-uc-74]{UC-74} \\
+    RF95-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[errore-uc-74]{UC-74} \\
     \hline
     RF96-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-53]{UC-53} \\
     \hline
@@ -3228,7 +3209,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF100-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-54]{UC-54} \\
     \hline
-    RF101-OB & Il sistema deve permettere al Consulente del Lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-47]{UC-47} \\
+    RF101-OB & Il sistema deve permettere al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-47]{UC-47} \\
     \hline
     RF102-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-54]{UC-55} \\
     \hline
@@ -3288,7 +3269,7 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     RQ6-OB & Produzione di un manuale utente per il prodotto sviluppato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ7-OB & Il modulo AI Co-Pilot deve raggiungere i KPI di accettazione del capitolato: confidenza media OCR $\geq$ 90\% e accuratezza di mapping del codice fiscale $\geq$ 99\%. Tali KPI sono distinti dalla soglia operativa di auto-validazione, parametro configurabile (valore predefinito 80\%) al di sotto del quale i documenti sono indirizzati alla revisione human-in-the-loop. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ7-OB & Il modulo AI Co-Pilot deve raggiungere una confidenza media OCR $\geq$ 90\% e un'accuratezza di mapping del codice fiscale $\geq$ 99\%; i documenti con confidenza inferiore alla soglia devono essere indirizzati alla revisione human-in-the-loop. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
     RQ8-OB & La qualità percepita dei contenuti generati dal modulo AI Assistant deve risultare $\geq$ 4/5 nel sistema di rating utenti integrato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
@@ -3337,28 +3318,28 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
     \hline
     RVC4-OB & Il backend deve essere sviluppato con il framework Laravel 12 su PHP 8.4. & Interna \\
     \hline
-    RVC5-OB & La persistenza relazionale del sistema deve basarsi su PostgreSQL erogato come servizio gestito in cloud. & Interna \\
+    RVC5-OB & Il database relazionale del sistema deve essere PostgreSQL. & Interna \\
     \hline
-    RVC6-OB & La cache applicativa e l'archiviazione delle sessioni devono basarsi su Redis erogato come servizio gestito in cloud. & Interna \\
+    RVC6-OB & Le code asincrone e la gestione dei job in background devono utilizzare Redis. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Frontend}} \\
     \hline
-    RVC7-OB & Il frontend deve essere realizzato come Single Page Application in React con TypeScript, basata sul bundler Vite. & Interna \\
+    RVC7-OB & Il frontend delle interfacce utente deve essere realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Infrastruttura}} \\
     \hline
-    RVC8-OB & L'esecuzione del sistema deve avvenire su infrastruttura cloud distribuita, con orchestrazione di container (lo specifico servizio di orchestrazione non è vincolato). & Interna/Proponente \\
+    RVC8-OB & L'ambiente di sviluppo e di esecuzione del sistema deve essere containerizzato tramite Docker e orchestrato con Docker Compose. & Interna/Proponente \\
     \hline
-    RVC9-OB & L'accesso al sistema deve avvenire attraverso un ingress/gateway gestito con terminazione TLS gestita (load balancer cloud); lo specifico servizio non è vincolato. & Interna/Proponente \\
+    RVC9-OB & Il web server dell'applicazione deve essere Nginx. & Interna/Proponente \\
     \hline
-    RVC10-OB & Lo storage dei file caricati nel sistema deve basarsi su un object storage gestito in cloud compatibile con le API Amazon S3 (AWS S3). & Interna/Proponente \\
+    RVC10-OB & Lo storage dei file caricati nel sistema deve utilizzare MinIO, servizio compatibile con le API Amazon S3. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Modelli AI}} \\
     \hline
-    RVC11-OB & Le funzionalità di intelligenza artificiale devono basarsi su servizi AI gestiti in cloud: generazione di contenuti e classificazione/split tramite Amazon Bedrock, riconoscimento ottico (OCR) tramite Amazon Textract. & Interna/Proponente \\
+    RVC11-OP & I modelli di intelligenza artificiale generativa possono essere erogati tramite Amazon Bedrock. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Accessibilità}} \\
@@ -3371,28 +3352,13 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
     RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
     \hline
 
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Architettura di esecuzione}} \\
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Requisiti minimi di sistema}} \\
     \hline
-    RVC14-OB & Lo stack applicativo di esecuzione comprende: backend Laravel 12 su PHP 8.4, frontend SPA React/TypeScript, PostgreSQL gestito, Redis gestito (cache e sessioni), coda di messaggi gestita compatibile con le API SQS e object storage gestito compatibile con le API S3. & Interna/Proponente \\
+    RVC14-OB & L'ambiente di esecuzione deve essere containerizzato con Docker Compose. Lo stack comprende: Nginx, PHP-FPM 8.4, Laravel 12, PostgreSQL 16, Redis 7 e storage S3-compatible (MinIO). & Interna/Proponente \\
     \hline
-    RVC15-OB & L'ambiente di esecuzione deve poter scalare orizzontalmente sull'infrastruttura cloud, esponendo il servizio esclusivamente in HTTPS attraverso l'ingress/gateway gestito. & Interna/Proponente \\
+    RVC15-OB & La configurazione minima del server richiede 2 vCPU, 4 GB di RAM e 10 GB di spazio disco, con porta HTTP esposta su 8080 o reverse proxy HTTPS. & Interna/Proponente \\
     \hline
-    RVC16-OB & L'utilizzo delle funzionalità AI richiede credenziali valide del provider cloud e connettività outbound verso i servizi AI gestiti (Amazon Bedrock e Amazon Textract). & Interna/Proponente \\
-    \hline
-
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Servizi gestiti di piattaforma}} \\
-    \hline
-    RVC17-OB & L'elaborazione asincrona dei job deve appoggiarsi a una coda di messaggi gestita in cloud compatibile con le API Amazon SQS. & Interna/Proponente \\
-    \hline
-    RVC18-OB & La gestione di segreti e parametri di configurazione deve avvenire tramite un servizio gestito di gestione dei segreti. & Interna/Proponente \\
-    \hline
-    RVC19-OB & L'osservabilità del sistema (metriche, tracing e log) deve basarsi su strumentazione OpenTelemetry, esportata verso un backend di osservabilità gestito (backend non vincolato). & Interna/Proponente \\
-    \hline
-    RVC20-OB & L'autenticazione degli utenti deve avvenire tramite un identity provider con token JWT; lo specifico provider non è vincolato. & Interna/Proponente \\
-    \hline
-    RVC21-OB & Il provisioning dell'infrastruttura cloud deve essere descritto e gestito tramite Infrastructure-as-Code. & Interna \\
-    \hline
-    RVC22-OP & L'invio di email e notifiche deve avvenire tramite un servizio gestito (es.\ Amazon SES per le email, Amazon SNS per le notifiche). & Interna/Proponente \\
+    RVC16-OB & L'utilizzo delle funzionalità AI richiede credenziali AWS valide e accesso outbound ad Amazon Bedrock. & Interna/Proponente \\
     \hline
 
 \end{longtable}
@@ -3675,9 +3641,9 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     Di qualità & 10 & 0 & 10 \\
     \hline
-    Di vincolo & 21 & 1 & 22 \\
+    Di vincolo & 15 & 1 & 16 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{128} & \textbf{14} & \textbf{142} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{122} & \textbf{14} & \textbf{136} \\
 
 \end{longtable}
 }
