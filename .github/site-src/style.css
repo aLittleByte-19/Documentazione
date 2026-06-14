@@ -188,7 +188,8 @@ a:hover {
     text-decoration: underline;
 }
 
-a[href$=".pdf"], 
+a[href$=".pdf"],
+a.doc-link,
 a[href$=".md"] {
     font-weight: 600;
     text-decoration: underline;
@@ -197,7 +198,8 @@ a[href$=".md"] {
     text-underline-offset: 4px;
 }
 
-a[href$=".pdf"]:hover, 
+a[href$=".pdf"]:hover,
+a.doc-link:hover,
 a[href$=".md"]:hover {
     color: var(--accent-gold);
     text-decoration-color: var(--accent-gold);
@@ -302,30 +304,98 @@ a[href$=".md"]:hover {
 
 @media screen and (max-width: 850px) {
     :root {
-        --scroll-offset: 230px;
+        --scroll-offset: 190px;
+    }
+
+    body {
+        padding-bottom: 32px;
     }
 
     nav {
         flex-direction: column; 
-        padding: 20px;
+        padding: 14px 16px;
         text-align: center;
     }
 
     #header-logo {
+        max-height: 58px;
         margin-right: 0; 
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
 
     .nome-logo {
         margin-top: 0;
-        margin-bottom: 15px; 
+        margin-bottom: 10px;
+        font-size: 1.55rem;
     }
 
     #nav-navigation {
         margin-left: 0;
         justify-content: center; 
         flex-wrap: wrap; 
-        gap: 15px; 
+        gap: 8px;
+    }
+
+    #nav-navigation a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 0 10px;
+        border: 1px solid transparent;
+        border-radius: 6px;
+    }
+
+    #nav-navigation a:hover {
+        border-color: rgba(179, 139, 54, 0.5);
+    }
+
+    section {
+        width: min(100% - 24px, 900px);
+        margin: 24px auto;
+        padding: 28px 24px;
+    }
+
+    h1 {
+        font-size: 1.85rem;
+    }
+
+    h2 {
+        font-size: 1.55rem;
+    }
+
+    .dir-title {
+        min-height: 44px;
+    }
+
+    .doc p {
+        padding-left: 2px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --scroll-offset: 176px;
+    }
+
+    #nav-navigation {
+        gap: 6px;
+    }
+
+    #nav-navigation a {
+        min-height: 42px;
+        padding: 0 8px;
+        font-size: 0.84rem;
+    }
+
+    section {
+        width: min(100% - 16px, 900px);
+        padding: 24px 20px;
+        border-radius: 7px;
+    }
+
+    .dir-content {
+        margin-left: 12px;
+        padding-left: 15px;
     }
 }
 
