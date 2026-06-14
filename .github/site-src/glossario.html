@@ -8,10 +8,10 @@
   <style>
     :root { color-scheme: light; --primary-blue: #153c5e; --accent-gold: #b38b36; --bg-gray: #f0f4f8; --text-dark: #2b3035; --muted: #5f6975; --line: #dfe7ee; --white: #ffffff; }
     * { box-sizing: border-box; }
-    html { scroll-padding-top: 110px; scroll-behavior: smooth; }
-    body { margin: 0; color: var(--text-dark); background: var(--bg-gray); font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
+    html { height: 100%; overflow: hidden; scroll-behavior: smooth; }
+    body { display: flex; flex-direction: column; height: 100vh; margin: 0; overflow: hidden; color: var(--text-dark); background: var(--bg-gray); font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
     button { font: inherit; }
-    .glossary-navbar { position: sticky; top: 0; z-index: 5; background: rgba(255, 255, 255, .97); border-bottom: 3px solid var(--accent-gold); box-shadow: 0 8px 18px rgb(21 60 94 / 8%); backdrop-filter: blur(10px); }
+    .glossary-navbar { position: relative; z-index: 5; flex: 0 0 auto; background: rgba(255, 255, 255, .97); border-bottom: 3px solid var(--accent-gold); box-shadow: 0 8px 18px rgb(21 60 94 / 8%); backdrop-filter: blur(10px); }
     .nav-shell { display: flex; align-items: center; max-width: 100%; margin: 0 auto; padding: 10px 50px; }
     .glossary-brand-wrap { display: flex; align-items: center; flex: 0 0 auto; color: var(--primary-blue); }
     .glossary-brand { display: flex; align-items: center; color: var(--primary-blue); text-decoration: none; }
@@ -20,7 +20,10 @@
     .glossary-brand-logo { max-height: 70px; object-fit: contain; margin-right: 5px; margin-bottom: 5px; }
     .glossary-brand-name { margin-top: 10px; color: inherit; font-size: 1.8rem; font-weight: 700; letter-spacing: 0; }
     .glossary-brand-suffix { margin-top: 10px; margin-left: 10px; color: var(--muted); font-size: 1.8rem; font-weight: 600; }
+    .glossary-brand-suffix::before { content: "- "; }
     .glossary-tools { display: flex; align-items: center; justify-content: flex-end; width: min(390px, 100%); min-width: 260px; margin-left: auto; }
+    .glossary-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scroll-padding-top: 28px; }
+    .glossary-scroll:focus-visible { outline: 3px solid rgba(179, 139, 54, .35); outline-offset: -3px; }
     .search-box { width: 100%; min-width: 0; }
     .search-control { position: relative; }
     .search-control::before { position: absolute; top: 50%; left: 14px; width: 14px; height: 14px; content: ""; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235f6975' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4.2-4.2'/%3E%3C/svg%3E") center / contain no-repeat; transform: translateY(-50%); pointer-events: none; }
@@ -31,7 +34,7 @@
     .clear-search.is-visible { opacity: 1; pointer-events: auto; }
     #result-count { position: absolute; top: 50%; right: 38px; color: var(--muted); font-size: .82rem; line-height: 1; white-space: nowrap; opacity: 0; transform: translateY(-50%); pointer-events: none; }
     #result-count.is-visible { opacity: 1; }
-    main { width: min(100% - 32px, 1040px); margin: 28px auto 48px; padding: 40px; background: var(--white); border-top: 4px solid var(--accent-gold); border-radius: 8px; box-shadow: 0 5px 15px rgb(0 0 0 / 5%); }
+    .glossary-page { width: min(100% - 32px, 1040px); margin: 28px auto 48px; padding: 40px; background: var(--white); border-top: 4px solid var(--accent-gold); border-radius: 8px; box-shadow: 0 5px 15px rgb(0 0 0 / 5%); }
     .glossary-hero { max-width: 760px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
     h1 { margin: 0 0 10px; padding-bottom: 10px; color: var(--primary-blue); font-size: clamp(2rem, 4vw, 2.7rem); line-height: 1.08; border-bottom: 2px solid var(--bg-gray); }
     h2 { display: inline-block; margin: 34px 0 12px; color: var(--primary-blue); font-size: 1.65rem; }
@@ -43,9 +46,10 @@
     .alphabet-nav { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
     .alphabet-nav a { min-width: 34px; padding: 6px 10px; color: var(--primary-blue); font-weight: 700; text-align: center; text-decoration: none; background: #f8fafc; border: 1px solid var(--line); border-radius: 4px; }
     .alphabet-nav a:hover { color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(179, 139, 54, 0.05); }
+    .letter-section { scroll-margin-top: 28px; }
     .letter-section h2 { display: flex; gap: 12px; align-items: center; width: 100%; margin-top: 30px; }
     .letter-section h2::after { flex: 1; height: 1px; content: ""; background: var(--line); }
-    .entry { scroll-margin-top: 104px; margin: 12px 0; overflow: hidden; background: #fbfdff; border: 1px solid var(--line); border-left: 4px solid transparent; border-radius: 8px; box-shadow: 0 2px 8px rgb(21 60 94 / 4%); }
+    .entry { scroll-margin-top: 28px; margin: 12px 0; overflow: hidden; background: #fbfdff; border: 1px solid var(--line); border-left: 4px solid transparent; border-radius: 8px; box-shadow: 0 2px 8px rgb(21 60 94 / 4%); }
     .entry:target { border-left-color: var(--accent-gold); background: rgba(179, 139, 54, 0.05); }
     .entry-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; padding: 18px 20px 12px; }
     .entry-title { display: grid; gap: 9px; min-width: 0; }
@@ -65,7 +69,8 @@
     .back-to-top.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; white-space: nowrap; border: 0; clip: rect(0, 0, 0, 0); }
     .is-hidden { display: none !important; }
-    @media (max-width: 850px) { html { scroll-padding-top: 230px; } .nav-shell { flex-direction: column; padding: 20px; text-align: center; } .glossary-brand-wrap { justify-content: center; } .glossary-brand { justify-content: center; } .glossary-brand-logo { margin-right: 0; margin-bottom: 5px; } .glossary-brand-name, .glossary-brand-suffix { margin-top: 0; margin-bottom: 15px; } .glossary-tools { align-items: stretch; width: 100%; min-width: 0; margin-left: 0; } main { width: min(100% - 20px, 1040px); margin: 20px auto; padding: 24px; } .entry-head { grid-template-columns: 1fr; } .copy-link { justify-self: start; } }
+    @media (max-width: 850px) { .glossary-scroll { scroll-padding-top: 20px; } .nav-shell { flex-direction: column; padding: 14px 20px 18px; text-align: center; } .glossary-brand-wrap { flex-wrap: wrap; justify-content: center; } .glossary-brand { justify-content: center; } .glossary-brand-logo { max-height: 56px; margin-right: 0; margin-bottom: 4px; } .glossary-brand-name { margin-top: 0; margin-bottom: 6px; font-size: 1.55rem; } .glossary-brand-suffix { width: 100%; margin: 0 0 12px; font-size: 1.35rem; line-height: 1.1; text-align: center; } .glossary-brand-suffix::before { content: ""; } .glossary-tools { align-items: stretch; width: 100%; min-width: 0; margin-left: 0; } .search-control input { min-height: 42px; padding-right: 82px; } #result-count { right: 36px; } .glossary-page { width: min(100% - 20px, 1040px); margin: 20px auto; padding: 24px; } .alphabet-nav a { min-width: 40px; min-height: 40px; padding: 8px 10px; } .entry-head { grid-template-columns: 1fr; padding: 16px 18px 10px; } .entry-body { padding: 0 18px 16px; } .copy-link { width: 40px; height: 40px; justify-self: start; } .back-to-top { right: 16px; bottom: 16px; } }
+    @media (max-width: 480px) { .nav-shell { padding-inline: 16px; } .glossary-page { width: min(100% - 16px, 1040px); padding: 22px 18px; } h1 { font-size: 2rem; } .alphabet-panel { padding: 14px; } .alphabet-nav { gap: 6px; } .alphabet-nav a { flex: 1 0 40px; } }
   </style>
 </head>
 <body>
@@ -76,7 +81,7 @@
           <img class="glossary-brand-logo" src="assets/logo.png" alt="">
           <span class="glossary-brand-name">aLittleByte</span>
         </a>
-        <span class="glossary-brand-suffix"> - Glossario</span>
+        <span class="glossary-brand-suffix">Glossario</span>
       </div>
       <div class="glossary-tools">
         <div class="search-box">
@@ -89,7 +94,8 @@
       </div>
     </div>
   </header>
-  <main>
+  <main id="glossary-scroll" class="glossary-scroll" tabindex="0" aria-label="Contenuto glossario">
+  <div class="glossary-page">
     <div class="glossary-hero">
       <h1>Glossario</h1>
       <p>Glossario in HTML del gruppo aLittleByte.</p>
@@ -202,6 +208,7 @@
 <article class="entry" id="gls-versioning" data-entry data-entry-id="versioning" data-search="versioning sistema che tiene traccia delle versioni.  versioning"><div class="entry-head"><div class="entry-title"><h3>Versioning</h3></div><button type="button" class="copy-link" data-copy-link="#gls-versioning" aria-label="Copia link a Versioning" title="Copia link"><span class="copy-icon" aria-hidden="true"></span><span class="sr-only">Copia link</span></button></div><div class="entry-body"><p class="entry-label">Definizione</p><p class="entry-definition">Sistema che tiene traccia delle versioni.</p></div></article></section><section id="letter-W" class="letter-section"><h2>W</h2><article class="entry" id="gls-walkthrough" data-entry data-entry-id="walkthrough" data-search="walkthrough metodo di revisione informale di documenti o codice.  walkthrough"><div class="entry-head"><div class="entry-title"><h3>Walkthrough</h3></div><button type="button" class="copy-link" data-copy-link="#gls-walkthrough" aria-label="Copia link a Walkthrough" title="Copia link"><span class="copy-icon" aria-hidden="true"></span><span class="sr-only">Copia link</span></button></div><div class="entry-body"><p class="entry-label">Definizione</p><p class="entry-definition">Metodo di revisione informale di documenti o codice.</p></div></article>
 <article class="entry" id="gls-way-of-working-wow" data-entry data-entry-id="way-of-working-wow" data-search="way of working (wow) insieme di norme, strumenti e procedure del gruppo. way of working wow way-of-working-wow"><div class="entry-head"><div class="entry-title"><h3>Way of Working (WoW)</h3><div class="aliases" aria-label="Alias"><span>Way of Working</span><span>WoW</span></div></div><button type="button" class="copy-link" data-copy-link="#gls-way-of-working-wow" aria-label="Copia link a Way of Working (WoW)" title="Copia link"><span class="copy-icon" aria-hidden="true"></span><span class="sr-only">Copia link</span></button></div><div class="entry-body"><p class="entry-label">Definizione</p><p class="entry-definition">Insieme di norme, strumenti e procedure del gruppo.</p></div></article>
 <article class="entry" id="gls-workflow" data-entry data-entry-id="workflow" data-search="workflow sequenza automatica di passaggi per l&#x27;elaborazione.  workflow"><div class="entry-head"><div class="entry-title"><h3>Workflow</h3></div><button type="button" class="copy-link" data-copy-link="#gls-workflow" aria-label="Copia link a Workflow" title="Copia link"><span class="copy-icon" aria-hidden="true"></span><span class="sr-only">Copia link</span></button></div><div class="entry-body"><p class="entry-label">Definizione</p><p class="entry-definition">Sequenza automatica di passaggi per l&#x27;elaborazione.</p></div></article></section>
+  </div>
   </main>
   <button id="back-to-top" class="back-to-top" type="button" aria-label="Torna su">&#8593;</button>
   <script>
@@ -210,6 +217,7 @@
     const resultCount = document.getElementById("result-count");
     const emptyResults = document.getElementById("empty-results");
     const backToTop = document.getElementById("back-to-top");
+    const glossaryScroll = document.getElementById("glossary-scroll");
     const entries = [...document.querySelectorAll("[data-entry]")];
     function updateSearch() {
       const query = search.value.trim().toLowerCase();
@@ -255,11 +263,11 @@
         }
       });
     });
-    window.addEventListener("scroll", () => {
-      backToTop?.classList.toggle("is-visible", window.scrollY > 420);
+    glossaryScroll?.addEventListener("scroll", () => {
+      backToTop?.classList.toggle("is-visible", glossaryScroll.scrollTop > 420);
     }, { passive: true });
     backToTop?.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      glossaryScroll?.scrollTo({ top: 0, behavior: "smooth" });
     });
     updateSearch();
   </script>

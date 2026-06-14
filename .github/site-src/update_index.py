@@ -2,6 +2,8 @@ import os
 import re
 from datetime import datetime
 import shutil
+from html import escape
+from urllib.parse import quote
 
 # Configurazione percorsi
 # Lo script viene eseguito dalla root del progetto
@@ -9,6 +11,7 @@ ROOT_DIR = '.'
 SITE_SRC = os.path.join('.github', 'site-src')
 BUILD_DIR = '_site'
 TEMPLATE_PATH = os.path.join(SITE_SRC, 'index_template.html')
+PDF_VIEWER_TEMPLATE_PATH = os.path.join(SITE_SRC, 'pdf-viewer-template.html')
 
 # Cartelle e file da escludere dalla scansione e dal deploy finale
 EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
@@ -54,6 +57,36 @@ def get_dir_id(relative_path):
 def sort_root_sections(item):
     normalized = item.lower()
     return (ROOT_SECTION_ORDER.get(normalized, len(ROOT_SECTION_ORDER)), normalized)
+
+def to_url_path(path):
+    return quote(path.replace(os.sep, '/'), safe='/')
+
+def get_pdf_viewer_path(pdf_path):
+    pdf_path = pdf_path.replace(os.sep, '/')
+    filename = os.path.basename(pdf_path)
+    if filename.lower() == 'glossario.pdf':
+        return 'glossario.html'
+
+    return os.path.splitext(pdf_path)[0] + '.html'
+
+def get_asset_prefix(viewer_path):
+    viewer_dir = os.path.dirname(viewer_path.replace(os.sep, '/'))
+    if not viewer_dir:
+        return ''
+
+    depth = len([part for part in viewer_dir.split('/') if part])
+    return '../' * depth
+
+def iter_source_pdfs():
+    for current_dir, dirs, files in os.walk(ROOT_DIR):
+        dirs[:] = [
+            d for d in dirs
+            if not d.startswith('.') and d not in EXCLUDE_DIRS
+        ]
+
+        for filename in files:
+            if filename.lower().endswith('.pdf') and filename not in EXCLUDE_FILES:
+                yield os.path.join(current_dir, filename)
 
 def build_html_tree(base_path, relative_path=""):
     html_output = ""
@@ -106,7 +139,8 @@ def build_html_tree(base_path, relative_path=""):
             else:
                 file_path = f
             name_without_ext = os.path.splitext(f)[0]
-            html_output += f'        <p><a href="{file_path}" target="_blank" rel="noopener noreferrer">{name_without_ext}</a></p>\n'
+            viewer_path = to_url_path(get_pdf_viewer_path(file_path))
+            html_output += f'        <p><a class="doc-link" href="{viewer_path}" target="_blank" rel="noopener noreferrer">{name_without_ext}</a></p>\n'
         html_output += '    </div>\n'
 
     # 2. Esplora ricorsivamente
@@ -129,11 +163,43 @@ def build_html_tree(base_path, relative_path=""):
 
     return html_output
 
+def generate_pdf_viewers(pdf_paths):
+    if not os.path.exists(PDF_VIEWER_TEMPLATE_PATH):
+        print(f"ERRORE: Template viewer PDF non trovato in {PDF_VIEWER_TEMPLATE_PATH}")
+        return
+
+    with open(PDF_VIEWER_TEMPLATE_PATH, 'r', encoding='utf-8') as f:
+        template = f.read()
+
+    for pdf_path in pdf_paths:
+        relative_pdf_path = os.path.relpath(pdf_path, ROOT_DIR).replace(os.sep, '/')
+        filename = os.path.basename(relative_pdf_path)
+        document_title = os.path.splitext(filename)[0]
+        viewer_relative_path = get_pdf_viewer_path(relative_pdf_path)
+        viewer_abs_path = os.path.join(BUILD_DIR, viewer_relative_path)
+        pdf_src = to_url_path(filename)
+        asset_prefix = get_asset_prefix(viewer_relative_path)
+
+        if os.path.basename(viewer_abs_path).lower() == 'glossario.html':
+            continue
+
+        os.makedirs(os.path.dirname(viewer_abs_path), exist_ok=True)
+        viewer_html = (
+            template
+            .replace('{{DOCUMENT_TITLE}}', escape(document_title))
+            .replace('{{PDF_SRC}}', escape(pdf_src, quote=True))
+            .replace('{{ASSET_PREFIX}}', asset_prefix)
+        )
+
+        with open(viewer_abs_path, 'w', encoding='utf-8') as f:
+            f.write(viewer_html)
+
 def main():
     # Pulisci o crea la cartella di output
     if os.path.exists(BUILD_DIR):
         shutil.rmtree(BUILD_DIR)
     os.makedirs(BUILD_DIR)
+    pdf_paths = list(iter_source_pdfs())
 
     # Genera l'albero HTML dei documenti
     docs_html = build_html_tree(ROOT_DIR)
@@ -182,6 +248,11 @@ def main():
     glossary_src = os.path.join(SITE_SRC, 'glossario.html')
     if os.path.exists(glossary_src):
         shutil.copy2(glossary_src, os.path.join(BUILD_DIR, 'glossario.html'))
+
+    for asset_name in ('pdf-viewer.css', 'pdf-viewer.js'):
+        asset_src = os.path.join(SITE_SRC, asset_name)
+        if os.path.exists(asset_src):
+            shutil.copy2(asset_src, os.path.join(BUILD_DIR, asset_name))
     
     # Asset (Logo ecc)
     assets_src = os.path.join(SITE_SRC, 'assets')
@@ -197,6 +268,8 @@ def main():
                 shutil.copytree(s, d)
             elif item.endswith('.pdf'):
                 shutil.copy2(s, d)
+
+    generate_pdf_viewers(pdf_paths)
 
     print("Sito generato con successo nella cartella _site/")
 
