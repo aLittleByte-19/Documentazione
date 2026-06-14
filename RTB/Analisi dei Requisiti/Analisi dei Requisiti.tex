@@ -3012,7 +3012,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF3-OB & Il sistema deve permettere al Redattore di selezionare lo stile editoriale della bozza da generare. & \hyperref[fig:uc-1.3]{UC-1.3} \\
     \hline
-    RF4-OP & Il sistema deve permettere al Redattore di selezionare la lunghezza desiderata per la bozza da generare. & \hyperref[fig:uc-1.4]{UC-1.4} \\
+    RF4-OP & Il sistema deve permettere al Redattore di selezionare la lunghezza desiderata per la bozza da generare (estensione opzionale non prevista dal capitolato). & \hyperref[fig:uc-1.4]{UC-1.4} \\
     \hline
     RF5-OB & Il sistema deve permettere al Redattore di salvare la configurazione corrente del prompt nella libreria personale, assegnandole un nome identificativo. & \hyperref[fig:uc-19]{UC-19} \\
     \hline
@@ -3050,7 +3050,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF22-OB & Il sistema deve notificare il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & \hyperref[fig:uc-2.e1]{UC-2.E1} \\
     \hline
-    RF23-OB & Il sistema deve permettere al Redattore di approvare e finalizzare il documento generato. & UC-9, UC-11, UC-12 \\
+    RF23-OB & Il sistema deve permettere al Redattore di pubblicare e finalizzare il documento generato, portandolo dallo stato di bozza allo stato di pubblicato. & UC-9, UC-11, UC-12 \\
     \hline
     RF24-OB & Il sistema deve visualizzare le opzioni disponibili per la finalizzazione del documento (salvataggio in bozza, esportazione, inoltro). & -- (UC-3.1 eliminato) \\
     \hline
@@ -3155,7 +3155,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF73-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & \hyperref[fig:uc-40.10]{UC-40.10} \\
     \hline
-    RF74-OB & Il sistema deve visualizzare lo stato di invio del documento. & \hyperref[fig:uc-40.11]{UC-40.11} \\
+    RF74-OB & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di invio. & \hyperref[fig:uc-40.11]{UC-40.11} \\
     \hline
     RF75-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-40.12]{UC-40.12} \\
     \hline
@@ -3269,7 +3269,7 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     RQ6-OB & Produzione di un manuale utente per il prodotto sviluppato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ7-OB & Il modulo AI Co-Pilot deve raggiungere una confidenza media OCR $\geq$ 90\% e un'accuratezza di mapping del codice fiscale $\geq$ 99\%; i documenti con confidenza inferiore alla soglia devono essere indirizzati alla revisione human-in-the-loop. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ7-OB & Il modulo AI Co-Pilot deve raggiungere i KPI di accettazione del capitolato: conﬁdenza media OCR $\geq$ 90\% e accuratezza di mapping del codice ﬁscale $\geq$ 99\%. Tali KPI sono distinti dalla soglia operativa di auto-validazione, parametro conﬁgurabile (valore predeﬁnito 80\%) al di sotto del quale i documenti sono indirizzati alla revisione human-in-the-loop. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
     RQ8-OB & La qualità percepita dei contenuti generati dal modulo AI Assistant deve risultare $\geq$ 4/5 nel sistema di rating utenti integrato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
@@ -3318,28 +3318,28 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
     \hline
     RVC4-OB & Il backend deve essere sviluppato con il framework Laravel 12 su PHP 8.4. & Interna \\
     \hline
-    RVC5-OB & Il database relazionale del sistema deve essere PostgreSQL. & Interna \\
+    RVC5-OB & La persistenza relazionale del sistema deve basarsi su PostgreSQL erogato come servizio gestito in cloud. & Interna \\
     \hline
-    RVC6-OB & Le code asincrone e la gestione dei job in background devono utilizzare Redis. & Interna \\
+    RVC6-OB & La cache applicativa e l'archiviazione delle sessioni devono basarsi su Redis erogato come servizio gestito in cloud. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Frontend}} \\
     \hline
-    RVC7-OB & Il frontend delle interfacce utente deve essere realizzato tramite il motore di template Blade con CSS e JavaScript vanilla. & Interna/Proponente \\
+    RVC7-OB & Il frontend deve essere realizzato come Single Page Application in React con TypeScript, basata sul bundler Vite. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Infrastruttura}} \\
     \hline
-    RVC8-OB & L'ambiente di sviluppo e di esecuzione del sistema deve essere containerizzato tramite Docker e orchestrato con Docker Compose. & Interna/Proponente \\
+    RVC8-OB & L'esecuzione del sistema deve avvenire su infrastruttura cloud distribuita, con orchestrazione di container (lo specifico servizio di orchestrazione non è vincolato). & Interna/Proponente \\
     \hline
-    RVC9-OB & Il web server dell'applicazione deve essere Nginx. & Interna/Proponente \\
+    RVC9-OB & L'accesso al sistema deve avvenire attraverso un ingress/gateway gestito con terminazione TLS gestita (load balancer cloud); lo specifico servizio non è vincolato. & Interna/Proponente \\
     \hline
-    RVC10-OB & Lo storage dei file caricati nel sistema deve utilizzare MinIO, servizio compatibile con le API Amazon S3. & Interna/Proponente \\
+    RVC10-OB & Lo storage dei file caricati nel sistema deve basarsi su un object storage gestito in cloud compatibile con le API Amazon S3 (AWS S3). & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Modelli AI}} \\
     \hline
-    RVC11-OP & I modelli di intelligenza artificiale generativa possono essere erogati tramite Amazon Bedrock. & Interna/Proponente \\
+    RVC11-OB & Le funzionalità di intelligenza artificiale devono basarsi su servizi AI gestiti in cloud: generazione di contenuti e classificazione/split tramite Amazon Bedrock, riconoscimento ottico (OCR) tramite Amazon Textract. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Accessibilità}} \\
@@ -3352,13 +3352,28 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
     RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
     \hline
 
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Requisiti minimi di sistema}} \\
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Architettura di esecuzione}} \\
     \hline
-    RVC14-OB & L'ambiente di esecuzione deve essere containerizzato con Docker Compose. Lo stack comprende: Nginx, PHP-FPM 8.4, Laravel 12, PostgreSQL 16, Redis 7 e storage S3-compatible (MinIO). & Interna/Proponente \\
+    RVC14-OB & Lo stack applicativo di esecuzione comprende: backend Laravel 12 su PHP 8.4, frontend SPA React/TypeScript, PostgreSQL gestito, Redis gestito (cache e sessioni), coda di messaggi gestita compatibile con le API SQS e object storage gestito compatibile con le API S3. & Interna/Proponente \\
     \hline
-    RVC15-OB & La configurazione minima del server richiede 2 vCPU, 4 GB di RAM e 10 GB di spazio disco, con porta HTTP esposta su 8080 o reverse proxy HTTPS. & Interna/Proponente \\
+    RVC15-OB & L'ambiente di esecuzione deve poter scalare orizzontalmente sull'infrastruttura cloud, esponendo il servizio esclusivamente in HTTPS attraverso l'ingress/gateway gestito. & Interna/Proponente \\
     \hline
-    RVC16-OB & L'utilizzo delle funzionalità AI richiede credenziali AWS valide e accesso outbound ad Amazon Bedrock. & Interna/Proponente \\
+    RVC16-OB & L'utilizzo delle funzionalità AI richiede credenziali valide del provider cloud e connettività outbound verso i servizi AI gestiti (Amazon Bedrock e Amazon Textract). & Interna/Proponente \\
+    \hline
+
+    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Servizi gestiti di piattaforma}} \\
+    \hline
+    RVC17-OB & L'elaborazione asincrona dei job deve appoggiarsi a una coda di messaggi gestita in cloud compatibile con le API Amazon SQS. & Interna/Proponente \\
+    \hline
+    RVC18-OB & La gestione di segreti e parametri di configurazione deve avvenire tramite un servizio gestito di gestione dei segreti. & Interna/Proponente \\
+    \hline
+    RVC19-OB & L'osservabilità del sistema (metriche, tracing e log) deve basarsi su strumentazione OpenTelemetry, esportata verso un backend di osservabilità gestito (backend non vincolato). & Interna/Proponente \\
+    \hline
+    RVC20-OB & L'autenticazione degli utenti deve avvenire tramite un identity provider con token JWT; lo specifico provider non è vincolato. & Interna/Proponente \\
+    \hline
+    RVC21-OB & Il provisioning dell'infrastruttura cloud deve essere descritto e gestito tramite Infrastructure-as-Code. & Interna \\
+    \hline
+    RVC22-OP & L'invio di email e notifiche deve avvenire tramite un servizio gestito (es.\ Amazon SES per le email, Amazon SNS per le notifiche). & Interna/Proponente \\
     \hline
 
 \end{longtable}
@@ -3641,9 +3656,9 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     Di qualità & 10 & 0 & 10 \\
     \hline
-    Di vincolo & 15 & 1 & 16 \\
+    Di vincolo & 21 & 1 & 22 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{122} & \textbf{14} & \textbf{136} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{128} & \textbf{14} & \textbf{142} \\
 
 \end{longtable}
 }
