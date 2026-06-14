@@ -3269,13 +3269,11 @@ I requisiti di qualità definiscono gli standard di processo e di prodotto che i
     \hline
     RQ6-OB & Produzione di un manuale utente per il prodotto sviluppato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
     \hline
-    RQ7-OB & Il modulo AI Co-Pilot deve raggiungere i KPI di accettazione del capitolato: conﬁdenza media OCR $\geq$ 90\% e accuratezza di mapping del codice ﬁscale $\geq$ 99\%. Tali KPI sono distinti dalla soglia operativa di auto-validazione, parametro conﬁgurabile (valore predeﬁnito 80\%) al di sotto del quale i documenti sono indirizzati alla revisione human-in-the-loop. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ7-OB & Il codice sorgente deve essere versionato tramite Git su un repository condiviso. & Proponente \\
     \hline
-    RQ8-OB & La qualità percepita dei contenuti generati dal modulo AI Assistant deve risultare $\geq$ 4/5 nel sistema di rating utenti integrato. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ8-OB & Il codice sorgente deve rispettare le regole di formattazione definite da Laravel Pint. & Interna \\
     \hline
-    RQ9-OB & L'interfaccia utente deve rimanere fluida e reattiva in ogni momento, anche durante l'elaborazione di operazioni in background. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
-    \hline
-    RQ10-OB & Le operazioni computazionalmente onerose (classificazione AI, generazione di contenuti, split documentale) devono essere eseguite in modo asincrono, senza bloccare l'interfaccia utente. & \href{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}{Capitolato} \\
+    RQ9-OB & La suite di test automatizzati deve essere scritta con il framework Pest. & Interna \\
     \hline
 
 \end{longtable}
@@ -3305,76 +3303,69 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
     \hline
     \endlastfoot
 
-    \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Controllo versione e qualità del codice}} \\
-    \hline
-    RVC1-OB & Il codice sorgente deve essere versionato tramite Git su un repository condiviso. & Proponente \\
-    \hline
-    RVC2-OB & Il codice sorgente deve rispettare le regole di formattazione definite da Laravel Pint. & Interna \\
-    \hline
-    RVC3-OB & La suite di test automatizzati deve essere scritta con il framework Pest. & Interna \\
-    \hline
-
+    
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Backend}} \\
     \hline
-    RVC4-OB & Il backend deve essere sviluppato con il framework Laravel 12 su PHP 8.4. & Interna \\
+    RVC1-OB & Il backend deve essere sviluppato con il framework Laravel 12 su PHP 8.4. & Interna \\
     \hline
-    RVC5-OB & La persistenza relazionale del sistema deve basarsi su PostgreSQL erogato come servizio gestito in cloud. & Interna \\
+    RVC2-OB & La persistenza relazionale del sistema deve basarsi su PostgreSQL erogato come servizio gestito in cloud. & Interna \\
     \hline
-    RVC6-OB & La cache applicativa e l'archiviazione delle sessioni devono basarsi su Redis erogato come servizio gestito in cloud. & Interna \\
+    RVC3-OB & La cache applicativa e l'archiviazione delle sessioni devono basarsi su Redis erogato come servizio gestito in cloud. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Frontend}} \\
     \hline
-    RVC7-OB & Il frontend deve essere realizzato come Single Page Application in React con TypeScript, basata sul bundler Vite. & Interna \\
+    RVC4-OB & Il frontend deve essere realizzato come Single Page Application in React con TypeScript, basata sul bundler Vite. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Infrastruttura}} \\
     \hline
-    RVC8-OB & L'esecuzione del sistema deve avvenire su infrastruttura cloud distribuita, con orchestrazione di container (lo specifico servizio di orchestrazione non è vincolato). & Interna/Proponente \\
+    RVC5-OB & L'esecuzione del sistema deve avvenire su infrastruttura cloud distribuita, con orchestrazione di container (lo specifico servizio di orchestrazione non è vincolato). & Interna/Proponente \\
     \hline
-    RVC9-OB & L'accesso al sistema deve avvenire attraverso un ingress/gateway gestito con terminazione TLS gestita (load balancer cloud); lo specifico servizio non è vincolato. & Interna/Proponente \\
+    RVC6-OB & L'accesso al sistema deve avvenire attraverso un ingress/gateway gestito con terminazione TLS gestita (load balancer cloud); lo specifico servizio non è vincolato. & Interna/Proponente \\
     \hline
-    RVC10-OB & Lo storage dei file caricati nel sistema deve basarsi su un object storage gestito in cloud compatibile con le API Amazon S3 (AWS S3). & Interna/Proponente \\
+    RVC7-OB & Lo storage dei file caricati nel sistema deve basarsi su un object storage gestito in cloud compatibile con le API Amazon S3 (AWS S3). & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Modelli AI}} \\
     \hline
-    RVC11-OB & Le funzionalità di intelligenza artificiale devono basarsi su servizi AI gestiti in cloud: generazione di contenuti e classificazione/split tramite Amazon Bedrock, riconoscimento ottico (OCR) tramite Amazon Textract. & Interna/Proponente \\
+    RVC8-OB & Le funzionalità di intelligenza artificiale devono basarsi su servizi AI gestiti in cloud: generazione di contenuti e classificazione/split tramite Amazon Bedrock, riconoscimento ottico (OCR) tramite Amazon Textract. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Accessibilità}} \\
     \hline
-    RVC12-OB & Il sistema deve superare i controlli di accessibilità automatizzati eseguiti tramite lo strumento pa11y e axe sulle interfacce utente principali tramite Playwright su Chromium. & Interna/Proponente \\
+    RVC9-OB & Il sistema deve superare i controlli di accessibilità automatizzati eseguiti tramite lo strumento pa11y e axe sulle interfacce utente principali tramite Playwright su Chromium. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Browser supportati}} \\
     \hline
-    RVC13-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
+    RVC10-OB & Il sistema deve essere fruibile sui principali browser moderni evergreen nelle versioni esplicitamente verificate alla data di produzione del documento: Google Chrome (min.\ 147), Microsoft Edge (min.\ 147), Mozilla Firefox (min.\ 149) e Safari (min.\ 26.4). La compatibilità con versioni successive è un obiettivo progettuale, non una garanzia automatica. Non sono supportati Internet Explorer, Edge Legacy e browser embedded obsoleti. & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Architettura di esecuzione}} \\
     \hline
-    RVC14-OB & Lo stack applicativo di esecuzione comprende: backend Laravel 12 su PHP 8.4, frontend SPA React/TypeScript, PostgreSQL gestito, Redis gestito (cache e sessioni), coda di messaggi gestita compatibile con le API SQS e object storage gestito compatibile con le API S3. & Interna/Proponente \\
+    RVC11-OB & Lo stack applicativo di esecuzione comprende: backend Laravel 12 su PHP 8.4, frontend SPA React/TypeScript, PostgreSQL gestito, Redis gestito (cache e sessioni), coda di messaggi gestita compatibile con le API SQS e object storage gestito compatibile con le API S3. & Interna/Proponente \\
     \hline
-    RVC15-OB & L'ambiente di esecuzione deve poter scalare orizzontalmente sull'infrastruttura cloud, esponendo il servizio esclusivamente in HTTPS attraverso l'ingress/gateway gestito. & Interna/Proponente \\
+    RVC12-OB & L'ambiente di esecuzione deve poter scalare orizzontalmente sull'infrastruttura cloud, esponendo il servizio esclusivamente in HTTPS attraverso l'ingress/gateway gestito. & Interna/Proponente \\
     \hline
-    RVC16-OB & L'utilizzo delle funzionalità AI richiede credenziali valide del provider cloud e connettività outbound verso i servizi AI gestiti (Amazon Bedrock e Amazon Textract). & Interna/Proponente \\
+    RVC13-OB & L'utilizzo delle funzionalità AI richiede credenziali valide del provider cloud e connettività outbound verso i servizi AI gestiti (Amazon Bedrock e Amazon Textract). & Interna/Proponente \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Servizi gestiti di piattaforma}} \\
     \hline
-    RVC17-OB & L'elaborazione asincrona dei job deve appoggiarsi a una coda di messaggi gestita in cloud compatibile con le API Amazon SQS. & Interna/Proponente \\
+    RVC14-OB & L'elaborazione asincrona dei job deve appoggiarsi a una coda di messaggi gestita in cloud compatibile con le API Amazon SQS. & Interna/Proponente \\
     \hline
-    RVC18-OB & La gestione di segreti e parametri di configurazione deve avvenire tramite un servizio gestito di gestione dei segreti. & Interna/Proponente \\
+    RVC15-OB & La gestione di segreti e parametri di configurazione deve avvenire tramite un servizio gestito di gestione dei segreti. & Interna/Proponente \\
     \hline
-    RVC19-OB & L'osservabilità del sistema (metriche, tracing e log) deve basarsi su strumentazione OpenTelemetry, esportata verso un backend di osservabilità gestito (backend non vincolato). & Interna/Proponente \\
+    RVC16-OB & L'osservabilità del sistema (metriche, tracing e log) deve basarsi su strumentazione OpenTelemetry, esportata verso un backend di osservabilità gestito (backend non vincolato). & Interna/Proponente \\
     \hline
-    RVC20-OB & L'autenticazione degli utenti deve avvenire tramite un identity provider con token JWT; lo specifico provider non è vincolato. & Interna/Proponente \\
+    RVC17-OB & L'autenticazione degli utenti deve avvenire tramite un identity provider con token JWT; lo specifico provider non è vincolato. & Interna/Proponente \\
     \hline
-    RVC21-OB & Il provisioning dell'infrastruttura cloud deve essere descritto e gestito tramite Infrastructure-as-Code. & Interna \\
+    RVC18-OB & Il provisioning dell'infrastruttura cloud deve essere descritto e gestito tramite Infrastructure-as-Code. & Interna \\
     \hline
-    RVC22-OP & L'invio di email e notifiche deve avvenire tramite un servizio gestito (es.\ Amazon SES per le email, Amazon SNS per le notifiche). & Interna/Proponente \\
+    RVC19-OP & L'invio di email e notifiche deve avvenire tramite un servizio gestito (es.\ Amazon SES per le email, Amazon SNS per le notifiche). & Interna/Proponente \\
     \hline
+
 
 \end{longtable}
 }
