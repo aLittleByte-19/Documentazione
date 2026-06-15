@@ -1118,6 +1118,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \newpage
 \subsubsection{UC-25: Aggiunta commento qualitativo alla valutazione}
 \mbox{} \\
+\phantomsection\label{fig:uc-25}
 \begin{description}[style=multiline, leftmargin=4.5cm, font=\bfseries]
     \item[Attore Principale] Redattore
 
@@ -1278,6 +1279,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-28: Filtraggio dati analitici per data}
 \mbox{} \\
+\phantomsection\label{fig:uc-28}
 
 %\begin{figure}[H]
 %    \centering
@@ -1309,6 +1311,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-29: Filtraggio dati analitici per tono}
 \mbox{} \\
+\phantomsection\label{fig:uc-29}
 
 %\begin{figure}[H]
 %    \centering
@@ -1340,6 +1343,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \subsubsection{UC-30: Filtraggio dati analitici per stile}
 \mbox{} \\
+\phantomsection\label{fig:uc-30}
 
 %\begin{figure}[H]
 %    \centering
@@ -1456,6 +1460,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-32.1: Selezione della tipologia del documento}
 \mbox{} \\
+\phantomsection\label{fig:uc-32.1}
 
 %\begin{figure}[H]
 %    \centering
@@ -1476,6 +1481,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-32.2: Inserimento del mese di riferimento}
 \mbox{} \\
+\phantomsection\label{fig:uc-32.2}
 
 %\begin{figure}[H]
 %    \centering
@@ -1496,6 +1502,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-32.3: Inserimento dell'anno di riferimento}
 \mbox{} \\
+\phantomsection\label{fig:uc-32.3}
 
 %\begin{figure}[H]
 %    \centering
@@ -1516,6 +1523,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \paragraph{UC-32.4: Inserimento dell'azienda di riferimento}
 \mbox{} \\
+\phantomsection\label{fig:uc-32.4}
 
 %\begin{figure}[H]
 %    \centering
@@ -3020,11 +3028,11 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF7-OB & Il sistema deve avviare la generazione del contenuto tramite il modulo AI Post Generator a partire dal prompt e dai parametri configurati. & \hyperref[fig:uc-1]{UC-1} \\
     \hline
-    RF8-OB & Il sistema deve notificare il Redattore quando il testo del prompt è mancante o insufficiente per avviare la generazione o per salvare la configurazione. & \hyperref[errore-uc-71]{UC-71} \\
+    RF8-OB & Il sistema deve notificare il Redattore quando il testo del prompt è mancante o insufficiente per avviare la generazione o per salvare la configurazione. & \hyperref[errore-uc-70]{UC-70} \\
     \hline
-    RF9-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la generazione iniziale del contenuto tramite AI. & \hyperref[errore-uc-58]{UC-58} \\
+    RF9-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la generazione iniziale del contenuto tramite AI. & \hyperref[fig:uc-1]{UC-1} \\
     \hline
-    RF10-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la rigenerazione del contenuto tramite AI. & \hyperref[errore-uc-58]{UC-58} \\
+    RF10-OB & Il sistema deve notificare il Redattore in caso di errore interno o timeout durante la rigenerazione del contenuto tramite AI. & \hyperref[fig:uc-6]{UC-6} \\
     \hline
     RF11-OB & Il sistema deve visualizzare un'anteprima della bozza generata. & \hyperref[fig:uc-2]{UC-2} \\
     \hline
@@ -3040,7 +3048,7 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF17-OB & Il sistema deve permettere al Redattore di sostituire l'immagine di copertina della bozza con un file caricato localmente. & \hyperref[fig:uc-5]{UC-5} \\
     \hline
-    RF18-OB & Il sistema deve notificare il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & \hyperref[errore-uc-59]{UC-59} \\
+    RF18-OB & Il sistema deve notificare il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & \hyperref[errore-uc-54]{UC-54} \\
     \hline
     RF19-OB & Il sistema deve permettere al Redattore di richiedere la rigenerazione della bozza mantenendo i parametri di configurazione. & \hyperref[fig:uc-6]{UC-6} \\
     \hline
@@ -3048,9 +3056,9 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF21-OP & Il sistema deve permettere al Redattore di annullare le modifiche manuali apportate alla bozza, ripristinando il contenuto originariamente generato. & \hyperref[fig:uc-8]{UC-8} \\
     \hline
-    RF22-OB & Il sistema deve notificare il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & \hyperref[fig:uc-2.e1]{UC-2.E1} \\
+    RF22-OB & Il sistema deve notificare il Redattore qualora il contenuto della bozza risulti vuoto a seguito di modifiche. & \hyperref[fig:uc-2]{UC-2} \\
     \hline
-    RF23-OB & Il sistema deve permettere al Redattore di pubblicare e finalizzare il documento generato, portandolo dallo stato di bozza allo stato di pubblicato. & UC-9, UC-11, UC-12 \\
+    RF23-OB & Il sistema deve permettere al Redattore di pubblicare e finalizzare il documento generato, portandolo dallo stato di bozza allo stato di pubblicato. & \hyperref[fig:uc-9]{UC-9} \\
     \hline
     RF24-OB & Il sistema deve visualizzare le opzioni disponibili per la finalizzazione del documento (salvataggio in bozza, esportazione, inoltro). & -- (UC-3.1 eliminato) \\
     \hline
@@ -3062,172 +3070,200 @@ I requisiti funzionali specificano le funzionalità che il sistema deve mettere 
     \hline
     RF28-OP & Il sistema deve permettere al Redattore di visualizzare un'anteprima del documento prima dell'esportazione definitiva. & \hyperref[fig:uc-10]{UC-10} \\
     \hline
-    RF29-OB & Il sistema deve notificare il Redattore in caso di indirizzo e-mail non valido durante l'inoltro. & \hyperref[errore-uc-60]{UC-60} \\
+    RF29-OB & Il sistema deve notificare il Redattore in caso di indirizzo e-mail non valido durante l'inoltro. & \hyperref[errore-uc-55]{UC-55} \\
     \hline
-    RF30-OB & Il sistema deve fornire al Redattore una libreria personale dei prompt con il relativo storico delle generazioni passate. & UC-13, UC-15, UC-20, UC-21, UC-23, UC-19, UC-16, UC-17, UC-18, UC-24 \\
+    RF30-OB & Il sistema deve fornire al Redattore una libreria personale dei prompt con il relativo storico delle generazioni passate. & \hyperref[fig:uc-13]{UC-13} \\
     \hline
     RF31-OB & Il sistema deve permettere al Redattore di visualizzare l'elenco delle generazioni passate e i prompt salvati nella libreria personale. & \hyperref[fig:uc-13]{UC-13} \\
     \hline
-    RF32-OB & Il sistema deve permettere la ricerca e il filtraggio dello storico dei prompt e delle generazioni passate. & \hyperref[fig:uc-15]{UC-15}, UC-16, UC-17, UC-18 \\
+    RF32-OB & Il sistema deve permettere la ricerca e il filtraggio dello storico dei prompt e delle generazioni passate. & \hyperref[fig:uc-14]{UC-14} \\
     \hline
-    RF33-OB & Il sistema deve avvisare l'utente quando la ricerca nello storico non produce risultati. & \hyperref[errore-uc-61]{UC-61} \\
+    RF33-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni tramite ricerca per parola chiave. & \hyperref[fig:uc-15]{UC-15} \\
     \hline
-    RF34-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione prompt dalla libreria personale. & \hyperref[fig:uc-20]{UC-20} \\
+    RF34-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni per tono comunicativo. & \hyperref[fig:uc-16]{UC-16} \\
     \hline
-    RF35-OB & Il sistema deve permettere al Redattore di contrassegnare o rimuovere una generazione come preferita nella libreria personale. & \hyperref[fig:uc-21]{UC-21}, UC-24 \\
+    RF35-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni per stile editoriale. & \hyperref[fig:uc-17]{UC-17} \\
     \hline
-    RF36-OP & Il sistema deve permettere l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & \hyperref[fig:uc-23]{UC-23} \\
+    RF36-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni per data. & \hyperref[fig:uc-18]{UC-18} \\
     \hline
-    RF37-OB & Il sistema deve fornire un modulo di valutazione qualitativa delle bozze generate. & \hyperref[fig:uc-25]{UC-25} \\
+    RF37-OB & Il sistema deve avvisare l'utente quando la ricerca nello storico non produce risultati. & \hyperref[errore-uc-56]{UC-56} \\
     \hline
-    RF38-OB & Il sistema deve permettere al Redattore di accedere al modulo di valutazione qualitativa della bozza generata. & \hyperref[fig:uc-25]{UC-25} \\
+    RF38-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione prompt dalla libreria personale. & \hyperref[fig:uc-20]{UC-20} \\
     \hline
-    RF39-OB & Il sistema deve permettere al Redattore di assegnare un rating numerico alla bozza generata. & \hyperref[fig:uc-25]{UC-25} \\
+    RF39-OB & Il sistema deve permettere al Redattore di contrassegnare una generazione come preferita nella libreria personale. & \hyperref[fig:uc-21]{UC-21} \\
     \hline
-    RF40-OB & Il sistema deve permettere al Redattore di inserire un commento testuale opzionale nell'ambito della valutazione della bozza. & \hyperref[fig:uc-25]{UC-25} \\
+    RF40-OB & Il sistema deve permettere al Redattore di rimuovere una generazione dai preferiti nella libreria personale. & \hyperref[fig:uc-22]{UC-22} \\
     \hline
-    RF41-OB & Il sistema deve permettere al Redattore di inviare la valutazione al sistema. & \hyperref[fig:uc-25]{UC-25} \\
+    RF41-OP & Il sistema deve permettere l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & \hyperref[fig:uc-23]{UC-23} \\
     \hline
-    RF42-OB & Il sistema deve notificare il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & \hyperref[fig:uc-25.e1]{UC-25.E1} \\
+    RF42-OB & Il sistema deve fornire un modulo di valutazione qualitativa delle bozze generate. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF43-OB & Il sistema deve notificare il Redattore qualora il commento testuale superi il limite di caratteri consentito. & \hyperref[errore-uc-62]{UC-62} \\
+    RF43-OB & Il sistema deve permettere al Redattore di accedere al modulo di valutazione qualitativa della bozza generata. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF44-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di utilizzo del modulo AI Assistant Generativo. & \hyperref[fig:uc-27]{UC-27} \\
+    RF44-OB & Il sistema deve permettere al Redattore di assegnare un rating numerico alla bozza generata. & \hyperref[fig:uc-24]{UC-24} \\
     \hline
-    RF45-OB & Il sistema deve visualizzare nella dashboard una panoramica dell'attività complessiva del modulo AI Assistant. & \hyperref[fig:uc-27]{UC-27} \\
+    RF45-OB & Il sistema deve permettere al Redattore di inserire un commento testuale opzionale nell'ambito della valutazione della bozza. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF46-OB & Il sistema deve visualizzare nella dashboard le statistiche di utilizzo del modulo AI Assistant. & \hyperref[fig:uc-27.1]{UC-27.1} \\
+    RF46-OB & Il sistema deve permettere al Redattore di inviare la valutazione al sistema. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF47-OB & Il sistema deve visualizzare nella dashboard il rating medio delle bozze generate. & \hyperref[fig:uc-27.2]{UC-27.2} \\
+    RF47-OB & Il sistema deve notificare il Redattore qualora tenti di inviare la valutazione senza aver assegnato un rating. & \hyperref[fig:uc-25]{UC-25} \\
     \hline
-    RF48-OB & Il sistema deve permettere all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & \hyperref[fig:uc-27.3]{UC-27.3} \\
+    RF48-OB & Il sistema deve notificare il Redattore qualora il commento testuale superi il limite di caratteri consentito. & \hyperref[errore-uc-57]{UC-57} \\
     \hline
-    RF49-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica (intervallo di date, tono, stile). & \hyperref[fig:uc-28]{UC-28} \\
+    RF49-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di utilizzo del modulo AI Assistant Generativo. & \hyperref[fig:uc-26]{UC-26} \\
     \hline
-    RF50-OB & Il sistema deve permettere all'Analista dati di esportare un report riepilogativo dei dati analitici in formato scaricabile. & \hyperref[errore-uc-57]{UC-57} \\
+    RF50-OB & Il sistema deve visualizzare nella dashboard una panoramica dell'attività complessiva del modulo AI Assistant. & \hyperref[fig:uc-26]{UC-26} \\
     \hline
-    RF51-OB & Il sistema deve notificare l'Analista dati qualora i dati non siano disponibili per i criteri selezionati. & \hyperref[errore-uc-63]{UC-63} \\
+    RF51-OB & Il sistema deve visualizzare nella dashboard le statistiche di utilizzo del modulo AI Assistant. & \hyperref[fig:uc-26.1]{UC-26.1} \\
+    \hline
+    RF52-OB & Il sistema deve visualizzare nella dashboard il rating medio delle bozze generate. & \hyperref[fig:uc-26.2]{UC-26.2} \\
+    \hline
+    RF53-OB & Il sistema deve permettere all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & \hyperref[fig:uc-26.3]{UC-26.3} \\
+    \hline
+    RF54-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica (intervallo di date, tono, stile). & \hyperref[fig:uc-27]{UC-27} \\
+    \hline
+    RF55-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per intervallo di date. & \hyperref[fig:uc-28]{UC-28} \\
+    \hline
+    RF56-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per tono comunicativo. & \hyperref[fig:uc-29]{UC-29} \\
+    \hline
+    RF57-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per stile editoriale. & \hyperref[fig:uc-30]{UC-30} \\
+    \hline
+    RF58-OB & Il sistema deve permettere all'Analista dati di esportare un report riepilogativo dei dati analitici in formato scaricabile. & \hyperref[fig:uc-26]{UC-26} \\
+    \hline
+    RF59-OB & Il sistema deve notificare l'Analista dati qualora i dati non siano disponibili per i criteri selezionati. & \hyperref[errore-uc-58]{UC-58} \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{AI Co-Pilot per Consulenti del Lavoro}} \\
     \hline
-    RF52-OB & Il sistema deve permettere al Consulente del lavoro di caricare singoli documenti o lotti nel repository dedicato. & \hyperref[fig:uc-36]{UC-36} \\
+    RF60-OB & Il sistema deve permettere al Consulente del lavoro di caricare singoli documenti nel repository dedicato. & \hyperref[fig:uc-31]{UC-31} \\
     \hline
-    RF53-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il Consulente del lavoro, richiedendone conferma prima del caricamento. & \hyperref[errore-uc-64]{UC-64} \\
+    RF61-OB & Il sistema deve permettere al Consulente del lavoro di caricare un lotto di documenti nel repository dedicato. & \hyperref[fig:uc-32]{UC-32} \\
     \hline
-    RF54-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del lavoro. & \hyperref[errore-uc-65]{UC-65} \\
+    RF62-OB & Il sistema deve permettere al Consulente del lavoro di selezionare la tipologia del documento durante il caricamento manuale. & \hyperref[fig:uc-32.1]{UC-32.1} \\
     \hline
-    RF55-OB & Il sistema deve classificare automaticamente i documenti caricati e popolare i metadati associati tramite il modulo AI Analyst. & \hyperref[fig:uc-37]{UC-37} \\
+    RF63-OB & Il sistema deve permettere al Consulente del lavoro di inserire il mese di riferimento del documento durante il caricamento manuale. & \hyperref[fig:uc-32.2]{UC-32.2} \\
     \hline
-    RF56-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-38]{UC-38} \\
+    RF64-OB & Il sistema deve permettere al Consulente del lavoro di inserire l'anno di riferimento del documento durante il caricamento manuale. & \hyperref[fig:uc-32.3]{UC-32.3} \\
     \hline
-    RF57-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & \hyperref[errore-uc-66]{UC-66} \\
+    RF65-OB & Il sistema deve permettere al Consulente del lavoro di inserire l'azienda di riferimento del documento durante il caricamento manuale. & \hyperref[fig:uc-32.4]{UC-32.4} \\
     \hline
-    RF58-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite criteri multipli. & \hyperref[fig:uc-39]{UC-39} \\
+    RF66-OB & Il sistema deve rilevare i documenti duplicati durante l'upload e notificare il Consulente del lavoro, richiedendone conferma prima del caricamento. & \hyperref[errore-uc-59]{UC-59} \\
     \hline
-    RF59-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite barra di ricerca testuale. & \hyperref[fig:uc-40]{UC-40} \\
+    RF67-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del lavoro. & \hyperref[errore-uc-60]{UC-60} \\
     \hline
-    RF60-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di invio. & \hyperref[fig:uc-41]{UC-41} \\
+    RF68-OB & Il sistema deve classificare automaticamente i documenti caricati e popolare i metadati associati tramite il modulo AI Analyst. & \hyperref[fig:uc-31]{UC-31} \\
     \hline
-    RF61-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & \hyperref[fig:uc-42]{UC-42} \\
+    RF69-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & \hyperref[fig:uc-33]{UC-33} \\
     \hline
-    RF62-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & \hyperref[fig:uc-43]{UC-43} \\
+    RF70-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & \hyperref[errore-uc-61]{UC-61} \\
     \hline
-    RF63-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & \hyperref[fig:uc-44]{UC-44} \\
+    RF71-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite criteri multipli. & \hyperref[fig:uc-34]{UC-34} \\
     \hline
-    RF64-OB & Il sistema deve permettere la visualizzazione del documento originale nella versione splittata. & \hyperref[fig:uc-40.1]{UC-40.1} \\
+    RF72-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite barra di ricerca testuale. & \hyperref[fig:uc-35]{UC-35} \\
     \hline
-    RF65-OB & Il sistema deve permettere la visualizzazione del documento originale non splittato. & \hyperref[fig:uc-40.2]{UC-40.2} \\
+    RF73-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di invio. & \hyperref[fig:uc-36]{UC-36} \\
     \hline
-    RF66-OB & Il sistema deve visualizzare il nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-40.3]{UC-40.3} \\
+    RF74-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & \hyperref[fig:uc-37]{UC-37} \\
     \hline
-    RF67-OB & Il sistema deve visualizzare l'azienda associata al documento. & \hyperref[fig:uc-40.4]{UC-40.4} \\
+    RF75-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & \hyperref[fig:uc-38]{UC-38} \\
     \hline
-    RF68-OB & Il sistema deve visualizzare il nome del file del documento. & \hyperref[fig:uc-40.5]{UC-40.5} \\
+    RF76-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & \hyperref[fig:uc-39]{UC-39} \\
     \hline
-    RF69-OB & Il sistema deve visualizzare la data del documento. & \hyperref[fig:uc-40.6]{UC-40.6} \\
+    RF77-OB & Il sistema deve permettere la visualizzazione del documento originale nella versione splittata. & \hyperref[fig:uc-39.1]{UC-39.1} \\
     \hline
-    RF70-OB & Il sistema deve visualizzare il numero di pagine del documento. & \hyperref[fig:uc-40.7]{UC-40.7} \\
+    RF78-OB & Il sistema deve permettere la visualizzazione del documento originale non splittato. & \hyperref[fig:uc-39.2]{UC-39.2} \\
     \hline
-    RF71-OB & Il sistema deve visualizzare la tipologia del documento. & \hyperref[fig:uc-40.8]{UC-40.8} \\
+    RF79-OB & Il sistema deve visualizzare il nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-39.3]{UC-39.3} \\
     \hline
-    RF72-OB & Il sistema deve visualizzare la breve descrizione del documento. & \hyperref[fig:uc-40.9]{UC-40.9} \\
+    RF80-OB & Il sistema deve visualizzare l'azienda associata al documento. & \hyperref[fig:uc-39.4]{UC-39.4} \\
     \hline
-    RF73-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & \hyperref[fig:uc-40.10]{UC-40.10} \\
+    RF81-OB & Il sistema deve visualizzare il nome del file del documento. & \hyperref[fig:uc-39.5]{UC-39.5} \\
     \hline
-    RF74-OB & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di invio. & \hyperref[fig:uc-40.11]{UC-40.11} \\
+    RF82-OB & Il sistema deve visualizzare la data del documento. & \hyperref[fig:uc-39.6]{UC-39.6} \\
     \hline
-    RF75-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-40.12]{UC-40.12} \\
+    RF83-OB & Il sistema deve visualizzare il numero di pagine del documento. & \hyperref[fig:uc-39.7]{UC-39.7} \\
     \hline
-    RF76-OP & Il sistema deve visualizzare il codice fiscale del destinatario. & \hyperref[fig:uc-40.13]{UC-40.13} \\
+    RF84-OB & Il sistema deve visualizzare la tipologia del documento. & \hyperref[fig:uc-39.8]{UC-39.8} \\
     \hline
-    RF77-OP & Il sistema deve visualizzare la matricola del dipendente. & \hyperref[fig:uc-40.14]{UC-40.14} \\
+    RF85-OB & Il sistema deve visualizzare la breve descrizione del documento. & \hyperref[fig:uc-39.9]{UC-39.9} \\
     \hline
-    RF78-OP & Il sistema deve visualizzare la data e ora di caricamento del documento. & \hyperref[fig:uc-40.15]{UC-40.15} \\
+    RF86-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & \hyperref[fig:uc-39.10]{UC-39.10} \\
     \hline
-    RF79-OB & Il sistema deve gestire il caso in cui il nome e cognome del destinatario non siano disponibili, visualizzando un opportuno indicatore. & \hyperref[errore-uc-63]{UC-63} \\
+    RF87-OB & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di invio. & \hyperref[fig:uc-39.11]{UC-39.11} \\
     \hline
-    RF80-OB & Il sistema deve gestire il caso in cui l'azienda non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-64]{UC-64} \\
+    RF88-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-39.12]{UC-39.12} \\
     \hline
-    RF81-OB & Il sistema deve gestire il caso in cui la data del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-65]{UC-65} \\
+    RF89-OP & Il sistema deve visualizzare il codice fiscale del destinatario. & \hyperref[fig:uc-39.13]{UC-39.13} \\
     \hline
-    RF82-OB & Il sistema deve gestire il caso in cui la tipologia del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-66]{UC-66} \\
+    RF90-OP & Il sistema deve visualizzare la matricola del dipendente. & \hyperref[fig:uc-39.14]{UC-39.14} \\
     \hline
-    RF83-OB & Il sistema deve gestire il caso in cui la breve descrizione non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-67]{UC-67} \\
+    RF91-OP & Il sistema deve visualizzare la data e ora di caricamento del documento. & \hyperref[fig:uc-39.15]{UC-39.15} \\
     \hline
-    RF84-OB & Il sistema deve gestire il caso in cui il livello di confidenza non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-68]{UC-68} \\
+    RF92-OB & Il sistema deve gestire il caso in cui il nome e cognome del destinatario non siano disponibili, visualizzando un opportuno indicatore. & \hyperref[errore-uc-62]{UC-62} \\
     \hline
-    RF85-OB & Il sistema deve permettere al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-45]{UC-45} \\
+    RF93-OB & Il sistema deve gestire il caso in cui l'azienda non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-63]{UC-63} \\
     \hline
-    RF86-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-45]{UC-45} \\
+    RF94-OB & Il sistema deve gestire il caso in cui la data del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-64]{UC-64} \\
     \hline
-    RF87-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & \hyperref[fig:uc-46]{UC-46} \\
+    RF95-OB & Il sistema deve gestire il caso in cui la tipologia del documento non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-65]{UC-65} \\
     \hline
-    RF88-OB & Il sistema deve permettere la modifica della data del documento. & \hyperref[fig:uc-47]{UC-47} \\
+    RF96-OB & Il sistema deve gestire il caso in cui la breve descrizione non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-66]{UC-66} \\
     \hline
-    RF89-OB & Il sistema deve permettere la modifica della tipologia del documento. & \hyperref[fig:uc-48]{UC-48} \\
+    RF97-OB & Il sistema deve gestire il caso in cui il livello di confidenza non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-67]{UC-67} \\
     \hline
-    RF90-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & \hyperref[fig:uc-49]{UC-49} \\
+    RF98-OP & Il sistema deve gestire il caso in cui l'e-mail del destinatario non sia disponibile, visualizzando un opportuno indicatore. & \hyperref[errore-uc-68]{UC-68} \\
     \hline
-    RF91-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & \hyperref[fig:uc-50]{UC-50} \\
+    RF99-OB & Il sistema deve permettere al Consulente del lavoro di modificare i metadati di un documento presente nello storico. & \hyperref[fig:uc-40]{UC-40} \\
     \hline
-    RF92-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & \hyperref[fig:uc-51]{UC-51} \\
+    RF100-OB & Il sistema deve permettere la modifica del nome e cognome del destinatario associato al documento. & \hyperref[fig:uc-40]{UC-40} \\
     \hline
-    RF93-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-52]{UC-52} \\
+    RF101-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & \hyperref[fig:uc-41]{UC-41} \\
     \hline
-    RF94-OP & Il sistema deve notificare il Consulente del lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[errore-uc-73]{UC-73} \\
+    RF102-OB & Il sistema deve permettere la modifica della data del documento. & \hyperref[fig:uc-42]{UC-42} \\
     \hline
-    RF95-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[errore-uc-74]{UC-74} \\
+    RF103-OB & Il sistema deve permettere la modifica della tipologia del documento. & \hyperref[fig:uc-43]{UC-43} \\
     \hline
-    RF96-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-53]{UC-53} \\
+    RF104-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & \hyperref[fig:uc-44]{UC-44} \\
     \hline
-    RF97-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-49.1]{UC-49.1} \\
+    RF105-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & \hyperref[fig:uc-45]{UC-45} \\
     \hline
-    RF98-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-49.2]{UC-49.2} \\
+    RF106-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & \hyperref[fig:uc-46]{UC-46} \\
     \hline
-    RF99-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-49.3]{UC-49.3} \\
+    RF107-OP & Il sistema deve permettere la modifica della matricola del dipendente. & \hyperref[fig:uc-47]{UC-47} \\
     \hline
-    RF100-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-54]{UC-54} \\
+    RF108-OP & Il sistema deve notificare il Consulente del lavoro in caso di formato e-mail non valido durante la modifica. & \hyperref[errore-uc-55]{UC-55} \\
     \hline
-    RF101-OB & Il sistema deve permettere al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-47]{UC-47} \\
+    RF109-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & \hyperref[errore-uc-69]{UC-69} \\
     \hline
-    RF102-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-54]{UC-55} \\
+    RF110-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-48]{UC-48} \\
     \hline
-    RF103-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-55]{UC-56} \\
+    RF111-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-48.1]{UC-48.1} \\
     \hline
-    RF104-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-56]{UC-57} \\
+    RF112-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-48.2]{UC-48.2} \\
     \hline
-    RF105-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & \hyperref[fig:uc-57]{UC-58} \\
+    RF113-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-48.3]{UC-48.3} \\
     \hline
-    RF106-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-54.1]{UC-54.1} \\
+    RF114-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-49]{UC-49} \\
     \hline
-    RF107-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & \hyperref[fig:uc-54.2]{UC-54.2} \\
+    RF115-OB & Il sistema deve permettere al Consulente del lavoro di modificare il contenuto del messaggio di invio generato prima della spedizione. & \hyperref[fig:uc-50]{UC-50} \\
     \hline
-    RF108-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & \hyperref[fig:uc-54.3]{UC-54.3} \\
+    RF116-OB & Il sistema deve permettere la modifica del destinatario del messaggio di invio. & \hyperref[fig:uc-50]{UC-50} \\
     \hline
-    RF109-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & \hyperref[fig:uc-54.4]{UC-54.4} \\
+    RF117-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-51]{UC-51} \\
     \hline
-    RF110-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & \hyperref[fig:uc-54.5]{UC-54.5} \\
+    RF118-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-52]{UC-52} \\
+    \hline
+    RF119-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & \hyperref[fig:uc-53]{UC-53} \\
+    \hline
+    RF120-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & \hyperref[fig:uc-53.1]{UC-53.1} \\
+    \hline
+    RF121-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & \hyperref[fig:uc-53.2]{UC-53.2} \\
+    \hline
+    RF122-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & \hyperref[fig:uc-53.3]{UC-53.3} \\
+    \hline
+    RF123-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & \hyperref[fig:uc-53.4]{UC-53.4} \\
+    \hline
+    RF124-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & \hyperref[fig:uc-53.5]{UC-53.5} \\
     \hline
 
 \end{longtable}
@@ -3398,23 +3434,23 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-1 & RF7-OB \\
     \hline
+    UC-1 & RF9-OB \\
+    \hline
+    UC-1 & RF10-OB \\
+    \hline
     UC-1.1 & RF1-OB \\
     \hline
     UC-1.2 & RF2-OB \\
     \hline
     UC-1.3 & RF3-OB \\
     \hline
-    UC-19 & RF5-OB \\
-    \hline
-    UC-71 & RF8-OB \\
+    UC-1.4 & RF4-OP \\
     \hline
     UC-1.4 & RF6-OB \\
     \hline
-    UC-1.4 & RF4-OP \\
-    \hline
-    UC-58 & RF9-OB \\
-    \hline
     UC-2 & RF11-OB \\
+    \hline
+    UC-2 & RF22-OB \\
     \hline
     UC-2.1 & RF12-OB \\
     \hline
@@ -3428,192 +3464,222 @@ La tabella seguente riporta il tracciamento tra i casi d'uso analizzati e i requ
     \hline
     UC-5 & RF17-OB \\
     \hline
-    UC-59 & RF18-OB \\
-    \hline
     UC-6 & RF19-OB \\
-    \hline
-    UC-58 & RF10-OB \\
     \hline
     UC-7 & RF20-OB \\
     \hline
     UC-8 & RF21-OP \\
     \hline
-    UC-2.E1 & RF22-OB \\
-    \hline
-    UC-9, UC-11, UC-12 & RF23-OB \\
-    \hline
-    -- & RF24-OB \\
+    UC-9 & RF23-OB \\
     \hline
     UC-9 & RF25-OB \\
+    \hline
+    UC-10 & RF28-OP \\
     \hline
     UC-11 & RF26-OB \\
     \hline
     UC-12 & RF27-OB \\
     \hline
-    UC-60 & RF29-OB \\
-    \hline
-    UC-10 & RF28-OP \\
+    UC-13 & RF30-OB \\
     \hline
     UC-13 & RF31-OB \\
     \hline
-    UC-15 & RF32-OB \\
+    UC-14 & RF32-OB \\
     \hline
-    UC-16 & RF32-OB \\
+    UC-15 & RF33-OB \\
     \hline
-    UC-17 & RF32-OB \\
+    UC-16 & RF34-OB \\
     \hline
-    UC-18 & RF32-OB \\
+    UC-17 & RF35-OB \\
     \hline
-    UC-61 & RF33-OB \\
+    UC-18 & RF36-OB \\
     \hline
-    UC-20 & RF34-OB \\
+    UC-19 & RF5-OB \\
     \hline
-    UC-21 & RF35-OB \\
+    UC-20 & RF38-OB \\
     \hline
-    UC-24 & RF35-OB \\
+    UC-21 & RF39-OB \\
     \hline
-    UC-23 & RF36-OP \\
+    UC-22 & RF40-OB \\
     \hline
-    UC-25 & RF37-OB, RF38-OB, RF39-OB, RF40-OB, RF41-OB \\
+    UC-23 & RF41-OP \\
     \hline
-    UC-25.E1 & RF42-OB \\
+    UC-24 & RF44-OB \\
     \hline
-    UC-62 & RF43-OB \\
+    UC-25 & RF42-OB \\
     \hline
-    UC-27 & RF44-OB, RF45-OB \\
+    UC-25 & RF43-OB \\
     \hline
-    UC-27.1 & RF46-OB \\
+    UC-25 & RF45-OB \\
     \hline
-    UC-27.2 & RF47-OB \\
+    UC-25 & RF46-OB \\
     \hline
-    UC-27.3 & RF48-OB \\
+    UC-25 & RF47-OB \\
     \hline
-    UC-28 & RF49-OB \\
+    UC-26 & RF49-OB \\
     \hline
-    UC-57 & RF50-OB \\
+    UC-26 & RF50-OB \\
     \hline
-    UC-63 & RF51-OB \\
+    UC-26 & RF58-OB \\
+    \hline
+    UC-26.1 & RF51-OB \\
+    \hline
+    UC-26.2 & RF52-OB \\
+    \hline
+    UC-26.3 & RF53-OB \\
+    \hline
+    UC-27 & RF54-OB \\
+    \hline
+    UC-28 & RF55-OB \\
+    \hline
+    UC-29 & RF56-OB \\
+    \hline
+    UC-30 & RF57-OB \\
+    \hline
+    UC-54 & RF18-OB \\
+    \hline
+    UC-55 & RF29-OB \\
+    \hline
+    UC-56 & RF37-OB \\
+    \hline
+    UC-57 & RF48-OB \\
+    \hline
+    UC-58 & RF59-OB \\
+    \hline
+    UC-70 & RF8-OB \\
     \hline
 
     \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{AI Co-Pilot per Consulenti del Lavoro}} \\
     \hline
-    UC-36 & RF52-OB \\
+    UC-31 & RF60-OB \\
     \hline
-    UC-64 & RF53-OB \\
+    UC-31 & RF68-OB \\
     \hline
-    UC-65 & RF54-OB \\
+    UC-32 & RF61-OB \\
     \hline
-    UC-37 & RF55-OB \\
+    UC-32.1 & RF62-OB \\
     \hline
-    UC-38 & RF56-OB \\
+    UC-32.2 & RF63-OB \\
     \hline
-    UC-66 & RF57-OB \\
+    UC-32.3 & RF64-OB \\
     \hline
-    UC-39 & RF58-OB \\
+    UC-32.4 & RF65-OB \\
     \hline
-    UC-40 & RF59-OB \\
+    UC-33 & RF69-OB \\
     \hline
-    UC-41 & RF60-OB \\
+    UC-34 & RF71-OB \\
     \hline
-    UC-42 & RF61-OB \\
+    UC-35 & RF72-OB \\
     \hline
-    UC-43 & RF62-OB \\
+    UC-36 & RF73-OB \\
     \hline
-    UC-44 & RF63-OB \\
+    UC-37 & RF74-OB \\
     \hline
-    UC-40.1 & RF64-OB \\
+    UC-38 & RF75-OB \\
     \hline
-    UC-40.2 & RF65-OB \\
+    UC-39 & RF76-OB \\
     \hline
-    UC-40.3 & RF66-OB \\
+    UC-39.1 & RF77-OB \\
     \hline
-    UC-63 & RF79-OB \\
+    UC-39.2 & RF78-OB \\
     \hline
-    UC-40.4 & RF67-OB \\
+    UC-39.3 & RF79-OB \\
     \hline
-    UC-64 & RF80-OB \\
+    UC-39.4 & RF80-OB \\
     \hline
-    UC-40.5 & RF68-OB \\
+    UC-39.5 & RF81-OB \\
     \hline
-    UC-40.6 & RF69-OB \\
+    UC-39.6 & RF82-OB \\
     \hline
-    UC-65 & RF81-OB \\
+    UC-39.7 & RF83-OB \\
     \hline
-    UC-40.7 & RF70-OB \\
+    UC-39.8 & RF84-OB \\
     \hline
-    UC-40.8 & RF71-OB \\
+    UC-39.9 & RF85-OB \\
     \hline
-    UC-66 & RF82-OB \\
+    UC-39.10 & RF86-OB \\
     \hline
-    UC-40.9 & RF72-OB \\
+    UC-39.11 & RF87-OB \\
     \hline
-    UC-67 & RF83-OB \\
+    UC-39.12 & RF88-OP \\
     \hline
-    UC-40.10 & RF73-OB \\
+    UC-39.13 & RF89-OP \\
     \hline
-    UC-68 & RF84-OB \\
+    UC-39.14 & RF90-OP \\
     \hline
-    UC-40.11 & RF74-OB \\
+    UC-39.15 & RF91-OP \\
     \hline
-    UC-40.12 & RF75-OP \\
+    UC-40 & RF99-OB \\
     \hline
-    UC-40.13 & RF76-OP \\
+    UC-40 & RF100-OB \\
     \hline
-    UC-40.14 & RF77-OP \\
+    UC-41 & RF101-OB \\
     \hline
-    UC-40.15 & RF78-OP \\
+    UC-42 & RF102-OB \\
     \hline
-    UC-45 & RF85-OB \\
+    UC-43 & RF103-OB \\
     \hline
-    UC-45 & RF86-OB \\
+    UC-44 & RF104-OB \\
     \hline
-    UC-46 & RF87-OB \\
+    UC-45 & RF105-OP \\
     \hline
-    UC-47 & RF88-OB \\
+    UC-46 & RF106-OP \\
     \hline
-    UC-48 & RF89-OB \\
+    UC-47 & RF107-OP \\
     \hline
-    UC-49 & RF90-OB \\
+    UC-48 & RF110-OB \\
     \hline
-    UC-50 & RF91-OP \\
+    UC-48.1 & RF111-OB \\
     \hline
-    UC-73 & RF94-OP \\
+    UC-48.2 & RF112-OB \\
     \hline
-    UC-51 & RF92-OP \\
+    UC-48.3 & RF113-OB \\
     \hline
-    UC-74 & RF95-OP \\
+    UC-49 & RF114-OB \\
     \hline
-    UC-52 & RF93-OP \\
+    UC-50 & RF115-OB \\
     \hline
-    UC-53 & RF96-OB \\
+    UC-50 & RF116-OB \\
     \hline
-    UC-49.1 & RF97-OB \\
+    UC-51 & RF117-OB \\
     \hline
-    UC-49.2 & RF98-OB \\
+    UC-52 & RF118-OB \\
     \hline
-    UC-49.3 & RF99-OB \\
+    UC-53 & RF119-OB \\
     \hline
-    UC-54 & RF100-OB \\
+    UC-53.1 & RF120-OB \\
     \hline
-    UC-47 & RF101-OB \\
+    UC-53.2 & RF121-OB \\
     \hline
-    UC-55 & RF102-OB \\
+    UC-53.3 & RF122-OB \\
     \hline
-    UC-56 & RF103-OB \\
+    UC-53.4 & RF123-OB \\
     \hline
-    UC-57 & RF104-OB \\
+    UC-53.5 & RF124-OB \\
     \hline
-    UC-58 & RF105-OB \\
+    UC-55 & RF108-OP \\
     \hline
-    UC-54.1 & RF106-OB \\
+    UC-59 & RF66-OB \\
     \hline
-    UC-54.2 & RF107-OB \\
+    UC-60 & RF67-OB \\
     \hline
-    UC-54.3 & RF108-OB \\
+    UC-61 & RF70-OB \\
     \hline
-    UC-54.4 & RF109-OB \\
+    UC-62 & RF92-OB \\
     \hline
-    UC-54.5 & RF110-OB \\
+    UC-63 & RF93-OB \\
+    \hline
+    UC-64 & RF94-OB \\
+    \hline
+    UC-65 & RF95-OB \\
+    \hline
+    UC-66 & RF96-OB \\
+    \hline
+    UC-67 & RF97-OB \\
+    \hline
+    UC-68 & RF98-OP \\
+    \hline
+    UC-69 & RF109-OP \\
     \hline
 
 \end{longtable}
@@ -3643,13 +3709,13 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     \endlastfoot
 
-    Funzionali & 97 & 13 & 110 \\
+    Funzionali & 110 & 14 & 124 \\
     \hline
     Di qualità & 10 & 0 & 10 \\
     \hline
     Di vincolo & 21 & 1 & 22 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{128} & \textbf{14} & \textbf{142} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{141} & \textbf{15} & \textbf{156} \\
 
 \end{longtable}
 }
