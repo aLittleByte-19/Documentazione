@@ -191,7 +191,7 @@
     \hline
 \end{longtable}
 }
-
+\newpage
 \tableofcontents
 
 \listoffigures
@@ -222,7 +222,7 @@ Il documento è pertanto soggetto a un processo di revisione continua, finalizza
 
     \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto} v2.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative.\\
-    \url{https://github.com/aLittleByte-19/Documentazione}\\
+    \url{https://alittlebyte-19.github.io/Documentazione/RTB/Norme%20di%20Progetto/Norme%20di%20Progetto.pdf}\\
     \textit{Data Ultimo accesso: 18/06/2026}
 
     \item \textbf{Regolamento del progetto didattico:}\\
@@ -233,7 +233,7 @@ Il documento è pertanto soggetto a un processo di revisione continua, finalizza
 \begin{itemize}
     \item \textbf{\glslink{glossario}{Glossario} v2.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici.\\
-    \url{https://github.com/aLittleByte-19/Documentazione}\\
+    \url{https://alittlebyte-19.github.io/Documentazione/RTB/Glossario/Glossario.pdf}\\
     \textit{Data Ultimo accesso: 18/06/2026}
 
     \item \textbf{Standard ISO/IEC 12207:1995:}\\
@@ -2738,7 +2738,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza un messaggio di errore con i formati supportati: PDF, PNG, JPG, TIFF.
     \end{enumerate}
 \end{description}
-\newpage
+
 \subsubsection{UC-61: Errore - Nessun documento individuato nello storico}
 \mbox{} \\
 
@@ -2838,7 +2838,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
-
+\newpage
 \subsubsection{UC-66: Errore - Breve descrizione del documento non disponibile}
 \mbox{} \\
 
@@ -2878,7 +2878,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il valore "Non disponibile" in corrispondenza del campo.
     \end{enumerate}
 \end{description}
-\newpage
+
 \subsubsection{UC-68: Errore - Email destinatario non disponibile}
 \mbox{} \\
 
@@ -3288,7 +3288,7 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Frontend}} \\
     \hline
-    RVC4-OB & Il frontend deve essere realizzato come Single Page Application in React con TypeScript, basata sul bundler Vite. & Interna \\
+    RVC4-OB & Il frontend deve essere realizzato come Single Page Application in \glslink{angular}{Angular} con TypeScript, con build gestita tramite \glslink{angular}{Angular} CLI.. & Interna \\
     \hline
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Infrastruttura}} \\
@@ -3317,7 +3317,7 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{Architettura di esecuzione}} \\
     \hline
-    RVC11-OB & Lo stack applicativo di esecuzione comprende: backend \glslink{laravel}{Laravel} 12 su PHP 8.4, frontend SPA React/TypeScript, \glslink{postgresql}{PostgreSQL} gestito, \glslink{redis}{Redis} gestito (cache e sessioni), coda di messaggi gestita compatibile con le API SQS e object storage gestito compatibile con le API S3. & Interna/\glslink{committente-proponente}{Proponente} \\
+    RVC11-OB & Lo stack applicativo di esecuzione comprende: backend \glslink{laravel}{Laravel} 12 su PHP 8.4, frontend SPA \glslink{angular}{Angular} 21/TypeScript, \glslink{postgresql}{PostgreSQL} gestito, \glslink{redis}{Redis} gestito (cache e sessioni), coda di messaggi gestita compatibile con le API SQS e object storage gestito compatibile con le API S3. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
     RVC12-OB & L'ambiente di esecuzione deve poter scalare orizzontalmente sull'infrastruttura cloud, esponendo il servizio esclusivamente in HTTPS attraverso l'ingress/gateway gestito. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
