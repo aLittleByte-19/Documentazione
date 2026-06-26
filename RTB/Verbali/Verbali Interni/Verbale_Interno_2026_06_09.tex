@@ -1,0 +1,169 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-06-09}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+        \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale 2026-06-09}
+}
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Interno - 2026-06-09}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & V. Y. Kaneda Fernandes \\
+            Verificatori & Alex Oloni\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-06-09\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
+
+Orario (Inizio - Fine) & 15:00 -- 15:30 \\[6pt]
+
+\glslink{redattore}{Redattore} &
+  V. Y. Kaneda Fernandes\\[6pt]
+
+\glslink{amministratore}{Amministratore} & 
+A. Maule\\[6pt]
+
+\glslink{verificatore}{Verificatore} &
+A. Oloni\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  A. Gastaldello\\&
+  E. Bellet\\&
+  D. Belluz\\&
+  A. Maule\\&
+  V. Y. Kaneda Fernandes\\[6pt]
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Analisi dell'operato dopo la valutazione insufficiente \\sull'\glslink{rtb-requirements-and-technology-baseline}{RTB (Requirements and Technology Baseline)}.
+    \item Sistemazione dell' \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}
+    \item Adattamenti del PoC
+    \item Valutazione su un nuovo incontro con l'azienda
+\end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Analisi dell'operato dopo la valutazione insufficiente \\sull'\glslink{rtb-requirements-and-technology-baseline}{RTB (Requirements and Technology Baseline)}.}
+Il team ha discusso principalmente sull'esito negativo avuto con l'incontro con il prof. Cardin, principalmente riguardanti alcune valutazioni tecnologie ritenute non sufficienti o con alternative migliori, oltre a varie sviste sull'AdR.
+
+\subsection{Sistemazione dell' \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}
+Una delle critiche principali dopo la consegna sono state alcuni errori dentro il documento dell' \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, sulla rappresentazione degli Use Case e su alcune svisste riguardo i requisiti. 
+Si riporta quindi che andrà sistemato e verificato da tutti i componenti del gruppo, esprimendo e discutendo la best practice, per diminuire errori e che la rappresentazione sia chiara.
+
+\subsection{Adattamenti del PoC}
+Si pone quindi come obiettivo principale dell'Inizio dello sprint attuale, confermato in maniera unanime da tutti i membri del gruppo, di migliorare la struttura del Proof of Concept, sistemando e correggendo il codice attualmente
+utilizzato e vengono valutate alternative su alcuni aspetti del PoC. 
+
+\subsection{Valutazione su un nuovo incontro con l'azienda}
+Viene discusso se chiedere nuove lucidazioni all'azienda proponente, affinchè le scelte che andremo a prendere non vadano ad intaccare sulla richiesta di quest'ultima. Si è deciso quindi di valutare prima le parti che andranno sistemate, e se ci
+sono cambiamenti importanti, si consulterà l'azienda tramite riunione o i vari modi di comunicazione che sono stati definiti con codesta.
+
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
+    \hline
+        \textit{A. Oloni e D. Belluz} & Sistemazione Analisi dei Requisiti& \href{https://github.com/aLittleByte-19/Documentazione/issues/121}{\#121}\\
+    \hline 
+        \textit{V. Y. K. Fernandes} & \glslink{diario-di-bordo}{Diario di Bordo} 12/06/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/123}{\#123}\\
+    \hline
+        \textit{[Tutti i membri del gruppo]} & Correzione e sistemazione del PoC & \href{https://github.com/aLittleByte-19/Documentazione/issues/124}{\#124}\\
+    \hline
+        \textit{V. Y. K. Fernandes} & Stesura \glslink{verbale-interno}{Verbale Interno} 09/06/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/122}{\#122}\\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
