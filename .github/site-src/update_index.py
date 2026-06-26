@@ -13,6 +13,7 @@ TEMPLATE_PATH = os.path.join(SITE_SRC, 'index_template.html')
 # Cartelle e file da escludere dalla scansione e dal deploy finale
 EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
+EXCLUDE_PDFS = {'Presentazione tecnologie.pdf'}
 ROOT_SECTION_ORDER = {'rtb': 0, 'diapositive': 1, 'candidatura': 2}
 ACRONYMS = {'adr': 'AdR', 'pb': 'PB', 'poc': 'PoC', 'rtb': 'RTB'}
 LOWERCASE_TITLE_WORDS = {
@@ -78,7 +79,7 @@ def build_html_tree(base_path, relative_path=""):
     files = [f for f in items if os.path.isfile(os.path.join(current_dir, f)) and f not in EXCLUDE_FILES]
 
     # 1. Stampa SOLO i file .pdf
-    valid_files = [f for f in files if f.endswith('.pdf')]
+    valid_files = [f for f in files if f.endswith('.pdf') and f not in EXCLUDE_PDFS]
     if valid_files:
         def get_sort_key(filename):
             # Cerca una data nel nome del file (es. 2026-03-16 o 2026_03_16)
