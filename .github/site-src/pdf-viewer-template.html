@@ -15,24 +15,44 @@
   <header class="viewer-header">
     <div class="document-heading">
       <a class="brand" href="{{ASSET_PREFIX}}index.html" aria-label="Torna all'indice">
-        <img src="{{ASSET_PREFIX}}assets/solo_logo.png" alt="">
-        <span>aLittleByte</span>
+        <img id="header-logo" src="{{ASSET_PREFIX}}assets/logo.png" alt="">
+        <span class="nome-logo">aLittleByte</span>
       </a>
       <h1 id="document-title">{{DOCUMENT_TITLE}}</h1>
     </div>
 
     <nav class="toolbar" aria-label="Strumenti documento">
+      <div class="page-indicator" aria-label="Posizione nel documento" title="Vai a pagina">
+        <label class="page-input-label">
+          <span class="sr-only">Pagina corrente</span>
+          <input id="page-input" type="text" value="1" inputmode="numeric" pattern="[0-9]*" aria-label="Vai a pagina">
+        </label>
+        <span id="page-total" class="page-total">/ 0</span>
+      </div>
       <div class="zoom-controls" aria-label="Zoom documento">
-        <button id="zoom-out" type="button" aria-label="Riduci zoom">-</button>
-        <label class="zoom-input-label">
+        <button id="zoom-out" type="button" aria-label="Riduci zoom" title="Riduci zoom (Ctrl -)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M5 12h14"/>
+          </svg>
+        </button>
+        <label class="zoom-input-label" title="Zoom percentuale">
           <span class="sr-only">Zoom</span>
           <input id="zoom-input" type="text" value="100" inputmode="numeric" pattern="[0-9]*" aria-label="Zoom percentuale">
           <span aria-hidden="true">%</span>
         </label>
-        <button id="zoom-in" type="button" aria-label="Aumenta zoom">+</button>
+        <button id="zoom-in" type="button" aria-label="Aumenta zoom" title="Aumenta zoom (Ctrl +)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
       </div>
-      <a id="open-pdf-link" href="{{PDF_SRC}}" target="_blank" rel="noopener noreferrer">PDF</a>
-      <a id="download-pdf-link" class="icon-button" href="{{PDF_SRC}}" download aria-label="Scarica PDF">
+      <a id="open-pdf-link" href="{{PDF_SRC}}" target="_blank" rel="noopener noreferrer" title="Apri il PDF originale in una nuova scheda">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M14 4h6v6m0-6L10 14M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/>
+        </svg>
+        <span>PDF</span>
+      </a>
+      <a id="download-pdf-link" class="icon-button" href="{{PDF_SRC}}" download aria-label="Scarica PDF" title="Scarica il PDF">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/>
         </svg>
@@ -41,7 +61,7 @@
     </nav>
   </header>
 
-  <button id="sidebar-toggle" class="sidebar-tab" type="button" aria-label="Mostra o nascondi anteprime" aria-pressed="true">
+  <button id="sidebar-toggle" class="sidebar-tab" type="button" aria-label="Mostra o nascondi anteprime" aria-pressed="true" title="Mostra o nascondi il pannello laterale">
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Z"/>
       <path d="M9 4v16"/>
@@ -64,12 +84,12 @@
             <label class="sr-only" for="search-input">Cerca</label>
             <input id="search-input" type="search" autocomplete="off" placeholder="Cerca">
           </div>
-          <button id="search-prev" class="search-nav-button" type="button" aria-label="Risultato precedente">
+          <button id="search-prev" class="search-nav-button" type="button" aria-label="Risultato precedente" title="Risultato precedente (Shift+Invio)">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="m6 15 6-6 6 6"/>
             </svg>
           </button>
-          <button id="search-next" class="search-nav-button" type="button" aria-label="Risultato successivo">
+          <button id="search-next" class="search-nav-button" type="button" aria-label="Risultato successivo" title="Risultato successivo (Invio)">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="m6 9 6 6 6-6"/>
             </svg>

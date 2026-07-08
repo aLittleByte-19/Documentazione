@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 from datetime import datetime
 import shutil
 from html import escape
@@ -17,6 +18,14 @@ PDF_VIEWER_TEMPLATE_PATH = os.path.join(SITE_SRC, 'pdf-viewer-template.html')
 EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
 EXCLUDE_PDFS = {'Presentazione tecnologie.pdf'}
+
+# Formati Office convertibili in PDF con LibreOffice al momento della build.
+# I .key di Keynote non sono convertibili su Linux: esportarli in .pptx o .pdf.
+CONVERTIBLE_EXTENSIONS = {'.pptx', '.ppt', '.odp', '.docx', '.odt'}
+SOFFICE_FALLBACK_PATHS = ('/Applications/LibreOffice.app/Contents/MacOS/soffice',)
+
+# Popolato in main() con i sorgenti Office convertiti con successo
+CONVERTED_SOURCES = set()
 ROOT_SECTION_ORDER = {'rtb': 0, 'diapositive': 1, 'candidatura': 2}
 ACRONYMS = {'adr': 'AdR', 'pb': 'PB', 'poc': 'PoC', 'rtb': 'RTB'}
 LOWERCASE_TITLE_WORDS = {
@@ -89,6 +98,70 @@ def iter_source_pdfs():
             if filename.lower().endswith('.pdf') and filename not in EXCLUDE_FILES:
                 yield os.path.join(current_dir, filename)
 
+def find_soffice():
+    path = shutil.which('soffice')
+    if path:
+        return path
+
+    for candidate in SOFFICE_FALLBACK_PATHS:
+        if os.path.exists(candidate):
+            return candidate
+
+    return None
+
+def iter_convertible_files():
+    for current_dir, dirs, files in os.walk(ROOT_DIR):
+        dirs[:] = [
+            d for d in dirs
+            if not d.startswith('.') and d not in EXCLUDE_DIRS
+        ]
+
+        for filename in files:
+            if filename in EXCLUDE_FILES:
+                continue
+
+            base, ext = os.path.splitext(filename)
+            if ext.lower() not in CONVERTIBLE_EXTENSIONS:
+                continue
+
+            # Se esiste già il PDF omonimo, il sorgente Office è ridondante
+            if os.path.exists(os.path.join(current_dir, base + '.pdf')):
+                continue
+
+            yield os.path.join(current_dir, filename)
+
+def convert_documents_to_pdf(source_paths, soffice_path):
+    converted = []
+
+    for source_path in source_paths:
+        relative_path = os.path.relpath(source_path, ROOT_DIR)
+        output_dir = os.path.join(BUILD_DIR, os.path.dirname(relative_path))
+        os.makedirs(output_dir, exist_ok=True)
+
+        try:
+            result = subprocess.run(
+                [soffice_path, '--headless', '--norestore',
+                 '--convert-to', 'pdf', '--outdir', output_dir, source_path],
+                capture_output=True, text=True, timeout=300
+            )
+        except subprocess.TimeoutExpired:
+            print(f"ATTENZIONE: timeout nella conversione di {relative_path}")
+            continue
+
+        pdf_name = os.path.splitext(os.path.basename(source_path))[0] + '.pdf'
+        output_pdf = os.path.join(output_dir, pdf_name)
+
+        if result.returncode != 0 or not os.path.exists(output_pdf):
+            error = (result.stderr or result.stdout or '').strip()
+            print(f"ATTENZIONE: conversione fallita per {relative_path}: {error}")
+            continue
+
+        site_path = os.path.join(os.path.dirname(relative_path), pdf_name).replace(os.sep, '/')
+        converted.append((source_path, site_path))
+        print(f"Convertito in PDF: {relative_path}")
+
+    return converted
+
 def build_html_tree(base_path, relative_path=""):
     html_output = ""
     current_dir = os.path.normpath(os.path.join(base_path, relative_path))
@@ -111,8 +184,15 @@ def build_html_tree(base_path, relative_path=""):
     dirs = [d for d in items if os.path.isdir(os.path.join(current_dir, d)) and d not in EXCLUDE_DIRS]
     files = [f for f in items if os.path.isfile(os.path.join(current_dir, f)) and f not in EXCLUDE_FILES]
 
-    # 1. Stampa SOLO i file .pdf
-    valid_files = [f for f in files if f.endswith('.pdf') and f not in EXCLUDE_PDFS]
+    # 1. Stampa i file .pdf e i formati Office convertiti in PDF durante la build
+    valid_files = []
+    for f in files:
+        if f.endswith('.pdf'):
+            if f not in EXCLUDE_PDFS:
+                valid_files.append(f)
+        elif os.path.normpath(os.path.join(current_dir, f)) in CONVERTED_SOURCES:
+            if os.path.splitext(f)[0] + '.pdf' not in EXCLUDE_PDFS:
+                valid_files.append(f)
     if valid_files:
         def get_sort_key(filename):
             # Cerca una data nel nome del file (es. 2026-03-16 o 2026_03_16)
@@ -134,14 +214,18 @@ def build_html_tree(base_path, relative_path=""):
         
         html_output += '    <div class="doc">\n'
         for f in valid_files:
+            name_without_ext = os.path.splitext(f)[0]
+            # I formati Office puntano al PDF generato dalla conversione
+            pdf_name = f if f.endswith('.pdf') else name_without_ext + '.pdf'
             if relative_path:
                 # Forza lo slash (/) per i percorsi URL anche su Windows
-                file_path = os.path.join(relative_path, f).replace(os.sep, '/')
+                file_path = os.path.join(relative_path, pdf_name).replace(os.sep, '/')
             else:
-                file_path = f
-            name_without_ext = os.path.splitext(f)[0]
+                file_path = pdf_name
             viewer_path = to_url_path(get_pdf_viewer_path(file_path))
-            html_output += f'        <p><a class="doc-link" href="{viewer_path}" target="_blank" rel="noopener noreferrer">{name_without_ext}</a></p>\n'
+            # Il glossario riusa la stessa scheda invece di aprirne una nuova
+            link_target = 'glossario' if viewer_path.endswith('glossario.html') else '_blank'
+            html_output += f'        <p><a class="doc-link" href="{viewer_path}" target="{link_target}" rel="noopener noreferrer">{name_without_ext}</a></p>\n'
         html_output += '    </div>\n'
 
     # 2. Esplora ricorsivamente
@@ -164,7 +248,8 @@ def build_html_tree(base_path, relative_path=""):
 
     return html_output
 
-def generate_pdf_viewers(pdf_paths):
+def generate_pdf_viewers(site_pdf_paths):
+    """Genera una pagina viewer per ogni PDF (percorsi relativi alla root del sito)."""
     if not os.path.exists(PDF_VIEWER_TEMPLATE_PATH):
         print(f"ERRORE: Template viewer PDF non trovato in {PDF_VIEWER_TEMPLATE_PATH}")
         return
@@ -172,8 +257,8 @@ def generate_pdf_viewers(pdf_paths):
     with open(PDF_VIEWER_TEMPLATE_PATH, 'r', encoding='utf-8') as f:
         template = f.read()
 
-    for pdf_path in pdf_paths:
-        relative_pdf_path = os.path.relpath(pdf_path, ROOT_DIR).replace(os.sep, '/')
+    for relative_pdf_path in site_pdf_paths:
+        relative_pdf_path = relative_pdf_path.replace(os.sep, '/')
         filename = os.path.basename(relative_pdf_path)
         document_title = os.path.splitext(filename)[0]
         viewer_relative_path = get_pdf_viewer_path(relative_pdf_path)
@@ -200,7 +285,24 @@ def main():
     if os.path.exists(BUILD_DIR):
         shutil.rmtree(BUILD_DIR)
     os.makedirs(BUILD_DIR)
-    pdf_paths = list(iter_source_pdfs())
+
+    site_pdf_paths = [
+        os.path.relpath(p, ROOT_DIR).replace(os.sep, '/')
+        for p in iter_source_pdfs()
+    ]
+
+    # Converte i formati Office (presentazioni e documenti) in PDF nella build
+    convertible_paths = list(iter_convertible_files())
+    if convertible_paths:
+        soffice_path = find_soffice()
+        if soffice_path:
+            converted = convert_documents_to_pdf(convertible_paths, soffice_path)
+            CONVERTED_SOURCES.update(os.path.normpath(src) for src, _ in converted)
+            site_pdf_paths.extend(site_path for _, site_path in converted)
+        else:
+            print("ATTENZIONE: LibreOffice (soffice) non trovato, file non pubblicati:")
+            for path in convertible_paths:
+                print(f"  - {os.path.relpath(path, ROOT_DIR)}")
 
     # Genera l'albero HTML dei documenti
     docs_html = build_html_tree(ROOT_DIR)
@@ -254,6 +356,11 @@ def main():
         asset_src = os.path.join(SITE_SRC, asset_name)
         if os.path.exists(asset_src):
             shutil.copy2(asset_src, os.path.join(BUILD_DIR, asset_name))
+
+    # Librerie vendorizzate (pdf.js)
+    vendor_src = os.path.join(SITE_SRC, 'vendor')
+    if os.path.exists(vendor_src):
+        shutil.copytree(vendor_src, os.path.join(BUILD_DIR, 'vendor'))
     
     # Asset (Logo ecc)
     assets_src = os.path.join(SITE_SRC, 'assets')
@@ -266,11 +373,12 @@ def main():
             s = os.path.join(ROOT_DIR, item)
             d = os.path.join(BUILD_DIR, item)
             if os.path.isdir(s):
-                shutil.copytree(s, d)
+                # dirs_exist_ok: le cartelle possono già contenere i PDF convertiti
+                shutil.copytree(s, d, dirs_exist_ok=True)
             elif item.endswith('.pdf'):
                 shutil.copy2(s, d)
 
-    generate_pdf_viewers(pdf_paths)
+    generate_pdf_viewers(site_pdf_paths)
 
     print("Sito generato con successo nella cartella _site/")
 

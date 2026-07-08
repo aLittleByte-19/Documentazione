@@ -213,6 +213,10 @@
   </main>
   <button id="back-to-top" class="back-to-top" type="button" aria-label="Torna su">&#8593;</button>
   <script>
+    // Nomina la scheda: i link "glossario" da indice e viewer la riusano
+    // invece di aprire una nuova scheda a ogni click
+    window.name = "glossario";
+
     const search = document.getElementById("glossary-search");
     const clearSearch = document.getElementById("clear-search");
     const resultCount = document.getElementById("result-count");
