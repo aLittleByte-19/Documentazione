@@ -31,15 +31,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Installa LibreOffice se servono conversioni Office -> PDF
-        run: |
-          if git ls-files | grep -qiE '\.(pptx|ppt|odp|docx|odt)$'; then
-            sudo apt-get update
-            sudo apt-get install -y --no-install-recommends libreoffice-impress libreoffice-writer fonts-liberation
-          else
-            echo "Nessun file Office da convertire: salto l'installazione."
-          fi
-
       - name: Genera Sito (HTML, CSS, Asset, Documenti)
         run: python .github/site-src/update_index.py
 
