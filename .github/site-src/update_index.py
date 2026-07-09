@@ -16,7 +16,8 @@ PDF_VIEWER_TEMPLATE_PATH = os.path.join(SITE_SRC, 'pdf-viewer-template.html')
 # Cartelle e file da escludere dalla scansione e dal deploy finale
 EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
-EXCLUDE_PDFS = {'Presentazione tecnologie.pdf'}
+EXCLUDE_PDFS = set()
+
 ROOT_SECTION_ORDER = {'rtb': 0, 'diapositive': 1, 'candidatura': 2}
 ACRONYMS = {'adr': 'AdR', 'pb': 'PB', 'poc': 'PoC', 'rtb': 'RTB'}
 LOWERCASE_TITLE_WORDS = {
