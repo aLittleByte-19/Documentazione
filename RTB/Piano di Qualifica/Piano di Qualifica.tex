@@ -90,11 +90,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione    & 2.0.0 \\
+            Versione    & 2.0.1 \\
             Redattori   & Eleonora Bellet, Alex Oloni, V.Y. Kaneda Fernandes \\
             Verificatori& Eleonora Bellet, Diego Belluz, V.Y. Kaneda Fernandes\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 24/06/2026 \\
+            Data        & 06/07/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -125,6 +125,9 @@
         \hline
         \endhead
 
+        \hline
+        2.0.1 & 06/07/2026 & Aggiunto settimo sprint & Diego Belluz & Alex Oloni & - \\
+        \hline 
         2.0.0 & 24/06/2026 & Approvazione e rilascio versione completa della fase RTB &  &  & Eleonora Bellet \\
         \hline
         1.1.0 & 21/06/2026 & Estensione dei test e tracciamento requisiti aggiornati (v2.0.0 AdR) & V.Y. Kaneda Fernandes & Diego Belluz & - \\
@@ -1145,7 +1148,7 @@ La tabella seguente riporta la corrispondenza tra i \glslink{test-di-sistema}{te
 
 Il cruscotto di qualità raccoglie i dati misurati nelle diverse iterazioni del progetto, mettendoli in relazione con le soglie accettabili e ottimali definite nella sezione \emph{Qualità di processo}. L'obiettivo è fornire una visione sintetica e aggiornata dello stato qualitativo del prodotto e dei processi, permettendo di identificare tempestivamente eventuali aree di miglioramento.
 
-Le misurazioni si riferiscono ai sei \glslink{sprint}{sprint} del periodo \glslink{rtb-requirements-and-technology-baseline}{RTB}:
+Le misurazioni si riferiscono ai sette \glslink{sprint}{sprint} rendicontati:
 
 \begin{itemize}
     \item \textbf{\glslink{sprint}{Sprint} 1 (S1):} 30/03/2026 – 12/04/2026
@@ -1154,10 +1157,10 @@ Le misurazioni si riferiscono ai sei \glslink{sprint}{sprint} del periodo \glsli
     \item \textbf{\glslink{sprint}{Sprint} 4 (S4):} 11/05/2026 – 24/05/2026
     \item \textbf{\glslink{sprint}{Sprint} 5 (S5):} 25/05/2026 – 07/06/2026
     \item \textbf{\glslink{sprint}{Sprint} 6 (S6):} 08/06/2026 – 21/06/2026
+    \item \textbf{\glslink{sprint}{Sprint} 7 (S7):} 22/06/2026 – 05/07/2026
 \end{itemize}
 
 Il Budget At Completion (BAC) dell'intero progetto è pari a \EUR{12.575,00}.
-
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi primari — Fornitura}
 
@@ -1179,9 +1182,10 @@ Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare
     S4 & 850,00  & 850,00  & 2.835,00 & 2.835,00 \\
     S5 & 530,00  & 530,00  & 3.365,00 & 3.365,00 \\
     S6 & 980,00  & 980,00  & 4.345,00 & 4.345,00 \\
+    S7 & 755,00  & 755,00  & 5.100,00 & 5.100,00 \\
     \hline
 \end{tabular}
-\caption{Andamento MPC-EV e MPC-PV per sprint (fase RTB)}
+\caption{Andamento MPC-EV e MPC-PV per sprint}
 \end{table}
 
 \begin{figure}[H]
@@ -1191,18 +1195,18 @@ Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare
     title={Andamento MPC-EV e MPC-PV Cumulativi},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Valore (\euro)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
-    ymin=0, ymax=4800,
+    ymin=0, ymax=6000,
     grid=both,
     grid style={dashed, gray!30},
     legend pos=north west,
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=blue, mark=o, thick, dashed] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345)};
+\addplot[color=blue, mark=o, thick, dashed] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345) (S7,5100)};
 \addlegendentry{PV Cumulativo}
-\addplot[color=teal, mark=x, thick] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345)};
+\addplot[color=teal, mark=x, thick] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345) (S7,5100)};
 \addlegendentry{EV Cumulativo}
 \end{axis}
 \end{tikzpicture}
@@ -1230,9 +1234,10 @@ L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro comple
     S4 & 975,00  & 3.135,00 \\
     S5 & 515,00  & 3.650,00 \\
     S6 & 955,00  & 4.605,00 \\
+    S7 & 755,00  & 5.360,00 \\
     \hline
 \end{tabular}
-\caption{Andamento MPC-AC per sprint (fase RTB)}
+\caption{Andamento MPC-AC per sprint}
 \end{table}
 
 \begin{figure}[H]
@@ -1242,23 +1247,23 @@ L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro comple
     title={Andamento MPC-AC Cumulativo},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Costo Effettivo (\euro)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
-    ymin=0, ymax=5000,
+    ymin=0, ymax=6000,
     grid=both,
     grid style={dashed, gray!30},
     legend pos=north west,
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=red!80!black, mark=square*, thick] coordinates {(S1,705) (S2,1330) (S3,2160) (S4,3135) (S5,3650) (S6,4605)};
+\addplot[color=red!80!black, mark=square*, thick] coordinates {(S1,705) (S2,1330) (S3,2160) (S4,3135) (S5,3650) (S6,4605) (S7,5360)};
 \addlegendentry{AC Cumulativo}
 \end{axis}
 \end{tikzpicture}
 \caption{Grafico dell'andamento dei costi effettivi cumulati.}
 \end{figure}
 
-\noindent\textbf{Valutazione:} I costi effettivi sono positivi in tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta). Rispetto al PV si osserva un lieve sforamento iniziale, ridotto sensibilmente negli Sprint 5 e 6 grazie alle attività mirate di controllo sui costi operativi.
+\noindent\textbf{Valutazione:} I costi effettivi sono positivi in tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta). Rispetto al PV si osserva un lieve sforamento iniziale, ridotto sensibilmente negli Sprint 5, 6 e 7grazie alle attività mirate di controllo sui costi operativi.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-CPI e MPC-SPI — Cost Performance Index e Schedule Performance Index}
@@ -1286,9 +1291,10 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
     S4 & 0,904 & 1,000 \\
     S5 & 0,922 & 1,000 \\
     S6 & 0,944 & 1,000 \\
+    S7 & 0,951 & 1,000 \\
     \hline
 \end{tabular}
-\caption{Andamento MPC-CPI e MPC-SPI per sprint (fase RTB)}
+\caption{Andamento MPC-CPI e MPC-SPI per sprint}
 \end{table}
 
 \begin{figure}[H]
@@ -1298,7 +1304,7 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
     title={Andamento indici CPI e SPI},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Indice},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
     ymin=0.8, ymax=1.1,
     grid=both,
@@ -1307,18 +1313,18 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=orange, mark=violet, thick] coordinates {(S1,0.950) (S2,0.929) (S3,0.919) (S4,0.904) (S5,0.922) (S6,0.944)};
+\addplot[color=orange, mark=violet, thick] coordinates {(S1,0.950) (S2,0.929) (S3,0.919) (S4,0.904) (S5,0.922) (S6,0.944) (S7,0.951)};
 \addlegendentry{CPI}
-\addplot[color=cyan!80!black, mark=triangle*, thick] coordinates {(S1,1.000) (S2,1.000) (S3,1.000) (S4,1.000) (S5,1.000) (S6,1.000)};
+\addplot[color=cyan!80!black, mark=triangle*, thick] coordinates {(S1,1.000) (S2,1.000) (S3,1.000) (S4,1.000) (S5,1.000) (S6,1.000) (S7,1.000)};
 \addlegendentry{SPI}
-\draw[red, thick, dashed] (axis cs:S1,0.9) -- (axis cs:S6,0.9);
+\draw[red, thick, dashed] (axis cs:S1,0.9) -- (axis cs:S7,0.9);
 \node[red, anchor=south west] at (axis cs:S1,0.9) {\footnotesize Soglia Accettabile (0.9)};
 \end{axis}
 \end{tikzpicture}
 \caption{Confronto tra Cost Performance Index e Schedule Performance Index.}
 \end{figure}
 
-\noindent\textbf{Valutazione:} Il CPI, dopo aver toccato il punto minimo a S4 (0,904), risale progressivamente fino a raggiungere il valore di 0,944 a S6 (\emph{soglia accettabile} ampiamente superata). L'SPI stabile a 1,000 in tutti gli \glslink{sprint}{sprint} conferma il perfetto rispetto delle scadenze e dell'avanzamento dei lavori previsti (\emph{soglia ottimale} raggiunta).
+\noindent\textbf{Valutazione:} Il CPI, dopo aver toccato il punto minimo a S4 (0,904), risale progressivamente fino a raggiungere il valore di 0,951 a S7 (\emph{soglia accettabile}  ampiamente superata). L'SPI stabile a 1,000 in tutti gli \glslink{sprint}{sprint} conferma il perfetto rispetto delle scadenze e dell'avanzamento dei lavori previsti (\emph{soglia ottimale} raggiunta).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-EAC e MPC-ETC — Estimated At Completion e Estimate To Complete}
@@ -1346,9 +1352,10 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
     S4 & 13.906,00 & 10.771,00 \\
     S5 & 13.640,00 & 9.990,00 \\
     S6 & 13.328,00 & 8.723,00 \\
+    S7 & 13.216,00 & 7.856,00 \\
     \hline
 \end{tabular}
-\caption{Andamento MPC-EAC e MPC-ETC per sprint (fase RTB)}
+\caption{Andamento MPC-EAC e MPC-ETC per sprint}
 \end{table}
 
 \begin{figure}[H]
@@ -1358,32 +1365,32 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
     title={Andamento EAC e ETC rispetto al BAC},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Valore (\euro)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
-    ymin=8000, ymax=15000,
+    ymin=7000, ymax=15000,
     grid=both,
     grid style={dashed, gray!30},
     legend pos=north east,
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=blue, mark=purple, thick] coordinates {(S1,13231) (S2,13544) (S3,13683) (S4,13906) (S5,13640) (S6,13328)};
+\addplot[color=blue, mark=purple, thick] coordinates {(S1,13231) (S2,13544) (S3,13683) (S4,13906) (S5,13640) (S6,13328) (S7,13216)};
 \addlegendentry{EAC}
-\addplot[color=olive, mark=diamond*, thick] coordinates {(S1,12526) (S2,12214) (S3,11523) (S4,10771) (S5,9990) (S6,8723)};
+\addplot[color=olive, mark=diamond*, thick] coordinates {(S1,12526) (S2,12214) (S3,11523) (S4,10771) (S5,9990) (S6,8723) (S7,7856)};
 \addlegendentry{ETC}
-\draw[green!60!black, ultra thick, dotted] (axis cs:S1,12575) -- (axis cs:S6,12575);
-\node[green!60!black, anchor=north west] at (axis cs:S1,12575) {\footnotesize BAC (12.575 \euro)};
+\draw[green!60!black, ultra thick, dotted] (axis cs:S1,12575) -- (axis cs:S7,12575);
+\node[green!60!black, anchor=south west] at (axis cs:S1,12575) {\footnotesize BAC (12.575 \euro)};
 \end{axis}
 \end{tikzpicture}
 \caption{Proiezione dei costi finali (EAC) e costi a finire (ETC) rispetto al budget.}
 \end{figure}
 
-\noindent\textbf{Valutazione:} L'EAC proiettato scende sensibilmente a S6 attestandosi a \EUR{13.328,00}, riducendo lo scostamento complessivo dal BAC al $+6,0\%$. L'ETC decresce regolarmente e rimane ampiamente positivo (\emph{soglia accettabile} raggiunta). La decrescita dell'EAC evidenzia l'efficacia delle azioni correttive sui processi organizzativi.
+\noindent\textbf{Valutazione:} L'EAC proiettato si abbassa ulteriormente a S7 attestandosi a \EUR{13.216,00}, riducendo lo scostamento complessivo dal BAC a +5,1\%. L'ETC decresce regolarmente e rimane ampiamente positivo (\emph{soglia accettabile} raggiunta). La decrescita dell'EAC evidenzia l'efficacia delle azioni correttive sui processi organizzativi.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-TEAC — Time Estimate At Completion}
 
-Il Time Estimate At Completion stima la durata totale del progetto a partire dalla performance di avanzamento temporale. Poiché $\text{SPI} = 1{,}000$ per tutte le scadenze, il team rispetta fedelmente la pianificazione temporale aggiornata. La durata totale stimata per la conclusione della fase RTB si assesta a 12 settimane in concomitanza con la sottomissione formale avvenuta al termine dello Sprint 6.
+Il Time Estimate At Completion stima la durata totale del progetto a partire dalla performance di avanzamento temporale. Poiché $\text{SPI} = 1{,}000$ per tutte le scadenze, il team rispetta fedelmente la pianificazione temporale aggiornata. La durata totale stimata per la conclusione della fase RTB si assesta a 14 settimane in concomitanza con la sottomissione formale avvenuta al termine dello Sprint 7.
 
 \begin{table}[H]
 \centering
@@ -1399,6 +1406,7 @@ Il Time Estimate At Completion stima la durata totale del progetto a partire dal
     S4 & 1,000 & 8,0 \\
     S5 & 1,000 & 10,0 \\
     S6 & 1,000 & 12,0 \\
+    S7 & 1,000 & 14,0 \\
     \hline
 \end{tabular}
 \caption{Andamento MPC-TEAC per sprint}
@@ -1411,7 +1419,7 @@ Il Time Estimate At Completion stima la durata totale del progetto a partire dal
     title={Andamento Time Estimate At Completion},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Settimane},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
     ymin=0, ymax=14,
     grid=both,
@@ -1420,7 +1428,7 @@ Il Time Estimate At Completion stima la durata totale del progetto a partire dal
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=violet, mark=*, thick] coordinates {(S1,8.0) (S2,8.0) (S3,8.0) (S4,8.0) (S5,10.0) (S6,12.0)};
+\addplot[color=violet, mark=*, thick] coordinates {(S1,8.0) (S2,8.0) (S3,8.0) (S4,8.0) (S5,10.0) (S6,12.0) (S7,14.0)};
 \addlegendentry{TEAC}
 \end{axis}
 \end{tikzpicture}
@@ -1450,6 +1458,7 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
         S4 & 131 & 0 & 4 & 0 & 96{,}9\% & \textcolor{green!60!black}{Accettabile} \\
         S5 & 131 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
         S6 & 131 & 6 & 8 & 2 & 87{,}8\% & \textcolor{green!60!black}{Accettabile} \\
+        S7 & 135 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
         \hline
     \end{tabular}
     \caption{Andamento MPC-RSI per sprint}
@@ -1462,7 +1471,7 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
     title={Andamento Requirements Stability Index},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={RSI (\%)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
     ymin=70, ymax=105,
     grid=both,
@@ -1470,9 +1479,9 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=teal, mark=*, thick] coordinates {(S3,100) (S4,96.9) (S5,100) (S6,87.8)};
+\addplot[color=teal, mark=*, thick] coordinates {(S3,100) (S4,96.9) (S5,100) (S6,87.8) (S7,100)};
 \addlegendentry{RSI Rilevato}
-\draw[red, thick, dashed] (axis cs:S1,70) -- (axis cs:S6,70);
+\draw[red, thick, dashed] (axis cs:S1,70) -- (axis cs:S7,70);
 \node[red, anchor=south west] at (axis cs:S1,70) {\footnotesize Soglia Accettabile (70\%)};
 \end{axis}
 \end{tikzpicture}
@@ -1596,15 +1605,15 @@ La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase 
     MPC-EV  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-PV  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-AC  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-CPI & 0,944 (S6)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-CPI & 0,951 (S7)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-SPI & 1,000 (tutti gli \glslink{sprint}{sprint}) & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-EAC & $+6{,}0\%$ dal BAC (S6) & $\pm 5\%$ dal BAC & \textcolor{orange!80!black}{Da migliorare} \\
+    MPC-EAC & $+5{,}1\%$ dal BAC (S7) & $\pm 5\%$ dal BAC & \textcolor{orange!80!black}{Da migliorare} \\
     MPC-ETC & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-TEAC & 12 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}  & 45,9 – 59,7             & $\geq 60$ & \textcolor{orange!80!black}{Da migliorare} \\
+    MPC-TEAC & 14 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
+    \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}  & 45,9 – 59,7              & $\geq 60$ & \textcolor{orange!80!black}{Da migliorare} \\
     MPC-CO  & 0 errori                 & 0 errori & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-RSI & 87,8\% (S6)               & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-PRI & 22,2\% (fase \glslink{rtb-requirements-and-technology-baseline}{RTB})          & $\leq 20\%$ & \textcolor{orange!80!black}{Da migliorare} \\
+    MPC-RSI & 100\% (S7)               & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-PRI & 22,2\% (fino a S7)       & $\leq 20\%$ & \textcolor{orange!80!black}{Da migliorare} \\
     \hline
     \rowcolor{gray!25}
     \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{9 / 12} \\
@@ -1613,7 +1622,7 @@ La tabella seguente riassume l'esito di tutte le metriche misurabili nella fase 
     \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{75\%} \\
     \hline
 \end{tabular}
-\caption{Calcolo MPC-QMS per la fase RTB aggiornato con RSI e PRI}
+\caption{Calcolo MPC-QMS aggiornato fino a S7}
 \end{table}
 
 L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S1, la soddisfazione è massima (100\%) per i dati valutati in quel frangente. Nei successivi S2 e S3 il valore si stabilizza all'80\%. Nello \glslink{sprint}{Sprint} 4, 5 e 6, con l'inclusione delle metriche globali RSI e PRI del periodo \glslink{rtb-requirements-and-technology-baseline}{RTB}, il QMS si attesta stabilmente al 75\% (essendo MPC-PRI, MPC-EAC e MPC-IG da migliorare). Il grafico seguente mostra questo andamento, confrontato con le soglie di accettabilità e ottimalità.
@@ -1624,7 +1633,7 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
 \begin{axis} [
     title={Andamento MPC-QMS per \glslink{sprint}{Sprint} rispetto alle Soglie},
     ylabel={Percentuale soddisfazione (\%)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7},
     xtick=data,
     ymin=0, ymax=100,
     ytick={0, 20, 40, 60, 80, 100},
@@ -1634,15 +1643,15 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     legend style={at={(0.5,-0.20)}, anchor=north, legend columns=-1, draw=none} 
 ]
 
-\addplot[ybar stacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20) (S5,20) (S6,20)};
+\addplot[ybar stacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20) (S5,20) (S6,20) (S7,20)};
 
-\addplot[ybar stacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80) (S5,80) (S6,80)};
+\addplot[ybar stacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80) (S5,80) (S6,80) (S7,80)};
 
-\addplot[ybar, fill=blue!70!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0) (S5,0) (S6,0)};
+\addplot[ybar, fill=blue!70!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0) (S5,0) (S6,0) (S7,0)};
 
-\addplot[ybar, fill=green!60!black, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,0) (S5,0) (S6,0)};
+\addplot[ybar, fill=green!60!black, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,0) (S5,0) (S6,0) (S7,0)};
 
-\addplot[ybar, fill=orange!80!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,75) (S5,75) (S6,75)};
+\addplot[ybar, fill=orange!80!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,75) (S5,75) (S6,75) (S7,75)};
 
 \addlegendimage{ybar, fill=blue!70!white, draw=none}
 \addlegendentry{Valore Rilevato}
@@ -1699,6 +1708,8 @@ La metrica valuta la capacità del team di prevedere e mitigare i rischi. I dati
         S5 & Esito negativo revisione (semaforo rosso) a causa di errata interpretazione degli standard. & Previsto (RR2, RP2, RO3) \\
         \hline
         S6 & Ristrutturazione AdR e PoC post revisione in tempi ristretti. & Previsto (RR2, RP2) \\
+        \hline 
+        S7 & Difficoltà di organizzazione del gruppo. & Previsto (RO2) \\
         \hline
     \end{tabularx}
     \caption{Tracciamento dei rischi manifestati per sprint}
@@ -1712,7 +1723,7 @@ La metrica valuta la capacità del team di prevedere e mitigare i rischi. I dati
         \rowcolor{gray!35}
         \textbf{\glslink{sprint}{Sprint}} & \textbf{Rischi Totali} & \textbf{Rischi Inattesi} & \textbf{PRI (\%)} & \textbf{Esito} \\
         \hline
-        Fase \glslink{rtb-requirements-and-technology-baseline}{RTB} & 9 & 2 & 22{,}2\% & \textcolor{orange!80!black}{Da migliorare} \\
+        Fase \glslink{rtb-requirements-and-technology-baseline}{RTB} & 10 & 2 & 20\% & \textcolor{orange!80!black}{Da migliorare} \\
         \hline
     \end{tabular}
     \caption{Calcolo MPC-PRI per la fase RTB}
