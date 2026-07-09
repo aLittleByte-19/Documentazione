@@ -25,6 +25,8 @@ const MAX_CANVAS_PIXELS = 16777216;
 const EVICTION_KEEP_MARGIN = "3200px 0px";
 const EVICTION_PAGE_DISTANCE = 3;
 const PAGE_HASH_PATTERN = /(?:^|[#&])page=(\d+)/i;
+const SNIPPET_BEFORE_CHARS = 34;
+const SNIPPET_AFTER_CHARS = 74;
 
 const body = document.body;
 const header = document.querySelector(".viewer-header");
@@ -46,6 +48,7 @@ const elements = {
   pageCount: document.getElementById("page-count"),
   thumbnailPanel: document.querySelector(".thumbnail-panel"),
   thumbnailList: document.getElementById("thumbnail-list"),
+  thumbnailHeading: document.querySelector(".thumbnail-panel .panel-heading h2"),
   pageInput: document.getElementById("page-input"),
   pageTotal: document.getElementById("page-total"),
   zoomInput: document.getElementById("zoom-input"),
@@ -69,6 +72,7 @@ const state = {
   searchToken: 0,
   searchQuery: "",
   searchResults: [],
+  searchResultButtons: [],
   activeSearchIndex: -1,
   navigationSerial: 0,
   scrollTicking: false,
@@ -100,6 +104,12 @@ function nextFrame() {
     window.requestAnimationFrame(settle);
     window.setTimeout(settle, 90);
   });
+}
+
+// Yield cooperativo per non bloccare la UI: nei tab nascosti i timer sono
+// pesantemente throttlati e non c'è UI da proteggere, quindi non cedere
+function yieldToUi() {
+  return document.hidden ? Promise.resolve() : nextFrame();
 }
 
 function waitForVisibleTab() {
@@ -632,6 +642,84 @@ function createThumbnail(pageNumber) {
   return { button, canvas, hits };
 }
 
+function clearSearchResultList() {
+  for (const button of state.searchResultButtons) {
+    button.remove();
+  }
+
+  state.searchResultButtons = [];
+}
+
+function updateSidebarHeading() {
+  if (!elements.thumbnailHeading || !elements.pageCount) {
+    return;
+  }
+
+  const searching = state.searchQuery.length > 0;
+  elements.thumbnailHeading.textContent = searching ? "Risultati" : "Anteprime";
+  elements.pageCount.textContent = searching
+    ? `${state.searchResults.length} risultati`
+    : `${state.pdf?.numPages || 0} pagine`;
+}
+
+function createSearchResultButton(result, index) {
+  const button = document.createElement("button");
+  button.className = "search-result-button";
+  button.type = "button";
+  button.setAttribute("aria-label", `Risultato ${index + 1}, pagina ${result.pageNumber}`);
+
+  const page = document.createElement("span");
+  page.className = "search-result-page";
+  page.textContent = `Pagina ${result.pageNumber}`;
+
+  const snippet = document.createElement("span");
+  snippet.className = "search-result-snippet";
+
+  const before = document.createElement("span");
+  before.textContent = result.snippet.before;
+
+  const match = document.createElement("mark");
+  match.textContent = result.snippet.match;
+
+  const after = document.createElement("span");
+  after.textContent = result.snippet.after;
+
+  snippet.append(before, match, after);
+  button.append(page, snippet);
+
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    goToSearchResult(index);
+    if (isMobileViewport()) {
+      setSidebarCollapsed(true);
+    }
+  });
+
+  elements.thumbnailList.appendChild(button);
+  return button;
+}
+
+function renderSearchResultList() {
+  clearSearchResultList();
+
+  state.searchResults.forEach((result, index) => {
+    state.searchResultButtons.push(createSearchResultButton(result, index));
+  });
+
+  updateSidebarHeading();
+}
+
+function updateActiveSearchResultButton() {
+  state.searchResultButtons.forEach((button, index) => {
+    button.classList.toggle("is-active", index === state.activeSearchIndex);
+  });
+
+  const activeButton = state.searchResultButtons[state.activeSearchIndex];
+  if (activeButton) {
+    activeButton.scrollIntoView({ block: "nearest" });
+  }
+}
+
 function updateActiveThumbnail() {
   schedulePageHashSync();
   updatePageIndicator();
@@ -690,12 +778,14 @@ function updateSearchBadge(pageNumber, count) {
 }
 
 function resetSearchBadges() {
+  clearSearchResultList();
   for (const pageState of state.pages.values()) {
     updateSearchBadge(pageState.pageNumber, 0);
     pageState.shell.classList.remove("search-focus");
     pageState.highlightLayer.replaceChildren();
     pageState.searchMatches = [];
   }
+  updateSidebarHeading();
 }
 
 async function addAnnotationLinks(pageState) {
@@ -704,10 +794,12 @@ async function addAnnotationLinks(pageState) {
   }
 
   const annotations = await pageState.page.getAnnotations({ intent: "display" });
+  // Geometria del testo: serve per correggere i rect dei link troppo stretti
+  const searchModel = await getPageSearchModel(pageState.pageNumber).catch(() => null);
   pageState.annotationLayer.replaceChildren();
 
   for (const annotation of annotations) {
-    const link = await createAnnotationLink(pageState, annotation);
+    const link = await createAnnotationLink(pageState, annotation, searchModel);
     if (link) {
       pageState.annotationLayer.appendChild(link);
     }
@@ -716,20 +808,58 @@ async function addAnnotationLinks(pageState) {
   pageState.annotationsRendered = true;
 }
 
-async function createAnnotationLink(pageState, annotation) {
+// hyperref genera rect più stretti del testo quando la riga viene giustificata
+// (l'URL si allunga, il box resta a larghezza naturale): se il rect copre
+// quasi tutto un item di testo ma si ferma prima della fine, estendilo
+function snapBoxToTextItems(searchModel, box) {
+  if (!searchModel) {
+    return box;
+  }
+
+  const { top, height } = box;
+  let { left } = box;
+  let right = left + box.width;
+  const centerY = top + height / 2;
+  const maxExtension = Math.max(30, box.width * 0.25);
+  const originalRight = right;
+
+  for (const item of searchModel.items) {
+    if (centerY < item.top || centerY > item.top + item.height) {
+      continue;
+    }
+
+    const itemRight = item.left + item.width;
+    const overlap = Math.min(right, itemRight) - Math.max(left, item.left);
+    if (overlap <= 0 || overlap / item.width < 0.7) {
+      continue;
+    }
+
+    if (item.left >= left - 3 && itemRight > right) {
+      right = Math.min(itemRight, originalRight + maxExtension);
+    }
+  }
+
+  return { left, top, width: right - left, height };
+}
+
+async function createAnnotationLink(pageState, annotation, searchModel = null) {
   if (!annotation.rect) {
     return null;
   }
 
   const rect = pageState.viewport.convertToViewportRectangle(annotation.rect);
-  const left = Math.min(rect[0], rect[2]);
-  const top = Math.min(rect[1], rect[3]);
-  const width = Math.abs(rect[0] - rect[2]);
-  const height = Math.abs(rect[1] - rect[3]);
+  const rawBox = {
+    left: Math.min(rect[0], rect[2]),
+    top: Math.min(rect[1], rect[3]),
+    width: Math.abs(rect[0] - rect[2]),
+    height: Math.abs(rect[1] - rect[3])
+  };
 
-  if (width < 1 || height < 1) {
+  if (rawBox.width < 1 || rawBox.height < 1) {
     return null;
   }
+
+  const { left, top, width, height } = snapBoxToTextItems(searchModel, rawBox);
 
   const rawUrl = annotation.url || annotation.unsafeUrl;
   if (rawUrl) {
@@ -747,6 +877,7 @@ async function createAnnotationLink(pageState, annotation) {
     link.title = targetHref;
     link.setAttribute("aria-label", `Apri link esterno: ${targetHref}`);
     positionLink(link, left, top, width, height);
+    registerLinkGroup(pageState, link, targetHref);
     return link;
   }
 
@@ -756,6 +887,11 @@ async function createAnnotationLink(pageState, annotation) {
     link.href = "#";
     link.setAttribute("aria-label", "Vai alla destinazione nel documento");
     positionLink(link, left, top, width, height);
+    registerLinkGroup(
+      pageState,
+      link,
+      `dest:${typeof annotation.dest === "string" ? annotation.dest : JSON.stringify(annotation.dest)}`
+    );
     link.addEventListener("click", async event => {
       event.preventDefault();
       const destination = Array.isArray(annotation.dest)
@@ -780,6 +916,25 @@ function positionLink(link, left, top, width, height) {
   link.style.top = `${top}px`;
   link.style.width = `${width}px`;
   link.style.height = `${height}px`;
+}
+
+// I link spezzati su più righe diventano annotazioni separate nel PDF:
+// raggruppale per destinazione così l'hover le evidenzia tutte insieme
+function registerLinkGroup(pageState, link, groupKey) {
+  link.dataset.linkGroup = groupKey;
+
+  const setGroupHover = active => {
+    for (const sibling of pageState.annotationLayer.querySelectorAll("[data-link-group]")) {
+      if (sibling.dataset.linkGroup === groupKey) {
+        sibling.classList.toggle("is-group-hover", active);
+      }
+    }
+  };
+
+  link.addEventListener("mouseenter", () => setGroupHover(true));
+  link.addEventListener("mouseleave", () => setGroupHover(false));
+  link.addEventListener("focus", () => setGroupHover(true));
+  link.addEventListener("blur", () => setGroupHover(false));
 }
 
 function queuePageRender(pageNumber) {
@@ -876,8 +1031,8 @@ async function renderPage(pageState) {
 
     // Con il text layer disponibile gli highlight diventano precisi
     if (state.searchQuery) {
-      const count = await renderSearchHighlights(pageState.pageNumber, state.searchQuery);
-      updateSearchBadge(pageState.pageNumber, count);
+      const pageResults = await renderSearchHighlights(pageState.pageNumber, state.searchQuery);
+      updateSearchBadge(pageState.pageNumber, pageResults.length);
       const activeResult = state.searchResults[state.activeSearchIndex];
       if (activeResult && activeResult.pageNumber === pageState.pageNumber) {
         setActiveSearchHighlight(activeResult);
@@ -896,7 +1051,7 @@ async function renderAllThumbnails() {
   for (let pageNumber = 1; pageNumber <= state.pdf.numPages; pageNumber += 1) {
     await renderThumbnail(pageNumber);
     if (pageNumber % 2 === 0) {
-      await nextFrame();
+      await yieldToUi();
     }
   }
 }
@@ -969,8 +1124,21 @@ function isWordCharacter(character) {
   return WORD_CHARACTER_PATTERN.test(character);
 }
 
+// Le parole sillabate a fine riga vengono ricomposte senza separatore e trattino.
+function isHyphenLineBreak(previous, next) {
+  return Boolean(
+    previous?.hasEOL &&
+    /\p{L}-$/u.test(previous.str) &&
+    next && /^\p{L}/u.test(next.str)
+  );
+}
+
 function shouldSeparateItems(previous, next) {
   if (!previous) {
+    return false;
+  }
+
+  if (isHyphenLineBreak(previous, next)) {
     return false;
   }
 
@@ -1030,7 +1198,13 @@ async function getPageSearchModel(pageNumber) {
       refs.push(null);
     }
 
+    const dropTrailingHyphen = isHyphenLineBreak(item, items[itemIndex + 1]);
+
     for (let charIndex = 0; charIndex < item.str.length; charIndex += 1) {
+      if (dropTrailingHyphen && charIndex === item.str.length - 1) {
+        continue;
+      }
+
       const sourceChar = item.str[charIndex];
 
       if (/\s/u.test(sourceChar)) {
@@ -1052,41 +1226,78 @@ async function getPageSearchModel(pageNumber) {
   return pageState.searchModel;
 }
 
-function expandToWordBoundaries(text, start, end) {
-  let expandedStart = start;
-  let expandedEnd = end;
-
-  while (expandedStart > 0 && isWordCharacter(text[expandedStart - 1])) {
-    expandedStart -= 1;
+// Tier di precisione del match: parola intera, inizio parola, sottostringa.
+function classifyMatch(text, start, end) {
+  if (start > 0 && isWordCharacter(text[start - 1])) {
+    return 0;
   }
 
-  while (expandedEnd < text.length && isWordCharacter(text[expandedEnd])) {
-    expandedEnd += 1;
-  }
-
-  return { start: expandedStart, end: expandedEnd };
+  return end >= text.length || !isWordCharacter(text[end]) ? 2 : 1;
 }
 
 function findPageMatches(model, query) {
   const matches = [];
-  const expandWholeWords = !query.includes(" ");
   let index = model.text.indexOf(query);
 
   while (index !== -1) {
-    let range = { start: index, end: index + query.length };
-    if (expandWholeWords) {
-      range = expandToWordBoundaries(model.text, range.start, range.end);
-    }
-
-    const previous = matches[matches.length - 1];
-    if (!previous || range.start >= previous.end) {
-      matches.push(range);
-    }
-
+    const end = index + query.length;
+    matches.push({ start: index, end, tier: classifyMatch(model.text, index, end) });
     index = model.text.indexOf(query, index + 1);
   }
 
   return matches;
+}
+
+function selectPageMatches(model, query) {
+  const selected = [];
+
+  for (const match of findPageMatches(model, query)) {
+    const previous = selected[selected.length - 1];
+    if (!previous || match.start >= previous.end) {
+      selected.push(match);
+    } else {
+      previous.tier = Math.max(previous.tier, match.tier);
+    }
+  }
+
+  return selected;
+}
+
+// Ricostruisce il testo originale (maiuscole e accenti inclusi) da un
+// intervallo del testo normalizzato, tramite la mappa dei riferimenti
+function getSourceText(model, start, end) {
+  let text = "";
+  let lastRef = null;
+
+  for (let i = start; i < end; i += 1) {
+    const ref = model.refs[i];
+
+    if (!ref) {
+      text += " ";
+      lastRef = null;
+      continue;
+    }
+
+    if (lastRef && ref.itemIndex === lastRef.itemIndex && ref.charIndex === lastRef.charIndex) {
+      continue;
+    }
+
+    text += model.items[ref.itemIndex].str[ref.charIndex];
+    lastRef = ref;
+  }
+
+  return text;
+}
+
+function buildSnippet(model, range) {
+  const beforeStart = Math.max(0, range.start - SNIPPET_BEFORE_CHARS);
+  const afterEnd = Math.min(model.text.length, range.end + SNIPPET_AFTER_CHARS);
+
+  return {
+    before: (beforeStart > 0 ? "…" : "") + getSourceText(model, beforeStart, range.start),
+    match: getSourceText(model, range.start, range.end),
+    after: getSourceText(model, range.end, afterEnd) + (afterEnd < model.text.length ? "…" : "")
+  };
 }
 
 function getMatchBoxes(model, match) {
@@ -1181,22 +1392,24 @@ function getPreciseSegmentBoxes(pageState, item, startChar, endChar) {
 async function renderSearchHighlights(pageNumber, query) {
   const pageState = state.pages.get(pageNumber);
   if (!pageState) {
-    return 0;
+    return [];
   }
 
   pageState.highlightLayer.replaceChildren();
   pageState.searchMatches = [];
 
   if (!query) {
-    return 0;
+    return [];
   }
 
   const model = await getPageSearchModel(pageNumber);
   if (!model) {
-    return 0;
+    return [];
   }
 
-  for (const match of findPageMatches(model, query)) {
+  const results = [];
+
+  for (const match of selectPageMatches(model, query)) {
     const matchElements = [];
 
     for (const box of getMatchBoxes(model, match)) {
@@ -1212,10 +1425,17 @@ async function renderSearchHighlights(pageNumber, query) {
 
     if (matchElements.length > 0) {
       pageState.searchMatches.push(matchElements);
+      results.push({
+        pageNumber,
+        occurrence: pageState.searchMatches.length,
+        tier: match.tier,
+        start: match.start,
+        snippet: buildSnippet(model, match)
+      });
     }
   }
 
-  return pageState.searchMatches.length;
+  return results;
 }
 
 function setActiveSearchHighlight(result) {
@@ -1308,15 +1528,12 @@ async function runSearch(rawQuery) {
       return;
     }
 
-    const count = await renderSearchHighlights(pageNumber, query);
-    updateSearchBadge(pageNumber, count);
-
-    for (let i = 0; i < count; i += 1) {
-      state.searchResults.push({ pageNumber, occurrence: i + 1 });
-    }
+    const pageResults = await renderSearchHighlights(pageNumber, query);
+    updateSearchBadge(pageNumber, pageResults.length);
+    state.searchResults.push(...pageResults);
 
     if (pageNumber % 3 === 0) {
-      await nextFrame();
+      await yieldToUi();
     }
   }
 
@@ -1326,8 +1543,16 @@ async function runSearch(rawQuery) {
 
   if (state.searchResults.length === 0) {
     elements.searchStatus.textContent = "Nessun risultato";
+    updateSidebarHeading();
     return;
   }
+
+  state.searchResults.sort((a, b) =>
+    b.tier - a.tier ||
+    a.pageNumber - b.pageNumber ||
+    a.start - b.start
+  );
+  renderSearchResultList();
 
   if (state.navigationSerial === navigationSerial) {
     state.activeSearchIndex = 0;
@@ -1345,6 +1570,7 @@ function goToSearchResult(index) {
   state.activeSearchIndex = (index + state.searchResults.length) % state.searchResults.length;
   const result = state.searchResults[state.activeSearchIndex];
   elements.searchStatus.textContent = `${state.activeSearchIndex + 1} di ${state.searchResults.length} - pagina ${result.pageNumber}`;
+  updateActiveSearchResultButton();
 
   scrollToSearchResult(result);
 }
@@ -1499,9 +1725,9 @@ async function buildPages() {
       setPageShellSize(pageState);
       queuePageRender(1);
       renderThumbnail(1);
-      await nextFrame();
+      await yieldToUi();
     } else if (pageNumber % 4 === 0) {
-      await nextFrame();
+      await yieldToUi();
     }
   }
 }
@@ -1626,6 +1852,16 @@ function setupControls() {
       event.preventDefault();
     }
   }, { passive: false });
+
+  // Mentre si trascina una selezione di testo, i link annotazione non devono
+  // catturare il puntatore (altrimenti la selezione si interrompe su ogni link)
+  elements.documentArea.addEventListener("pointerdown", event => {
+    if (event.button === 0 && event.target.closest(".text-layer")) {
+      body.classList.add("is-text-selecting");
+    }
+  });
+  window.addEventListener("pointerup", () => body.classList.remove("is-text-selecting"));
+  window.addEventListener("pointercancel", () => body.classList.remove("is-text-selecting"));
 
   elements.documentArea.addEventListener("scroll", scheduleCurrentPageUpdate, { passive: true });
   elements.documentArea.addEventListener("pointerenter", () => {
