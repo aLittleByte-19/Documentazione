@@ -142,11 +142,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione & 2.0.0 \\
+            Versione & 2.0.1 \\
             Redattori   & A. Maule, A. Oloni, E. Bellet, V. Y. K. Fernandes \\
             Verificatori &  V. Y. K. Fernandes, E. Bellet, D. Belluz \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 22/06/2026
+            Data        & 06/07/2026
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -178,6 +178,7 @@
     \endhead 
     \endfoot
     \endlastfoot
+    2.0.1 & 06/07/2026 & Aggiunto settimo sprint & Diego Belluz & Alex Oloni & - \\ \hline
     2.0.0 & 22/06/2026 & Approvazione versione 2.0.0 & - & - & Diego Belluz \\ \hline
     1.0.4 & 22/06/2026 & Aggiornamento sezione periodi & V. Y. K. Fernandes & Eleonora Bellet & - \\ \hline
     1.0.3 & 21/06/2026 & Aggiunto sesto sprint & V. Y. K. Fernandes & Eleonora Bellet & - \\ \hline
@@ -922,7 +923,7 @@ Quindi i punti chiave in questa \textit{\glslink{rtb-requirements-and-technology
     \item \textbf{Sviluppo del \textit{Proof of Concept}}: Viene quindi iniziato a sviluppare un prototipo del prodotto, per testarne funzionalità, attività e complessità.
 \end{itemize}
 \subsubsection{Periodi}
-La fase \glslink{rtb-requirements-and-technology-baseline}{RTB} è suddivisa in 6 iterazioni (\glslink{sprint}{Sprint}).
+La fase \glslink{rtb-requirements-and-technology-baseline}{RTB} è suddivisa in 7 iterazioni (\glslink{sprint}{Sprint}).
 \label{sec:rtb_primoperiodo}
 \begin{table}[H]
     \centering
@@ -942,6 +943,8 @@ La fase \glslink{rtb-requirements-and-technology-baseline}{RTB} è suddivisa in 
     \glslink{sprint}{Sprint} 5 & 25/05/2026 & 07/06/2026 \\
     \hline
     \glslink{sprint}{Sprint} 6 & 08/06/2026 & 21/06/2026 \\
+    \hline
+    \glslink{sprint}{Sprint} 7 & 22/06/2026 & 05/07/2026 \\
     \hline
 
     \end{tabularx}
@@ -1383,6 +1386,75 @@ I rischi gestiti in questa fase sono stati i seguenti:
 \begin{itemize}
     \item \textbf{RR2 (Ambiguità o errata interpretazione dei requisiti):} L'errata interpretazione delle aspettative dei docenti, che aveva causato il semaforo rosso, è stata attivamente affrontata e mitigata. Grazie a un'attenta rilettura dei feedback forniti dal Prof. R. Cardin, il team ha corretto le ambiguità presenti nei casi d'uso e allineato le funzionalità del PoC alle reali richieste della \glslink{milestone}{milestone}.
     \item \textbf{RP2 (Lavoro svolto non conforme rispetto agli impegni dichiarati):} Per rimediare alla precedente non conformità del prodotto, il gruppo ha abbandonato l'approccio sbrigativo dello \glslink{sprint}{sprint} passato. Ogni documento e ogni modulo di codice è stato sottoposto a una validazione rigorosa prima di considerarlo chiuso, accertandosi che rispondesse punto per punto alle criticità segnalate durante la revisione fallita.
+\end{itemize}
+
+\subsubsubsection{Settimo Periodo}
+
+\label{sec:rtb_settimoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    22/06/2026 & 05/07/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il settimo periodo di \glslink{sprint}{Sprint} è stato un'iterazione volutamente contenuta sul piano operativo, configurandosi principalmente come una fase di consolidamento e di attesa. In data 26/06/2026 il team ha infatti riconsegnato al Prof. R. Cardin una nuova versione del documento di \textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}, restando in attesa di un riscontro ufficiale in merito all'accettazione della fase \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+Non conoscendo ancora l'esito della revisione, il gruppo ha preferito non intraprendere modifiche strutturali. Le attività si sono dunque concentrate sul mantenimento della documentazione di progetto e su un'ulteriore opera di rifinitura del \textit{Proof of Concept} (PoC): il \glslink{responsabile}{Responsabile} ha curato la redazione del \glslink{diario-di-bordo}{diario di bordo} e del verbale, l'\glslink{analista}{Analista} ha rivisto l'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}, \glslink{progettista}{Progettista} e \glslink{programmatore}{Programmatore} hanno perfezionato le tecnologie e l'implementazione del PoC, mentre il \glslink{verificatore}{Verificatore} ha effettuato un controllo incrociato dei documenti e del PoC.
+
+\begin{center}
+\noindent\textbf{Attività Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Redazione \glslink{diario-di-bordo}{diario di bordo} e verbale & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Revisione \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 2 & 2 & Completata \\
+    \hline
+    Revisione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 7 & 6 & Completata \\
+    \hline
+    Rifinitura delle tecnologie del PoC & \glslink{progettista}{Progettista} & 7 & 7 & Completata \\
+    \hline
+    Rifinitura implementativa del PoC & \glslink{programmatore}{Programmatore} & 9 & 9 & Completata \\
+    \hline
+    Verifica della documentazione e del PoC & \glslink{verificatore}{Verificatore} & 9 & 9 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{38} & \textbf{37} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 7}
+    \label{tab:task_sprint7}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Le ore di lavoro sono state ridotte rispetto alle iterazioni precedenti (37 ore consuntivate su 38 preventivate). L'assenza di un riscontro da parte del Prof. R. Cardin sulla nuova versione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, riconsegnata il 26/06/2026, ha reso poco produttivo intraprendere nuove attività. Il team si è limitato al mantenimento della documentazione e a una rifinitura di dettaglio del PoC, completando tutti i task previsti con un lieve risparmio orario.
+    \item \textbf{Azioni Correttive:} Il gruppo ha deciso di sfruttare la fase di attesa per rafforzare l'organizzazione interna e la chiarezza sulla ripartizione delle responsabilità, così da farsi trovare pronto non appena sarà disponibile il riscontro del docente, riprendendo a pieno ritmo la pianificazione verso la fase \glslink{pb-product-baseline}{PB}.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} La principale criticità di questo periodo non è stata di natura tecnica, ma legata alla ridotta operatività dovuta all'attesa del riscontro esterno. Un contesto di lavoro poco definito e con un carico contenuto rischiava di generare incertezza sulle attività da svolgere e sulla loro attribuzione ai singoli membri del gruppo.
+
+I rischi gestiti in questa fase sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RO2 (Confusione sulla gestione delle responsabilità):} Per prevenire sovrapposizioni e lacune in un periodo caratterizzato da poco lavoro, il rischio è stato mitigato chiedendo a ciascun membro del gruppo di dichiarare esplicitamente i propri impegni e definendo in maniera chiara le attività da svolgere e le relative scadenze, così da mantenere il coordinamento del team nonostante l'incertezza sull'esito della \glslink{rtb-requirements-and-technology-baseline}{RTB}.
 \end{itemize}
 
 \subsection{Pianificazione a Lungo Termine (Verso la PB)}
@@ -2450,6 +2522,175 @@ V. Y. K. Fernandes & 4 & 5 & 0 & 16 & 23 & 12 & 60 \\
 \hline
 \end{tabularx}
 \caption{Rendiconto - Ore rimanenti al termine del sesto sprint}
+\end{table}
+
+\newpage
+\subsection {Settimo Periodo: Sprint 22/06/2026 - 05/07/2026}
+
+\label{sec:pec_settimoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & 2 & - & 2 & - & 2 & 6\\
+Eleonora Bellet      & - & - & 3 & 3 & - & - & 6\\
+Alex Oloni           & - & - & - & - & 4 & 3 & 7\\
+Diego Belluz         & 4 & - & 3 & - & 1 & - & 8\\
+Angela Maule         & - & - & - & 2 & - & - & 2\\
+Leonardo Soligo      & - & - & 1 & - & - & 4 & 5\\
+V.Y. Kaneda Fernandes & - & - & - & - & 4 & - & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 2 & 7 & 7 & 9 & 9 & 38\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Settimo Sprint}
+\end{table}
+
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & 2 & - & 2 & - & 2 & 6\\
+Eleonora Bellet      & - & - & 3 & 3 & - & - & 6\\
+Alex Oloni           & - & - & - & - & 4 & 3 & 7\\
+Diego Belluz         & 4 & - & 2 & - & 1 & - & 7\\
+Angela Maule         & - & - & - & 2 & - & - & 2\\
+Leonardo Soligo      & - & - & 1 & - & - & 4 & 5\\
+V.Y. Kaneda Fernandes & - & - & - & - & 4 & - & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 2 & 6 & 7 & 9 & 9 & 37\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Settimo Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            15.9/\glslink{responsabile}{Responsabile},
+            5.3/\glslink{amministratore}{Amministratore},
+            19.9/\glslink{analista}{Analista},
+            23.2/\glslink{progettista}{Progettista},
+            17.9/\glslink{programmatore}{Programmatore},
+            17.9/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Settimo Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 40 \euro & 150 \euro & 175 \euro & 135 \euro & 135 \euro &  755 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 780 \euro & 480 \euro & 250 \euro & 2375 \euro & 1680 \euro & 1650 \euro & \cellcolor{yellow!50} 7.215 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Settimo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 7}
+Al termine del settimo periodo di lavoro la metrica del \textit{\glslink{preventivo}{Preventivo} a Finire} è stata nuovamente aggiornata. Trattandosi di uno sprint con un basso carico di lavoro, dedicato al mantenimento della documentazione e alla rifinitura del PoC in attesa del riscontro del Prof. R. Cardin, l'impegno complessivo è stato di 37 ore rispetto alle 38 stimate in sede di \glslink{pianificazione}{pianificazione}.
+
+L'unico scostamento del periodo si registra nel ruolo di \glslink{analista}{Analista}, che ha consuntivato 6 ore a fronte delle 7 preventivate (-1 ora), grazie al fatto che la revisione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} ha richiesto un intervento più contenuto del previsto. Tutti gli altri ruoli hanno rispettato esattamente le stime. Di conseguenza il bilancio cumulativo degli scostamenti scende ulteriormente a +12 ore totali, proseguendo il rientro avviato nell'iterazione precedente.
+
+La \glslink{pianificazione}{pianificazione} economica aggiornata viene strutturata nella seguente tabella:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +4 & 63 & 1.575,00 \euro & -100,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +5 & 165 & 2.475,00 \euro & -75,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+12} & \textbf{642} & \textbf{12.805,00 \euro} & \textbf{-235,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 7}
+    \label{tab:eac_sprint7}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint7}, il bilancio a finire proietta attualmente un totale di 642 ore lavorative. L'ulteriore, seppur lieve, recupero delle ore di analisi conferma il consolidamento del monitoraggio orario e la progressiva riduzione del deficit accumulato nelle iterazioni iniziali del progetto.
+
+\subsubsection{Rendiconto ore rimanenti al termine del settimo sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 5 & 0 & 10 & 13 & 17 & 48 \\
+\hline
+E. Bellet & 4 & 1 & 0 & 16 & 17 & 13 & 51 \\
+\hline
+A.Oloni & 4 & 3 & 4 & 15 & 12 & 20 & 58 \\
+\hline
+D. Belluz & 4 & 0 & 2 & 14 & 21 & 15 & 56 \\
+\hline
+A. Maule & 3 & 6 & 0 & 14 & 15 & 17 & 55 \\
+\hline
+L. Soligo & 4 & 5 & 3 & 10 & 15 & 16 & 53 \\
+\hline
+V. Y. K. Fernandes & 4 & 5 & 0 & 16 & 19 & 12 & 56 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{26} & \textbf{25} & \textbf{9} & \textbf{95} & \textbf{112} & \textbf{110} & \textbf{377} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del settimo sprint}
 \end{table}
 
 \end{document}
