@@ -31,6 +31,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Installa poppler (anteprime PDF)
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
       - name: Genera Sito (HTML, CSS, Asset, Documenti)
         run: python .github/site-src/update_index.py
 
