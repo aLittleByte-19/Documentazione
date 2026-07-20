@@ -82,11 +82,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione    & 1.0.0 \\
+            Versione    & 1.1.0 \\
             Redattori   & Eleonora Bellet, Diego Belluz, Alex Oloni \\
             Verificatori& V.Y. Kaneda Fernandes, Eleonora Bellet, Angela Maule \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 15/06/2026 \\
+            Data        & 19/07/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -122,6 +122,8 @@
         \hline
         \endlastfoot
         
+        \hline
+        1.1.0 & 19/07/2026 & Aggiunta delle procedure operative ai processi definiti. & Eleonora Bellet & Leonardo Soligo & - \\
         \hline
         1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Angelica Gastaldello \\
         \hline
@@ -258,6 +260,19 @@ Il team si impegna nelle seguenti attività chiave:
     \item \textbf{Accertamento della Qualità:} Definizione degli obiettivi di qualità per i processi e per il prodotto finale.
 \end{itemize}
 
+\paragraph{Procedura Operativa}
+Il processo di fornitura viene eseguito secondo i seguenti passaggi:
+
+\begin{enumerate}
+    \item Analisi delle richieste formulate dal \glslink{committente-proponente}{proponente}.
+    \item Definizione degli obiettivi della \glslink{milestone}{milestone} corrente.
+    \item \glslink{pianificazione}{Pianificazione} delle attività da svolgere.
+    \item Produzione dei deliverable previsti.
+    \item Verifica dei deliverable prodotti.
+    \item Validazione interna dei risultati ottenuti.
+    \item Consegna del materiale al \glslink{committente-proponente}{committente} o ai docenti.
+\end{enumerate}
+
 \paragraph{Documentazione Prodotta (Core della Fornitura)}
 La documentazione non è solo un onere burocratico, ma lo strumento principale per garantire la trasparenza verso i committenti e la coerenza interna. Di seguito sono elencati i documenti redatti e mantenuti dal team:
 \begin{itemize}
@@ -293,6 +308,19 @@ Il ciclo di sviluppo per l'integrazione dei modelli di \glslink{intelligenza-art
     \item \textbf{Validazione "\glslink{human-in-the-loop}{Human-in-the-loop}":} Implementazione di flussi di sviluppo che prevedano sempre un passaggio di validazione umana per le operazioni \glslink{intelligenza-artificiale-ai}{AI} a bassa \glslink{confidenza-confidence-score}{confidenza} (es. revisione dei destinatari estratti o modifica del testo generato).
     \item \textbf{Collaudo e Rilascio:} Esecuzione di test formali sulle metriche di qualità (es. tempi di risposta, tasso di successo dell'\glslink{intelligenza-artificiale-ai}{AI}) prima dell'approvazione finale.
 \end{itemize}
+
+\paragraph{Procedura Operativa}
+Il processo di sviluppo segue il seguente ciclo di vita:
+
+\begin{enumerate}
+    \item \glslink{analisi-dei-requisiti-adr}{Analisi dei requisiti}.
+    \item Definizione della soluzione architetturale.
+    \item \glslink{pianificazione}{Pianificazione} delle attività di sviluppo.
+    \item Implementazione delle funzionalità previste.
+    \item Esecuzione delle attività di verifica.
+    \item Correzione delle eventuali anomalie rilevate.
+    \item Validazione del prodotto sviluppato.
+\end{enumerate}
 
 \paragraph{Analisi e Tracciamento dei Requisiti}
 Fase nevralgica per la definizione del perimetro del prodotto. Per garantire chiarezza e tracciabilità, il team adotta standard di modellazione e nomenclatura precisi per attori e casi d'uso.
@@ -458,6 +486,18 @@ Il ciclo di vita di ogni documento prodotto dal team è regolato da una procedur
 
 \end{itemize}
 
+\paragraph{Procedura Operativa}
+La produzione della documentazione avviene mediante i seguenti passaggi:
+
+\begin{enumerate}
+    \item Identificazione del documento da produrre o aggiornare.
+    \item Assegnazione dell'attività al membro \glslink{responsabile}{responsabile}.
+    \item Redazione o modifica del documento.
+    \item Verifica della conformità alle \glslink{norme-di-progetto}{Norme di Progetto}.
+    \item Approvazione del documento da parte del \glslink{responsabile}{Responsabile}.
+    \item Pubblicazione della versione approvata nel \glslink{repository}{repository}.
+\end{enumerate}
+
 \subsubsection{Gestione della configurazione}
 Il processo di Gestione della Configurazione ha l'obiettivo di tracciare, organizzare e controllare in modo sistematico l'evoluzione di tutti gli artefatti di progetto (codice sorgente, documentazione, script). Adottare questo processo permette al gruppo \textit{aLittleByte} di prevenire conflitti, recuperare versioni precedenti in caso di errore e garantire che ogni rilascio sia coerente e verificabile.
 
@@ -477,6 +517,20 @@ Il controllo della configurazione è l'attività preposta alla gestione, traccia
     
     \item \textbf{\glslink{pull-request}{Pull Request}:} Rappresenta il meccanismo esclusivo per l'integrazione di qualsiasi modifica all'interno del \glslink{repository}{repository}. Al fine di mantenere un elevato standard qualitativo e prevenire errori, il team ha stabilito che nessun componente è autorizzato a effettuare modifiche dirette sul ramo principale (\texttt{main}). Perciò ogni integrazione deve necessariamente passare per una \textit{\glslink{pull-request}{Pull Request}}, la quale richiede obbligatoriamente un processo di revisione incrociata e può essere inserita nel main solo a seguito di almeno una revisione positiva da parte di altri membri del gruppo. 
 \end{itemize}
+
+\paragraph{Procedura Operativa}
+Il controllo della configurazione viene gestito come segue:
+
+\begin{enumerate}
+    \item Apertura di una \glslink{issue}{Issue} associata alla modifica.
+    \item Creazione di un \glslink{branch}{branch} dedicato.
+    \item Implementazione delle modifiche previste.
+    \item Verifica delle modifiche effettuate.
+    \item Apertura di una \glslink{pull-request}{Pull Request}.
+    \item Revisione della \glslink{pull-request}{Pull Request} da parte del \glslink{verificatore}{Verificatore}.
+    \item Approvazione della modifica.
+    \item Integrazione nel \glslink{branch}{branch} principale.
+\end{enumerate}
 
 \paragraph{Registrazione stato di configurazione}
 Ogni documento presenta un \textit{Registro delle modifiche} (eccetto i verbali) per tenere traccia di tutte le modifiche svolte. Il sistema di versionamento è il seguente: \\
@@ -527,6 +581,19 @@ La verifica interviene nelle singole fasi del nostro progetto, con lo scopo di a
 In questa prima parte del lavoro, il gruppo \textit{aLittleByte} si è dedicato principalmente alla verifica della documentazione. Tramite revisioni incrociate tra i membri, ci siamo assicurati che i contenuti fossero corretti e che i testi rispettassero le regole grammaticali, sintattiche e di formattazione che ci siamo dati nelle presenti \glslink{norme-di-progetto}{Norme di Progetto}.
 
 Per quanto riguarda invece la verifica del codice sorgente e del prodotto software, ce ne occuperemo nel dettaglio una volta superata la revisione \textit{\glslink{rtb-requirements-and-technology-baseline}{RTB}}. In ogni caso, tutte le decisioni prese, i metodi di controllo utilizzati e i risultati di queste verifiche verranno sempre riportati in modo esaustivo nel documento \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}}.
+
+\paragraph{Procedura Operativa}
+Le attività di verifica vengono eseguite secondo il seguente processo:
+
+\begin{enumerate}
+    \item Individuazione dell'artefatto da verificare.
+    \item Selezione delle tecniche di verifica applicabili.
+    \item Esecuzione delle verifiche previste.
+    \item Registrazione delle anomalie riscontrate.
+    \item Correzione delle anomalie.
+    \item Riesecuzione delle verifiche.
+    \item Approvazione dell'artefatto verificato.
+\end{enumerate}
 
 \paragraph{Analisi Statica}
 L'\glslink{analisi-statica}{analisi statica} è una tecnica di verifica che viene applicata all'oggetto di studio senza richiederne l'esecuzione. Questo approccio ci permette di individuare anomalie e difetti fin dalle primissime fasi del ciclo di vita del software, ben prima che la scrittura del codice sia ultimata.
@@ -599,6 +666,18 @@ Gli esiti derivanti da queste procedure di validazione saranno riportati e discu
 
 Si precisa che, in concomitanza con la pubblicazione dei documenti per l'\textit{\glslink{rtb-requirements-and-technology-baseline}{RTB}}, il progetto si trova in una fase antecedente alla codifica e al collaudo del software. Per tale ragione, lo stato di avanzamento dei test riporterà la dicitura temporanea ''Non Implementato''. I dati e i risultati effettivi dei test verranno integrati in questa sezione solamente in vista della consegna della \textit{\glslink{pb-product-baseline}{PB}}.
 
+\paragraph{Procedura Operativa}
+La validazione del prodotto avviene attraverso i seguenti passaggi:
+
+\begin{enumerate}
+    \item Raccolta dei risultati delle attività di verifica.
+    \item Controllo del soddisfacimento dei requisiti.
+    \item Verifica del raggiungimento degli obiettivi di qualità.
+    \item Esecuzione dei \glslink{test-di-sistema}{test di sistema} previsti.
+    \item Analisi delle eventuali non conformità.
+    \item Approvazione del prodotto.
+\end{enumerate}
+
 \subsection{Processi Organizzativi}
 
 \subsubsection{Descrizione e scopo}
@@ -633,6 +712,20 @@ L'organizzazione di ogni singola iterazione è scandita da una riunione, organiz
     \item \textbf{\glslink{sprint}{Sprint} Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo. In questa fase è obbligatorio revisionare e aggiornare il Registro dei Rischi: per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi durante lo \glslink{sprint}{sprint}, il gruppo deve documentare formalmente nel registro la causa scatenante, l'impatto effettivo sul progetto e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista e assegnare. 
 \end{itemize}
 
+\paragraph{Procedura Operativa}
+La gestione degli \glslink{sprint}{Sprint} avviene secondo il seguente processo:
+
+\begin{enumerate}
+    \item Definizione degli obiettivi dello \glslink{sprint}{Sprint}.
+    \item Individuazione delle attività da svolgere.
+    \item Assegnazione dei ruoli e delle responsabilità.
+    \item Stima dell'effort richiesto.
+    \item Inserimento delle attività nello \glslink{sprint}{Sprint} Backlog.
+    \item Monitoraggio dell'avanzamento.
+    \item Esecuzione della \glslink{sprint}{Sprint} Review.
+    \item Esecuzione della \glslink{sprint}{Sprint} Retrospective.
+\end{enumerate}
+
 \paragraph{Gestione del Flusso di Lavoro tramite Kanban}
 Per garantire un controllo visivo e immediato sullo stato di avanzamento delle singole \glslink{issue}{Issue} associate al progetto, il gruppo gestisce i task tramite la board \glslink{github}{GitHub} Projects ''aLittleByte - \glslink{dashboard}{Dashboard}''.
 La bacheca è modellata secondo i principi Kanban e si articola nelle seguenti colonne operative:
@@ -642,6 +735,19 @@ La bacheca è modellata secondo i principi Kanban e si articola nelle seguenti c
     \item \textbf{In Review:} Task completati nello sviluppo o nella stesura e attualmente in attesa di \textit{Peer Review} tramite l'approvazione della relativa \textit{\glslink{pull-request}{Pull Request}}.
     \item \textbf{Done:} Lavoro verificato, approvato e unito definitivamente al \glslink{branch}{branch} principale.
 \end{itemize}
+
+\paragraph{Procedura Operativa}
+Il flusso di lavoro tramite Kanban viene gestito come segue:
+
+\begin{enumerate}
+    \item Creazione della \glslink{issue}{Issue} associata all'attività.
+    \item Inserimento della \glslink{issue}{Issue} nella colonna "To Do".
+    \item Spostamento nella colonna "In Progress" all'avvio dei lavori.
+    \item Aggiornamento dello stato durante l'esecuzione.
+    \item Spostamento nella colonna "Review" al termine delle attività.
+    \item Verifica del lavoro svolto.
+    \item Spostamento nella colonna "Done" a seguito dell'approvazione.
+\end{enumerate}
 
 \subsubsection{Ruoli}
 
@@ -754,6 +860,17 @@ Il \glslink{responsabile}{Responsabile} ha il compito di controllare, a fine \gl
 
 Al termine di ogni riunione, il membro designato redige il verbale seguendo la struttura definita nella sezione~\ref{sec:documentazione}. Ogni compito emerso viene immediatamente trasformato in una \textit{\glslink{issue}{Issue}} su \glslink{github}{GitHub} e assegnato al membro o ai membri incaricati. Qualora il componente assegnato riscontri difficoltà, può utilizzare la sezione commenti della \textit{\glslink{issue}{Issue}} per chiedere chiarimenti al resto del team.
 
+\paragraph{Procedura Operativa}
+Il tracciamento delle azioni viene effettuato mediante i seguenti passaggi:
+
+\begin{enumerate}
+    \item Registrazione dell'attività nel sistema di tracciamento.
+    \item Assegnazione dell'attività a un membro del gruppo.
+    \item Aggiornamento periodico dello stato.
+    \item Verifica del completamento dell'attività.
+    \item Chiusura dell'azione registrata.
+\end{enumerate}
+
 \subsubsection{Comunicazione}
 \paragraph{Comunicazioni Interne}
 Le comunicazioni interne avvengono tramite: 
@@ -796,6 +913,19 @@ Tutte le sedute si tengono in via telematica sfruttando la piattaforma \textbf{G
 In conformità con i principi agili e gli standard di qualità adottati, il gruppo aLittleByte applica sistematicamente un ciclo di miglioramento continuo del proprio \textit{\glslink{way-of-working-wow}{Way of Working}}. Al termine di ogni iterazione o fase di progetto, il team analizza le misurazioni raccolte nel cruscotto di valutazione all'interno del \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}}. 
 
 Qualora emergano metriche sotto la soglia di accettabilità o inefficienze operative, il gruppo elabora specifiche ``Iniziative di miglioramento'', documentandole nel \glslink{piano-di-qualifica}{Piano di Qualifica} stesso. Tali iniziative non rimangono semplici osservazioni, ma vengono obbligatoriamente recepite e formalizzate all'interno delle presenti \textbf{\glslink{norme-di-progetto}{Norme di Progetto}} sotto forma di nuove regole operative e procedurali per gli \glslink{sprint}{sprint} successivi. Questo meccanismo garantisce che il metodo di lavoro si evolva costantemente, riducendo i rischi, correggendo le anomalie e massimizzando l'efficienza complessiva del team.
+
+\paragraph{Procedura Operativa}
+Il processo di miglioramento continuo viene svolto secondo i seguenti passaggi:
+
+\begin{enumerate}
+    \item Raccolta dei dati relativi allo \glslink{sprint}{Sprint} concluso.
+    \item Analisi dei risultati ottenuti.
+    \item Individuazione delle criticità emerse.
+    \item Definizione delle misure correttive.
+    \item Aggiornamento dell'\glslink{analisi-dei-rischi}{analisi dei rischi}.
+    \item Aggiornamento della \glslink{pianificazione}{pianificazione} futura.
+    \item Verifica dell'efficacia delle azioni intraprese.
+\end{enumerate}
 
 \section{Qualità del software}
 Con l'espressione ``qualità del software'' si indica la totalità delle proprietà di un'entità che concorrono a soddisfare le necessità degli utenti, siano esse dichiarate esplicitamente o sottintese. Tale valutazione si focalizza su due direttrici fondamentali: il valore del prodotto finito e l'efficacia del processo di realizzazione.
