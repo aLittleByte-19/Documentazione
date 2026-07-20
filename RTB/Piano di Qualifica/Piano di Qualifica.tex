@@ -90,11 +90,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione    & 2.1.0 \\
+            Versione    & 2.2.0 \\
             Redattori   & Eleonora Bellet, Alex Oloni, V.Y. Kaneda Fernandes \\
             Verificatori& Eleonora Bellet, Diego Belluz, V.Y. Kaneda Fernandes\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 06/07/2026 \\
+            Data        & 19/07/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -125,6 +125,8 @@
         \hline
         \endhead
 
+        \hline
+        2.2.0 & 19/07/2026 & Aggiunti MPC-TSC, MPC-TPC e MPC-TEC.  & Eleonora Bellet & Alex Oloni & - \\
         \hline
         2.1.0 & 06/07/2026 & Aggiunto settimo sprint & Diego Belluz & Alex Oloni & - \\
         \hline 
@@ -1581,6 +1583,40 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{\glslink{
 \subsubsection{MPC-CC e MPC-TSR — Code Coverage e Test Success Rate}
 
 Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono ancora considerate pienamente applicabili nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, poiché il codice realizzato in \glslink{rtb-requirements-and-technology-baseline}{RTB} ha natura dimostrativa e non coincide con una baseline stabile di prodotto. La misurazione sistematica di tali metriche è prevista a partire dalla fase \glslink{pb-product-baseline}{PB (Product Baseline)}, quando verrà sviluppata e consolidata la baseline di riferimento e i test automatici potranno essere utilizzati come criterio continuativo di verifica.
+
+\subsubsection{MPC-TSC -- Test Specification Coverage}
+
+Misura la percentuale di casi di test specificati rispetto al numero totale di casi di test previsti.
+
+\[
+MPC\text{-}TSC = \frac{Test\ specificati}{Test\ previsti} \times 100
+\]
+
+L'obiettivo minimo stabilito dal gruppo è pari al 95\%.
+
+\subsubsection{MPC-TPC -- Test Progress Coverage}
+
+Misura la percentuale di casi di test implementati rispetto al numero totale di casi di test previsti.
+
+\[
+MPC\text{-}TPC = \frac{Test\ implementati}{Test\ previsti} \times 100
+\]
+
+L'obiettivo minimo stabilito dal gruppo è pari al 90\%.
+
+\subsubsection{MPC-TEC -- Test Execution Coverage}
+
+Misura la percentuale di casi di test eseguiti rispetto al numero totale di casi di test previsti.
+
+\[
+MPC\text{-}TEC = \frac{Test\ eseguiti}{Test\ previsti} \times 100
+\]
+
+L'obiettivo minimo stabilito dal gruppo è pari al 90\%.
+
+\subsubsection{Interpretazione degli indicatori}
+
+Gli indicatori relativi alla campagna di test consentono di monitorare lo stato di avanzamento delle attività di verifica. Valori inferiori alle soglie stabilite evidenziano la necessità di pianificare attività correttive nel corso dello \glslink{sprint}{Sprint} successivo, al fine di garantire il raggiungimento degli obiettivi di qualità definiti dal gruppo.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Gestione della qualità}
