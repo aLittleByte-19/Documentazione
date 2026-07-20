@@ -1,0 +1,182 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-07-14}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+        \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale 2026-07-14}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Interno - 2026-07-14}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & Leonardo Soligo \\
+            Verificatore & Alex Oloni\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 14 Luglio 2026\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Discord \\[6pt]
+
+Orario (Inizio - Fine) & 18:00 -- 18:30 \\[6pt]
+
+Redattore &
+    L. Soligo\\[6pt]
+
+Amministratore & 
+    D. Belluz\\[6pt]
+
+Verificatore &
+    A. Oloni\\[6pt]
+
+Partecipanti &
+  A. Oloni\\ &
+  L. Soligo\\&
+  E. Bellet\\&
+  A. Gastaldello\\&
+  A. Maule\\&
+  V. Y. Kaneda Fernandes\\&
+  D. Belluz\\
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Strategia repo PB/MVP: nuova repo e sostituzione occorrenze
+    \item Aggiornamento azienda e richiesta riunione
+    \item Definizione documentale: manuale utente e specifica tecnica in bozza
+    \item Prossime attività di sviluppo
+    \end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Strategia repo PB/MVP: nuova repo e sostituzione occorrenze}
+Si definiscono compiti di avvio: Leonardo crea la repository dell'MVP(Minimum Viable Product), Angelica si occuperà del refactoring dei nomi dei package,
+dei file, e delle varie parti del codice necessarie.
+
+\subsection{Aggiornamento azienda e richiesta riunione}
+Si discute che l’azienda non ha risposto da tempo (possibile periodo di ferie) e si propone di riscrivere il messaggio attuale chiedendo anche una riunione per la prossima settimana. Si decide di conferire internamente la data (sondaggio se necessario) e 
+si ipotizza lunedì o martedì della prossima settimana; l’idea è inviare già la comunicazione affinchè c'è tempo per organizzarsi.
+
+\subsection{Inizio stesura documenti PB}
+Angela Maule si occuperà della stesura del manuale utente e delle specifiche tecniche. Si discute inoltre che
+la manualistica potrebbe essere verso la fine, mentre la specifica tecnica è molto più corposa.
+Vinicius Y. Kaneda Fernandes si occuperà poi della sistemazione dei vari documenti che hanno avuto un riscontro avverso da parte dei professori nella correzione dell'RTB, che poi andranno implementati nella fase PB.
+
+\subsection{Prossime attività di sviluppo}
+Il team inoltre ha definito le prossime task da svolgere nell'ambito dello sviluppo del software, che includono:
+\begin{itemize}
+\item Implementare la valutazione della risposta generata
+\item Modifica manuale della bozza generata
+\item Generazione automatica/modifica manuale(/retry) dell’immagine di copertina contestuale al messaggio
+\item Sistema di download come pdf per comunicazioni ai assistant
+\end{itemize}
+Si è deciso di procedere per step graduali, Alex Oloni si dedicherà alla parte di implementazione dell'immagine di copertina, mentre il rating della risposta generata e modifica manuale delle bozze sarà implementato da Diego Belluz e Eleonora Bellet.
+\newpage
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+    \hline
+        \textit {Leonardo Soligo} & Creazione nuova repository per sviluppo MVP & \href{https://github.com/aLittleByte-19/Documentazione/issues/148}{\#148}\\
+    \hline
+        \textit {Angelica Gastaldello} &  Refactoring per nuova repository & \href{https://github.com/aLittleByte-19/Documentazione/issues/149}{\#149}\\
+    \hline
+        \textit{Angela Maule} & Prima stesura Manuale Utente e Specifiche Tecniche & \href{https://github.com/aLittleByte-19/Documentazione/issues/150}{\#150}\\
+    \hline
+        \textit{Alex Oloni} & Implementazione immagine di copertina & \href{https://github.com/aLittleByte-19/Documentazione/issues/151}{\#151}\\
+    \hline
+        \textit{Eleonora Bellet e Diego Belluz} & Implementazione rating della risposta generata e modifica manuale delle bozze & \href{https://github.com/aLittleByte-19/Documentazione/issues/152}{\#152}\\
+    \hline
+        \textit{V.Y. Kaneda Fernandes} & Correzione documenti & 
+        \href{https://github.com/aLittleByte-19/Documentazione/issues/153}{\#153}\\
+    \hline
+        \textit{Alex Oloni} & Stesura Verbale Interno 14/07/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/154}{\#154}\\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
