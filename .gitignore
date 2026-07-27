@@ -9,6 +9,11 @@
 *~
 .vscode/
 .idea/
+.claude/
+
+# il progetto Node del glossario vive in .github/glossary-app
+/package.json
+/package-lock.json
 
 # log e cache
 *.log
@@ -16,6 +21,13 @@ tmp/
 temp/
 .cache/
 _site/
+node_modules/
+.github/glossary-app/.angular/
+.github/glossary-app/dist/
+.github/glossary-app/public/
+.github/glossary-app/out-tsc/
+.github/glossary-app/playwright-report/
+.github/glossary-app/test-results/
 
 # per latex
 *.aux

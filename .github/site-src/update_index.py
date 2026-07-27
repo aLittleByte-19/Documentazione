@@ -13,10 +13,14 @@ SITE_SRC = os.path.join('.github', 'site-src')
 BUILD_DIR = '_site'
 TEMPLATE_PATH = os.path.join(SITE_SRC, 'index_template.html')
 PDF_VIEWER_TEMPLATE_PATH = os.path.join(SITE_SRC, 'pdf-viewer-template.html')
-GLOSSARY_SRC = os.path.join(SITE_SRC, 'glossario.html')
+GLOSSARY_BUILD_DIR = os.path.join('.github', 'glossary-app', 'dist', 'glossary-app', 'browser')
+GLOSSARY_BUILD_INDEX = os.path.join(GLOSSARY_BUILD_DIR, 'index.html')
 
 # Cartelle e file da escludere dalla scansione e dal deploy finale
-EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
+EXCLUDE_DIRS = {
+    '.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', 'node_modules',
+    '__pycache__', '.pytest_cache'
+}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
 EXCLUDE_PDFS = set()
 
@@ -289,9 +293,10 @@ def render_doc_item(pdf_rel_path, desc=None, large=False):
     link_target = 'glossario' if is_glossario else '_blank'
     meta = 'Pagina web' if is_glossario else 'PDF'
 
-    # Il glossario apre una pagina web: anteprima della pagina, non del PDF
+    # La stessa pagina Angular serve le card delle diverse fasi (RTB, PB, ...).
+    # Lo screenshot viene rigenerato con Playwright dopo l'assemblaggio del sito.
     if is_glossario:
-        thumb_rel = ensure_web_thumbnail(GLOSSARY_SRC, 'glossario-web')
+        thumb_rel = f'{THUMBS_DIR}/glossario.png'
     else:
         thumb_rel = ensure_thumbnail(pdf_rel_path)
 
@@ -299,8 +304,6 @@ def render_doc_item(pdf_rel_path, desc=None, large=False):
         thumb_html = (
             f'<img class="doc-thumb" src="{to_url_path(thumb_rel)}" alt="" loading="lazy">'
         )
-    elif is_glossario:
-        thumb_html = f'<span class="doc-thumb doc-thumb-fallback">{SVG_WEB}</span>'
     else:
         thumb_html = f'<span class="doc-thumb doc-thumb-fallback">{SVG_DOC}</span>'
 
@@ -643,6 +646,12 @@ def generate_pdf_viewers(site_pdf_paths):
             f.write(viewer_html)
 
 def main():
+    if not os.path.exists(GLOSSARY_BUILD_INDEX):
+        raise FileNotFoundError(
+            f"Build Angular del glossario non trovato: {GLOSSARY_BUILD_INDEX}. "
+            "Eseguire prima 'npm run build' in .github/glossary-app."
+        )
+
     # Pulisci o crea la cartella di output
     if os.path.exists(BUILD_DIR):
         shutil.rmtree(BUILD_DIR)
@@ -720,8 +729,14 @@ def main():
     if os.path.exists(css_src):
         shutil.copy2(css_src, os.path.join(BUILD_DIR, 'style.css'))
 
-    if os.path.exists(GLOSSARY_SRC):
-        shutil.copy2(GLOSSARY_SRC, os.path.join(BUILD_DIR, 'glossario.html'))
+    # L'index Angular e l'unica pagina pubblica del glossario. I bundle e il
+    # JSON restano isolati sotto glossary-app per evitare collisioni.
+    shutil.copy2(GLOSSARY_BUILD_INDEX, os.path.join(BUILD_DIR, 'glossario.html'))
+    shutil.copytree(
+        GLOSSARY_BUILD_DIR,
+        os.path.join(BUILD_DIR, 'glossary-app'),
+        ignore=shutil.ignore_patterns('index.html'),
+    )
 
     for asset_name in ('pdf-viewer.css', 'pdf-viewer.js'):
         asset_src = os.path.join(SITE_SRC, asset_name)

@@ -1,0 +1,38 @@
+{
+  "name": "documentation-glossary",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "prepare:assets": "\"$npm_node_execpath\" scripts/prepare-assets.mjs",
+    "build": "\"$npm_node_execpath\" scripts/build.mjs",
+    "build:development": "\"$npm_node_execpath\" scripts/build.mjs --development --watch",
+    "capture:glossary-thumbnail": "\"$npm_node_execpath\" scripts/capture-glossary-thumbnail.mjs",
+    "validate:data": "\"$npm_node_execpath\" scripts/validate-glossary.mjs",
+    "test:e2e": "\"$npm_node_execpath\" node_modules/@playwright/test/cli.js test"
+  },
+  "dependencies": {
+    "@angular/animations": "20.3.26",
+    "@angular/cdk": "20.2.14",
+    "@angular/common": "20.3.26",
+    "@angular/compiler": "20.3.26",
+    "@angular/core": "20.3.26",
+    "@angular/forms": "20.3.26",
+    "@angular/platform-browser": "20.3.26",
+    "@angular/router": "20.3.26",
+    "@primeuix/themes": "1.2.5",
+    "primeng": "20.4.0",
+    "rxjs": "^7.8.2",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@angular/build": "20.3.32",
+    "@angular/cli": "20.3.32",
+    "@angular/compiler-cli": "20.3.26",
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.0",
+    "typescript": "~5.9.2"
+  }
+}

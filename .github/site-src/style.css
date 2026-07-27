@@ -12,8 +12,9 @@
 }
 
 html {
+    height: 100%;
+    overflow: hidden;
     scroll-behavior: smooth;
-    scroll-padding-top: var(--scroll-offset);
 }
 
 * {
@@ -23,19 +24,32 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
     background-color: var(--bg-gray);
     color: var(--text-dark);
-    padding-bottom: 50px;
+    overflow: hidden;
 }
 
 header {
+    flex: 0 0 auto;
     background-color: var(--white);
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 1000;
     border-bottom: 3px solid var(--accent-gold);
+}
+
+.page-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-bottom: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-padding-top: 12px;
 }
 
 nav {
@@ -798,7 +812,7 @@ footer {
         --scroll-offset: 190px;
     }
 
-    body {
+    .page-scroll {
         padding-bottom: 32px;
     }
 

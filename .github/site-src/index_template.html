@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentazione aLittleByte</title>
+    <title>Documentazione | aLittleByte</title>
     <link rel="icon" type="image/png" href="assets/solo_logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -22,6 +22,7 @@
     </nav>
   </header>
 
+  <div id="page-scroll" class="page-scroll">
   <main>
     <section class="hero" aria-label="Presentazione">
       <img class="hero-logo" src="assets/logo.png" alt="">
@@ -169,20 +170,13 @@
   <footer>
     <p id="last-update">Ultimo aggiornamento: <!-- TIMESTAMP --></p>
   </footer>
+  </div>
 
   <script>
     (function () {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      const siteHeader = document.querySelector('header');
-      function updateScrollOffset() {
-        document.documentElement.style.setProperty(
-          '--scroll-offset',
-          (siteHeader.offsetHeight + 12) + 'px'
-        );
-      }
-      updateScrollOffset();
-      window.addEventListener('resize', updateScrollOffset, { passive: true });
+      const pageScroll = document.getElementById('page-scroll');
       const hashAliases = {
         RTB: 'rtb',
         rtb: 'documentazione',
@@ -264,12 +258,12 @@
       navigateToHash(window.location.hash, false);
 
       const backToTop = document.getElementById('back-to-top');
-      window.addEventListener('scroll', function () {
-        backToTop.hidden = window.scrollY < 400;
+      pageScroll.addEventListener('scroll', function () {
+        backToTop.hidden = pageScroll.scrollTop < 400;
       }, { passive: true });
 
       backToTop.addEventListener('click', function () {
-        window.scrollTo({
+        pageScroll.scrollTo({
           top: 0,
           behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
         });
