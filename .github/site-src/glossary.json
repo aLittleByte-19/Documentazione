@@ -640,7 +640,7 @@
     {
       "id": "soglia-di-confidenza",
       "term": "Soglia di Confidenza",
-      "definition": "Valore limite per l'intervento manuale (es. 80\\",
+      "definition": "Valore limite per l'intervento manuale (es. 80%).",
       "aliases": []
     },
     {
