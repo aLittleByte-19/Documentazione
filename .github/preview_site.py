@@ -15,6 +15,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 BUILD_DIR = REPO_ROOT / "_site"
 BUILD_SCRIPT = REPO_ROOT / ".github" / "site-src" / "update_index.py"
+GLOSSARY_APP_DIR = REPO_ROOT / ".github" / "glossary-app"
 
 
 class PreviewHandler(http.server.SimpleHTTPRequestHandler):
@@ -28,8 +29,20 @@ def build_site() -> None:
         raise FileNotFoundError(f"Build script not found: {BUILD_SCRIPT}")
 
     subprocess.run(
+        ["npm", "run", "build"],
+        cwd=GLOSSARY_APP_DIR,
+        check=True,
+    )
+
+    subprocess.run(
         [sys.executable, str(BUILD_SCRIPT)],
         cwd=REPO_ROOT,
+        check=True,
+    )
+
+    subprocess.run(
+        ["npm", "run", "capture:glossary-thumbnail"],
+        cwd=GLOSSARY_APP_DIR,
         check=True,
     )
 

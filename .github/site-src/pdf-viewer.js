@@ -1888,7 +1888,7 @@ async function init() {
     syncHeaderHeight();
     syncSidebarForViewport();
     elements.title.textContent = documentTitle;
-    document.title = `${documentTitle} - Documentazione`;
+    document.title = `${documentTitle} | aLittleByte`;
     elements.openPdfLink.href = pdfUrl.href;
     elements.downloadPdfLink.href = pdfUrl.href;
     elements.downloadPdfLink.download = getFileName(pdfUrl);

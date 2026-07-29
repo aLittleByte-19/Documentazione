@@ -12,8 +12,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -31,8 +29,52 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.22.3'
+          cache: 'npm'
+          cache-dependency-path: '.github/glossary-app/package-lock.json'
+
+      - name: Installa poppler (anteprime PDF)
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Installa dipendenze glossario
+        working-directory: .github/glossary-app
+        run: npm ci
+
+      - name: Valida dati glossario
+        working-directory: .github/glossary-app
+        run: npm run validate:data
+
+      - name: Compila glossario Angular
+        working-directory: .github/glossary-app
+        run: npm run build
+
       - name: Genera Sito (HTML, CSS, Asset, Documenti)
         run: python .github/site-src/update_index.py
+
+      - name: Installa Chromium per i test
+        working-directory: .github/glossary-app
+        run: npx playwright install --with-deps chromium
+
+      - name: Genera anteprima del glossario
+        working-directory: .github/glossary-app
+        run: npm run capture:glossary-thumbnail
+
+      - name: Test browser e accessibilità del sito
+        working-directory: .github/glossary-app
+        run: npm run test:e2e
+
+      - name: Carica diagnostica Playwright in caso di errore
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-playwright-report
+          path: |
+            .github/glossary-app/playwright-report/
+            .github/glossary-app/test-results/
+          retention-days: 7
 
       - name: Debug - Elenca file generati
         run: ls -R _site/
@@ -44,6 +86,9 @@ jobs:
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

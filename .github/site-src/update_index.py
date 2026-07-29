@@ -1,7 +1,8 @@
 import os
 import re
-from datetime import datetime
 import shutil
+import subprocess
+from datetime import datetime
 from html import escape
 from urllib.parse import quote
 
@@ -12,13 +13,80 @@ SITE_SRC = os.path.join('.github', 'site-src')
 BUILD_DIR = '_site'
 TEMPLATE_PATH = os.path.join(SITE_SRC, 'index_template.html')
 PDF_VIEWER_TEMPLATE_PATH = os.path.join(SITE_SRC, 'pdf-viewer-template.html')
+GLOSSARY_BUILD_DIR = os.path.join('.github', 'glossary-app', 'dist', 'glossary-app', 'browser')
+GLOSSARY_BUILD_INDEX = os.path.join(GLOSSARY_BUILD_DIR, 'index.html')
 
 # Cartelle e file da escludere dalla scansione e dal deploy finale
-EXCLUDE_DIRS = {'.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', '__pycache__', '.pytest_cache'}
+EXCLUDE_DIRS = {
+    '.github', '.git', BUILD_DIR, 'scripts', 'website', 'assets', 'node_modules',
+    '__pycache__', '.pytest_cache'
+}
 EXCLUDE_FILES = {'.gitignore', 'prompt.tex', 'README.md', 'index.html'}
 EXCLUDE_PDFS = set()
 
-ROOT_SECTION_ORDER = {'rtb': 0, 'diapositive': 1, 'candidatura': 2}
+# ---- Configurazione delle fasi ----
+# Le fasi vengono rilevate automaticamente dalle cartelle presenti nella root
+# (confronto case-insensitive con gli id qui sotto). L'ultima fase presente
+# nell'ordine di PHASE_META e' la consegna corrente; le precedenti finiscono
+# in archivio. Quando verra' creata la cartella "PB", alla build successiva il
+# sito si riorganizza da solo: PB diventa corrente e RTB scivola in archivio.
+PHASE_META = [
+    {
+        'id': 'candidatura',
+        'title': 'Candidatura',
+        'subtitle': 'Scelta del capitolato e dichiarazione degli impegni',
+        'artefatto': None,
+        # La candidatura ha prodotti una tantum, fuori dalla classificazione
+        # del regolamento: gruppo unico esplicito.
+        'groups_override': [('Documenti', ['analisi capitolati', 'Dichiarazione Impegni'])],
+    },
+    {
+        'id': 'rtb',
+        'title': 'RTB',
+        'subtitle': 'Requirements and Technology Baseline',
+        'artefatto': ('PoC', 'https://github.com/aLittleByte-19/PoC'),
+    },
+    {
+        'id': 'pb',
+        'title': 'PB',
+        'subtitle': 'Product Baseline',
+        'artefatto': ('MVP', 'https://github.com/aLittleByte-19/MVP'),
+        # Prodotti attesi dal regolamento: se la cartella manca o e' ancora
+        # vuota, la fase corrente espone un segnaposto "In preparazione".
+        'attesi': [
+            'Piano di Progetto',
+            'Piano di Qualifica',
+            'Analisi dei Requisiti',
+            'Specifica Tecnica',
+            'Manuale Utente',
+            'Norme di Progetto',
+            'Glossario',
+        ],
+    },
+]
+
+# Forza una fase come corrente (es. 'rtb'); None = automatico (ultima presente)
+CURRENT_PHASE = None
+
+# Classificazione dei prodotti secondo il regolamento ("Obblighi documentali").
+# I confronti sono case-insensitive sul nome della cartella del prodotto.
+DOCUMENTI_ESTERNI = [
+    'piano di progetto',
+    'piano di qualifica',
+    'analisi dei requisiti',
+    'specifica tecnica',
+    'manuale utente',
+]
+DOCUMENTI_INTERNI = [
+    'norme di progetto',
+    'glossario',
+]
+
+SLIDES_DIR = 'Diapositive'
+
+# Cartelle top-level note che non contengono documenti da esporre
+NON_DOC_DIRS = {'mockup'}
+
 ACRONYMS = {'adr': 'AdR', 'pb': 'PB', 'poc': 'PoC', 'rtb': 'RTB'}
 LOWERCASE_TITLE_WORDS = {
     'a', 'ad', 'al', 'allo', 'ai', 'agli', 'alla', 'alle',
@@ -51,15 +119,6 @@ def format_dir_title(dirname):
 
     return ''.join(formatted)
 
-def get_dir_id(relative_path):
-    slug = relative_path.replace(os.sep, ' ').lower()
-    slug = re.sub(r'[^a-z0-9]+', '-', slug).strip('-')
-    return slug
-
-def sort_root_sections(item):
-    normalized = item.lower()
-    return (ROOT_SECTION_ORDER.get(normalized, len(ROOT_SECTION_ORDER)), normalized)
-
 def to_url_path(path):
     return quote(path.replace(os.sep, '/'), safe='/')
 
@@ -90,82 +149,469 @@ def iter_source_pdfs():
             if filename.lower().endswith('.pdf') and filename not in EXCLUDE_FILES:
                 yield os.path.join(current_dir, filename)
 
-def build_html_tree(base_path, relative_path=""):
-    html_output = ""
-    current_dir = os.path.normpath(os.path.join(base_path, relative_path))
-    
-    if not os.path.exists(current_dir):
-        return ""
+def date_sort_key(pdf_rel_path):
+    """Chiave di ordinamento: data nel nome file (YYYY-MM-DD o YYYY_MM_DD), fallback mtime."""
+    filename = os.path.basename(pdf_rel_path)
+    date_match = re.search(r'(\d{4})[-_](\d{2})[-_](\d{2})', filename)
+    if date_match:
+        return (date_match.group(1) + date_match.group(2) + date_match.group(3), filename)
+    return (str(os.path.getmtime(os.path.join(ROOT_DIR, pdf_rel_path))), filename)
 
-    # Ottieni cartelle e file, ignorando file nascosti e cartelle escluse
-    items = sorted([i for i in os.listdir(current_dir) if not i.startswith('.')])
+def list_dir_pdfs(rel_dir):
+    """PDF direttamente contenuti in rel_dir (non ricorsivo), come percorsi relativi alla root."""
+    abs_dir = os.path.join(ROOT_DIR, rel_dir)
+    if not os.path.isdir(abs_dir):
+        print(f"ATTENZIONE: cartella non trovata: {rel_dir}")
+        return []
 
-    if not relative_path:
-        items.sort(key=sort_root_sections)
-    
-    # Assicura che la Lettera di Presentazione sia in cima
-    for i, item in enumerate(items):
-        if "lettera di presentazione" in item.lower():
-            items.insert(0, items.pop(i))
-            break
-    
-    dirs = [d for d in items if os.path.isdir(os.path.join(current_dir, d)) and d not in EXCLUDE_DIRS]
-    files = [f for f in items if os.path.isfile(os.path.join(current_dir, f)) and f not in EXCLUDE_FILES]
+    return [
+        os.path.join(rel_dir, f)
+        for f in sorted(os.listdir(abs_dir))
+        if f.lower().endswith('.pdf') and f not in EXCLUDE_PDFS
+    ]
 
-    # 1. Stampa SOLO i file .pdf
-    valid_files = [f for f in files if f.endswith('.pdf') and f not in EXCLUDE_PDFS]
-    if valid_files:
-        def get_sort_key(filename):
-            # Cerca una data nel nome del file (es. 2026-03-16 o 2026_03_16)
-            date_match = re.search(r'(\d{4})[-_](\d{2})[-_](\d{2})', filename)
-            if date_match:
-                # Restituisce la data come stringa YYYYMMDD per l'ordinamento
-                return (date_match.group(1) + date_match.group(2) + date_match.group(3), filename)
-            # Fallback: data di modifica del file e nome
-            return (str(os.path.getmtime(os.path.join(current_dir, filename))), filename)
+def filter_signed_only(pdf_paths):
+    """Se esistono sia X.pdf che X_FIRMATO.pdf, espone solo la versione firmata."""
+    stems = {os.path.splitext(os.path.basename(p))[0] for p in pdf_paths}
+    result = []
+    for p in pdf_paths:
+        stem = os.path.splitext(os.path.basename(p))[0]
+        if not stem.endswith('_FIRMATO') and f'{stem}_FIRMATO' in stems:
+            continue
+        result.append(p)
+    return result
 
-        # Ordina i file in ordine decrescente (più recenti in alto)
-        valid_files.sort(key=get_sort_key, reverse=True)
+def display_title(pdf_rel_path):
+    """Titolo leggibile: senza estensione, suffisso FIRMATO come nota, date normalizzate."""
+    stem = os.path.splitext(os.path.basename(pdf_rel_path))[0]
+    signed = stem.endswith('_FIRMATO')
+    if signed:
+        stem = stem[: -len('_FIRMATO')]
+    stem = re.sub(r'(\d{4})[-_](\d{2})[-_](\d{2})', r'\1-\2-\3', stem)
+    title = stem.replace('_', ' ').strip()
+    if signed:
+        title += ' (firmato)'
+    return title
 
-        # Assicura che la Lettera di Presentazione sia il primo file
-        for i, f in enumerate(valid_files):
-            if "lettera di presentazione" in f.lower():
-                valid_files.insert(0, valid_files.pop(i))
-                break
-        
-        html_output += '    <div class="doc">\n'
-        for f in valid_files:
-            name_without_ext = os.path.splitext(f)[0]
-            if relative_path:
-                # Forza lo slash (/) per i percorsi URL anche su Windows
-                file_path = os.path.join(relative_path, f).replace(os.sep, '/')
-            else:
-                file_path = f
-            viewer_path = to_url_path(get_pdf_viewer_path(file_path))
-            # Il glossario riusa la stessa scheda invece di aprirne una nuova
-            link_target = 'glossario' if viewer_path.endswith('glossario.html') else '_blank'
-            html_output += f'        <p><a class="doc-link" href="{viewer_path}" target="{link_target}" rel="noopener noreferrer">{name_without_ext}</a></p>\n'
-        html_output += '    </div>\n'
+# Icone inline (stroke: currentColor)
+SVG_DOC = (
+    '<svg class="icon-doc" viewBox="0 0 24 24" width="20" height="20" fill="none" '
+    'stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" '
+    'aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>'
+    '<path d="M14 2v6h6"/></svg>'
+)
+SVG_OPEN = (
+    '<svg class="icon-open" viewBox="0 0 24 24" width="16" height="16" fill="none" '
+    'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" '
+    'aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'
+    '<path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>'
+)
+SVG_WEB = (
+    '<svg class="icon-doc" viewBox="0 0 24 24" width="20" height="20" fill="none" '
+    'stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" '
+    'aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/>'
+    '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+)
 
-    # 2. Esplora ricorsivamente
-    for d in dirs:
-        dir_title = format_dir_title(d)
-        dir_id = get_dir_id(os.path.join(relative_path, d))
-        depth = len(relative_path.split(os.sep)) if relative_path else 0
-        header_level = min(depth + 2, 6) 
-        
-        sub_content = build_html_tree(base_path, os.path.join(relative_path, d))
-        
-        if sub_content.strip():
-            # Implementazione cartelle collassabili
-            html_output += f'\n    <details id="{dir_id}" class="dir-container">\n'
-            html_output += f'        <summary class="dir-title"><h{header_level}>{dir_title}</h{header_level}></summary>\n'
-            html_output += f'        <div class="dir-content">\n'
-            html_output += sub_content
-            html_output += f'        </div>\n'
-            html_output += f'    </details>\n'
+# ---- Miniature dei documenti ----
+THUMBS_DIR = 'thumbs'
+_pdftoppm_warned = False
+_chrome_warned = False
 
-    return html_output
+def ensure_thumbnail(pdf_rel_path):
+    """Genera (se possibile) la miniatura della prima pagina del PDF con pdftoppm;
+    ritorna il percorso relativo alla root del sito oppure None (fallback: icona)."""
+    global _pdftoppm_warned
+    if shutil.which('pdftoppm') is None:
+        if not _pdftoppm_warned:
+            print("ATTENZIONE: pdftoppm non disponibile, uso icone al posto delle anteprime")
+            _pdftoppm_warned = True
+        return None
+
+    slug = re.sub(r'[^a-z0-9]+', '-', os.path.splitext(pdf_rel_path)[0].lower()).strip('-')
+    out_dir = os.path.join(BUILD_DIR, THUMBS_DIR)
+    os.makedirs(out_dir, exist_ok=True)
+    out_prefix = os.path.join(out_dir, slug)
+    out_file = f'{out_prefix}.png'
+
+    result = subprocess.run(
+        ['pdftoppm', '-png', '-f', '1', '-singlefile', '-scale-to-x', '192', '-scale-to-y', '-1',
+         os.path.join(ROOT_DIR, pdf_rel_path), out_prefix],
+        capture_output=True,
+    )
+    if result.returncode != 0 or not os.path.exists(out_file):
+        print(f"ATTENZIONE: anteprima non generata per {pdf_rel_path}")
+        return None
+
+    return f'{THUMBS_DIR}/{slug}.png'
+
+def find_chrome():
+    candidates = [
+        os.environ.get('CHROME_BIN'),
+        shutil.which('google-chrome'),
+        shutil.which('chromium'),
+        shutil.which('chromium-browser'),
+        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    ]
+    for candidate in candidates:
+        if candidate and os.path.exists(candidate):
+            return candidate
+    return None
+
+def ensure_web_thumbnail(html_src_path, slug):
+    """Genera la miniatura di una pagina web con Chrome headless;
+    ritorna il percorso relativo alla root del sito oppure None (fallback: icona)."""
+    global _chrome_warned
+    chrome = find_chrome()
+    if chrome is None:
+        if not _chrome_warned:
+            print("ATTENZIONE: Chrome non disponibile, uso icona per le anteprime web")
+            _chrome_warned = True
+        return None
+
+    out_dir = os.path.join(BUILD_DIR, THUMBS_DIR)
+    os.makedirs(out_dir, exist_ok=True)
+    out_file = os.path.abspath(os.path.join(out_dir, f'{slug}.png'))
+    src_url = 'file://' + os.path.abspath(html_src_path)
+
+    result = subprocess.run(
+        [chrome, '--headless=new', '--disable-gpu', '--hide-scrollbars',
+         f'--screenshot={out_file}', '--window-size=800,1131', src_url],
+        capture_output=True,
+    )
+    if result.returncode != 0 or not os.path.exists(out_file):
+        print(f"ATTENZIONE: anteprima web non generata per {html_src_path}")
+        return None
+
+    return f'{THUMBS_DIR}/{slug}.png'
+
+def render_doc_item(pdf_rel_path, desc=None, large=False):
+    """Elemento documento: anteprima della prima pagina, titolo-link, metadati.
+    Un solo link per elemento, tutta l'area cliccabile."""
+    viewer_path = to_url_path(get_pdf_viewer_path(pdf_rel_path))
+    is_glossario = viewer_path.endswith('glossario.html')
+    link_target = 'glossario' if is_glossario else '_blank'
+    meta = 'Pagina web' if is_glossario else 'PDF'
+
+    # La stessa pagina Angular serve le card delle diverse fasi (RTB, PB, ...).
+    # Lo screenshot viene rigenerato con Playwright dopo l'assemblaggio del sito.
+    if is_glossario:
+        thumb_rel = f'{THUMBS_DIR}/glossario.png'
+    else:
+        thumb_rel = ensure_thumbnail(pdf_rel_path)
+
+    if thumb_rel:
+        thumb_html = (
+            f'<img class="doc-thumb" src="{to_url_path(thumb_rel)}" alt="" loading="lazy">'
+        )
+    else:
+        thumb_html = f'<span class="doc-thumb doc-thumb-fallback">{SVG_DOC}</span>'
+
+    css_class = 'doc-item doc-item-lg' if large else 'doc-item'
+    desc_html = f'<span class="doc-desc">{escape(desc)}</span>' if desc else ''
+    return (
+        f'<a class="{css_class}" href="{viewer_path}" target="{link_target}" rel="noopener noreferrer">'
+        f'{thumb_html}'
+        f'<span class="doc-body">'
+        f'<span class="doc-title">{escape(display_title(pdf_rel_path))}</span>'
+        f'{desc_html}'
+        f'<span class="doc-meta">{meta}</span>'
+        f'</span>'
+        f'<span class="open-flag">{SVG_OPEN}</span></a>'
+    )
+
+def render_placeholder_item(title, desc=None, large=False):
+    """Segnaposto non cliccabile per un prodotto atteso ma non ancora consegnato."""
+    css_class = 'doc-item doc-item-placeholder doc-item-lg' if large else 'doc-item doc-item-placeholder'
+    desc_html = f'<span class="doc-desc">{escape(desc)}</span>' if desc else ''
+    return (
+        f'<div class="{css_class}">'
+        f'<span class="doc-thumb doc-thumb-fallback">{SVG_DOC}</span>'
+        f'<span class="doc-body">'
+        f'<span class="doc-title">{escape(title)}</span>'
+        f'{desc_html}'
+        f'<span class="doc-meta">In preparazione</span>'
+        f'</span></div>'
+    )
+
+def render_doc_row(pdf_rel_path):
+    """Riga compatta senza anteprima (usata per i verbali)."""
+    viewer_path = to_url_path(get_pdf_viewer_path(pdf_rel_path))
+    return (
+        f'<a class="doc-row" href="{viewer_path}" target="_blank" rel="noopener noreferrer">'
+        f'<span class="doc-title">{escape(display_title(pdf_rel_path))}</span>'
+        f'<span class="open-flag">{SVG_OPEN}</span></a>'
+    )
+
+# ---- Rilevamento automatico di fasi e struttura ----
+
+def discover_phases():
+    """Le fasi presenti nel repo, nell'ordine di PHASE_META (cronologico)."""
+    top_dirs = {
+        d.lower(): d
+        for d in os.listdir(ROOT_DIR)
+        if os.path.isdir(os.path.join(ROOT_DIR, d)) and not d.startswith('.') and d not in EXCLUDE_DIRS
+    }
+
+    phases = []
+    for meta in PHASE_META:
+        base = top_dirs.get(meta['id'])
+        if base:
+            phase = dict(meta)
+            phase['base'] = base
+            phases.append(phase)
+    return phases
+
+def detect_structure(phase):
+    """Individua nella cartella di fase: lettera, cartella verbali e prodotti."""
+    base_abs = os.path.join(ROOT_DIR, phase['base'])
+    lettera = None
+    verbali = None
+    products = []
+
+    for item in sorted(os.listdir(base_abs)):
+        if item.startswith('.') or not os.path.isdir(os.path.join(base_abs, item)):
+            continue
+        low = item.lower()
+        if 'lettera di presentazione' in low:
+            lettera = item
+        elif 'verbal' in low:
+            verbali = item
+        else:
+            products.append(item)
+
+    if lettera is None:
+        print(f"ATTENZIONE: nessuna Lettera di Presentazione trovata nella fase '{phase['id']}'")
+    if verbali is None:
+        print(f"ATTENZIONE: nessuna cartella verbali trovata nella fase '{phase['id']}'")
+    return lettera, verbali, products
+
+def classify_products(phase, products):
+    """Divide i prodotti in documenti esterni/interni secondo il regolamento."""
+    if phase.get('groups_override'):
+        return phase['groups_override']
+
+    def bucket_of(name):
+        low = name.lower()
+        for index, known in enumerate(DOCUMENTI_ESTERNI):
+            if low == known or known in low:
+                return ('esterni', index)
+        for index, known in enumerate(DOCUMENTI_INTERNI):
+            if low == known or known in low:
+                return ('interni', index)
+        return ('altri', 0)
+
+    esterni, interni, altri = [], [], []
+    for product in products:
+        bucket, order = bucket_of(product)
+        if bucket == 'esterni':
+            esterni.append((order, product))
+        elif bucket == 'interni':
+            interni.append((order, product))
+        else:
+            print(f"ATTENZIONE: prodotto non classificato dal regolamento nella fase '{phase['id']}': {product}")
+            altri.append(product)
+
+    groups = []
+    if esterni:
+        groups.append(('Documenti esterni', [name for _, name in sorted(esterni)]))
+    if interni:
+        groups.append(('Documenti interni', [name for _, name in sorted(interni)]))
+    if altri:
+        groups.append(('Altri documenti', altri))
+    return groups
+
+# ---- Rendering delle sezioni ----
+
+def render_lettera(phase, lettera_dir, current=False):
+    """La Lettera di Presentazione, in cima alla fase ("sopra l'involucro")."""
+    pdfs = []
+    if lettera_dir:
+        pdfs = filter_signed_only(list_dir_pdfs(os.path.join(phase['base'], lettera_dir)))
+
+    if not pdfs:
+        if current:
+            item = render_placeholder_item(
+                f"Lettera di Presentazione {phase['title']}",
+                desc='Contenuti della consegna e stato di avanzamento',
+                large=True,
+            )
+            return f'    <div class="lettera-wrap">\n        {item}\n    </div>\n'
+        print(f"ATTENZIONE: nessuna Lettera di Presentazione nella fase '{phase['id']}'")
+        return ''
+
+    return (
+        '    <div class="lettera-wrap">\n'
+        f'        {render_doc_item(pdfs[0], desc="Contenuti della consegna e stato di avanzamento", large=True)}\n'
+        '    </div>\n'
+    )
+
+def render_groups(phase, groups, current=False):
+    """Gruppi di prodotti (documenti esterni / interni) come voci di primo livello."""
+    if not groups:
+        return ''
+
+    html = '    <div class="doc-groups">\n'
+    for group_title, subdirs in groups:
+        html += '        <div class="doc-group">\n'
+        html += f'            <h2 class="group-title">{escape(group_title)}</h2>\n'
+        html += '            <ul class="product-list">\n'
+        for subdir in subdirs:
+            rel_dir = os.path.join(phase['base'], subdir)
+            pdfs = []
+            if os.path.isdir(os.path.join(ROOT_DIR, rel_dir)):
+                pdfs = filter_signed_only(list_dir_pdfs(rel_dir))
+            if not pdfs:
+                if current:
+                    html += f'                <li>{render_placeholder_item(format_dir_title(subdir))}</li>\n'
+                else:
+                    print(f"ATTENZIONE: nessun PDF trovato per il prodotto: {rel_dir}")
+                continue
+            for pdf in pdfs:
+                html += f'                <li>{render_doc_item(pdf)}</li>\n'
+        html += '            </ul>\n'
+        html += '        </div>\n'
+    html += '    </div>\n'
+    return html
+
+def render_verbali(phase, verbali_dir, heading_level):
+    """Sezione Verbali: sotto-liste per verbali esterni e interni, dal piu' recente."""
+    if not verbali_dir:
+        return ''
+
+    rel_dir = os.path.join(phase['base'], verbali_dir)
+    abs_dir = os.path.join(ROOT_DIR, rel_dir)
+    subdirs = [d for d in sorted(os.listdir(abs_dir)) if os.path.isdir(os.path.join(abs_dir, d))]
+    esterni = [d for d in subdirs if 'estern' in d.lower()]
+    interni = [d for d in subdirs if 'intern' in d.lower()]
+    for d in subdirs:
+        if d not in esterni and d not in interni:
+            print(f"ATTENZIONE: sottocartella verbali non classificata: {os.path.join(rel_dir, d)}")
+
+    html = '    <div class="verbali-block">\n'
+    html += f'        <h{heading_level} class="group-title">Verbali</h{heading_level}>\n'
+    for d in esterni + interni:
+        pdfs = filter_signed_only(list_dir_pdfs(os.path.join(rel_dir, d)))
+        if not pdfs:
+            continue
+        pdfs.sort(key=date_sort_key, reverse=True)
+        dir_id = f"{phase['id']}-{re.sub(r'[^a-z0-9]+', '-', d.lower()).strip('-')}"
+        html += f'        <details id="{dir_id}" class="dir-container">\n'
+        html += f'            <summary class="dir-title"><h{heading_level + 1}>{escape(format_dir_title(d))}</h{heading_level + 1}></summary>\n'
+        html += '            <div class="dir-content">\n'
+        html += '                <div class="doc-list">\n'
+        for pdf in pdfs:
+            html += f'                    {render_doc_row(pdf)}\n'
+        html += '                </div>\n'
+        html += '            </div>\n'
+        html += '        </details>\n'
+    html += '    </div>\n'
+    return html
+
+def render_phase_body(phase, heading_level=2, current=False):
+    lettera_dir, verbali_dir, products = detect_structure(phase)
+
+    # Nella fase corrente i prodotti attesi ma assenti compaiono come segnaposto
+    if current and phase.get('attesi'):
+        present = {p.lower() for p in products}
+        products = products + [a for a in phase['attesi'] if a.lower() not in present]
+
+    groups = classify_products(phase, products)
+    return (
+        render_lettera(phase, lettera_dir, current=current)
+        + render_groups(phase, groups, current=current)
+        + render_verbali(phase, verbali_dir, heading_level)
+    )
+
+def render_current_phase(phase):
+    artefatto_html = ''
+    if phase.get('artefatto'):
+        name, url = phase['artefatto']
+        artefatto_html = (
+            '    <p class="phase-artefatto">Artefatto: '
+            f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">{escape(name)}{SVG_OPEN}</a></p>\n'
+        )
+
+    html = '<section id="documentazione" class="phase-current">\n'
+    html += f'    <span id="{phase["id"]}" class="phase-anchor" aria-hidden="true"></span>\n'
+    html += f'    <h1>{escape(phase["title"])}</h1>\n'
+    html += f'    <p class="phase-subtitle">{escape(phase["subtitle"])}</p>\n'
+    html += artefatto_html
+    html += render_phase_body(phase, heading_level=2, current=True)
+    html += '</section>\n'
+    return html
+
+# Milestone delle presentazioni, dalla piu' vecchia alla piu' recente:
+# in pagina compaiono in ordine inverso (la piu' recente in cima, come i diari)
+PRESENTATION_ORDER = ['tb', 'rtb', 'pb']
+
+def render_slides_section():
+    pdfs = list_dir_pdfs(SLIDES_DIR)
+    if not pdfs:
+        return ''
+
+    presentazioni, diari = [], []
+    for pdf in pdfs:
+        name = os.path.splitext(os.path.basename(pdf))[0].lower()
+        if 'presentazione' in name:
+            presentazioni.append(pdf)
+        else:
+            if 'diario' not in name:
+                print(f"ATTENZIONE: diapositiva non classificata, esposta tra i diari: {pdf}")
+            diari.append(pdf)
+
+    def presentation_key(pdf):
+        tokens = re.split(r'[^a-z0-9]+', os.path.splitext(os.path.basename(pdf))[0].lower())
+        for index, token in enumerate(PRESENTATION_ORDER):
+            if token in tokens:
+                return (0, -index, pdf)
+        print(f"ATTENZIONE: presentazione senza milestone riconosciuta nel nome: {pdf}")
+        return (1, 0, pdf)
+
+    presentazioni.sort(key=presentation_key)
+    diari.sort(key=date_sort_key, reverse=True)
+
+    html = '<section id="diapositive">\n'
+    html += '    <h1>Diapositive</h1>\n'
+    html += '    <div class="doc-groups doc-groups-stacked">\n'
+    for group_title, group_pdfs in (('Presentazioni', presentazioni), ('Diari di bordo', diari)):
+        if not group_pdfs:
+            continue
+        html += '        <div class="doc-group">\n'
+        html += f'            <h2 class="group-title">{escape(group_title)}</h2>\n'
+        html += '            <ul class="product-list slides-list">\n'
+        for pdf in group_pdfs:
+            html += f'                <li>{render_doc_item(pdf)}</li>\n'
+        html += '            </ul>\n'
+        html += '        </div>\n'
+    html += '    </div>\n'
+    html += '</section>\n'
+    return html
+
+def render_archive_section(archived_phases):
+    if not archived_phases:
+        return ''
+
+    html = '<section id="archivio">\n'
+    html += '    <h1>Archivio</h1>\n'
+    for phase in archived_phases:
+        html += f'    <details id="{phase["id"]}" class="phase-archived">\n'
+        html += f'        <summary class="dir-title"><h2>{escape(phase["title"])}</h2></summary>\n'
+        html += '        <div class="phase-archived-content">\n'
+        html += render_phase_body(phase, heading_level=3)
+        html += '        </div>\n'
+        html += '    </details>\n'
+    html += '</section>\n'
+    return html
+
+def check_top_level(phases):
+    """Avvisa se nella root compaiono cartelle non riconosciute."""
+    known = {phase['base'] for phase in phases} | {SLIDES_DIR} | NON_DOC_DIRS
+    for item in sorted(os.listdir(ROOT_DIR)):
+        if item.startswith('.') or item in EXCLUDE_DIRS or item in EXCLUDE_FILES:
+            continue
+        if os.path.isdir(os.path.join(ROOT_DIR, item)) and item not in known:
+            print(f"ATTENZIONE: cartella top-level non riconosciuta (fase mancante in PHASE_META?): {item}")
 
 def generate_pdf_viewers(site_pdf_paths):
     """Genera una pagina viewer per ogni PDF (percorsi relativi alla root del sito)."""
@@ -200,6 +646,12 @@ def generate_pdf_viewers(site_pdf_paths):
             f.write(viewer_html)
 
 def main():
+    if not os.path.exists(GLOSSARY_BUILD_INDEX):
+        raise FileNotFoundError(
+            f"Build Angular del glossario non trovato: {GLOSSARY_BUILD_INDEX}. "
+            "Eseguire prima 'npm run build' in .github/glossary-app."
+        )
+
     # Pulisci o crea la cartella di output
     if os.path.exists(BUILD_DIR):
         shutil.rmtree(BUILD_DIR)
@@ -210,8 +662,28 @@ def main():
         for p in iter_source_pdfs()
     ]
 
-    # Genera l'albero HTML dei documenti
-    docs_html = build_html_tree(ROOT_DIR)
+    phases = discover_phases()
+    if not phases:
+        print("ERRORE: nessuna fase trovata nel repo")
+        return
+
+    check_top_level(phases)
+
+    if CURRENT_PHASE:
+        current = next((p for p in phases if p['id'] == CURRENT_PHASE), None)
+        if current is None:
+            print(f"ERRORE: CURRENT_PHASE '{CURRENT_PHASE}' non trovata tra le fasi presenti")
+            return
+    else:
+        current = phases[-1]
+    # In archivio dalla piu' recente alla piu' vecchia
+    archived = [p for p in reversed(phases) if p['id'] != current['id']]
+
+    print(f"Fase corrente: {current['title']}; in archivio: {[p['title'] for p in archived]}")
+
+    docs_html = render_current_phase(current)
+    docs_html += render_slides_section()
+    docs_html += render_archive_section(archived)
 
     # Leggi il template HTML
     if not os.path.exists(TEMPLATE_PATH):
@@ -236,6 +708,9 @@ def main():
         print(f"ERRORE: Marker non trovati nel template! Start: {start_idx}, End: {end_idx}")
         return
 
+    # La voce di navigazione della sezione documenti prende il nome della fase corrente
+    html_content = html_content.replace('{{CURRENT_PHASE_NAV}}', escape(current['title'].upper()))
+
     # Aggiorna la data di ultimo aggiornamento
     now = datetime.now().strftime("%d/%m/%Y %H:%M")
     html_content = re.sub(
@@ -254,9 +729,14 @@ def main():
     if os.path.exists(css_src):
         shutil.copy2(css_src, os.path.join(BUILD_DIR, 'style.css'))
 
-    glossary_src = os.path.join(SITE_SRC, 'glossario.html')
-    if os.path.exists(glossary_src):
-        shutil.copy2(glossary_src, os.path.join(BUILD_DIR, 'glossario.html'))
+    # L'index Angular e l'unica pagina pubblica del glossario. I bundle e il
+    # JSON restano isolati sotto glossary-app per evitare collisioni.
+    shutil.copy2(GLOSSARY_BUILD_INDEX, os.path.join(BUILD_DIR, 'glossario.html'))
+    shutil.copytree(
+        GLOSSARY_BUILD_DIR,
+        os.path.join(BUILD_DIR, 'glossary-app'),
+        ignore=shutil.ignore_patterns('index.html'),
+    )
 
     for asset_name in ('pdf-viewer.css', 'pdf-viewer.js'):
         asset_src = os.path.join(SITE_SRC, asset_name)
@@ -267,13 +747,13 @@ def main():
     vendor_src = os.path.join(SITE_SRC, 'vendor')
     if os.path.exists(vendor_src):
         shutil.copytree(vendor_src, os.path.join(BUILD_DIR, 'vendor'))
-    
+
     # Asset (Logo ecc)
     assets_src = os.path.join(SITE_SRC, 'assets')
     if os.path.exists(assets_src):
         shutil.copytree(assets_src, os.path.join(BUILD_DIR, 'assets'))
 
-    # Copia tutte le cartelle dei documenti (es. candidatura/) e file PDF in root
+    # Copia tutte le cartelle dei documenti (es. RTB/) e file PDF in root
     for item in os.listdir(ROOT_DIR):
         if item not in EXCLUDE_DIRS and item not in EXCLUDE_FILES and not item.startswith('.'):
             s = os.path.join(ROOT_DIR, item)

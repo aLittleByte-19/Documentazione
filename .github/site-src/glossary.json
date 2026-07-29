@@ -1,0 +1,782 @@
+{
+  "title": "Glossario",
+  "entries": [
+    {
+      "id": "agile",
+      "term": "Agile",
+      "definition": "Modello di sviluppo basato su sprint bisettimanali, adottato dal team.",
+      "aliases": []
+    },
+    {
+      "id": "ai-analyst",
+      "term": "AI Analyst",
+      "definition": "Nucleo elaborativo del modulo AI Co-Pilot che esegue autonomamente classificazione documentale, OCR ed estrazione dati.",
+      "aliases": []
+    },
+    {
+      "id": "ai-assistant-generativo",
+      "term": "AI Assistant Generativo",
+      "definition": "Modulo che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini) a partire da un prompt.",
+      "aliases": []
+    },
+    {
+      "id": "ai-co-pilot-per-consulenti-del-lavoro-cdl",
+      "term": "AI Co-Pilot per Consulenti del Lavoro (CdL)",
+      "definition": "Sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati, estrarre i destinatari tramite OCR ed Entity Resolution.",
+      "aliases": [
+        "AI Co-Pilot per Consulenti del Lavoro",
+        "CdL"
+      ]
+    },
+    {
+      "id": "ai-post-generator",
+      "term": "AI Post Generator",
+      "definition": "Modulo esterno (attore di sistema) che costituisce il nucleo di intelligenza artificiale per l'elaborazione di testi, titoli e immagini.",
+      "aliases": []
+    },
+    {
+      "id": "amazon-bedrock",
+      "term": "Amazon Bedrock",
+      "definition": "Servizio AWS che rende disponibili modelli di fondazione (FM) tramite API, utilizzato per l'integrazione di funzionalità AI.",
+      "aliases": []
+    },
+    {
+      "id": "amministratore",
+      "term": "Amministratore",
+      "definition": "Ruolo responsabile della configurazione dell'ambiente standalone, della gestione dei privilegi e della definizione delle policy globali.",
+      "aliases": []
+    },
+    {
+      "id": "analisi-dei-requisiti-adr",
+      "term": "Analisi dei Requisiti (AdR)",
+      "definition": "Documento che formalizza le funzionalità del sistema, inclusa la modellazione degli attori, la descrizione dei casi d'uso e la classificazione dei requisiti.",
+      "aliases": [
+        "Analisi dei Requisiti",
+        "AdR"
+      ]
+    },
+    {
+      "id": "analisi-dei-rischi",
+      "term": "Analisi dei Rischi",
+      "definition": "Processo strutturato per identificare, classificare e valutare potenziali eventi critici.",
+      "aliases": []
+    },
+    {
+      "id": "analisi-dinamica",
+      "term": "Analisi Dinamica",
+      "definition": "Attività di verifica del codice eseguita durante la sua esecuzione.",
+      "aliases": []
+    },
+    {
+      "id": "analisi-statica",
+      "term": "Analisi Statica",
+      "definition": "Attività di verifica del codice eseguita senza la sua esecuzione.",
+      "aliases": []
+    },
+    {
+      "id": "analista",
+      "term": "Analista",
+      "definition": "Ruolo incaricato dell'analisi dei requisiti e del dominio.",
+      "aliases": []
+    },
+    {
+      "id": "analista-dati",
+      "term": "Analista Dati",
+      "definition": "Figura che supervisiona l'efficienza del sistema, monitorando le performance dell'IA attraverso feedback e metriche.",
+      "aliases": []
+    },
+    {
+      "id": "angular",
+      "term": "Angular",
+      "definition": "Framework open-source per lo sviluppo web.",
+      "aliases": []
+    },
+    {
+      "id": "approccio-incrementale",
+      "term": "Approccio Incrementale",
+      "definition": "Metodo di stesura e sviluppo in cui i documenti e il prodotto vengono costantemente aggiornati e affinati nel tempo.",
+      "aliases": []
+    },
+    {
+      "id": "attore",
+      "term": "Attore",
+      "definition": "Ruolo ricoperto da un utente o da un sistema esterno che interagisce con l'applicazione.",
+      "aliases": []
+    },
+    {
+      "id": "attore-primario",
+      "term": "Attore Primario",
+      "definition": "L'utente umano o il sistema esterno che avvia attivamente un caso d'uso.",
+      "aliases": []
+    },
+    {
+      "id": "attore-secondario",
+      "term": "Attore Secondario",
+      "definition": "Entità o sistema terzo coinvolto passivamente nel processo.",
+      "aliases": []
+    },
+    {
+      "id": "bookmark",
+      "term": "Bookmark",
+      "definition": "Funzionalità che permette di contrassegnare e salvare i prompt preferiti.",
+      "aliases": []
+    },
+    {
+      "id": "bozza-draft",
+      "term": "Bozza (Draft)",
+      "definition": "Stato temporaneo di un documento salvato prima della validazione o invio definitivo.",
+      "aliases": [
+        "Bozza",
+        "Draft"
+      ]
+    },
+    {
+      "id": "branch",
+      "term": "Branch",
+      "definition": "Ramificazione del repository Git per lo sviluppo isolato.",
+      "aliases": []
+    },
+    {
+      "id": "capitolato",
+      "term": "Capitolato",
+      "definition": "Documento tecnico fornito dal proponente che definisce requisiti e obiettivi.",
+      "aliases": []
+    },
+    {
+      "id": "caso-d-uso-uc",
+      "term": "Caso d'Uso (UC)",
+      "definition": "Descrizione di un'interazione tra un attore e il sistema.",
+      "aliases": [
+        "Caso d'Uso",
+        "UC"
+      ]
+    },
+    {
+      "id": "cedolini-massivi",
+      "term": "Cedolini Massivi",
+      "definition": "File contenente le buste paga di più dipendenti, da suddividere automaticamente.",
+      "aliases": []
+    },
+    {
+      "id": "ciclo-iterativo",
+      "term": "Ciclo Iterativo",
+      "definition": "Suddivisione del lavoro in periodi ricorrenti (sprint).",
+      "aliases": []
+    },
+    {
+      "id": "code-review",
+      "term": "Code Review",
+      "definition": "Revisione del codice effettuata tra pari.",
+      "aliases": []
+    },
+    {
+      "id": "committente-proponente",
+      "term": "Committente (Proponente)",
+      "definition": "Azienda che ha commissionato il progetto (Eggon S.r.l.).",
+      "aliases": [
+        "Committente",
+        "Proponente"
+      ]
+    },
+    {
+      "id": "confidenza-confidence-score",
+      "term": "Confidenza (Confidence Score)",
+      "definition": "Percentuale che indica l'affidabilità del riconoscimento automatico.",
+      "aliases": [
+        "Confidenza",
+        "Confidence Score"
+      ]
+    },
+    {
+      "id": "consulente-del-lavoro-cdl",
+      "term": "Consulente del Lavoro (CdL)",
+      "definition": "Attore principale che utilizza l'AI Co-Pilot per gestire documenti.",
+      "aliases": [
+        "Consulente del Lavoro",
+        "CdL"
+      ]
+    },
+    {
+      "id": "consuntivo",
+      "term": "Consuntivo",
+      "definition": "Rendiconto delle ore effettivamente impiegate e dei costi sostenuti.",
+      "aliases": []
+    },
+    {
+      "id": "copie-atomiche",
+      "term": "Copie Atomiche",
+      "definition": "Singole parti risultanti dallo split di un documento massivo.",
+      "aliases": []
+    },
+    {
+      "id": "dashboard",
+      "term": "Dashboard",
+      "definition": "Interfaccia grafica per visualizzare metriche e statistiche.",
+      "aliases": []
+    },
+    {
+      "id": "detex",
+      "term": "Detex",
+      "definition": "Strumento per rimuovere sintassi LaTeX ed estrarre testo puro.",
+      "aliases": []
+    },
+    {
+      "id": "diagramma-delle-classi-uml",
+      "term": "Diagramma delle classi UML",
+      "definition": "Rappresentazione della struttura statica del sistema.",
+      "aliases": []
+    },
+    {
+      "id": "diario-di-bordo",
+      "term": "Diario di Bordo",
+      "definition": "Documento per il tracciamento settimanale delle attività.",
+      "aliases": []
+    },
+    {
+      "id": "discord",
+      "term": "Discord",
+      "definition": "Piattaforma di comunicazione digitale utilizzata dal team per il coordinamento rapido, canali testuali/vocali e riunioni interne.",
+      "aliases": []
+    },
+    {
+      "id": "dispaccio",
+      "term": "Dispaccio",
+      "definition": "Processo automatico di invio dei documenti ai destinatari.",
+      "aliases": []
+    },
+    {
+      "id": "entity-resolution",
+      "term": "Entity Resolution",
+      "definition": "Processo di riconoscimento e associazione dei destinatari ai documenti.",
+      "aliases": []
+    },
+    {
+      "id": "esecuzione-asincrona",
+      "term": "Esecuzione Asincrona",
+      "definition": "Modalità di esecuzione di operazioni lunghe in background.",
+      "aliases": []
+    },
+    {
+      "id": "figma",
+      "term": "Figma",
+      "definition": "Strumento per la progettazione di mockup interattivi.",
+      "aliases": []
+    },
+    {
+      "id": "filament",
+      "term": "Filament",
+      "definition": "Framework PHP per interfacce amministrative, parte dello stack tecnologico.",
+      "aliases": []
+    },
+    {
+      "id": "filtro-dinamico",
+      "term": "Filtro dinamico",
+      "definition": "Strumento che aggiorna istantaneamente i dati visualizzati.",
+      "aliases": []
+    },
+    {
+      "id": "gdpr",
+      "term": "GDPR",
+      "definition": "Regolamento europeo sulla protezione dei dati personali.",
+      "aliases": []
+    },
+    {
+      "id": "git",
+      "term": "Git",
+      "definition": "Software per il controllo di versione distribuito.",
+      "aliases": []
+    },
+    {
+      "id": "github",
+      "term": "GitHub",
+      "definition": "Piattaforma per hosting e gestione collaborativa di repository.",
+      "aliases": []
+    },
+    {
+      "id": "glossario",
+      "term": "Glossario",
+      "definition": "Documento che definisce i termini tecnici e ambigui del progetto.",
+      "aliases": []
+    },
+    {
+      "id": "human-in-the-loop",
+      "term": "Human-in-the-loop",
+      "definition": "Approccio con revisione umana per casi a bassa confidenza dell'AI.",
+      "aliases": []
+    },
+    {
+      "id": "indice-di-gulpease-mpc-ig",
+      "term": "Indice di Gulpease (MPC-IG)",
+      "definition": "Indice di leggibilità per testi in italiano.",
+      "aliases": [
+        "Indice di Gulpease",
+        "MPC-IG"
+      ]
+    },
+    {
+      "id": "intelligenza-artificiale-ai",
+      "term": "Intelligenza Artificiale (AI)",
+      "definition": "Tecnologie che permettono ai computer di svolgere attività che richiederebbero l'intelligenza umana, come l'apprendimento, il riconoscimento di pattern, la comprensione del linguaggio naturale e la generazione di contenuti.",
+      "aliases": [
+        "Intelligenza Artificiale",
+        "AI"
+      ]
+    },
+    {
+      "id": "issue",
+      "term": "Issue",
+      "definition": "Strumento per tracciare task su GitHub.",
+      "aliases": []
+    },
+    {
+      "id": "kloc",
+      "term": "KLOC",
+      "definition": "Migliaia di linee di codice.",
+      "aliases": []
+    },
+    {
+      "id": "kpi-key-performance-indicator",
+      "term": "KPI (Key Performance Indicator)",
+      "definition": "Indicatori numerici per misurare le performance del sistema.",
+      "aliases": [
+        "KPI",
+        "Key Performance Indicator"
+      ]
+    },
+    {
+      "id": "laravel",
+      "term": "Laravel",
+      "definition": "Framework PHP per lo sviluppo del backend.",
+      "aliases": []
+    },
+    {
+      "id": "latenza",
+      "term": "Latenza",
+      "definition": "Tempo di risposta del sistema a una richiesta.",
+      "aliases": []
+    },
+    {
+      "id": "latex",
+      "term": "LaTeX",
+      "definition": "Linguaggio di composizione per documenti professionali.",
+      "aliases": []
+    },
+    {
+      "id": "llm-large-language-model",
+      "term": "LLM (Large Language Model)",
+      "definition": "Modello di linguaggio di grandi dimensioni per la generazione di testo.",
+      "aliases": [
+        "LLM",
+        "Large Language Model"
+      ]
+    },
+    {
+      "id": "lotto-documentale",
+      "term": "Lotto Documentale",
+      "definition": "Insieme di file caricati simultaneamente nel sistema.",
+      "aliases": []
+    },
+    {
+      "id": "marcatore-di-trasparenza",
+      "term": "Marcatore di trasparenza",
+      "definition": "Dicitura \"Creato da AI Assistant\" inserita nei contenuti esportati.",
+      "aliases": []
+    },
+    {
+      "id": "metadati",
+      "term": "Metadati",
+      "definition": "Informazioni di contesto associate a un file.",
+      "aliases": []
+    },
+    {
+      "id": "milestone",
+      "term": "Milestone",
+      "definition": "Traguardo significativo nel cronoprogramma (RTB, PB).",
+      "aliases": []
+    },
+    {
+      "id": "minio",
+      "term": "MinIO",
+      "definition": "Storage compatibile con API S3 per la gestione dei file.",
+      "aliases": []
+    },
+    {
+      "id": "mitigazione-dei-rischi",
+      "term": "Mitigazione (dei rischi)",
+      "definition": "Azioni per ridurre probabilità o impatto di un rischio.",
+      "aliases": [
+        "Mitigazione",
+        "dei rischi"
+      ]
+    },
+    {
+      "id": "mockup",
+      "term": "Mockup",
+      "definition": "Prototipo grafico dell'interfaccia utente.",
+      "aliases": []
+    },
+    {
+      "id": "modello-c4",
+      "term": "Modello C4",
+      "definition": "Modello per descrivere l'architettura del sistema.",
+      "aliases": []
+    },
+    {
+      "id": "modello-di-sviluppo",
+      "term": "Modello di Sviluppo",
+      "definition": "Approccio metodologico adottato (Agile/SCRUM).",
+      "aliases": []
+    },
+    {
+      "id": "moduli-esterni",
+      "term": "Moduli Esterni",
+      "definition": "Sistemi terzi con cui il software scambia dati (AI Analyst, AI Post Generator).",
+      "aliases": []
+    },
+    {
+      "id": "mvp-minimum-viable-product",
+      "term": "MVP (Minimum Viable Product)",
+      "definition": "Versione con funzionalità minime necessarie.",
+      "aliases": [
+        "MVP",
+        "Minimum Viable Product"
+      ]
+    },
+    {
+      "id": "nexum",
+      "term": "Nexum",
+      "definition": "Piattaforma digitale di Eggon per comunicazione e gestione HR.",
+      "aliases": []
+    },
+    {
+      "id": "norme-di-progetto",
+      "term": "Norme di Progetto",
+      "definition": "Documento che definisce Way of Working, ruoli, strumenti e procedure.",
+      "aliases": []
+    },
+    {
+      "id": "ocr-riconoscimento-ottico-dei-caratteri",
+      "term": "OCR (Riconoscimento Ottico dei Caratteri)",
+      "definition": "Tecnologia per estrarre testo da immagini o PDF scannerizzati.",
+      "aliases": [
+        "OCR",
+        "Riconoscimento Ottico dei Caratteri"
+      ]
+    },
+    {
+      "id": "pb-product-baseline",
+      "term": "PB (Product Baseline)",
+      "definition": "Fase finale del progetto per lo sviluppo e la consegna del prodotto.",
+      "aliases": [
+        "PB",
+        "Product Baseline"
+      ]
+    },
+    {
+      "id": "penpot",
+      "term": "Penpot",
+      "definition": "Strumento open source scelto per la progettazione di mockup.",
+      "aliases": []
+    },
+    {
+      "id": "pest",
+      "term": "Pest",
+      "definition": "Framework di testing per PHP.",
+      "aliases": []
+    },
+    {
+      "id": "pianificazione",
+      "term": "Pianificazione",
+      "definition": "Attività di definizione di compiti, scadenze e responsabilità.",
+      "aliases": []
+    },
+    {
+      "id": "piano-di-progetto",
+      "term": "Piano di Progetto",
+      "definition": "Documento con pianificazione, rischi, preventivi e consuntivi.",
+      "aliases": []
+    },
+    {
+      "id": "piano-di-qualifica",
+      "term": "Piano di Qualifica",
+      "definition": "Documento con metriche, test e obiettivi di qualità.",
+      "aliases": []
+    },
+    {
+      "id": "postcondizioni",
+      "term": "Postcondizioni",
+      "definition": "Stato finale del sistema dopo un caso d'uso.",
+      "aliases": []
+    },
+    {
+      "id": "postgresql",
+      "term": "PostgreSQL",
+      "definition": "Database relazionale del sistema.",
+      "aliases": []
+    },
+    {
+      "id": "precondizioni",
+      "term": "Precondizioni",
+      "definition": "Stato obbligatorio prima di un caso d'uso.",
+      "aliases": []
+    },
+    {
+      "id": "preventivo",
+      "term": "Preventivo",
+      "definition": "Stima delle ore e dei costi prima dello sprint.",
+      "aliases": []
+    },
+    {
+      "id": "progettista",
+      "term": "Progettista",
+      "definition": "Ruolo responsabile dell'architettura del sistema.",
+      "aliases": []
+    },
+    {
+      "id": "programmatore",
+      "term": "Programmatore",
+      "definition": "Ruolo responsabile della codifica.",
+      "aliases": []
+    },
+    {
+      "id": "prompt",
+      "term": "Prompt",
+      "definition": "Testo fornito all'AI per generare un contenuto.",
+      "aliases": []
+    },
+    {
+      "id": "pull-request",
+      "term": "Pull Request",
+      "definition": "Richiesta di integrazione di modifiche su GitHub.",
+      "aliases": []
+    },
+    {
+      "id": "pwa-progressive-web-app",
+      "term": "PWA (Progressive Web App)",
+      "definition": "Applicazione web con esperienza simile a un'app nativa.",
+      "aliases": [
+        "PWA",
+        "Progressive Web App"
+      ]
+    },
+    {
+      "id": "rating",
+      "term": "Rating",
+      "definition": "Punteggio assegnato dall'utente al contenuto generato.",
+      "aliases": []
+    },
+    {
+      "id": "rbac-role-based-access-control",
+      "term": "RBAC (Role-Based Access Control)",
+      "definition": "Controllo degli accessi basato sui ruoli.",
+      "aliases": [
+        "RBAC",
+        "Role-Based Access Control"
+      ]
+    },
+    {
+      "id": "redattore",
+      "term": "Redattore",
+      "definition": "Utente che utilizza l'AI Assistant per creare comunicazioni.",
+      "aliases": []
+    },
+    {
+      "id": "redis",
+      "term": "Redis",
+      "definition": "Sistema per code asincrone e caching.",
+      "aliases": []
+    },
+    {
+      "id": "repository",
+      "term": "Repository",
+      "definition": "Archivio digitale per documenti e codice.",
+      "aliases": []
+    },
+    {
+      "id": "requisiti-funzionali",
+      "term": "Requisiti Funzionali",
+      "definition": "Specifiche che descrivono i comportamenti, i servizi e le funzioni che il sistema deve eseguire per soddisfare i bisogni dell'utente.",
+      "aliases": []
+    },
+    {
+      "id": "requisiti-opzionali",
+      "term": "Requisiti opzionali",
+      "definition": "Funzionalità accessorie che possono essere implementate solo se le risorse e i tempi lo permettono, senza impattare sugli obiettivi primari",
+      "aliases": []
+    },
+    {
+      "id": "responsabile",
+      "term": "Responsabile",
+      "definition": "Ruolo di project manager: coordina, pianifica e approva.",
+      "aliases": []
+    },
+    {
+      "id": "rischio",
+      "term": "Rischio",
+      "definition": "Evento o condizione incerta la cui occorrenza può influire (positivamente o negativamente) su costi, tempi o qualità degli obiettivi di progetto.",
+      "aliases": []
+    },
+    {
+      "id": "rtb-requirements-and-technology-baseline",
+      "term": "RTB (Requirements and Technology Baseline)",
+      "definition": "Milestone di progetto finalizzata alla validazione dei requisiti analizzati e al consolidamento dell'architettura tecnologica tramite prototipazione (PoC).",
+      "aliases": [
+        "RTB",
+        "Requirements and Technology Baseline"
+      ]
+    },
+    {
+      "id": "scenario-alternativo",
+      "term": "Scenario Alternativo",
+      "definition": "Percorso di gestione di errori o eccezioni.",
+      "aliases": []
+    },
+    {
+      "id": "scenario-principale",
+      "term": "Scenario Principale",
+      "definition": "Sequenza ottimale di interazioni.",
+      "aliases": []
+    },
+    {
+      "id": "soglia-di-confidenza",
+      "term": "Soglia di Confidenza",
+      "definition": "Valore limite per l'intervento manuale (es. 80%).",
+      "aliases": []
+    },
+    {
+      "id": "sottocaso",
+      "term": "Sottocaso",
+      "definition": "Scomposizione di un caso d'uso complesso.",
+      "aliases": []
+    },
+    {
+      "id": "split-automatico",
+      "term": "Split Automatico",
+      "definition": "Suddivisione di documenti multi-destinatario.",
+      "aliases": []
+    },
+    {
+      "id": "sprint",
+      "term": "Sprint",
+      "definition": "Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi",
+      "aliases": []
+    },
+    {
+      "id": "stakeholder",
+      "term": "Stakeholder",
+      "definition": "Soggetti con interesse nel progetto (committente, docenti, utenti).",
+      "aliases": []
+    },
+    {
+      "id": "standalone",
+      "term": "Standalone",
+      "definition": "Applicazione che funziona in modo indipendente.",
+      "aliases": []
+    },
+    {
+      "id": "stile-editoriale",
+      "term": "Stile Editoriale",
+      "definition": "Parametro che calibra lo stile di scrittura dell'AI.",
+      "aliases": []
+    },
+    {
+      "id": "test-di-accettazione",
+      "term": "Test di Accettazione",
+      "definition": "Test che validano il sistema rispetto al capitolato.",
+      "aliases": []
+    },
+    {
+      "id": "test-di-integrazione",
+      "term": "Test di Integrazione",
+      "definition": "Test tra più moduli.",
+      "aliases": []
+    },
+    {
+      "id": "test-di-regressione",
+      "term": "Test di Regressione",
+      "definition": "Test per rilevare nuovi errori dopo modifiche.",
+      "aliases": []
+    },
+    {
+      "id": "test-di-sistema",
+      "term": "Test di Sistema",
+      "definition": "Test end-to-end in ambiente simulato.",
+      "aliases": []
+    },
+    {
+      "id": "test-di-unita",
+      "term": "Test di Unità",
+      "definition": "Test su singole funzioni in isolamento.",
+      "aliases": []
+    },
+    {
+      "id": "timeout",
+      "term": "Timeout",
+      "definition": "Interruzione di un'operazione che supera il tempo massimo.",
+      "aliases": []
+    },
+    {
+      "id": "tono-comunicativo",
+      "term": "Tono Comunicativo",
+      "definition": "Parametro che calibra il tono dell'AI.",
+      "aliases": []
+    },
+    {
+      "id": "trigger",
+      "term": "Trigger",
+      "definition": "Evento che innesca un caso d'uso.",
+      "aliases": []
+    },
+    {
+      "id": "utente-operativo",
+      "term": "Utente Operativo",
+      "definition": "Utente autorizzato alle funzionalità ordinarie.",
+      "aliases": []
+    },
+    {
+      "id": "verbale-esterno",
+      "term": "Verbale Esterno",
+      "definition": "Resoconto di riunione con il proponente.",
+      "aliases": []
+    },
+    {
+      "id": "verbale-interno",
+      "term": "Verbale Interno",
+      "definition": "Resoconto di riunione del team.",
+      "aliases": []
+    },
+    {
+      "id": "verificatore",
+      "term": "Verificatore",
+      "definition": "Ruolo responsabile della verifica di documenti e codice.",
+      "aliases": []
+    },
+    {
+      "id": "versioning",
+      "term": "Versioning",
+      "definition": "Sistema che tiene traccia delle versioni.",
+      "aliases": []
+    },
+    {
+      "id": "walkthrough",
+      "term": "Walkthrough",
+      "definition": "Metodo di revisione informale di documenti o codice.",
+      "aliases": []
+    },
+    {
+      "id": "way-of-working-wow",
+      "term": "Way of Working (WoW)",
+      "definition": "Insieme di norme, strumenti e procedure del gruppo.",
+      "aliases": [
+        "Way of Working",
+        "WoW"
+      ]
+    },
+    {
+      "id": "workflow",
+      "term": "Workflow",
+      "definition": "Sequenza automatica di passaggi per l'elaborazione.",
+      "aliases": []
+    }
+  ]
+}
