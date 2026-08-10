@@ -1,0 +1,3181 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx} % Per l'ambiente tabularx (tabelle)
+\usepackage{calc} % Sempre per le tabelle
+\usepackage{xltabular}
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{xcolor}  
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{colortbl}
+\usepackage{eurosym}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec}
+\usepackage{caption} 
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\newcommand{\slice}[4]{
+  \pgfmathparse{0.5*#1+0.5*#2}
+  \let\midangle\pgfmathresult
+
+  \draw[thick,fill=black!10] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+
+  \node[label=\midangle:#4] at (\midangle:1) {};
+
+  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
+  \let\temp\pgfmathresult
+  \pgfmathparse{max(\temp,-0.5) + 0.8}
+  \let\innerpos\pgfmathresult
+  \node at (\midangle:\innerpos) {#3};
+}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+%\def\toclevel@paragraph{6}
+\def\toclevel@subparagraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[R]{Piano di Progetto}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[R]{Piano di Progetto}
+}
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Piano di Progetto}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Versione & 2.3.0 \\
+            Redattori   & A. Maule, A. Oloni, E. Bellet, V. Y. K. Fernandes \\
+            Verificatori &  V. Y. K. Fernandes, E. Bellet, D. Belluz \\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 02/08/2026
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+\fancyfoot[R]{Piano di Progetto\hspace{0.8em}}
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+
+\begin{center}
+    {\Large \textbf{Registro delle Modifiche}}
+\end{center}
+
+\vspace{0.35cm}
+\renewcommand{\arraystretch}{1.35}
+\rowcolors{2}{gray!8}{white} 
+
+\setlength{\tabcolsep}{3pt} 
+\footnotesize
+\begin{longtable}{|l|l|p{4.5cm}|p{2cm}|p{2.5cm}|p{2.5cm}|}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+    \hline
+    \endfirsthead 
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+    \hline
+    \endhead 
+    \endfoot
+    \endlastfoot
+    2.3.0 & 02/08/2026 & Aggiunto nono sprint & Alex Oloni & Diego Belluz & - \\ \hline
+    2.2.0 & 19/07/2026 & Aggiunto ottavo sprint (primo sprint della fase PB) & Leonardo Soligo & Eleonora Bellet & - \\ \hline
+    2.1.0 & 06/07/2026 & Aggiunto settimo sprint & Leonardo Soligo & Alex Oloni & - \\ \hline
+    2.0.0 & 22/06/2026 & Approvazione versione 2.0.0 & - & - & Diego Belluz \\ \hline
+    1.4.0 & 22/06/2026 & Aggiornamento sezione periodi & V. Y. K. Fernandes & Eleonora Bellet & - \\ \hline
+    1.3.0 & 21/06/2026 & Aggiunto sesto sprint & V. Y. K. Fernandes & Eleonora Bellet & - \\ \hline
+    1.2.0 & 10/06/2026 & Aggiunta del preventivo a finire e della sprint review del quinto sprint & V. Y. K. Fernandes & Eleonora Bellet & - \\ \hline
+    1.1.0 & 08/06/2026 & Aggiunto il preventivo e il consuntivo del quinto sprint & V. Y. K. Fernandes & Eleonora Bellet & - \\ \hline
+    1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Angela Maule \\ \hline
+    0.9.0 & 24/05/2026 & Aggiunta della tabella ore rimanenti per ruolo & Eleonora Bellet & Diego Belluz & - \\ \hline
+    0.8.1 & 24/05/2026 & Completato il quarto sprint & Eleonora Bellet & Diego Belluz & - \\ \hline
+    0.8.0 & 16/05/2026 & Aggiunta del consuntivo quarto sprint & Eleonora Bellet & Diego Belluz & - \\ \hline
+    0.7.0 & 15/05/2026 & Aggiunti i preventivi a finire del terzo sprint e iniziato il preventivo del quarto sprint & Eleonora Bellet & Diego Belluz & - \\ \hline
+    0.6.1 & 11/05/2026 & Aggiunti i preventivi a finire del primo e del secondo sprint & Eleonora Bellet & Diego Belluz & - \\ \hline
+    0.6.0 & 09/05/2026 & Aggiunto terzo sprint & Alex Oloni & V. Y. K. Fernandes & - \\ \hline
+    0.5.1 & 05/05/2026 & Aggiunti rischi all'analisi dei rischi & Alex Oloni & V. Y. K. Fernandes & - \\ \hline
+    0.5.0 & 02/05/2026 & Aggiunta di specifiche nel Primo Periodo e Stesura del Secondo Periodo & Alex Oloni & Eleonora Bellet & - \\ \hline
+    0.4.0 & 29/04/2026 & Inizio stesura della sezione §4 & Alex Oloni & Eleonora Bellet & - \\ \hline
+    0.3.2 & 26/04/2026 & Stesura della sezione §3 & Angela Maule & V. Y. K. Fernandes & - \\ \hline
+    0.3.1 & 23/04/2026 & Stesura delle sezioni §1 e §2 & Angela Maule & V. Y. K. Fernandes & - \\ \hline
+    0.3.0 & 21/04/2026 & Aggiunta delle sezioni: §1.2, §1.3, §1.4, §2, §3, Preventivo ed aggiunta specifiche sulla sezione Introduzione e Pianificazione & Angela Maule & V. Y. K. Fernandes & - \\ \hline
+    0.2.0 & 14/04/2026 & Stesura del primo periodo & Angela Maule & V. Y. K. Fernandes & - \\ \hline
+    0.1.0 & 13/04/2026 & Prima stesura del documento & Angela Maule & V. Y. K. Fernandes & - \\ \hline
+
+\end{longtable}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyfoot[R]{Piano di Progetto\hspace{0.8em}\thepage}
+\newpage
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\newpage
+
+\section{Introduzione}
+\label{sec:introduzione}
+
+\subsection{Scopo del documento}
+\label{sec:scopo_del_documento}
+Il \glslink{piano-di-progetto}{Piano di Progetto} è un documento nella quale vengono fissati in maniera chiara e coincisa gli obiettivi, la progettazione, l'esecuzione ed il controllo delle attività del progetto, fungendo quindi da bussola per allineare il lavoro in svolgimento verso un'unico obiettivo comune.
+Inoltre questo documento specifica anche la suddivisione del lavoro, la stima dei costi di realizzazione, le risorse necessarie e i vari rischi con la loro conseguente \glslink{mitigazione-dei-rischi}{mitigazione}, dati necessari per il compimento dei traguardi stabiliti ed evitare costi ed espansioni non controllate.
+
+
+\subsection{Scopo del prodotto}
+\label{sec:scopo_del_prodotto}
+Il prodotto da realizzare consiste in un'estensione innovativa per \textit{''\glslink{nexum}{Nexum}"}, una piattaforma digitale sviluppata dall'azienda \glslink{committente-proponente}{proponente} \textit{Eggon}, dedicata alla comunicazione interna e alla gestione HR.
+Nello specifico, il progetto mira a potenziare l'ecosistema \glslink{nexum}{Nexum} attraverso lo sviluppo e l'integrazione di due moduli basati sull'\glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}:
+\begin{itemize}
+    \item \textbf{\glslink{ai-assistant-generativo}{AI Assistant Generativo}:} Un modulo dedicato agli utenti amministrativi (\glslink{dashboard}{dashboard}) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un \glslink{prompt}{prompt}, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
+    \item \textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per Consulenti del Lavoro (CdL)}:} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} ed \textbf{\glslink{entity-resolution}{Entity Resolution}}, e automatizzare lo smistamento e il \glslink{dispaccio}{dispaccio} massivo.
+\end{itemize}
+
+L'obiettivo finale è migliorare l'efficienza dei processi HR e semplificare l'interoperabilità tra le aziende e gli studi dei Consulenti del Lavoro.
+
+\subsection{Glossario}
+\label{sec:glossario}
+Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, è stato redatto un documento esterno denominato \textit{\glslink{glossario}{Glossario}}.
+I termini tecnici, gli acronimi e le parole con un significato specifico all'interno del progetto sono contrassegnati nel testo da una ``G'' in apice (es. parola\textsuperscript{\scalebox{0.9}{\textbf{G}}}). La loro definizione completa è consultabile nel \textit{\glslink{glossario}{Glossario}}.
+
+
+Il \glslink{glossario}{glossario} è disponibile a questo link:
+\begin{itemize}
+    \item \url{https://alittlebyte-19.github.io/Documentazione/RTB/Glossario/Glossario.pdf}
+\end{itemize}
+
+\subsection{Riferimenti}
+\label{sec:riferimenti}
+\subsubsection{Riferimenti normativi}
+\begin{itemize}
+    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto} v.1.0.0}
+    \begin{itemize}
+        \item \url{https://alittlebyte-19.github.io/Documentazione/RTB/Norme%20di%20Progetto/Norme%20di%20Progetto.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026} 
+    \end{itemize}
+    \item \textbf{\glslink{capitolato}{Capitolato} C5: \textit{\textbf{'\glslink{nexum}{Nexum}'}}}
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026}
+    \end{itemize}
+     \item \textbf{Regolamento Progetto Didattico}
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026}
+    \end{itemize}
+   
+\end{itemize}
+\subsubsection{Riferimenti informativi}
+\begin{itemize}
+    \item \textbf{\glslink{glossario}{Glossario} v.2.0.0}
+    \begin{itemize}
+        \item \url{https://alittlebyte-19.github.io/Documentazione/RTB/Glossario/Glossario.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026}
+    \end{itemize}
+    \item \textbf{T2: Ciclo di Vita del Software}
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026}
+    \end{itemize}
+    \item \textbf{T3: Modelli di sviluppo Software}
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T03.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026}
+    \end{itemize}
+    \item \textbf{T4: Gestione di Progetto}
+    \begin{itemize}
+        \item \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf}
+        \item \textit{Data ultimo accesso: 13/06/2026}
+    \end{itemize}
+\end{itemize}
+
+
+\section{Analisi dei Rischi}
+\label{sec:analisi_dei_rischi}
+In questa sezione vengono individuati e analizzati i fattori di \glslink{rischio}{rischio} che, a seconda del loro livello di gravità, potrebbero ostacolare l'avanzamento dei lavori e il successo dell'iniziativa. Rilevare tempestivamente questi rischi e predisporre le opportune tecniche di \glslink{mitigazione-dei-rischi}{mitigazione} permette di ridurre drasticamente gli imprevisti in fase di sviluppo. Questa gestione controllata favorisce il rispetto del budget preventivato, l'aderenza alle tempistiche di consegna e una maggiore fluidità nei processi di lavoro. Il processo di gestione dei rischi è strutturato nelle seguenti fasi sequenziali:
+\begin{itemize}
+    \item \textbf{Identificazione}: Questa fase consiste nell'individuare le varie zone di \glslink{rischio}{rischio}, quale area di competenza viene impattata ed il fattore scatenante.
+    In esso viene creato un elenco/inventario per far si che venga creata una mappatura completa sui vari rischi che possono compromettere il progetto.
+    \item \textbf{Analisi}: Valutazione dettagliata e approfondita dei rischi, per valutarne la probabilità e la gravità che ne consegue se il \glslink{rischio}{rischio} si applica.
+    Analizzando i vari rischi, si può così optare per strategie più efficaci e funzionali per il trattamento di essi.
+    \item \textbf{Valutazione}: Consiste nella specifica delle criticità, in ordine di importanza, per poi proporre la \glslink{mitigazione-dei-rischi}{mitigazione} necessaria e più adatta per quel determinato \glslink{rischio}{rischio},
+    Grazie a ciò, si ha un'idea più chiara su quali minacce concentrarsi maggiormente, ottimizzando i tempi e l'uso di risorse.
+    \item \textbf{Gestione}: Implica l'utilizzo di mezzi e tecniche come misure preventive per evitare l'insorgere dei rischi, utilizzando proprio le mitigazioni.
+    Quindi si specifica che, dopo le fasi precedenti, si procede ad eseguire azioni concrete con l'obiettivo di bloccare i vari contrattempi che possono nascere.
+    \item \textbf{Monitoraggio e Revisione}: Dopo aver implementato le varie mitigazioni, il periodo che segue consiste nel controllo periodico e regolare delle soluzioni proposte e messe in atto,
+    per far si che le soluzioni adottate siano efficienti e coprano le problematiche che nascono, oltre a modificare la strategia se nuove difficoltà si presentano.
+\end{itemize}
+
+\subsection{Categorie di Rischio}
+Queste fasi elencate devono essere attuate costantemente durante tutto il periodo di vita del progetto, con lo scopo di avere efficenza a livello di tempi e di costi.
+Per identificare meglio questi rischi, si è deciso di utilizzare un formato nel quale viene specificata la zona di interesse e l'importanza del \glslink{rischio}{rischio}:
+\begin{center}
+    \textbf{R[Tipo][Indice]}
+\end{center}
+Dove \textbf{Tipo} indica la categoria in cui rientra il \glslink{rischio}{rischio}, che si divide in tre sezioni:
+\begin{itemize}
+    \item \textbf{T}: Tecnologico
+    \item \textbf{O}: Organizzativo, legato alla comunicazione e alla gestione interna del team
+    \item \textbf{P}: Personale, singolare ad ogni membro del gruppo
+    \item \textbf{R}: Requisiti, legato a possibili modifiche, aggiunte o incomprensioni delle richieste del \glslink{committente-proponente}{proponente}
+\end{itemize}
+L'\textbf{\textit{Indice}} indica l'ordine dei rischi su ogni categoria, in cui abbiamo deciso di metterli in ordine di Probabilità e Pericolosità.
+
+\newpage
+\subsection{RT: Rischi legati alle Tecnologie}
+\subsubsection{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+Nel \glslink{capitolato}{Capitolato} C5 \textbf{\textit{'\glslink{nexum}{Nexum}'}} richiede varie tecnologie richieste dall'azienda \glslink{committente-proponente}{proponente} che escono dal nostro campo di competenza che abbiamo sviluppato durante il periodo di Università, andando ad imparare tecnologie di cui i membri non hanno confidenza e padronanza.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT1 \\
+
+Probabilità & Molto Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & L'apprendimento e l'utilizzo con minima sicurezza dei nuovi linguaggi e tecnologie proposte, comporterà sicuramente ad un rallentamento nel raggiungimento degli obiettivi del progetto,
+portando tutto il gruppo a concentrarsi ed adattarsi alle nuove risorse proposte. \\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & È indispensabile che ogni membro, sia singolarmente che a gruppi, dedichi un periodo di tempo per imparare ed esplorare le nuove tecnologie, per far si che vengano utilizzate nel modo più efficiente possibile all'interno del \glslink{capitolato}{capitolato}.
+Ogni membro del gruppo si dedicherà nella ricerca di varia documentazione per l'apprendimento delle nuove tecnologie e le varie best practices.\\
+\end{tabular}
+\caption{RT1: Complessità nell'apprendimento delle nuove tecnologie}
+\end{table}
+\newpage
+
+\subsubsection{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+Avendo già difficoltà non indifferenti con l'apprendimento delle nuove tecnologie, se le risorse e la documentazione risultano insufficienti o carenti, il processo di studio diventa ancora più complesso, principalmente per le tecnologie non note a nessun membro del team, oltre ad adattarle al progetto.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT2 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze &  Senza documentazione adatta o carente, questo \glslink{rischio}{rischio} causa rallentamenti, per l'apprendimento e la comprensione dei linguaggi, e ritardi nello sviluppo del codice e nella fase di debugging \\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Si può richiedere all'azienda \glslink{committente-proponente}{proponente} di proporci qualche spunto o documentazione necessaria per imparare le nuove tecnologie, oppure si possono
+trovare dei compromessi sull'utilizzo delle tecnologie, utilizzando delle soluzioni alternative meno complicate e con la documentazione più completa possibile\\
+\end{tabular}
+\caption{RT2: Mancanza o insufficienza di documenti o risorse per le tecnologie}
+\end{table}
+\newpage
+
+\subsubsection{RT2: Disallineamento e integrazione dei sottosistemi}
+Nello sviluppo di un sistema complesso come quello richiesto per il \glslink{capitolato}{Capitolato} C5 \textbf{\textit{'\glslink{nexum}{Nexum}'}}, il lavoro viene diviso in moduli (frontend, backend, database). Esiste il \glslink{rischio}{rischio} concreto che le interfacce di comunicazione tra questi sottosistemi non siano perfettamente allineate, causando errori critici in fase di unione del codice.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT3: Disallineamento e integrazione dei sottosistemi}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT3 \\
+
+Probabilità & Media \\
+
+Pericolosità & Alta \\
+
+Conseguenze & Il sistema potrebbe risultare frammentato e inutilizzabile nonostante il corretto funzionamento dei singoli componenti presi isolatamente, costringendo il team a pesanti sessioni di refactoring non pianificate. \\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Definizione formale e preventiva dei contratti API e dei protocolli di comunicazione tra i vari moduli. Introduzione di \glslink{test-di-integrazione}{test di integrazione} automatici all'interno del flusso di Continuous Integration. \\
+\end{tabular}
+\caption{RT3: Disallineamento e integrazione dei sottosistemi}
+\end{table}
+\newpage
+
+\subsubsection{RT4: Incongruenze tra ambienti di sviluppo e produzione}
+La varietà di sistemi operativi e configurazioni hardware tra i sette membri del gruppo può portare a bug difficili da replicare, noti come problemi di "ambiente". Questo \glslink{rischio}{rischio} può causare il malfunzionamento del software sulla macchina del \glslink{committente-proponente}{proponente} nonostante funzioni sui PC del team.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT4: Incongruenze tra ambienti di sviluppo e produzione}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT4 \\
+
+Probabilità & Media \\
+
+Pericolosità & Media \\
+
+Conseguenze & Rallentamento delle attività di debugging e \glslink{rischio}{rischio} di fallimento delle dimostrazioni ufficiali a causa di dipendenze mancanti o configurazioni errate nel sistema di destinazione. \\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Standardizzazione dell'ambiente di sviluppo tramite l'utilizzo di containerizzazione (\textit{Docker}). Ogni membro del gruppo utilizzerà la medesima immagine per garantire che il software si comporti in modo identico su ogni macchina. \\
+\end{tabular}
+
+\caption{RT4: Incongruenze tra ambienti di sviluppo e produzione}
+\end{table}
+\newpage 
+
+\subsubsection{RT5: Esposizione involontaria di dati sensibili o credenziali}
+Durante il caricamento del codice su piattaforme di versionamento pubblico come \glslink{github}{GitHub}, esiste il \glslink{rischio}{rischio} di includere accidentalmente chiavi API, password di database o token di accesso. Questo metterebbe a \glslink{rischio}{rischio} la sicurezza del progetto.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT5: Esposizione involontaria di dati sensibili o credenziali}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT5 \\
+
+Probabilità & Bassa \\
+
+Pericolosità & Molto Alta \\
+
+Conseguenze & Compromissione degli account, possibile utilizzo non autorizzato delle risorse cloud da parte di terzi e necessità di invalidare e rigenerare tutte le credenziali esposte, con relativa pulizia dello storico \glslink{git}{Git}. \\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Utilizzo sistematico di file di configurazione locali (.env) esclusi dal tracciamento \glslink{git}{Git} tramite il file .gitignore. Formazione dei membri sull'uso di segreti e adozione di tool automatici per la scansione dei segreti nei commit. \\
+\end{tabular}
+\caption{RT5: Esposizione involontaria di dati sensibili o credenziali}
+\end{table}
+\newpage
+
+\subsubsection{RT6: Perdita di file o danneggiamento di essi}
+C'è la possibilità che i file vengano danneggiati o vengono cancellati per errori software, hardware o per errori umani.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RT6: Perdita di file o danneggiamento di essi}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RT6 \\
+
+Probabilità & Bassa\\
+
+Pericolosità & Media\\
+
+Conseguenze & Perdere i documenti necessari causa un rallentamento non oscurabile al proseguimento del progetto, dovendo rimediare all'errore con la ricostruzione dei file mancanti\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Si adotta una soluzione nella quale viene utilizzato un sistema per il salvataggio dei file robusto ed affidabile, con salvataggio del lavoro graduale ed incrementale. 
+Fare ciò garantisce sicurezza ed integrità dei documenti di lavoro, facilitandone anche il recupero in caso di perdita. \\
+\end{tabular}
+\caption{RT6: Perdita di file o danneggiamento di essi}
+\end{table}
+\newpage
+
+\subsection{RO: Rischi legati all'Organizzazione del gruppo}
+\subsubsection{RO1: Mancanza di comunicazione chiara e completa}
+La comunicazione all'interno del gruppo può essere insufficientemente esaustiva o chiara, portando ad errori di comprensione, malintesi 
+e disallineamenti sulle attività pianificate
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO1: Mancanza di comunicazione chiara e completa}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO1 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Può causare gravi errori nello sviluppo, portare a rallentamenti e ritardi consistenti per rimediare alle mancanze o duplicazioni delle attività.
+Oltre al malumore generale causato nel gruppo, comporta a probabili errori nel prodotto finale, peggiorando la qualità dello stesso.\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Si pubblica un resoconto chiaro e coinciso delle mansioni che si devono portare a termine, ognuno col proprio destinatario, e discutendo in maniera costante con gli altri membri attraverso i vari canali di comunicazione (WhatsApp, Telegram, \glslink{discord}{Discord}). Si organizzano riunioni periodiche per portare agli altri membri il riassunto dettagliato del proprio lavoro durante il periodo di \glslink{sprint}{sprint}, discutendo inoltre delle prossime \glslink{milestone}{milestone} che si vogliono raggiungere, fissando poi in maniera esaustiva le varie mansioni di ogni singolo membro.\\
+\end{tabular}
+\caption{RO1: Mancanza di comunicazione chiara e completa}
+\end{table}
+\newpage
+
+
+\subsubsection{RO2: Confusione sulla gestione delle responsabilità}
+La mancata chiarezza sui ruoli affidati durante il periodo può portare a confusione sulle proprie attività, sovrapposizioni e lacune in settori che richiedono maggiore attenzione.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO2: Confusione sulla gestione delle responsabilità}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO2 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La mancata organizzazione sulla divisione delle responsabilità può portare a ritardi e ad uno spreco di risorse non indifferente, con il \glslink{rischio}{rischio} di 
+far slittare ulteriormente la scadenza della consegna del progetto\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Durante le riunioni del team, si definiscono in maniera precisa e chiara, scrivendo le varie responsabilità e attività da svolgere durante i singoli \glslink{sprint}{Sprint}, così da evitare fraintendimenti e duplice lavoro.\\
+\end{tabular}
+\caption{RO2: Confusione sulla gestione delle responsabilità}
+\end{table}
+\newpage
+
+\subsubsection{RO3: Gestione del tempo e delle scadenze}
+La mancanza di organizzazione del tempo e delle varie scadenze indicate per il compimento del progetto, come la sottovalutazione degli impegni o scadenze irrealizzabili, possono portare a ritardi che
+possono compromettere il risultato finale, oltre a causare slittamenti nelle scadenze.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO3: Gestione del tempo e delle scadenze}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO3 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La sottovalutazione dei propri impegni può portare a rimandare il lavoro a cui si è stati affidati, causando slittamenti non indifferenti riguardo le scadenze.
+Inoltre la proposizione di pianificazioni irrealizzabili, portano a svolgere le attività in maniera sbrigativa, portando ad una qualità peggiore del prodotto finale. \\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Ogni membro del gruppo deve organizzarsi affinchè i vari compiti che gli vengono assegnati siano compatibili e siano realizzabili. Il \glslink{responsabile}{Responsabile} deve
+essere inoltre avvisato tempestivamente se ci sono difficoltà nel rispettare le scadenze, cercando di darsi una mano in maniera reciproca. Infine, devono essere svolte riunioni periodiche, affinchè ogni difficoltà emersa possa essere resa nota a tutti i membri e così adattarsi di conseguenza.\\
+\end{tabular}
+\caption{RO3: Gestione del tempo e delle scadenze}
+\end{table}
+\newpage
+
+\subsubsection{RO4: Esaurimento precoce del monte ore per un ruolo specifico}
+A causa dei rigidi vincoli di ripartizione oraria stabiliti nel \glslink{preventivo}{preventivo} e della regola di rotazione, esiste la possibilità che un membro del team esaurisca prematuramente le ore a sua disposizione per un determinato ruolo (ad esempio \glslink{amministratore}{Amministratore} o \glslink{progettista}{Progettista}), prima del termine del progetto.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO4: Esaurimento precoce del monte ore per un ruolo specifico}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO4 \\
+
+Probabilità & Media\\
+
+Pericolosità & Media\\
+
+Conseguenze & Impossibilità formale per un componente di svolgere determinate mansioni senza violare le direttive del \glslink{piano-di-progetto}{Piano di Progetto}. Necessità di riassegnare i task in emergenza ad altri membri, con possibile rallentamento delle attività in corso e perdita di efficienza.\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Monitoraggio costante, alla fine di ogni \glslink{sprint}{Sprint}, del bilancio orario rimanente (Saldo Ore) per ciascun componente tramite il foglio di calcolo condiviso. Quando un membro si avvicina all'esaurimento delle ore per un ruolo, il \glslink{responsabile}{Responsabile} pianificherà in anticipo un passaggio di consegne verso un collega con un monte ore ancora intatto.\\
+\end{tabular}
+\caption{RO4: Esaurimento precoce del monte ore per un ruolo specifico}
+\end{table}
+\newpage
+
+\subsubsection{RO5: Mancata o carenza di comunicazione col proponente}
+La comunicazione con l'azienda \glslink{committente-proponente}{proponente} è fondamentale per far si che il prodotto finale sia in linea con le richieste, se questa viene a mancare o le risposte non sono abbastanza tempestive, possono causare ritardi e fraintendimenti su questioni tecnologiche ed organizzative.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RO5: Mancata o carenza di comunicazione col \glslink{committente-proponente}{proponente}}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RO5 \\
+
+Probabilità & Media\\
+
+Pericolosità & Media\\
+
+Conseguenze & Ritardi a causa di incertezze su domande a livello tecnico ed organizzativo. Probabile disallineamento tra la richiesta del \glslink{committente-proponente}{proponente}
+ed il prodotto del team\\
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Ogni qualvolta ci sono dubbi di rilievo, è opportuno interpellare il \glslink{committente-proponente}{proponente} tramite i mezzi di comunicazione da loro fornitoci. Se il problema persiste,
+si contatta il \glslink{committente-proponente}{committente} per un colloquio. È inoltre importante fare una documentazione chiara e precisa sui verbali esterni.\\
+\end{tabular}
+\caption{RO5: Mancata o carenza di comunicazione col proponente}
+\end{table}
+
+\newpage
+
+\subsection{RP: Rischi personali legati ai singoli membri}
+\subsubsection{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+Il mancato svolgimento dei propri impegni per problemi di salute, accademici o personali possono compromettere la continuità del progetto.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RP1 \\
+
+Probabilità & Alta\\
+
+Pericolosità & Alta\\
+
+Conseguenze & La riduzione del tempo impiegato al progetto porta ad un rallentamento delle varie attività. Procrastinazione e mancanza di organizzazione dei propri impegni,
+i quali comportano problemi nella \glslink{pianificazione}{pianificazione} delle varie attività. Eventi imprevisti come malattia o emergenze, oppure situazioni lavorative per alcuni membri, sicuramente 
+incidono notevolmente sul tempo di termine del progetto, allungando i tempi delle scadenze ed influenzando le capacità del gruppo.\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Pianificare in maniera chiara e realizzabile i propri impegni sul progetto, mettendoli in linea con i propri impegni personali ed accademici.
+Prevedere del tempo extra in caso di eventi imprevisti. Comunicare in maniera tempestiva o, in caso di impegni accademici e lavorativi, a priori con un buon margine di tempo, al \glslink{responsabile}{Responsabile} del Progetto, affinchè si abbia maggior margine
+di manovra per una miglior disposizione delle responsabilità e di redistribuzione delle attività ai membri del gruppo, con effetto immediato o nel prossimo \glslink{sprint}{sprint}, in caso in cui 
+non si vuole sovraccaricare di lavoro il team. \\
+\end{tabular}
+\caption{RP1: Mancato o insufficiente svolgimento dei propri impegni}
+\end{table}
+
+\newpage
+
+\subsubsection{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+Se viene svolto un lavoro che non coincide con le specifiche del \glslink{capitolato}{capitolato} oppure non si adempie al lavoro svolto, ci sono dei rischi sul tempo e sui costi.
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RP2 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Perdita di interesse del \glslink{committente-proponente}{proponente}, costi e tempi maggiori rispetto a quelli dichiarati per rimediare al problema creatosi e malumori
+all'interno del gruppo, perdendo così coesione fra i vari membri del gruppo.\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Comunicazione continua fra i membri del gruppo. Adozione di una gestione chiara e rigorosa sul progetto, per evitare sbavature. Comunicazione periodica col cliente, affinchè il lavoro
+sia in linea con gli impegni dichiarati\\
+\end{tabular}
+\caption{RP2: Lavoro svolto non conforme rispetto agli impegni dichiarati}
+\end{table}
+
+\newpage
+\subsection{RR: Rischi legati ai Requisiti}
+\subsubsection{RR1: Cambiamento o aggiunta di requisiti in corso d'opera}
+Durante lo sviluppo del progetto, l'azienda \glslink{committente-proponente}{proponente} potrebbe modificare le proprie necessità o richiedere l'aggiunta di nuove funzionalità non previste inizialmente nel \glslink{capitolato}{capitolato} o nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RR1: Cambiamento o aggiunta di requisiti in corso d'opera}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RR1 \\
+
+Probabilità & Media\\
+
+Pericolosità & Alta\\
+
+Conseguenze & L'inserimento di nuovi requisiti ad architettura già definita comporta un pesante lavoro di refactoring, un aumento dei costi preventivati e un inevitabile ritardo nelle scadenze (\glslink{rtb-requirements-and-technology-baseline}{RTB} o \glslink{pb-product-baseline}{PB}), compromettendo la stabilità del lavoro già svolto.\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Adozione rigorosa della metodologia \glslink{agile}{Agile}. I nuovi requisiti verranno valutati dal team e, se accettati, inseriti nel Product Backlog per essere sviluppati negli \glslink{sprint}{Sprint} successivi, rinegoziando eventualmente i tempi di consegna con il \glslink{committente-proponente}{proponente}. Verrà data priorità ai requisiti obbligatori per garantire in ogni caso la consegna dell'\glslink{mvp-minimum-viable-product}{MVP (Minimum Viable Product)}.\\
+\end{tabular}
+\caption{RR1: Cambiamento o aggiunta di requisiti in corso d'opera}
+\end{table}
+\newpage
+
+\subsubsection{RR2: Ambiguità o errata interpretazione dei requisiti}
+I requisiti concordati potrebbero risultare poco chiari, ambigui o interpretabili in modi diversi dai vari membri del team o tra il team e la \glslink{committente-proponente}{proponente} stessa.
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5em}
+\textbf{RR2: Ambiguità o errata interpretazione dei requisiti}
+\vspace{0.5em}
+\hrule
+\vspace{1cm}
+
+\begin{table}[h]
+\begin{tabular}{>{\bfseries}p{3cm} | p{12.2cm}}
+Codice & RR2 \\
+
+Probabilità & Bassa\\
+
+Pericolosità & Alta\\
+
+Conseguenze & Sviluppo di funzionalità non conformi alle reali aspettative dell'azienda. Questo errore porta a un enorme spreco di risorse, in quanto il codice prodotto risulta inutile e deve essere scartato o pesantemente riscritto, generando frustrazione nel team.\\
+
+\glslink{mitigazione-dei-rischi}{Mitigazione} & Durante la stesura del documento di \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, ogni \glslink{caso-d-uso-uc}{caso d'uso} deve essere tracciato e approvato meticolosamente. Mantenere un dialogo costante con la \glslink{committente-proponente}{proponente}, inviando diagrammi e prototipi grafici (\glslink{mockup}{Mockup}) per validare visivamente le funzionalità prima di iniziare a scrivere il codice.\\
+\end{tabular}
+\caption{RR2: Ambiguità o errata interpretazione dei requisiti}
+\end{table}
+\newpage
+
+\section{Stima Costi di Sviluppo}
+In questa sezione viene dettagliato il budget preventivato per la realizzazione dell'intero progetto. Tale \glslink{pianificazione}{pianificazione} è stata redatta per consentire una gestione flessibile delle risorse umane, permettendo di intervenire sull'assegnazione delle ore per i vari ruoli qualora le necessità di sviluppo lo richiedano. Resta fermo l'impegno del gruppo a non superare il budget complessivo definito nel \glslink{preventivo}{Preventivo} dei Costi consegnato durante la fase di Candidatura.
+\subsection{Preventivo Costi - Prima Stesura 24-03-2026}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Ruolo} & \textbf{Costo Orario (€/h)} & \textbf{Ore} & \textbf{Costo (€)} \\
+\hline
+\glslink{responsabile}{Responsabile} & 30€/h &56h  &1.680€  \\
+\hline
+\glslink{amministratore}{Amministratore} & 20€/h &51h  &1.020€  \\
+\hline
+\glslink{analista}{Analista} & 25€/h &60h  &1.500€  \\
+\hline
+\glslink{progettista}{Progettista} & 25€/h &143h  &3.575€  \\
+\hline
+\glslink{programmatore}{Programmatore} & 15€/h &160h  &2.400€  \\
+\hline
+\glslink{verificatore}{Verificatore} & 15€/h &160h  &2.400€  \\
+\hline
+\textbf{Totale} & & \textbf{630} & \textbf{12.575€} \\
+\hline
+\end{tabular}
+\caption{Riassunto dei costi derivanti dalle ore assegnate a ciascun ruolo}
+\label{tab:costi_ruoli}
+\end{table}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            8.9/\glslink{responsabile}{Responsabile} (56 ore),
+            8.1/\glslink{amministratore}{Amministratore} (51 ore),
+            9.5/\glslink{analista}{Analista} (60 ore),
+            22.7/\glslink{progettista}{Progettista} (143 ore),
+            25.4/\glslink{programmatore}{Programmatore} (160 ore),
+            25.4/\glslink{verificatore}{Verificatore} (160 ore)
+        }
+    \end{tikzpicture}
+    \caption{Preventivo Costi - Prima Stesura}
+\end{figure}
+
+\subsection{Ripartizione Oraria per Membro}
+Come già previsto nella dichiarazione degli impegni, al fine di garantire il rispetto del principio di rotazione dei ruoli e assicurare un carico di lavoro uniforme, il team ha definito una matrice di ripartizione oraria. Ciascun componente del gruppo si impegna formalmente a prestare un totale di 90 ore produttive individuali lungo l'intero ciclo di vita del progetto, per un ammontare complessivo di 630 ore lavorative.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{Membro del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+    \hline
+    Angelica Gastaldello & 8 & 7 & 9 & 21 & 22 & 23 & \textbf{90} \\
+    \hline
+    Eleonora Bellet & 8 & 7 & 8 & 20 & 23 & 24 & \textbf{90} \\
+    \hline
+    Alex Oloni & 8 & 8 & 8 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    Diego Belluz & 8 & 7 & 9 & 21 & 23 & 22 & \textbf{90} \\
+    \hline
+    Angela Maule & 8 & 8 & 8 & 21 & 23 & 22 & \textbf{90} \\
+    \hline
+    Leonardo Soligo & 8 & 7 & 9 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    V.Y. Kaneda Fernandes & 8 & 8 & 8 & 20 & 23 & 23 & \textbf{90} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale Ore Ruolo} & \textbf{56} & \textbf{52} & \textbf{59} & \textbf{143} & \textbf{160} & \textbf{160} & \textbf{630} \\
+    \hline
+    \end{tabularx}
+    \caption{Matrice di ripartizione oraria complessiva per ciascun componente del team}
+    \label{tab:ripartizione_oraria_totale}
+\end{table}
+\newpage
+
+\newpage
+
+\section{Modello di Sviluppo}
+\label{sec:modello_di_sviluppo}
+Affinchè lo svolgimento del \glslink{capitolato}{Capitolato} \textit{C5: '\glslink{nexum}{Nexum}'} venga svolto in maniera efficiente ed in linea con le scadenze, il team ha deciso
+di utilizzare un \glslink{modello-di-sviluppo}{modello di sviluppo} \href{https://agilemanifesto.org/}{\textbf{\textit{Agile}}} per la capacità di adattamento a cambiamenti improvvisi o naturali, oltre all'\glslink{approccio-incrementale}{approccio incrementale} ed iterativo, grazie al quale, con questi brevi cicli chiamati \textit{\glslink{sprint}{Sprint}},
+offre una capacità maggiore di controllo e di miglioramento del software. Oltre a ciò, offre una continua contrattazione e dialogo col cliente, individuando problemi o modifiche necessarie in tempi brevi,
+andando ad influire positivamente sul rispetto delle scadenze e dei costi di sviluppo.
+\subsection{Fasi del Progetto}
+Le fasi del progetto si dividono in tre macro sezioni, nelle quali ognuna di esse ha obiettivi specifici e diversificati:
+\begin{itemize}
+    \item \textbf{Candidatura}: Questo è il periodo preliminare e precedente all'inizio dell'\glslink{rtb-requirements-and-technology-baseline}{RTB}, nella quale vengono studiati e valutati i vari
+    capitolati proposti dalle varie aziende proponenti.
+    \item \textbf{\glslink{rtb-requirements-and-technology-baseline}{RTB} \textit{(\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline})}}: Questa fase avviene dopo l'aggiudicazione dell'appalto. Rappresenta il punto di controllo iniziale, fissato al termine della prima \glslink{milestone}{milestone} di revisione. Essa certifica il consolidamento dei requisiti, la stabilità della documentazione normativa e la validazione delle scelte tecnologiche avvenuta tramite il \textit{Proof of Concept}.
+    \item \textbf{\glslink{pb-product-baseline}{PB}: \textit{(\glslink{pb-product-baseline}{Product Baseline})}}: In questo ultimo periodo, viene elaborato e sviluppato il prodotto software. È la baseline finale stabilita a conclusione della \glslink{milestone}{milestone} di accettazione, volta a validare la conformità dell'\glslink{mvp-minimum-viable-product}{MVP}, l'avvenuta esecuzione di tutti i piani di \glslink{test-di-sistema}{test di sistema} e la sottomissione finale del prodotto.
+\end{itemize}
+
+\subsection{Adozione del framework SCRUM al progetto}
+Il team ha utilizzato SCRUM in questo progetto accademico per avere maggiore efficienza operativa ed un continuo riscontro con gli altri membri del gruppo.
+Il ciclo di lavoro viene diviso in \glslink{sprint}{Sprint}, e in esso vengono eseguiti:
+\begin{itemize}
+    \item \textbf{\glslink{sprint}{Sprint} Planning}: All'inizio del nuovo \glslink{sprint}{Sprint}, il gruppo decide le varie mansioni e attività da svolgere emerse, producendo uno \textit{\glslink{sprint}{Sprint} Backlog}.
+    \item \textbf{Meeting Sicrono}: Il team si riunisce in riunione su un'apposita applicazione in chiamata per discutere delle attività da svolgere
+    durante lo \glslink{sprint}{Sprint} in apertura, specificando le varie priorità ed importanza, oltre alle risorse che andranno impiegate.
+    \item \textbf{\glslink{sprint}{Sprint} Review e Retrospective}: Al termine dello \glslink{sprint}{Sprint}, si svolge una riunione sulla revisione dell'operato del team rispetto agli obiettivi
+    fissati per il periodo, e si fanno delle considerazioni su vari aspetti per un miglioramento futuro della produttività.
+\end{itemize}
+\section{Pianificazione}
+\label{sec:pianificazione}
+\subsection{Calendario Revisioni del Progetto}
+In questa sezione vengono illustrati le date previste per le revisioni del progetto e del suo conseguente avanzamento, definite in base alla quantità di lavoro da svolgere
+e alle scadenze del corso.
+\subsubsection{Date Avanzamento Progetto - Prima Stesura 29/04/2026}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Revisione} & \textbf{Data Stimata}\\
+    \hline
+    \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline} - \glslink{rtb-requirements-and-technology-baseline}{RTB}} & 2026/05/29\\
+    \hline
+    \textit{\glslink{pb-product-baseline}{Product Baseline} - \glslink{pb-product-baseline}{PB}} & 2026/09/10\\
+    \hline
+    \end{tabularx}
+    \caption{Calendario Avanzamento Progetto - Prima Stesura}
+\end{table}
+\subsection{Periodo preliminare studio Capitolati (Pre-RTB)}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine} & \textbf{Data Aggiudicazione Appalto}\\
+    \hline
+    06/03/2026 & 24/03/2026 & 26/03/2026\\
+    \hline
+    \end{tabularx}
+    \caption{Periodo pre-RTB}
+\end{table}
+
+\subsubsection{Attività}
+\label{sec:prertb_attivita}
+Nella fase preliminare, con tutti i membri del team, si ha una discussione sull'opzione più interessante e fattibile a livello di tempi e costi.
+Durante questa fase, il team prepara i documenti necessari per la candidatura e, conseguentemente, l'aggiudicazione dell'appalto, oltre ad un primo brainstorming sulle varie
+task del \glslink{capitolato}{capitolato} scelto.
+\subsubsection{Costruzione Candidatura}
+\label{sec:costruzione_candidatura}
+Nel periodo iniziale, il team \textit{aLittleByte} si è concentrato nella costruzione di una linea guida, per avere una coesione e comprensione reciproca sul lavoro da svolgere,
+con l'obiettivo comune di eseguire un lavoro efficiente e preciso.
+Nella fase a seguire, ogni membro ha contribuito nella stesura delle \textit{\glslink{norme-di-progetto}{Norme di Progetto}}, analizzando i vari capitolati proposti dalle aziende proponenti e condividendo
+con tutti i propri interessi, dubbi ed incertezze su ogni \glslink{capitolato}{capitolato}. Dopo aver trovato i capitolati di maggior interesse e fattibilità, il team ha fissato dei colloqui con le aziende, per esporre le domande emerse durante le riunioni interne e maggiori specifiche organizzative e tecnologiche.
+Parallelamente vengono svolte altre mansioni minori ma comunque essenziali, come la scelta del nome del gruppo, il logo, la creazione sia di una mail di riferimento che di una \glslink{repository}{repository} su
+\glslink{github}{GitHub} dove andranno inseriti i vari file da presentare per la candidatura.
+
+\subsection{Requirements and Technology Baseline - RTB}
+\label{sec:requirements-and-technology-baseline}
+\subsubsection{Obiettivi}
+Durante questa fase, il team si impegna a redarre tutti i documenti necessari, ossia:
+\begin{itemize}
+    \item \textit{\glslink{norme-di-progetto}{Norme di Progetto}}
+    \item \textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}
+    \item \textit{\glslink{piano-di-progetto}{Piano di Progetto}}
+    \item \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}
+    \item \textit{\glslink{glossario}{Glossario}}
+\end{itemize}
+affinchè si abbia una chiara comprensione del \glslink{capitolato}{capitolato} scelto, e in certe situazioni si richiede all'azienda \glslink{committente-proponente}{proponente} incontri per un maggior riscontro sulle scelte attuate e su
+eventuali compromessi tecnologici. Inoltre, tramite le scelte effettuate, verrà sviluppato un \textit{Proof of Concept}, ossia un prototipo funzionale in cui vengono inseriti i vari obiettivi indicati e le 
+varie attività che deve svolgere, per valutarne quindi la complessità, fattibilità tecnologica e per avere un esempio tangibile delle varie soluzioni proposte.
+Quindi i punti chiave in questa \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline}} sono essenzialmente:
+\begin{itemize}
+    \item \textbf{Stesura Documentazione}: Il gruppo si suddivide la creazione e la stesura della documentazione necessaria allo sviluppo del prodotto
+    \item \textbf{Analisi}: Al \glslink{committente-proponente}{proponente} vengono richiesti incontri per un maggiore riscontro sullo sviluppo del Proof of Concept, affinchè si evitino ambiguità e si trovino compromessi o soluzioni migliori
+    \item \textbf{Sviluppo del \textit{Proof of Concept}}: Viene quindi iniziato a sviluppare un prototipo del prodotto, per testarne funzionalità, attività e complessità.
+\end{itemize}
+\subsubsection{Periodi}
+La fase \glslink{rtb-requirements-and-technology-baseline}{RTB} è suddivisa in 7 iterazioni (\glslink{sprint}{Sprint}).
+\label{sec:rtb_primoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{\glslink{sprint}{Sprint}} & \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    \glslink{sprint}{Sprint} 1 & 30/03/2026 & 12/04/2026\\
+    \hline
+    \glslink{sprint}{Sprint} 2 & 13/04/2026 & 26/04/2026\\
+    \hline
+    \glslink{sprint}{Sprint} 3 & 27/04/2026 & 10/05/2026\\
+    \hline
+    \glslink{sprint}{Sprint} 4 & 11/05/2026 & 24/05/2026\\
+    \hline
+    \glslink{sprint}{Sprint} 5 & 25/05/2026 & 07/06/2026 \\
+    \hline
+    \glslink{sprint}{Sprint} 6 & 08/06/2026 & 21/06/2026 \\
+    \hline
+    \glslink{sprint}{Sprint} 7 & 22/06/2026 & 05/07/2026 \\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Chiave di lettura dei periodi di Sprint}
+Per garantire la massima trasparenza e agevolare la consultazione del documento, la rendicontazione di ciascuno \glslink{sprint}{Sprint} è stata strutturata secondo il seguente schema standard:
+
+\begin{itemize}
+    \item \textbf{Sintesi del periodo:} Un breve paragrafo introduttivo che riassume le principali attività affrontate dal team e gli obiettivi generali perseguiti durante l'iterazione.
+    
+    \item \textbf{Attività Pianificate (\glslink{sprint}{Sprint} Backlog):} Una tabella di dettaglio che elenca i task assegnati ai vari ruoli, confrontando le ore preventivate con quelle effettivamente consumate a \glslink{consuntivo}{consuntivo}. Ogni attività è accompagnata dal relativo stato di avanzamento, indicato con le diciture ``\textit{Completata}'' o ``\textit{In corso}''.
+    \begin{quote}
+        \textit{Nota bene:} È fondamentale precisare che tali stati si riferiscono \textbf{esclusivamente agli incrementi e agli aggiornamenti pianificati per lo specifico \glslink{sprint}{Sprint}}, e non al completamento assoluto dell'intera attività o del documento a cui fanno riferimento. (A titolo di esempio, lo stato ``Completata'' per la voce ``Stesura \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}'' indica unicamente che il team ha portato a termine il carico di lavoro prefissato per quella specifica iterazione, non che il documento sia da considerarsi concluso o in versione definitiva).
+    \end{quote}
+    
+    \item \textbf{Considerazioni (\glslink{sprint}{Sprint} Review e Retrospective):} Una sezione conclusiva in cui vengono analizzati criticamente i risultati raggiunti, evidenziando eventuali problematiche riscontrate durante lo sviluppo e formalizzando le azioni correttive adottate per le iterazioni successive.
+\end{itemize}
+
+\subsubsubsection{Primo Periodo}
+
+\label{sec:rtb_primoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    30/03/2026 & 12/04/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+
+A seguito dell'aggiudicazione del \glslink{capitolato}{capitolato}, le attività del primo \glslink{sprint}{Sprint} si sono concentrate sull'analisi approfondita della documentazione e sul confronto con l'azienda \glslink{committente-proponente}{proponente} in merito alle scelte tecnologiche. Parallelamente, il team ha proceduto con l'individuazione dei \textit{casi d'uso} e ha avviato la stesura dell'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}, seguita dalle \textit{\glslink{norme-di-progetto}{Norme di Progetto}} e da una prima \glslink{bozza-draft}{bozza} del \textit{\glslink{glossario}{Glossario}}. Infine, è stata iniziata la realizzazione di un mock-up grafico, che fungerà da riferimento strutturale e visivo per le successive fasi di sviluppo.
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+Di seguito vengono dettagliate le singole attività pianificate per l'iterazione, con il relativo confronto tra le ore stimate in sede di \glslink{sprint}{Sprint} Planning e le ore effettivamente impiegate a \glslink{consuntivo}{consuntivo}.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento sito web per visualizzazione doc. & \glslink{programmatore}{Programmatore} & 1 & 1 & Completata \\
+    \hline
+    Inizio stesura \glslink{glossario}{Glossario} & \glslink{analista}{Analista} & 3 & 3 & Completata \\
+    \hline
+    Inizio stesura \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 6 & 7 & Completata\\
+    \hline
+    Inizio stesura \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 6 & 6 & Completata \\
+    \hline
+    Costruzione Mock-up & \glslink{progettista}{Progettista} & 4 & 5 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & \glslink{verificatore}{Verificatore} & 4 & 3 & Completata \\
+    \hline
+    Redazione verbali interni durante le riunioni & \glslink{responsabile}{Responsabile} & 5 & 5 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{29} & \textbf{30} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 1}
+    \label{tab:task_sprint1}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review e Retrospective)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Avvio efficace delle attività fondanti del progetto, con la configurazione dell'ambiente di lavoro, la prima stesura della documentazione principale (\glslink{glossario}{Glossario}, \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, \glslink{norme-di-progetto}{Norme di Progetto}) e la realizzazione della prima versione del mock-up grafico.
+    \item \textbf{Azioni Correttive:} Maggiore accortezza nelle stime per le attività di Analisi e Progettazione durante i prossimi \glslink{sprint}{Sprint} Planning; introduzione dell'obbligo di avviso tempestivo al \glslink{responsabile}{Responsabile} in caso di ritardi per consentire una rapida redistribuzione del carico.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} Lieve rallentamento fisiologico per i ruoli di \glslink{analista}{Analista} e \glslink{progettista}{Progettista}, dovuto alla curva di apprendimento nell'utilizzo dei tool grafici e alla fase di rodaggio nella stesura dei requisiti.\\
+
+I rischi riscontrati sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RT1:} La progettazione del mock-up, ha richiesto all'inizio uno studio su nuove tecnologie. Il problema è stato sviato decidendo di lavorare con tecnologie e linguaggi conosciuti da tutti in modo da non spendere tempo a imparare nuove tecnologie in questa fase di apprendimento, e concentrarsi maggiormente sulla stesura dei documenti. 
+\end{itemize}
+    \newpage
+
+\subsubsubsection{Secondo Periodo}
+
+\label{sec:rtb_secondoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    13/04/2026 & 26/04/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Durante il secondo \glslink{sprint}{Sprint}, l'obiettivo principale del team è stato il consolidamento e l'allineamento della documentazione per prevenire future incomprensioni sui requisiti. Si è proceduto con l'avvio della stesura del \textit{\glslink{piano-di-progetto}{Piano di Progetto}} e con il continuo aggiornamento dell'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}} (tramite l'estensione dei casi d'uso) e del \textit{\glslink{glossario}{Glossario}}. Sul fronte progettuale, il mock-up è stato ultimato e presentato all'azienda \glslink{committente-proponente}{proponente}. A seguito del feedback ricevuto, sono state recepite le richieste per alcune modifiche minori; la revisione finale e la relativa approvazione del mock-up sono state riprogrammate per lo \glslink{sprint}{Sprint} successivo.\\
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Inizio stesura \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 3 & 3 & Completata \\
+    \hline
+    Aggiornamento \glslink{glossario}{Glossario} & \glslink{analista}{Analista} & 3 & 4 & Completata \\
+    \hline
+    Aggiornamento \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 6 & 5 & Completata \\
+    \hline
+    Aggiornamento \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 5 & 6 & In corso \\
+    \hline
+    Rifinitura Mock-up & \glslink{progettista}{Progettista} & 2 & 2 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & \glslink{verificatore}{Verificatore} & 3 & 5 & Completata \\
+    \hline
+    Redazione verbali interni e \glslink{verbale-esterno}{verbale esterno} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{24} & \textbf{27} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 2}
+    \label{tab:task_sprint2}
+\end{table}
+
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Ultimazione e presentazione del mock-up grafico all'azienda \glslink{committente-proponente}{proponente}; buon avanzamento nel consolidamento e nell'allineamento della documentazione per prevenire ambiguità.
+    \item \textbf{Azioni Correttive:} Ottimizzazione della \glslink{pianificazione}{pianificazione} interna per riassorbire lo sforzo orario extra e impegno del team nell'affinare le metriche di stima a partire dall'iterazione successiva.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+
+\textbf{Problematiche Riscontrate:} Emersione di richieste per modifiche minori sul mock-up da parte del \glslink{committente-proponente}{proponente} e incremento imprevisto del carico di lavoro per i ruoli di \glslink{analista}{Analista} (estensione casi d'uso) e \glslink{verificatore}{Verificatore}. Le attività di \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} hanno subito un momentaneo stallo a causa della necessità di acquisire dal \glslink{committente-proponente}{proponente} dei file di esempio (es. cedolini, comunicazioni). Tali documenti si sono rivelati un prerequisito indispensabile per poter estrarre e mappare correttamente i dati necessari alla descrizione dettagliata dei casi d'uso, generando un rallentamento rispetto alle stime iniziali.
+Come azione correttiva, il team ha riassegnato temporaneamente gli Analisti ad altre attività documentali (ovvero la correzione dello stesso documento) in attesa della ricezione dei file, per poi concentrare lo sforzo sui casi d'uso non appena i materiali sono stati resi disponibili.\\
+
+I rischi riscontrati sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RR1:} Per quanto riguarda l'estenzione dei casi d'uso. Siccome, nel seguente caso, il rallentamento non è stato eccessivo, i nuovi casi d'uso sono stati aggiunti senza comportare un ritardo nelle scadenze. Tuttavia, è importante sottolineare che, qualora si verificassero situazioni analoghe in futuro, potrebbe essere necessario rivedere le scadenze per garantire un adeguato tempo di sviluppo e mantenere la qualità del lavoro.
+\end{itemize}
+\newpage
+
+\subsubsubsection{Terzo Periodo}
+\label{sec:rtb_terzoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    27/04/2026 & 10/05/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Durante il terzo \glslink{sprint}{Sprint}, il team ha proseguito attivamente con la stesura della documentazione, concentrandosi in particolar modo sul consolidamento dell'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}} (estensione dei casi d'uso e diagrammazione), sull'ampliamento del \textit{\glslink{piano-di-progetto}{Piano di Progetto}} e sull'aggiornamento continuo del \textit{\glslink{glossario}{Glossario}}. Inoltre, è stata iniziata la stesura del \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}. Dal punto di vista tecnico, è stata ultimata la revisione del mock-up per il \glslink{committente-proponente}{proponente} ed è iniziata la fase di autoformazione sui framework scelti per lo sviluppo (\glslink{laravel}{Laravel} e \glslink{filament}{Filament}).
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento \glslink{glossario}{Glossario} & \glslink{analista}{Analista} & 2 & 3 & Completata \\
+    \hline
+    Aggiornamento \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 3 & 3 & Completata \\
+    \hline
+    Aggiornamento \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 7 & 9 & Completata \\
+    \hline
+    Inizio stesura \glslink{piano-di-qualifica}{Piano di Qualifica} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Rifinitura Mock-up & \glslink{programmatore}{Programmatore} & 0 & 2 & Completata \\
+    \hline
+    Studio delle tecnologie adottate & \glslink{progettista}{Progettista} & 12 & 11 & Completata \\
+    \hline
+    Verifica della documentazione prodotta & \glslink{verificatore}{Verificatore} & 3 & 3 & Completata \\
+    \hline
+    Redazione verbali interni e \glslink{verbale-esterno}{verbale esterno} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{31} & \textbf{35} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 3}
+    \label{tab:task_sprint3}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Approvazione finale del mock-up da parte del \glslink{committente-proponente}{proponente}, forte progressione nella stesura dei casi d'uso (\glslink{analisi-dei-requisiti-adr}{AdR}) e avvio efficace della fase di autoformazione sui framework tecnologici \glslink{laravel}{Laravel} e \glslink{filament}{Filament}.
+    \item \textbf{Azioni Correttive:} Gestione flessibile e tempestiva del budget orario, attuando una riduzione mirata sulle ore del \glslink{progettista}{Progettista} per supportare i ruoli che hanno portato via più tempo del necessario (\glslink{analista}{Analista} e \glslink{programmatore}{Programmatore}).
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} Sottostima iniziale dell'intensità del lavoro richiesto per la diagrammazione dei requisiti ed emersione di attività tecniche non preventivate (ruolo del \glslink{programmatore}{Programmatore}) necessarie alla rifinitura del mock-up. 
+\newpage
+
+\subsubsubsection{Quarto Periodo}
+
+\label{sec:rtb_quartoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    11/05/2026 & 24/05/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il quarto periodo di \glslink{sprint}{Sprint} ha rappresentato il momento di convergenza e finalizzazione di tutte le attività legate alla fase di \glslink{rtb-requirements-and-technology-baseline}{RTB}. Sul piano documentale, il team si è focalizzato sulla chiusura formale dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e del \glslink{glossario}{Glossario}, integrando gli ultimi raffinamenti emersi dalle verifiche interne. Il nucleo operativo dell'iterazione è stato tuttavia assorbito dalle attività tecniche, con la definizione teorica e la successiva implementazione pratica del PoC. Sfruttando lo stack tecnologico concordato il gruppo ha sviluppato un prototipo funzionante mirato a validare la fattibilità delle architetture e a minimizzare i rischi tecnologici individuati. 
+
+A conclusione dell'iterazione, il team ha organizzato un incontro ufficiale con l'azienda \glslink{committente-proponente}{proponente} Eggon per presentare una demo operativa del PoC. Il colloquio ha permesso di mostrare le soluzioni software realizzate, ricevendo un riscontro estremamente positivo da parte del \glslink{committente-proponente}{committente}; questo passaggio ha sancito il superamento dei criteri di accettazione interni e ha confermato la solidità del lavoro svolto in preparazione al colloquio di revisione \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Stesura e incremento \glslink{piano-di-qualifica}{Piano di Qualifica} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 1 & 1 & Completata \\
+    \hline
+    Conclusione \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e \glslink{glossario}{Glossario} & \glslink{analista}{Analista} & 1 & 1 & Completata \\
+    \hline
+    Definizione del PoC & \glslink{progettista}{Progettista} & 13 & 15 & Completata \\
+    \hline
+    Implementazione del PoC & \glslink{programmatore}{Programmatore} & 16 & 18 & Completata \\
+    \hline
+    Verifica della documentazione e del PoC & \glslink{verificatore}{Verificatore} & 8 & 11 & Completata \\
+    \hline
+    Redazione verbali interni ed esterni & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{43} & \textbf{50} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 4}
+    \label{tab:task_sprint4}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Chiusura definitiva dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e sviluppo completato del Proof of Concept (PoC) utilizzando le tecnologie designate; Completati \glslink{norme-di-progetto}{Norme di progetto}, \glslink{piano-di-qualifica}{piano di qualifica}, \glslink{piano-di-progetto}{piano di progetto} e \glslink{glossario}{glossario} in vista dell'\glslink{rtb-requirements-and-technology-baseline}{RTB}.
+    \item \textbf{Azioni Correttive:} Trattandosi dell'ultimo \glslink{sprint}{Sprint} della fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il gruppo utilizzerà le criticità per il \glslink{preventivo}{preventivo} delle ore del PoC per stilare una \glslink{pianificazione}{pianificazione} oraria post-\glslink{rtb-requirements-and-technology-baseline}{RTB} estremamente accurata, prevedendo \textit{buffer} di \glslink{rischio}{rischio} più ampi per la fase di coding.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} Sul piano tecnico, lo sviluppo del PoC ha subito un momentaneo stallo a causa di una dipendenza esterna legata all'infrastruttura cloud di \textbf{AWS}. Il team si è trovato bloccato in attesa di poter richiedere e ottenere le credenziali e le risorse necessarie direttamente dall'azienda \glslink{committente-proponente}{proponente}. Questo periodo di attesa forzata ha costretto i ruoli tecnici (\glslink{progettista}{Progettista}, \glslink{programmatore}{Programmatore} e \glslink{verificatore}{Verificatore}) a condensare l'intera fase di implementazione e collaudo in un arco di tempo molto più ristretto rispetto a quanto pianificato. Per recuperare il tempo latente e garantire la consegna del PoC entro i termini dello \glslink{sprint}{Sprint}, il team ha dovuto svolgere sessioni di lavoro straordinarie e intensive, generando così lo scostamento complessivo di +7 ore.\\
+I rischi riscontrati sono stati i seguenti:
+\begin{itemize}
+\item \textbf{RT1:} Per quanto riguarda lo studio delle nuove tecnologie per lo sviluppo del PoC. Il problema è stato mitigato, come già descritto inizialmente, dedicando del tempo per imparare le nuove tcnologie, cercando il più possibile una documentazione chiara e sufficientemente dettagliata. 
+\end{itemize}
+
+\subsubsubsection{Quinto Periodo}
+
+\label{sec:rtb_quintoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    25/05/2026 & 07/06/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il quinto periodo di \glslink{sprint}{Sprint} è stato caratterizzato da un andamento diverso rispetto ai precedenti. Il team ha infatti lavorato a pieno regime solamente durante la prima settimana, concentrando e concludendo le attività entro il 29 maggio 2026. In tale data, ritenendo di aver ultimato il carico di lavoro necessario, il gruppo ha presentato formalmente la candidatura per la revisione della \glslink{rtb-requirements-and-technology-baseline}{RTB}. L'incontro ufficiale di revisione è stato fissato per il 3 giugno. 
+
+Nei giorni immediatamente successivi al colloquio, il team ha sospeso temporaneamente le attività di sviluppo in attesa della valutazione ufficiale da parte del Prof. R. Cardin. Il riscontro ottenuto è stato negativo: il progetto ha ricevuto un ``semaforo rosso'', indicando che la documentazione (in particolare l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}) e il PoC non hanno raggiunto gli standard qualitativi richiesti per il superamento della \glslink{milestone}{milestone}.
+
+\begin{center}
+\noindent\textbf{Attivitá Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Redazione \glslink{verbale-interno}{verbale interno} e \glslink{diario-di-bordo}{diario di bordo} (29/05) & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Conclusione \glslink{piano-di-qualifica}{Piano di Qualifica} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Conclusione \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 6 & 6 & Completata \\
+    \hline
+    Preparazione materiale e supporto per revisione \glslink{rtb-requirements-and-technology-baseline}{RTB} & \glslink{analista}{Analista} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento sito web & \glslink{programmatore}{Programmatore} & 4 & 3 & Completata \\
+    \hline
+    Verifica della documentazione e del PoC & \glslink{verificatore}{Verificatore} & 12 & 12 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{28} & \textbf{27} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 5}
+    \label{tab:task_sprint5}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Le attività pianificate per la chiusura (aggiornamento del \glslink{piano-di-progetto}{Piano di Progetto}, conclusione dei documenti normativi e di qualifica, rilascio web) sono state eseguite rapidamente e completate entro il 29 maggio, con un risparmio di 1 ora sul ruolo di \glslink{programmatore}{Programmatore}. Tuttavia, l'obiettivo principale, ovvero il superamento dell'incontro del 3 giugno, non è stato raggiunto a causa del semaforo rosso ricevuto dal Prof. R. Cardin.
+    \item \textbf{Azioni Correttive:} L'esito negativo della revisione impone un immediato cambio di rotta. Il team dovrà dedicare il prossimo \glslink{sprint}{Sprint} (\glslink{sprint}{Sprint} 6) all'analisi dettagliata dei feedback ricevuti dal Prof. R. Cardin e alla risoluzione di tutte le criticità rilevate, al fine di presentarsi nuovamente per l'accettazione della \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} L'anticipo nella chiusura delle attività e le conseguenti verifiche (durate ben 12 ore) non sono state sufficienti a garantire la qualità attesa in sede di revisione. Il semaforo rosso evidenzia una probabile discrepanza tra le metriche di \glslink{verificatore}{Verifica} interne adottate dal gruppo e le reali aspettative dei docenti. Il tempo trascorso in attesa del risultato ha rappresentato un periodo di inattività che ora andrà compensato con uno sforzo extra per rimediare agli errori segnalati e pianificare il recupero del progetto.
+I rischi riscontrati sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RR2:} Il semaforo rosso evidenzia una chiara errata interpretazione delle aspettative dei docenti e delle metriche di valutazione necessarie per l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e il PoC. Le nostre metriche di \glslink{verificatore}{Verifica} interne non erano allineate agli standard accademici richiesti per la \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+    \item \textbf{RP2:} Il lavoro presentato si è rivelato non conforme agli standard per il superamento della \glslink{milestone}{milestone}, il che costringerà il team a impiegare tempo e costi maggiori (non preventivati) per rimediare al problema nel prossimo periodo.
+    \item \textbf{RO3:} Il desiderio di chiudere la consegna in tempi brevi (entro il 29 maggio) ha portato a un lavoro sbrigativo che ha compromesso la qualità del PoC. Inoltre, il tempo trascorso in attesa del risultato ha rappresentato un periodo di inattività che ora andrà compensato con uno sforzo extra per rimediare agli errori segnalati e pianificare il recupero del progetto.
+\end{itemize}
+
+\subsubsubsection{Sesto Periodo}
+
+\label{sec:rtb_sestoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    08/06/2026 & 21/06/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il sesto periodo di \glslink{sprint}{Sprint} è stato interamente dedicato all'analisi e alla risoluzione delle criticità emerse in seguito all'esito negativo (semaforo rosso) ricevuto dal Prof. R. Cardin. Il team si è riunito per condurre una profonda riflessione sulle cause che hanno portato a tale valutazione, focalizzandosi in particolar modo sulle lacune evidenziate durante la presentazione del \textit{Proof of Concept} (PoC) e sugli errori metodologici e strutturali riscontrati nell'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}.
+
+Preso atto degli errori commessi e ricalibrato l'approccio interno, l'intero sforzo operativo di questa iterazione si è focalizzato in un'opera di correzione e recupero. Le risorse sono state concentrate sulla revisione minuziosa dell'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}, sull'ottimizzazione e il perfezionamento dell'implementazione del PoC, nonché sul controllo incrociato di tutta l'altra documentazione di progetto. L'obiettivo primario di questo intenso lavoro è stato riallineare il prodotto e i documenti agli standard qualitativi richiesti, al fine di preparare tempestivamente una nuova e solida candidatura per il superamento della fase \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+
+\begin{center}
+\noindent\textbf{Attività Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Redazione \glslink{diario-di-bordo}{diario di bordo} e verbale & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-qualifica}{Piano di Qualifica} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Revisione \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 4 & 4 & Completata \\
+    \hline
+    Sistemazione \glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 10 & 9 & Completata \\
+    \hline
+    Revisione della progettazione del PoC & \glslink{progettista}{Progettista} & 8 & 8 & Completata \\
+    \hline
+    Implementazione del PoC & \glslink{programmatore}{Programmatore} & 16 & 15 & Completata \\
+    \hline
+    Verifica della documentazione e del codice & \glslink{verificatore}{Verificatore} & 6 & 7 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{48} & \textbf{47} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 6}
+    \label{tab:task_sprint6}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Il team ha analizzato a fondo i feedback ricevuti a seguito dell'esito negativo dello \glslink{sprint}{Sprint} 5. Sono state apportate correzioni strutturali e metodologiche all'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, mentre il PoC è stato pesantemente revisionato sia a livello di progettazione architetturale che di implementazione del codice. L'aggiornamento parallelo degli altri documenti normativi e di \glslink{pianificazione}{pianificazione} ha permesso di chiudere l'iterazione completando tutti i task previsti con un lieve risparmio orario (47 ore consuntivate su 48), portando il gruppo a presentare una nuova e più matura candidatura per l'accettazione della \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+    \item \textbf{Azioni Correttive:} L'incremento dell'effort sul ruolo di \glslink{verificatore}{Verificatore} (+1 ora rispetto al \glslink{preventivo}{preventivo}) ha garantito il controllo qualitativo rigoroso che era mancato nel periodo precedente. Per le future iterazioni verso la \glslink{pb-product-baseline}{PB}, il team ha stabilito di mantenere questi nuovi e più alti standard di verifica incrociata, evitando categoricamente la fretta di chiusura che aveva compromesso i risultati dello \glslink{sprint}{Sprint} 5.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} La criticità maggiore affrontata in questo periodo è stata il dover decostruire e ripensare in tempi molto ristretti parti significative del lavoro già consolidato. Il cambio di paradigma necessario per colmare il divario tra le metriche interne e i reali standard qualitativi attesi dai docenti ha richiesto un notevole sforzo iniziale di riallineamento e coordinamento tra i ruoli di Analisi e Progettazione.
+
+I rischi gestiti in questa fase sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RR2 (Ambiguità o errata interpretazione dei requisiti):} L'errata interpretazione delle aspettative dei docenti, che aveva causato il semaforo rosso, è stata attivamente affrontata e mitigata. Grazie a un'attenta rilettura dei feedback forniti dal Prof. R. Cardin, il team ha corretto le ambiguità presenti nei casi d'uso e allineato le funzionalità del PoC alle reali richieste della \glslink{milestone}{milestone}.
+    \item \textbf{RP2 (Lavoro svolto non conforme rispetto agli impegni dichiarati):} Per rimediare alla precedente non conformità del prodotto, il gruppo ha abbandonato l'approccio sbrigativo dello \glslink{sprint}{sprint} passato. Ogni documento e ogni modulo di codice è stato sottoposto a una validazione rigorosa prima di considerarlo chiuso, accertandosi che rispondesse punto per punto alle criticità segnalate durante la revisione fallita.
+\end{itemize}
+
+\subsubsubsection{Settimo Periodo}
+
+\label{sec:rtb_settimoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    22/06/2026 & 05/07/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il settimo periodo di \glslink{sprint}{Sprint} è stato un'iterazione volutamente contenuta sul piano operativo, configurandosi principalmente come una fase di consolidamento e di attesa. In data 26/06/2026 il team ha infatti riconsegnato al Prof. R. Cardin una nuova versione del documento di \textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}, restando in attesa di un riscontro ufficiale in merito all'accettazione della fase \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+Non conoscendo ancora l'esito della revisione, il gruppo ha preferito non intraprendere modifiche strutturali. Le attività si sono dunque concentrate sul mantenimento della documentazione di progetto e su un'ulteriore opera di rifinitura del \textit{Proof of Concept} (PoC): il \glslink{responsabile}{Responsabile} ha curato la redazione del \glslink{diario-di-bordo}{diario di bordo} e del verbale, l'\glslink{analista}{Analista} ha rivisto l'\textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}, \glslink{progettista}{Progettista} e \glslink{programmatore}{Programmatore} hanno perfezionato le tecnologie e l'implementazione del PoC, mentre il \glslink{verificatore}{Verificatore} ha effettuato un controllo incrociato dei documenti e del PoC.
+
+\begin{center}
+\noindent\textbf{Attività Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Redazione \glslink{diario-di-bordo}{diario di bordo} e verbale & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Revisione \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 2 & 2 & Completata \\
+    \hline
+    Revisione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 7 & 6 & Completata \\
+    \hline
+    Rifinitura delle tecnologie del PoC & \glslink{progettista}{Progettista} & 7 & 7 & Completata \\
+    \hline
+    Rifinitura implementativa del PoC & \glslink{programmatore}{Programmatore} & 9 & 9 & Completata \\
+    \hline
+    Verifica della documentazione e del PoC & \glslink{verificatore}{Verificatore} & 9 & 9 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{38} & \textbf{37} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 7}
+    \label{tab:task_sprint7}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Le ore di lavoro sono state ridotte rispetto alle iterazioni precedenti (37 ore consuntivate su 38 preventivate). L'assenza di un riscontro da parte del Prof. R. Cardin sulla nuova versione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, riconsegnata il 26/06/2026, ha reso poco produttivo intraprendere nuove attività. Il team si è limitato al mantenimento della documentazione e a una rifinitura di dettaglio del PoC, completando tutti i task previsti con un lieve risparmio orario.
+    \item \textbf{Azioni Correttive:} Il gruppo ha deciso di sfruttare la fase di attesa per rafforzare l'organizzazione interna e la chiarezza sulla ripartizione delle responsabilità, così da farsi trovare pronto non appena sarà disponibile il riscontro del docente, riprendendo a pieno ritmo la pianificazione verso la fase \glslink{pb-product-baseline}{PB}.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} La principale criticità di questo periodo non è stata di natura tecnica, ma legata alla ridotta operatività dovuta all'attesa del riscontro esterno. Un contesto di lavoro poco definito e con un carico contenuto rischiava di generare incertezza sulle attività da svolgere e sulla loro attribuzione ai singoli membri del gruppo.
+
+I rischi gestiti in questa fase sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RO2 (Confusione sulla gestione delle responsabilità):} Per prevenire sovrapposizioni e lacune in un periodo caratterizzato da poco lavoro, il rischio è stato mitigato chiedendo a ciascun membro del gruppo di dichiarare esplicitamente i propri impegni e definendo in maniera chiara le attività da svolgere e le relative scadenze, così da mantenere il coordinamento del team nonostante l'incertezza sull'esito della \glslink{rtb-requirements-and-technology-baseline}{RTB}.
+\end{itemize}
+
+\subsection{Pianificazione a Lungo Termine (Verso la PB)}
+La programmazione analitica dei singoli \glslink{sprint}{Sprint} e delle scadenze intermedie verrà ufficializzata e integrata nella release v2.0.0 del presente documento, dopo aver superato la \glslink{rtb-requirements-and-technology-baseline}{RTB}. Nonostante ciò, il team ha delineato subito una strategia di sviluppo a lungo termine da poter seguire. Questo approccio, articolato in 4 macro-fasi sequenziali, è concepito per assicurare un rilascio incrementale, isolando le criticità architetturali.
+
+\subsubsection{Macro-fase 1: Consolidamento Architetturale e Infrastrutturale (Post-RTB)}
+Questa fase segna il passaggio dallo sviluppo sperimentale PoC alla progettazione ingegneristica rigorosa del sistema.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Stabilizzare l'architettura di base e predisporre l'ambiente cloud definitivo, garantendo che le fondamenta del software siano scalabili e sicure per il trattamento di dati aziendali.
+    \item \textbf{Attività chiave:} Stesura del \textit{Technical Design} definitivo (diagrammi UML avanzati), configurazione strutturata dei database e dello storage cloud per i documenti, implementazione dei protocolli di sicurezza per i dati sensibili in conformità al \glslink{gdpr}{GDPR} e setup della pipeline automatizzata di CI/CD.
+\end{itemize}
+
+\subsubsection{Macro-fase 2: Sviluppo del Core del Prodotto (Fase MVP)}
+Fase interamente focalizzata sulla realizzazione del nucleo funzionale essenziale per la piattaforma, al fine di soddisfare tutti i requisiti classificati come obbligatori.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Rilasciare un \textit{\glslink{mvp-minimum-viable-product}{Minimum Viable Product}} (\glslink{mvp-minimum-viable-product}{MVP}) stabile, in grado di dimostrare l'interoperabilità di base tra le interfacce utente e i servizi di backend.
+    \item \textbf{Attività chiave:} Sviluppo delle API principali di comunicazione, implementazione delle componenti core per la \glslink{dashboard}{dashboard} amministrativa e le interfacce lato dipendente, e prima integrazione stabile dei motori di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} per l'elaborazione dei testi e il riconoscimento documentale di base.
+\end{itemize}
+
+\subsubsection{Macro-fase 3: Estensione Funzionale, Ottimizzazione e Sicurezza}
+Fase orientata al completamento dei requisiti desiderabili e opzionali, focalizzandosi sull'efficienza e sulla rifinitura dell'esperienza utente (UX).
+\begin{itemize}
+    \item \textbf{Obiettivo:} Raggiungere la piena copertura funzionale del \glslink{capitolato}{capitolato}, ottimizzando i costi operativi legati alle chiamate \glslink{intelligenza-artificiale-ai}{AI} e perfezionando le logiche di automazione.
+    \item \textbf{Attività chiave:} Estensione delle funzionalità \glslink{intelligenza-artificiale-ai}{AI} (raffinamento dei \glslink{prompt}{prompt} e dei meccanismi di smistamento automatico), implementazione di sistemi di caching per minimizzare le richieste esterne, definizione granulare del controllo accessi basato sui ruoli (\glslink{rbac-role-based-access-control}{RBAC}) e rifinitura grafica delle interfacce \textit{\glslink{nexum}{Nexum}}.
+\end{itemize}
+
+\subsubsection{Macro-fase 4: Validazione, Quality Assurance e Rilascio}
+L'ultimo periodo prima della consegna ufficiale, dedicato esclusivamente alle attività di verifica approfondita e alla preparazione del deployment finale.
+\begin{itemize}
+    \item \textbf{Obiettivo:} Certificare la conformità totale del prodotto rispetto ai requisiti qualitativi, prestazionali e di sicurezza concordati con la \glslink{committente-proponente}{proponente}.
+    \item \textbf{Attività chiave:} Esecuzione intensiva dei \textit{System Test} e dei \glslink{test-di-integrazione}{test di integrazione}, sessioni di \textit{User Acceptance Test} (UAT) in coordinamento con Eggon, stesura e validazione della manualistica finale (Manuale Utente e Manuale \glslink{amministratore}{Amministratore}) e rilascio del codice in ambiente di produzione.
+\end{itemize}
+
+\subsection{Product Baseline - PB}
+\subsubsection{Periodi}
+Superata la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il team ha avviato la fase \glslink{pb-product-baseline}{PB}, riprendendo la suddivisione del lavoro in \glslink{sprint}{Sprint} secondo lo stesso schema adottato in precedenza, in continuità di numerazione con i periodi già rendicontati.
+
+\subsubsubsection{Ottavo Periodo}
+
+\label{sec:pb_ottavoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    06/07/2026 & 19/07/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+L'ottavo periodo di \glslink{sprint}{Sprint} segna l'avvio operativo della fase \glslink{pb-product-baseline}{PB}, a seguito dell'accettazione della \glslink{rtb-requirements-and-technology-baseline}{RTB}. Il team ha quindi predisposto la nuova repository dedicata allo sviluppo dell'\glslink{mvp-minimum-viable-product}{MVP}, riorganizzando nomi di package, file e porzioni di codice ereditate dal PoC per adattarle alla nuova struttura. In parallelo è iniziata la stesura della documentazione tecnica e utente e sono state avviate le prime implementazioni funzionali previste dalla Macro-fase 2 (generazione/modifica dell'immagine di copertina e rating della risposta generata con relativa modifica manuale delle bozze), oltre alla correzione dei documenti della \glslink{rtb-requirements-and-technology-baseline}{RTB} che avevano ricevuto riscontri negativi dai docenti, propedeutica alla loro integrazione nella fase PB.
+
+\begin{center}
+\noindent\textbf{Attività Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Creazione repository \glslink{mvp-minimum-viable-product}{MVP} & \glslink{progettista}{Progettista} & 1 & 1 & Completata \\
+    \hline
+    Refactoring nomi package e file & \glslink{progettista}{Progettista} & 2 & 2 & Completata \\
+    \hline
+    Stesura Manuale Utente e Specifiche Tecniche & \glslink{amministratore}{Amministratore} & 1 & 1 & In corso \\
+    \hline
+    Stesura verbale interno & \glslink{responsabile}{Responsabile} & 4 & 4 & Completata \\
+    \hline
+    Generazione/modifica immagine di copertina & \glslink{programmatore}{Programmatore} & 11 & 11 & Completata \\
+    \hline
+    Rating risposta generata e modifica bozze & \glslink{programmatore}{Programmatore} & 12 & 12 & Completata \\
+    \hline
+    Correzione documenti RTB con riscontri negativi & \glslink{amministratore}{Amministratore} & 4 & 4 & Completata \\
+    \hline
+    Verifica documenti e codice & \glslink{verificatore}{Verificatore} & 17 & 16 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{52} & \textbf{51} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 8}
+    \label{tab:task_sprint8}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Il periodo si chiude con un tasso di completamento elevato (51 ore consuntivate su 52 preventivate). Il \glslink{verificatore}{Verificatore} ha risparmiato un'ora rispetto al previsto grazie ai controlli più snelli richiesti dal refactoring della nuova repository, mentre l'\glslink{amministratore}{Amministratore} ha impiegato un'ora in più del previsto per avviare la prima stesura della documentazione, compensando quasi del tutto lo scostamento. Tutte le attività risultano completate ad eccezione della prima stesura della documentazione: il Manuale Utente è quasi terminato, mentre le Specifiche Tecniche, più corpose, richiederanno ulteriore lavoro nel prossimo periodo.
+    \item \textbf{Azioni Correttive:} Avendo rilevato un silenzio prolungato da parte dell'azienda \glslink{committente-proponente}{proponente}, verosimilmente riconducibile al periodo di ferie estive, il gruppo ha deciso di sollecitarla attivamente, richiedendo una riunione di allineamento per lunedì o martedì della settimana successiva.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} La mancata risposta dell'azienda \glslink{committente-proponente}{proponente} rischia di rallentare l'allineamento sui requisiti della fase PB, mentre la maggiore corposità delle Specifiche Tecniche rispetto al Manuale Utente comporterà uno spostamento di parte del lavoro documentale sui periodi successivi.
+
+I rischi gestiti in questa fase sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RO5 (Mancata o carenza di comunicazione col proponente):} Per prevenire ulteriori ritardi dovuti al silenzio dell'azienda, il team ha sollecitato tempestivamente un incontro tramite i canali di comunicazione forniti, così da ripristinare l'allineamento sulle richieste della fase \glslink{pb-product-baseline}{PB}.
+\end{itemize}
+
+\subsubsubsection{Nono Periodo}
+
+\label{sec:pb_nonoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    20/07/2026 & 02/08/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il nono periodo si apre con l'esito positivo dell'\textbf{Azione Correttiva} pianificata al termine dello sprint precedente: in data 21/07/2026 si è tenuta la riunione esterna sollecitata all'azienda \glslink{committente-proponente}{proponente}, con la partecipazione dei referenti Eggon Luca Iuzzolino e GianPaolo Ferrarin, durante la quale è stata confermata la struttura tecnologica definitiva del prodotto. Nella riunione è inoltre emerso un blocco tecnico nell'accesso ad alcuni modelli generativi per la creazione di immagini, per cui è stato concordato l'invio dei log di errore al fine di sbloccare tempestivamente i permessi: grazie alla disponibilità dell'azienda, il blocco è stato risolto nel giro di pochi giorni. Nella successiva riunione interna del 29/07/2026 il team ha fatto il punto sull'avanzamento del progetto, ha organizzato l'allineamento del codice sul branch \texttt{develop} a cura di Leonardo Soligo, e ha assegnato i nuovi \glslink{caso-d-uso-uc}{casi d'uso} UC21, UC22, UC32, UC39.12 e UC39.15, oltre alla logica di riuso delle configurazioni.
+
+\begin{center}
+\noindent\textbf{Attività Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Analisi avanzamento progetto e funzionalità mancanti & \glslink{progettista}{Progettista} & 14 & 14 & Completata \\
+    \hline
+    Allineamento branch \texttt{develop} (merge del codice) & \glslink{programmatore}{Programmatore} & 5 & 3 & Completata \\
+    \hline
+    Implementazione UC 21 e UC 22 & \glslink{programmatore}{Programmatore} & 8 & 8 & Completata \\
+    \hline
+    Implementazione UC 39.12 e UC 39.15 (mail, destinatario, data, ora) & \glslink{programmatore}{Programmatore} & 8 & 8 & Completata \\
+    \hline
+    Riuso della configurazione e sviluppo UC 32 & \glslink{programmatore}{Programmatore} & 9 & 9 & Completata \\
+    \hline
+    Gestione della richiesta di accesso ai modelli generativi & \glslink{amministratore}{Amministratore} & 4 & 4 & Completata \\
+    \hline
+    Stesura verbale interno & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Stesura verbale esterno & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-qualifica}{Piano di Qualifica} & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Verifica documenti e codice & \glslink{verificatore}{Verificatore} & 10 & 9 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{62} & \textbf{59} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 9}
+    \label{tab:task_sprint9}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Il periodo si chiude con un buon tasso di efficienza (59 ore consuntivate su 62 preventivate). Il \glslink{programmatore}{Programmatore} ha risparmiato 2 ore grazie a un allineamento del branch \texttt{develop} più rapido del previsto, mentre il \glslink{verificatore}{Verificatore} ha risparmiato un'ulteriore ora; tutti gli altri ruoli hanno rispettato le stime. Tutti i nuovi \glslink{caso-d-uso-uc}{casi d'uso} assegnati durante la riunione interna risultano avviati; anche il blocco sull'accesso ai modelli generativi si è risolto positivamente nel giro di pochi giorni, grazie alla pronta disponibilità dell'azienda \glslink{committente-proponente}{proponente} nello sbloccare i permessi.
+    \item \textbf{Azioni Correttive:} Per sbloccare l'accesso ai modelli generativi di immagini, il gruppo ha inviato tramite Telegram il log dettagliato dell'errore riscontrato: grazie alla pronta disponibilità dell'azienda \glslink{committente-proponente}{proponente}, l'intervento sulla configurazione dei permessi è stato completato nel giro di pochi giorni, senza ulteriori impatti sullo sviluppo.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} L'unica criticità del periodo riguarda il blocco nell'accesso ad alcuni modelli generativi per la creazione di immagini, causato da permessi utente non correttamente configurati o scaduti; grazie alla pronta disponibilità dell'azienda \glslink{committente-proponente}{proponente}, il problema è stato risolto nel giro di pochi giorni, senza rallentare in maniera significativa lo sviluppo della funzionalità di generazione/modifica delle immagini di copertina.
+
+I rischi gestiti in questa fase sono stati i seguenti:
+\begin{itemize}
+    \item \textbf{RO5 (Mancata o carenza di comunicazione col proponente):} Il rischio, sollecitato al termine del periodo precedente, si è risolto positivamente con lo svolgimento della riunione esterna del 21/07/2026, che ha ripristinato l'allineamento con l'azienda \glslink{committente-proponente}{proponente} sullo stack tecnologico e sulle priorità di sviluppo.
+    \item \textbf{RT2 (Mancanza o insufficienza di documenti o risorse per le tecnologie):} Il blocco riscontrato nell'accesso ai modelli generativi è stato trattato come un'estensione di questo rischio tecnologico; il gruppo ha prontamente condiviso i log di errore con chi gestisce l'infrastruttura e, grazie alla pronta disponibilità dell'azienda \glslink{committente-proponente}{proponente}, il rischio è rientrato nel giro di pochi giorni senza propagarsi ulteriormente nello sviluppo.
+\end{itemize}
+
+\newpage
+\section{Preventivo e Consuntivo dei Periodi}
+\label{sec:preventivo_e_consuntivo}
+\subsection{Primo Periodo: Sprint 30/03/2026 - 12/04/2026}
+\label{sec:pec_primoperiodo}
+
+\vspace{0.5em}
+
+\begin{table}[H]
+\centering
+\label{tab:preventivo-sprint1}
+\vspace{2mm}
+
+\begin{center}
+    
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & 5 & - & 1 & - & - & - & 6\\
+Eleonora Bellet & - & 3 & - & - & - & - & 3\\
+Alex Oloni & - & - & 1 & 2 & - & - & 3\\
+Diego Belluz & - & 3 & - & - & - & - & 3\\
+Angela Maule & - & - & 2 & - & - & 1 & 3\\
+Leonardo Soligo & - & - & 3 & 2 & 1 & - & 6\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 3 & 5\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 6 & 9 & 4 & 1 & 4 & 29\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Primo Sprint}
+\end{table}
+
+\begin{center}
+    
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & 5 & - & 2 & - & - & - & 7\\
+Eleonora Bellet & - & 3 & - & - & - & - & 3\\
+Alex Oloni & - & - & 1 & 2 & - & - & 3\\
+Diego Belluz & - & 3 & - & - & - & - & 3\\
+Angela Maule & - & - & 3 & - & - & 1 & 4\\
+Leonardo Soligo & - & - & 2 & 3 & 1 & - & 6 \\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 2 & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 6 & 10 & 5 & 1 & 3 & 30\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Primo Sprint}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            7.7/\glslink{responsabile}{Responsabile},
+            23/\glslink{amministratore}{Amministratore},
+            38.5/\glslink{analista}{Analista},
+            19.2/\glslink{progettista}{Progettista},
+            3.9/\glslink{programmatore}{Programmatore},
+            7.7/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Primo Sprint}
+\end{figure}
+
+\vspace{0.5cm}
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\label{tab:risorse-rimanenti}
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  150 \euro& 120 \euro & 250 \euro & 125 \euro & 15 \euro & 45 \euro & 705 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1530 \euro & 900 \euro & 1250 \euro & 3450 \euro & 2385 \euro & 2355 \euro & \cellcolor{yellow!50} 11.870 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Primo Sprint }
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 1}
+Al termine del primo \glslink{sprint}{Sprint}, viene effettuato il calcolo del \textit{\glslink{preventivo}{Preventivo} a Finire} (EAC - \textit{Estimate at Completion}) per monitorare proattivamente l'andamento economico del progetto. Questa metrica proietta il costo totale finale sulla base degli scostamenti registrati nell'iterazione appena conclusa.
+
+Rispetto al \glslink{preventivo}{preventivo} iniziale dello \glslink{sprint}{Sprint} 1, si è registrato un lieve scostamento in eccesso per i ruoli di \glslink{analista}{Analista} (+1 ora) e \glslink{progettista}{Progettista} (+1 ora), parzialmente compensato da un risparmio nel ruolo di \glslink{verificatore}{Verificatore} (-1 ora). Di seguito viene presentata la proiezione aggiornata sull'intero ciclo di vita del progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro \\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & +0 & 52 & 1.020,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +1 & 60 & 1.500,00 \euro & -25,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +1 & 144 & 3.575,00 \euro & -25,00 \euro\\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & -1 & 159 & 2.400,00 \euro & +15,00 \euro \\
+    \hline
+    \rowcolor{green!50!black!20!white}
+   \textbf{Totale} & \textbf{630} & \textbf{+1} & \textbf{631} & \textbf{12.605,00 \euro} & \textbf{-35,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza al termine dello Sprint 1}
+    \label{tab:eac_sprint1}
+\end{table}
+
+Come si nota dalla Tabella~\ref{tab:eac_sprint1}, il bilancio a finire proietta un totale di 631 ore con un costo complessivo stimato di € 12.610,00. La Varianza a Finire (VAC) risulta essere leggermente negativa e pari a € -35,00. Essendo il primo \glslink{sprint}{Sprint} di progetto, questo scostamento è considerato del tutto fisiologico e legato alla fase di rodaggio del team; esso verrà tenuto in considerazione nelle prossime pianificazioni per riportare il bilancio in perfetto equilibrio.
+
+\subsubsection{Rendiconto ore rimanenti al termine del primo sprint}
+La tabella riporta il dettaglio delle ore rimanenti a disposizione. I dati sono suddivisi per ogni singolo componente del gruppo e per i rispettivi ruoli, mostrando il monte ore residuo calcolato al termine del primo \glslink{sprint}{sprint}.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 7 & 21 & 22 & 23 & 83 \\
+\hline
+E. Bellet & 8 & 4 & 8 & 20 & 23 & 24 & 87 \\
+\hline
+A.Oloni & 8 & 8 & 7 & 18 & 23 & 23 & 87 \\
+\hline
+D. Belluz & 8 & 4 & 9 & 21 & 23 & 22 & 87 \\
+\hline
+A. Maule & 8 & 8 & 5 & 21 & 23 & 21 & 86 \\
+\hline
+L. Soligo & 8 & 7 & 7 & 17 & 22 & 23 & 84 \\
+\hline
+V. Y. K. Fernandes & 8 & 8 & 6 & 20 & 23 & 21 & 86 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{51} & \textbf{46} & \textbf{49} & \textbf{138} & \textbf{159} & \textbf{157} & \textbf{600} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del primo sprint}
+\end{table}
+
+\newpage
+\subsection{Secondo Periodo: Sprint 13/04/2026 - 26/04/2026}
+\label{sec:pec_secondoperiodo}
+
+\vspace{0.5em}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+
+\begin{center}
+    
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 3 & - & - & - & 3\\
+Eleonora Bellet & - & 3 & - & - & - & 1 & 4\\
+Alex Oloni & - & 3 & - & - & - & - & 3\\
+Diego Belluz & - & - & 2 & - & - & - & 2\\
+Angela Maule & 5 & - & 1 & - & - & - & 6\\
+Leonardo Soligo & - & - & - & 2 & - & - & 2\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 2 & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 6 & 8 & 2 & 0 & 3 & 24\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Secondo Sprint}
+\end{table}
+
+\begin{center}
+    
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 4 & - & - & - & 4\\
+Eleonora Bellet & - & 3 & - & - & - & 2 & 5\\
+Alex Oloni & - & 2 & - & - & - & - & 2\\
+Diego Belluz & - & - & 2 & - & - & - & 2\\
+Angela Maule & 5 & - & 2 & - & - & - & 7\\
+Leonardo Soligo & - & - & - & 2 & - & - & 2\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 3 & 5\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 5 & 5 & 10 & 2 & 0 & 5 & 27\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Secondo Sprint}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, orange!60}
+        ]{
+            21.7/\glslink{responsabile}{Responsabile},
+            21.7/\glslink{amministratore}{Amministratore},
+            43.5/\glslink{analista}{Analista},
+            8.7/\glslink{progettista}{Progettista},
+            4.4/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Secondo Sprint}
+\end{figure}
+
+
+\vspace{0.5cm}
+\begin{center}
+    
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  150 \euro& 100 \euro & 250 \euro & 50 \euro & 0 \euro & 75 \euro & 625\euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1380 \euro & 800 \euro & 1000 \euro & 3400 \euro & 2385 \euro & 2280 \euro & \cellcolor{yellow!50} 11.245 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Secondo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 2}
+Al termine del secondo \glslink{sprint}{Sprint}, il \textit{\glslink{preventivo}{Preventivo} a Finire} (EAC) è stato ricalcolato tenendo conto degli scostamenti cumulativi registrati nelle prime due iterazioni di progetto. 
+
+Nello \glslink{sprint}{Sprint} appena concluso si è verificato un lieve scostamento in eccesso rispetto alle stime, principalmente dovuto all'aumento delle ore necessarie per l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e per le attività di Verifica, parzialmente mitigate da un risparmio nel ruolo di \glslink{amministratore}{Amministratore}. Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro \\
+    \hline
+    \glslink{analista}{Analista} & 59 & +3 & 62 & 1.550,00 \euro & -75,00 \euro \\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +1 & 144 & 3.600,00 \euro & -25,00 \euro\\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +1 & 161 & 2.415,00 \euro & -15,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+4} & \textbf{634} & \textbf{12.665,00 \euro} & \textbf{-95,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 2}
+    \label{tab:eac_sprint2}
+\end{table}
+
+Come mostrato nella Tabella~\ref{tab:eac_sprint2}, lo scostamento cumulativo totale si attesta a +4 ore rispetto al piano originale. La Varianza a Finire (VAC) registra un valore di € -95,00. Il team ha preso atto di questa tendenza al rialzo, dovuta principalmente al consolidamento della documentazione; verranno pertanto pianificate delle azioni di ottimizzazione nelle successive iterazioni tecniche per riassorbire tale scostamento e rientrare nel budget stabilito.
+
+\subsubsection{Rendiconto ore rimanenti al termine del secondo sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 3 & 21 & 22 & 23 & 79 \\
+\hline
+E. Bellet & 8 & 1 & 8 & 20 & 23 & 22 & 82 \\
+\hline
+A.Oloni & 8 & 6 & 7 & 18 & 23 & 23 & 85 \\
+\hline
+D. Belluz & 8 & 4 & 7 & 21 & 23 & 22 & 85 \\
+\hline
+A. Maule & 3 & 8 & 3 & 21 & 23 & 21 & 79 \\
+\hline
+L. Soligo & 8 & 7 & 7 & 15 & 22 & 23 & 82 \\
+\hline
+V. Y. K. Fernandes & 8 & 8 & 4 & 20 & 23 & 18 & 81 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{46} & \textbf{41} & \textbf{39} & \textbf{136} & \textbf{159} & \textbf{152} & \textbf{573} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del secondo sprint}
+\end{table}
+
+\newpage
+
+\subsection{Terzo Periodo: Sprint 27/04/2026 - 10/05/2026}
+\label{sec:pec_terzoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 2 & 3 & - & - & 5\\
+Eleonora Bellet      & - & - & 1 & 3 & - & 2 & 6\\
+Alex Oloni           & 4 & - & - & - & - & - & 4\\
+Diego Belluz         & - & 3 & - & 3 & - & - & 6\\
+Angela Maule         & - & - & 2 & - & - & - & 2\\
+Leonardo Soligo      & - & - & 2 & 3 & - & - & 5\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 3 & 9 & 12 & 0 & 3 & 31\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Terzo sprint}
+\end{table}
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & 3 & 4 & - & - & 7\\
+Eleonora Bellet & - & - & 3 & 1 & - & 2 & 6\\
+Alex Oloni & 4 & - & - & 1 & - & - & 5\\
+Diego Belluz & - & 3 & - & 3 & - & - & 6\\
+Angela Maule & - & - & 2 & - & - & - & 2\\
+Leonardo Soligo & - &  - & 2 & 2 & 2 & - & 6\\
+V.Y. Kaneda Fernandes & - & - & 2 & - & - & 1 & 3\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale} & 4 & 3 & 12 & 11 & 2 & 3 & 35\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Terzo Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            14.4/\glslink{responsabile}{Responsabile},
+            7.2/\glslink{amministratore}{Amministratore},
+            36.1/\glslink{analista}{Analista},
+            33.1/\glslink{progettista}{Progettista},
+            3.6/\glslink{programmatore}{Programmatore},
+            5.4/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Terzo Sprint}
+\end{figure}
+
+\vspace{0.5cm}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 60 \euro & 300 \euro & 275 \euro & 30 \euro & 45 \euro &  830\euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1260 \euro & 740 \euro & 700 \euro & 3125 \euro & 2355 \euro & 2235 \euro & \cellcolor{yellow!50} 10.415 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Terzo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 3}
+Al termine del terzo \glslink{sprint}{Sprint}, il \glslink{responsabile}{Responsabile} ha proceduto al ricalcolo del \textit{\glslink{preventivo}{Preventivo} a Finire}. Questa analisi predittiva valuta l'impatto degli scostamenti cumulativi registrati fin dall'inizio del progetto rispetto al budget aggiornato in fase di avvio.
+
+Durante quest'ultima iterazione, il team ha compensato lo scostamento in eccesso registrato precedentemente sul ruolo di \glslink{progettista}{Progettista}, riportando il suo bilancio cumulativo in perfetto equilibrio. Tuttavia, il perdurare di un intenso carico di lavoro sull'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e l'avvio delle attività di Programmazione per la chiusura del Mock-up e l'inizio del Poc hanno generato un ulteriore assorbimento di risorse. Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro \\
+    \hline
+    \glslink{analista}{Analista} & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro \\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +0 & 143 & 3.575,00 \euro & 0,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro\\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +1 & 161 & 2.415,00 \euro & -15,00 \euro \\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+8} & \textbf{638} & \textbf{12.745,00 \euro} & \textbf{-175,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 3}
+    \label{tab:eac_sprint3}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint3}, il bilancio a finire proietta attualmente un totale di 638 ore, con una Varianza (VAC) complessiva di -175,00 \euro dovuta quasi interamente alle stime al ribasso per il ruolo di \glslink{analista}{Analista} nelle fasi iniziali. Tale scostamento impone al team un'attenta ripianificazione nelle prossime settimane: l'ottimizzazione e il risparmio delle ore di \glslink{analista}{Analista} e \glslink{responsabile}{Responsabile} durante la fase di \glslink{pb-product-baseline}{PB} saranno essenziali per garantire un rientro all'interno del tetto massimo di spesa.
+
+\subsubsection{Rendiconto ore rimanenti al termine del terzo sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 0 & 17 & 22 & 23 & 72 \\
+\hline
+E. Bellet & 8 & 1 & 5 & 19 & 23 & 20 & 76 \\
+\hline
+A.Oloni & 4 & 6 & 7 & 17 & 23 & 23 & 80 \\
+\hline
+D. Belluz & 8 & 1 & 7 & 18 & 23 & 22 & 79 \\
+\hline
+A. Maule & 3 & 8 & 1 & 21 & 23 & 21 & 77 \\
+\hline
+L. Soligo & 8 & 7 & 5 & 13 & 20 & 23 & 76 \\
+\hline
+V. Y. K. Fernandes & 8 & 8 & 2 & 20 & 23 & 17 & 78 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{42} & \textbf{38} & \textbf{27} & \textbf{125} & \textbf{157} & \textbf{149} & \textbf{538} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del terzo sprint}
+\end{table}
+
+\newpage
+\subsection{Quarto Periodo: Sprint 11/05/2026 - 24/05/2026}
+\label{sec:pec_quartoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & 2 & 4 & - & 6\\
+Eleonora Bellet      & 4 & - & - & - & - & 2 & 6\\
+Alex Oloni           & - & - & - & 2 & 4 & - & 6\\
+Diego Belluz         & - & 1 & - & 3 & - & 2 & 6\\
+Angela Maule         & - & - & 1 & 2 & 4 & - & 7\\
+Leonardo Soligo      & - & - & - & 2 & 4 & - & 6\\
+V.Y. Kaneda Fernandes & - & - & - & 2 & - & 4 & 6\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 1 & 1 & 13 & 16 & 8 & 43\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Quarto Sprint}
+\end{table}
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+    Angelica Gastaldello & - & - & - & 3 & 5 & - & 8 \\
+    Eleonora Bellet & 4 & - & - & - & - & 3 & 7 \\
+    Alex Oloni & - & - & - & 2 & 4 & - & 6 \\
+    Diego Belluz & - & 1 & - & 2 & - & 3 & 6 \\
+    Angela Maule & - & - & 1 & 3 & 4 & - & 8 \\
+    Leonardo Soligo & - & - & - & 3 & 5 & - & 8 \\
+    V.Y. Kaneda Fernandes & - & - & - & 2 & - & 5 & 7 \\
+    \hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+    Totale & 4 & 1 & 1 & 15 & 18 & 11 & 50 \\
+    \hline
+   \end{tabular}
+\caption{Consuntivo ore per componente - Quarto sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            hide number,
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            12.31/\glslink{responsabile}{Responsabile},
+            2.05/\glslink{amministratore}{Amministratore},
+            2.56/\glslink{analista}{Analista},
+            38.46/\glslink{progettista}{Progettista},
+            27.70/\glslink{programmatore}{Programmatore},
+            16.92/\glslink{verificatore}{Verificatore}
+        }
+        \node at (22:1.6) {12.31\%};  
+        \node at (130:1.6) {38.46\%};
+        \node at (249:1.6) {27.70\%}; 
+        \node at (330:1.6) {16.92\%}; 
+
+        \draw[<-] (48:2.9) -- (48:4.2) node[right] {2.05\%};
+        
+        \draw[<-] (56:2.9) -- (56:4.6) node[above right] {2.56\%};
+
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Quarto Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 20 \euro & 25 \euro & 375 \euro & 270 \euro & 165 \euro &  975 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1140 \euro & 720 \euro & 675 \euro & 2750 \euro & 2085 \euro & 2070 \euro & \cellcolor{yellow!50} 9.440 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Quarto Sprint}
+\end{table}
+
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 4}
+Al termine del quarto e ultimo \glslink{sprint}{Sprint} della fase di pre-qualifica, viene rendicontato il \textit{\glslink{preventivo}{Preventivo} a Finire} (EAC) finale per la \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline}} (\glslink{rtb-requirements-and-technology-baseline}{RTB}).
+
+La realizzazione e il collaudo del Proof of Concept (PoC) hanno richiesto un effort tecnico superiore alle stime (complessive +7 ore sui ruoli di Progettazione, Programmazione e Verifica). Questo scostamento, sommato a quelli delle iterazioni precedenti, porta la Varianza a Finire complessiva a -300,00 \euro. Trattandosi della chiusura di una macro-fase, il team ha assorbito tale varianza all'interno del margine di \glslink{rischio}{rischio} concordato; la futura \glslink{pianificazione}{pianificazione} della fase di \textit{\glslink{pb-product-baseline}{Product Baseline}} (\glslink{pb-product-baseline}{PB}) sarà calibrata su metriche più conservative per garantire l'assoluto rispetto del tetto di spesa.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+15} & \textbf{645} & \textbf{12.870,00 \euro} & \textbf{-300,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa finale al termine dello Sprint 4}
+    \label{tab:eac_sprint4}
+\end{table}
+
+\subsubsection{Rendiconto ore rimanenti al termine del quarto sprint}
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 0 & 14 & 17 & 23 & 64 \\
+\hline
+E. Bellet & 4 & 1 & 5 & 19 & 23 & 17 & 69 \\
+\hline
+A.Oloni & 4 & 6 & 7 & 15 & 19 & 23 & 74 \\
+\hline
+D. Belluz & 8 & 0 & 7 & 16 & 23 & 19 & 73 \\
+\hline
+A. Maule & 3 & 8 & 0 & 18 & 19 & 21 & 69 \\
+\hline
+L. Soligo & 8 & 7 & 5 & 10 & 15 & 23 & 68 \\
+\hline
+V. Y. K. Fernandes & 8 & 8 & 2 & 18 & 23 & 12 & 71 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{38} & \textbf{37} & \textbf{26} & \textbf{110} & \textbf{139} & \textbf{138} & \textbf{488} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del quarto sprint}
+\end{table}
+
+\newpage
+\subsection {Quinto Periodo: Sprint 25/05/2026 - 07/06/2026}
+
+\label{sec:pec_quintoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & - & - & 4 & 4\\
+Eleonora Bellet      & - & - & - & - & 2 & 2 & 4\\
+Alex Oloni           & - & 3 & - & - & - & - & 3\\
+Diego Belluz         & - & - & - & - & 2 & 2 & 4\\
+Angela Maule         & - & - & - & - & - & 4 & 4\\
+Leonardo Soligo      & 4 & - & - & - & - & - & 4\\
+V.Y. Kaneda Fernandes & - & 3 & 2 & - & - & - & 3\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 6 & 2 & 0 & 4 & 12 & 28\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Quinto Sprint}
+\end{table}
+
+\label{sec:pec_quintoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & - & - & 4 & 4\\
+Eleonora Bellet      & - & - & - & - & 2 & 2 & 4\\
+Alex Oloni           & - & 3 & - & - & - & - & 3\\
+Diego Belluz         & - & - & - & - & 1 & 2 & 3\\
+Angela Maule         & - & - & - & - & - & 4 & 4\\
+Leonardo Soligo      & 4 & - & - & - & - & - & 4\\
+V.Y. Kaneda Fernandes & - & 3 & 2 & - & - & - & 5\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 6 & 2 & 0 & 3 & 12 & 27\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Quinto Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            23.30/\glslink{responsabile}{Responsabile},
+            23.30/\glslink{amministratore}{Amministratore},
+            9.71/\glslink{analista}{Analista},
+            8.74/\glslink{programmatore}{Programmatore},
+            34.95/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Quinto Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 120 \euro & 50 \euro & 0 \euro & 45 \euro & 180 \euro &  515 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 1020 \euro & 600 \euro & 625 \euro & 2750 \euro & 2040 \euro & 1890 \euro & \cellcolor{yellow!50} 8.925 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Quinto Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 5}
+Al termine del quinto \glslink{sprint}{Sprint}, il \glslink{responsabile}{Responsabile} ha proceduto al ricalcolo del \textit{\glslink{preventivo}{Preventivo} a Finire} (EAC). Questa analisi predittiva valuta l'impatto degli scostamenti cumulativi registrati fin dall'inizio del progetto.
+
+Durante quest'ultima iterazione, il team ha impiegato e consuntivato un quantitativo di ore leggermente inferiore rispetto al totale preventivato. Tale riduzione è motivata dalla rapida conclusione di tutte le attività documentali e tecniche necessarie alla chiusura. Nello specifico, avendo completato i task in anticipo, in data 29 maggio il gruppo ha potuto inoltrare formalmente la richiesta per la revisione ufficiale della \glslink{rtb-requirements-and-technology-baseline}{RTB}, la quale è stata successivamente fissata per il 3 giugno.
+
+Avendo raggiunto la \glslink{milestone}{milestone} prima della naturale scadenza dello \glslink{sprint}{Sprint}, si è registrato un risparmio (pari a un'ora per il ruolo di \glslink{programmatore}{Programmatore}), che contribuisce a ridurre lievemente lo scostamento in eccesso accumulato nelle settimane precedenti. La Varianza a Finire complessiva passa così a -285,00 \euro.
+
+Di seguito viene presentata la proiezione economica aggiornata per l'intero progetto.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +6 & 65 & 1.625,00 \euro & -150,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +3 & 163 & 2.445,00 \euro & -45,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+14} & \textbf{644} & \textbf{12.855,00 \euro} & \textbf{-285,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 5}
+    \label{tab:eac_sprint5}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint5}, il bilancio a finire proietta attualmente un totale di 644 ore lavorative. Il risparmio registrato conferma che la conclusione anticipata delle attività ha evitato ulteriori e inutili sprechi di risorse in attesa del colloquio di revisione. Alla luce dell'esito negativo (semaforo rosso) ottenuto, il team manterrà un monitoraggio rigoroso sui costi durante il prossimo \glslink{sprint}{Sprint} di correzione per cercare di riassorbire il deficit accumulato e riportare il bilancio in attivo.
+
+\subsubsection{Rendiconto ore rimanenti al termine del quinto sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 0 & 14 & 17 & 19 & 60 \\
+\hline
+E. Bellet & 4 & 1 & 5 & 19 & 21 & 15 & 65 \\
+\hline
+A.Oloni & 4 & 3 & 7 & 15 & 19 & 23 & 71 \\
+\hline
+D. Belluz & 8 & 0 & 7 & 16 & 22 & 17 & 70 \\
+\hline
+A. Maule & 3 & 8 & 0 & 18 & 19 & 17 & 65 \\
+\hline
+L. Soligo & 4 & 7 & 5 & 10 & 15 & 23 & 64 \\
+\hline
+V. Y. K. Fernandes & 8 & 5 & 0 & 18 & 23 & 12 & 66 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{34} & \textbf{31} & \textbf{24} & \textbf{110} & \textbf{136} & \textbf{126} & \textbf{461} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del quinto sprint}
+\end{table}
+
+
+\newpage
+\subsection {Sesto Periodo: Sprint 08/06/2026 - 21/06/2026}
+
+\label{sec:pec_sestoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & 2 & 4 & - & 6\\
+Eleonora Bellet      & - & - & 2 & - & 4 & 2 & 8\\
+Alex Oloni           & - & - & 3 & - & 4 & - & 7\\
+Diego Belluz         & - & - & 3 & 2 & - & 2 & 7\\
+Angela Maule         & - & 2 & - & 2 & 4 & - & 8\\
+Leonardo Soligo      & - & 2 & 2 & - & - & 2 & 6\\
+V.Y. Kaneda Fernandes & 4 & - & - & 2 & - & - & 6\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 4 & 10 & 8 & 16 & 6 & 48\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Sesto Sprint}
+\end{table}
+
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & 2 & 4 & - & 6\\
+Eleonora Bellet      & - & - & 2 & - & 4 & 2 & 8\\
+Alex Oloni           & - & - & 3 & - & 3 & - & 6\\
+Diego Belluz         & - & - & 3 & 2 & - & 2 & 7\\
+Angela Maule         & - & 2 & - & 2 & 4 &  & 8\\
+Leonardo Soligo      & - & 2 & 1 & - & - & 3 & 6\\
+V.Y. Kaneda Fernandes & 4 & - & - & 2 & - & - & 6\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 4 & 9 & 8 & 15 & 7 & 47\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Sesto Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            12.6/\glslink{responsabile}{Responsabile},
+            8.4/\glslink{amministratore}{Amministratore},
+            23.6/\glslink{analista}{Analista},
+            20.9/\glslink{progettista}{Progettista},
+            23.6/\glslink{programmatore}{Programmatore},
+            10.99/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Sesto Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 80 \euro & 225 \euro & 200 \euro & 225 \euro & 105 \euro &  955 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 900 \euro & 520 \euro & 400 \euro & 2550 \euro & 1815 \euro & 1785 \euro & \cellcolor{yellow!50} 7.970 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Sesto Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 6}
+In seguito alla chiusura del sesto periodo di lavoro è stata aggiornata la metrica del \textit{\glslink{preventivo}{Preventivo} a Finire}. I dati raccolti nell'ultimo \glslink{consuntivo}{consuntivo} indicano un andamento incoraggiante per il team: l'impegno complessivo richiesto dalle attività è stato di 47 ore rispetto alle 48 originariamente stimate in sede di \glslink{pianificazione}{pianificazione}.
+
+Entrando nel dettaglio delle singole mansioni, si rileva un risparmio di un'ora sia per il ruolo di \glslink{analista}{Analista} (che si attesta a 9 ore rispetto alle 10 preventivate) sia per quello di \glslink{programmatore}{Programmatore} (15 ore a fronte delle 16 pianificate). Questo margine positivo ha ampiamente compensato il lieve incremento registrato nell'attività di Verifica, dove sono state investite 7 ore anziché 6 allo scopo di elevare gli standard qualitativi (+1 ora). Di conseguenza, il bilancio cumulativo degli scostamenti scende a +13 ore totali, allentando la pressione sul budget complessivo del progetto.
+
+La \glslink{pianificazione}{pianificazione} economica aggiornata viene strutturata nella seguente tabella:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +5 & 64 & 1.600,00 \euro & -125,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +5 & 165 & 2.475,00 \euro & -75,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+13} & \textbf{643} & \textbf{12.830,00 \euro} & \textbf{-260,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 6}
+    \label{tab:eac_sprint6}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint6}, il bilancio a finire proietta attualmente un totale di 643 ore lavorative. Il lieve recupero delle ore di sviluppo e analisi dimostra un segnale positivo e un monitoraggio più rigoroso volto a riassorbire il deficit accumulato nelle iterazioni passate.
+
+\subsubsection{Rendiconto ore rimanenti al termine del sesto sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5} 
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 7 & 0 & 12 & 13 & 19 & 54 \\
+\hline
+E. Bellet & 4 & 1 & 3 & 19 & 17 & 13 & 57 \\
+\hline
+A.Oloni & 4 & 3 & 4 & 15 & 16 & 23 & 65 \\
+\hline
+D. Belluz & 8 & 0 & 4 & 14 & 22 & 15 & 63 \\
+\hline
+A. Maule & 3 & 6 & 0 & 16 & 15 & 17 & 57 \\
+\hline
+L. Soligo & 4 & 5 & 4 & 10 & 15 & 20 & 58 \\
+\hline
+V. Y. K. Fernandes & 4 & 5 & 0 & 16 & 23 & 12 & 60 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{30} & \textbf{27} & \textbf{15} & \textbf{102} & \textbf{121} & \textbf{119} & \textbf{414} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del sesto sprint}
+\end{table}
+
+\newpage
+\subsection {Settimo Periodo: Sprint 22/06/2026 - 05/07/2026}
+
+\label{sec:pec_settimoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & 2 & - & 2 & - & 2 & 6\\
+Eleonora Bellet      & - & - & 3 & 3 & - & - & 6\\
+Alex Oloni           & - & - & - & - & 4 & 3 & 7\\
+Diego Belluz         & 4 & - & 3 & - & 1 & - & 8\\
+Angela Maule         & - & - & - & 2 & - & - & 2\\
+Leonardo Soligo      & - & - & 1 & - & - & 4 & 5\\
+V.Y. Kaneda Fernandes & - & - & - & - & 4 & - & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 2 & 7 & 7 & 9 & 9 & 38\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Settimo Sprint}
+\end{table}
+
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & 2 & - & 2 & - & 2 & 6\\
+Eleonora Bellet      & - & - & 3 & 3 & - & - & 6\\
+Alex Oloni           & - & - & - & - & 4 & 3 & 7\\
+Diego Belluz         & 4 & - & 2 & - & 1 & - & 7\\
+Angela Maule         & - & - & - & 2 & - & - & 2\\
+Leonardo Soligo      & - & - & 1 & - & - & 4 & 5\\
+V.Y. Kaneda Fernandes & - & - & - & - & 4 & - & 4\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 2 & 6 & 7 & 9 & 9 & 37\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Settimo Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            15.9/\glslink{responsabile}{Responsabile},
+            5.3/\glslink{amministratore}{Amministratore},
+            19.9/\glslink{analista}{Analista},
+            23.2/\glslink{progettista}{Progettista},
+            17.9/\glslink{programmatore}{Programmatore},
+            17.9/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Settimo Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 40 \euro & 150 \euro & 175 \euro & 135 \euro & 135 \euro &  755 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 780 \euro & 480 \euro & 250 \euro & 2375 \euro & 1680 \euro & 1650 \euro & \cellcolor{yellow!50} 7.215 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Settimo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 7}
+Al termine del settimo periodo di lavoro la metrica del \textit{\glslink{preventivo}{Preventivo} a Finire} è stata nuovamente aggiornata. Trattandosi di uno sprint con un basso carico di lavoro, dedicato al mantenimento della documentazione e alla rifinitura del PoC in attesa del riscontro del Prof. R. Cardin, l'impegno complessivo è stato di 37 ore rispetto alle 38 stimate in sede di \glslink{pianificazione}{pianificazione}.
+
+L'unico scostamento del periodo si registra nel ruolo di \glslink{analista}{Analista}, che ha consuntivato 6 ore a fronte delle 7 preventivate (-1 ora), grazie al fatto che la revisione dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} ha richiesto un intervento più contenuto del previsto. Tutti gli altri ruoli hanno rispettato esattamente le stime. Di conseguenza il bilancio cumulativo degli scostamenti scende ulteriormente a +12 ore totali, proseguendo il rientro avviato nell'iterazione precedente.
+
+La \glslink{pianificazione}{pianificazione} economica aggiornata viene strutturata nella seguente tabella:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +4 & 63 & 1.575,00 \euro & -100,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +5 & 165 & 2.475,00 \euro & -75,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+12} & \textbf{642} & \textbf{12.805,00 \euro} & \textbf{-235,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 7}
+    \label{tab:eac_sprint7}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint7}, il bilancio a finire proietta attualmente un totale di 642 ore lavorative. L'ulteriore, seppur lieve, recupero delle ore di analisi conferma il consolidamento del monitoraggio orario e la progressiva riduzione del deficit accumulato nelle iterazioni iniziali del progetto.
+
+\subsubsection{Rendiconto ore rimanenti al termine del settimo sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 5 & 0 & 10 & 13 & 17 & 48 \\
+\hline
+E. Bellet & 4 & 1 & 0 & 16 & 17 & 13 & 51 \\
+\hline
+A.Oloni & 4 & 3 & 4 & 15 & 12 & 20 & 58 \\
+\hline
+D. Belluz & 4 & 0 & 2 & 14 & 21 & 15 & 56 \\
+\hline
+A. Maule & 3 & 6 & 0 & 14 & 15 & 17 & 55 \\
+\hline
+L. Soligo & 4 & 5 & 3 & 10 & 15 & 16 & 53 \\
+\hline
+V. Y. K. Fernandes & 4 & 5 & 0 & 16 & 19 & 12 & 56 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{26} & \textbf{25} & \textbf{9} & \textbf{95} & \textbf{112} & \textbf{110} & \textbf{377} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del settimo sprint}
+\end{table}
+
+\newpage
+\subsection {Ottavo Periodo: Sprint 06/07/2026 - 19/07/2026}
+
+\label{sec:pec_ottavoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & - & 5 & 4 & 9\\
+Eleonora Bellet      & - & - & - & - & 5 & 3 & 8\\
+Alex Oloni           & - & - & - & 1 & - & 3 & 4\\
+Diego Belluz         & - & - & - & - & 5 & 2 & 7\\
+Angela Maule         & - & 1 & - & - & 5 & 3 & 9\\
+Leonardo Soligo      & 4 & - & - & 2 & 3 & - & 9\\
+V.Y. Kaneda Fernandes & - & 4 & - & - & - & 2 & 6\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 5 & 0 & 3 & 23 & 17 & 52\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Ottavo Sprint}
+\end{table}
+
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & - & 5 & 3 & 8\\
+Eleonora Bellet      & - & - & - & - & 5 & 3 & 8\\
+Alex Oloni           & - & - & - & 1 & - & 3 & 4\\
+Diego Belluz         & - & - & - & - & 5 & 2 & 7\\
+Angela Maule         & - & 1 & - & - & 5 & 3 & 9\\
+Leonardo Soligo      & 4 & - & - & 2 & 3 & - & 9\\
+V.Y. Kaneda Fernandes & - & 4 & - & - & - & 2 & 6\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 5 & 0 & 3 & 23 & 16 & 51\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Ottavo Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, green!60, purple!60, orange!60}
+        ]{
+            13.6/\glslink{responsabile}{Responsabile},
+            11.4/\glslink{amministratore}{Amministratore},
+            8.5/\glslink{progettista}{Progettista},
+            39.2/\glslink{programmatore}{Programmatore},
+            27.3/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Ottavo Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 100 \euro & 0 \euro & 75 \euro & 345 \euro & 240 \euro &  880 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 780 \euro & 420 \euro & 400 \euro & 2475 \euro & 1470 \euro & 1545 \euro & \cellcolor{yellow!50} 7.090 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Ottavo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 8}
+Al termine dell'ottavo periodo di lavoro, il primo della fase \glslink{pb-product-baseline}{PB}, la metrica del \textit{\glslink{preventivo}{Preventivo} a Finire} è stata nuovamente aggiornata. Rispetto alle 52 ore preventivate, il team ha consuntivato 51 ore complessive: il \glslink{verificatore}{Verificatore} ha risparmiato un'ora grazie ai controlli più snelli richiesti dal refactoring della nuova repository, mentre l'\glslink{amministratore}{Amministratore} ha impiegato un'ora in più del previsto per avviare la prima stesura della documentazione; tutti gli altri ruoli hanno rispettato esattamente le stime.
+
+Di conseguenza il bilancio cumulativo degli scostamenti scende ulteriormente a +11 ore totali, proseguendo il rientro avviato nelle iterazioni precedenti. La \glslink{pianificazione}{pianificazione} economica aggiornata viene strutturata nella seguente tabella:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +4 & 63 & 1.575,00 \euro & -100,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +4 & 164 & 2.460,00 \euro & -60,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+11} & \textbf{641} & \textbf{12.790,00 \euro} & \textbf{-220,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 8}
+    \label{tab:eac_sprint8}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint8}, il bilancio a finire proietta attualmente un totale di 641 ore lavorative, con una Varianza a Finire complessiva di -220,00 \euro. Il lieve recupero nel ruolo di Verificatore conferma la solidità del monitoraggio orario mantenuta anche nel passaggio alla fase PB.
+
+\subsubsection{Rendiconto ore rimanenti al termine dell'ottavo sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 5 & 0 & 10 & 8 & 14 & 40 \\
+\hline
+E. Bellet & 4 & 1 & 0 & 16 & 12 & 10 & 43 \\
+\hline
+A.Oloni & 4 & 3 & 4 & 14 & 12 & 17 & 54 \\
+\hline
+D. Belluz & 4 & 0 & 2 & 14 & 16 & 13 & 49 \\
+\hline
+A. Maule & 3 & 5 & 0 & 14 & 10 & 14 & 46 \\
+\hline
+L. Soligo & 0 & 5 & 3 & 8 & 12 & 16 & 44 \\
+\hline
+V. Y. K. Fernandes & 4 & 1 & 0 & 16 & 19 & 10 & 50 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{22} & \textbf{20} & \textbf{9} & \textbf{92} & \textbf{89} & \textbf{94} & \textbf{326} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine dell'ottavo sprint}
+\end{table}
+
+\newpage
+\subsection {Nono Periodo: Sprint 20/07/2026 - 02/08/2026}
+
+\label{sec:pec_nonoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & - & 4 & 2 & 6\\
+Eleonora Bellet      & - & - & - & 3 & 5 & - & 8\\
+Alex Oloni           & 4 & - & - & - & 3 & 2 & 9\\
+Diego Belluz         & - & - & - & 3 & 5 & 2 & 10\\
+Angela Maule         & - & 4 & - & 3 & 5 & - & 12\\
+Leonardo Soligo      & - & - & - & 3 & 5 & 2 & 10\\
+V.Y. Kaneda Fernandes & - & - & - & 2 & 3 & 2 & 7\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 4 & 0 & 14 & 30 & 10 & 62\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Nono Sprint}
+\end{table}
+
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & - & - & - & 4 & 2 & 6\\
+Eleonora Bellet      & - & - & - & 3 & 5 & - & 8\\
+Alex Oloni           & 4 & - & - & - & 3 & 2 & 9\\
+Diego Belluz         & - & - & - & 3 & 5 & 1 & 9\\
+Angela Maule         & - & 4 & - & 3 & 5 & - & 12\\
+Leonardo Soligo      & - & - & - & 3 & 3 & 2 & 8\\
+V.Y. Kaneda Fernandes & - & - & - & 2 & 3 & 2 & 7\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 4 & 4 & 0 & 14 & 28 & 9 & 59\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Nono Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, green!60, purple!60, orange!60}
+        ]{
+            10.9/\glslink{responsabile}{Responsabile},
+            7.2/\glslink{amministratore}{Amministratore},
+            31.7/\glslink{progettista}{Progettista},
+            38.0/\glslink{programmatore}{Programmatore},
+            12.2/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Nono Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  120 \euro & 80 \euro & 0 \euro & 350 \euro & 420 \euro & 135 \euro &  1.105 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo fine periodo} & 780 \euro & 440 \euro & 400 \euro & 2200 \euro & 1395 \euro & 1650 \euro & \cellcolor{yellow!50} 6.865 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Nono Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 9}
+Al termine del nono periodo di lavoro la metrica del \textit{\glslink{preventivo}{Preventivo} a Finire} è stata nuovamente aggiornata. Rispetto alle 62 ore preventivate, il team ha consuntivato 59 ore complessive: il \glslink{programmatore}{Programmatore} ha risparmiato 2 ore, grazie a un'implementazione più rapida del previsto da parte di Leonardo Soligo, mentre il \glslink{verificatore}{Verificatore} ha risparmiato un'ulteriore ora grazie ai controlli più snelli di Diego Belluz; tutti gli altri ruoli hanno rispettato esattamente le stime.
+
+Di conseguenza il bilancio cumulativo degli scostamenti scende sensibilmente a +8 ore totali, proseguendo il deciso rientro avviato nelle iterazioni precedenti. La \glslink{pianificazione}{pianificazione} economica aggiornata viene strutturata nella seguente tabella:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -1 & 51 & 1.020,00 \euro & +20,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +4 & 63 & 1.575,00 \euro & -100,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +2 & 145 & 3.625,00 \euro & -50,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +3 & 163 & 2.445,00 \euro & -45,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+8} & \textbf{638} & \textbf{12.745,00 \euro} & \textbf{-175,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 9}
+    \label{tab:eac_sprint9}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint9}, il bilancio a finire proietta attualmente un totale di 638 ore lavorative, con una Varianza a Finire complessiva di -175,00 \euro. Il recupero registrato sui ruoli di Programmatore e Verificatore conferma il consolidamento del monitoraggio orario nella fase PB.
+
+\subsubsection{Rendiconto ore rimanenti al termine del nono sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 5 & 0 & 10 & 4 & 12 & 34 \\
+\hline
+E. Bellet & 4 & 1 & 0 & 13 & 7 & 10 & 35 \\
+\hline
+A.Oloni & 0 & 3 & 4 & 14 & 9 & 15 & 45 \\
+\hline
+D. Belluz & 4 & 0 & 2 & 11 & 11 & 12 & 40 \\
+\hline
+A. Maule & 3 & 1 & 0 & 11 & 5 & 14 & 34 \\
+\hline
+L. Soligo & 0 & 5 & 3 & 5 & 9 & 14 & 36 \\
+\hline
+V. Y. K. Fernandes & 4 & 1 & 0 & 14 & 16 & 8 & 43 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{18} & \textbf{16} & \textbf{9} & \textbf{78} & \textbf{61} & \textbf{85} & \textbf{267} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del nono sprint}
+\end{table}
+
+\end{document}
