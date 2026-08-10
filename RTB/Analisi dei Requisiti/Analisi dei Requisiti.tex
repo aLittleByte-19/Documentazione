@@ -12,6 +12,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{float}
 \usepackage{enumitem}
+\newcommand{\itemlinebreak}{\mbox{}\newline}
+\setlist[itemize,enumerate]{before=\itemlinebreak}
 
 \setcounter{secnumdepth}{5}   
 \setcounter{tocdepth}{5}     
@@ -819,7 +821,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{postcondizioni}{Post-condizioni}] Lo storico mostra l'elenco delle generazioni archiviate.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema mostra le generazioni in ordine cronologico decrescente, con anteprima del \glslink{prompt}{prompt}, tono e data.
+        \item Il sistema mostra le generazioni in ordine cronologico decrescente, indicando per ciascuna il titolo, lo stato, la data e l'indicazione di preferito.
         \item Il \glslink{redattore}{Redattore} visualizza l'elenco delle generazioni archiviate.
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
@@ -3018,7 +3020,7 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     \hline
     RF18-OB & Il sistema deve permettere la pubblicazione del documento generato e la sua esportazione in formato PDF. & \hyperref[fig:uc-11]{UC-11} \\
     \hline
-    RF19-OB & Il sistema deve permettere al \glslink{redattore}{Redattore} di inoltrare il documento finalizzato tramite posta elettronica. & \hyperref[fig:uc-12]{UC-12} \\
+    RF19-OP & Il sistema deve permettere al \glslink{redattore}{Redattore} di inoltrare il documento finalizzato tramite posta elettronica. & \hyperref[fig:uc-12]{UC-12} \\
     \hline
     RF20-OB & Il sistema deve fornire al \glslink{redattore}{Redattore} la libreria personale con lo storico delle generazioni passate e i \glslink{prompt}{prompt} salvati. & \hyperref[fig:uc-13]{UC-13} \\
     \hline
@@ -3170,7 +3172,7 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     \hline
     RF91-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & \hyperref[errore-uc-54]{UC-54} \\
     \hline
-    RF92-OB & Il sistema deve notificare l'utente in caso di indirizzo e-mail non valido durante l'inoltro del documento. & \hyperref[errore-uc-55]{UC-55} \\
+    RF92-OP & Il sistema deve notificare l'utente in caso di indirizzo e-mail non valido durante l'inoltro del documento. & \hyperref[errore-uc-55]{UC-55} \\
     \hline
     RF93-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} quando la ricerca nello storico delle generazioni non produce risultati. & \hyperref[errore-uc-56]{UC-56} \\
     \hline
@@ -3405,7 +3407,7 @@ La tabella seguente riporta il tracciamento tra i \glslink{caso-d-uso-uc}{casi d
     \hline
     \hyperref[fig:uc-11]{UC-11} & RF18-OB \\
     \hline
-    \hyperref[fig:uc-12]{UC-12} & RF19-OB \\
+    \hyperref[fig:uc-12]{UC-12} & RF19-OP \\
     \hline
     \hyperref[fig:uc-13]{UC-13} & RF20-OB \\
     \hline
@@ -3557,7 +3559,7 @@ La tabella seguente riporta il tracciamento tra i \glslink{caso-d-uso-uc}{casi d
     \hline
     \hyperref[errore-uc-54]{UC-54} & RF91-OB \\
     \hline
-    \hyperref[errore-uc-55]{UC-55} & RF92-OB \\
+    \hyperref[errore-uc-55]{UC-55} & RF92-OP \\
     \hline
     \hyperref[errore-uc-56]{UC-56} & RF93-OB \\
     \hline
@@ -3617,13 +3619,13 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     \endlastfoot
 
-    Funzionali & 94 & 13 & 107 \\
+    Funzionali & 92 & 15 & 107 \\
     \hline
     Di qualità & 9 & 0 & 9 \\
     \hline
     Di vincolo & 18 & 1 & 19 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{121} & \textbf{14} & \textbf{135} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{119} & \textbf{16} & \textbf{135} \\
 
 \end{longtable}
 }
