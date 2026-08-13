@@ -2387,7 +2387,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-49: Conferma e invio del messaggio}
+\subsubsection{UC-49: Conferma ed esportazione del messaggio di invio}
 \mbox{} \\
 
 \begin{figure}[H]
@@ -2398,15 +2398,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} decide di confermare e inviare il messaggio al destinatario dopo aver verificato i campi nella schermata di invio.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per l'invio (UC-48) e ha verificato i campi destinatario, oggetto e testo.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} ha inviato il documento al destinatario e riceve conferma dell'esito dell'operazione.
+    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} decide di confermare il messaggio precompilato e scaricare il PDF finale da utilizzare per il recapito tramite canali esterni alla piattaforma.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} Il Consulente del lavoro si trova nella schermata di generazione per l’invio (UC-48) e ha verificato o modificato i campi destinatario, oggetto e testo.
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il PDF del messaggio di invio viene scaricato. Alla prima esportazione, il documento passa dallo stato “Da inviare” a “Inviato” come evento osservabile di completamento del flusso nell’MVP.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il comando di invio definitivo del messaggio.
-        \item Il sistema acquisisce i campi confermati e il documento allegato dalla schermata di invio.
-        \item Il sistema invia il messaggio al destinatario indicato.
-        \item Il sistema notifica al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} l'esito dell'invio.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il comando di invio esportazione del messaggio.
+        \item Il sistema genera il PDF con destinatario, oggetto, testo e riferimento al documento allegato.
+        \item Il sistema avvia il download del PDF.
+        \item Se lo stato del documento è “Da inviare”, il sistema lo aggiorna a “Inviato”.
+        \item Il sistema registra l’evento di audit relativo all’esportazione.
     \end{enumerate}
 \end{description}
 
