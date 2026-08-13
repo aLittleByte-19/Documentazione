@@ -1579,6 +1579,9 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-34: Visualizzazione storico con filtri}
 \mbox{} \\
 
+\subsubsection{UC-34: Visualizzazione storico con filtri}
+\mbox{} \\
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-34.png}
@@ -1592,7 +1595,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza solo i documenti dello storico che soddisfano i criteri da lui impostati.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-35}), stato invio (\textbf{UC-36}), \glslink{confidenza-confidence-score}{confidenza} rispetto a soglia (\textbf{UC-37}), mese e anno (\textbf{UC-38}).
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} imposta uno o più filtri tra i proposti: barra di ricerca (\textbf{UC-35}), stato scaricamento (\textbf{UC-36}), \glslink{confidenza-confidence-score}{confidenza} rispetto a soglia (\textbf{UC-37}), mese e anno (\textbf{UC-38}).
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza la lista aggiornata con i soli documenti che soddisfano i criteri selezionati.
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
@@ -1638,20 +1641,23 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \subsubsection{UC-36: Filtraggio storico per stato invio}
 \mbox{} \\
 
+\subsubsection{UC-36: Filtraggio storico per stato scaricamento}
+\mbox{} \\
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-36.png}
-    \caption{Diagramma del caso d'uso UC-36: Filtraggio storico per stato invio}
+    \caption{Diagramma del caso d'uso UC-36: Filtraggio storico per stato scaricamento}
     \label{fig:uc-36}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende visualizzare solo documenti inviati o non inviati.
+    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende visualizzare solo documenti scaricati o non scaricati.
     \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione "Storico documenti analizzati".
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza solo i documenti con lo stato di invio da lui selezionato.
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza solo i documenti con lo stato di scaricamento da lui selezionato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il filtro di stato invio scegliendo tra "Inviato" e "Non inviato".
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il filtro di stato scaricamento scegliendo tra "Scaricato" e "Non scaricato".
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza la lista aggiornata con i soli documenti coerenti con lo stato selezionato.
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
@@ -1786,9 +1792,10 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema carica il file originale completo associato al record selezionato.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il documento completo in anteprima nel pannello dedicato.
+        \item Il sistema apre il documento originale completo in una nuova scheda/pagina del browser.
     \end{enumerate}
 \end{description}
+
 \newpage
 \paragraph{UC-39.3: Visualizzazione nome e cognome del dipendente}
 \mbox{} \\
@@ -2018,16 +2025,16 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema ha eseguito l'estrazione dei \glslink{metadati}{metadati} dal documento selezionato.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema dispone dell'indirizzo e-mail inserito manualmente per il documento.
     \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce l'indirizzo e-mail a cui il documento sarà recapitato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema recupera l'indirizzo e-mail estratto associato al documento.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza l'indirizzo e-mail nel pannello dati estratti, con un'eventuale icona per copiarlo o avviare un invio rapido.
+        \item Il sistema recupera l'indirizzo e-mail inserito manualmente associato al documento.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza l'indirizzo e-mail nel pannello dati, con un'eventuale icona per copiarlo o avviare un invio rapido.
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. Email destinatario non disponibile: il sistema non dispone del dato estratto; viene eseguito \hyperref[errore-uc-68]{UC-68}.
+        \item 1a. Email destinatario non disponibile: il sistema non dispone del dato; viene eseguito \hyperref[errore-uc-68]{UC-68}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
@@ -2046,11 +2053,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema ha estratto i \glslink{metadati}{metadati} anagrafici dal documento.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema dispone del codice fiscale inserito manualmente per il documento.
     \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce il codice fiscale del dipendente e sa se supera il controllo di validità formale.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema recupera il codice fiscale estratto.
+        \item Il sistema recupera il codice fiscale inserito manualmente.
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il codice fiscale con l'esito del controllo di validità formale (checksum).
     \end{enumerate}
 \end{description}
@@ -2065,12 +2072,12 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema ha estratto o associato l'identificativo interno (matricola) al documento.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema dispone della matricola inserita manualmente per il documento.
     \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce la matricola del dipendente associata al documento.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema recupera la matricola associata al record.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza la matricola nel pannello dati estratti.
+        \item Il sistema recupera la matricola inserita manualmente associata al record.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza la matricola nel pannello dati.
     \end{enumerate}
 \end{description}
 
@@ -3085,7 +3092,7 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     \hline
     RF49-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite barra di ricerca testuale. & \hyperref[fig:uc-35]{UC-35} \\
     \hline
-    RF50-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di invio. & \hyperref[fig:uc-36]{UC-36} \\
+    RF50-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di scaricamento. & \hyperref[fig:uc-36]{UC-36} \\
     \hline
     RF51-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di \glslink{confidenza-confidence-score}{confidenza} dell'analisi \glslink{intelligenza-artificiale-ai}{AI}. & \hyperref[fig:uc-37]{UC-37} \\
     \hline
@@ -3112,8 +3119,8 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     RF62-OB & Il sistema deve visualizzare la breve descrizione del documento. & \hyperref[fig:uc-39.9]{UC-39.9} \\
     \hline
     RF63-OB & Il sistema deve visualizzare il livello di \glslink{confidenza-confidence-score}{confidenza} in percentuale del documento. & \hyperref[fig:uc-39.10]{UC-39.10} \\
-    \hline
-    RF64-OB & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di invio. & \hyperref[fig:uc-39.11]{UC-39.11} \\
+   \hline
+    RF64-OP & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di scaricamento. & \hyperref[fig:uc-39.11]{UC-39.11} \\
     \hline
     RF65-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & \hyperref[fig:uc-39.12]{UC-39.12} \\
     \hline
@@ -3500,7 +3507,7 @@ La tabella seguente riporta il tracciamento tra i \glslink{caso-d-uso-uc}{casi d
     \hline
     \hyperref[fig:uc-39.10]{UC-39.10} & RF63-OB \\
     \hline
-    \hyperref[fig:uc-39.11]{UC-39.11} & RF64-OB \\
+    \hyperref[fig:uc-39.11]{UC-39.11} & RF64-OP \\
     \hline
     \hyperref[fig:uc-39.12]{UC-39.12} & RF65-OP \\
     \hline
@@ -3619,15 +3626,14 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     \endlastfoot
 
-    Funzionali & 92 & 15 & 107 \\
+    Funzionali & 91 & 16 & 107 \\
     \hline
     Di qualità & 9 & 0 & 9 \\
     \hline
     Di vincolo & 18 & 1 & 19 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{119} & \textbf{16} & \textbf{135} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{118} & \textbf{17} & \textbf{135} \\
 
 \end{longtable}
-}
 
 \end{document}
