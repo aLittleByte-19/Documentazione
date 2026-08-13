@@ -1018,24 +1018,24 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{itemize}
 \end{description}
 \newpage
-\subsubsection{UC-20: Riutilizzo configurazione di una generazione archiviata}
+\subsubsection{UC-20: Riutilizzo di una configurazione salvata}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-20.png}
-    \caption{Diagramma del caso d'uso UC-20: Riutilizzo configurazione di una generazione archiviata}
+    \caption{Diagramma del caso d'uso UC-20: Riutilizzo di una configurazione salvata}
     \label{fig:uc-20}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{redattore}{Redattore}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{redattore}{Redattore} decide di riutilizzare la configurazione di una generazione archiviata.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{redattore}{Redattore} ha individuato una generazione d'interesse nello storico.
-    \item[\glslink{postcondizioni}{Post-condizioni}] I parametri del \glslink{prompt}{prompt} selezionato sono caricati nei campi di configurazione, pronti per una nuova generazione (UC-1).
+    \item[\glslink{trigger}{Trigger}] Il \glslink{redattore}{Redattore} decide di riutilizzare una configurazione di prompt precedentemente salvata.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{redattore}{Redattore} ha individuato una configurazione salvata d'interesse nello storico delle configurazioni.
+    \item[\glslink{postcondizioni}{Post-condizioni}] I parametri della configurazione salvata sono caricati nei campi di configurazione, pronti per avviare una nuova generazione (UC-1).
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{redattore}{Redattore} seleziona il comando di riutilizzo su una generazione archiviata.
-        \item Il sistema carica i parametri del \glslink{prompt}{prompt} selezionato nei campi di configurazione.
+        \item Il \glslink{redattore}{Redattore} seleziona il comando di riutilizzo su una configurazione salvata.
+        \item Il sistema carica i parametri associati a tale configurazione nei rispettivi campi di input.
     \end{enumerate}
 \end{description}
 
@@ -1385,13 +1385,13 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 \newpage
 \subsection{AI Co-Pilot per Consulenti del Lavoro}
 
-\subsubsection{UC-31: Caricamento documento per analisi AI automatica}
+\subsubsection{UC-31: Caricamento di un singolo documento per l'analisi AI automatica}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-31.png}
-    \caption{Diagramma del caso d'uso UC-31: Caricamento documento per analisi AI automatica}
+    \caption{Diagramma del caso d'uso UC-31: Caricamento di un singolo documento per l'analisi AI automatica}
     \label{fig:uc-31}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
@@ -1399,19 +1399,19 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
     \item[\glslink{attore-secondario}{Attore Secondario}] \glslink{ai-analyst}{AI Analyst}
     
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende caricare uno o più documenti nel sistema.
+    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende caricare un singolo documento per l'analisi automatica.
     
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot e dispone di un singolo file supportato.
     
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il documento viene suddiviso per destinatario e ogni sotto-documento appare come voce distinta nello storico, con nome del documento e data di analisi come campi visibili.
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il documento singolo viene caricato, analizzato, suddiviso per destinatario (se multi-destinatario) e resgistrato nello storico.
 
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il file dal proprio dispositivo.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona un singolo file dal proprio dispositivo.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento del documento.
         \item Il sistema verifica formato e duplicati.
         \item Il sistema completa il caricamento e avvia l'analisi \glslink{intelligenza-artificiale-ai}{AI} del documento; il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} riceve notifica dell'esito e può seguire l'avanzamento dell'elaborazione.
-        \item Il sistema suddivide il documento per destinatario e aggiunge allo storico una voce distinta per ciascun sotto-documento, mostrando nome del documento e data di analisi.
+        \item Il sistema suddivide il documento per destinatario (se applicabile) e aggiunge allo storico una voce distinta per ciascun sotto-documento, mostrando nome del documento e data di analisi.
     \end{enumerate}
 
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
@@ -3044,7 +3044,7 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     \hline
     RF26-OB & Il sistema deve permettere al \glslink{redattore}{Redattore} di salvare la configurazione corrente del \glslink{prompt}{prompt} nella libreria personale, assegnandole un nome identificativo. & \hyperref[fig:uc-19]{UC-19} \\
     \hline
-    RF27-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione \glslink{prompt}{prompt} archiviata. & \hyperref[fig:uc-20]{UC-20} \\
+    RF27-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione \glslink{prompt}{prompt} salvata. & \hyperref[fig:uc-20]{UC-20} \\
     \hline
     RF28-OB & Il sistema deve permettere al \glslink{redattore}{Redattore} di contrassegnare una generazione come preferita nella libreria personale. & \hyperref[fig:uc-21]{UC-21} \\
     \hline
@@ -3075,7 +3075,7 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
 
     \multicolumn{3}{|l|}{\cellcolor{gray!12}\textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per Consulenti del Lavoro}}} \\
     \hline
-    RF41-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare singoli documenti per l'analisi \glslink{intelligenza-artificiale-ai}{AI} automatica. & \hyperref[fig:uc-31]{UC-31} \\
+    RF41-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare un singolo documento per l'analisi \glslink{intelligenza-artificiale-ai}{AI} automatica. & \hyperref[fig:uc-31]{UC-31} \\
     \hline
     RF42-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare documenti con classificazione e \glslink{metadati}{metadati} inseriti manualmente. & \hyperref[fig:uc-32]{UC-32} \\
     \hline
