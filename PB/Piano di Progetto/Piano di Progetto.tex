@@ -142,11 +142,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione & 2.3.0 \\
+            Versione & 2.4.0 \\
             Redattori   & A. Maule, A. Oloni, E. Bellet, V. Y. K. Fernandes \\
             Verificatori &  V. Y. K. Fernandes, E. Bellet, D. Belluz \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 02/08/2026
+            Data        & 14/08/2026
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -175,9 +175,10 @@
     \rowcolor{gray!20}
     \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
     \hline
-    \endhead 
+    \endhead
     \endfoot
     \endlastfoot
+    2.4.0 & 14/08/2026 & Aggiunti i diagrammi di Gantt delle fasi RTB e PB, la tabella dei periodi PB e correzione del codice RT3 & Eleonora Bellet & Angela Maule & - \\ \hline
     2.3.0 & 02/08/2026 & Aggiunto nono sprint & Alex Oloni & Diego Belluz & - \\ \hline
     2.2.0 & 19/07/2026 & Aggiunto ottavo sprint (primo sprint della fase PB) & Leonardo Soligo & Eleonora Bellet & - \\ \hline
     2.1.0 & 06/07/2026 & Aggiunto settimo sprint & Leonardo Soligo & Alex Oloni & - \\ \hline
@@ -381,7 +382,7 @@ trovare dei compromessi sull'utilizzo delle tecnologie, utilizzando delle soluzi
 \end{table}
 \newpage
 
-\subsubsection{RT2: Disallineamento e integrazione dei sottosistemi}
+\subsubsection{RT3: Disallineamento e integrazione dei sottosistemi}
 Nello sviluppo di un sistema complesso come quello richiesto per il \glslink{capitolato}{Capitolato} C5 \textbf{\textit{'\glslink{nexum}{Nexum}'}}, il lavoro viene diviso in moduli (frontend, backend, database). Esiste il \glslink{rischio}{rischio} concreto che le interfacce di comunicazione tra questi sottosistemi non siano perfettamente allineate, causando errori critici in fase di unione del codice.
 
 \vspace{0.5cm}
@@ -869,7 +870,7 @@ e alle scadenze del corso.
     \hline \rowcolor{Dandelion!50}
     \textbf{Revisione} & \textbf{Data Stimata}\\
     \hline
-    \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline} - \glslink{rtb-requirements-and-technology-baseline}{RTB}} & 2026/05/29\\
+    \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline} - \glslink{rtb-requirements-and-technology-baseline}{RTB}} & 2026/07/13\\
     \hline
     \textit{\glslink{pb-product-baseline}{Product Baseline} - \glslink{pb-product-baseline}{PB}} & 2026/09/10\\
     \hline
@@ -951,6 +952,15 @@ La fase \glslink{rtb-requirements-and-technology-baseline}{RTB} è suddivisa in 
 
     \end{tabularx}
 \end{table}
+
+La Figura~\ref{fig:gantt_rtb} riporta la rappresentazione temporale dei 7 \glslink{sprint}{Sprint} della fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, dalla candidatura iniziale (30/03/2026) fino all'accettazione formale della \glslink{milestone}{milestone} da parte del Prof. R. Cardin, avvenuta il 13/07/2026.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{src/gantt_rtb.pdf}
+    \caption{Diagramma di Gantt della fase \glslink{rtb-requirements-and-technology-baseline}{RTB} (30/03/2026 -- 13/07/2026)}
+    \label{fig:gantt_rtb}
+\end{figure}
 
 \subsubsection{Chiave di lettura dei periodi di Sprint}
 Per garantire la massima trasparenza e agevolare la consultazione del documento, la rendicontazione di ciascuno \glslink{sprint}{Sprint} è stata strutturata secondo il seguente schema standard:
@@ -1462,6 +1472,15 @@ I rischi gestiti in questa fase sono stati i seguenti:
 \subsection{Pianificazione a Lungo Termine (Verso la PB)}
 La programmazione analitica dei singoli \glslink{sprint}{Sprint} e delle scadenze intermedie verrà ufficializzata e integrata nella release v2.0.0 del presente documento, dopo aver superato la \glslink{rtb-requirements-and-technology-baseline}{RTB}. Nonostante ciò, il team ha delineato subito una strategia di sviluppo a lungo termine da poter seguire. Questo approccio, articolato in 4 macro-fasi sequenziali, è concepito per assicurare un rilascio incrementale, isolando le criticità architetturali.
 
+La Figura~\ref{fig:gantt_pb} riporta la rappresentazione temporale di tale strategia sotto forma di diagramma di Gantt, che copre l'intera fase \glslink{pb-product-baseline}{PB} (dal 06/07/2026 al 10/09/2026): le quattro macro-fasi sono mappate in sequenza logica sugli \glslink{sprint}{Sprint} di sviluppo (Sprint 8-12, ciascuno della durata standard di due settimane, ad eccezione dell'ultimo, compresso per far coincidere puntualmente la sua chiusura con la \glslink{milestone}{milestone} di consegna finale).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{src/gantt_pb.pdf}
+    \caption{Diagramma di Gantt della pianificazione a lungo termine della fase \glslink{pb-product-baseline}{PB} (06/07/2026 -- 10/09/2026)}
+    \label{fig:gantt_pb}
+\end{figure}
+
 \subsubsection{Macro-fase 1: Consolidamento Architetturale e Infrastrutturale (Post-RTB)}
 Questa fase segna il passaggio dallo sviluppo sperimentale PoC alla progettazione ingegneristica rigorosa del sistema.
 \begin{itemize}
@@ -1492,7 +1511,22 @@ L'ultimo periodo prima della consegna ufficiale, dedicato esclusivamente alle at
 
 \subsection{Product Baseline - PB}
 \subsubsection{Periodi}
-Superata la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il team ha avviato la fase \glslink{pb-product-baseline}{PB}, riprendendo la suddivisione del lavoro in \glslink{sprint}{Sprint} secondo lo stesso schema adottato in precedenza, in continuità di numerazione con i periodi già rendicontati.
+Superata la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il team ha avviato la fase \glslink{pb-product-baseline}{PB}, riprendendo la suddivisione del lavoro in \glslink{sprint}{Sprint} secondo lo stesso schema adottato in precedenza, in continuità di numerazione con i periodi già rendicontati. La fase \glslink{pb-product-baseline}{PB} è, ad oggi, suddivisa in 2 iterazioni (\glslink{sprint}{Sprint}), fino al nono \glslink{sprint}{Sprint}.
+\label{sec:pb_periodi}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Aumenta l'altezza delle righe
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{\glslink{sprint}{Sprint}} & \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    \glslink{sprint}{Sprint} 8 & 06/07/2026 & 19/07/2026\\
+    \hline
+    \glslink{sprint}{Sprint} 9 & 20/07/2026 & 02/08/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
 
 \subsubsubsection{Ottavo Periodo}
 
