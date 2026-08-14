@@ -142,11 +142,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione & 2.4.0 \\
+            Versione & 2.5.0 \\
             Redattori   & A. Maule, A. Oloni, E. Bellet, V. Y. K. Fernandes \\
             Verificatori &  V. Y. K. Fernandes, E. Bellet, D. Belluz \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 14/08/2026
+            Data        & 17/08/2026
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -178,6 +178,7 @@
     \endhead
     \endfoot
     \endlastfoot
+    2.5.0 & 17/08/2026 & Aggiunto decimo sprint & Eleonora Bellet & Alex Oloni & - \\ \hline
     2.4.0 & 14/08/2026 & Aggiunti i diagrammi di Gantt delle fasi RTB e PB, la tabella dei periodi PB e correzione del codice RT3 & Eleonora Bellet & Angela Maule & - \\ \hline
     2.3.0 & 02/08/2026 & Aggiunto nono sprint & Alex Oloni & Diego Belluz & - \\ \hline
     2.2.0 & 19/07/2026 & Aggiunto ottavo sprint (primo sprint della fase PB) & Leonardo Soligo & Eleonora Bellet & - \\ \hline
@@ -1511,7 +1512,7 @@ L'ultimo periodo prima della consegna ufficiale, dedicato esclusivamente alle at
 
 \subsection{Product Baseline - PB}
 \subsubsection{Periodi}
-Superata la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il team ha avviato la fase \glslink{pb-product-baseline}{PB}, riprendendo la suddivisione del lavoro in \glslink{sprint}{Sprint} secondo lo stesso schema adottato in precedenza, in continuità di numerazione con i periodi già rendicontati. La fase \glslink{pb-product-baseline}{PB} è, ad oggi, suddivisa in 2 iterazioni (\glslink{sprint}{Sprint}), fino al nono \glslink{sprint}{Sprint}.
+Superata la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il team ha avviato la fase \glslink{pb-product-baseline}{PB}, riprendendo la suddivisione del lavoro in \glslink{sprint}{Sprint} secondo lo stesso schema adottato in precedenza, in continuità di numerazione con i periodi già rendicontati. La fase \glslink{pb-product-baseline}{PB} è, ad oggi, suddivisa in 3 iterazioni (\glslink{sprint}{Sprint}), fino al decimo \glslink{sprint}{Sprint}.
 \label{sec:pb_periodi}
 \begin{table}[H]
     \centering
@@ -1523,6 +1524,8 @@ Superata la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, il tea
     \glslink{sprint}{Sprint} 8 & 06/07/2026 & 19/07/2026\\
     \hline
     \glslink{sprint}{Sprint} 9 & 20/07/2026 & 02/08/2026\\
+    \hline
+    \glslink{sprint}{Sprint} 10 & 03/08/2026 & 16/08/2026\\
     \hline
 
     \end{tabularx}
@@ -1674,6 +1677,73 @@ I rischi gestiti in questa fase sono stati i seguenti:
     \item \textbf{RO5 (Mancata o carenza di comunicazione col proponente):} Il rischio, sollecitato al termine del periodo precedente, si è risolto positivamente con lo svolgimento della riunione esterna del 21/07/2026, che ha ripristinato l'allineamento con l'azienda \glslink{committente-proponente}{proponente} sullo stack tecnologico e sulle priorità di sviluppo.
     \item \textbf{RT2 (Mancanza o insufficienza di documenti o risorse per le tecnologie):} Il blocco riscontrato nell'accesso ai modelli generativi è stato trattato come un'estensione di questo rischio tecnologico; il gruppo ha prontamente condiviso i log di errore con chi gestisce l'infrastruttura e, grazie alla pronta disponibilità dell'azienda \glslink{committente-proponente}{proponente}, il rischio è rientrato nel giro di pochi giorni senza propagarsi ulteriormente nello sviluppo.
 \end{itemize}
+
+\subsubsubsection{Decimo Periodo}
+
+\label{sec:pb_decimoperiodo}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|X|X|}
+    \hline \rowcolor{Dandelion!50}
+    \textbf{Data Inizio} & \textbf{Data Fine}\\
+    \hline
+    03/08/2026 & 16/08/2026\\
+    \hline
+
+    \end{tabularx}
+\end{table}
+
+Il decimo periodo è stato dedicato prevalentemente al consolidamento della documentazione di progetto e al proseguimento dello sviluppo dell'\glslink{mvp-minimum-viable-product}{MVP}. Sul fronte documentale sono stati aggiornati il \glslink{piano-di-progetto}{Piano di Progetto} e il \glslink{piano-di-qualifica}{Piano di Qualifica} con il rendiconto del periodo, le \glslink{norme-di-progetto}{Norme di Progetto} e le specifiche tecniche, oltre alla stesura del consueto verbale interno. In parallelo l'\glslink{analista}{Analista} ha svolto un controllo di verifica sull'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, mentre il \glslink{programmatore}{Programmatore} ha proseguito lo sviluppo dell'\glslink{mvp-minimum-viable-product}{MVP} e il \glslink{verificatore}{Verificatore} ha effettuato la verifica di codice e documenti prodotti nel periodo. Non sono stati riscontrati nuovi rischi durante questo \glslink{sprint}{Sprint}.
+
+\begin{center}
+\noindent\textbf{Attività Pianificate \textit{(\glslink{sprint}{Sprint} Backlog)}}\\
+\end{center}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \rowcolor{Dandelion!50}
+    \textbf{Descrizione Incarico} & \textbf{Ruolo Assegnato} & \textbf{Ore Previste} & \textbf{Ore Effettive} & \textbf{Stato} \\
+    \hline
+    Controllo dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} & \glslink{analista}{Analista} & 8 & 6 & Completata \\
+    \hline
+    Stesura verbale interno & \glslink{responsabile}{Responsabile} & 1 & 1 & Completata \\
+    \hline
+    Aggiornamento \glslink{norme-di-progetto}{Norme di Progetto} & \glslink{amministratore}{Amministratore} & 6 & 4 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-progetto}{Piano di Progetto} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento \glslink{piano-di-qualifica}{Piano di Qualifica} & \glslink{responsabile}{Responsabile} & 2 & 2 & Completata \\
+    \hline
+    Aggiornamento specifiche tecniche & \glslink{progettista}{Progettista} & 13 & 11 & Completata \\
+    \hline
+    Continuamento sviluppo \glslink{mvp-minimum-viable-product}{MVP} & \glslink{programmatore}{Programmatore} & 9 & 9 & Completata \\
+    \hline
+    Verifica documenti e codice & \glslink{verificatore}{Verificatore} & 18 & 17 & Completata \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Totale} & & \textbf{59} & \textbf{52} & \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Dettaglio delle attività, ore stimate vs effettive e stato di completamento - Sprint 10}
+    \label{tab:task_sprint10}
+\end{table}
+
+\paragraph{Considerazioni (Sprint Review)}
+\begin{itemize}
+    \item \textbf{Analisi dei Risultati:} Il periodo si chiude con un buon margine di efficienza (52 ore consuntivate su 59 preventivate). L'\glslink{amministratore}{Amministratore} ha risparmiato 2 ore sull'aggiornamento delle \glslink{norme-di-progetto}{Norme di Progetto}, l'\glslink{analista}{Analista} ha risparmiato 2 ore sul controllo dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e il \glslink{progettista}{Progettista} ha risparmiato 2 ore sull'aggiornamento delle specifiche tecniche, mentre il \glslink{verificatore}{Verificatore} ha risparmiato un'ulteriore ora; il \glslink{responsabile}{Responsabile} e il \glslink{programmatore}{Programmatore} hanno rispettato esattamente le stime. Tutte le attività pianificate risultano completate.
+    \item \textbf{Azioni Correttive:} Non essendo emerse criticità di rilievo nel periodo, non sono state necessarie azioni correttive.
+\end{itemize}
+
+\paragraph{Considerazioni (Sprint Retrospective)}
+\textbf{Problematiche Riscontrate:} Il periodo si è svolto senza intoppi di rilievo, confermando la solidità del processo di aggiornamento documentale e di sviluppo consolidato nei periodi precedenti.
+
+In questo periodo non sono stati riscontrati né gestiti nuovi rischi.
 
 \newpage
 \section{Preventivo e Consuntivo dei Periodi}
@@ -3210,6 +3280,173 @@ V. Y. K. Fernandes & 4 & 1 & 0 & 14 & 16 & 8 & 43 \\
 \hline
 \end{tabularx}
 \caption{Rendiconto - Ore rimanenti al termine del nono sprint}
+\end{table}
+
+\newpage
+\subsection {Decimo Periodo: Sprint 03/08/2026 - 16/08/2026}
+
+\label{sec:pec_decimoperiodo}
+
+\vspace{0.5em}
+
+\begin{center}
+\noindent\textbf{\glslink{preventivo}{Preventivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & 4 & - & - & - & 4 & 8\\
+Eleonora Bellet      & 4 & - & - & 5 & - & - & 9\\
+Alex Oloni           & - & - & 4 & - & - & 4 & 8\\
+Diego Belluz         & - & - & 1 & - & 4 & 3 & 8\\
+Angela Maule         & 1 & - & - & 5 & - & 4 & 10\\
+Leonardo Soligo      & - & 2 & 3 & - & - & 3 & 8\\
+V.Y. Kaneda Fernandes & - & - & - & 3 & 5 & - & 8\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 5 & 6 & 8 & 13 & 9 & 18 & 59\\
+\hline
+\end{tabular}
+\caption{Preventivo ore per componente - Decimo Sprint}
+\end{table}
+
+
+\begin{center}
+\noindent\textbf{\glslink{consuntivo}{Consuntivo}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Componente del Team} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Angelica Gastaldello & - & 3 & - & - & - & 4 & 7\\
+Eleonora Bellet      & 4 & - & - & 4 & - & - & 8\\
+Alex Oloni           & - & - & 3 & - & - & 4 & 7\\
+Diego Belluz         & - & - & 1 & - & 4 & 3 & 8\\
+Angela Maule         & 1 & - & - & 5 & - & 3 & 9\\
+Leonardo Soligo      & - & 1 & 2 & - & - & 3 & 6\\
+V.Y. Kaneda Fernandes & - & - & - & 2 & 5 & - & 7\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Totale}      & 5 & 4 & 6 & 11 & 9 & 17 & 52\\
+\hline
+\end{tabular}
+\caption{Consuntivo ore per componente - Decimo Sprint}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \pie[
+            text=legend,
+            radius=3,
+            color={red!60, blue!60, yellow!60, green!60, purple!60, orange!60}
+        ]{
+            14.4/\glslink{responsabile}{Responsabile},
+            7.7/\glslink{amministratore}{Amministratore},
+            14.4/\glslink{analista}{Analista},
+            26.3/\glslink{progettista}{Progettista},
+            12.9/\glslink{programmatore}{Programmatore},
+            24.3/\glslink{verificatore}{Verificatore}
+        }
+    \end{tikzpicture}
+    \caption{Grafico Consuntivo Costi - Decimo Sprint}
+\end{figure}
+
+\begin{center}
+\noindent\textbf{Bilancio Economico}
+\end{center}
+
+\begin{table}[H]
+\centering
+\vspace{2mm}
+\begin{tabular}{|l|c|c|c|c|c|c|>{\cellcolor{Apricot!50}}c|}
+\hline
+\textbf{Costo} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+Costo Orario &  30 \euro &  20 \euro &  25 \euro&  25 \euro &  15 \euro &  15 \euro & /\\
+Costo Totale &  150 \euro & 80 \euro & 150 \euro & 275 \euro & 135 \euro & 255 \euro &  1.045 \euro\\
+\hline
+\hiderowcolors
+\rowcolor{green!50!black!20!white}
+\textbf{Saldo rimanente} & 750 \euro & 440 \euro & 250 \euro & 2275 \euro & 1680 \euro & 1530 \euro & \cellcolor{yellow!50} 6.925 \euro  \\
+\hline
+\end{tabular}
+\caption{Riepilogo costi e budget rimanente - Decimo Sprint}
+\end{table}
+
+\subsubsection{Aggiornamento del Preventivo a Finire - Sprint 10}
+Al termine del decimo periodo di lavoro la metrica del \textit{\glslink{preventivo}{Preventivo} a Finire} è stata nuovamente aggiornata. Rispetto alle 59 ore preventivate, il team ha consuntivato 52 ore complessive: l'\glslink{amministratore}{Amministratore} e l'\glslink{analista}{Analista} hanno risparmiato 2 ore ciascuno, il \glslink{progettista}{Progettista} ha risparmiato altre 2 ore e il \glslink{verificatore}{Verificatore} un'ulteriore ora; il \glslink{responsabile}{Responsabile} e il \glslink{programmatore}{Programmatore} hanno rispettato esattamente le stime.
+
+Di conseguenza il bilancio cumulativo degli scostamenti scende sensibilmente a +1 ora totale, proseguendo il deciso rientro avviato nelle iterazioni precedenti. La \glslink{pianificazione}{pianificazione} economica aggiornata viene strutturata nella seguente tabella:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \textbf{Ruolo} & \textbf{Ore Prev. Iniziali} & \textbf{Scostamento Ore} & \textbf{EAC (Ore)} & \textbf{EAC (Costo)} & \textbf{Varianza (VAC)} \\
+    \hline
+    \glslink{responsabile}{Responsabile} & 56 & +0 & 56 & 1.680,00 \euro & 0,00 \euro\\
+    \hline
+    \glslink{amministratore}{Amministratore} & 52 & -3 & 49 & 980,00 \euro & +60,00 \euro\\
+    \hline
+    \glslink{analista}{Analista} & 59 & +2 & 61 & 1.525,00 \euro & -50,00 \euro\\
+    \hline
+    \glslink{progettista}{Progettista} & 143 & +0 & 143 & 3.575,00 \euro & 0,00 \euro \\
+    \hline
+    \glslink{programmatore}{Programmatore} & 160 & +0 & 160 & 2.400,00 \euro & 0,00 \euro \\
+    \hline
+    \glslink{verificatore}{Verificatore} & 160 & +2 & 162 & 2.430,00 \euro & -30,00 \euro\\
+    \hline
+    \rowcolor{green!50!black!20!white}
+    \textbf{Totale} & \textbf{630} & \textbf{+1} & \textbf{631} & \textbf{12.590,00 \euro} & \textbf{-20,00 \euro} \\
+    \hline
+    \end{tabular}%
+    }
+    \caption{Aggiornamento del Preventivo a Finire e Varianza cumulativa al termine dello Sprint 10}
+    \label{tab:eac_sprint10}
+\end{table}
+
+Come evidenziato dalla Tabella~\ref{tab:eac_sprint10}, il bilancio a finire proietta attualmente un totale di 631 ore lavorative, con una Varianza a Finire complessiva di -20,00 \euro. Il netto recupero registrato sui ruoli di Amministratore, Analista e Verificatore conferma il consolidamento del monitoraggio orario nella fase PB.
+
+\subsubsection{Rendiconto ore rimanenti al termine del decimo sprint}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ore rimanenti} & \textbf{Resp.} & \textbf{Amm.} & \textbf{Ana.} & \textbf{Proget.} & \textbf{Progr.} & \textbf{Ver.} & \textbf{Totale} \\
+\hline
+A. Gastaldello & 3 & 2 & 0 & 10 & 4 & 8 & 27 \\
+\hline
+E. Bellet & 0 & 1 & 0 & 9 & 7 & 10 & 27 \\
+\hline
+A.Oloni & 0 & 3 & 1 & 14 & 9 & 11 & 38 \\
+\hline
+D. Belluz & 4 & 0 & 1 & 11 & 7 & 9 & 32 \\
+\hline
+A. Maule & 2 & 1 & 0 & 6 & 5 & 11 & 25 \\
+\hline
+L. Soligo & 0 & 4 & 1 & 5 & 9 & 11 & 30 \\
+\hline
+V. Y. K. Fernandes & 4 & 1 & 0 & 12 & 11 & 8 & 36 \\
+\hline
+\rowcolor{gray!20}
+\textbf{TOTALE} & \textbf{13} & \textbf{12} & \textbf{3} & \textbf{67} & \textbf{52} & \textbf{68} & \textbf{215} \\
+\hline
+\end{tabularx}
+\caption{Rendiconto - Ore rimanenti al termine del decimo sprint}
 \end{table}
 
 \end{document}
