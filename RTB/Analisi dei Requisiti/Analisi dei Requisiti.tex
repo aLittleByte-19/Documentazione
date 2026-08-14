@@ -2299,47 +2299,48 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-48: Visualizzazione del messaggio di invio precompilato}
+\subsubsection{UC-48: Visualizzazione del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-48.png}
-    \caption{Diagramma del caso d'uso UC-48: Visualizzazione del messaggio di invio precompilato}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-48.png}
+    \caption{Diagramma del caso d'uso UC-48: Visualizzazione del messaggio precompilato}
     \label{fig:uc-48}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Dopo la visualizzazione del singolo documento (UC-39), il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il comando di invio.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} sta visualizzando il dettaglio di un documento nello storico (UC-39).
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza la \glslink{bozza-draft}{bozza} di invio precompilata dal sistema con destinatario, oggetto e testo.
+    \item[\glslink{trigger}{Trigger}] Il Consulente del lavoro apre il pannello del messaggio precompilato dal dettaglio del singolo documento.
+    \item[\glslink{precondizioni}{Pre-condizioni}] È stato selezionato un singolo documento dallo storico ed è disponibile la relativa scheda di dettaglio.
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il sistema mostra il messaggio precompilato (destinatario, oggetto, testo). Nessun invio e-mail viene eseguito nella MVP.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} clicca il tasto "Invia" dalla vista di dettaglio del documento.
-        \item Il sistema apre la sezione di generazione per l'invio e allega automaticamente il documento che era in visualizzazione.
+        \item Il sistema apre la sezione di generazione del messaggio precompilato e allega automaticamente il documento che era in visualizzazione.
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il destinatario proposto dal sistema (\textbf{UC-48.1}).
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza l'oggetto proposto dal sistema (\textbf{UC-48.2}).
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il testo proposto dal sistema (\textbf{UC-48.3}).
     \end{enumerate}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Inclusioni}: UC-48.1, UC-48.2, UC-48.3.
+        \item \textbf{Include}: \textbf{UC-48.1}, \textbf{UC-48.2}, \textbf{UC-48.3}.
     \end{itemize}
 \end{description}
 
-\paragraph{UC-48.1: Visualizzazione del destinatario del messaggio di invio}
+\paragraph{UC-48.1: Visualizzazione del destinatario del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-48.1.png}
-    \caption{Diagramma del caso d'uso UC-48.1: Visualizzazione del destinatario del messaggio di invio}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-48.1.png}
+    \caption{Diagramma del caso d'uso UC-48.1: Visualizzazione del destinatario}
     \label{fig:uc-48.1}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema dispone del nome e cognome estratti dal documento selezionato.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce il destinatario proposto dal sistema per l'invio del documento.
+    \item[\glslink{trigger}{Trigger}] L'utente apre la sezione del messaggio precompilato.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il messaggio precompilato è richiesto dal dettaglio del documento.
+    \item[\glslink{postcondizioni}{Post-condizioni}]  Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce il destinatario proposto dal sistema per l'invio del documento.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema propone il destinatario sulla base dei dati estratti dal documento.
@@ -2347,39 +2348,41 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-48.2: Visualizzazione dell'oggetto del messaggio di invio}
+\paragraph{UC-48.2: Visualizzazione dell'oggetto del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-48.2.png}
-    \caption{Diagramma del caso d'uso UC-48.2: Visualizzazione dell'oggetto del messaggio di invio}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-48.2.png}
+    \caption{Diagramma del caso d'uso UC-48.2: Visualizzazione dell'oggetto}
     \label{fig:uc-48.2}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema ha accesso ai \glslink{metadati}{metadati} principali del documento selezionato.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce l'oggetto proposto dal sistema per il messaggio di invio.
+    \item[\glslink{trigger}{Trigger}] L'utente apre la sezione del messaggio precompilato.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il messaggio precompilato è richiesto dal dettaglio del documento.
+    \item[\glslink{postcondizioni}{Post-condizioni}] ] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce l'oggetto proposto dal sistema.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il sistema propone un oggetto coerente con il documento in invio.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il valore del campo oggetto.
+        \item Il sistema propone un oggetto coerente con il documento.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza il valore del campo oggetto
     \end{enumerate}
 \end{description}
 
-\paragraph{UC-48.3: Visualizzazione del testo del messaggio di invio}
+\paragraph{UC-48.3: Visualizzazione del testo del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-48.3.png}
-    \caption{Diagramma del caso d'uso UC-48.3: Visualizzazione del testo del messaggio di invio}
+    \includegraphics[width=0.55\textwidth]{diagrammi_use_case/UC-48.3.png}
+    \caption{Diagramma del caso d'uso UC-48.3: Visualizzazione del testo}
     \label{fig:uc-48.3}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il sistema ha accesso ai dati estratti dal documento selezionato.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce il testo di accompagnamento proposto dal sistema per il documento in invio.
+    \item[\glslink{trigger}{Trigger}] L'utente apre la sezione del messaggio precompilato.
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il messaggio precompilato è richiesto dal dettaglio del documento.
+    \item[\glslink{postcondizioni}{Post-condizioni}]Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conosce il testo di accompagnamento proposto dal sistema.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema propone un testo di accompagnamento del documento allegato.
@@ -2387,96 +2390,112 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-49: Conferma ed esportazione del messaggio di invio}
+\subsubsection{UC-49: Conferma ed esportazione del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{diagrammi_use_case/UC-49.png}
-    \caption{Diagramma del caso d'uso UC-49: Conferma e invio del messaggio}
+    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-49.png}
+    \caption{Diagramma del caso d'uso UC-49: Conferma ed esportazione del messaggio precompilato}
     \label{fig:uc-49}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} decide di confermare il messaggio precompilato e scaricare il PDF finale da utilizzare per il recapito tramite canali esterni alla piattaforma.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} Il Consulente del lavoro si trova nella schermata di generazione per l’invio (UC-48) e ha verificato o modificato i campi destinatario, oggetto e testo.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il PDF del messaggio di invio viene scaricato. Alla prima esportazione, il documento passa dallo stato “Da inviare” a “Inviato” come evento osservabile di completamento del flusso nell’MVP.
+    \item[\glslink{trigger}{Trigger}] Il Consulente del lavoro conferma il contenuto del messaggio precompilato e richiede anteprima o scaricamento del PDF.
+    \item[\glslink{precondizioni}{Pre-condizioni}] È selezionato un singolo documento; il messaggio precompilato (destinatario, oggetto, testo) è disponibile.
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il sistema produce l'anteprima e/o il file PDF del messaggio. In caso di scaricamento, lo stato di scaricamento risulta aggiornato.
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il comando di invio esportazione del messaggio.
         \item Il sistema genera il PDF con destinatario, oggetto, testo e riferimento al documento allegato.
         \item Il sistema avvia il download del PDF.
-        \item Se lo stato del documento è “Da inviare”, il sistema lo aggiorna a “Inviato”.
         \item Il sistema registra l’evento di audit relativo all’esportazione.
     \end{enumerate}
 \end{description}
 
 
-\subsubsection{UC-50: Modifica del destinatario del messaggio di invio}
+\subsubsection{UC-50: Modifica del destinatario del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{diagrammi_use_case/UC-50.png}
-    \caption{Diagramma del caso d'uso UC-50: Modifica del destinatario del messaggio di invio}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-50.png}
+    \caption{Diagramma del caso d'uso UC-50: Modifica del destinatario del messaggio precompilato}
     \label{fig:uc-50}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} decide di modificare il destinatario del messaggio di invio.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per l'invio (UC-48) con il campo destinatario valorizzato.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} ha aggiornato il valore del campo destinatario nel messaggio di invio.
+
+    \item[\glslink{trigger}{Trigger}] Il Consulente del lavoro decide di correggere il campo destinatario del messaggio precompilato.
+
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per il messaggio precompilato(UC-48) con il campo oggetto valorizzato.
+
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il destinatario modificato viene salvato e usato nelle successive anteprime/esportazioni PDF del messaggio.
+
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il campo destinatario.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} sostituisce o integra il valore presente nel campo.
-        \item Il sistema aggiorna il campo destinatario nella \glslink{bozza-draft}{bozza} di invio.
+        \item Il Consulente del lavoro attiva la modalità modifica del messaggio.
+        \item Il Consulente del lavoro aggiorna il campo destinatario.
+        \item Il Consulente del lavoro conferma il salvataggio.
+        \item Il sistema persiste il nuovo valore e lo ripropone nelle visualizzazioni successive.
     \end{enumerate}
 \end{description}
 \newpage
-\subsubsection{UC-51: Modifica dell'oggetto del messaggio di invio}
+\subsubsection{UC-51: Modifica dell'oggetto del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{diagrammi_use_case/UC-51.png}
-    \caption{Diagramma del caso d'uso UC-51: Modifica dell'oggetto del messaggio di invio}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-51.png}
+    \caption{Diagramma del caso d'uso UC-51: Modifica dell'oggetto del messaggio precompilato}
     \label{fig:uc-51}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} decide di modificare l'oggetto del messaggio di invio.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per l'invio (UC-48) con il campo oggetto valorizzato.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} ha aggiornato il testo del campo oggetto nel messaggio di invio.
+
+    \item[\glslink{trigger}{Trigger}] Il Consulente del lavoro decide di correggere l'oggetto del messaggio precompilato.
+
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per il messaggio precompilato(UC-48) con il campo oggetto valorizzato.
+
+    \item[\glslink{postcondizioni}{Post-condizioni}] L'oggetto modificato viene salvato e usato nelle successive anteprime/esportazioni PDF del messaggio.
+
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il campo oggetto.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} modifica il testo dell'oggetto.
-        \item Il sistema aggiorna il campo oggetto nella \glslink{bozza-draft}{bozza} di invio.
+        \item Il Consulente del lavoro attiva la modalità modifica del messaggio.
+        \item Il Consulente del lavoro aggiorna il campo oggetto.
+        \item Il Consulente del lavoro conferma il salvataggio.
+        \item Il sistema persiste il nuovo valore e lo ripropone nelle visualizzazioni successive.
     \end{enumerate}
 \end{description}
 
-\subsubsection{UC-52: Modifica del testo del messaggio di invio}
+\subsubsection{UC-52: Modifica del testo del messaggio precompilato}
 \mbox{} \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{diagrammi_use_case/UC-52.png}
-    \caption{Diagramma del caso d'uso UC-52: Modifica del testo del messaggio di invio}
+    \includegraphics[width=0.6\textwidth]{diagrammi_use_case/UC-52.png}
+    \caption{Diagramma del caso d'uso UC-52: Modifica del testo del messaggio precompilato}
     \label{fig:uc-52}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} decide di modificare il testo del messaggio di invio.
-    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per l'invio (UC-48) con il campo testo valorizzato.
-    \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} ha aggiornato il testo di accompagnamento nel messaggio di invio.
+
+    \item[\glslink{trigger}{Trigger}] Il Consulente del lavoro decide di correggere il testo del messaggio precompilato.
+
+    \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella schermata di generazione per il messaggio precompilato(UC-48) con il campo oggetto valorizzato.
+
+    \item[\glslink{postcondizioni}{Post-condizioni}] Il testo modificato viene salvato e usato nelle successive anteprime/esportazioni PDF del messaggio.
+
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona il campo testo.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} modifica il corpo del messaggio.
-        \item Il sistema aggiorna il campo testo nella \glslink{bozza-draft}{bozza} di invio.
+        \item Il Consulente del lavoro attiva la modalità modifica del messaggio.
+        \item Il Consulente del lavoro aggiorna il campo testo.
+        \item Il Consulente del lavoro conferma il salvataggio.
+        \item Il sistema persiste il nuovo valore e lo ripropone nelle visualizzazioni successive.
     \end{enumerate}
 \end{description}
+\newpage
+
 
 \subsubsection{UC-53: Consultazione metriche del modulo AI Co-Pilot}
 \mbox{} \\
