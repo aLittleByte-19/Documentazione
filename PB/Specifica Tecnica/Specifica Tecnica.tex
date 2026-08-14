@@ -162,6 +162,8 @@ La struttura del presente documento è articolata nelle seguenti sezioni princip
     \item \textbf{Sezione 2 - Tecnologie:} Descrive lo stack tecnologico adottato, suddiviso per categoria: linguaggi, framework, librerie, ambiente locale, edge, servizi cloud AWS, persistenza dei dati, osservabilità e CI/quality gate.
     \item \textbf{Sezione 3 - API:} Descrive il contratto REST esposto dal backend, organizzato per area funzionale (stato applicativo, AI Assistant Generativo, AI Co-Pilot).
     \item \textbf{Sezione 4 - Architettura del Sistema:} Descrive il contesto di sistema, l'architettura applicativa e logica interna del backend, il dettaglio dei componenti, il deployment, la containerizzazione e lo stile architetturale complessivo.
+    \item \textbf{Sezione 5 - Descrizione architettura (Backend):} Scende al livello delle singole classi dei due domini di prodotto (Documents, Communications): entità di dominio, casi d'uso applicativi e adapter secondari.
+    \item \textbf{Sezione 6 - Architettura Frontend:} Descrive i principi di progettazione della SPA Angular, il pattern MVVM adottato, i modelli di dati, i servizi di comunicazione col backend e i componenti UI, micro e macro.
 \end{itemize}
 
 \subsection{Glossario}
@@ -558,11 +560,11 @@ Ogni modifica inviata al repository attiva la pipeline di integrazione continua 
     \hline
     Jest & 30.4 & Qualità frontend & Framework di testing JavaScript utilizzato per i test unitari del frontend Angular, in combinazione con TypeScript. \\
     \hline
-    Redocly + Orval diff & 8.18 & Contratto API & Redocly (sempre ultima versione) valida il contratto OpenAPI e Orval rigenera il client tipizzato; un diff verifica che il client generato sia allineato con il contratto aggiornato. \\
+    Redocly + Orval diff & 8.23 & Contratto API & Redocly (sempre ultima versione) valida il contratto OpenAPI e Orval rigenera il client tipizzato; un diff verifica che il client generato sia allineato con il contratto aggiornato. \\
     \hline
     terraform validate & 1.10.5 & IaC & Valida formato e correttezza sintattica/semantica della configurazione Terraform prima di qualsiasi applicazione. \\
     \hline
-    axe & 4.12 & Accessibilità & Strumento di testing automatico per l'accessibilità (a11y) dell'interfaccia utente, integrato nella pipeline CI. \\
+    axe & 4.13 & Accessibilità & Strumento di testing automatico per l'accessibilità (a11y) dell'interfaccia utente, integrato nella pipeline CI. \\
     \hline
     pa11y & 9.1 & Accessibilità & Strumento complementare ad axe per il testing dell'accessibilità. Esegue test a11y sulle pagine dell'applicazione. \\
     \hline
@@ -1517,6 +1519,324 @@ Infrastruttura trasversale ai due domini, non riorganizzata in porte e adapter p
     \item \textbf{\texttt{AuditLogger}} (\texttt{Audit/Services}): registra gli eventi di audit dispatchati dai listener di dominio.
     \item \textbf{\texttt{MetricsRecorder}} e \textbf{\texttt{PrometheusExporter}} (\texttt{Observability}): raccolgono ed espongono le metriche applicative sull'endpoint \texttt{/internal/metrics}, descritto nella Sezione 2.9.
 \end{itemize}
+\end{sloppypar}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Architettura Frontend}
+
+\begin{sloppypar}
+
+% ── 6.1 ──────────────────────────────────────────────────────────────────────
+\subsection{Principi di progettazione}
+
+La SPA Angular è organizzata per feature (\texttt{features/assistant}, \texttt{features/copilot}, \texttt{features/overview}), affiancate da tre cartelle trasversali: \texttt{core} (stato applicativo, interceptor HTTP, osservabilità), \texttt{shared} (componenti UI riutilizzabili) e \texttt{layout} (guscio dell'applicazione, intestazioni, navigazione). Ogni feature raggruppa a sua volta una pagina (View), il proprio ViewModel, i propri componenti (\texttt{components/}) e i propri servizi/modelli (\texttt{data/}), rispecchiando la stessa separazione per dominio applicativo già adottata nel backend (Sezione 4.3).\\
+Tutti i componenti sono standalone (nessun \texttt{NgModule}) e usano \texttt{ChangeDetectionStrategy.OnPush} con le API a segnali di Angular 21 (\texttt{signal}, \texttt{computed}, \texttt{input()}) al posto delle proprietà decorate con \texttt{@Input()}: un componente si ridisegna solo quando un segnale che consuma cambia valore, non a ogni ciclo di change detection globale. Il routing e i template usano la sintassi di controllo nativa (\texttt{@if}, \texttt{@for}) introdotta nelle versioni recenti del framework, senza le direttive strutturali \texttt{*ngIf}/\texttt{*ngFor}. Le tre pagine principali (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}) separano inoltre la logica di presentazione dalla vista tramite un ViewModel dedicato (Sezione 6.2), un principio applicato solo lì: i componenti di feature e quelli condivisi restano invece componenti Angular ordinari, senza un ViewModel proprio.
+
+% ── 6.2 ──────────────────────────────────────────────────────────────────────
+\subsection{Il pattern MVVM}
+
+Le tre pagine principali applicano MVVM in senso classico: un \emph{ViewModel} — più precisamente un \emph{Presentation Model} nel senso di Fowler — è una classe TypeScript che non tocca il DOM né l'infrastruttura di rendering o di dependency injection di Angular (nessun \texttt{@Component}, \texttt{inject()}, decoratore, injection context, chiamata diretta a \texttt{document}/\texttt{window}); riceve le proprie dipendenze dal costruttore, ed è quindi istanziabile con un semplice \texttt{new} e testabile senza \texttt{TestBed}, con dipendenze mockate a mano. L'unica eccezione apparente è l'uso di \texttt{signal}/\texttt{computed} di \texttt{@angular/core}: restano nel ViewModel non come parte del motore di rendering, ma come primitiva reattiva di piattaforma — l'equivalente di \texttt{INotifyPropertyChanged} in WPF — quindi non compromettono l'istanziabilità con \texttt{new} né la testabilità senza Angular avviato; è questa distinzione, non un conteggio letterale degli import da \texttt{@angular/core}, a rendere la classe un Presentation Model genuino. Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contratto OpenAPI e i modelli di dominio specifici di ciascuna feature. La \emph{View} è la pagina stessa (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}): l'unico punto accoppiato ad Angular e al DOM, che si procura le dipendenze con \texttt{inject()} nel proprio costruttore e le passa al ViewModel per costruirlo, poi lega il template ai segnali e ai metodi pubblici che il ViewModel espone (\texttt{vm.stato()}, \texttt{(evento)="vm.metodo()"}). Anche l'unica operazione DOM richiesta da alcuni ViewModel — lo scroll verso una sezione dopo un'azione — resta un'operazione della View: \texttt{AssistantPageViewModel} e \texttt{OverviewPageViewModel} la ricevono come funzione dal costruttore (\texttt{scrollToElement}, definita in \texttt{shared/util/scroll.ts}), così possono \emph{chiedere} uno scroll senza \emph{eseguirlo} direttamente.\\
+Lo stato condiviso fra le pagine non vive nel ViewModel: una sola istanza di \texttt{MvpStateStore}, fornita a livello di applicazione (\texttt{providedIn: "root"}), conserva lo stato restituito dal backend e sopravvive ai cambi di rotta. Ogni ViewModel riceve lo Store come una qualunque altra dipendenza nel proprio costruttore e lo consuma in sola lettura per derivare i propri segnali \texttt{computed}; le mutazioni (generazione, upload, revisione, eliminazione) non aggiornano lo stato localmente, ma rimpiazzano l'intero stato con quello autorevole restituito dal backend nella risposta, evitando divergenze fra ciò che la SPA mostra e ciò che il backend ha effettivamente persistito.\\
+Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. L'\texttt{effect()} però si limita a leggere i segnali sorgente (lo storico condiviso, i filtri attivi) e a chiamare \texttt{vm.reload()}: la chiamata di ricerca vera e propria — stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()} — vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo il template non legge mai \texttt{store.*} direttamente: anche \texttt{error}, \texttt{loading} e le metriche sono esposti come segnali \texttt{computed} pass-through sul ViewModel (\texttt{vm.error()}, \texttt{vm.loading()}, \texttt{vm.metrics()}), che si limita a leggerli dallo Store già ricevuto come dipendenza.\\
+Angular offre già disaccoppiamento e testabilità tramite i propri servizi e la dependency injection, quindi un ViewModel separato potrebbe sembrare ridondante rispetto a testare direttamente il componente con \texttt{TestBed}. Il motivo per cui si è scelto comunque questo confine è pratico, non dogmatico: un test su \texttt{TestBed} richiede il bootstrap del modulo, la compilazione del template e la risoluzione dell'albero di dependency injection a ogni esecuzione, mentre un test sul ViewModel istanzia la classe con \texttt{new} passando dipendenze mockate a mano — più veloce da eseguire e più semplice da scrivere, perché isola la logica applicativa dal ciclo di vita di Angular. Per questo il confine è tracciato solo sulle tre pagine principali, dove quella logica è più densa, e non esteso a ogni componente della SPA.\\
+L'assenza di \texttt{inject()} e dell'infrastruttura di rendering nel ViewModel non è un'omissione stilistica: è la condizione che rende possibile l'obiettivo dichiarato sopra. \texttt{inject()} funziona solo dentro un injection context, quindi una classe che lo usasse sarebbe istanziabile solo da Angular — per testarla servirebbe comunque \texttt{TestBed.runInInjectionContext()} o un \texttt{TestBed.inject()}, lo stesso costo che l'estrazione del ViewModel vuole evitare. Lo stesso vale per il rendering: un ViewModel che manipolasse il DOM richiederebbe un ambiente browser (o \texttt{jsdom}) anche solo per verificarne la logica. Estendere questo pattern a ogni componente della SPA, non solo alle tre pagine principali, non è però la conclusione corretta: il beneficio (test framework-indipendenti su logica applicativa densa) va confrontato con il costo (un file e un'indirection in più). I dodici componenti condivisi (Sezione 6.6) non hanno quasi logica propria — ricevono un \texttt{input()} e lo mostrano — e un ViewModel dedicato aggiungerebbe solo un file vuoto da mantenere, senza nulla di significativo da isolare che il codice non mostri già direttamente.
+
+\subsubsection{Esempio nel progetto: AssistantPageViewModel}
+
+Il ViewModel più corposo, perché copre l'intero ciclo di vita di una bozza (generazione, rigenerazione, valutazione, copertina, storico, configurazioni di prompt salvate). Il test unitario associato (\texttt{assistant-page.view-model.spec.ts}) lo costruisce con \texttt{new} passando un \texttt{AssistantService}, un \texttt{MvpStateStore} e una funzione di scroll mockati a mano — nessun bootstrap Angular — a riprova diretta che qui MVVM non è solo nominale. \texttt{CopilotPageViewModel} e \texttt{OverviewPageViewModel} seguono la stessa forma per le rispettive pagine, con una superficie più piccola; \texttt{CopilotPageViewModel} non riceve la dipendenza di scroll perché non ne ha mai avuto bisogno.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{assistant: AssistantService}, \texttt{store: MvpStateStore}, \texttt{scrollTo: (elementId: string) => void} — dipendenze ricevute dal costruttore, non da \texttt{inject()}; \texttt{scrollTo} è \texttt{scrollToElement} passata dalla View.
+    \item \texttt{phase}, \texttt{isGenerating}, \texttt{latestDraft}, \texttt{previewDraft}, \texttt{status} — segnali sullo stato della generazione in corso e della bozza visualizzata.
+    \item \texttt{error: Signal<string | null>} — pass-through su \texttt{store.error()}, così il template non legge mai lo Store direttamente.
+    \item \texttt{activeFilters}, \texttt{filteredCommunications}, \texttt{historyError} — segnali sullo storico, letti dal template; scritti solo internamente da \texttt{reload()}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{generate(payload: CommunicationDraftForm): void}, \texttt{regenerate(): void}
+    \item \texttt{rateDraft(payload: RateDraftPayload): void}, \texttt{selectDraft(communicationId: number): void}
+    \item \texttt{uploadCover(file: File): void}, \texttt{removeCover(): void}
+    \item \texttt{saveDraft(event: \{communicationId: number, payload: UpdateCommunicationRequest\}): void}
+    \item \texttt{discard(): void}, \texttt{saveToHistory(): void}, \texttt{deleteHistoryItem(communicationId: number): void}
+    \item \texttt{toggleFavorite(communication: Communication): void}
+    \item \texttt{saveConfiguration(payload: SavePromptConfigurationRequest): void}, \texttt{useConfiguration(configuration: PromptConfiguration): void}, \texttt{deleteConfiguration(configurationId: number): void}
+    \item \texttt{setActiveFilters(filters: CommunicationFilters): void}
+    \item \texttt{reload(): void} — rilegge lo storico con i filtri correnti; stessa forma delle altre azioni, chiamata dall'\texttt{effect()} della View a ogni cambio di filtro o di stato condiviso.
+\end{itemize}
+
+\subsubsection{Esempio nel progetto: MvpStateStore (stato condiviso fra i ViewModel)}
+
+Sorgente unica dello stato applicativo (Assistant e Co-Pilot), condivisa da tutte le viste tramite i rispettivi ViewModel. Espone segnali di sola lettura derivati da un unico segnale privato, così che né i ViewModel né i componenti possano scrivere lo stato direttamente, ma solo tramite i metodi dedicati.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{state: Signal<MvpState | null>}, \texttt{loading: Signal<boolean>}, \texttt{error: Signal<string | null>} — segnali di sola lettura.
+    \item \texttt{documents}, \texttt{history}, \texttt{promptConfigurations}, \texttt{assistantMetrics}, \texttt{copilotMetrics} — segnali derivati (\texttt{computed}) sulle diverse viste dello stato.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{loadOnce(): void} — carica lo stato una sola volta, al primo montaggio della shell applicativa.
+    \item \texttt{reload(): void} — ricarica lo stato dal backend, con un tentativo di retry per errori temporanei.
+    \item \texttt{setState(state: MvpState): void} — rimpiazza lo stato con quello autorevole restituito da una mutazione.
+    \item \texttt{upsertDocument(document: SubDocument): void} — inserisce o aggiorna in testa un sotto-documento ricevuto dallo stream SSE, senza ricaricare l'intero stato.
+    \item \texttt{metric(key: string): number} — legge una metrica per chiave stabile, evitando di ricalcolarla su elenchi parzialmente caricati.
+\end{itemize}
+
+% ── 6.3 ──────────────────────────────────────────────────────────────────────
+\subsection{Definizione dei modelli di dati}
+
+Il livello Model si articola su due strati. Il primo è generato automaticamente da Orval a partire dal contratto OpenAPI (Sezione 2.4): interfacce TypeScript per ogni schema (\texttt{Communication}, \texttt{SubDocument}, \texttt{MvpState}...), non modificabili a mano. Il secondo è specifico di ciascuna feature e arricchisce i tipi generati con concetti che esistono solo lato UI — fasi di una pipeline, etichette, vincoli dei form — senza duplicarne i campi.
+
+\subsubsection{Esempio nel progetto: assistant.model.ts}
+
+Arricchisce i tipi generati per il modulo Assistant. \texttt{CommunicationGenerationPhase} traduce le combinazioni di \texttt{generationStatus}/\texttt{coverStatus} restituite dal backend in un'unica fase discreta, usata dal template per etichette e stato dei controlli senza replicare quella logica in più punti; \texttt{GeneratedDraft} è la proiezione della bozza usata dal pannello di anteprima, con solo i campi che quella vista consuma.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{CommunicationDraftForm} — alias del tipo di richiesta generato, usato dal form di generazione.
+    \item \texttt{CommunicationGenerationPhase} — unione di stringhe letterali (\textit{queued}, \textit{generating-text}, \textit{generating-cover}, \textit{completed}, \textit{failed}).
+    \item \texttt{CommunicationGenerationProgress}, \texttt{GeneratedDraft}, \texttt{RateDraftPayload} — interfacce di proiezione per, rispettivamente, l'avanzamento SSE, l'anteprima e la valutazione.
+    \item \texttt{communicationTones}, \texttt{communicationStyles} — le opzioni di tono e stile selezionabili, condivise fra form e validazione.
+\end{itemize}
+
+\subsubsection{Esempio nel progetto: tipi del modulo Co-Pilot}
+
+L'equivalente Co-Pilot di \texttt{assistant.model.ts}, distribuito fra \texttt{document-workflow.service.ts} (i tipi) e \texttt{document-filters.ts} (il form dei filtri e la sua conversione). \texttt{DocumentUploadPhase} traduce l'evento SSE \texttt{progress} in una fase discreta per la barra di avanzamento, analogamente a \texttt{CommunicationGenerationPhase} sul modulo Assistant. \texttt{toDocumentFilters()} converte i valori grezzi del form nei criteri inviati all'API scartando quelli vuoti, evitando percorsi che possano sollevare eccezioni: un valore inatteso nel form non deve poter interrompere silenziosamente lo stream dei filtri, come segnalato nel commento della funzione che genera il form.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{DocumentUploadPhase} — unione di stringhe letterali (\textit{uploading}, \textit{queued}, \textit{processing}, \textit{extracting}, \textit{completed}, \textit{failed}).
+    \item \texttt{DocumentFilters}, \texttt{ConfidenceCriterion}, \texttt{DocumentUploadMetadata}, \texttt{DocumentUploadProgress}, \texttt{DocumentPreviewStatus} — interfacce e unioni per, rispettivamente, i criteri di ricerca, il confronto di soglia, i metadati di upload, l'avanzamento e lo stato dell'anteprima PDF.
+    \item \texttt{DocumentFilterFormValue} — tipo derivato dal \texttt{FormGroup} dei filtri tramite \texttt{ReturnType}, così i due restano sincronizzati senza doverli dichiarare due volte.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{createDocumentFilterForm(): FormGroup}
+    \item \texttt{toDocumentFilters(value: DocumentFilterFormValue): DocumentFilters}
+\end{itemize}
+
+% ── 6.4 ──────────────────────────────────────────────────────────────────────
+\subsection{Servizi di comunicazione con il backend}
+
+Ogni feature ha un servizio dedicato (\texttt{AssistantService}, \texttt{DocumentWorkflowService}) che incapsula le chiamate al client generato e aggiorna lo Store con la risposta autorevole. Nessun componente né ViewModel chiama direttamente il client HTTP: passa sempre dal servizio della propria feature, ricevuto come dipendenza dal costruttore del ViewModel (Sezione 6.2).
+
+\subsubsection{Esempio nel progetto: AssistantService}
+
+Il servizio più corposo del frontend, perché incapsula anche il consumo dello stream SSE lato client, simmetrico a quello che il backend espone (Sezione 3.2). \texttt{trackGeneration()} avvolge la chiamata HTTP iniziale e l'\texttt{EventSource} risultante in un unico \texttt{Observable}: chi lo sottoscrive riceve una sequenza di stati di avanzamento (\textit{queued} → testo → copertina → \textit{completed}/\textit{failed}) senza dover gestire direttamente gli eventi SSE, e la disiscrizione chiude automaticamente sia la sottoscrizione HTTP sia la connessione \texttt{EventSource}.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{api: AlittlebyteMVPAPIService}, \texttt{store: MvpStateStore}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright\small
+    \item \texttt{generate(payload: CommunicationDraftForm):}\\ \hspace*{1.5em}\texttt{Observable<CommunicationGenerationProgress>}
+    \item \texttt{regenerate(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<CommunicationGenerationProgress>}
+    \item \texttt{searchCommunications(filters: CommunicationFilters):}\\ \hspace*{1.5em}\texttt{Observable<Communication[]>}
+    \item \texttt{rate(communicationId: number, payload: RateCommunicationRequest):}\\ \hspace*{1.5em}\texttt{Observable<RateCommunicationResponse>}
+    \item \texttt{favorite(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<UpdateCommunicationFavoriteResponse>}
+    \item \texttt{unfavorite(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<UpdateCommunicationFavoriteResponse>}
+    \item \texttt{updateCoverImage(communicationId: number, image: File):}\\ \hspace*{1.5em}\texttt{Observable<CommunicationMutationResponse>}
+    \item \texttt{removeCoverImage(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<CommunicationMutationResponse>}
+    \item \texttt{saveToHistory(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<CommunicationMutationResponse>}
+    \item \texttt{discard(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<CommunicationMutationResponse>}
+    \item \texttt{deleteFromHistory(communicationId: number):}\\ \hspace*{1.5em}\texttt{Observable<DeleteDocumentResponse>}
+    \item \texttt{saveConfiguration(payload: SavePromptConfigurationRequest):}\\ \hspace*{1.5em}\texttt{Observable<SavePromptConfigurationResponse>}
+    \item \texttt{deleteConfiguration(configurationId: number):}\\ \hspace*{1.5em}\texttt{Observable<DeleteDocumentResponse>}
+\end{itemize}
+
+\subsubsection{Esempio nel progetto: DocumentWorkflowService}
+
+Equivalente Co-Pilot di \texttt{AssistantService}, con lo stesso incapsulamento dello stream SSE lato client. \texttt{upload()} avvolge la chiamata HTTP di caricamento e l'\texttt{EventSource} risultante in un unico \texttt{Observable}, esattamente come \texttt{trackGeneration()}; \texttt{previewStatus()} è invece un caso specifico di questo modulo, assente sul dominio Communications: verifica il \textit{content-type} della risposta prima di montare l'iframe di anteprima, perché l'endpoint può restituire il PDF (200), un 404 se il file non è ancora disponibile o un 503 JSON se lo storage non è raggiungibile — tre esiti che il componente chiamante deve distinguere per mostrare lo stato corretto.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{api: AlittlebyteMVPAPIService}, \texttt{store: MvpStateStore}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright\small
+    \item \texttt{upload(file: File, metadata: DocumentUploadMetadata):}\\ \hspace*{1.5em}\texttt{Observable<DocumentUploadProgress>}
+    \item \texttt{deleteSubDocument(documentId: string):}\\ \hspace*{1.5em}\texttt{Observable<DeleteDocumentResponse>}
+    \item \texttt{saveExtractedData(documentId: string, payload: UpdateExtractedDataRequest):}\\ \hspace*{1.5em}\texttt{Observable<UpdateSubDocumentReviewResponse>}
+    \item \texttt{markReviewed(documentId: string):}\\ \hspace*{1.5em}\texttt{Observable<UpdateSubDocumentReviewResponse>}
+    \item \texttt{saveSendMessage(documentId: string, payload: UpdateSendMessageRequest):}\\ \hspace*{1.5em}\texttt{Observable<UpdateSubDocumentReviewResponse>}
+    \item \texttt{searchDocuments(filters: DocumentFilters):}\\ \hspace*{1.5em}\texttt{Observable<SubDocument[]>}
+    \item \texttt{previewStatus(previewUrl: string):}\\ \hspace*{1.5em}\texttt{Observable<DocumentPreviewStatus>}
+\end{itemize}
+
+% ── 6.5 ──────────────────────────────────────────────────────────────────────
+\subsection{Serializzazione e deserializzazione dei dati}
+
+A differenza di un backend Rails con serializer scritti a mano per ogni risorsa, qui la serializzazione verso e dal backend è interamente generata: Orval crea, insieme alle interfacce dei modelli, anche le funzioni client che serializzano il corpo delle richieste e deserializzano le risposte JSON secondo i tipi del contratto OpenAPI. Non esiste quindi un adapter di serializzazione scritto a mano da documentare: la conformità fra client e contratto è verificata automaticamente in CI (Sezione 2.10, \texttt{openapi:check}), che rigenera il client e fallisce se il risultato differisce da quello committato.
+
+% ── 6.6 ──────────────────────────────────────────────────────────────────────
+\subsection{Micro componenti UI}
+
+I componenti condivisi (\texttt{shared/components}) sono privi di logica di dominio: ricevono dati tramite segnali di input e riemettono eventi tramite \texttt{output()}, senza conoscere da quale feature vengono usati. Sono dodici in tutto: \texttt{ButtonComponent}, \texttt{AlertComponent}, \texttt{ErrorStateComponent}, \texttt{EmptyStateComponent}, \texttt{LoadingStateComponent}, \texttt{StatusBadgeComponent}, \texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{ProgressBarComponent}, \texttt{SelectFieldComponent}, \texttt{TextAreaFieldComponent}, \texttt{FileDropzoneComponent}. La cartella \texttt{data-table} contiene solo un foglio di stile condiviso, non un componente: le tabelle restano markup HTML nativo nelle singole pagine, non un elemento riutilizzabile a sé.
+
+\subsubsection{Esempio nel progetto: ButtonComponent}
+
+Il più semplice dei componenti condivisi: non introduce un nuovo elemento HTML, ma si applica come attributo su un \texttt{<button>} nativo (\texttt{<button mvpButton variant="secondary">}). In questo modo il componente lascia al browser tipo, stato disabilitato, attributi ARIA ed eventi nativi, occupandosi solo della variante di stile applicata all'host.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{variant: InputSignal<"primary" | "secondary" | "icon">} — variante di stile, di default \textit{primary}.
+    \item \texttt{type: InputSignal<string>} — tipo dell'attributo HTML \texttt{type}, di default \textit{button}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno: il comportamento è interamente dichiarativo, espresso nei binding \texttt{host} del decoratore \texttt{@Component}.
+\end{itemize}
+
+\subsubsection{AlertComponent, ErrorStateComponent}
+
+\texttt{AlertComponent} è il riquadro di base per un messaggio con titolo, usato ovunque serva segnalare qualcosa con enfasi (\texttt{role="alert"}, \texttt{aria-live="polite"}). \texttt{ErrorStateComponent} non duplica quel markup: lo compone, fissando un titolo di default (\textit{"Servizio non disponibile"}) e passando il messaggio d'errore come contenuto proiettato — è il componente che compare in cima a ogni pagina quando \texttt{store.error()} è valorizzato.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{AlertComponent}: \texttt{title: InputSignal<string>} (obbligatorio).
+    \item \texttt{ErrorStateComponent}: \texttt{message: InputSignal<string>} (obbligatorio), \texttt{title: InputSignal<string>} (default \textit{"Servizio non disponibile"}).
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+\subsubsection{EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent}
+
+Tre componenti minimi di visualizzazione, senza alcuna logica: si limitano a proiettare contenuto o un'etichetta dentro un elemento con lo stile e la semantica ARIA corretti (\texttt{role="status"} per il caricamento, colori diversi per tono sull'etichetta di stato).
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{EmptyStateComponent}: nessuno, solo \texttt{<ng-content>}.
+    \item \texttt{LoadingStateComponent}: \texttt{label: InputSignal<string>} (default \textit{"Caricamento in corso."}).
+    \item \texttt{StatusBadgeComponent}: \texttt{tone: InputSignal<StatusTone>} (\textit{info}, \textit{success}, \textit{warning}, \textit{danger}, default \textit{neutral}).
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+\subsubsection{MetricCardComponent, MetricsPanelComponent}
+
+\texttt{MetricCardComponent} mostra una singola coppia valore/etichetta. \texttt{MetricsPanelComponent} la compone in una griglia, gestendo da sé i tre stati della richiesta a monte: caricamento (\texttt{LoadingStateComponent}), elenco vuoto (\texttt{EmptyStateComponent}) o dati presenti — così ogni pannello di metriche della SPA (Overview, Assistant, Co-Pilot) ottiene lo stesso comportamento senza ripeterlo.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{MetricCardComponent}: \texttt{value: InputSignal<string | number>} (obbligatorio), \texttt{label: InputSignal<string>} (obbligatorio).
+    \item \texttt{MetricsPanelComponent}: \texttt{isLoading: InputSignal<boolean>} (default \textit{false}), \texttt{metrics: InputSignal<Metric[]>} (default \texttt{[]}).
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+\subsubsection{ProgressBarComponent}
+
+Barra di avanzamento orizzontale condivisa fra le pipeline asincrone di entrambi i moduli: non conosce le fasi di dominio (\textit{extracting}, \textit{generating-cover}...), riceve già una percentuale e uno stato visivo generico, ed è ogni feature a mappare la propria fase su questi ultimi. Finché lo stato è \textit{active} un bagliore scorre da sinistra a destra; con \texttt{prefers-reduced-motion} resta fermo, per conformità WCAG 2.3.3.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{value: InputSignal<number>} (obbligatorio), \texttt{state: InputSignal<ProgressState>} (\textit{idle}, \textit{active}, \textit{done}, \textit{error}), \texttt{label: InputSignal<string>}.
+    \item \texttt{clamped: Signal<number>} — segnale derivato che vincola \texttt{value} fra 0 e 100 prima di applicarlo alla larghezza della barra.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+\subsubsection{SelectFieldComponent, TextAreaFieldComponent}
+
+I due wrapper di campo condivisi dai form reattivi della SPA, con la stessa struttura: un'etichetta associata via \texttt{<label for>}, un identificativo generato automaticamente dal testo dell'etichetta se non fornito esplicitamente, e un \texttt{FormControl} ricevuto come segnale di input invece che tramite \texttt{ControlValueAccessor} — una scelta più semplice, sufficiente perché nessuno dei due deve integrarsi con \texttt{ngModel}.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{SelectFieldComponent}: \texttt{label}, \texttt{options: InputSignal<readonly string[]>}, \texttt{control: InputSignal<FormControl<string>>} (tutti obbligatori), \texttt{id: InputSignal<string>} (opzionale).
+    \item \texttt{TextAreaFieldComponent}: \texttt{label}, \texttt{control} (obbligatori), \texttt{rows: InputSignal<number>} (default 4), \texttt{placeholder}, \texttt{id} (opzionali).
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+\subsubsection{FileDropzoneComponent}
+
+Area di trascinamento/selezione file per il caricamento documenti nel Co-Pilot, ristretta ai soli PDF (\texttt{accept="application/pdf"}). Ripulisce il valore dell'\texttt{<input>} subito dopo aver emesso il file selezionato, così lo stesso file può essere ricaricato una seconda volta senza che il browser lo consideri un valore invariato e sopprima l'evento \texttt{change}.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{label: InputSignal<string>} (obbligatorio), \texttt{disabled: InputSignal<boolean>} (default \textit{false}).
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{fileSelected: OutputEmitterRef<File>} — evento emesso alla selezione di un file valido.
+\end{itemize}
+
+% ── 6.7 ──────────────────────────────────────────────────────────────────────
+\subsection{Macro componenti UI (pagine)}
+
+Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha — i \texttt{FormGroup} reattivi dei filtri e l'\texttt{effect()} che li collega al ViewModel — oltre a un'unica azione locale priva di logica di dominio (\texttt{resetFilters()}); nessuna chiamata HTTP e nessuna regola di business vive più nella pagina.
+
+\subsubsection{Esempio nel progetto: AssistantPage}
+
+Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent}) e quello di anteprima (\texttt{GeneratedCommunicationPreviewComponent}), entrambi componenti di feature, insieme a componenti condivisi per stato di errore e stato vuoto, legando ogni input e ogni evento del template a un segnale o un metodo di \texttt{vm} (\texttt{AssistantPageViewModel}, Sezione 6.2) — mai a \texttt{store} direttamente, nemmeno per \texttt{error}/\texttt{loading}. Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), store, scrollToElement)} — passandogli anche l'unica funzione che tocca il DOM, così il ViewModel resta un Presentation Model puro — e collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{store: MvpStateStore} — dipendenza Angular procurata con \texttt{inject()}, privata: usata solo per costruire il ViewModel e come segnale sorgente nell'\texttt{effect()}, mai letta dal template.
+    \item \texttt{vm: AssistantPageViewModel} — istanziato nel costruttore, unico punto a cui il template si lega.
+    \item \texttt{filterForm: FormGroup} — form reattivo dei filtri dello storico, resta sulla View perché \texttt{ReactiveFormsModule} richiede un injection context.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{resetFilters(): void} — unico metodo proprio della View, oltre alla logica di collegamento nel costruttore.
+\end{itemize}
+
+\subsubsection{Esempio nel progetto: CopilotPage}
+
+Stessa struttura di \texttt{AssistantPage}, applicata al Co-Pilot: compone il pannello di upload (\texttt{DocumentUploadPanelComponent}), l'elenco documenti (\texttt{DocumentListComponent}) e il pannello di revisione del sotto-documento selezionato (\texttt{SubDocumentListComponent}), leggendo dal template anche \texttt{vm.error()}, \texttt{vm.loading()} e \texttt{vm.metrics()} invece dei rispettivi segnali sullo Store. Istanzia il ViewModel con \texttt{new CopilotPageViewModel(inject(DocumentWorkflowService), store)} — senza la dipendenza di scroll, perché questo ViewModel non ne ha mai avuto bisogno (Sezione 6.2) — e collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocumentFilterForm()}) e un \texttt{effect()} che rilegge lo storico documentale chiamando \texttt{vm.reload()} a ogni cambio di filtro o di stato condiviso.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{store: MvpStateStore} — dipendenza Angular procurata con \texttt{inject()}, privata: stesso ruolo che ha su \texttt{AssistantPage}.
+    \item \texttt{vm: CopilotPageViewModel} — istanziato nel costruttore.
+    \item \texttt{filterForm: FormGroup} — form reattivo dei filtri dello storico documenti.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{resetFilters(): void} — unico metodo proprio della View.
+\end{itemize}
+
+\subsubsection{Esempio nel progetto: OverviewPage}
+
+La pagina più semplice: nessun \texttt{FormGroup}, nessun \texttt{effect()}, perché la Overview non ha uno storico filtrabile proprio — mostra solo le metriche aggregate e le attività recenti già presenti nello Store. Compone componenti condivisi (\texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{StatusBadgeComponent}, \texttt{EmptyStateComponent}) senza alcun componente di feature proprio. Istanzia il ViewModel con \texttt{new OverviewPageViewModel(store, router)}; i pulsanti di richiamo all'azione nella sezione hero delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scroll verso la sezione target sulla pagina di destinazione.
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{store: MvpStateStore} — dipendenza Angular procurata con \texttt{inject()}, usata sia dalla View (per \texttt{store.error()}/\texttt{store.loading()}) sia passata al ViewModel.
+    \item \texttt{vm: OverviewPageViewModel} — istanziato nel costruttore insieme a \texttt{inject(Router)}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno: a differenza delle altre due pagine, non ha bisogno di cablare filtri o effetti reattivi propri.
+\end{itemize}
+
 \end{sloppypar}
 
 \end{document}
