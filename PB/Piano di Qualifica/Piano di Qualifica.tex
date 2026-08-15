@@ -126,7 +126,9 @@
         \endhead
 
         \hline
-        2.2.0 & 14/08/2026 & Aggiunti ottavo e nono sprint (fase PB) al cruscotto di qualità, separazione dell'analisi RTB/PB e delle azioni di miglioramento & Angela Maule& Alex Oloni & - &\\
+        2.3.0 & 14/08/2026 & Aggiunto decimo sprint (fase PB) al cruscotto di qualità e alle azioni di miglioramento & Angela Maule & Alex Oloni & - \\
+        \hline
+        2.2.0 & 14/08/2026 & Aggiunti ottavo e nono sprint (fase PB) al cruscotto di qualità, separazione dell'analisi RTB/PB e delle azioni di miglioramento & Angela Maule & Alex Oloni & - \\
         \hline
         2.1.0 & 06/07/2026 & Aggiunto settimo sprint & Diego Belluz & Alex Oloni & - \\
         \hline
@@ -1150,7 +1152,7 @@ La tabella seguente riporta la corrispondenza tra i \glslink{test-di-sistema}{te
 
 Il cruscotto di qualità raccoglie i dati misurati nelle diverse iterazioni del progetto, mettendoli in relazione con le soglie accettabili e ottimali definite nella sezione \emph{Qualità di processo}. L'obiettivo è fornire una visione sintetica e aggiornata dello stato qualitativo del prodotto e dei processi, permettendo di identificare tempestivamente eventuali aree di miglioramento.
 
-Le misurazioni si riferiscono ai nove \glslink{sprint}{sprint} rendicontati, di cui i primi sette appartengono alla fase \glslink{rtb-requirements-and-technology-baseline}{RTB} e gli ultimi due alla fase \glslink{pb-product-baseline}{PB}:
+Le misurazioni si riferiscono ai dieci \glslink{sprint}{sprint} rendicontati, di cui i primi sette appartengono alla fase \glslink{rtb-requirements-and-technology-baseline}{RTB} e gli ultimi tre alla fase \glslink{pb-product-baseline}{PB}:
 
 \begin{itemize}
     \item \textbf{\glslink{sprint}{Sprint} 1 (S1):} 30/03/2026 – 12/04/2026
@@ -1162,11 +1164,12 @@ Le misurazioni si riferiscono ai nove \glslink{sprint}{sprint} rendicontati, di 
     \item \textbf{\glslink{sprint}{Sprint} 7 (S7):} 22/06/2026 – 05/07/2026
     \item \textbf{\glslink{sprint}{Sprint} 8 (S8):} 06/07/2026 – 19/07/2026 \textit{(primo \glslink{sprint}{sprint} della fase \glslink{pb-product-baseline}{PB})}
     \item \textbf{\glslink{sprint}{Sprint} 9 (S9):} 20/07/2026 – 02/08/2026
+    \item \textbf{\glslink{sprint}{Sprint} 10 (S10):} 03/08/2026 – 16/08/2026
 \end{itemize}
 
 Il Budget At Completion (BAC) dell'intero progetto è pari a \EUR{12.575,00} e non è stato rivisto durante il passaggio alla fase \glslink{pb-product-baseline}{PB}.
 
-Per ciascuna metrica, l'analisi descrittiva è suddivisa in due sottoparagrafi: \textbf{Requirements and Technology Baseline (RTB)}, che riporta le considerazioni già formulate al termine dello Sprint 7, e \textbf{Product Baseline (PB)}, che descrive l'andamento rilevato negli Sprint 8 e 9. I grafici e le tabelle di dettaglio restano invece unificati sull'intero arco progettuale, per mantenere la continuità visiva dall'inizio della RTB fino allo stato attuale della PB.
+Per ciascuna metrica, l'analisi descrittiva è suddivisa in due sottoparagrafi: \textbf{Requirements and Technology Baseline (RTB)}, che riporta le considerazioni già formulate al termine dello Sprint 7, e \textbf{Product Baseline (PB)}, che descrive l'andamento rilevato negli Sprint 8, 9 e 10. I grafici e le tabelle di dettaglio restano invece unificati sull'intero arco progettuale, per mantenere la continuità visiva dall'inizio della RTB fino allo stato attuale della PB.
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi primari — Fornitura}
 
@@ -1191,6 +1194,7 @@ Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare
     S7 & 755,00  & 755,00  & 5.100,00 & 5.100,00 \\
     S8 & 895,00  & 895,00  & 5.995,00 & 5.995,00 \\
     S9 & 1.150,00 & 1.150,00 & 7.145,00 & 7.145,00 \\
+    S10 & 1.200,00 & 1.200,00 & 8.345,00 & 8.345,00 \\
     \hline
 \end{tabular}
 \caption{Andamento MPC-EV e MPC-PV per sprint}
@@ -1203,21 +1207,21 @@ Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare
     title={Andamento MPC-EV e MPC-PV Cumulativi},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Valore (\euro)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
-    ymin=0, ymax=8000,
+    ymin=0, ymax=9000,
     grid=both,
     grid style={dashed, gray!30},
     legend pos=north west,
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=blue, mark=o, thick, dashed] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345) (S7,5100) (S8,5995) (S9,7145)};
+\addplot[color=blue, mark=o, thick, dashed] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345) (S7,5100) (S8,5995) (S9,7145) (S10,8345)};
 \addlegendentry{PV Cumulativo}
-\addplot[color=teal, mark=x, thick] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345) (S7,5100) (S8,5995) (S9,7145)};
+\addplot[color=teal, mark=x, thick] coordinates {(S1,670) (S2,1235) (S3,1985) (S4,2835) (S5,3365) (S6,4345) (S7,5100) (S8,5995) (S9,7145) (S10,8345)};
 \addlegendentry{EV Cumulativo}
-\draw[gray, thick, dotted] (axis cs:S7,0) -- (axis cs:S7,8000);
-\node[gray, anchor=north west, rotate=90] at (axis cs:S7,7900) {\footnotesize Inizio fase PB};
+\draw[gray, thick, dotted] (axis cs:S7,0) -- (axis cs:S7,9000);
+\node[gray, anchor=north west, rotate=90] at (axis cs:S7,8900) {\footnotesize Inizio fase PB};
 \end{axis}
 \end{tikzpicture}
 \caption{Grafico dell'andamento cumulativo di Planned Value ed Earned Value per sprint.}
@@ -1225,7 +1229,7 @@ Il Planned Value (PV) rappresenta il valore pianificato del lavoro da completare
 
 \paragraph*{Requirements and Technology Baseline (RTB)} Entrambi i valori sono $\geq 0$ per tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta). Il PV cumulativo è $\leq \text{BAC} = \EUR{12.575,00}$ (\emph{soglia ottimale per MPC-PV} raggiunta); l'EV cumulativo è $\leq \text{EAC}$ (\emph{soglia ottimale per MPC-EV} raggiunta).
 
-\paragraph*{Product Baseline (PB)} Anche negli Sprint 8 e 9 le retrospettive del \glslink{piano-di-progetto}{Piano di Progetto} riportano il completamento sostanziale degli obiettivi pianificati (Sprint 9 interamente ``Completata''; Sprint 8 con la sola stesura delle Specifiche Tecniche ancora ``In corso'', di peso marginale sul valore complessivo dello \glslink{sprint}{sprint}), pertanto si mantiene l'ipotesi $\text{EV} = \text{PV}$ già adottata in RTB. Il PV cumulativo prosegue la crescita raggiungendo \EUR{7.145,00} a S9, restando $\leq \text{BAC}$ (\emph{soglia ottimale} raggiunta); l'EV cumulativo segue lo stesso andamento, confermando che il valore del lavoro completato resta sempre $\geq 0$ (\emph{soglia accettabile} raggiunta).
+\paragraph*{Product Baseline (PB)} Anche negli Sprint 8, 9 e 10 le retrospettive del \glslink{piano-di-progetto}{Piano di Progetto} riportano il completamento sostanziale degli obiettivi pianificati (Sprint 9 e Sprint 10 interamente ``Completata''; Sprint 8 con la sola stesura delle Specifiche Tecniche ancora ``In corso'', di peso marginale sul valore complessivo dello \glslink{sprint}{sprint}), pertanto si mantiene l'ipotesi $\text{EV} = \text{PV}$ già adottata in RTB. Il PV cumulativo prosegue la crescita raggiungendo \EUR{8.345,00} a S10, restando $\leq \text{BAC}$ (\emph{soglia ottimale} raggiunta); l'EV cumulativo segue lo stesso andamento, confermando che il valore del lavoro completato resta sempre $\geq 0$ (\emph{soglia accettabile} raggiunta).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-AC — Actual Cost}
@@ -1249,6 +1253,7 @@ L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro comple
     S7 & 755,00  & 5.360,00 \\
     S8 & 880,00  & 6.240,00 \\
     S9 & 1.105,00 & 7.345,00 \\
+    S10 & 1.045,00 & 8.390,00 \\
     \hline
 \end{tabular}
 \caption{Andamento MPC-AC per sprint}
@@ -1261,19 +1266,19 @@ L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro comple
     title={Andamento MPC-AC Cumulativo},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Costo Effettivo (\euro)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
-    ymin=0, ymax=8000,
+    ymin=0, ymax=9000,
     grid=both,
     grid style={dashed, gray!30},
     legend pos=north west,
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=red!80!black, mark=square*, thick] coordinates {(S1,705) (S2,1330) (S3,2160) (S4,3135) (S5,3650) (S6,4605) (S7,5360) (S8,6240) (S9,7345)};
+\addplot[color=red!80!black, mark=square*, thick] coordinates {(S1,705) (S2,1330) (S3,2160) (S4,3135) (S5,3650) (S6,4605) (S7,5360) (S8,6240) (S9,7345) (S10,8390)};
 \addlegendentry{AC Cumulativo}
-\draw[gray, thick, dotted] (axis cs:S7,0) -- (axis cs:S7,8000);
-\node[gray, anchor=north west, rotate=90] at (axis cs:S7,7900) {\footnotesize Inizio fase PB};
+\draw[gray, thick, dotted] (axis cs:S7,0) -- (axis cs:S7,9000);
+\node[gray, anchor=north west, rotate=90] at (axis cs:S7,8900) {\footnotesize Inizio fase PB};
 \end{axis}
 \end{tikzpicture}
 \caption{Grafico dell'andamento dei costi effettivi cumulati.}
@@ -1281,7 +1286,7 @@ L'Actual Cost (AC) rappresenta il costo effettivo sostenuto per il lavoro comple
 
 \paragraph*{Requirements and Technology Baseline (RTB)} I costi effettivi sono positivi in tutti gli \glslink{sprint}{sprint} (\emph{soglia accettabile} raggiunta). Rispetto al PV si osserva un lieve sforamento iniziale, ridotto sensibilmente negli Sprint 5, 6 e 7 grazie alle attività mirate di controllo sui costi operativi.
 
-\paragraph*{Product Baseline (PB)} L'AC resta positivo anche negli Sprint 8 e 9 (\emph{soglia accettabile} raggiunta). Lo scostamento rispetto al PV si mantiene contenuto: \EUR{895,00} preventivati contro \EUR{880,00} consuntivati a S8 (-\EUR{15,00}) e \EUR{1.150,00} contro \EUR{1.105,00} a S9 (-\EUR{45,00}), confermando che il controllo dei costi introdotto nella seconda metà della RTB si è consolidato anche nell'avvio della fase \glslink{pb-product-baseline}{PB}.
+\paragraph*{Product Baseline (PB)} L'AC resta positivo anche negli Sprint 8, 9 e 10 (\emph{soglia accettabile} raggiunta). Lo scostamento rispetto al PV si mantiene contenuto: \EUR{895,00} preventivati contro \EUR{880,00} consuntivati a S8 (-\EUR{15,00}), \EUR{1.150,00} contro \EUR{1.105,00} a S9 (-\EUR{45,00}) e \EUR{1.200,00} contro \EUR{1.045,00} a S10 (-\EUR{155,00}), confermando che il controllo dei costi introdotto nella seconda metà della RTB si è consolidato anche nella fase \glslink{pb-product-baseline}{PB}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-CPI e MPC-SPI — Cost Performance Index e Schedule Performance Index}
@@ -1312,6 +1317,7 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
     S7 & 0,951 & 1,000 \\
     S8 & 0,961 & 1,000 \\
     S9 & 0,973 & 1,000 \\
+    S10 & 0,995 & 1,000 \\
     \hline
 \end{tabular}
 \caption{Andamento MPC-CPI e MPC-SPI per sprint}
@@ -1324,7 +1330,7 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
     title={Andamento indici CPI e SPI},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Indice},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
     ymin=0.8, ymax=1.1,
     grid=both,
@@ -1333,11 +1339,11 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=orange, mark=violet, thick] coordinates {(S1,0.950) (S2,0.929) (S3,0.919) (S4,0.904) (S5,0.922) (S6,0.944) (S7,0.951) (S8,0.961) (S9,0.973)};
+\addplot[color=orange, mark=violet, thick] coordinates {(S1,0.950) (S2,0.929) (S3,0.919) (S4,0.904) (S5,0.922) (S6,0.944) (S7,0.951) (S8,0.961) (S9,0.973) (S10,0.995)};
 \addlegendentry{CPI}
-\addplot[color=cyan!80!black, mark=triangle*, thick] coordinates {(S1,1.000) (S2,1.000) (S3,1.000) (S4,1.000) (S5,1.000) (S6,1.000) (S7,1.000) (S8,1.000) (S9,1.000)};
+\addplot[color=cyan!80!black, mark=triangle*, thick] coordinates {(S1,1.000) (S2,1.000) (S3,1.000) (S4,1.000) (S5,1.000) (S6,1.000) (S7,1.000) (S8,1.000) (S9,1.000) (S10,1.000)};
 \addlegendentry{SPI}
-\draw[red, thick, dashed] (axis cs:S1,0.9) -- (axis cs:S9,0.9);
+\draw[red, thick, dashed] (axis cs:S1,0.9) -- (axis cs:S10,0.9);
 \node[red, anchor=south west] at (axis cs:S1,0.9) {\footnotesize Soglia Accettabile (0.9)};
 \draw[gray, thick, dotted] (axis cs:S7,0.8) -- (axis cs:S7,1.1);
 \node[gray, anchor=north west, rotate=90] at (axis cs:S7,1.095) {\footnotesize Inizio fase PB};
@@ -1348,7 +1354,7 @@ Lo Schedule Performance Index misura l'efficienza del tempo:
 
 \paragraph*{Requirements and Technology Baseline (RTB)} Il CPI, dopo aver toccato il punto minimo a S4 (0,904), risale progressivamente fino a raggiungere il valore di 0,951 a S7 (\emph{soglia accettabile}  ampiamente superata). L'SPI stabile a 1,000 in tutti gli \glslink{sprint}{sprint} conferma il perfetto rispetto delle scadenze e dell'avanzamento dei lavori previsti (\emph{soglia ottimale} raggiunta).
 
-\paragraph*{Product Baseline (PB)} Il CPI prosegue la risalita avviata a fine RTB, raggiungendo 0,961 a S8 e 0,973 a S9: il valore più alto misurato dall'avvio del progetto (\emph{soglia accettabile} $\geq 0,9$ ampiamente superata, con avvicinamento progressivo alla \emph{soglia ottimale} di 1). Il miglioramento conferma l'efficacia del controllo dei costi introdotto tra le due fasi. L'SPI resta stabile a 1,000 anche in PB (\emph{soglia ottimale} raggiunta), poiché anche in questi due \glslink{sprint}{sprint} il lavoro pianificato risulta sostanzialmente completato.
+\paragraph*{Product Baseline (PB)} Il CPI prosegue la risalita avviata a fine RTB, raggiungendo 0,961 a S8, 0,973 a S9 e 0,995 a S10: il valore più alto misurato dall'avvio del progetto, ormai a ridosso della \emph{soglia ottimale} di 1 (\emph{soglia accettabile} $\geq 0,9$ ampiamente superata). Il miglioramento conferma l'efficacia del controllo dei costi introdotto tra le due fasi. L'SPI resta stabile a 1,000 anche in PB (\emph{soglia ottimale} raggiunta), poiché anche in questi tre \glslink{sprint}{sprint} il lavoro pianificato risulta sostanzialmente completato.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-EAC e MPC-ETC — Estimated At Completion e Estimate To Complete}
@@ -1379,6 +1385,7 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
     S7 & 13.216,00 & 7.856,00 \\
     S8 & 13.089,00 & 6.849,00 \\
     S9 & 12.927,00 & 5.582,00 \\
+    S10 & 12.643,00 & 4.253,00 \\
     \hline
 \end{tabular}
 \caption{Andamento MPC-EAC e MPC-ETC per sprint}
@@ -1391,22 +1398,22 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
     title={Andamento EAC e ETC rispetto al BAC},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Valore (\euro)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
-    ymin=5000, ymax=15000,
+    ymin=4000, ymax=15000,
     grid=both,
     grid style={dashed, gray!30},
     legend pos=north east,
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=blue, mark=purple, thick] coordinates {(S1,13231) (S2,13544) (S3,13683) (S4,13906) (S5,13640) (S6,13328) (S7,13216) (S8,13089) (S9,12927)};
+\addplot[color=blue, mark=purple, thick] coordinates {(S1,13231) (S2,13544) (S3,13683) (S4,13906) (S5,13640) (S6,13328) (S7,13216) (S8,13089) (S9,12927) (S10,12643)};
 \addlegendentry{EAC}
-\addplot[color=olive, mark=diamond*, thick] coordinates {(S1,12526) (S2,12214) (S3,11523) (S4,10771) (S5,9990) (S6,8723) (S7,7856) (S8,6849) (S9,5582)};
+\addplot[color=olive, mark=diamond*, thick] coordinates {(S1,12526) (S2,12214) (S3,11523) (S4,10771) (S5,9990) (S6,8723) (S7,7856) (S8,6849) (S9,5582) (S10,4253)};
 \addlegendentry{ETC}
-\draw[green!60!black, ultra thick, dotted] (axis cs:S1,12575) -- (axis cs:S9,12575);
+\draw[green!60!black, ultra thick, dotted] (axis cs:S1,12575) -- (axis cs:S10,12575);
 \node[green!60!black, anchor=south west] at (axis cs:S1,12575) {\footnotesize BAC (12.575 \euro)};
-\draw[gray, thick, dotted] (axis cs:S7,5000) -- (axis cs:S7,15000);
+\draw[gray, thick, dotted] (axis cs:S7,4000) -- (axis cs:S7,15000);
 \node[gray, anchor=north west, rotate=90] at (axis cs:S7,14900) {\footnotesize Inizio fase PB};
 \end{axis}
 \end{tikzpicture}
@@ -1415,7 +1422,7 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
 
 \paragraph*{Requirements and Technology Baseline (RTB)} L'EAC proiettato si abbassa ulteriormente a S7 attestandosi a \EUR{13.216,00}, riducendo lo scostamento complessivo dal BAC a +5,1\%. L'ETC decresce regolarmente e rimane ampiamente positivo (\emph{soglia accettabile} raggiunta). La decrescita dell'EAC evidenzia l'efficacia delle azioni correttive sui processi organizzativi.
 
-\paragraph*{Product Baseline (PB)} L'EAC continua a scendere anche in PB, raggiungendo \EUR{13.089,00} a S8 (+4,1\% dal BAC) e \EUR{12.927,00} a S9 (+2,8\% dal BAC): per la prima volta dall'inizio del progetto lo scostamento rientra stabilmente entro la \emph{soglia ottimale} $\pm 5\%$ definita per MPC-EAC, confermando l'efficacia dell'azione di miglioramento sulla \glslink{pianificazione}{pianificazione} avviata alla chiusura della RTB (si veda la Sezione~\ref{sec:iniziative-miglioramento}). L'ETC prosegue la propria decrescita regolare, scendendo a \EUR{5.582,00} a S9, e resta $\geq 0$ (\emph{soglia accettabile} raggiunta).
+\paragraph*{Product Baseline (PB)} L'EAC continua a scendere anche in PB, raggiungendo \EUR{13.089,00} a S8 (+4,1\% dal BAC), \EUR{12.927,00} a S9 (+2,8\% dal BAC) e \EUR{12.643,00} a S10 (+0,5\% dal BAC): a partire da S9 lo scostamento rientra stabilmente entro la \emph{soglia ottimale} $\pm 5\%$ definita per MPC-EAC, e a S10 si riduce ulteriormente fino quasi ad azzerarsi, confermando l'efficacia dell'azione di miglioramento sulla \glslink{pianificazione}{pianificazione} avviata alla chiusura della RTB (si veda la Sezione~\ref{sec:iniziative-miglioramento}). L'ETC prosegue la propria decrescita regolare, scendendo a \EUR{4.253,00} a S10, e resta $\geq 0$ (\emph{soglia accettabile} raggiunta).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-TEAC — Time Estimate At Completion}
@@ -1439,6 +1446,7 @@ Il Time Estimate At Completion stima la durata totale della fase in corso a part
     S7 & 1,000 & 14,0 \\
     S8 & 1,000 & 9,4 \\
     S9 & 1,000 & 9,4 \\
+    S10 & 1,000 & 9,4 \\
     \hline
 \end{tabular}
 \caption{Andamento MPC-TEAC per sprint}
@@ -1451,7 +1459,7 @@ Il Time Estimate At Completion stima la durata totale della fase in corso a part
     title={Andamento Time Estimate At Completion},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={Settimane},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
     ymin=0, ymax=14,
     grid=both,
@@ -1462,7 +1470,7 @@ Il Time Estimate At Completion stima la durata totale della fase in corso a part
 ]
 \addplot[color=violet, mark=*, thick] coordinates {(S1,8.0) (S2,8.0) (S3,8.0) (S4,8.0) (S5,10.0) (S6,12.0) (S7,14.0)};
 \addlegendentry{TEAC RTB}
-\addplot[color=violet, mark=*, thick, dashed] coordinates {(S8,9.4) (S9,9.4)};
+\addplot[color=violet, mark=*, thick, dashed] coordinates {(S8,9.4) (S9,9.4) (S10,9.4)};
 \addlegendentry{TEAC PB}
 \draw[gray, thick, dotted] (axis cs:S7,0) -- (axis cs:S7,14);
 \node[gray, anchor=north west, rotate=90] at (axis cs:S7,13.8) {\footnotesize Inizio fase PB};
@@ -1473,7 +1481,7 @@ Il Time Estimate At Completion stima la durata totale della fase in corso a part
 
 \paragraph*{Requirements and Technology Baseline (RTB)} La performance temporale si attesta esattamente in linea con la pianificazione di recupero post-retrospettiva (\emph{soglia accettabile} raggiunta).
 
-\paragraph*{Product Baseline (PB)} Con l'ingresso in \glslink{pb-product-baseline}{PB} il TEAC riparte da una nuova baseline temporale di fase, pari a 9,4 settimane (5 \glslink{sprint}{sprint}, S8-S12). L'SPI resta pari a 1,000 anche a S8 e S9, per cui la stima non necessita di correzioni: il valore rimane costante a 9,4 settimane in entrambi gli \glslink{sprint}{sprint} (\emph{soglia accettabile} $\geq 0$ raggiunta), a conferma che la \glslink{pianificazione}{pianificazione} a lungo termine verso la consegna finale (10/09/2026) è, ad oggi, pienamente rispettata.
+\paragraph*{Product Baseline (PB)} Con l'ingresso in \glslink{pb-product-baseline}{PB} il TEAC riparte da una nuova baseline temporale di fase, pari a 9,4 settimane (5 \glslink{sprint}{sprint}, S8-S12). L'SPI resta pari a 1,000 anche a S8, S9 e S10, per cui la stima non necessita di correzioni: il valore rimane costante a 9,4 settimane in tutti e tre gli \glslink{sprint}{sprint} (\emph{soglia accettabile} $\geq 0$ raggiunta), a conferma che la \glslink{pianificazione}{pianificazione} a lungo termine verso la consegna finale (10/09/2026) è, ad oggi, pienamente rispettata.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi primari — Sviluppo}
@@ -1499,6 +1507,7 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
         S7 & 135 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
         S8 & 135 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
         S9 & 135 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
+        S10 & 135 & 0 & 0 & 0 & 100\% & \textcolor{green!60!black}{Ottimo} \\
         \hline
     \end{tabular}
     \caption{Andamento MPC-RSI per sprint}
@@ -1511,7 +1520,7 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
     title={Andamento Requirements Stability Index},
     xlabel={\glslink{sprint}{Sprint}},
     ylabel={RSI (\%)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
     ymin=70, ymax=105,
     grid=both,
@@ -1519,9 +1528,9 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
     width=0.85\textwidth,
     height=6.5cm
 ]
-\addplot[color=teal, mark=*, thick] coordinates {(S3,100) (S4,96.9) (S5,100) (S6,87.8) (S7,100) (S8,100) (S9,100)};
+\addplot[color=teal, mark=*, thick] coordinates {(S3,100) (S4,96.9) (S5,100) (S6,87.8) (S7,100) (S8,100) (S9,100) (S10,100)};
 \addlegendentry{RSI Rilevato}
-\draw[red, thick, dashed] (axis cs:S1,70) -- (axis cs:S9,70);
+\draw[red, thick, dashed] (axis cs:S1,70) -- (axis cs:S10,70);
 \node[red, anchor=south west] at (axis cs:S1,70) {\footnotesize Soglia Accettabile (70\%)};
 \draw[gray, thick, dotted] (axis cs:S7,70) -- (axis cs:S7,105);
 \node[gray, anchor=north west, rotate=90] at (axis cs:S7,104) {\footnotesize Inizio fase PB};
@@ -1532,7 +1541,7 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
 
 \paragraph*{Requirements and Technology Baseline (RTB)} L'RSI a S6 si attesta all'87,8\%. Nonostante l'ampia attività di riscrittura formale e l'adeguamento della tassonomia del tracciamento, l'indice si mantiene ampiamente sopra la soglia minima accettabile del 70\% (\emph{soglia accettabile} raggiunta).
 
-\paragraph*{Product Baseline (PB)} Negli Sprint 8 e 9 la baseline dei requisiti, consolidata a 135 voci al termine della RTB, non ha subito ulteriori aggiunte, modifiche o eliminazioni: i nuovi \glslink{caso-d-uso-uc}{casi d'uso} assegnati durante la riunione interna del 29/07/2026 (UC21, UC22, UC32, UC39.12, UC39.15) rientrano infatti tra i requisiti già tracciati nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e ne rappresentano l'implementazione, non una variazione. L'RSI si mantiene quindi al 100\% in entrambi gli \glslink{sprint}{sprint} (\emph{soglia ottimale} raggiunta), a conferma della stabilità raggiunta dal documento dopo la ristrutturazione operata a S6.
+\paragraph*{Product Baseline (PB)} Negli Sprint 8, 9 e 10 la baseline dei requisiti, consolidata a 135 voci al termine della RTB, non ha subito ulteriori aggiunte, modifiche o eliminazioni: i nuovi \glslink{caso-d-uso-uc}{casi d'uso} assegnati durante la riunione interna del 29/07/2026 (UC21, UC22, UC32, UC39.12, UC39.15) rientrano infatti tra i requisiti già tracciati nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e ne rappresentano l'implementazione, non una variazione; anche il controllo dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} svolto dall'\glslink{analista}{Analista} a S10 non ha rilevato scostamenti. L'RSI si mantiene quindi al 100\% in tutti e tre gli \glslink{sprint}{sprint} (\emph{soglia ottimale} raggiunta), a conferma della stabilità raggiunta dal documento dopo la ristrutturazione operata a S6.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Documentazione}
@@ -1595,7 +1604,7 @@ dove $L$ è il numero di lettere, $P$ il numero di parole e $F$ il numero di fra
 
 \paragraph*{Requirements and Technology Baseline (RTB)} I documenti tecnici mostrano punteggi compresi tra 45,9 e 59,7. Questo risultato è strutturalmente atteso: la terminologia tecnica specialistica, gli acronimi e i costrutti formali riducono l'indice di leggibilità nei documenti ingegneristici. Si raccomanda di semplificare ove possibile la struttura delle frasi nelle prossime revisioni.
 
-\paragraph*{Product Baseline (PB)} Durante gli Sprint 8 e 9 i documenti RTB sono stati oggetto di interventi mirati: a S8 la correzione dei punti con riscontro negativo dai docenti, a S9 l'aggiornamento del \glslink{piano-di-progetto}{Piano di Progetto} (aggiunta degli Sprint 8-9) e del presente \glslink{piano-di-qualifica}{Piano di Qualifica}. Tali interventi non erano orientati alla leggibilità ma alla correttezza dei contenuti e all'estensione dei dati rendicontati, per cui non si prevede una variazione significativa dell'indice. Il ricalcolo formale tramite \texttt{\glslink{detex}{detex}} e script Python, con la stessa metodologia già applicata in RTB, è pianificato al termine della fase \glslink{pb-product-baseline}{PB}, quando i documenti raggiungeranno una nuova versione stabile; resta comunque valida la raccomandazione di semplificare la struttura dei periodi più densi nelle prossime revisioni.
+\paragraph*{Product Baseline (PB)} Durante gli Sprint 8, 9 e 10 i documenti RTB sono stati oggetto di interventi mirati: a S8 la correzione dei punti con riscontro negativo dai docenti, a S9 l'aggiornamento del \glslink{piano-di-progetto}{Piano di Progetto} (aggiunta degli Sprint 8-9) e del presente \glslink{piano-di-qualifica}{Piano di Qualifica}, a S10 il proseguimento dell'aggiornamento di \glslink{piano-di-progetto}{Piano di Progetto} e \glslink{piano-di-qualifica}{Piano di Qualifica} (rendiconto dello Sprint 10) insieme alla revisione delle \glslink{norme-di-progetto}{Norme di Progetto} e delle specifiche tecniche. Tali interventi non erano orientati alla leggibilità ma alla correttezza dei contenuti e all'estensione dei dati rendicontati, per cui non si prevede una variazione significativa dell'indice. Il ricalcolo formale tramite \texttt{\glslink{detex}{detex}} e script Python, con la stessa metodologia già applicata in RTB, è pianificato al termine della fase \glslink{pb-product-baseline}{PB}, quando i documenti raggiungeranno una nuova versione stabile; resta comunque valida la raccomandazione di semplificare la struttura dei periodi più densi nelle prossime revisioni.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-CO — Correttezza ortografica}
@@ -1621,7 +1630,7 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{\glslink{
 
 \paragraph*{Requirements and Technology Baseline (RTB)} Tutti i documenti presentano 0 errori ortografici (\emph{soglia ottimale} raggiunta).
 
-\paragraph*{Product Baseline (PB)} Le revisioni effettuate negli Sprint 8 e 9 sui documenti RTB (correzione dei riscontri negativi, aggiornamento di \glslink{piano-di-progetto}{Piano di Progetto} e \glslink{piano-di-qualifica}{Piano di Qualifica}) hanno mantenuto la stessa prassi di verifica incrociata già adottata in RTB, con controllo da parte del \glslink{verificatore}{Verificatore} assegnato allo \glslink{sprint}{sprint} prima della chiusura. Non sono stati segnalati errori ortografici nei contenuti aggiunti o modificati; il ricalcolo automatico tramite \texttt{\glslink{detex}{detex}} verrà comunque ripetuto in occasione della prossima versione stabile dei documenti, in coerenza con la cadenza già adottata per \glslink{indice-di-gulpease-mpc-ig}{MPC-IG} (\emph{soglia ottimale} 0 errori, ad oggi confermata).
+\paragraph*{Product Baseline (PB)} Le revisioni effettuate negli Sprint 8, 9 e 10 sui documenti RTB (correzione dei riscontri negativi, aggiornamento di \glslink{piano-di-progetto}{Piano di Progetto}, \glslink{piano-di-qualifica}{Piano di Qualifica}, \glslink{norme-di-progetto}{Norme di Progetto} e specifiche tecniche) hanno mantenuto la stessa prassi di verifica incrociata già adottata in RTB, con controllo da parte del \glslink{verificatore}{Verificatore} assegnato allo \glslink{sprint}{sprint} prima della chiusura — a S10 sulle 17 ore consuntivate su 18 previste. Non sono stati segnalati errori ortografici nei contenuti aggiunti o modificati; il ricalcolo automatico tramite \texttt{\glslink{detex}{detex}} verrà comunque ripetuto in occasione della prossima versione stabile dei documenti, in coerenza con la cadenza già adottata per \glslink{indice-di-gulpease-mpc-ig}{MPC-IG} (\emph{soglia ottimale} 0 errori, ad oggi confermata).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Verifica}
@@ -1630,7 +1639,7 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{\glslink{
 
 \paragraph*{Requirements and Technology Baseline (RTB)} Le metriche MPC-CC (Code Coverage) e MPC-TSR (Test Success Rate) non sono ancora considerate pienamente applicabili nella fase \glslink{rtb-requirements-and-technology-baseline}{RTB}, poiché il codice realizzato in \glslink{rtb-requirements-and-technology-baseline}{RTB} ha natura dimostrativa e non coincide con una baseline stabile di prodotto. La misurazione sistematica di tali metriche è prevista a partire dalla fase \glslink{pb-product-baseline}{PB (Product Baseline)}, quando verrà sviluppata e consolidata la baseline di riferimento e i test automatici potranno essere utilizzati come criterio continuativo di verifica.
 
-\paragraph*{Product Baseline (PB)} Negli Sprint 8 e 9 il gruppo ha creato la nuova repository dedicata all'\glslink{mvp-minimum-viable-product}{MVP} e ha riorganizzato nomi di package, file e porzioni di codice ereditate dal PoC, avviando le prime implementazioni funzionali (Macro-fase 2). La suite di test automatizzati con \glslink{pest}{Pest}, prevista dalle azioni di miglioramento della verifica (Sezione~\ref{sec:iniziative-miglioramento}), non è ancora stata collegata a un quality gate continuativo su questi due \glslink{sprint}{sprint}: MPC-CC e MPC-TSR restano pertanto \textbf{N/A} anche per S8 e S9. La prima misurazione sistematica è attesa a partire dagli \glslink{sprint}{sprint} successivi, quando i componenti del \glslink{mvp-minimum-viable-product}{MVP} core (Macro-fase 2) raggiungeranno una copertura funzionale sufficiente a costituire una baseline stabile.
+\paragraph*{Product Baseline (PB)} Negli Sprint 8 e 9 il gruppo ha creato la nuova repository dedicata all'\glslink{mvp-minimum-viable-product}{MVP} e ha riorganizzato nomi di package, file e porzioni di codice ereditate dal PoC, avviando le prime implementazioni funzionali (Macro-fase 2); a S10 lo sviluppo dell'\glslink{mvp-minimum-viable-product}{MVP} è proseguito (9 ore consuntivate su 9 previste) in parallelo al consolidamento della documentazione di progetto. La suite di test automatizzati con \glslink{pest}{Pest}, prevista dalle azioni di miglioramento della verifica (Sezione~\ref{sec:iniziative-miglioramento}), non è ancora stata collegata a un quality gate continuativo su questi tre \glslink{sprint}{sprint}: MPC-CC e MPC-TSR restano pertanto \textbf{N/A} anche per S8, S9 e S10. La prima misurazione sistematica è attesa a partire dagli \glslink{sprint}{sprint} successivi, quando i componenti del \glslink{mvp-minimum-viable-product}{MVP} core (Macro-fase 2) raggiungeranno una copertura funzionale sufficiente a costituire una baseline stabile.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Gestione della qualità}
@@ -1685,7 +1694,7 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
 \begin{axis} [
     title={Andamento MPC-QMS per \glslink{sprint}{Sprint} rispetto alle Soglie},
     ylabel={Percentuale soddisfazione (\%)},
-    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9},
+    symbolic x coords={S1, S2, S3, S4, S5, S6, S7, S8, S9, S10},
     xtick=data,
     ymin=0, ymax=100,
     ytick={0, 20, 40, 60, 80, 100},
@@ -1695,17 +1704,17 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     legend style={at={(0.5,-0.25)}, anchor=north, legend columns=2, draw=none}
 ]
 
-\addplot[ybar stacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20) (S5,20) (S6,20) (S7,20) (S8,20) (S9,20)};
+\addplot[ybar stacked, fill=gray!8, pattern=crosshatch, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,20) (S2,20) (S3,20) (S4,20) (S5,20) (S6,20) (S7,20) (S8,20) (S9,20) (S10,20)};
 
-\addplot[ybar stacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80) (S5,80) (S6,80) (S7,80) (S8,80) (S9,80)};
+\addplot[ybar stacked, fill=none, pattern=dots, pattern color=black!40, forget plot, bar width=16pt] coordinates {(S1,80) (S2,80) (S3,80) (S4,80) (S5,80) (S6,80) (S7,80) (S8,80) (S9,80) (S10,80)};
 
-\addplot[ybar, fill=blue!70!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0) (S5,0) (S6,0) (S7,0) (S8,0) (S9,0)};
+\addplot[ybar, fill=blue!70!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,100) (S2,0) (S3,0) (S4,0) (S5,0) (S6,0) (S7,0) (S8,0) (S9,0) (S10,0)};
 
-\addplot[ybar, fill=green!60!black, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,0) (S5,0) (S6,0) (S7,0) (S8,0) (S9,0)};
+\addplot[ybar, fill=green!60!black, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,80) (S3,80) (S4,0) (S5,0) (S6,0) (S7,0) (S8,0) (S9,0) (S10,0)};
 
-\addplot[ybar, fill=orange!80!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,75) (S5,75) (S6,75) (S7,75) (S8,0) (S9,0)};
+\addplot[ybar, fill=orange!80!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,75) (S5,75) (S6,75) (S7,75) (S8,0) (S9,0) (S10,0)};
 
-\addplot[ybar, fill=violet!70!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,0) (S5,0) (S6,0) (S7,0) (S8,83.3) (S9,83.3)};
+\addplot[ybar, fill=violet!70!white, draw=none, bar width=8pt, forget plot] coordinates {(S1,0) (S2,0) (S3,0) (S4,0) (S5,0) (S6,0) (S7,0) (S8,83.3) (S9,83.3) (S10,83.3)};
 
 \addlegendimage{ybar, fill=blue!70!white, draw=none}
 \addlegendentry{Valore Rilevato (RTB)}
@@ -1733,7 +1742,7 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     \item \textbf{\glslink{indice-di-gulpease-mpc-ig}{MPC-IG}:} i documenti tecnici presentano indici di leggibilità inferiori alle aspettative. Si raccomanda una revisione stilistica nelle prossime versioni, semplificando la struttura delle frasi.
 \end{itemize}
 
-\paragraph*{Product Baseline (PB)} La tabella seguente ricalcola MPC-QMS con i dati aggiornati fino allo Sprint 9.
+\paragraph*{Product Baseline (PB)} La tabella seguente ricalcola MPC-QMS con i dati aggiornati fino allo Sprint 10.
 
 \begin{table}[H]
 \centering
@@ -1746,15 +1755,15 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     MPC-EV  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-PV  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-AC  & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-CPI & 0,973 (S9)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-CPI & 0,995 (S10)               & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-SPI & 1,000 (tutti gli \glslink{sprint}{sprint}) & $\geq 0{,}9$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-EAC & $+2{,}8\%$ dal BAC (S9) & $\pm 5\%$ dal BAC & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-EAC & $+0{,}5\%$ dal BAC (S10) & $\pm 5\%$ dal BAC & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-ETC & $\geq 0$ tutti gli \glslink{sprint}{sprint} & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-TEAC & 9,4 settimane (SPI = 1,000) & $\geq 0$ & \textcolor{green!60!black}{Soddisfatta} \\
     \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}  & 45,9 – 59,7 (non rimisurato in PB) & $\geq 60$ & \textcolor{orange!80!black}{Da migliorare} \\
     MPC-CO  & 0 errori                 & 0 errori & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-RSI & 100\% (S8-S9)            & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-PRI & 33,3\% (fase PB, S8-S9)  & $\leq 20\%$ & \textcolor{orange!80!black}{Da migliorare} \\
+    MPC-RSI & 100\% (S8-S10)           & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-PRI & 33,3\% (fase PB, S8-S10) & $\leq 20\%$ & \textcolor{orange!80!black}{Da migliorare} \\
     \hline
     \rowcolor{gray!25}
     \multicolumn{3}{|l|}{\textbf{Metriche soddisfatte / Metriche misurate}} & \textbf{10 / 12} \\
@@ -1763,12 +1772,12 @@ L'indice MPC-QMS riflette la conformità complessiva dei processi del team. In S
     \multicolumn{3}{|l|}{\textbf{MPC-QMS}} & \textbf{83,3\%} \\
     \hline
 \end{tabular}
-\caption{Calcolo MPC-QMS — Periodo PB (aggiornato fino a S9)}
+\caption{Calcolo MPC-QMS — Periodo PB (aggiornato fino a S10)}
 \end{table}
 
-Il QMS sale all'83,3\% già a S8 e si mantiene su tale valore a S9, superando per la prima volta la \emph{soglia accettabile} dell'80\% definita per questa metrica. Il miglioramento è determinato interamente dal rientro di MPC-EAC entro la soglia $\pm 5\%$ dal BAC, diretta conseguenza dell'azione di miglioramento sulla \glslink{pianificazione}{pianificazione} avviata a fine RTB (Sezione~\ref{sec:iniziative-miglioramento}). Restano da migliorare due metriche:
+Il QMS sale all'83,3\% già a S8 e si mantiene su tale valore anche a S9 e S10, superando stabilmente la \emph{soglia accettabile} dell'80\% definita per questa metrica. Il miglioramento è determinato interamente dal rientro di MPC-EAC entro la soglia $\pm 5\%$ dal BAC, diretta conseguenza dell'azione di miglioramento sulla \glslink{pianificazione}{pianificazione} avviata a fine RTB (Sezione~\ref{sec:iniziative-miglioramento}), scostamento che a S10 si riduce ulteriormente allo $+0{,}5\%$. Restano da migliorare due metriche:
 \begin{itemize}
-    \item \textbf{MPC-PRI:} il valore sale al 33,3\% nella fase PB (contro il 22,2\% di fine RTB); trattandosi però di una percentuale calcolata su soli 3 eventi rilevati in 2 \glslink{sprint}{sprint}, il dato è statisticamente instabile e verrà consolidato con l'accumularsi di ulteriori \glslink{sprint}{sprint}. Le azioni di miglioramento sulla gestione dei rischi restano comunque prioritarie.
+    \item \textbf{MPC-PRI:} il valore resta al 33,3\% nella fase PB (contro il 22,2\% di fine RTB), invariato rispetto a S9 poiché a S10 non sono stati riscontrati né gestiti nuovi rischi; trattandosi però di una percentuale calcolata su soli 3 eventi rilevati in 3 \glslink{sprint}{sprint}, il dato è ancora statisticamente poco robusto e verrà consolidato con l'accumularsi di ulteriori \glslink{sprint}{sprint}. Le azioni di miglioramento sulla gestione dei rischi restano comunque prioritarie.
     \item \textbf{\glslink{indice-di-gulpease-mpc-ig}{MPC-IG}:} non ancora rimisurato in questa iterazione (si veda la Sezione~\ref{sec:iniziative-miglioramento}); resta il valore rilevato in RTB.
 \end{itemize}
 
@@ -1781,7 +1790,7 @@ Il QMS sale all'83,3\% già a S8 e si mantiene su tale valore a S9, superando pe
 
 \noindent\textbf{Azioni di miglioramento:} Il team introdurrà un sistema di \textit{time-tracking} granulare a partire dalla fase di \glslink{pb-product-baseline}{Product Baseline} (\glslink{pb-product-baseline}{PB}).
 
-\paragraph*{Product Baseline (PB)} Le categorie di tracciamento proposte nella Sezione~\ref{sec:iniziative-miglioramento} (attività produttive, verifica, riunioni, studio, overhead) non sono state ancora applicate in modo sistematico alla rendicontazione oraria di S8 e S9: il \glslink{piano-di-progetto}{Piano di Progetto} continua a registrare le ore per ruolo e task, ma senza la distinzione valore-aggiunto/\textit{overhead} necessaria al calcolo. MPC-TE resta pertanto \textbf{N/A} anche per S8 e S9. L'introduzione dello schema di categorizzazione è confermata come azione prioritaria per gli \glslink{sprint}{sprint} successivi, in modo da avere la prima misurazione effettiva entro la Macro-fase 2.
+\paragraph*{Product Baseline (PB)} Le categorie di tracciamento proposte nella Sezione~\ref{sec:iniziative-miglioramento} (attività produttive, verifica, riunioni, studio, overhead) non sono state ancora applicate in modo sistematico alla rendicontazione oraria di S8, S9 e S10: il \glslink{piano-di-progetto}{Piano di Progetto} continua a registrare le ore per ruolo e task, ma senza la distinzione valore-aggiunto/\textit{overhead} necessaria al calcolo. MPC-TE resta pertanto \textbf{N/A} anche per S8, S9 e S10. L'introduzione dello schema di categorizzazione è confermata come azione prioritaria per gli \glslink{sprint}{sprint} successivi, in modo da avere la prima misurazione effettiva entro la Macro-fase 2.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-PRI — Percentuale Rischi Inattesi}
@@ -1850,6 +1859,8 @@ Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} sono eme
         \hline
         S9 & Blocco temporaneo nell'accesso ad alcuni modelli generativi per la creazione di immagini, dovuto a permessi non correttamente configurati. & Previsto (RT2) \\
         \hline
+        S10 & Nessun nuovo rischio riscontrato o gestito nel periodo. & — \\
+        \hline
     \end{tabularx}
     \caption{Tracciamento dei rischi manifestati per sprint — Periodo PB}
 \end{table}
@@ -1862,20 +1873,20 @@ Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} sono eme
         \rowcolor{gray!35}
         \textbf{\glslink{sprint}{Sprint}} & \textbf{Rischi Totali} & \textbf{Rischi Inattesi} & \textbf{PRI (\%)} & \textbf{Esito} \\
         \hline
-        Fase \glslink{pb-product-baseline}{PB} (S8-S9) & 3 & 1 & 33,3\% & \textcolor{orange!80!black}{Da migliorare} \\
+        Fase \glslink{pb-product-baseline}{PB} (S8-S10) & 3 & 1 & 33,3\% & \textcolor{orange!80!black}{Da migliorare} \\
         \hline
     \end{tabular}
     \caption{Calcolo MPC-PRI per la fase PB}
 \end{table}
 
-Negli Sprint 8 e 9 sono emersi 3 problemi, con la stessa granularità di rilevazione già adottata in RTB (un evento per riga). Due sono stati ricondotti a rischi già presenti nel registro (RO5 per il silenzio del \glslink{committente-proponente}{proponente}, gestito tramite sollecito diretto; RT2 per il blocco sui modelli generativi, gestito tramite condivisione dei log di errore), mentre la sottostima del carico di lavoro documentale non era stata prevista. Il PRI di fase sale al 33,3\%, superiore sia alla soglia accettabile del 20\% sia al 22,2\% registrato in RTB; trattandosi tuttavia di una percentuale calcolata su un campione ancora ridotto (2 \glslink{sprint}{sprint}, 3 eventi), il dato è statisticamente poco stabile e non implica di per sé un peggioramento della capacità predittiva del team, che anzi ha gestito entrambi i rischi previsti entro pochi giorni dalla loro comparsa. Il valore verrà monitorato nei prossimi \glslink{sprint}{sprint} per verificarne la tendenza su un campione più ampio, in linea con l'azione di miglioramento sulla gestione dei rischi (Sezione~\ref{sec:iniziative-miglioramento}).
+Negli Sprint 8 e 9 sono emersi 3 problemi, con la stessa granularità di rilevazione già adottata in RTB (un evento per riga); lo Sprint 10 si è invece svolto senza intoppi di rilievo e non ha introdotto nuovi eventi. Due dei tre problemi sono stati ricondotti a rischi già presenti nel registro (RO5 per il silenzio del \glslink{committente-proponente}{proponente}, gestito tramite sollecito diretto; RT2 per il blocco sui modelli generativi, gestito tramite condivisione dei log di errore), mentre la sottostima del carico di lavoro documentale non era stata prevista. Il PRI di fase resta quindi al 33,3\%, superiore sia alla soglia accettabile del 20\% sia al 22,2\% registrato in RTB; trattandosi tuttavia di una percentuale calcolata su un campione ancora ridotto (3 \glslink{sprint}{sprint}, 3 eventi), il dato è statisticamente poco stabile e non implica di per sé un peggioramento della capacità predittiva del team, che anzi ha gestito entrambi i rischi previsti entro pochi giorni dalla loro comparsa e non ne ha registrati di nuovi nell'ultimo periodo. Il valore verrà monitorato nei prossimi \glslink{sprint}{sprint} per verificarne la tendenza su un campione più ampio, in linea con l'azione di miglioramento sulla gestione dei rischi (Sezione~\ref{sec:iniziative-miglioramento}).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-LE — Labor Efficiency}
 
 \paragraph*{Requirements and Technology Baseline (RTB)} Come per la metrica MPC-TE, l'assenza di un tracciamento puntuale delle ore spese in attività a valore aggiunto rispetto al tempo totale lavorato (incluso overhead) rende impossibile il calcolo per la fase \glslink{rtb-requirements-and-technology-baseline}{RTB}. Il valore è quindi \textbf{N/A}. Le misurazioni inizieranno formalmente con la fase \glslink{pb-product-baseline}{PB}.
 
-\paragraph*{Product Baseline (PB)} Per lo stesso motivo indicato per MPC-TE, il tracciamento granulare necessario al calcolo di MPC-LE non è stato ancora attivato negli Sprint 8 e 9: il valore resta \textbf{N/A}. Come indicatore indiretto, il tasso di completamento ore preventivate/consuntivate resta comunque elevato in entrambi gli \glslink{sprint}{sprint} (51/52 a S8, 59/62 a S9), a conferma di un impiego del tempo complessivamente efficiente, pur non distinguendo ancora le ore a valore aggiunto da quelle di overhead richieste dalla definizione formale della metrica.
+\paragraph*{Product Baseline (PB)} Per lo stesso motivo indicato per MPC-TE, il tracciamento granulare necessario al calcolo di MPC-LE non è stato ancora attivato negli Sprint 8, 9 e 10: il valore resta \textbf{N/A}. Come indicatore indiretto, il tasso di completamento ore preventivate/consuntivate resta comunque elevato in tutti e tre gli \glslink{sprint}{sprint} (51/52 a S8, 59/62 a S9, 52/59 a S10), a conferma di un impiego del tempo complessivamente efficiente, pur non distinguendo ancora le ore a valore aggiunto da quelle di overhead richieste dalla definizione formale della metrica.
 
 \section{Iniziative di miglioramento}
 \label{sec:iniziative-miglioramento}
@@ -1907,7 +1918,7 @@ Le valutazioni riportate nel cruscotto di qualità evidenziano alcuni ambiti sui
 
 Le azioni descritte nelle sottosezioni seguenti sono state definite a partire dagli esiti delle metriche e dalle evidenze emerse durante gli \glslink{sprint}{sprint} \glslink{rtb-requirements-and-technology-baseline}{RTB}. Per ciascun ambito sono indicati la criticità rilevata, l'intervento previsto e il criterio con cui il gruppo intende verificarne l'efficacia nella fase successiva.
 
-Negli Sprint 8 e 9, primi due \glslink{sprint}{sprint} della fase \glslink{pb-product-baseline}{PB}, sono emerse ulteriori sfide organizzative e tecniche, distinte da quelle rilevate in RTB e riportate separatamente nella Tabella~\ref{tab:storico-pb}, per non confondere criticità già chiuse con quelle ancora aperte.
+Negli Sprint 8, 9 e 10, primi tre \glslink{sprint}{sprint} della fase \glslink{pb-product-baseline}{PB}, sono emerse ulteriori sfide organizzative e tecniche, distinte da quelle rilevate in RTB e riportate separatamente nella Tabella~\ref{tab:storico-pb}, per non confondere criticità già chiuse con quelle ancora aperte.
 
 \begin{table}[H]
     \centering
@@ -1916,15 +1927,17 @@ Negli Sprint 8 e 9, primi due \glslink{sprint}{sprint} della fase \glslink{pb-pr
     \begin{tabularx}{\textwidth}{|p{3.1cm}|X|X|}
         \hline
         \rowcolor{gray!35}
-        \textbf{Ambito} & \textbf{Sfida riscontrata in \glslink{pb-product-baseline}{PB} (S8-S9)} & \textbf{Trattamento ed esito} \\
+        \textbf{Ambito} & \textbf{Sfida riscontrata in \glslink{pb-product-baseline}{PB} (S8-S10)} & \textbf{Trattamento ed esito} \\
         \hline
         Comunicazione con il \glslink{committente-proponente}{proponente} (organizzativo) & Silenzio prolungato dell'azienda durante il periodo di ferie estive, con rischio di rallentamento sull'allineamento dei requisiti PB (RO5). & Sollecito diretto tramite i canali di comunicazione forniti; risolto con la riunione esterna del 21/07/2026, che ha ripristinato l'allineamento sullo stack tecnologico e sulle priorità. \\
         \hline
-        Stima del carico documentale (organizzativo) & Le Specifiche Tecniche si sono rivelate più corpose del Manuale Utente, comportando uno spostamento di parte del lavoro sui periodi successivi. & Lavoro ridistribuito sugli \glslink{sprint}{sprint} seguenti; da monitorare tramite il confronto ore preventivate/consuntivate già introdotto per MPC-EAC. \\
+        Stima del carico documentale (organizzativo) & Le Specifiche Tecniche si sono rivelate più corpose del Manuale Utente, comportando uno spostamento di parte del lavoro sui periodi successivi. & Lavoro ridistribuito sugli \glslink{sprint}{sprint} seguenti; a S10 il confronto ore preventivate/consuntivate già introdotto per MPC-EAC conferma il rientro (52 ore consuntivate su 59 preventivate). \\
         \hline
         Accesso a risorse tecnologiche esterne (tecnico) & Blocco temporaneo nell'accesso ad alcuni modelli generativi per la creazione di immagini, per permessi utente non correttamente configurati (RT2). & Condivisione tempestiva dei log di errore con l'azienda \glslink{committente-proponente}{proponente}; permessi ripristinati nel giro di pochi giorni, senza impatti significativi sullo sviluppo. \\
         \hline
         Migrazione della base di codice (tecnico) & Riorganizzazione di nomi di package, file e porzioni di codice ereditate dal PoC nella nuova repository dedicata all'\glslink{mvp-minimum-viable-product}{MVP}. & Refactoring completato nello Sprint 8 entro le ore preventivate, senza impatti sugli \glslink{sprint}{sprint} successivi. \\
+        \hline
+        Consolidamento del processo (organizzativo) & A S10 non sono emerse nuove criticità: il periodo si è svolto senza intoppi di rilievo. & Conferma della solidità del processo di aggiornamento documentale e di sviluppo consolidato nei periodi precedenti; nessuna azione correttiva necessaria. \\
         \hline
     \end{tabularx}
     \caption{Storico delle azioni di miglioramento — Periodo PB}
@@ -2100,6 +2113,6 @@ In \glslink{pb-product-baseline}{PB} il gruppo intende collegare il tracciamento
 
 \noindent\textbf{Sintesi conclusiva:} Le iniziative descritte hanno lo scopo di trasformare le criticità emerse durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} in azioni operative per la fase \glslink{pb-product-baseline}{PB}. In particolare, il gruppo intende migliorare la precisione della \glslink{pianificazione}{pianificazione}, rendere più sistematica la gestione dei rischi, aumentare la qualità della documentazione e consolidare il processo di verifica del codice. Tali interventi saranno monitorati attraverso le metriche già definite nel presente documento, con particolare attenzione a MPC-EAC, MPC-PRI, \glslink{indice-di-gulpease-mpc-ig}{MPC-IG}, MPC-TE, MPC-LE, MPC-CC e MPC-TSR.
 
-A due \glslink{sprint}{sprint} dall'avvio della fase \glslink{pb-product-baseline}{PB}, un primo bilancio delle azioni intraprese mostra risultati contrastanti. L'azione sulla \glslink{pianificazione}{pianificazione} ha prodotto un esito positivo e immediatamente misurabile: MPC-EAC è rientrato entro la \emph{soglia ottimale} $\pm 5\%$ già a S8, portando MPC-QMS dal 75\% dell'RTB all'83,3\% della PB. L'azione sulla gestione dei rischi è invece ancora in fase di consolidamento: MPC-PRI sale al 33,3\% nella fase PB, seppur su un campione ancora limitato a 2 \glslink{sprint}{sprint}. Le azioni su qualità documentale, tracciamento operativo e verifica/testing non hanno ancora prodotto misurazioni aggiornate — rispettivamente perché i documenti non sono stati oggetto di un nuovo ciclo completo di revisione, perché lo schema di categorizzazione delle ore non è ancora stato applicato in modo sistematico e perché la baseline di codice stabile è ancora in fase di costruzione (Macro-fase 2) — e restano pertanto priorità aperte per i prossimi \glslink{sprint}{sprint} della fase \glslink{pb-product-baseline}{PB}.
+A tre \glslink{sprint}{sprint} dall'avvio della fase \glslink{pb-product-baseline}{PB}, un primo bilancio delle azioni intraprese mostra risultati contrastanti. L'azione sulla \glslink{pianificazione}{pianificazione} ha prodotto un esito positivo e immediatamente misurabile: MPC-EAC è rientrato entro la \emph{soglia ottimale} $\pm 5\%$ già a S8 e si è ulteriormente consolidato a S10 (+0,5\% dal BAC), portando e mantenendo MPC-QMS dal 75\% dell'RTB all'83,3\% della PB in tutti e tre gli \glslink{sprint}{sprint} osservati. L'azione sulla gestione dei rischi è invece ancora in fase di consolidamento: MPC-PRI resta al 33,3\% nella fase PB — invariato dopo che S10 non ha registrato nuovi eventi — seppur su un campione ancora limitato a 3 \glslink{sprint}{sprint}. Le azioni su qualità documentale, tracciamento operativo e verifica/testing non hanno ancora prodotto misurazioni aggiornate — rispettivamente perché i documenti non sono stati oggetto di un nuovo ciclo completo di revisione, perché lo schema di categorizzazione delle ore non è ancora stato applicato in modo sistematico e perché la baseline di codice stabile è ancora in fase di costruzione (Macro-fase 2) — e restano pertanto priorità aperte per i prossimi \glslink{sprint}{sprint} della fase \glslink{pb-product-baseline}{PB}.
 
 \end{document}
