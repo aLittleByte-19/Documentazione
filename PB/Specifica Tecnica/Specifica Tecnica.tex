@@ -140,9 +140,21 @@
 \makeatother
 
 \newpage
+
+\begin{center}
+    {\Large \textbf{Indice delle Figure}}
+\end{center}
+
+\vspace{0.6cm}
+
+\makeatletter
+\@starttoc{lof}
+\makeatother
+
+\newpage
 \pagenumbering{arabic}
 \hypersetup{pageanchor=true}
-\setcounter{page}{4}
+\setcounter{page}{5}
 \fancyfoot[R]{Specifica Tecnica\hspace{0.8em}\thepage}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -162,7 +174,7 @@ Nexum è la piattaforma sviluppata per Eggon S.r.l. a supporto degli operatori c
 
 L'AI Co-Pilot assiste i consulenti del lavoro nella gestione della documentazione HR: un file caricato viene automaticamente suddiviso, riconosciuto tramite OCR e associato al destinatario corretto, lasciando all'operatore solo la revisione dei casi a bassa confidenza invece della classificazione manuale di ogni documento.
 
-L'AI Assistant Generativo assiste i redattori aziendali nella produzione di comunicazioni interne, dal titolo al testo fino all'immagine di copertina, a partire da un semplice prompt: riduce il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale, poiché ogni bozza generata resta modificabile, valutabile e rigenerabile prima dell'approvazione finale.
+L'AI Assistant Generativo assiste i redattori aziendali nella produzione di comunicazioni interne, dal titolo al testo fino all'immagine di copertina, a partire da un semplice prompt: riduce il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale, poiché ogni bozza generata resta modificabile, valutabile e rigenerabile finché non viene scartata.
 
 \subsection{Struttura del documento}
 
@@ -218,7 +230,7 @@ Al fine di evitare ambiguità e garantire una comprensione uniforme della termin
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Tecnologie}
 
-Il presente capitolo illustra lo stack tecnologico adottato per la progettazione e la realizzazione del sistema Nexum. Le scelte implementative sono state guidate dai requisiti di vincolo definiti nell'Analisi dei Requisiti e dalle indicazioni del proponente Eggon S.r.l. Lo stack è organizzato attorno a cinque macro-aree principali: il runtime applicativo (backend Laravel su PHP e frontend Angular in TypeScript), l'infrastruttura cloud AWS per l'elaborazione intelligente dei documenti e la gestione asincrona dei job, la persistenza dei dati, lo stack di osservabilità e la pipeline di integrazione continua con quality gate automatici. L'ambiente locale replica fedelmente la configurazione di produzione attraverso la containerizzazione con Docker e l'emulazione dei servizi cloud con LocalStack, garantendo riproducibilità e coerenza tra i diversi ambienti di sviluppo e produzione.
+Il presente capitolo illustra lo stack tecnologico adottato per la progettazione e la realizzazione del sistema Nexum. Le scelte implementative sono state guidate dai requisiti di vincolo definiti nell'Analisi dei Requisiti e dalle indicazioni del proponente Eggon S.r.l. Lo stack è organizzato attorno a cinque macro-aree principali: il runtime applicativo (backend Laravel su PHP e frontend Angular in TypeScript), l'infrastruttura cloud AWS per l'elaborazione intelligente dei documenti e la gestione asincrona dei job, la persistenza dei dati, lo stack di osservabilità e la pipeline di integrazione continua con quality gate automatici. L'ambiente locale riproduce la logica applicativa e l'orchestrazione asincrona di produzione attraverso la containerizzazione con Docker e l'emulazione dei servizi cloud con LocalStack, garantendo riproducibilità senza credenziali reali; fanno eccezione Bedrock e Textract, che parlano sempre con AWS reale, e l'infrastruttura di produzione vera e propria (RDS, ElastiCache, CloudFront), fuori dal perimetro dell'MVP.
 
 % ── 2.1 ──────────────────────────────────────────────────────────────────────
 \subsection{Linguaggi di programmazione}
@@ -297,13 +309,13 @@ Il presente capitolo illustra lo stack tecnologico adottato per la progettazione
     \endhead
     RxJS & 7.8 & Frontend & Libreria per la programmazione reattiva basata su Observable. Utilizzata per la gestione dello stato asincrono e degli stream di eventi all'interno della SPA Angular, in combinazione con i signals nativi di Angular. \\
     \hline
-    @lucide/angular & 1.21 & Frontend & Libreria di icone open source integrata nel frontend Angular. Fornisce un set di icone SVG consistente e accessibile per l'interfaccia utente. \\
+    @lucide/angular & 1.28 & Frontend & Libreria di icone open source integrata nel frontend Angular. Fornisce un set di icone SVG consistente e accessibile per l'interfaccia utente. \\
     \hline
     AWS SDK for PHP & 3.380 & Backend & SDK ufficiale AWS per PHP. Utilizzata dal backend Laravel per invocare Bedrock, Textract, S3, SQS, Step Functions, SSM Parameter Store e Secrets Manager tramite un'unica libreria client. \\
     \hline
     Flysystem S3 (league/flysystem-aws-s3-v3) & 3.32 & Backend & Adapter S3 per il filesystem astratto di Laravel. Consente di trattare i bucket S3 (o LocalStack) come un disco Laravel standard, cambiando solo la configurazione tra ambienti. \\
     \hline
-    Opis JSON Schema & 2.6 & Backend & Libreria per la validazione di payload JSON contro uno schema. Utilizzata per validare la struttura dei dati restituiti dai modelli Bedrock durante l'estrazione dei documenti. \\
+    Opis JSON Schema & 2.6 & Backend & Libreria per la validazione di payload JSON contro uno schema. Utilizzata per validare la struttura dei dati restituiti dai modelli Bedrock, sia nella pipeline di Documents (split e estrazione campi) sia nella generazione testuale di Communications. \\
     \hline
     FPDI & 2.6 & Backend & Libreria PHP per l'importazione di pagine da documenti PDF esistenti. Utilizzata nella pipeline documentale per estrarre pagine specifiche da PDF massivi prima dello split. \\
     \hline
@@ -597,7 +609,7 @@ Ogni modifica inviata al repository attiva la pipeline di integrazione continua 
 
 Il sistema espone un contratto REST versionato (\texttt{/api/v1}), definito tramite la specifica OpenAPI 3.1.1 in \texttt{openapi/v1/alittlebyte-mvp-api.yaml} e consumato dalla SPA Angular tramite il client generato con Orval. L'identità (\texttt{MvpIdentity}: attore e tenant) è risolta in due modalità alternative, selezionate da \texttt{MVP\_IDENTITY\_MODE}: in modalità \textit{local} (default, usata in sviluppo e nella MVP) l'identità è iniettata da configurazione e nessun header è richiesto; in modalità \textit{trusted\_headers} la richiesta deve portare \texttt{X-Mvp-User-Id} insieme a \texttt{X-Mvp-Tenant-Id} e agli altri header fidati, iniettati dal confine aziendale a monte dell'applicazione.
 
-Il rate limiting è granulare per gruppo di endpoint. Il limite di default è 60 richieste al minuto; scende a 20/minuto per le operazioni di generazione e scrittura più onerose (creazione bozze, rigenerazione, upload OCR, aggiornamento copertina, salvataggio configurazioni di prompt, salvataggio e scarto della bozza) e a 30/minuto per anteprima, export e valutazione. Sale invece a 120/minuto per la sola lettura della copertina già generata. Gli endpoint che restituiscono un PDF (anteprima ed export delle comunicazioni) supportano la cache HTTP tramite \texttt{ETag}/\texttt{If-None-Match}, evitando di rigenerare il documento se il client possiede già l'ultima versione.
+Il rate limiting è granulare per gruppo di endpoint. Il limite di default è 60 richieste al minuto; scende a 20/minuto per le operazioni di generazione e scrittura più onerose (creazione bozze, rigenerazione, upload OCR, aggiornamento copertina, salvataggio configurazioni di prompt, salvataggio e scarto della bozza) e a 30/minuto per anteprima, export e valutazione delle comunicazioni (le rotte equivalenti sui documenti restano al limite di default). Sale invece a 120/minuto per la sola lettura della copertina già generata. Gli endpoint che restituiscono un PDF (anteprima ed export delle comunicazioni) supportano la cache HTTP tramite \texttt{ETag}/\texttt{If-None-Match}, evitando di rigenerare il documento se il client possiede già l'ultima versione.
 
 L'avanzamento delle elaborazioni asincrone (generazione contenuti, pipeline documentale) è notificato alla SPA tramite un endpoint Server-Sent Events (SSE), senza dover interrogare ripetutamente il server. Le liste di comunicazioni e documenti supportano filtri lato server e paginazione.
 
@@ -746,10 +758,24 @@ Questo capitolo descrive l'architettura del sistema, dal generale al particolare
 
 L'utente finale interagisce con la piattaforma tramite browser, via HTTPS. Il sistema delega l'elaborazione intelligente dei contenuti a due servizi AWS esterni: l'AI Co-Pilot invia i documenti caricati ad AWS Textract per il riconoscimento ottico dei caratteri; l'AI Assistant Generativo invia i prompt ad AWS Bedrock per la generazione di testi e immagini. Le integrazioni con AWS avvengono esclusivamente lato backend; il browser comunica solo con il sistema.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/Esagonale/context.png}
+    \caption{System Context Diagram}
+    \label{fig:system-context}
+\end{figure}
+
 % ── 4.2 ──────────────────────────────────────────────────────────────────────
 \subsection{Architettura Applicativa}
 
-Il sistema si compone dei seguenti container principali. Il frontend è una Single Page Application in Angular 21. Il backend è un'API in Laravel 12 su PHP 8.4, servita da PHP-FPM e Nginx, che espone esclusivamente un contratto REST in formato JSON, senza rendering lato server. Le operazioni pesanti (OCR e invocazione dei modelli generativi) sono delegate in modo asincrono ad AWS Step Functions e Amazon SQS; un processo Worker separato dall'API consuma i messaggi e coordina l'esecuzione. La persistenza è affidata a PostgreSQL per i dati applicativi e a Redis per cache, sessioni e rate limiting; nessuno dei due è utilizzato come coda, ruolo riservato a SQS.
+Il sistema si compone dei seguenti container principali. Il frontend è una Single Page Application in Angular 21. Il backend è un'API in Laravel 12 su PHP 8.4, servita da PHP-FPM e Nginx, che espone esclusivamente un contratto REST in formato JSON, senza rendering lato server. Le operazioni pesanti (OCR e invocazione dei modelli generativi) sono delegate in modo asincrono ad AWS Step Functions e Amazon SQS; due processi Worker separati dall'API, uno per pipeline, consumano i messaggi e coordinano l'esecuzione: la coda documentale è servita da un container dedicato, quella delle comunicazioni da un secondo container, così i due flussi non si contendono gli stessi consumatori. La persistenza è affidata a PostgreSQL per i dati applicativi e a Redis per cache, sessioni e rate limiting; nessuno dei due è utilizzato come coda, ruolo riservato a SQS.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{ImmaginiSpecificaTecnica/Esagonale/container.png}
+    \caption{Container Diagram}
+    \label{fig:container-diagram}
+\end{figure}
 
 % ── 4.3 ──────────────────────────────────────────────────────────────────────
 \subsection{Architettura Logica Interna}
@@ -780,7 +806,14 @@ Il dominio contiene le regole di business e le porte che definiscono le capacit�
 Implementano la comunicazione con i sistemi esterni: il database PostgreSQL tramite repository Eloquent, i modelli AI tramite gli adapter di Bedrock e Textract, lo storage documentale tramite Flysystem e S3.
 
 \paragraph{Esempio: il dominio Documents}
-Un Controller riceve l'upload, lo valida e delega l'esecuzione al caso d'uso corrispondente, che salva il file e avvia la pipeline asincrona senza conoscere i dettagli di Step Functions. Il Worker raggiunge lo stesso dominio applicativo tramite un adapter primario diverso, guidato dal workflow, e delega ai casi d'uso di estrazione e revisione. Il risultato è persistito tramite il repository del dominio; un evento dedicato notifica audit e metriche. Il dominio Communications segue lo stesso schema.
+Un Controller riceve l'upload, lo valida e delega l'esecuzione al caso d'uso corrispondente, che salva il file e avvia la pipeline asincrona senza conoscere i dettagli di Step Functions. Il Worker raggiunge lo stesso dominio applicativo tramite un adapter primario diverso, guidato dal workflow, e delega ai casi d'uso di OCR, estrazione dei campi e finalizzazione della pipeline. La revisione umana delle estrazioni a bassa confidenza avviene invece in modo sincrono, tramite un Controller HTTP dedicato invocato dall'operatore, non dal Worker. Il risultato è persistito tramite il repository del dominio; un evento dedicato notifica audit e metriche. Il dominio Communications segue lo stesso schema.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documentExemple.png}
+    \caption{Architettura Esagonale --- Esempio Dominio Documents}
+    \label{fig:documents-hexagonal-example}
+\end{figure}
 
 % ── 4.4 ──────────────────────────────────────────────────────────────────────
 \subsection{Dettaglio dei Componenti}
@@ -815,20 +848,34 @@ I due domini condividono un piccolo numero di porte secondarie puramente infrast
 
 La separazione fra i due domini è verificata automaticamente a ogni build della pipeline CI: uno script analizza il codice e blocca la build se un dominio referenzia direttamente il framework, l'SDK AWS o l'altro dominio, così i due moduli restano davvero indipendenti.
 
-\paragraph{Documents}
+\subsubsection{Modulo Documents}
 
 Copre l'intera pipeline dell'AI Co-Pilot: dall'ingresso del documento caricato dall'utente, attraverso l'orchestrazione asincrona di riconoscimento ottico, classificazione ed estrazione dei campi, fino alla consultazione, alla revisione umana dei dati estratti e alla composizione del documento precompilato per il destinatario, che l'operatore scarica ed invia fuori piattaforma. Le porte secondarie isolano il dominio dalla persistenza, dai gateway AI di riconoscimento ottico e classificazione, dallo storage documentale, dal rendering del documento di invio e dalla pubblicazione degli eventi di dominio.
 
-\paragraph{Communications}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents.png}
+    \caption{Component Diagram --- Modulo Documents}
+    \label{fig:documents-component-diagram}
+\end{figure}
+
+\subsubsection{Modulo Communications}
 
 Copre l'intero ciclo di vita di una bozza generata dall'AI Assistant Generativo: dalla richiesta di generazione (testo e copertina), attraverso l'orchestrazione asincrona della pipeline, fino alla gestione editoriale della bozza (preferiti, modifica, approvazione, scarto), alla sua consultazione, esportazione e valutazione, e alla gestione delle configurazioni di prompt riutilizzabili. Le porte secondarie isolano il dominio dalla persistenza, dal gateway AI generativo, dallo storage delle copertine, dal rendering PDF e dalla pubblicazione degli eventi di dominio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/Esagonale/comunication.png}
+    \caption{Component Diagram --- Modulo Communications}
+    \label{fig:communications-component-diagram}
+\end{figure}
 
 % ── 4.5 ──────────────────────────────────────────────────────────────────────
 \subsection{Architettura di Deployment}
 
-Il backend e la SPA frontend sono distribuiti come container separati, raggiunti da un unico entry point TLS (la catena completa di proxy è descritta in Sezione 2.6). Il backend gira su due processi che condividono lo stesso nucleo applicativo: l'API, raggiunta via HTTP, e il Worker, che esegue lo stesso dominio tramite i messaggi SQS e le callback di Step Functions — due adapter primari sullo stesso sistema, non due sistemi separati.
+Il backend e la SPA frontend sono distribuiti come container separati, raggiunti da un unico entry point TLS (la catena completa di proxy è descritta in Sezione 2.6). Il backend gira su tre processi che condividono lo stesso nucleo applicativo: l'API, raggiunta via HTTP, e due Worker, uno per la coda documentale e uno per quella delle comunicazioni, che eseguono lo stesso dominio tramite i messaggi SQS e le callback di Step Functions — tre adapter primari sullo stesso sistema, non sistemi separati.
 
-In locale l'intera topologia, orchestrazione Step Functions/SQS inclusa, è riprodotta con Docker Compose, LocalStack e Terraform, con gli stessi componenti usati in produzione.
+In locale l'intera topologia, orchestrazione Step Functions/SQS inclusa, è riprodotta con Docker Compose, LocalStack e Terraform: stessa API applicativa, stessi due Worker, stessa orchestrazione Step Functions/SQS emulata. Bedrock e Textract restano un'eccezione deliberata (Sezione 2.7), e un deploy di produzione reale (RDS, ElastiCache, CloudFront) resta fuori dal perimetro dell'MVP (Sezioni 2.6, 2.8).
 
 % ── 4.6 ──────────────────────────────────────────────────────────────────────
 \subsection{Containerizzazione con Docker}
@@ -838,10 +885,12 @@ L'intero stack è containerizzato; i dettagli di ciascun servizio sono descritti
 \begin{itemize}
     \item \textbf{Frontend (SPA):} esegue la build statica Angular, servita dall'edge; nessuna logica di business.
     \item \textbf{Backend (API):} esegue PHP-FPM dietro Nginx, gestisce le richieste HTTP verso il dominio applicativo.
-    \item \textbf{Worker:} esegue lo stesso dominio applicativo del backend, in ascolto su Step Functions/SQS anziché su HTTP.
+    \item \textbf{Worker documenti e Worker comunicazioni:} due container separati che eseguono lo stesso dominio applicativo del backend, in ascolto rispettivamente sulla coda SQS documentale e su quella delle comunicazioni, anziché su HTTP.
     \item \textbf{Database (PostgreSQL) e Cache (Redis):} persistenza applicativa e stato volatile, su volumi Docker dedicati.
-    \item \textbf{Emulazione AWS (LocalStack) e provisioning (Terraform):} riproducono in locale, senza credenziali reali, l'infrastruttura di produzione.
+    \item \textbf{Emulazione AWS (LocalStack) e provisioning (Terraform):} riproducono in locale, senza credenziali reali, i servizi AWS emulabili (Sezione 2.7); Bedrock e Textract restano un'eccezione e parlano sempre con AWS reale.
 \end{itemize}
+
+Il pool PHP-FPM del container Backend è dimensionato esplicitamente (\texttt{docker/php/www-pool.conf}), invece di restare sul default dell'immagine base (\texttt{pm.max\_children=5}). Il rischio non era il timeout di Traefik o di Nginx verso lo stream SSE (l'heartbeat inviato ogni secondo lo tiene vivo), ma il pool PHP-FPM stesso: ogni connessione SSE occupa un worker per l'intera durata dello stream (fino a 1800 secondi per i documenti), quindi pochi upload concorrenti avrebbero esaurito l'intero pool, bloccando anche l'endpoint \texttt{/health} per tutte le richieste in arrivo.
 
 % ── 4.7 ──────────────────────────────────────────────────────────────────────
 \subsection{Stile architetturale}
@@ -867,23 +916,107 @@ Questo capitolo scende al livello delle singole classi che compongono il nucleo 
 
 Il modulo Documents è la componente del sistema dedicata alla gestione e all'elaborazione intelligente della documentazione HR caricata dai consulenti del lavoro. Il suo obiettivo è ridurre il lavoro manuale di classificazione e smistamento dei documenti: un file caricato viene automaticamente suddiviso, riconosciuto tramite OCR e associato al destinatario corretto, lasciando all'operatore solo la revisione dei casi a bassa confidenza. Il modulo si integra con Amazon Textract per il riconoscimento ottico dei caratteri e con Amazon Bedrock per la classificazione e l'estrazione dei dati, orchestrando l'intera pipeline in modo asincrono tramite AWS Step Functions.
 
-\subsubsection{Diagramma di sequenza: caricamento ed elaborazione di un documento}
+% TODO/valutare: BugBusters, per il modulo AI CoPilot (analogo a Documents), omette il diagramma delle classi
+% completo e mostra solo i diagrammi parziali, dichiarando esplicitamente il motivo: "utili a mostrare i
+% componenti principali senza appesantire la lettura con l'intero grafo delle dipendenze" (Sez. 5.2, loro doc).
+% Qui il diagramma completo resta perché è leggibile in una sola immagine (a differenza del loro caso), ma se in
+% futuro dovesse risultare ridondante rispetto ai 5 diagrammi parziali sottostanti, può essere rimosso richiamando
+% la stessa giustificazione.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/diagrammaClassi_Documents.png}
+    \caption{Diagramma delle classi --- Modulo Documents}
+    \label{fig:documents-class-diagram}
+\end{figure}
 
-% TODO: diagramma di sequenza (immagine) da produrre e includere qui con \includegraphics, sul modello della Figura 12 di BugBusters.
+\subsubsection{Diagrammi delle classi parziali del modulo Documents}
 
-Il diagramma descrive la sequenza delle operazioni che avvengono quando un consulente del lavoro carica un documento tramite l'endpoint dedicato. Il \texttt{DocumentController} riceve la richiesta, delega il salvataggio del file a \texttt{UploadDocumentService} e, subito dopo, l'avvio della pipeline a \texttt{StartDocumentWorkflowUseCase}; la risposta HTTP torna al client con l'URL di streaming, senza attendere l'elaborazione.
+I diagrammi seguenti mostrano porzioni del diagramma delle classi complessivo, raggruppate per flusso applicativo, utili a leggere le dipendenze reali senza dover tenere sott'occhio l'intero grafo.
 
-Da quel momento la sequenza prosegue in modo asincrono. Il Worker riceve dalla state machine Step Functions un task alla volta e lo smista al caso d'uso corrispondente, un passo per fase della pipeline: riconoscimento ottico, classificazione, estrazione dei campi per ogni destinatario individuato, infine persistenza dei risultati e pubblicazione dell'evento di completamento.
+Il primo diagramma mostra \texttt{DocumentController}, l'adapter primario che riceve tutte le richieste HTTP del modulo e le smista verso i cinque casi d'uso corrispondenti.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents-partial-controller.png}
+    \caption{Diagramma classi parziale --- DocumentController}
+    \label{fig:documents-partial-controller}
+\end{figure}
+
+Il secondo diagramma rappresenta il flusso di upload e avvio della pipeline: \texttt{UploadDocumentService} salva il file e crea il documento originale, mentre \texttt{StartDocumentWorkflowService} avvia l'esecuzione Step Functions tramite \texttt{SfnWorkflowEngineAdapter} (componente condiviso del modulo Workflow, non specifico di Documents).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents-partial-upload.png}
+    \caption{Diagramma classi parziale --- Flusso di upload e avvio}
+    \label{fig:documents-partial-upload}
+\end{figure}
+
+Il terzo diagramma evidenzia la catena di elaborazione asincrona orchestrata da \texttt{DocumentWorkflowTaskHandler}: riconoscimento OCR, split e classificazione del documento, estrazione dei campi per ogni destinatario ed aggiornamento finale dello stato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents-partial-processing.png}
+    \caption{Diagramma classi parziale --- Flusso di elaborazione OCR/AI}
+    \label{fig:documents-partial-processing}
+\end{figure}
+
+Il quarto diagramma mostra il percorso di revisione umana e invio: i tre adapter primari dedicati (\texttt{DocumentReviewController}, \texttt{DocumentPreviewController}, \texttt{SendMessageController}) delegano rispettivamente a \texttt{ReviewDocumentService}, \texttt{PreviewDocumentService} e \texttt{SendMessageService}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents-partial-review.png}
+    \caption{Diagramma classi parziale --- Flusso di revisione e invio}
+    \label{fig:documents-partial-review}
+\end{figure}
+
+Il quinto diagramma completa il quadro con il flusso di consultazione ed eliminazione: \texttt{ListDocumentsService} e \texttt{PollDocumentProgressService} leggono lo stato tramite \texttt{EloquentDocumentRepository}, mentre \texttt{DeleteDocumentService} ne orchestra anche la cancellazione del file fisico e la pubblicazione dell'evento di dominio. È qui che compare per la prima volta l'entità \texttt{SubDocument}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents-partial-query.png}
+    \caption{Diagramma classi parziale --- Flusso di consultazione ed eliminazione}
+    \label{fig:documents-partial-query}
+\end{figure}
+
+\subsubsection{Diagrammi di sequenza: caricamento ed elaborazione di un documento}
+
+La sequenza è divisa in due diagrammi lungo il confine reale della pipeline: la parte sincrona, servita direttamente dall'endpoint HTTP, e la parte asincrona, orchestrata da Step Functions ed eseguita dal Worker.
+
+\begin{figure}[H]
+    \noindent\makebox[\textwidth][c]{\includegraphics[width=20cm]{ImmaginiSpecificaTecnica/Esagonale/documents-sequence-upload.png}}
+    \caption{Diagramma di sequenza --- Upload e avvio della pipeline}
+    \label{fig:documents-sequence-upload}
+\end{figure}
+
+Il primo diagramma descrive la sequenza delle operazioni che avvengono quando un consulente del lavoro carica un documento tramite l'endpoint dedicato. Il \texttt{DocumentController} riceve la richiesta, delega il salvataggio del file a \texttt{UploadDocumentService} e, subito dopo, l'avvio della pipeline a \texttt{StartDocumentWorkflowUseCase}; la risposta HTTP torna al client con l'URL di streaming, senza attendere l'elaborazione.
+
+\begin{figure}[H]
+    \noindent\makebox[\textwidth][c]{\includegraphics[width=20cm]{ImmaginiSpecificaTecnica/Esagonale/documents-sequence-processing.png}}
+    \caption{Diagramma di sequenza --- Elaborazione asincrona e streaming SSE}
+    \label{fig:documents-sequence-processing}
+\end{figure}
+
+Da quel momento la sequenza prosegue in modo asincrono, come mostra il secondo diagramma. Il Worker riceve dalla state machine Step Functions un task alla volta e lo smista al caso d'uso corrispondente, un passo per fase della pipeline: riconoscimento ottico, classificazione, estrazione dei campi per ogni destinatario individuato, infine persistenza dei risultati e pubblicazione dell'evento di completamento.
 
 In termini di classi, quello smistamento passa per \texttt{DocumentWorkflowTaskHandler}, che delega rispettivamente a \texttt{RunOcrService} (\texttt{textract.ocr}), \texttt{ProcessDocumentService} (\texttt{bedrock.extract}, che a sua volta delega l'estrazione dei campi per ogni destinatario a \texttt{ExtractSubDocumentFieldsService}, Sezione 5.1) e \texttt{FinalizeDocumentWorkflowUseCase} (\texttt{persist.results}, \texttt{dispatch.domain\_event}). Ogni passo aggiorna lo stato di \texttt{OriginalDocument} tramite \texttt{EloquentDocumentRepository}.
 
-In parallelo, la SPA resta connessa all'endpoint SSE esposto da \texttt{DocumentController::stream()}, che interroga \texttt{PollDocumentProgressUseCase} a ogni iterazione e inoltra al client i sotto-documenti man mano che vengono estratti, fino all'evento finale di completamento o di errore.
+In parallelo, dal momento dell'upload, la SPA resta connessa all'endpoint SSE esposto da \texttt{DocumentController::stream()}, che interroga \texttt{PollDocumentProgressUseCase} a ogni iterazione e inoltra al client i sotto-documenti man mano che vengono estratti, fino all'evento finale di completamento o di errore --- anch'essa illustrata nel secondo diagramma.
 
-\subsubsection{DocumentController}
+\subsubsection{Tutte le classi del modulo Documents}
+
+Dopo aver mostrato i diagrammi delle classi e di sequenza, si riportano di seguito le descrizioni di tutte le classi coinvolte nel modulo Documents, con i dettagli di attributi e metodi per ciascuna.
+
+\paragraph{DocumentController}
 
 Adapter primario HTTP del dominio: riceve le richieste, le traduce in chiamate ai casi d'uso tramite le rispettive porte primarie e restituisce la risposta al client. Non contiene alcuna regola di business: quella vive nel dominio e nell'applicazione.
 
 \texttt{store()} incatena due casi d'uso distinti, caricamento e avvio del workflow. \texttt{stream()} espone invece l'avanzamento della pipeline via Server-Sent Events: il controller resta responsabile solo del protocollo SSE (loop, heartbeat, timeout), leggendo lo stato tramite \texttt{PollDocumentProgressUseCase} invece di interrogare direttamente il database a ogni iterazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DocumentController.png}
+    \caption{Classe --- DocumentController}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -898,9 +1031,21 @@ Metodi
     \item \texttt{destroy(request: Request, subDocument: SubDocument, delete: DeleteDocumentUseCase, state: MvpStateService): JsonResponse}
 \end{itemize}
 
-\subsubsection{DocumentPreviewController, SendMessageController}
+\paragraph{DocumentPreviewController, SendMessageController}
 
 Due Controller separati da \texttt{DocumentController}, sullo stesso principio di traduzione pura verso una porta primaria: \texttt{DocumentPreviewController} espone la sola anteprima del file del sotto-documento (non del documento originale, che non ha un endpoint di anteprima proprio), \texttt{SendMessageController} l'intero ciclo del messaggio di invio (anteprima PDF composta, esportazione, correzione delle sovrascritture manuali). Entrambi traducono un fallimento applicativo in una risposta HTTP appropriata invece di lasciarlo propagare: \texttt{DocumentPreviewController} converte \texttt{DocumentPreviewUnavailableException} in un 404 e un \texttt{RuntimeException} generico (storage non raggiungibile) in un 503.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DocumentPreviewController.png}
+    \caption{Classe --- DocumentPreviewController}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/SendMessageController.png}
+    \caption{Classe --- SendMessageController}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -915,11 +1060,17 @@ Metodi
     \item \texttt{updateSendMessage(request: UpdateSendMessageRequest, subDocument: SubDocument, sendMessage: SendMessageUseCase, state: MvpStateService): JsonResponse}
 \end{itemize}
 
-\subsubsection{DocumentWorkflowTaskHandler}
+\paragraph{DocumentWorkflowTaskHandler}
 
 Adapter primario guidato da Step Functions/SQS invece che da HTTP: sullo stesso piano concettuale del Controller, traduce ogni task di callback in arrivo dalla pipeline in una chiamata al caso d'uso corrispondente, tramite la sua porta primaria. Non contiene regole di business: l'idempotenza verso la riconsegna di un task (\textit{documento già completato}) vive nei singoli casi d'uso, non in questo adapter.
 
 Risolve e aggiorna l'aggregato documentale attraverso lo stesso \texttt{DocumentRepository} usato dai casi d'uso, mai attraverso Eloquent diretto. Comunica con il runner condiviso passando solo un identificativo e un tenant, così da restare agnostico rispetto al dominio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DocumentWorkflowTaskHandler.png}
+    \caption{Classe --- DocumentWorkflowTaskHandler}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -930,16 +1081,23 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{taskTypes(): array}
     \item \texttt{subjectType(): string}
+    \item \texttt{auditEventPrefix(): string} --- prefisso (\texttt{"mvp-document-workflow-task-"}) usato dal runner condiviso per nominare gli eventi di audit di questo dominio.
     \item \texttt{resolveSubject(message: array): WorkflowSubject}
     \item \texttt{execute(taskType: string, subject: WorkflowSubject, message: array): array}
     \item \texttt{onFailure(subject: WorkflowSubject, taskType: string, e: Throwable): void}
 \end{itemize}
 
-\subsubsection{OriginalDocument}
+\paragraph{OriginalDocument}
 
 Entità di dominio che rappresenta il documento caricato dall'utente e il suo avanzamento nella pipeline di elaborazione. Non è una semplice proiezione dei dati salvati: governa da sé le proprie transizioni di stato, invece di lasciare a ogni caso d'uso il compito di scriverle correttamente a mano.
 
 Prima della sua introduzione, tre punti diversi del codice (l'avvio del workflow, il riconoscimento ottico, l'elaborazione AI) impostavano lo stato di fallimento con combinazioni di campi diverse e incoerenti fra loro; oggi \texttt{startProcessing()} e \texttt{fail()} consolidano quella logica in un unico posto, distinguendo sempre il messaggio pensato per l'operatore dal dettaglio tecnico usato per il troubleshooting. Non governa invece i campi restituiti dal riconoscimento ottico (testo, pagine, confidenza): non sono una transizione di stato, solo dati letti dal gateway OCR e scritti direttamente dal caso d'uso che li riceve.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/OriginalDocument.png}
+    \caption{Classe --- OriginalDocument}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -953,18 +1111,25 @@ Metodi
     \item \texttt{fail(errorMessage: string, technicalReason: ?string, failedAt: DateTimeImmutable): void}
     \item \texttt{complete(): void}
     \item \texttt{markWorkflowCompleted(completedAt: DateTimeImmutable): void}
+    \item \texttt{hasManualUploadMetadata(): bool} --- vero se l'utente ha fornito almeno uno dei metadati manuali di caricamento (tipo documento, ragione sociale, mese/anno di riferimento).
     \item \texttt{pendingChanges(): OriginalDocumentChanges}
 \end{itemize}
 
-\subsubsection{SubDocument}
+\paragraph{SubDocument}
 
 Entità di dominio che rappresenta un sotto-documento generato dallo split di un documento originale, e governa la propria revisione: può essere validato automaticamente dal sistema, messo in quarantena con un motivo esplicito quando l'estrazione ha una confidenza troppo bassa, oppure validato manualmente da un operatore.
 
 Governa anche il proprio stato di invio (\texttt{sendStatus()}, \texttt{markSent()}): il download del PDF esportato tramite \texttt{SendMessageService::export()} lo marca \textit{Sent} in una transizione a senso unico (Sezione 5.1, \texttt{SendMessageService}). Non governa invece le eventuali sovrascritture apportate al messaggio destinato al destinatario (destinatario, oggetto, corpo): quei valori vivono a parte in \texttt{SendMessageContext}, letto insieme ai dati estratti al momento della composizione, non come stato proprio dell'entità.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/SubDocument.png}
+    \caption{Classe --- SubDocument}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{id}, \texttt{originalDocumentId}, \texttt{filePath}, il range di pagine, \texttt{originalFilename}, \texttt{reviewStatus}.
+    \item \texttt{id}, \texttt{originalDocumentId}, \texttt{filePath}, il range di pagine, \texttt{originalFilename}, \texttt{reviewStatus}, \texttt{sendStatus}.
 \end{itemize}
 
 Metodi
@@ -974,14 +1139,21 @@ Metodi
     \item \texttt{markNeedsReview(): void}
     \item \texttt{markQuarantined(reason: string): void}
     \item \texttt{markManuallyValidated(): void}
+    \item \texttt{markSent(): void}
     \item \texttt{pendingChanges(): SubDocumentChanges}
 \end{itemize}
 
-\subsubsection{UploadDocumentService}
+\paragraph{UploadDocumentService}
 
 Implementa \texttt{UploadDocumentUseCase} ed è il punto di ingresso della pipeline documentale: riceve il file già validato dall'adapter HTTP, lo salva su storage e crea il record del documento originale con stato \textit{Pending}. Deliberatamente non avvia la pipeline di elaborazione: quella è una decisione distinta, delegata a \texttt{StartDocumentWorkflowUseCase} e invocata in sequenza dallo stesso Controller.
 
 L'audit non passa più da un \texttt{AuditLogger} chiamato direttamente: il caso d'uso dispatcha l'evento di dominio \texttt{DocumentUploadAccepted} (id documento, attore, nome file, metadati manuali), registrato da un listener dedicato: stesso principio già in uso per il resto degli eventi di dominio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/UploadDocumentService.png}
+    \caption{Classe --- UploadDocumentService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -993,11 +1165,17 @@ Metodi
     \item \texttt{upload(command: UploadDocumentCommand): int}
 \end{itemize}
 
-\subsubsection{StartDocumentWorkflowService}
+\paragraph{StartDocumentWorkflowService}
 
 Implementa \texttt{StartDocumentWorkflowUseCase}: avvia l'esecuzione Step Functions della pipeline per un documento già persistito, subito dopo \texttt{UploadDocumentService} nello stesso ciclo di richiesta. È idempotente rispetto a un documento già in elaborazione, ed esegue un controllo esplicito a runtime: quando Textract reale è abilitato, verifica che i documenti risiedano effettivamente su S3 reale e non sul disco LocalStack, fallendo subito con un messaggio azionabile invece di lasciare che Textract fallisca più a valle con un errore criptico. In caso di errore nell'avvio, marca il documento come fallito tramite \texttt{OriginalDocument::fail()} prima di rilanciare l'eccezione.
 
 Non legge più configurazione tramite \texttt{config()} al proprio interno: ARN della state machine, URL della coda, flag Textract, disco e bucket di storage sono risolti una sola volta in \texttt{AppServiceProvider} e iniettati come scalari nel costruttore: lo stesso trattamento già riservato a soglia di confidenza e prefisso storage altrove nel dominio. Poiché anche \texttt{WorkflowContext} è una classe pura senza dipendenze da Illuminate, \texttt{start()} è interamente istanziabile ed eseguibile in un test Pest puro, senza avviare Laravel.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/StartDocumentWorkflowService.png}
+    \caption{Classe --- StartDocumentWorkflowService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1010,11 +1188,17 @@ Metodi
     \item \texttt{start(documentId: int, correlationId: ?string, requestId: ?string): void}
 \end{itemize}
 
-\subsubsection{RunOcrService}
+\paragraph{RunOcrService}
 
 Implementa \texttt{RunOcrUseCase}: invoca il gateway OCR per il documento e ne salva il risultato grezzo (testo, pagine, confidenza media, id del job Textract) tramite \texttt{OriginalDocumentChanges}. In caso di errore marca il documento come fallito prima di rilanciare l'eccezione.
 
 È idempotente verso la riconsegna del task workflow (un documento già completato restituisce immediatamente senza richiamare Textract) e deriva la chiave di idempotenza anche dall'oggetto S3, non solo dall'id del documento: dopo un reset seguito da un nuovo upload lo stesso id può puntare a un file diverso, e una chiave fissa farebbe scattare un conflitto contro il job precedente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/RunOcrService.png}
+    \caption{Classe --- RunOcrService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1026,11 +1210,17 @@ Metodi
     \item \texttt{run(documentId: int, bucket: ?string, key: ?string): array}
 \end{itemize}
 
-\subsubsection{ProcessDocumentService}
+\paragraph{ProcessDocumentService}
 
 Coordina la fase più corposa della pipeline documentale: la classificazione del documento tramite Bedrock e, per ogni destinatario individuato, la delega dell'estrazione dei campi a \texttt{ExtractSubDocumentFieldsService}. Fino a una revisione recente era un'unica classe di quasi 480 righe, perché lo split del documento invocava internamente la logica di estrazione per ogni segmento appena creato; le due responsabilità sono state separate in classi distinte, mantenendo però la stessa forma di orchestrazione esterna.
 
 Le sue dipendenze sono fra le più numerose del dominio, perché riflettono quante integrazioni coordina in un solo passo: un repository, uno storage, un gateway AI, un dispatcher di eventi, un heartbeat verso Step Functions (per segnalare che l'elaborazione è ancora viva durante chiamate AI che possono durare minuti), oltre a un generatore di identificativi e un lettore OCR condiviso.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/ProcessDocumentService.png}
+    \caption{Classe --- ProcessDocumentService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1042,11 +1232,17 @@ Metodi
     \item \texttt{process(documentId: int): array}
 \end{itemize}
 
-\subsubsection{ExtractSubDocumentFieldsService}
+\paragraph{ExtractSubDocumentFieldsService}
 
 Implementa \texttt{ExtractSubDocumentFieldsUseCase}: estrae i campi strutturati (nominativo, azienda, data, tipo documento) di un singolo sotto-documento tramite Bedrock, un destinatario alla volta. Fino a un refactor recente era un'unica classe di quasi 480 righe insieme a \texttt{ProcessDocumentService}, perché lo split del documento invocava internamente l'estrazione per ogni segmento appena creato; la separazione isola oggi questa logica dalla manipolazione PDF che la rendeva testabile solo insieme a quest'ultima.
 
 I metadati dichiarati manualmente in fase di upload prevalgono sempre su quelli estratti dall'AI. Calcola un punteggio di confidenza combinando la confidenza media OCR sull'intervallo di pagine del sotto-documento con la completezza dei campi chiave effettivamente trovati, e ne deriva lo stato di revisione: sopra soglia il sotto-documento è validato automaticamente, altrimenti marcato per revisione manuale. Un output AI non conforme allo schema atteso mette il sotto-documento in quarantena invece di propagare l'errore.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/ExtractSubDocumentFieldsService.png}
+    \caption{Classe --- ExtractSubDocumentFieldsService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1059,11 +1255,17 @@ Metodi
     \item \texttt{extractAndSaveFieldsWithContext(subDocumentId: int, original: OriginalDocument): void}
 \end{itemize}
 
-\subsubsection{FinalizeDocumentWorkflowService}
+\paragraph{FinalizeDocumentWorkflowService}
 
 Implementa \texttt{FinalizeDocumentWorkflowUseCase}: chiude la pipeline documentale, marcando il workflow come completato sull'entità \texttt{OriginalDocument} quando lo stato di elaborazione è \textit{Completed}, e pubblicando l'evento di completamento che la SPA osserva tramite lo stream SSE.
 
 \texttt{currentStatus()} espone lo stato corrente per i punti della pipeline che devono decidere se procedere; \texttt{dispatchCompletionEvent()} distingue nel proprio risultato un completamento effettivo da un semplice avanzamento, così che il chiamante possa scegliere l'evento SSE corretto da inoltrare al client.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/FinalizeDocumentWorkflowService.png}
+    \caption{Classe --- FinalizeDocumentWorkflowService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1076,9 +1278,15 @@ Metodi
     \item \texttt{dispatchCompletionEvent(documentId: int): array}
 \end{itemize}
 
-\subsubsection{PollDocumentProgressService}
+\paragraph{PollDocumentProgressService}
 
 Implementa \texttt{PollDocumentProgressUseCase}: legge un'istantanea dello stato di avanzamento di un documento (stato di elaborazione, eventuale messaggio d'errore, identificativi dei sotto-documenti per cui l'estrazione è già disponibile), consumata da \texttt{DocumentController::stream()} a ogni iterazione del loop SSE invece di interrogare direttamente il repository dal controller.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/PollDocumentProgressService.png}
+    \caption{Classe --- PollDocumentProgressService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1090,9 +1298,15 @@ Metodi
     \item \texttt{poll(documentId: int): DocumentProgressSnapshot}
 \end{itemize}
 
-\subsubsection{DocumentReviewController}
+\paragraph{DocumentReviewController}
 
 Adapter primario HTTP dedicato alla revisione human-in-the-loop: traduce le due operazioni di correzione manuale verso \texttt{ReviewDocumentUseCase}, senza regole di business proprie. \texttt{updateExtractedData()} accetta anche un flag opzionale che marca contestualmente il sotto-documento come validato manualmente, oltre a correggerne i campi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DocumentReviewController.png}
+    \caption{Classe --- DocumentReviewController}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1105,11 +1319,17 @@ Metodi
     \item \texttt{markReviewed(request: Request, subDocument: SubDocument, review: ReviewDocumentUseCase, state: MvpStateService): JsonResponse}
 \end{itemize}
 
-\subsubsection{ReviewDocumentService}
+\paragraph{ReviewDocumentService}
 
 Implementa \texttt{ReviewDocumentUseCase}: gestisce la revisione manuale di un sotto-documento da parte dell'operatore, con due metodi che coprono due percorsi distinti.
 
 \texttt{updateExtractedData()} applica correzioni ai campi estratti e, in base al parametro esplicito ricevuto dal chiamante, marca il sotto-documento come validato manualmente oppure lo rimanda in revisione; scrive comunque i dati estratti se il sotto-documento non ne ha ancora, anche in assenza di modifiche. \texttt{markReviewed()} valida invece un sotto-documento senza modificarne i campi, e rifiuta l'operazione se non esistono ancora dati estratti da validare.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/ReviewDocumentService.png}
+    \caption{Classe --- ReviewDocumentService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1122,11 +1342,17 @@ Metodi
     \item \texttt{markReviewed(subDocumentId: int, actor: ?Actor): void}
 \end{itemize}
 
-\subsubsection{PreviewDocumentService}
+\paragraph{PreviewDocumentService}
 
 Implementa \texttt{PreviewDocumentUseCase}: restituisce il contenuto grezzo del file di un sotto-documento per l'anteprima nella SPA, verificando prima che esista ancora sullo storage. Distinta da \texttt{SendMessageService::preview()}, che genera invece un PDF composto a partire dai dati estratti, non il file originale.
 
 Verifica anche l'autorizzazione: se il tenant dell'attore non coincide con quello del documento originale, solleva \texttt{DocumentNotAuthorizedException} prima di leggere il file.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/PreviewDocumentService.png}
+    \caption{Classe --- PreviewDocumentService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1138,11 +1364,17 @@ Metodi
     \item \texttt{preview(subDocumentId: int, actor: Actor): PreviewableDocument}
 \end{itemize}
 
-\subsubsection{SendMessageService}
+\paragraph{SendMessageService}
 
 Implementa \texttt{SendMessageUseCase}: compone il messaggio di invio precompilato a partire dai dati già estratti (nessuna generazione AI coinvolta) e ne orchestra anteprima, esportazione e correzione manuale. Destinatario, oggetto e corpo hanno un valore proposto di default, sovrascrivibile dall'operatore tramite le sovrascritture salvate sul sotto-documento.
 
 Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osservare l'invio reale, è il download del PDF esportato a marcare lo stato come \textit{Sent}, in una transizione a senso unico: un secondo download non la ripete. Tutti e tre i metodi pubblici verificano l'autorizzazione tramite un metodo privato condiviso (\texttt{assertActorOwnsSubDocument()}), che solleva \texttt{DocumentNotAuthorizedException} in caso di tenant non corrispondente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/SendMessageService.png}
+    \caption{Classe --- SendMessageService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1156,11 +1388,23 @@ Metodi
     \item \texttt{updateOverrides(subDocumentId: int, overrides: array, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{ListDocumentsService, DeleteDocumentService}
+\paragraph{ListDocumentsService, DeleteDocumentService}
 
 Due casi d'uso minimi, simmetrici ai rispettivi sul dominio Communications. \texttt{ListDocumentsService} implementa \texttt{ListDocumentsUseCase} e inoltra la paginazione al repository tramite \texttt{DocumentListFilters} (value object tipizzato, non più un array grezzo), senza logica propria.
 
 \texttt{DeleteDocumentService} implementa \texttt{DeleteDocumentUseCase}: verifica che l'attore appartenga allo stesso tenant del documento originale (\texttt{DocumentNotAuthorizedException} altrimenti), elimina un sotto-documento e, se non resta alcun altro sotto-documento collegato allo stesso documento originale, elimina anche quest'ultimo insieme ai suoi task di workflow pendenti. In entrambi i casi il record resta rimosso dal database anche se la pulizia dello storage fallisce: un guasto di rete verso S3 non deve far fallire un'eliminazione già avvenuta dal punto di vista dell'utente, a costo di lasciare temporaneamente un file orfano.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/ListDocumentsService.png}
+    \caption{Classe --- ListDocumentsService}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DeleteDocumentService.png}
+    \caption{Classe --- DeleteDocumentService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1174,9 +1418,15 @@ Metodi
     \item \texttt{delete(subDocumentId: int, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{EloquentDocumentRepository}
+\paragraph{EloquentDocumentRepository}
 
 Adapter secondario che implementa \texttt{DocumentRepository} sopra Eloquent: è il punto in cui l'aggregato documentale (documento originale e sotto-documenti) viene effettivamente letto e scritto sul database. Consuma i value object tipizzati del dominio (\texttt{NewOriginalDocument}, \texttt{OriginalDocumentChanges}, \texttt{SubDocumentChanges}...) invece di array associativi grezzi, così che un refuso nel nome di una colonna venga intercettato dall'analisi statica invece che a runtime.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/EloquentDocumentRepository.png}
+    \caption{Classe --- EloquentDocumentRepository}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1207,11 +1457,23 @@ Metodi
     \item \texttt{countSubDocuments(originalDocumentId: int): int}
 \end{itemize}
 
-\subsubsection{Adapter AI e OCR: TextractOcrAdapter, BedrockDocumentAiAdapter}
+\paragraph{Adapter AI e OCR: TextractOcrAdapter, BedrockDocumentAiAdapter}
 
 I due adapter che collegano il dominio ai servizi AI esterni. \texttt{TextractOcrAdapter} implementa \texttt{OcrGatewayPort} sopra Amazon Textract e restituisce il risultato grezzo del riconoscimento ottico, senza toccare la persistenza: è il caso d'uso chiamante a decidere cosa salvarne. Se Textract è disattivato (\texttt{TEXTRACT\_ENABLED=false}, il default), non contatta AWS: restituisce un risultato vuoto (\texttt{enabled: false}) e registra una metrica dedicata, così la pipeline prosegue comunque fino alla classificazione AI senza un OCR reale alle spalle.
 
 \texttt{BedrockDocumentAiAdapter} implementa \texttt{DocumentAiGatewayPort} sopra il servizio condiviso \texttt{BedrockService} (Sezione 2.7), per lo split del documento e l'estrazione dei campi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/TextractOcrAdapter.png}
+    \caption{Classe --- TextractOcrAdapter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/BedrockDocumentAiAdapter.png}
+    \caption{Classe --- BedrockDocumentAiAdapter}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1224,13 +1486,27 @@ Metodi
     \item \texttt{detectText(bucket: string, key: string, idempotencyKey: string): array}
     \item \texttt{splitDocument(ocrText: string, pageCount: int, boundaryNonce: string): array}
     \item \texttt{extractFields(ocrText: string): array}
+    \item \texttt{pageBoundaryMarker(page: int, nonce: string): string} --- delega al marcatore di confine pagina di \texttt{BedrockService}, usato per far riconoscere al modello dove finisce ogni pagina nel testo OCR concatenato.
+    \item \texttt{formatUserError(e: Throwable, defaultMessage: string): string} --- delega alla formattazione errori di \texttt{BedrockService}, per un messaggio utente leggibile a partire da un'eccezione tecnica.
 \end{itemize}
 
-\subsubsection{FlysystemDocumentStorageAdapter, DompdfSendMessageRenderer}
+\paragraph{FlysystemDocumentStorageAdapter, DompdfSendMessageRenderer}
 
 Due adapter secondari di supporto. \texttt{FlysystemDocumentStorageAdapter} implementa \texttt{DocumentStoragePort} sopra il disco Laravel/Flysystem configurato per i documenti, generando per ogni file caricato un nome univoco (UUID) nella directory di destinazione, per evitare collisioni fra upload concorrenti.
 
 \texttt{DompdfSendMessageRenderer} implementa \texttt{SendMessageRendererPort} sopra Dompdf e la vista Blade dedicata, applicando lo stesso timbro di piè di pagina (\texttt{PdfFooterStamper}) condiviso con l'esportazione delle comunicazioni.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/FlysystemDocumentStorageAdapter.png}
+    \caption{Classe --- FlysystemDocumentStorageAdapter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DompdfSendMessageRenderer.png}
+    \caption{Classe --- DompdfSendMessageRenderer}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1245,9 +1521,15 @@ Metodi
     \item \texttt{renderPdf(composition: SendMessageComposition): string}
 \end{itemize}
 
-\subsubsection{LaravelDocumentEventDispatcher}
+\paragraph{LaravelDocumentEventDispatcher}
 
 Adapter secondario minimo: implementa \texttt{DocumentEventDispatcherPort} appoggiandosi al dispatcher di eventi nativo di Laravel. I 14 listener del dominio (Sezione 4.4) sono registrati nel service provider, non in questa classe, che si limita a inoltrare l'evento.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/LaravelDocumentEventDispatcher.png}
+    \caption{Classe --- LaravelDocumentEventDispatcher}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1262,11 +1544,80 @@ Metodi
 % ── 5.2 ──────────────────────────────────────────────────────────────────────
 \subsection{Modulo Communications (AI Assistant Generativo)}
 
-Il modulo Communications è la componente del sistema dedicata alla generazione assistita di comunicazioni interne, dal titolo al testo fino all'immagine di copertina. Il suo obiettivo è offrire ai redattori aziendali uno strumento che produca contenuti coerenti con il tono e lo stile dell'organizzazione a partire da un semplice prompt, riducendo il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale: ogni bozza generata resta modificabile, valutabile e rigenerabile prima dell'approvazione finale. Il modulo si integra con Amazon Bedrock sia per la generazione testuale sia per quella delle immagini di copertina, orchestrando la pipeline in modo asincrono tramite AWS Step Functions, sullo stesso schema del modulo Documents.
+Il modulo Communications è la componente del sistema dedicata alla generazione assistita di comunicazioni interne, dal titolo al testo fino all'immagine di copertina. Il suo obiettivo è offrire ai redattori aziendali uno strumento che produca contenuti coerenti con il tono e lo stile dell'organizzazione a partire da un semplice prompt, riducendo il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale: ogni bozza generata resta modificabile, valutabile e rigenerabile finché non viene scartata, anche dopo l'approvazione. Il modulo si integra con Amazon Bedrock sia per la generazione testuale sia per quella delle immagini di copertina, orchestrando la pipeline in modo asincrono tramite AWS Step Functions, sullo stesso schema del modulo Documents.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/diagrammaClassi_Communications.png}
+    \caption{Diagramma delle classi --- Modulo Communications}
+    \label{fig:communications-class-diagram}
+\end{figure}
+
+\subsubsection{Diagrammi delle classi parziali del modulo Communications}
+
+I diagrammi seguenti mostrano porzioni del diagramma delle classi complessivo, raggruppate per flusso applicativo, sullo stesso principio già applicato al modulo Documents.
+
+Il primo diagramma mostra \texttt{CommunicationController}, l'adapter primario che riceve la maggior parte delle richieste HTTP del modulo e le smista verso i cinque casi d'uso corrispondenti.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/communications-partial-controller.png}
+    \caption{Diagramma classi parziale --- CommunicationController}
+    \label{fig:communications-partial-controller}
+\end{figure}
+
+Il secondo diagramma rappresenta il flusso di generazione e avvio della pipeline: \texttt{GenerateCommunicationService} crea la comunicazione, mentre \texttt{StartCommunicationWorkflowService} avvia l'esecuzione Step Functions tramite \texttt{SfnWorkflowEngineAdapter} (componente condiviso del modulo Workflow, non specifico di Communications) ed elimina l'eventuale copertina precedente in caso di rigenerazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/communications-partial-generation.png}
+    \caption{Diagramma classi parziale --- Flusso di generazione e avvio}
+    \label{fig:communications-partial-generation}
+\end{figure}
+
+Il terzo diagramma evidenzia la catena di generazione asincrona orchestrata da \texttt{CommunicationWorkflowTaskHandler}: generazione del testo, generazione della copertina ed aggiornamento finale dello stato, entrambe le generazioni tramite Bedrock.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/communications-partial-pipeline.png}
+    \caption{Diagramma classi parziale --- Flusso di generazione asincrona}
+    \label{fig:communications-partial-pipeline}
+\end{figure}
+
+Il quarto diagramma mostra il percorso di copertina, esportazione e valutazione: i tre adapter primari dedicati (\texttt{CommunicationCoverController}, \texttt{CommunicationExportController}, \texttt{CommunicationRatingController}) delegano rispettivamente a \texttt{UpdateCommunicationCoverService}/\texttt{DownloadCommunicationCoverService}, \texttt{ExportCommunicationService} e \texttt{RateCommunicationService}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/communications-partial-cover-export.png}
+    \caption{Diagramma classi parziale --- Flusso di copertina, esportazione e valutazione}
+    \label{fig:communications-partial-cover-export}
+\end{figure}
+
+Il quinto diagramma completa il quadro con il flusso di consultazione, streaming ed eliminazione: \texttt{ListCommunicationsService} e \texttt{PollCommunicationProgressService} leggono lo stato tramite \texttt{EloquentCommunicationRepository}, mentre \texttt{DeleteCommunicationService} ne orchestra anche la cancellazione della copertina e la pubblicazione dell'evento di dominio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/communications-partial-query.png}
+    \caption{Diagramma classi parziale --- Flusso di consultazione ed eliminazione}
+    \label{fig:communications-partial-query}
+\end{figure}
+
+Il sesto diagramma isola la gestione delle configurazioni di prompt salvate, un aggregato distinto da \texttt{Communication} con un proprio repository dedicato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/Esagonale/communications-partial-promptconfig.png}
+    \caption{Diagramma classi parziale --- Configurazioni di prompt}
+    \label{fig:communications-partial-promptconfig}
+\end{figure}
 
 \subsubsection{Diagramma di sequenza: generazione di una comunicazione}
 
-% TODO: diagramma di sequenza (immagine) da produrre e includere qui con \includegraphics, sul modello della Figura 12 di BugBusters.
+\begin{figure}[H]
+    \noindent\makebox[\textwidth][c]{\includegraphics[width=20cm]{ImmaginiSpecificaTecnica/Esagonale/communications-sequence.png}}
+    \caption{Diagramma di sequenza --- Generazione di una comunicazione}
+    \label{fig:communications-sequence}
+\end{figure}
 
 Il diagramma descrive la sequenza delle operazioni che avvengono quando un redattore richiede la generazione di una comunicazione tramite l'endpoint dedicato. Il \texttt{CommunicationController} riceve prompt, tono e stile, delega la creazione della bozza a \texttt{GenerateCommunicationService} e, subito dopo, l'avvio della pipeline a \texttt{StartCommunicationWorkflowUseCase}; la risposta HTTP torna al client con l'identificativo della comunicazione e l'URL di streaming, senza attendere la generazione.
 
@@ -1276,11 +1627,21 @@ In termini di classi, quei tre passi passano rispettivamente per \texttt{Communi
 
 In parallelo, la SPA resta connessa all'endpoint SSE esposto da \texttt{CommunicationStreamController}, che interroga \texttt{PollCommunicationProgressUseCase} a ogni iterazione e inoltra al client l'avanzamento di testo e copertina, fino all'evento finale di completamento o di errore.
 
-\subsubsection{CommunicationController}
+\subsubsection{Tutte le classi del modulo Communications}
+
+Dopo aver mostrato i diagrammi delle classi e di sequenza, si riportano di seguito le descrizioni di tutte le classi coinvolte nel modulo Communications, con i dettagli di attributi e metodi per ciascuna.
+
+\paragraph{CommunicationController}
 
 Adapter primario HTTP del dominio: raccoglie le operazioni sul ciclo di vita della bozza (creazione, modifica, rigenerazione, salvataggio, scarto, eliminazione, preferiti) che nel dominio Documents sono invece distribuite su più Controller specializzati, perché qui condividono lo stesso aggregato e la stessa autorizzazione di base.
 
 Le operazioni più specifiche (copertina, esportazione, valutazione, streaming SSE) restano su Controller dedicati (\texttt{CommunicationCoverController}, \texttt{CommunicationExportController}, \texttt{CommunicationRatingController}, \texttt{CommunicationStreamController}), sullo stesso principio di traduzione pura verso una porta primaria, senza regole di business proprie.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationController.png}
+    \caption{Classe --- CommunicationController}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1300,11 +1661,100 @@ Metodi
     \item \texttt{destroy(request: Request, communication: Communication, delete: DeleteCommunicationUseCase, state: MvpStateService): JsonResponse}
 \end{itemize}
 
-\subsubsection{CommunicationWorkflowTaskHandler}
+\paragraph{CommunicationCoverController}
+
+Adapter primario HTTP dedicato all'immagine di copertina della comunicazione: sostituzione manuale, rimozione e download. L'audit della mutazione passa dagli eventi \texttt{CommunicationCoverReplaced}/\texttt{CommunicationCoverRemoved} dispatchati da \texttt{UpdateCommunicationCoverService}, non scritto qui direttamente. Il download passa dalla porta primaria \texttt{DownloadCommunicationCoverUseCase}, stesso schema di \texttt{DocumentPreviewController} sul dominio Documents.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationCoverController.png}
+    \caption{Classe --- CommunicationCoverController}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{updateCoverImage(request: UpdateCommunicationCoverRequest, communication: Communication, covers: UpdateCommunicationCoverUseCase, state: MvpStateService): JsonResponse}
+    \item \texttt{removeCoverImage(request: Request, communication: Communication, covers: UpdateCommunicationCoverUseCase, state: MvpStateService): JsonResponse}
+    \item \texttt{coverImage(request: Request, communication: Communication, covers: DownloadCommunicationCoverUseCase): Response}
+\end{itemize}
+
+\paragraph{CommunicationExportController}
+
+Adapter primario HTTP per il documento finale impaginato: anteprima inline ed esportazione come allegato. Entrambi i metodi condividono la stessa logica privata di risposta PDF, che usa l'impronta (\texttt{fingerprint()}) come \texttt{ETag} per evitare di rigenerare il documento se il client possiede già l'ultima versione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationExportController.png}
+    \caption{Classe --- CommunicationExportController}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{preview(request: Request, communication: Communication, export: ExportCommunicationUseCase): Response}
+    \item \texttt{export(request: Request, communication: Communication, export: ExportCommunicationUseCase): Response}
+\end{itemize}
+
+\paragraph{CommunicationRatingController}
+
+Adapter primario HTTP per la valutazione a stelle (1-5) con commento opzionale, una sola per generazione: traduce la richiesta verso \texttt{RateCommunicationUseCase} senza regole di business proprie.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationRatingController.png}
+    \caption{Classe --- CommunicationRatingController}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{rate(request: RateCommunicationRequest, communication: Communication, rate: RateCommunicationUseCase, state: MvpStateService): JsonResponse}
+\end{itemize}
+
+\paragraph{CommunicationStreamController}
+
+Adapter primario HTTP dedicato allo stream SSE dell'avanzamento della generazione: legge lo stato tramite \texttt{PollCommunicationProgressUseCase} (porta primaria), restando responsabile solo del protocollo SSE e dello shaping via \texttt{MvpStateService}, ricaricando dal modello Eloquent solo quando deve emettere gli eventi \textit{cover}/\textit{done} che richiedono l'intero aggregato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationStreamController.png}
+    \caption{Classe --- CommunicationStreamController}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item Nessuno.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{stream(request: Request, communication: Communication, state: MvpStateService, poll: PollCommunicationProgressUseCase): StreamedResponse}
+\end{itemize}
+
+\paragraph{CommunicationWorkflowTaskHandler}
 
 Adapter primario guidato da Step Functions/SQS, equivalente concettuale del \texttt{DocumentWorkflowTaskHandler} sul dominio gemello: traduce i task di callback della pipeline di generazione in chiamate ai casi d'uso di dominio tramite le loro porte primarie, senza contenere regole di business proprie.
 
 Fino a una revisione recente chiamava staticamente un metodo di formattazione errori sulla classe concreta \texttt{BedrockService} per costruire un messaggio di ripiego; è stato allineato al comportamento del suo equivalente sul dominio Documents, che usa direttamente il messaggio dell'eccezione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationWorkflowTaskHandler.png}
+    \caption{Classe --- CommunicationWorkflowTaskHandler}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1315,16 +1765,23 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{taskTypes(): array}
     \item \texttt{subjectType(): string}
+    \item \texttt{auditEventPrefix(): string} --- prefisso (\texttt{"mvp-communication-workflow-task-"}) usato dal runner condiviso per nominare gli eventi di audit di questo dominio.
     \item \texttt{resolveSubject(message: array): WorkflowSubject}
     \item \texttt{execute(taskType: string, subject: WorkflowSubject, message: array): array}
     \item \texttt{onFailure(subject: WorkflowSubject, taskType: string, e: Throwable): void}
 \end{itemize}
 
-\subsubsection{Communication}
+\paragraph{Communication}
 
 Entità di dominio che governa l'intero ciclo di vita di una bozza di comunicazione, ed è la più estesa dei due domini perché accumula responsabilità distinte (preferiti, approvazione e scarto della bozza, valutazione a stelle, copertina manuale o generata dall'AI, l'intera pipeline di generazione fino alla rigenerazione) invece delle una o due tipiche di \texttt{SubDocument} e \texttt{OriginalDocument}.
 
 Assorbe anche un'invariante che in precedenza viveva in un value object a parte, oggi ritirato: una copertina non può mai essere applicata prima che il testo sia stato generato, verificato dalla stessa entità ogni volta che riceve l'esito della generazione AI. Come le altre due entità, ogni metodo verifica la propria guardia (una comunicazione già scartata non può essere approvata, una valutazione già assegnata non può essere ripetuta) e accumula il proprio delta in un oggetto di modifiche interno, letto una sola volta dall'adapter di persistenza.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/Communication.png}
+    \caption{Classe --- Communication}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1341,15 +1798,22 @@ Metodi
     \item \texttt{applyGeneratedText(generated: GeneratedCommunicationText): void}, \texttt{applyGeneratedCover(image: GeneratedCommunicationImage, path: string): void}, \texttt{degradeCover(warning: string): void}
     \item \texttt{startGeneration(executionArn: string, startedAt: DateTimeImmutable): void}, \texttt{failGeneration(errorMessage: string, technicalReason: ?string, failedAt: DateTimeImmutable): void}, \texttt{completeGeneration(completedAt: DateTimeImmutable): void}
     \item \texttt{regenerate(): void}
+    \item \texttt{hasGeneratedText(): bool} --- l'invariante testo-prima-di-copertina descritta sopra: usato da \texttt{GenerateCommunicationCoverService} come guardia prima di generare la copertina.
     \item \texttt{isReadyForExport(): bool}, \texttt{isEditable(): bool}
     \item \texttt{pendingChanges(): CommunicationChanges}
 \end{itemize}
 
-\subsubsection{GenerateCommunicationService}
+\paragraph{GenerateCommunicationService}
 
 Implementa \texttt{GenerateCommunicationUseCase} ed è il punto di ingresso della pipeline di generazione: crea la comunicazione con stato \textit{Draft} e generazione \textit{Pending} a partire da prompt, tono e stile, e restituisce l'identificativo appena creato. Come il suo equivalente sul dominio Documents, non avvia da sé la pipeline: quella responsabilità è delegata a \texttt{StartCommunicationWorkflowUseCase}, invocato subito dopo dallo stesso Controller.
 
 L'audit non passa più da un \texttt{AuditLogger} diretto ma dal dispatch dell'evento \texttt{CommunicationGenerationRequested}, stesso principio già applicato a \texttt{UploadDocumentService} sul dominio Documents.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/GenerateCommunicationService.png}
+    \caption{Classe --- GenerateCommunicationService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1361,11 +1825,17 @@ Metodi
     \item \texttt{generate(command: GenerateCommunicationCommand): int}
 \end{itemize}
 
-\subsubsection{StartCommunicationWorkflowService}
+\paragraph{StartCommunicationWorkflowService}
 
 Implementa \texttt{StartCommunicationWorkflowUseCase}: avvia l'esecuzione Step Functions della pipeline di generazione, equivalente concettuale di \texttt{StartDocumentWorkflowService} sul dominio Documents, con la stessa idempotenza verso un'esecuzione già in corso. Espone anche \texttt{regenerate()}: riporta la comunicazione allo stato di rigenerazione, elimina l'eventuale copertina precedente dallo storage e riavvia la pipeline richiamando internamente \texttt{start()}, così che prima generazione e rigenerazione condividano sempre la stessa logica di avvio.
 
 Stesso trattamento della configurazione del suo equivalente Documents: ARN della state machine e URL della coda non sono più letti tramite \texttt{config()} internamente, ma risolti una volta in \texttt{AppServiceProvider} e iniettati come scalari: stessa istanziabilità in un test Pest puro, senza avviare Laravel.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/StartCommunicationWorkflowService.png}
+    \caption{Classe --- StartCommunicationWorkflowService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1379,14 +1849,26 @@ Metodi
     \item \texttt{regenerate(communicationId: int, actor: ?Actor, correlationId: ?string, requestId: ?string): void}
 \end{itemize}
 
-\subsubsection{GenerateCommunicationTextService, GenerateCommunicationCoverService}
+\paragraph{GenerateCommunicationTextService, GenerateCommunicationCoverService}
 
 Le due classi che orchestrano la generazione vera e propria, invocate dal Worker durante la pipeline asincrona: la prima genera titolo e corpo del testo tramite Bedrock, la seconda l'immagine di copertina a partire dal prompt visivo prodotto dalla prima. Sono rimaste distinte invece di essere unificate in un unico servizio, perché rappresentano due passi della state machine Step Functions con criticità diverse: se il testo non viene generato la bozza è fallita, mentre una copertina non disponibile viene degradata e segnalata, lasciando la comunicazione comunque valida.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/GenerateCommunicationTextService.png}
+    \caption{Classe --- GenerateCommunicationTextService}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/GenerateCommunicationCoverService.png}
+    \caption{Classe --- GenerateCommunicationCoverService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{GenerateCommunicationTextService}: \texttt{communications: CommunicationRepository}, \texttt{ai: CommunicationAiGatewayPort}, \texttt{events: CommunicationEventDispatcherPort}.
-    \item \texttt{GenerateCommunicationCoverService}: gli stessi tre più \texttt{storage: CommunicationCoverStoragePort}, \texttt{logger: LoggerInterface}, \texttt{ids: UniqueIdGeneratorPort}.
+    \item \texttt{GenerateCommunicationCoverService}: gli stessi tre più \texttt{storage: CommunicationCoverStoragePort}, \texttt{logger: LoggerInterface}, \texttt{ids: UniqueIdGeneratorPort}, \texttt{coverPathPrefix: string} (prefisso del percorso di storage, default \texttt{"communications/covers"}).
 \end{itemize}
 
 Metodi
@@ -1394,11 +1876,17 @@ Metodi
     \item \texttt{generate(communicationId: int): array}
 \end{itemize}
 
-\subsubsection{FinalizeCommunicationService}
+\paragraph{FinalizeCommunicationService}
 
 Implementa \texttt{FinalizeCommunicationUseCase}, equivalente concettuale di \texttt{FinalizeDocumentWorkflowService}: chiude la pipeline di generazione, marcando la comunicazione come completata e pubblicando l'evento di completamento osservato dallo stream SSE. È idempotente verso la riconsegna del task: una comunicazione già completata non ripubblica l'evento.
 
 Se la copertina è rimasta bloccata in \textit{Pending}/\textit{Processing} (il ramo di degrado della state machine può saltare il task in caso di timeout o worker caduto), questo caso d'uso la degrada esplicitamente a \textit{Failed} prima di chiudere la pipeline, così la SPA non resta in attesa indefinita.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/FinalizeCommunicationService.png}
+    \caption{Classe --- FinalizeCommunicationService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1410,9 +1898,15 @@ Metodi
     \item \texttt{finalize(communicationId: int): array}
 \end{itemize}
 
-\subsubsection{PollCommunicationProgressService}
+\paragraph{PollCommunicationProgressService}
 
 Implementa \texttt{PollCommunicationProgressUseCase}, equivalente concettuale di \texttt{PollDocumentProgressService}: legge un'istantanea dell'avanzamento (stato di generazione, stato copertina, testo generato finora, eventuali errori di copertina o di generazione), consumata da \texttt{CommunicationStreamController} a ogni iterazione dello stream SSE.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/PollCommunicationProgressService.png}
+    \caption{Classe --- PollCommunicationProgressService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1424,11 +1918,17 @@ Metodi
     \item \texttt{poll(communicationId: int): CommunicationProgressSnapshot}
 \end{itemize}
 
-\subsubsection{CommunicationDraftService}
+\paragraph{CommunicationDraftService}
 
 Implementa \texttt{CommunicationDraftUseCase}: raccoglie le operazioni sul ciclo di vita editoriale della bozza (preferiti, modifica, approvazione, scarto) dietro cui il \texttt{CommunicationController} delega senza contenere logica propria. Ogni metodo segue lo stesso schema: recupera l'entità, invoca la transizione corrispondente (che verifica da sé le proprie guardie), persiste e pubblica l'evento di dominio associato.
 
 \texttt{favorite()}/\texttt{unfavorite()} racchiudono lettura-per-aggiornamento e scrittura in una transazione tramite \texttt{TransactionManagerPort}, per evitare una corsa fra due toggle concorrenti sullo stesso preferito; \texttt{update()}/\texttt{save()}/\texttt{discard()} restano fuori transazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationDraftService.png}
+    \caption{Classe --- CommunicationDraftService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1442,9 +1942,15 @@ Metodi
     \item \texttt{save(communicationId: int, actor: Actor): void}, \texttt{discard(communicationId: int, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{RateCommunicationService}
+\paragraph{RateCommunicationService}
 
 Implementa \texttt{RateCommunicationUseCase}: registra la valutazione a stelle di una comunicazione insieme a un commento opzionale, normalizzando un commento composto solo da spazi bianchi a \texttt{null} prima di passarlo all'entità. Lettura-per-aggiornamento, mutazione e salvataggio avvengono dentro una transazione (\texttt{TransactionManagerPort}), stessa cautela di \texttt{CommunicationDraftService::favorite()}/\texttt{unfavorite()} contro valutazioni concorrenti sulla stessa comunicazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/RateCommunicationService.png}
+    \caption{Classe --- RateCommunicationService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1456,11 +1962,17 @@ Metodi
     \item \texttt{rate(communicationId: int, rating: int, comment: ?string, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{UpdateCommunicationCoverService}
+\paragraph{UpdateCommunicationCoverService}
 
 Implementa \texttt{UpdateCommunicationCoverUseCase}: gestisce la sostituzione manuale della copertina da parte dell'utente, in alternativa a quella generata dall'AI. Rifiuta l'operazione solo se la bozza è già scartata (\texttt{Communication::isEditable()}): una bozza approvata resta modificabile anche dopo il salvataggio nello storico, come previsto dal perimetro MVP: testo, rigenerazione e copertina restano tutti ammessi finché la bozza non è scartata.
 
 Genera un percorso univoco per ogni nuova copertina caricata e rimuove quella precedente dallo storage solo dopo che la nuova è stata salvata con successo, per non lasciare la comunicazione temporaneamente senza copertina in caso di errore a metà operazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/UpdateCommunicationCoverService.png}
+    \caption{Classe --- UpdateCommunicationCoverService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1474,11 +1986,23 @@ Metodi
     \item \texttt{remove(communicationId: int, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{DownloadCommunicationCoverService, ExportCommunicationService}
+\paragraph{DownloadCommunicationCoverService, ExportCommunicationService}
 
 Due casi d'uso di lettura per l'output finale di una comunicazione. \texttt{DownloadCommunicationCoverService} implementa \texttt{DownloadCommunicationCoverUseCase} e restituisce i byte grezzi della sola immagine di copertina.
 
 \texttt{ExportCommunicationService} implementa \texttt{ExportCommunicationUseCase} e produce il PDF completo della comunicazione tramite \texttt{CommunicationPdfRendererPort}, rifiutando l'operazione se la bozza non è ancora pronta per l'esportazione (\texttt{isReadyForExport()}); espone anche un'impronta (\texttt{fingerprint()}) usata dall'adapter di rendering per la cache su disco, senza che il caso d'uso sappia che quella cache esiste.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/DownloadCommunicationCoverService.png}
+    \caption{Classe --- DownloadCommunicationCoverService}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/ExportCommunicationService.png}
+    \caption{Classe --- ExportCommunicationService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1492,11 +2016,23 @@ Metodi
     \item \texttt{fingerprint(communicationId: int): string}, \texttt{render(communicationId: int): RenderedCommunicationPdf}
 \end{itemize}
 
-\subsubsection{ListCommunicationsService, DeleteCommunicationService}
+\paragraph{ListCommunicationsService, DeleteCommunicationService}
 
 Due casi d'uso minimi, equivalenti concettuali di \texttt{ListDocumentsService} e \texttt{DeleteDocumentService}. \texttt{ListCommunicationsService} implementa \texttt{ListCommunicationsUseCase} e inoltra la paginazione al repository.
 
 \texttt{DeleteCommunicationService} implementa \texttt{DeleteCommunicationUseCase}: elimina la comunicazione e, se presente, la sua copertina dallo storage: con lo stesso trattamento delle eliminazioni sul dominio Documents, un guasto nella pulizia dello storage viene solo loggato, non propagato, perché il record è già rimosso dal punto di vista dell'utente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/ListCommunicationsService.png}
+    \caption{Classe --- ListCommunicationsService}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/DeleteCommunicationService.png}
+    \caption{Classe --- DeleteCommunicationService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1510,9 +2046,15 @@ Metodi
     \item \texttt{delete(communicationId: int, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{PromptConfigurationController}
+\paragraph{PromptConfigurationController}
 
 Adapter primario HTTP per i preset di prompt riutilizzabili: traduce creazione ed eliminazione verso \texttt{PromptConfigurationUseCase}, senza regole di business proprie: l'unico controllo qui è di trasporto, la verifica di ownership del tenant prima di autorizzare l'eliminazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/PromptConfigurationController.png}
+    \caption{Classe --- PromptConfigurationController}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1525,13 +2067,19 @@ Metodi
     \item \texttt{destroy(request: Request, promptConfiguration: PromptConfiguration, configurations: PromptConfigurationUseCase, state: MvpStateService): JsonResponse}
 \end{itemize}
 
-\subsubsection{PromptConfigurationService}
+\paragraph{PromptConfigurationService}
 
 Implementa \texttt{PromptConfigurationUseCase}: gestisce le configurazioni di prompt salvate dall'utente (combinazioni di prompt, tono e stile riutilizzabili). Se il nome richiesto è vuoto o già in uso per il tenant, \texttt{save()} non restituisce un errore all'utente ma assegna un'etichetta progressiva (\textit{"Senza nome (1)"}, \textit{"(2)"}, ...) tramite un resolver privato, scegliendo sempre di lasciar salvare la configurazione piuttosto che bloccare l'utente su un conflitto di nome: invariato rispetto a prima.
 
 Il nome è ora protetto anche da un vincolo di unicità a livello di database: \texttt{save()} tenta il salvataggio fino a 8 volte, e se l'adapter di persistenza segnala una collisione (\texttt{PromptConfigurationNameTakenException}, tradotta da una violazione del vincolo unico) rigenera un nome e riprova. È una difesa contro la corsa fra due richieste concorrenti che il resolver, da solo, non può escludere: solo dopo 8 tentativi falliti l'eccezione risale al chiamante.
 
 \texttt{delete()} verifica invece l'autorizzazione: se il tenant della configurazione non coincide con quello dell'attore, solleva \texttt{PromptConfigurationNotAuthorizedException}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/PromptConfigurationService.png}
+    \caption{Classe --- PromptConfigurationService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1544,11 +2092,17 @@ Metodi
     \item \texttt{delete(configurationId: int, actor: Actor): void}
 \end{itemize}
 
-\subsubsection{EloquentCommunicationRepository}
+\paragraph{EloquentCommunicationRepository}
 
 Adapter secondario che implementa \texttt{CommunicationRepository} sopra Eloquent, equivalente concettuale dell'\texttt{EloquentDocumentRepository}: consuma i value object tipizzati del dominio (\texttt{NewCommunication}, \texttt{CommunicationChanges}) invece di array grezzi.
 
 È il punto di scrittura più consolidato di tutto il refactor verso l'architettura esagonale: prima della sua introduzione, lo stesso aggregato veniva scritto da diciotto punti diversi, distribuiti su otto casi d'uso.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/EloquentCommunicationRepository.png}
+    \caption{Classe --- EloquentCommunicationRepository}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1566,9 +2120,15 @@ Metodi
     \item \texttt{paginateApprovedCommunications(tenantId: string, filters: CommunicationListFilters, page: int, perPage: int): CommunicationPage}
 \end{itemize}
 
-\subsubsection{EloquentPromptConfigurationRepository}
+\paragraph{EloquentPromptConfigurationRepository}
 
 Adapter secondario che implementa \texttt{PromptConfigurationRepository} sopra Eloquent, per la persistenza delle configurazioni di prompt salvate dall'utente: un aggregato distinto da \texttt{Communication}, con un proprio repository invece di essere annegato in quello principale. \texttt{create()} riceve ora il value object tipizzato \texttt{NewPromptConfiguration} invece di un array grezzo, e traduce una violazione del vincolo unico a livello database in \texttt{PromptConfigurationNameTakenException}: è questa traduzione che \texttt{PromptConfigurationService::save()} intercetta nel proprio ciclo di retry.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/EloquentPromptConfigurationRepository.png}
+    \caption{Classe --- EloquentPromptConfigurationRepository}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1583,9 +2143,15 @@ Metodi
     \item \texttt{delete(id: int): void}
 \end{itemize}
 
-\subsubsection{BedrockCommunicationAiAdapter}
+\paragraph{BedrockCommunicationAiAdapter}
 
 Adapter secondario che implementa \texttt{CommunicationAiGatewayPort} sopra il servizio condiviso \texttt{BedrockService} (Sezione 2.7), equivalente concettuale del \texttt{BedrockDocumentAiAdapter} sul dominio Documents: la generazione testuale e quella dell'immagine di copertina restano due chiamate distinte, coerentemente con il fatto che sono due passi separati della pipeline.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/BedrockCommunicationAiAdapter.png}
+    \caption{Classe --- BedrockCommunicationAiAdapter}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1598,11 +2164,23 @@ Metodi
     \item \texttt{generateImage(prompt: string, tone: string, style: string, modelImagePrompt: ?string): GeneratedCommunicationImage}
 \end{itemize}
 
-\subsubsection{FlysystemCommunicationCoverAdapter, DompdfCommunicationPdfRenderer}
+\paragraph{FlysystemCommunicationCoverAdapter, DompdfCommunicationPdfRenderer}
 
 Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemDocumentStorageAdapter} e \texttt{DompdfSendMessageRenderer} sul dominio Documents. \texttt{FlysystemCommunicationCoverAdapter} implementa \texttt{CommunicationCoverStoragePort} sopra Flysystem, registrando ogni fallimento di lettura/scrittura come metrica dedicata (\texttt{communication\_cover\_storage\_failed\_total}) oltre che nel log applicativo.
 
 \texttt{DompdfCommunicationPdfRenderer} implementa \texttt{CommunicationPdfRendererPort} sopra Dompdf: prima di renderizzare calcola un'impronta SHA-1 del contenuto (titolo, corpo, stato e percorso della copertina) e, se un PDF con la stessa impronta è già stato materializzato su disco, lo restituisce direttamente invece di rigenerarlo; applica inoltre una filigrana diagonale (\textit{"Creato da AI Assistant"}) e lo stesso timbro di piè di pagina condiviso con \texttt{DompdfSendMessageRenderer}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/FlysystemCommunicationCoverAdapter.png}
+    \caption{Classe --- FlysystemCommunicationCoverAdapter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/DompdfCommunicationPdfRenderer.png}
+    \caption{Classe --- DompdfCommunicationPdfRenderer}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1617,9 +2195,15 @@ Metodi
     \item \texttt{render(context: CommunicationPdfContext): string}, \texttt{filename(context: CommunicationPdfContext): string}
 \end{itemize}
 
-\subsubsection{LaravelCommunicationEventDispatcher}
+\paragraph{LaravelCommunicationEventDispatcher}
 
 Adapter secondario minimo, equivalente concettuale del \texttt{LaravelDocumentEventDispatcher}: implementa \texttt{CommunicationEventDispatcherPort} appoggiandosi al dispatcher di eventi nativo di Laravel. I 21 listener del dominio (Sezione 4.4) sono registrati nel service provider.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/LaravelCommunicationEventDispatcher.png}
+    \caption{Classe --- LaravelCommunicationEventDispatcher}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -1636,18 +2220,280 @@ Metodi
 
 Infrastruttura trasversale ai due domini, non riorganizzata in porte e adapter propri (si veda la Sezione 4.7 per la motivazione del perimetro).
 
-\begin{itemize}
-    \item \textbf{\texttt{WorkflowTaskRegistry}} e \textbf{\texttt{WorkflowTaskRunner}} (\texttt{Workflow/Services}): instradano un task in arrivo da Step Functions/SQS verso l'handler del dominio competente, gestendo deduplicazione, presa in carico e audit in modo generico.
-    \item \textbf{\texttt{WorkflowTaskHeartbeat}} (\texttt{Workflow/Services}): unico adapter condiviso della porta \texttt{WorkflowHeartbeatPort}, invocata dai casi d'uso di lunga durata (split PDF, OCR) per segnalare a Step Functions che l'elaborazione è ancora viva, senza che quei casi d'uso conoscano \texttt{SfnClient}.
-    \item \textbf{\texttt{SfnWorkflowEngineAdapter}} (\texttt{Workflow/Adapters/Outbound}): unico adapter che implementa la porta condivisa verso Step Functions per entrambi i domini.
-    \item \textbf{\texttt{WorkflowContext}} (\texttt{Workflow/Support}): contenitore puro degli identificativi di correlazione (request id, correlation id, tenant) propagati lungo l'esecuzione di un caso d'uso, senza alcuna dipendenza da Illuminate: il tagging dei log (\texttt{Log::withContext()}) non vive più qui, ma nel middleware HTTP \texttt{CorrelateRequests} e, per il worker SQS, in \texttt{ConsumeWorkflowTasks}.
-    \item \textbf{\texttt{Actor}} (\texttt{Support/Identity}): chi ha compiuto un'azione (id, tenant, ruoli), tradotto una sola volta al bordo HTTP da \texttt{MvpUser}; porte, eventi e comandi di dominio vedono solo questa classe, mai il contratto \texttt{Authenticatable} di Laravel.
-    \item \textbf{\texttt{MvpUserProvider}} (\texttt{Identity}): \texttt{UserProvider} esplicito per il guard \texttt{mvp}, registrato in \texttt{AppServiceProvider::boot()}. Poiché \texttt{MvpUser} non ha un archivio persistente (viene ricostruito a ogni richiesta da \texttt{ResolveMvpIdentity}, mai risolto da un provider), ogni metodo di questa classe fallisce deliberatamente con un messaggio esplicito invece di lasciare che una risoluzione inattesa fallisca con un errore criptico.
-    \item \textbf{\texttt{SystemClock}} (\texttt{Support/Clock}): unico adapter condiviso dell'interfaccia standard PSR-20 \texttt{ClockInterface}, usata al posto di un helper temporale custom.
-    \item \textbf{\texttt{RandomUuidGenerator}} (\texttt{Support/Identifiers}): unico adapter condiviso della porta \texttt{UniqueIdGeneratorPort}, per la generazione di identificativi univoci.
-    \item \textbf{\texttt{LaravelTransactionManager}} (\texttt{Support/Persistence}): unico adapter condiviso della porta \texttt{TransactionManagerPort}, per le sequenze di scritture DB pure che richiedono un confine transazionale.
-    \item \textbf{\texttt{AuditLogger}} (\texttt{Audit/Services}): registra gli eventi di audit dispatchati dai listener di dominio.
-    \item \textbf{\texttt{MetricsRecorder}} e \textbf{\texttt{PrometheusExporter}} (\texttt{Observability}): raccolgono ed espongono le metriche applicative sull'endpoint \texttt{/internal/metrics}, descritto nella Sezione 2.9.
+\subsubsection{Tutte le classi condivise}
+
+Si riportano di seguito le descrizioni di tutte le classi condivise fra i due domini, con i dettagli di attributi e metodi per ciascuna.
+
+\paragraph{WorkflowTaskRegistry}
+
+Instrada un tipo di task (\texttt{communication.generate\_text}, \texttt{document.split}, \ldots) verso l'handler del dominio competente: ogni \texttt{WorkflowTaskHandler} di dominio (Sezioni 5.1 e 5.2) viene registrato qui nel binding del singleton in \texttt{AppServiceProvider::register()}, così che \texttt{WorkflowTaskRunner} non debba conoscere staticamente quali domini esistono.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/WorkflowTaskRegistry.png}
+    \caption{Classe --- WorkflowTaskRegistry}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{handlers: array} --- handler registrati, indicizzati per tipo di task gestito.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{register(handler: WorkflowTaskHandler): void} --- registra un handler per i tipi di task che dichiara di gestire.
+    \item \texttt{for(taskType: string): WorkflowTaskHandler} --- restituisce l'handler registrato per un tipo di task, lanciando un'eccezione se nessuno è registrato.
+    \item \texttt{taskTypes(): array} --- restituisce l'elenco di tutti i tipi di task registrati.
+\end{itemize}
+
+\paragraph{WorkflowTaskRunner}
+
+Punto di ingresso generico invocato da \texttt{ConsumeWorkflowTasks} per ogni messaggio SQS: deduplica il task tramite il suo token hash, lo prende in carico atomicamente a database, delega l'esecuzione all'handler risolto tramite \texttt{WorkflowTaskRegistry} e registra audit e metriche in modo indipendente dal dominio del task.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/WorkflowTaskRunner.png}
+    \caption{Classe --- WorkflowTaskRunner}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{registry: WorkflowTaskRegistry}.
+    \item \texttt{audit: AuditLogger}.
+    \item \texttt{metrics: MetricsRecorder}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{handle(message: array): array} --- esegue un singolo task a partire dal messaggio SQS decodificato, restituendo l'esito, incluso se e come va inviato il callback verso Step Functions.
+\end{itemize}
+
+\paragraph{ConsumeWorkflowTasks}
+
+Il comando che il Worker esegue in loop, consumando i messaggi SQS e invocando \texttt{WorkflowTaskRunner} per ciascuno. Nel callback di esito a Step Functions distingue gli errori permanenti (\texttt{TaskTimedOut}, \texttt{TaskDoesNotExist}, \texttt{InvalidToken}: il token non è più valido, nessun retry potrebbe riuscire) da quelli transitori (throttling, servizio non disponibile): sui primi rimuove comunque il messaggio dalla coda, sui secondi lo lascia per un nuovo tentativo, evitando di popolare la DLQ con falsi fallimenti per un task già concluso a database.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/ConsumeWorkflowTasks.png}
+    \caption{Classe --- ConsumeWorkflowTasks}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{PERMANENT\_CALLBACK\_ERRORS: array} (costante) --- codici di errore Step Functions per cui un retry con lo stesso token non può mai riuscire.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{handle(sqs, stepFunctions, runner, heartbeat, context, metrics): int} --- ricevuti per dependency injection dal metodo (non dal costruttore, come da convenzione dei comandi Artisan): riceve i messaggi da SQS, delega l'esecuzione a \texttt{WorkflowTaskRunner}, invia il callback di esito a Step Functions e cancella il messaggio dalla coda solo a callback confermato.
+\end{itemize}
+
+\paragraph{WorkflowTaskHeartbeat}
+
+Unico adapter condiviso della porta \texttt{WorkflowHeartbeatPort}, invocata dai casi d'uso di lunga durata (split PDF, OCR) per segnalare a Step Functions che l'elaborazione è ancora viva, senza che quei casi d'uso conoscano \texttt{SfnClient}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/WorkflowTaskHeartbeat.png}
+    \caption{Classe --- WorkflowTaskHeartbeat}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{stepFunctions: SfnClient}.
+    \item \texttt{metrics: MetricsRecorder}.
+    \item \texttt{taskToken: string} --- token del task attivo, impostato da \texttt{activate()}.
+    \item \texttt{taskType: string}.
+    \item \texttt{lastBeatAt: float} --- timestamp Unix (\texttt{microtime(true)}) dell'ultimo segnale inviato.
+    \item \texttt{degraded: bool}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{activate(taskToken: string, taskType: string): void} --- attiva l'heartbeat per il task corrente.
+    \item \texttt{deactivate(): void} --- disattiva l'heartbeat al termine del task.
+    \item \texttt{beat(force: bool): void} --- invia un segnale di attività a Step Functions se necessario (o sempre, se \texttt{force} è vero).
+\end{itemize}
+
+\paragraph{SfnWorkflowEngineAdapter}
+
+Unico adapter che implementa la porta condivisa verso Step Functions per entrambi i domini.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/SfnWorkflowEngineAdapter.png}
+    \caption{Classe --- SfnWorkflowEngineAdapter}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{client: SfnClient}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{startExecution(stateMachineArn: string, executionName: string, input: array): string} --- avvia un'esecuzione Step Functions, restituendo l'ARN dell'esecuzione.
+\end{itemize}
+
+\paragraph{WorkflowContext}
+
+Contenitore puro degli identificativi di correlazione (request id, correlation id, tenant) propagati lungo l'esecuzione di un caso d'uso, senza alcuna dipendenza da Illuminate: il tagging dei log (\texttt{Log::withContext()}) non vive più qui, ma nel middleware HTTP \texttt{CorrelateRequests} e, per il worker SQS, in \texttt{ConsumeWorkflowTasks}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/WorkflowContext.png}
+    \caption{Classe --- WorkflowContext}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{requestId: string}.
+    \item \texttt{correlationId: string}.
+    \item \texttt{tenantId: string}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{bind(requestId, correlationId, tenantId): void} --- imposta gli identificativi di correlazione per l'esecuzione corrente.
+    \item \texttt{clear(): void} --- azzera il contesto a fine esecuzione.
+    \item \texttt{requestId(): string}, \texttt{correlationId(): string}, \texttt{tenantId(): string} --- accessori di sola lettura.
+\end{itemize}
+
+\paragraph{Actor}
+
+Chi ha compiuto un'azione (id, tenant, ruoli), tradotto una sola volta al bordo HTTP da \texttt{MvpUser}; porte, eventi e comandi di dominio vedono solo questa classe, mai il contratto \texttt{Authenticatable} di Laravel.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/Actor.png}
+    \caption{Classe --- Actor}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{id: string}, \texttt{email: string}, \texttt{name: string}, \texttt{tenantId: string}, \texttt{roles: array} --- tutti \texttt{readonly}, impostati una sola volta alla costruzione.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{hasAnyRole(requiredRoles: array): bool} --- vero se l'attore possiede almeno uno dei ruoli richiesti.
+\end{itemize}
+
+\paragraph{MvpUserProvider}
+
+\texttt{UserProvider} esplicito per il guard \texttt{mvp}, registrato in \texttt{AppServiceProvider::boot()}. Poiché \texttt{MvpUser} non ha un archivio persistente (viene ricostruito a ogni richiesta da \texttt{ResolveMvpIdentity}, mai risolto da un provider), ogni metodo di questa classe fallisce deliberatamente con un messaggio esplicito invece di lasciare che una risoluzione inattesa fallisca con un errore criptico.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/MvpUserProvider.png}
+    \caption{Classe --- MvpUserProvider}
+\end{figure}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{retrieveById(identifier)}, \texttt{retrieveByToken(identifier, token)}, \texttt{updateRememberToken(user, token)}, \texttt{retrieveByCredentials(credentials)}, \texttt{validateCredentials(user, credentials)}, \texttt{rehashPasswordIfRequired(user, credentials, force)} --- i sei metodi del contratto \texttt{UserProvider}, tutti implementati per lanciare una \texttt{LogicException} esplicativa.
+\end{itemize}
+
+\paragraph{SystemClock}
+
+Unico adapter condiviso dell'interfaccia standard PSR-20 \texttt{ClockInterface}, usata al posto di un helper temporale custom.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/SystemClock.png}
+    \caption{Classe --- SystemClock}
+\end{figure}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{now(): DateTimeImmutable} --- restituisce l'istante corrente.
+\end{itemize}
+
+\paragraph{RandomUuidGenerator}
+
+Unico adapter condiviso della porta \texttt{UniqueIdGeneratorPort}, per la generazione di identificativi univoci.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/RandomUuidGenerator.png}
+    \caption{Classe --- RandomUuidGenerator}
+\end{figure}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{generate(): string} --- genera un nuovo UUID.
+\end{itemize}
+
+\paragraph{LaravelTransactionManager}
+
+Unico adapter condiviso della porta \texttt{TransactionManagerPort}, per le sequenze di scritture DB pure che richiedono un confine transazionale.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/LaravelTransactionManager.png}
+    \caption{Classe --- LaravelTransactionManager}
+\end{figure}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{run(operation: callable): mixed} --- esegue l'operazione all'interno di una transazione DB.
+\end{itemize}
+
+\paragraph{AuditLogger}
+
+Registra gli eventi di audit dispatchati dai listener di dominio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/AuditLogger.png}
+    \caption{Classe --- AuditLogger}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{context: WorkflowContext}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{record(eventType, actor, resourceType, resourceId, metadata, request, tenantId): AuditEvent} --- registra un evento di audit; fuori da una richiesta HTTP (worker SQS) gli id di correlazione arrivano da \texttt{WorkflowContext} anziché dalla request.
+\end{itemize}
+
+\paragraph{MetricsRecorder}
+
+Raccoglie le metriche applicative (HTTP e di dominio) in un file condiviso protetto da lock, lette poi da \texttt{PrometheusExporter}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/MetricsRecorder.png}
+    \caption{Classe --- MetricsRecorder}
+\end{figure}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{snapshot(): array} --- legge lo stato corrente di tutte le metriche.
+    \item \texttt{recordHttp(request, response, durationSeconds): void} --- incrementa i contatori e l'istogramma di durata per una richiesta HTTP.
+    \item \texttt{recordDomainCounter(name, labels, amount): void} --- incrementa un contatore di dominio generico (ad esempio i fallimenti di callback verso Step Functions).
+\end{itemize}
+
+\paragraph{PrometheusExporter}
+
+Espone le metriche applicative raccolte da \texttt{MetricsRecorder}, insieme a metriche di stato lette direttamente dal database, sull'endpoint \texttt{/internal/metrics} descritto nella Sezione 2.9.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/PrometheusExporter.png}
+    \caption{Classe --- PrometheusExporter}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{metrics: MetricsRecorder}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{render(): string} --- produce il testo in formato Prometheus con le metriche HTTP, di dominio e i readiness check.
 \end{itemize}
 \end{sloppypar}
 
@@ -1674,7 +2520,7 @@ Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contr
 
 Lo stato condiviso fra le pagine non vive nel ViewModel: una sola istanza di \texttt{MvpStateStore}, fornita a livello di applicazione (\texttt{providedIn: "root"}), conserva lo stato restituito dal backend e sopravvive ai cambi di rotta. Ogni ViewModel riceve lo Store come una qualunque altra dipendenza nel proprio costruttore e lo consuma in sola lettura per derivare i propri segnali \texttt{computed}; le mutazioni (generazione, upload, revisione, eliminazione) non aggiornano lo stato localmente, ma rimpiazzano l'intero stato con quello autorevole restituito dal backend nella risposta, evitando divergenze fra ciò che la SPA mostra e ciò che il backend ha effettivamente persistito.
 
-Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. L'\texttt{effect()} però si limita a leggere i segnali sorgente (lo storico condiviso, i filtri attivi) e a chiamare \texttt{vm.reload()}: la chiamata di ricerca vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo il template non legge mai \texttt{store.*} direttamente: anche \texttt{error}, \texttt{loading} e le metriche sono esposti come segnali \texttt{computed} pass-through sul ViewModel (\texttt{vm.error()}, \texttt{vm.loading()}, \texttt{vm.metrics()}), che si limita a leggerli dallo Store già ricevuto come dipendenza.
+Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. L'\texttt{effect()} però si limita a leggere i segnali sorgente (lo storico condiviso, i filtri attivi) e a chiamare \texttt{vm.reload()}: la chiamata di ricerca vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo, su \texttt{AssistantPage} e \texttt{CopilotPage} il template non legge mai \texttt{store.*} direttamente: anche \texttt{error}, \texttt{loading} e le metriche sono esposti come segnali \texttt{computed} pass-through sul ViewModel (\texttt{vm.error()}, \texttt{vm.loading()}, \texttt{vm.metrics()}), che si limita a leggerli dallo Store già ricevuto come dipendenza. \texttt{OverviewPage} è l'eccezione documentata in Sezione 6.7, dove il template legge lo Store direttamente in più punti.
 
 Angular offre già disaccoppiamento e testabilità tramite i propri servizi e la dependency injection, quindi un ViewModel separato potrebbe sembrare ridondante rispetto a testare direttamente il componente con \texttt{TestBed}. Il motivo per cui si è scelto comunque questo confine è pratico, non dogmatico: un test su \texttt{TestBed} richiede l'avvio del modulo, la compilazione del template e la risoluzione dell'albero di dependency injection a ogni esecuzione, mentre un test sul ViewModel istanzia la classe con \texttt{new} passando dipendenze fittizie create a mano: più veloce da eseguire e più semplice da scrivere, perché isola la logica applicativa dal ciclo di vita di Angular. Per questo il confine è tracciato solo sulle tre pagine principali, dove quella logica è più densa, e non esteso a ogni componente della SPA.
 
@@ -2105,7 +2951,7 @@ I design pattern individuati nel sistema si dividono in due categorie: quelli ap
 
 \textbf{Intent:} convertire l'interfaccia di una classe in un'altra interfaccia attesa dal client, permettendo la collaborazione fra classi altrimenti incompatibili per via delle librerie o dei framework esterni che usano.
 
-È il pattern costitutivo dell'intera architettura esagonale (Sezione 4.3.2): isola sistematicamente il dominio applicativo dalla forma specifica delle tecnologie esterne (ORM, SDK cloud) che altrimenti imporrebbero la propria interfaccia direttamente ai casi d'uso. Ogni porta secondaria ha un adapter che la implementa sopra una tecnologia concreta, mai il contrario.
+È il pattern costitutivo dell'intera architettura esagonale (Sezione 4.3): isola sistematicamente il dominio applicativo dalla forma specifica delle tecnologie esterne (ORM, SDK cloud) che altrimenti imporrebbero la propria interfaccia direttamente ai casi d'uso. Ogni porta secondaria ha un adapter che la implementa sopra una tecnologia concreta, mai il contrario.
 
 Esempio nel progetto. \texttt{EloquentDocumentRepository} ed \texttt{EloquentCommunicationRepository} implementano le porte di persistenza sopra Eloquent, \texttt{BedrockDocumentAiAdapter}, \texttt{BedrockCommunicationAiAdapter} e \texttt{TextractOcrAdapter} sopra gli SDK AWS, \texttt{SfnWorkflowEngineAdapter} sopra Step Functions (Sezione 5). Un caso d'uso parla sempre con \texttt{DocumentRepository}, mai con \texttt{SubDocument::query()}. Senza questo pattern il dominio dipenderebbe direttamente da Eloquent e dagli SDK AWS, e nessun caso d'uso sarebbe testabile senza avviare Laravel e senza credenziali AWS/LocalStack: è questa la testabilità del dominio senza framework descritta in Sezione 4.7, dimostrata dalla suite dedicata \texttt{tests/DomainUnit} che istanzia i casi d'uso con implementazioni in memoria delle porte secondarie.
 
@@ -2194,25 +3040,15 @@ Il minimo richiesto sarebbe il \texttt{@Component} stesso come ViewModel (MVVM i
 
 \begin{sloppypar}
 
-Il sistema non ha una tabella \texttt{users}: l'identità (tenant, attore) arriva da header fidati risolti a monte della richiesta (Sezione 3), non da una tabella anagrafica locale: coerentemente, ogni tabella di dominio porta un \texttt{tenant\_id} testuale invece di una chiave esterna verso un'entità utente. Le sette tabelle di dominio descritte in questa sezione escludono le tabelle infrastrutturali di Laravel (\texttt{sessions}, \texttt{cache}, \texttt{jobs}, \texttt{password\_reset\_tokens}), prive di rilevanza per il modello dei dati applicativo.
+Il sistema non ha una tabella \texttt{users}: l'identità (tenant, attore) è risolta da configurazione o da header fidati a monte della richiesta, a seconda della modalità (Sezione 3), non da una tabella anagrafica locale: coerentemente, ogni tabella di dominio porta un \texttt{tenant\_id} testuale invece di una chiave esterna verso un'entità utente. Le sette tabelle di dominio descritte in questa sezione escludono le tabelle infrastrutturali di Laravel (\texttt{sessions}, \texttt{cache}, \texttt{jobs}, \texttt{password\_reset\_tokens}), prive di rilevanza per il modello dei dati applicativo.
 
 \subsection{Schema ER}
 
 % TODO: diagramma ER (immagine) da produrre e includere qui con \includegraphics, sul modello della Figura 19 di BugBusters.
 
-Il modello ha due aggregati radice, uno per modulo (\texttt{original\_documents} per il Co-Pilot, \texttt{communications} per l'AI Assistant Generativo, Sezione 5), entrambi scoped per \texttt{tenant\_id}. \texttt{original\_documents} si estende in una relazione 1-N verso \texttt{sub\_documents} (un documento originale, più sotto-documenti dopo lo split), a sua volta in una relazione 1-1 verso \texttt{extracted\_data} (i campi strutturati estratti dall'AI per quel sotto-documento). \texttt{communications} non ha invece entità figlie: accumula l'intero ciclo di vita (bozza, generazione, copertina, valutazione) sulla stessa riga (Sezione 5.2, entità \texttt{Communication}). \texttt{workflow\_tasks} e \texttt{audit\_events} sono trasversali a entrambi gli aggregati: la prima tramite una relazione polimorfica (\texttt{subject\_type}/\texttt{subject\_id}, senza foreign key dichiarata), la seconda tramite semplici colonne testuali (\texttt{resource\_type}/\texttt{resource\_id}) popolate dai listener degli eventi di dominio, non da un vincolo relazionale. \texttt{prompt\_configurations} è indipendente da entrambi: un preset riutilizzabile, scoped solo per tenant.
-
 \subsection{Schema Relazionale}
 
-\begin{itemize}\raggedright
-    \item \texttt{communications(\underline{id}, tenant\_id, created\_by, prompt, tone, style, generated\_title, generated\_body, image\_prompt, status, is\_favorite, rating, rating\_comment, rated\_at, rated\_by, generation\_status, workflow\_execution\_arn, workflow\_started\_at, workflow\_completed\_at, workflow\_failed\_at, workflow\_failure\_reason, error\_message, cover\_image\_path, cover\_image\_mime, cover\_image\_size, cover\_image\_source, cover\_status, cover\_error, created\_at, updated\_at)}
-    \item \texttt{original\_documents(\underline{id}, tenant\_id, created\_by, file\_path, original\_filename, manual\_document\_type, manual\_company\_name, manual\_reference\_month, manual\_reference\_year, processing\_status, error\_message, s3\_bucket, s3\_key, workflow\_execution\_arn, workflow\_started\_at, workflow\_completed\_at, workflow\_failed\_at, workflow\_failure\_reason, textract\_job\_id, ocr\_text, ocr\_pages, ocr\_confidence\_avg, created\_at, updated\_at)}
-    \item \texttt{sub\_documents(\underline{id}, original\_document\_id, file\_path, start\_page, end\_page, send\_status, send\_recipient\_override, send\_subject\_override, send\_body\_override, review\_status, error\_message, created\_at, updated\_at)}: \texttt{original\_document\_id} → \texttt{original\_documents.id} (FK, \textit{on delete cascade}).
-    \item \texttt{extracted\_data(\underline{id}, sub\_document\_id, employee\_first\_name, employee\_last\_name, company\_name, recipient\_email, fiscal\_code, employee\_id, document\_date, document\_type, description, confidence\_score, ai\_payload, created\_at, updated\_at)}: \texttt{sub\_document\_id} → \texttt{sub\_documents.id} (FK univoca, \textit{on delete cascade}: relazione 1-1).
-    \item \texttt{workflow\_tasks(\underline{id}, subject\_type, subject\_id, task\_type, task\_token\_hash, status, input\_payload, output\_payload, error\_message, started\_at, completed\_at, failed\_at, created\_at, updated\_at)}: \texttt{(subject\_type, subject\_id)} riferisce polimorficamente \texttt{original\_documents.id} o \texttt{communications.id}, senza vincolo di integrità referenziale dichiarato; \texttt{task\_token\_hash} è univoca (deduplicazione della riconsegna).
-    \item \texttt{prompt\_configurations(\underline{id}, tenant\_id, created\_by, name, prompt, tone, style, created\_at, updated\_at)}: \texttt{(tenant\_id, name)} univoca.
-    \item \texttt{audit\_events(\underline{id}, event\_type, tenant\_id, actor\_id, actor\_email, resource\_type, resource\_id, request\_id, correlation\_id, metadata, created\_at)}: \texttt{(resource\_type, resource\_id)} non è una foreign key: sono colonne testuali popolate dai listener (Sezione 7.1.6), non un vincolo relazionale.
-\end{itemize}
+% TODO: diagramma dello schema relazionale (immagine) da produrre e includere qui con \includegraphics, sul modello della Figura 20 di BugBusters.
 
 \subsection{Descrizione tabelle}
 
