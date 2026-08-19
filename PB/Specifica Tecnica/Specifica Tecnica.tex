@@ -16,7 +16,46 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{patterns}
+\usepackage{listings}
 \graphicspath{{./}{../../}}
+
+\lstdefinestyle{codelisting}{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    breakatwhitespace=false,
+    backgroundcolor=\color{gray!6},
+    frame=single,
+    rulecolor=\color{gray!45},
+    framesep=4pt,
+    numbers=left,
+    numberstyle=\tiny\color{gray!60},
+    numbersep=8pt,
+    keywordstyle=\color{blue!60!black}\bfseries,
+    commentstyle=\color{green!35!black}\itshape,
+    stringstyle=\color{orange!65!black},
+    showstringspaces=false,
+    tabsize=2,
+    captionpos=b,
+    xleftmargin=4pt,
+    xrightmargin=4pt,
+    aboveskip=8pt,
+    belowskip=4pt
+}
+\lstset{style=codelisting}
+
+\lstdefinelanguage{TypeScriptMvp}{
+    keywords={class, constructor, private, public, protected, readonly, interface, type, export, import, return, if, else, for, while, new, this, void, extends, implements, static, get, set, function, const, let, var, from, as, typeof, instanceof, in, of, try, catch, finally, throw, async, await, yield, default, case, switch, break, continue, do, delete, null, undefined, true, false},
+    keywordstyle=\color{blue!60!black}\bfseries,
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[s]{/**}{*/},
+    string=[b]",
+    morestring=[b]',
+    morestring=[b]`,
+}
+\lstdefinestyle{phplisting}{style=codelisting, language=PHP}
+\lstdefinestyle{tslisting}{style=codelisting, language=TypeScriptMvp}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
 \newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
@@ -280,7 +319,7 @@ Il presente capitolo illustra lo stack tecnologico adottato per la progettazione
     \textbf{Nome} & \textbf{Versione} & \textbf{Descrizione} \\
     \hline
     \endhead
-    Laravel & 12 & Framework PHP open source per lo sviluppo di applicazioni web server-side. Fornisce routing, un ORM (Eloquent) e strumenti integrati per la gestione dei job asincroni; il prodotto non ne adotta il tipico MVC applicativo, ma li usa come infrastruttura sotto un'architettura esagonale a porte e adapter (Sezione 4.3). È stato scelto per la maturità del suo ecosistema rispetto ad alternative come Symfony. \\
+    Laravel & 12 & Framework PHP open source per lo sviluppo di applicazioni web server-side. Fornisce routing, un ORM (Eloquent) e strumenti integrati per la gestione dei job asincroni; il prodotto non ne adotta il tipico MVC applicativo, ma li usa come infrastruttura sotto un'architettura esagonale a porte e adapter (Sezione 4.3). È stato preferito a Symfony (di cui riusa diversi componenti sotto il cofano, come HttpFoundation e Routing) per le convenzioni integrate — ORM, code asincrone, CLI Artisan — che riducono la configurazione esplicita richiesta per un MVP con team ridotto, a fronte della maggiore modularità che Symfony offrirebbe. \\
     \hline
     Angular & 21 & Framework open source sviluppato da Google per la creazione di Single Page Application (SPA). Utilizza TypeScript e adotta un'architettura basata su componenti con supporto nativo per dependency injection, routing, reactive forms e signals. È stato preferito per la struttura integrata e opinionata che garantisce coerenza e manutenibilità nel tempo. \\
     \hline
@@ -841,6 +880,7 @@ La tabella seguente quantifica la composizione interna dei due domini: casi d'us
     Communications & 14 & 6 & 21 & 6 Controller HTTP + \texttt{WorkflowTaskHandler} \\
     \hline
     \caption{Metriche strutturali dei due domini esagonali}
+    \label{tab:component-metrics}
 \end{longtable}
 }
 
@@ -852,10 +892,12 @@ La separazione fra i due domini è verificata automaticamente a ogni build della
 
 Copre l'intera pipeline dell'AI Co-Pilot: dall'ingresso del documento caricato dall'utente, attraverso l'orchestrazione asincrona di riconoscimento ottico, classificazione ed estrazione dei campi, fino alla consultazione, alla revisione umana dei dati estratti e alla composizione del documento precompilato per il destinatario, che l'operatore scarica ed invia fuori piattaforma. Le porte secondarie isolano il dominio dalla persistenza, dai gateway AI di riconoscimento ottico e classificazione, dallo storage documentale, dal rendering del documento di invio e dalla pubblicazione degli eventi di dominio.
 
+Il diagramma seguente si concentra sulla pipeline centrale (upload, orchestrazione asincrona, revisione); i controller e i casi d'uso di sola consultazione (\texttt{DocumentPreviewController}, \texttt{SendMessageController} e i rispettivi casi d'uso di lista, cancellazione e polling) non compaiono qui: il conteggio completo dei 4 Controller HTTP e dei 12 casi d'uso è nella Tabella~\ref{tab:component-metrics} della Sezione 4.4, il dettaglio di ciascuno nella Sezione 5.1.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{ImmaginiSpecificaTecnica/Esagonale/documents.png}
-    \caption{Component Diagram --- Modulo Documents}
+    \caption{Component Diagram --- Pipeline centrale del modulo Documents}
     \label{fig:documents-component-diagram}
 \end{figure}
 
@@ -863,10 +905,12 @@ Copre l'intera pipeline dell'AI Co-Pilot: dall'ingresso del documento caricato d
 
 Copre l'intero ciclo di vita di una bozza generata dall'AI Assistant Generativo: dalla richiesta di generazione (testo e copertina), attraverso l'orchestrazione asincrona della pipeline, fino alla gestione editoriale della bozza (preferiti, modifica, approvazione, scarto), alla sua consultazione, esportazione e valutazione, e alla gestione delle configurazioni di prompt riutilizzabili. Le porte secondarie isolano il dominio dalla persistenza, dal gateway AI generativo, dallo storage delle copertine, dal rendering PDF e dalla pubblicazione degli eventi di dominio.
 
+Il diagramma seguente si concentra sulla pipeline centrale (generazione, orchestrazione asincrona, valutazione); i controller e i casi d'uso di gestione editoriale, consultazione e configurazione (\texttt{CommunicationCoverController}, \texttt{CommunicationExportController}, \texttt{CommunicationStreamController}, \texttt{PromptConfigurationController} e i rispettivi casi d'uso) non compaiono qui: il conteggio completo dei 6 Controller HTTP e dei 14 casi d'uso è nella Tabella~\ref{tab:component-metrics} della Sezione 4.4, il dettaglio di ciascuno nella Sezione 5.2.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/Esagonale/comunication.png}
-    \caption{Component Diagram --- Modulo Communications}
+    \caption{Component Diagram --- Pipeline centrale del modulo Communications}
     \label{fig:communications-component-diagram}
 \end{figure}
 
@@ -998,7 +1042,7 @@ Il primo diagramma descrive la sequenza delle operazioni che avvengono quando un
 
 Da quel momento la sequenza prosegue in modo asincrono, come mostra il secondo diagramma. Il Worker riceve dalla state machine Step Functions un task alla volta e lo smista al caso d'uso corrispondente, un passo per fase della pipeline: riconoscimento ottico, classificazione, estrazione dei campi per ogni destinatario individuato, infine persistenza dei risultati e pubblicazione dell'evento di completamento.
 
-In termini di classi, quello smistamento passa per \texttt{DocumentWorkflowTaskHandler}, che delega rispettivamente a \texttt{RunOcrService} (\texttt{textract.ocr}), \texttt{ProcessDocumentService} (\texttt{bedrock.extract}, che a sua volta delega l'estrazione dei campi per ogni destinatario a \texttt{ExtractSubDocumentFieldsService}, Sezione 5.1) e \texttt{FinalizeDocumentWorkflowUseCase} (\texttt{persist.results}, \texttt{dispatch.domain\_event}). Ogni passo aggiorna lo stato di \texttt{OriginalDocument} tramite \texttt{EloquentDocumentRepository}.
+In termini di classi, quello smistamento passa per \texttt{DocumentWorkflowTaskHandler}, che delega rispettivamente a \texttt{RunOcrService} (\texttt{textract.ocr}), \texttt{ProcessDocumentService} (\texttt{bedrock.extract}, che a sua volta delega l'estrazione dei campi per ogni destinatario a \texttt{ExtractSubDocumentFieldsService}, Sezione 5.1) e \texttt{FinalizeDocumentWorkflowUseCase} (\texttt{persist.results}, \texttt{dispatch.domain\_event}). La transizione di stato \textit{Processing} $\rightarrow$ \textit{Completed} avviene già durante \texttt{bedrock.extract}, quando \texttt{ProcessDocumentService} completa lo split: \texttt{persist.results} si limita a leggerlo tramite \texttt{DocumentRepository}, senza scriverlo; \texttt{dispatch.domain\_event} marca invece separatamente il workflow come concluso (\texttt{workflowCompleted}) e pubblica l'evento finale.
 
 In parallelo, dal momento dell'upload, la SPA resta connessa all'endpoint SSE esposto da \texttt{DocumentController::stream()}, che interroga \texttt{PollDocumentProgressUseCase} a ogni iterazione e inoltra al client i sotto-documenti man mano che vengono estratti, fino all'evento finale di completamento o di errore --- anch'essa illustrata nel secondo diagramma.
 
@@ -1068,7 +1112,7 @@ Risolve e aggiorna l'aggregato documentale attraverso lo stesso \texttt{Document
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DocumentWorkflowTaskHandler.png}
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DocumentWorkflowTaskHandler.png}
     \caption{Classe --- DocumentWorkflowTaskHandler}
 \end{figure}
 
@@ -1218,7 +1262,7 @@ Le sue dipendenze sono fra le più numerose del dominio, perché riflettono quan
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/ProcessDocumentService.png}
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/ProcessDocumentService.png}
     \caption{Classe --- ProcessDocumentService}
 \end{figure}
 
@@ -1263,7 +1307,7 @@ Implementa \texttt{FinalizeDocumentWorkflowUseCase}: chiude la pipeline document
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/FinalizeDocumentWorkflowService.png}
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/FinalizeDocumentWorkflowService.png}
     \caption{Classe --- FinalizeDocumentWorkflowService}
 \end{figure}
 
@@ -1402,7 +1446,7 @@ Due casi d'uso minimi, simmetrici ai rispettivi sul dominio Communications. \tex
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DeleteDocumentService.png}
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/DeleteDocumentService.png}
     \caption{Classe --- DeleteDocumentService}
 \end{figure}
 
@@ -1527,7 +1571,7 @@ Adapter secondario minimo: implementa \texttt{DocumentEventDispatcherPort} appog
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/LaravelDocumentEventDispatcher.png}
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingole/LaravelDocumentEventDispatcher.png}
     \caption{Classe --- LaravelDocumentEventDispatcher}
 \end{figure}
 
@@ -1639,7 +1683,7 @@ Le operazioni più specifiche (copertina, esportazione, valutazione, streaming S
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationController.png}
+    \includegraphics[width=0.7\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationController.png}
     \caption{Classe --- CommunicationController}
 \end{figure}
 
@@ -1752,7 +1796,7 @@ Fino a una revisione recente chiamava staticamente un metodo di formattazione er
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationWorkflowTaskHandler.png}
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/CommunicationWorkflowTaskHandler.png}
     \caption{Classe --- CommunicationWorkflowTaskHandler}
 \end{figure}
 
@@ -1861,7 +1905,7 @@ Le due classi che orchestrano la generazione vera e propria, invocate dal Worker
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/GenerateCommunicationCoverService.png}
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/GenerateCommunicationCoverService.png}
     \caption{Classe --- GenerateCommunicationCoverService}
 \end{figure}
 
@@ -2030,7 +2074,7 @@ Due casi d'uso minimi, equivalenti concettuali di \texttt{ListDocumentsService} 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/DeleteCommunicationService.png}
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/DeleteCommunicationService.png}
     \caption{Classe --- DeleteCommunicationService}
 \end{figure}
 
@@ -2172,7 +2216,7 @@ Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemD
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/FlysystemCommunicationCoverAdapter.png}
+    \includegraphics[width=0.45\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCommunications/FlysystemCommunicationCoverAdapter.png}
     \caption{Classe --- FlysystemCommunicationCoverAdapter}
 \end{figure}
 
@@ -2514,6 +2558,15 @@ Il routing e i template usano la sintassi di controllo nativa (\texttt{@if}, \te
 % ── 6.2 ──────────────────────────────────────────────────────────────────────
 \subsection{Il pattern MVVM}
 
+La figura seguente illustra il pattern e la comunicazione fra i suoi tre componenti; un esempio concreto tratto dal progetto segue in Sezione 6.2.1.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/Esagonale/frontend-mvvm-concept.png}
+    \caption{Il pattern MVVM}
+    \label{fig:frontend-mvvm-concept}
+\end{figure}
+
 Le tre pagine principali applicano MVVM in senso classico: un \emph{ViewModel} (più precisamente un \emph{Presentation Model} nel senso di Fowler) è una classe TypeScript che non tocca il DOM né l'infrastruttura di rendering o di dependency injection di Angular (nessun \texttt{@Component}, \texttt{inject()}, decoratore, injection context, chiamata diretta a \texttt{document}/\texttt{window}); riceve le proprie dipendenze dal costruttore, ed è quindi istanziabile con un semplice \texttt{new} e testabile senza \texttt{TestBed}, con dipendenze fittizie create a mano. L'unica eccezione apparente è l'uso di \texttt{signal}/\texttt{computed} di \texttt{@angular/core}: restano nel ViewModel non come parte del motore di rendering, ma come primitiva reattiva di piattaforma (l'equivalente di \texttt{INotifyPropertyChanged} in WPF), quindi non compromettono l'istanziabilità con \texttt{new} né la testabilità senza Angular avviato; è questa distinzione, non un conteggio letterale degli import da \texttt{@angular/core}, a rendere la classe un Presentation Model genuino.
 
 Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contratto OpenAPI e i modelli di dominio specifici di ciascuna feature. La \emph{View} è la pagina stessa (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}): l'unico punto accoppiato ad Angular e al DOM, che si procura le dipendenze con \texttt{inject()} nel proprio costruttore e le passa al ViewModel per costruirlo, poi lega il template ai segnali e ai metodi pubblici che il ViewModel espone (\texttt{vm.stato()}, \texttt{(evento)="vm.metodo()"}). Anche l'unica operazione DOM richiesta da alcuni ViewModel (lo scorrimento verso una sezione dopo un'azione) resta un'operazione della View: \texttt{AssistantPageViewModel} e \texttt{OverviewPageViewModel} la ricevono come funzione dal costruttore (\texttt{scrollToElement}, definita in \texttt{shared/util/scroll.ts}), così possono \emph{chiedere} uno scorrimento senza \emph{eseguirlo} direttamente.
@@ -2526,9 +2579,36 @@ Angular offre già disaccoppiamento e testabilità tramite i propri servizi e la
 
 L'assenza di \texttt{inject()} e dell'infrastruttura di rendering nel ViewModel non è un'omissione stilistica: è la condizione che rende possibile l'obiettivo dichiarato sopra. \texttt{inject()} funziona solo dentro un injection context, quindi una classe che lo usasse sarebbe istanziabile solo da Angular: per testarla servirebbe comunque \texttt{TestBed.runInInjectionContext()} o un \texttt{TestBed.inject()}, lo stesso costo che l'estrazione del ViewModel vuole evitare. Lo stesso vale per il rendering: un ViewModel che manipolasse il DOM richiederebbe un ambiente browser (o \texttt{jsdom}) anche solo per verificarne la logica. Estendere questo pattern a ogni componente della SPA, non solo alle tre pagine principali, non è però la conclusione corretta: il beneficio (test framework-indipendenti su logica applicativa densa) va confrontato con il costo (un file e un'indirection in più). I dodici componenti condivisi (Sezione 6.6) non hanno quasi logica propria (ricevono un \texttt{input()} e lo mostrano), e un ViewModel dedicato aggiungerebbe solo un file vuoto da mantenere, senza nulla di significativo da isolare che il codice non mostri già direttamente.
 
+\subsubsection{Esempio di pattern MVVM nel progetto}
+
+Il diagramma seguente illustra il pattern con un esempio concreto tratto dalla pagina di generazione (\texttt{AssistantPage}): per chiarezza è semplificato a una sola delle componenti riutilizzabili della pagina.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{ImmaginiSpecificaTecnica/Esagonale/frontend-mvvm-example.png}
+    \caption{Esempio di pattern MVVM --- AssistantPage}
+    \label{fig:frontend-mvvm-example}
+\end{figure}
+
+La classe \texttt{AssistantPage} (View) costruisce \texttt{AssistantPageViewModel} (ViewModel) con \texttt{new()} nel proprio costruttore e nel template legge solo i suoi segnali e metodi pubblici (\texttt{vm.*}). \texttt{AssistantPageViewModel}, a sua volta, non tocca mai Angular né il DOM: risponde alle azioni richieste dalla View chiamando le operazioni esposte da \texttt{AssistantService} (Model), il servizio che comunica con l'API generata e con lo stream SSE.
+
+Per completezza si mostra anche la relazione con il componente riutilizzabile \texttt{CommunicationGeneratorPanelComponent}: \texttt{AssistantPage} lo importa nel proprio template e gli passa lo stato tramite property binding (\texttt{[isGenerating]}, \texttt{[status]}, \texttt{[phase]}); il componente notifica le azioni dell'utente alla View tramite event binding (\texttt{(generate)}, \texttt{(saveConfiguration)}), che le inoltra al ViewModel (\texttt{vm.generate(\$event)}) — lo stesso schema vale per qualunque altro componente riutilizzabile della SPA.
+
+\subsubsection{Two-way data binding}
+
+Il progetto non usa il binding bidirezionale nativo di Angular (\texttt{[(ngModel)]}, equivalente meccanicamente alla stessa coppia \texttt{[input]}/\texttt{(outputChange)} già usata altrove, o l'API \texttt{model()}): il motivo è strutturale, non stilistico. \texttt{model()} richiede che sia il componente stesso a possedere il segnale bidirezionale, ma il ViewModel resta volutamente una classe pura fuori dall'injector di Angular (Sezione 6.2), quindi non potrebbe comunque parteciparvi. La relazione fra View e ViewModel non è inoltre il caso d'uso naturale del two-way binding, pensato per rispecchiare un valore grezzo: il componente riceve stato derivato e \texttt{computed} dal ViewModel, ed emette azioni (\texttt{generate}, \texttt{saveConfiguration}) che devono passare per logica applicativa, non per una scrittura diretta, prima di cambiare qualcosa.
+
+Questo spiega anche la scelta di MVVM invece di MVP: un Presenter MVP dovrebbe aggiornare la View direttamente tramite un riferimento esplicito a essa, il che comprometterebbe l'istanziabilità con \texttt{new()} e la testabilità senza \texttt{TestBed} del ViewModel. Con MVVM è invece Angular stesso a occuparsi della sincronizzazione: \texttt{ChangeDetectionStrategy.OnPush} ridisegna la View a ogni cambiamento di un segnale letto nel template, senza che il ViewModel debba mai sapere che la View esiste.
+
 \subsubsection{AssistantPageViewModel}
 
 Il ViewModel più corposo dei tre, perché copre l'intero ciclo di vita di una bozza (generazione, rigenerazione, valutazione, copertina, storico, configurazioni di prompt salvate). Il test unitario associato (\texttt{assistant-page.view-model.spec.ts}) lo costruisce con \texttt{new} passando un \texttt{AssistantService}, un \texttt{MvpStateStore} e una funzione di scorrimento simulati a mano (senza avviare Angular), a riprova diretta che qui MVVM non è solo nominale.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontend/AssistantPageViewModel.png}
+    \caption{Classe --- AssistantPageViewModel}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2556,6 +2636,12 @@ Metodi
 
 Stessa forma di \texttt{AssistantPageViewModel} applicata al Co-Pilot, con una superficie più piccola: copre upload, eliminazione, revisione dei dati estratti e correzione del messaggio di invio. Non riceve la dipendenza di scorrimento dal costruttore, perché questa pagina non ne ha mai avuto bisogno.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontend/CopilotPageViewModel.png}
+    \caption{Classe --- CopilotPageViewModel}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{workflow: DocumentWorkflowService}, \texttt{store: MvpStateStore}: dipendenze ricevute dal costruttore, non da \texttt{inject()}.
@@ -2580,6 +2666,12 @@ Metodi
 
 Il più semplice dei tre: nessuna azione di scrittura, solo segnali derivati dallo Store condiviso e la navigazione verso le altre due pagine. I conteggi (\texttt{generatedDrafts}, \texttt{documentsToReview}, \texttt{readyDocuments}) leggono metriche sull'intero tenant tramite \texttt{store.metric()}, non ricalcolandole sulle liste locali: \texttt{history} e \texttt{documents} nello Store sono finestre limitate (rispettivamente 10 e 40 elementi), e un conteggio derivato da quelle finestre darebbe un numero silenziosamente sbagliato appena i dati reali le superano.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontend/OverviewPageViewModel.png}
+    \caption{Classe --- OverviewPageViewModel}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{store: MvpStateStore}, \texttt{router: Router}, \texttt{scrollTo: (elementId: string) => void}: dipendenze ricevute dal costruttore.
@@ -2596,8 +2688,15 @@ Metodi
 
 Sorgente unica dello stato applicativo (Assistant e Co-Pilot), condivisa da tutte le viste tramite i rispettivi ViewModel. Espone segnali di sola lettura derivati da un unico segnale privato, così che né i ViewModel né i componenti possano scrivere lo stato direttamente, ma solo tramite i metodi dedicati.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontend/MvpStateStore.png}
+    \caption{Classe --- MvpStateStore}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
+    \item \texttt{api: AlittlebyteMVPAPIService}: client HTTP generato dal contratto OpenAPI, iniettato tramite \texttt{inject()} (unico punto della classe accoppiato ad Angular, essendo un vero \texttt{@Injectable} e non un ViewModel puro).
     \item \texttt{state: Signal<MvpState | null>}, \texttt{loading: Signal<boolean>}, \texttt{error: Signal<string | null>}: segnali di sola lettura.
     \item \texttt{documents}, \texttt{history}, \texttt{promptConfigurations}, \texttt{assistantMetrics}, \texttt{copilotMetrics}: segnali derivati (\texttt{computed}) sulle diverse viste dello stato.
 \end{itemize}
@@ -2620,13 +2719,71 @@ Il livello Model si articola su due strati. Il primo è generato automaticamente
 
 Arricchisce i tipi generati per il modulo Assistant. \texttt{CommunicationGenerationPhase} traduce le combinazioni di \texttt{generationStatus}/\texttt{coverStatus} restituite dal backend in un'unica fase discreta, usata dal template per etichette e stato dei controlli senza replicare quella logica in più punti; \texttt{GeneratedDraft} è la proiezione della bozza usata dal pannello di anteprima, con solo i campi che quella vista consuma.
 
-Attributi
-\begin{itemize}\raggedright
-    \item \texttt{CommunicationDraftForm}: alias del tipo di richiesta generato, usato dal form di generazione.
-    \item \texttt{CommunicationGenerationPhase}: unione di stringhe letterali (\textit{queued}, \textit{generating-text}, \textit{generating-cover}, \textit{still\_running}, \textit{completed}, \textit{failed}).
-    \item \texttt{CommunicationGenerationProgress}, \texttt{GeneratedDraft}, \texttt{RateDraftPayload}: interfacce di proiezione per, rispettivamente, l'avanzamento SSE, l'anteprima e la valutazione.
-    \item \texttt{communicationTones}, \texttt{communicationStyles}: le opzioni di tono e stile selezionabili, condivise fra form e validazione.
-\end{itemize}
+\paragraph{CommunicationDraftForm}
+
+Alias del tipo di richiesta generato da OpenAPI, usato dal form di generazione senza introdurre una forma propria.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/CommunicationDraftForm.png}
+    \caption{Tipo --- CommunicationDraftForm}
+\end{figure}
+
+\paragraph{CommunicationGenerationPhase}
+
+Unione di stringhe letterali che traduce le combinazioni di \texttt{generationStatus}/\texttt{coverStatus} restituite dal backend in un'unica fase discreta, usata dal template per etichette e stato dei controlli senza replicare quella logica in più punti.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/CommunicationGenerationPhase.png}
+    \caption{Tipo --- CommunicationGenerationPhase}
+\end{figure}
+
+\paragraph{CommunicationGenerationProgress}
+
+Proiezione dell'evento di avanzamento SSE ricevuto durante la generazione: testo e copertina restano opzionali perché arrivano in momenti diversi della pipeline.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/CommunicationGenerationProgress.png}
+    \caption{Tipo --- CommunicationGenerationProgress}
+\end{figure}
+
+\paragraph{GeneratedDraft}
+
+Proiezione della bozza usata dal pannello di anteprima, con solo i campi che quella vista consuma, non l'intera \texttt{Communication} generata da OpenAPI.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/GeneratedDraft.png}
+    \caption{Tipo --- GeneratedDraft}
+\end{figure}
+
+\paragraph{RateDraftPayload}
+
+Payload minimo per la valutazione di una bozza: stelle e commento facoltativo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/RateDraftPayload.png}
+    \caption{Tipo --- RateDraftPayload}
+\end{figure}
+
+\paragraph{communicationTones e communicationStyles}
+
+Le opzioni di tono e stile selezionabili nel form di generazione, condivise fra form e validazione così da non poter divergere.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.28\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/communicationTones.png}
+    \caption{Tipo --- communicationTones}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.28\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/communicationStyles.png}
+    \caption{Tipo --- communicationStyles}
+\end{figure}
 
 \subsubsection{Tipi del modulo Co-Pilot}
 
@@ -2634,12 +2791,79 @@ L'equivalente Co-Pilot di \texttt{assistant.model.ts}, distribuito fra \texttt{d
 
 \texttt{toDocumentFilters()} converte i valori grezzi del form nei criteri inviati all'API scartando quelli vuoti, evitando percorsi che possano sollevare eccezioni: un valore inatteso nel form non deve poter interrompere silenziosamente lo stream dei filtri.
 
-Attributi
-\begin{itemize}\raggedright
-    \item \texttt{DocumentUploadPhase}: unione di stringhe letterali (\textit{uploading}, \textit{queued}, \textit{processing}, \textit{extracting}, \textit{still\_running}, \textit{completed}, \textit{failed}); \textit{still\_running} riflette l'omonima fase SSE del backend (Sezione 6.4, \texttt{SseClient}) quando lo stream supera il timeout senza che la pipeline sia effettivamente fallita.
-    \item \texttt{DocumentFilters}, \texttt{ConfidenceCriterion}, \texttt{DocumentUploadMetadata}, \texttt{DocumentUploadProgress}, \texttt{DocumentPreviewStatus}: interfacce e unioni per, rispettivamente, i criteri di ricerca, il confronto di soglia, i metadati di upload, l'avanzamento e lo stato dell'anteprima PDF.
-    \item \texttt{DocumentFilterFormValue}: tipo derivato dal \texttt{FormGroup} dei filtri tramite \texttt{ReturnType}, così i due restano sincronizzati senza doverli dichiarare due volte.
-\end{itemize}
+\paragraph{DocumentUploadPhase}
+
+Fase dell'elaborazione usata dalla barra di progressione a step; \textit{still\_running} riflette l'omonima fase SSE del backend (Sezione 6.4, \texttt{SseClient}) quando lo stream supera il timeout senza che la pipeline sia effettivamente fallita.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentUploadPhase.png}
+    \caption{Tipo --- DocumentUploadPhase}
+\end{figure}
+
+\paragraph{DocumentFilters}
+
+Criteri di filtro per l'elenco documenti mostrato nel Co-Pilot: ricerca testuale, stato di invio, soglia di confidenza col relativo criterio di confronto, mese e anno.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentFilters.png}
+    \caption{Tipo --- DocumentFilters}
+\end{figure}
+
+\paragraph{ConfidenceCriterion}
+
+Criterio di confronto per il filtro di confidenza: sopra o sotto la soglia impostata.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/ConfidenceCriterion.png}
+    \caption{Tipo --- ConfidenceCriterion}
+\end{figure}
+
+\paragraph{DocumentUploadMetadata}
+
+Metadati manuali inviati insieme al file in upload: tipo di documento, ragione sociale, mese e anno di riferimento — gli stessi che il backend espone tramite \texttt{OriginalDocument::hasManualUploadMetadata()} (Sezione 5.1).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentUploadMetadata.png}
+    \caption{Tipo --- DocumentUploadMetadata}
+\end{figure}
+
+\paragraph{DocumentUploadProgress}
+
+Avanzamento dell'upload e dell'elaborazione di un documento, con l'identificativo ricevuto non appena disponibile.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentUploadProgress.png}
+    \caption{Tipo --- DocumentUploadProgress}
+\end{figure}
+
+\paragraph{DocumentPreviewStatus}
+
+Stato dell'anteprima PDF di un sotto-documento, dal caricamento all'eventuale indisponibilità.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentPreviewStatus.png}
+    \caption{Tipo --- DocumentPreviewStatus}
+\end{figure}
+
+\paragraph{DocumentFilterFormValue}
+
+Tipo derivato dal \texttt{FormGroup} dei filtri tramite \texttt{ReturnType}, così i due restano sincronizzati senza doverli dichiarare due volte.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentFilterFormValue.png}
+    \caption{Tipo --- DocumentFilterFormValue}
+\end{figure}
+
+\paragraph{createDocumentFilterForm e toDocumentFilters}
+
+Le due funzioni che costruiscono il \texttt{FormGroup} dei filtri e ne convertono il valore nei criteri inviati all'API.
 
 Metodi
 \begin{itemize}\raggedright
@@ -2656,7 +2880,13 @@ Ogni feature ha un servizio dedicato (\texttt{AssistantService}, \texttt{Documen
 
 Il servizio più corposo del frontend, perché incapsula anche il consumo dello stream SSE lato client, simmetrico a quello che il backend espone (Sezione 3.2). \texttt{trackGeneration()} avvolge la chiamata HTTP iniziale e la connessione SSE risultante in un unico \texttt{Observable}: chi lo sottoscrive riceve una sequenza di stati di avanzamento (\textit{queued} → testo → copertina → \textit{completed}/\textit{failed}) senza dover gestire direttamente gli eventi SSE.
 
-La connessione non usa più \texttt{EventSource} direttamente: la meccanica di basso livello (apertura dello stream, parsing dei frame, distinzione fra evento nominato \texttt{error} e caduta della connessione) è stata estratta in \texttt{SseClient} (Sezione 6.4, sottosezione successiva); questo servizio resta responsabile solo dell'orchestrazione specifica di feature (interpretazione degli eventi \textit{progress}/\textit{text}/\textit{cover}/\textit{done}, aggiornamento dello Store).
+La connessione non usa più \texttt{EventSource} direttamente: la meccanica di basso livello (apertura dello stream, parsing dei frame, distinzione fra evento nominato \texttt{error} e caduta della connessione) è stata estratta in \texttt{SseClient} (Sezione 6.4, più avanti in questa sezione); questo servizio resta responsabile solo dell'orchestrazione specifica di feature (interpretazione degli eventi \textit{progress}/\textit{text}/\textit{cover}/\textit{done}, aggiornamento dello Store).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendServizi/AssistantService.png}
+    \caption{Classe --- AssistantService}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2687,6 +2917,12 @@ Equivalente Co-Pilot di \texttt{AssistantService}, con lo stesso incapsulamento 
 
 \texttt{previewStatus()} è invece un caso specifico di questo modulo, assente sul dominio Communications e indipendente da SSE: verifica il \textit{content-type} della risposta prima di montare l'iframe di anteprima, perché l'endpoint può restituire il PDF (200), un 404 se il file non è ancora disponibile o un 503 JSON se lo storage non è raggiungibile: tre esiti che il componente chiamante deve distinguere per mostrare lo stato corretto.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendServizi/DocumentWorkflowService.png}
+    \caption{Classe --- DocumentWorkflowService}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{api: AlittlebyteMVPAPIService}, \texttt{store: MvpStateStore}, \texttt{sse: SseClient}.
@@ -2708,6 +2944,12 @@ Metodi
 Client SSE condiviso da entrambi i servizi di feature, iniettabile a livello applicazione (\texttt{providedIn: "root"}). A differenza di \texttt{EventSource}, è basato su \texttt{fetch}: può quindi inviare gli header di correlazione (\texttt{X-Request-Id}, \texttt{X-Correlation-Id}) sulla richiesta iniziale di apertura dello stream, cosa che \texttt{EventSource} non permette.
 
 Distingue esplicitamente l'evento SSE nominato \texttt{error} (dati applicativi, es. un messaggio di errore) dalla caduta della connessione o da una risposta non riuscita: due condizioni che \texttt{EventSource} collassa in un unico \texttt{onerror}, costringendo il chiamante a indovinare quale sia successo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendServizi/SseClient.png}
+    \caption{Classe --- SseClient}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2735,6 +2977,12 @@ Resta fuori da questo conteggio \texttt{StarRatingComponent}: vive in \texttt{ap
 
 Il più semplice dei componenti condivisi: non introduce un nuovo elemento HTML, ma si applica come attributo su un \texttt{<button>} nativo (\texttt{<button mvpButton variant="secondary">}). In questo modo il componente lascia al browser tipo, stato disabilitato, attributi ARIA ed eventi nativi, occupandosi solo della variante di stile applicata all'host.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/ButtonComponent.png}
+    \caption{Classe --- ButtonComponent}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{variant: InputSignal<"primary" | "secondary" | "icon">}: variante di stile, di default \textit{primary}.
@@ -2752,6 +3000,12 @@ Metodi
 
 \texttt{ErrorStateComponent} non duplica quel markup: lo compone, fissando un titolo di default (\textit{"Servizio non disponibile"}) e passando il messaggio d'errore come contenuto proiettato: è il componente che compare in cima a ogni pagina quando lo stato di errore è valorizzato. Espone ora anche un pulsante di ripetizione opzionale (\textit{"Riprova"}), renderizzato solo quando \texttt{canRetry()} è vero: alla pressione emette l'evento \texttt{retry}, lasciando al chiamante decidere cosa ritentare.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/AlertErrorState.png}
+    \caption{Classi --- AlertComponent, ErrorStateComponent}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{AlertComponent}: \texttt{title: InputSignal<string>} (obbligatorio).
@@ -2767,6 +3021,12 @@ Metodi
 \subsubsection{EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent}
 
 Tre componenti minimi di visualizzazione, senza alcuna logica: si limitano a proiettare contenuto o un'etichetta dentro un elemento con lo stile e la semantica ARIA corretti (\texttt{role="status"} per il caricamento, colori diversi per tono sull'etichetta di stato).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/EmptyLoadingStatus.png}
+    \caption{Classi --- EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2784,6 +3044,12 @@ Metodi
 
 \texttt{MetricCardComponent} mostra una singola coppia valore/etichetta. \texttt{MetricsPanelComponent} la compone in una griglia, gestendo da sé i tre stati della richiesta a monte: caricamento (\texttt{LoadingStateComponent}), elenco vuoto (\texttt{EmptyStateComponent}) o dati presenti, così ogni pannello di metriche della SPA (Overview, Assistant, Co-Pilot) ottiene lo stesso comportamento senza ripeterlo.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/MetricCardPanel.png}
+    \caption{Classi --- MetricCardComponent, MetricsPanelComponent}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{MetricCardComponent}: \texttt{value: InputSignal<string | number>} (obbligatorio), \texttt{label: InputSignal<string>} (obbligatorio).
@@ -2798,6 +3064,12 @@ Metodi
 \subsubsection{ProgressBarComponent}
 
 Barra di avanzamento orizzontale condivisa fra le pipeline asincrone di entrambi i moduli: non conosce le fasi di dominio (\textit{extracting}, \textit{generating-cover}...), riceve già una percentuale e uno stato visivo generico, ed è ogni feature a mappare la propria fase su questi ultimi. Finché lo stato è \textit{active} un bagliore scorre da sinistra a destra; con \texttt{prefers-reduced-motion} resta fermo, per conformità WCAG 2.3.3.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/ProgressBarComponent.png}
+    \caption{Classe --- ProgressBarComponent}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2814,6 +3086,12 @@ Metodi
 
 I due componenti di campo condivisi dai form reattivi della SPA, con la stessa struttura: un'etichetta associata via \texttt{<label for>}, un identificativo generato automaticamente dal testo dell'etichetta se non fornito esplicitamente, e un \texttt{FormControl} ricevuto come segnale di input invece che tramite \texttt{ControlValueAccessor}: una scelta più semplice, sufficiente perché nessuno dei due deve integrarsi con \texttt{ngModel}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/SelectTextAreaField.png}
+    \caption{Classi --- SelectFieldComponent, TextAreaFieldComponent}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{SelectFieldComponent}: \texttt{label}, \texttt{options: InputSignal<readonly string[]>}, \texttt{control: InputSignal<FormControl<string>>} (tutti obbligatori), \texttt{id: InputSignal<string>} (opzionale).
@@ -2828,6 +3106,12 @@ Metodi
 \subsubsection{FileDropzoneComponent}
 
 Area di trascinamento/selezione file per il caricamento documenti nel Co-Pilot, ristretta ai soli PDF (\texttt{accept="application/pdf"}). Ripulisce il valore dell'\texttt{<input>} subito dopo aver emesso il file selezionato, così lo stesso file può essere ricaricato una seconda volta senza che il browser lo consideri un valore invariato e sopprima l'evento \texttt{change}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/FileDropzoneComponent.png}
+    \caption{Classe --- FileDropzoneComponent}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2852,6 +3136,12 @@ Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(in
 
 Collega inoltre un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Registra anche \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/AssistantPageRelation.png}
+    \caption{Classe --- AssistantPage}
+\end{figure}
+
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected} (non più \texttt{private}): il template la legge direttamente solo per il retry del banner d'errore principale (\texttt{store.reload()}), oltre a passarla al costruttore del ViewModel e leggerla come segnale sorgente nell'\texttt{effect()}.
@@ -2869,6 +3159,12 @@ Metodi
 Stessa struttura di \texttt{AssistantPage}, applicata al Co-Pilot: compone il pannello di upload (\texttt{DocumentUploadPanelComponent}), l'elenco documenti (\texttt{DocumentListComponent}) e il pannello di revisione del sotto-documento selezionato (\texttt{SubDocumentListComponent}), leggendo dal template anche \texttt{vm.error()}, \texttt{vm.loading()} e \texttt{vm.metrics()} invece dei rispettivi segnali sullo Store, con la stessa unica eccezione di \texttt{AssistantPage}: il banner d'errore principale usa \texttt{[canRetry]="true" (retry)="store.reload()"} direttamente sullo Store. Istanzia il ViewModel con \texttt{new CopilotPageViewModel(inject(DocumentWorkflowService), store)}, senza la dipendenza di scorrimento perché questo ViewModel non ne ha mai avuto bisogno (Sezione 6.2).
 
 Collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocumentFilterForm()}) e un \texttt{effect()} che rilegge lo storico documentale chiamando \texttt{vm.reload()} a ogni cambio di filtro o di stato condiviso; registra inoltre \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/CopilotPageRelation.png}
+    \caption{Classe --- CopilotPage}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2889,6 +3185,12 @@ La pagina più semplice: nessun \texttt{FormGroup}, nessun \texttt{effect()}, pe
 Istanzia il ViewModel con \texttt{new OverviewPageViewModel(store, router, scrollToElement)}; i pulsanti di richiamo all'azione nella sezione hero delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scorrimento verso la sezione target sulla pagina di destinazione.
 
 A differenza di \texttt{AssistantPage}/\texttt{CopilotPage}, qui la View legge lo Store direttamente in più punti, non solo nel banner d'errore (\texttt{[canRetry]="true" (retry)="store.reload()"}): anche i due pannelli di metriche per strumento leggono \texttt{store.loading()} e \texttt{store.state()} senza passare da un pass-through del ViewModel. Non è un'incoerenza rispetto al pattern, ma una conseguenza della sua assenza qui: \texttt{OverviewPageViewModel} non espone segnali derivati per le metriche degli strumenti (a differenza di \texttt{vm.error()}/\texttt{vm.loading()}/\texttt{vm.metrics()} sulle altre due pagine), perché quei dati sono già letture dirette e non filtrate dello stato condiviso, senza logica di dominio propria della pagina da isolare.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/OverviewPageRelation.png}
+    \caption{Classe --- OverviewPage}
+\end{figure}
 
 Attributi
 \begin{itemize}\raggedright
@@ -2955,6 +3257,34 @@ I design pattern individuati nel sistema si dividono in due categorie: quelli ap
 
 Esempio nel progetto. \texttt{EloquentDocumentRepository} ed \texttt{EloquentCommunicationRepository} implementano le porte di persistenza sopra Eloquent, \texttt{BedrockDocumentAiAdapter}, \texttt{BedrockCommunicationAiAdapter} e \texttt{TextractOcrAdapter} sopra gli SDK AWS, \texttt{SfnWorkflowEngineAdapter} sopra Step Functions (Sezione 5). Un caso d'uso parla sempre con \texttt{DocumentRepository}, mai con \texttt{SubDocument::query()}. Senza questo pattern il dominio dipenderebbe direttamente da Eloquent e dagli SDK AWS, e nessun caso d'uso sarebbe testabile senza avviare Laravel e senza credenziali AWS/LocalStack: è questa la testabilità del dominio senza framework descritta in Sezione 4.7, dimostrata dalla suite dedicata \texttt{tests/DomainUnit} che istanzia i casi d'uso con implementazioni in memoria delle porte secondarie.
 
+\begin{lstlisting}[style=phplisting, caption={BedrockDocumentAiAdapter -- adapter secondario sopra BedrockService}]
+// app/Mvp/Documents/Adapters/Outbound/Ai/BedrockDocumentAiAdapter.php
+class BedrockDocumentAiAdapter implements DocumentAiGatewayPort
+{
+    public function __construct(private readonly BedrockService $bedrock) {}
+
+    public function splitDocument(string $ocrText, int $pageCount, string $boundaryNonce): array
+    {
+        return $this->bedrock->splitDocument($ocrText, $pageCount, $boundaryNonce);
+    }
+
+    public function extractFields(string $ocrText): array
+    {
+        return $this->bedrock->extractFields($ocrText);
+    }
+
+    public function pageBoundaryMarker(int $page, string $nonce): string
+    {
+        return BedrockService::pageBoundaryMarker($page, $nonce);
+    }
+
+    public function formatUserError(\Throwable $e, string $defaultMessage): string
+    {
+        return BedrockService::formatUserError($e, $defaultMessage);
+    }
+}
+\end{lstlisting}
+
 \subsubsection{Strategy}
 
 \textbf{Intent:} definire una famiglia di algoritmi intercambiabili, incapsularli singolarmente e renderli intercambiabili indipendentemente dal client che li usa.
@@ -2962,6 +3292,43 @@ Esempio nel progetto. \texttt{EloquentDocumentRepository} ed \texttt{EloquentCom
 Risolve il problema di un componente infrastrutturale condiviso da più domini che deve restare agnostico rispetto al passo di business specifico di ciascuno, delegando solo quel passo a un'implementazione selezionata a runtime invece di conoscerla in anticipo.
 
 Esempio nel progetto. \texttt{WorkflowTaskHandler} è la porta primaria implementata da \texttt{DocumentWorkflowTaskHandler} e \texttt{CommunicationWorkflowTaskHandler} (Sezione 5): \texttt{WorkflowTaskRunner}, il collaboratore condiviso che riceve un task da Step Functions/SQS, resta completamente agnostico rispetto al dominio (deduplicazione, presa in carico, audit e metriche sono identici per entrambi) e delega il solo passo di business all'handler selezionato da \texttt{WorkflowTaskRegistry} in base al tipo di task. Senza questo pattern, \texttt{WorkflowTaskRunner} avrebbe bisogno di un \texttt{match}/\texttt{if} sul dominio del task, violando la Dependency Rule verificata in CI (Sezione 4.7): l'infrastruttura di workflow condivisa dovrebbe conoscere i dettagli interni di Documents e Communications.
+
+\begin{lstlisting}[style=phplisting, caption={WorkflowTaskRunner -- selezione della Strategy concreta e delega del passo di business}]
+// app/Mvp/Workflow/Services/WorkflowTaskRunner.php
+class WorkflowTaskRunner
+{
+    public function __construct(
+        private readonly WorkflowTaskRegistry $registry,
+        private readonly AuditLogger $audit,
+        private readonly MetricsRecorder $metrics,
+    ) {}
+
+    public function handle(array $message): array
+    {
+        $taskToken = (string) ($message['taskToken'] ?? $message['task_token'] ?? '');
+        $taskType = (string) ($message['taskType'] ?? $message['task_type'] ?? '');
+
+        if ($taskToken === '' || $taskType === '') {
+            throw new \InvalidArgumentException('Messaggio workflow non valido: taskToken e taskType sono obbligatori.');
+        }
+
+        // Selezione della Strategy concreta: il runner non conosce
+        // DocumentWorkflowTaskHandler ne' CommunicationWorkflowTaskHandler,
+        // solo l'interfaccia WorkflowTaskHandler.
+        $handler = $this->registry->for($taskType);
+        $subject = $handler->resolveSubject($message);
+
+        // [...] deduplicazione via task_token_hash, claim atomico dello
+        // stato "running", gestione dei casi gia' completato/fallito:
+        // logica agnostica dal dominio, identica per ogni taskType.
+
+        // Delega del solo passo di business alla Strategy selezionata.
+        $result = $handler->execute($taskType, $subject, $message);
+
+        // [...] aggiornamento del task, audit, costruzione della risposta.
+    }
+}
+\end{lstlisting}
 
 \subsubsection{Facade}
 
@@ -2971,6 +3338,92 @@ Evita che l'adapter primario (un Controller HTTP o un handler di workflow) debba
 
 Esempio nel progetto. Ogni caso d'uso applicativo (Sezione 5) è una Facade sulle proprie porte secondarie: \texttt{ProcessDocumentService} coordina repository, storage, gateway AI, dispatcher di eventi, heartbeat e generatore di identificativi dietro un solo metodo pubblico (\texttt{process()}); l'adapter primario che lo invoca (\texttt{DocumentController} o \texttt{DocumentWorkflowTaskHandler}) non deve sapere quanti collaboratori servono per soddisfare la richiesta. Senza questo pattern il Controller orchestrerebbe direttamente 4-5 servizi, la situazione esplicitamente evitata dalla separazione fra adapter primario e caso d'uso applicativo su cui si fonda tutta la Sezione 5.
 
+\begin{lstlisting}[style=phplisting, caption={ProcessDocumentService -- Facade su repository, storage, gateway AI, eventi ed heartbeat dietro process()}]
+// app/Mvp/Documents/Application/UseCases/ProcessDocumentService.php
+class ProcessDocumentService implements ProcessDocumentUseCase
+{
+    public function __construct(
+        private readonly DocumentRepository $documents,
+        private readonly DocumentStoragePort $storage,
+        private readonly DocumentAiGatewayPort $ai,
+        private readonly DocumentEventDispatcherPort $events,
+        private readonly WorkflowHeartbeatPort $heartbeat,
+        private readonly LoggerInterface $logger,
+        private readonly UniqueIdGeneratorPort $ids,
+        private readonly OcrRangeReader $ocrRange,
+        private readonly ExtractSubDocumentFieldsUseCase $fieldsExtractor,
+        private readonly ClockInterface $clock,
+        private readonly string $tempDirectory,
+    ) {}
+
+    public function process(int $documentId): array
+    {
+        $document = $this->documents->findOriginalDocument($documentId);
+
+        if ($document->processingStatus() === ProcessingStatus::Completed) {
+            return ['skipped' => true];
+        }
+
+        $absoluteSource = null;
+
+        try {
+            $this->documents->updateOriginalDocument($documentId, OriginalDocumentChanges::none()
+                ->withProcessingStatus(ProcessingStatus::Processing)
+                ->withErrorMessage(null));
+            $this->events->dispatch(new DocumentProcessingStarted($documentId, $document->tenantId));
+
+            $absoluteSource = $this->copyStorageFileToTemporaryPath($document->filePath);
+            $pdf = new Fpdi;
+            $pageCount = max(1, $pdf->setSourceFile($absoluteSource));
+
+            $this->heartbeat->beat(force: true);
+
+            $segments = $this->normalizeSegments($this->splitDocument($document, $pageCount), $pageCount);
+
+            $oldSplitPaths = $this->documents->deleteExistingSubDocuments($documentId);
+            $this->deleteStoragePaths($oldSplitPaths);
+
+            foreach ($segments as $segment) {
+                $this->heartbeat->beat();
+                $splitPath = $this->extractPages($absoluteSource, $documentId, $segment['employee_name'], $segment['start_page'], $segment['end_page']);
+
+                try {
+                    $subDocumentId = $this->documents->createSubDocument(new NewSubDocument(
+                        originalDocumentId: $documentId,
+                        filePath: $splitPath,
+                        startPage: $segment['start_page'],
+                        endPage: $segment['end_page'],
+                    ));
+                } catch (\Throwable $e) {
+                    $this->deleteStoragePaths([$splitPath]);
+
+                    throw $e;
+                }
+
+                $this->fieldsExtractor->extractAndSaveFieldsWithContext($subDocumentId, $document);
+            }
+
+            $document->complete();
+            $this->documents->saveOriginalDocument($document);
+            $this->events->dispatch(new DocumentProcessingCompleted($documentId, $document->tenantId));
+        } catch (\Throwable $e) {
+            $this->handleProcessingFailure($documentId, $e);
+        } finally {
+            if ($absoluteSource !== null) {
+                @unlink($absoluteSource);
+            }
+        }
+
+        return ['skipped' => false];
+    }
+
+    // [...] handleProcessingFailure(), normalizeSegments(), splitDocument(),
+    // deleteStoragePaths(), extractPages(), copyStorageFileToTemporaryPath(),
+    // temporaryPath(): dettagli privati di manipolazione PDF e storage, mai
+    // esposti al chiamante di process().
+}
+\end{lstlisting}
+
 \subsubsection{Factory Method}
 
 \textbf{Intent:} definire un'interfaccia per creare un oggetto, lasciando che sia un metodo dedicato a decidere quale classe concreta istanziare, invece del chiamante.
@@ -2979,6 +3432,38 @@ Centralizza in un solo punto la selezione dell'implementazione corretta a runtim
 
 Esempio nel progetto. \texttt{WorkflowTaskRegistry::for(string \$taskType): WorkflowTaskHandler} seleziona l'handler corretto per tipo di task, senza che \texttt{WorkflowTaskRunner} (il chiamante) conosca le classi concrete \texttt{DocumentWorkflowTaskHandler}/\texttt{CommunicationWorkflowTaskHandler}. Senza questo pattern, quella selezione andrebbe duplicata con logica propria a ogni punto di invocazione del runner.
 
+Nota di onestà: non è Factory Method in senso GoF stretto, che richiede una gerarchia di sottoclassi dove ciascuna decide per override quale prodotto concreto creare. \texttt{WorkflowTaskRegistry} è una singola classe con una mappa interna e un lookup a runtime, non una gerarchia — più vicino a un Registry (nel senso di Fowler) che a un Factory Method: stesso intento pratico (il chiamante non conosce le classi concrete), meccanismo diverso.
+
+\begin{lstlisting}[style=phplisting, caption={WorkflowTaskRegistry -- registrazione e lookup dell'handler per tipo di task}]
+// app/Mvp/Workflow/Services/WorkflowTaskRegistry.php
+class WorkflowTaskRegistry
+{
+    /** @var array<string, WorkflowTaskHandler> */
+    private array $handlers = [];
+
+    public function register(WorkflowTaskHandler $handler): void
+    {
+        foreach ($handler->taskTypes() as $taskType) {
+            $this->handlers[$taskType] = $handler;
+        }
+    }
+
+    public function for(string $taskType): WorkflowTaskHandler
+    {
+        return $this->handlers[$taskType]
+            ?? throw new \InvalidArgumentException("Task workflow non supportato: {$taskType}");
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function taskTypes(): array
+    {
+        return array_keys($this->handlers);
+    }
+}
+\end{lstlisting}
+
 \subsubsection{Singleton}
 
 \textbf{Intent:} garantire che una classe abbia una sola istanza condivisa e fornire un punto di accesso globale ad essa.
@@ -2986,6 +3471,42 @@ Esempio nel progetto. \texttt{WorkflowTaskRegistry::for(string \$taskType): Work
 Evita la costruzione ripetuta di collaboratori costosi da istanziare (un client HTTP verso un servizio esterno, tipicamente) e centralizza in un solo punto la scelta di quale implementazione concreta soddisfa una data porta.
 
 Esempio nel progetto. I client AWS (\texttt{SfnClient}, il client Bedrock, il client Textract) e i rispettivi adapter sono bindati come singleton nel service provider (costruzione costosa evitata, connessioni riutilizzate), ma bindati all'interfaccia di porta, non alla classe concreta: il binding diventa così anche il punto unico in cui si decide quale adapter soddisfa quale porta. Senza questa scelta, cambiare adapter richiederebbe cercare e modificare ogni type-hint concreto sparso nella codebase.
+
+Nota di onestà: non è un Singleton in senso GoF stretto, che richiede che sia la classe stessa a impedire una seconda istanza (costruttore privato, \texttt{getInstance()} statico). Qui è il container a garantire un'unica istanza per la durata della request: un vincolo di lifecycle esterno alla classe, non una proprietà che la classe impone su se stessa — \texttt{SfnWorkflowEngineAdapter} e gli altri adapter restano classi con un costruttore pubblico ordinario, e nulla impedirebbe a un altro punto del codice di chiamare comunque \texttt{new} e ottenere una seconda istanza.
+
+\begin{lstlisting}[style=phplisting, caption={AppServiceProvider -- binding singleton dei client AWS e delle porte secondarie}]
+// app/Providers/AppServiceProvider.php (register())
+$this->app->singleton(BedrockRuntimeClient::class, function () {
+    return $this->bedrockClient((string) config('services.bedrock.region'));
+});
+
+$this->app->singleton(SfnClient::class, function () {
+    $config = [
+        'version' => 'latest',
+        'region' => config('services.workflow.region'),
+    ];
+
+    if (filled(config('services.workflow.endpoint'))) {
+        $config['endpoint'] = config('services.workflow.endpoint');
+    }
+
+    return new SfnClient($config);
+});
+
+// [...] SqsClient, TextractClient, WorkflowTaskHeartbeat: stesso schema,
+// client costoso o servizio condiviso, un solo binding.
+
+// --- Dominio Documents: porta -> adapter ---
+$this->app->singleton(OcrGatewayPort::class, TextractOcrAdapter::class);
+$this->app->singleton(DocumentAiGatewayPort::class, BedrockDocumentAiAdapter::class);
+$this->app->singleton(DocumentStoragePort::class, FlysystemDocumentStorageAdapter::class);
+$this->app->singleton(DocumentRepository::class, EloquentDocumentRepository::class);
+$this->app->singleton(SendMessageRendererPort::class, DompdfSendMessageRenderer::class);
+$this->app->singleton(DocumentEventDispatcherPort::class, LaravelDocumentEventDispatcher::class);
+
+// Workflow: porta condivisa fra Documents e Communications.
+$this->app->singleton(WorkflowEnginePort::class, SfnWorkflowEngineAdapter::class);
+\end{lstlisting}
 
 \subsubsection{Observer}
 
@@ -2997,6 +3518,35 @@ Esempio nel progetto. Applicato simmetricamente a entrambi i domini, con porte s
 
 Prima dell'adozione sistematica del pattern, le chiamate ad audit e metriche erano sparse manualmente in ogni caso d'uso: la coppia audit+metrica per "copertina degradata" era duplicata in due punti distinti (degrado da errore del modello o dello storage, degrado da timeout in \texttt{FinalizeCommunicationService}); con l'evento unico quella duplicazione sparisce. Senza Observer, ogni nuova reazione a un evento di dominio richiederebbe toccare ogni caso d'uso che genera quell'evento, invece di aggiungere un listener.
 
+\begin{lstlisting}[style=phplisting, caption={Registrazione del listener in AppServiceProvider e reazione in RecordDocumentProcessingStarted}]
+// app/Providers/AppServiceProvider.php (boot())
+Event::listen(DocumentUploadAccepted::class, RecordDocumentUploadAccepted::class);
+Event::listen(DocumentProcessingStarted::class, RecordDocumentProcessingStarted::class);
+Event::listen(DocumentProcessingCompleted::class, RecordDocumentProcessingCompleted::class);
+Event::listen(DocumentProcessingFailed::class, RecordDocumentProcessingFailed::class);
+// [...] altri 10 listener per Documents, 21 per Communications: stesso
+// schema, un Event::listen per coppia evento/listener.
+
+// app/Mvp/Documents/Application/Listeners/RecordDocumentProcessingStarted.php
+class RecordDocumentProcessingStarted
+{
+    public function __construct(private readonly AuditLogger $audit) {}
+
+    public function handle(DocumentProcessingStarted $event): void
+    {
+        $this->audit->record(
+            'mvp-document-processing-started',
+            resourceType: 'original_document',
+            resourceId: (string) $event->documentId,
+            metadata: ['status' => ProcessingStatus::Processing->value],
+            tenantId: $event->tenantId,
+        );
+    }
+}
+\end{lstlisting}
+
+Il caso d'uso che pubblica l'evento (\texttt{ProcessDocumentService::process()}, si veda il Listing precedente) non conosce \texttt{RecordDocumentProcessingStarted}: chiama \texttt{\$this->events->dispatch(new DocumentProcessingStarted(...))} sulla propria porta secondaria, e il dispatcher Laravel invoca tutti i listener registrati per quell'evento.
+
 \subsubsection{Command}
 
 \textbf{Intent:} incapsulare una richiesta come oggetto a sé stante, permettendo di parametrizzare i client con richieste diverse e di trattare ogni richiesta come una singola unità testabile in isolamento.
@@ -3004,6 +3554,49 @@ Prima dell'adozione sistematica del pattern, le chiamate ad audit e metriche era
 Trasforma ogni operazione applicativa in un oggetto con una singola responsabilità, testabile passando implementazioni fittizie delle sue dipendenze senza dover avviare l'intero framework che lo circonda.
 
 Esempio nel progetto. Ogni caso d'uso applicativo (Sezione 5) è una classe dedicata a una singola porta primaria, la stessa forma già usata da \texttt{WorkflowTaskHandler::execute()}: un caso d'uso, una responsabilità, testabile passando implementazioni fittizie delle porte secondarie senza avviare Laravel.
+
+\begin{lstlisting}[style=phplisting, caption={DeleteDocumentService -- caso d'uso applicativo con una singola porta primaria (delete())}]
+// app/Mvp/Documents/Application/UseCases/DeleteDocumentService.php
+class DeleteDocumentService implements DeleteDocumentUseCase
+{
+    public function __construct(
+        private readonly DocumentRepository $documents,
+        private readonly DocumentStoragePort $storage,
+        private readonly DocumentEventDispatcherPort $events,
+        private readonly LoggerInterface $logger,
+    ) {}
+
+    public function delete(int $subDocumentId, Actor $actor): void
+    {
+        $subDocument = $this->documents->findSubDocument($subDocumentId);
+        $originalDocumentId = $subDocument->originalDocumentId;
+        $original = $this->documents->findOriginalDocument($originalDocumentId);
+
+        if ($original->tenantId !== $actor->tenantId) {
+            throw new DocumentNotAuthorizedException;
+        }
+
+        $this->documents->deleteSubDocument($subDocumentId);
+        $this->deleteStoragePath($subDocument->filePath);
+
+        $this->events->dispatch(new SubDocumentDeleted($subDocumentId, $originalDocumentId, $actor));
+
+        if (! $this->documents->originalDocumentHasRemainingSubDocuments($originalDocumentId)) {
+            $this->documents->deleteOriginalDocumentWithWorkflowTasks($originalDocumentId);
+            $this->deleteStoragePath($original->filePath);
+        }
+    }
+
+    private function deleteStoragePath(string $path): void
+    {
+        try {
+            $this->storage->delete($path);
+        } catch (\Throwable $e) {
+            $this->logger->warning('DeleteDocumentService: storage cleanup failed', ['path' => $path, 'message' => $e->getMessage()]);
+        }
+    }
+}
+\end{lstlisting}
 
 Nota di onestà: l'idea "un caso d'uso = una classe con un solo metodo pubblico" non regge alla lettera per le porte che raggruppano più transizioni sullo stesso aggregato: \texttt{CommunicationDraftUseCase} ne ha cinque (\texttt{favorite}/\texttt{unfavorite}/\texttt{update}/\texttt{save}/\texttt{discard}), \texttt{StartCommunicationWorkflowUseCase} e \texttt{UpdateCommunicationCoverUseCase} ne hanno due ciascuna. È una scelta esplicita (raggruppare transizioni correlate sullo stesso aggregato invece di una classe per transizione), non un Command puro: si applica a metà dei casi d'uso, non a tutti.
 
@@ -3023,6 +3616,68 @@ Evita che un ViewModel debba orchestrare direttamente più collaboratori del liv
 
 Esempio nel progetto. \texttt{AssistantService} e \texttt{DocumentWorkflowService} (Sezione 6.4) sono Facade sul client HTTP generato, su \texttt{SseClient} e sullo Store condiviso: un ViewModel chiama un solo metodo (\texttt{generate()}, \texttt{upload()}...) senza sapere che dietro c'è una richiesta HTTP, l'apertura di uno stream SSE e un aggiornamento dello stato applicativo. Senza questo pattern, ogni ViewModel dovrebbe orchestrare direttamente client API, \texttt{SseClient} e \texttt{MvpStateStore} per ciascuna azione, duplicando la stessa sequenza di passi in più punti.
 
+\begin{lstlisting}[style=tslisting, caption={AssistantService -- Facade su client HTTP generato, SseClient e MvpStateStore dietro generate()}]
+// apps/frontend/src/app/features/assistant/data/assistant.service.ts
+generate(payload: CommunicationDraftForm): Observable<CommunicationGenerationProgress> {
+  return this.trackGeneration(this.api.generateMvpCommunication(payload));
+}
+
+private trackGeneration(
+  start$: Observable<StartCommunicationGenerationResponse>
+): Observable<CommunicationGenerationProgress> {
+  return new Observable<CommunicationGenerationProgress>((observer) => {
+    let closeStream: (() => void) | null = null;
+
+    const subscription = start$.subscribe({
+      next: (response) => {
+        observer.next({
+          status: response.message,
+          phase: "queued",
+          communicationId: response.communicationId
+        });
+
+        closeStream = this.sse.connect(response.streamUrl, {
+          onEvent: (event, data) => {
+            // [...] rilancia sull'observer un evento CommunicationGenerationProgress
+            // per ciascun evento SSE ("progress", "text", "cover", "still_running"),
+            // e su "done" aggiorna lo Store con lo stato autorevole del backend:
+            if (event === "done") {
+              const payload = data as { communication?: Communication; state?: MvpState };
+
+              if (payload.state) {
+                this.store.setState(payload.state);
+              }
+
+              observer.next({
+                status: "Bozza generata correttamente.",
+                phase: "completed",
+                communicationId: response.communicationId,
+                communication: payload.communication
+              });
+              closeStream?.();
+              observer.complete();
+            }
+          },
+          onConnectionError: () => {
+            closeStream?.();
+            this.store.reload();
+            observer.complete();
+          }
+        });
+      },
+      error: (error: unknown) => observer.error(error)
+    });
+
+    return () => {
+      subscription.unsubscribe();
+      closeStream?.();
+    };
+  });
+}
+\end{lstlisting}
+
+Il chiamante (\texttt{AssistantPageViewModel::generate()}, si veda il Listing successivo) vede un solo \texttt{Observable<CommunicationGenerationProgress>}: la richiesta HTTP iniziale, la connessione SSE e l'aggiornamento dello Store restano interamente dietro questo metodo.
+
 \subsubsection{Presentation Model}
 
 \textbf{Intent (Fowler, POEAA):} rappresentare lo stato e il comportamento della view in una classe indipendente dai widget della piattaforma, così che la view sia una proiezione sottile di quello stato invece di contenerlo.
@@ -3030,6 +3685,52 @@ Esempio nel progetto. \texttt{AssistantService} e \texttt{DocumentWorkflowServic
 A differenza del Facade, non è un pattern GoF ma architetturale (POEAA, come Repository o Active Record). Separa la logica applicativa di una pagina dal framework che la ospita, rendendola verificabile senza avviare l'infrastruttura di rendering: al prezzo di un file in più per ogni pagina a cui viene applicato.
 
 Esempio nel progetto. Descritto per intero in Sezione 6.2: ogni pagina principale (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}) ha un \texttt{*ViewModel} sibling (classe TypeScript pura, costruita con \texttt{new}, senza \texttt{inject()} né riferimenti al DOM) che il Component costruisce e a cui lega l'intero template.
+
+\begin{lstlisting}[style=tslisting, caption={AssistantPageViewModel -- classe pura costruita con new(), niente inject() né riferimenti al DOM}]
+// apps/frontend/src/app/features/assistant/assistant-page.view-model.ts
+export class AssistantPageViewModel {
+  readonly phase: WritableSignal<CommunicationGenerationPhase | "idle"> = signal("idle");
+  readonly isGenerating: Signal<boolean> = computed(
+    () => this.phase() === "queued" || this.phase() === "generating-text" || this.phase() === "generating-cover"
+  );
+  readonly status = signal("In attesa di istruzioni.");
+  readonly selectedDraftId: WritableSignal<number | null> = signal(null);
+  readonly latestDraft: WritableSignal<GeneratedDraft | null> = signal(null);
+
+  // [...] altri diciassette signal/computed per storico, configurazioni,
+  // filtri, stati di caricamento delle singole azioni.
+
+  readonly error: Signal<string | null> = computed(() => this.store.error());
+
+  constructor(
+    private readonly assistant: AssistantService,
+    private readonly store: MvpStateStore,
+    private readonly scrollTo: (elementId: string) => void
+  ) {}
+
+  generate(payload: CommunicationDraftForm): void {
+    this.phase.set("queued");
+    this.status.set("Generazione in corso.");
+    this.selectedDraftId.set(null);
+    this.latestDraft.set(null);
+    this.rateError.set(null);
+
+    this.assistant.generate(payload).subscribe({
+      next: (progress) => this.handleProgress(progress),
+      error: (error: unknown) => {
+        this.phase.set("failed");
+        this.status.set(getApiErrorMessage(error, "Generazione non disponibile."));
+      }
+    });
+  }
+
+  // [...] regenerate(), rateDraft(), uploadCover(), saveDraft(), discard(),
+  // saveToHistory(), toggleFavorite(), ...: stessa forma per ogni azione,
+  // un metodo che aggiorna i signal e chiama AssistantService (Facade).
+}
+\end{lstlisting}
+
+Le dipendenze (\texttt{AssistantService}, \texttt{MvpStateStore}, la funzione \texttt{scrollTo}) arrivano dal costruttore, non da \texttt{inject()}: la classe è istanziabile con \texttt{new AssistantPageViewModel(...)} in un test senza \texttt{TestBed}, il requisito che ha guidato la scelta di questo pattern al posto del \texttt{@Component} stesso come ViewModel (si veda oltre).
 
 Il minimo richiesto sarebbe il \texttt{@Component} stesso come ViewModel (MVVM in senso lasco): scartato come unica implementazione perché non regge a un test costruito con \texttt{new}, il requisito esplicito del refactor. Senza questo pattern, ogni test sulla logica di una pagina richiederebbe \texttt{TestBed}/\texttt{Injector.create()}: il costo che l'intera Sezione 6.2 spiega di voler evitare, e solo dove il beneficio lo giustifica (le tre pagine principali, non ogni componente della SPA).
 
