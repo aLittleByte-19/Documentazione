@@ -412,11 +412,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. \glslink{prompt}{Prompt} mancante o insufficiente: il campo \glslink{prompt}{prompt} è vuoto o contiene un testo troppo breve; viene eseguito \hyperref[errore-uc-71]{UC-71}.
+        \item 1a. \glslink{prompt}{Prompt} mancante o insufficiente: il campo \glslink{prompt}{prompt} è vuoto o contiene un testo troppo breve; viene eseguito \hyperref[errore-uc-72]{UC-72}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-71]{UC-71}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-72]{UC-72}.
     \end{itemize}
 \end{description}
 
@@ -1035,11 +1035,11 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 1a. \glslink{prompt}{Prompt} mancante o insufficiente: il testo del \glslink{prompt}{prompt} è vuoto o insufficiente al momento del salvataggio; viene eseguito \hyperref[errore-uc-71]{UC-71}.
+        \item 1a. \glslink{prompt}{Prompt} mancante o insufficiente: il testo del \glslink{prompt}{prompt} è vuoto o insufficiente al momento del salvataggio; viene eseguito \hyperref[errore-uc-72]{UC-72}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
-        \item \textbf{Estensioni}: \hyperref[errore-uc-71]{UC-71}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-72]{UC-72}.
     \end{itemize}
 \end{description}
 \newpage
@@ -1434,20 +1434,20 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} seleziona un singolo file dal proprio dispositivo.
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento del documento.
-        \item Il sistema verifica formato e duplicati.
+        \item Il sistema verifica il formato del documento.
         \item Il sistema completa il caricamento e avvia l'analisi \glslink{intelligenza-artificiale-ai}{AI} del documento; il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} riceve notifica dell'esito e può seguire l'avanzamento dell'elaborazione.
         \item Il sistema suddivide il documento per destinatario (se applicabile) e aggiunge allo storico una voce distinta per ciascun sotto-documento, mostrando nome del documento e data di analisi.
     \end{enumerate}
 
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 3b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 3a. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
 
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Generalizzazioni}: UC-33.
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}, \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
 
 \end{description}
@@ -1457,14 +1457,14 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrammi_use_case/UC-33.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-33.png}
     \caption{Diagramma del caso d'uso UC-33: Caricamento documento con classificazione e metadati manuali}
     \label{fig:uc-33}
 \end{figure}
 \begin{description}[style=multiline, leftmargin=4cm, font=\bfseries]
     \item[\glslink{attore-primario}{Attore Principale}] \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}
     \item[\glslink{attore-secondario}{Attore Secondario}] \glslink{ai-analyst}{AI Analyst}
-    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende caricare uno o più documenti nel sistema impostando manualmente classificazione e \glslink{metadati}{metadati}.
+    \item[\glslink{trigger}{Trigger}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} intende caricare un documento nel sistema impostando manualmente classificazione e \glslink{metadati}{metadati}.
     \item[\glslink{precondizioni}{Pre-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} si trova nella sezione di upload del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot.   
     \item[\glslink{postcondizioni}{Post-condizioni}] Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} può consultare nello storico i risultati dell'analisi \glslink{intelligenza-artificiale-ai}{AI} (estrazione dati e split in sotto-documenti per destinatario) con la garanzia che classificazione e \glslink{metadati}{metadati} inseriti manualmente siano stati preservati senza essere sovrascritti dall'\glslink{intelligenza-artificiale-ai}{AI}.
 
@@ -1475,18 +1475,17 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} inserisce il mese di riferimento (\textbf{UC-33.2}).
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} inserisce l'anno di riferimento (\textbf{UC-33.3}).
         \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} inserisce l'azienda (\textbf{UC-33.4}).
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento; dopodiché il sistema verifica formato e duplicati.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} conferma il caricamento; dopodiché il sistema verifica il formato del documento.
         \item Il sistema completa il caricamento, avvia l'analisi \glslink{intelligenza-artificiale-ai}{AI} del documento e mantiene i campi inseriti dall'utente.
     \end{enumerate}
     \item[\glslink{scenario-alternativo}{Scenari Alternativi}]
     \begin{itemize}[leftmargin=*, nosep]
-        \item 6a. Documento duplicato: il sistema rileva che il file è già presente; viene eseguito \hyperref[errore-uc-62]{UC-62}.
-        \item 6b. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
+        \item 6a. Formato non valido: il sistema rileva un formato non supportato; viene eseguito \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
     \item[Relazioni]
     \begin{itemize}[leftmargin=*, nosep]
         \item \textbf{Inclusioni}: UC-33.1, UC-33.2, UC-33.3, UC-33.4.
-        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}, \hyperref[errore-uc-62]{UC-62}.
+        \item \textbf{Estensioni}: \hyperref[errore-uc-62]{UC-62}.
     \end{itemize}
 \end{description}
 
@@ -1689,6 +1688,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
+\newpage
 
 \subsubsection{UC-38: Filtraggio storico per confidenza}
 \mbox{} \\
@@ -1718,6 +1718,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item \textbf{Estensioni}: \hyperref[errore-uc-63]{UC-63}.
     \end{itemize}
 \end{description}
+\newpage
 
 \subsubsection{UC-39: Filtraggio storico per mese e anno}
 \mbox{} \\
@@ -1753,7 +1754,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{diagrammi_use_case/UC-40.png}
+    \includegraphics[width=0.70\textwidth]{diagrammi_use_case/UC-40.png}
     \caption{Diagramma del caso d'uso UC-40: Visualizzazione singolo documento dallo storico}
     \label{fig:uc-40}
 \end{figure}
@@ -1775,6 +1776,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
         \item \textbf{Inclusioni}: UC-40.1, UC-40.2, UC-40.3, UC-40.4, UC-40.5, UC-40.6, UC-40.7, UC-40.8, UC-40.9, UC-40.10, UC-40.11, UC-40.12, UC-40.13, UC-40.14, UC-40.15.
     \end{itemize}
 \end{description}
+\newpage
 
 \paragraph{UC-40.1: Visualizzazione della porzione di documento relativa al dipendente}
 \mbox{} \\
@@ -2367,7 +2369,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-49.png}
+    \includegraphics[width=0.9\textwidth]{diagrammi_use_case/UC-51.png}
     \caption{Diagramma del caso d'uso UC-51: Visualizzazione del messaggio precompilato}
     \label{fig:uc-51}
 \end{figure}
@@ -2458,7 +2460,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-50.png}
+    \includegraphics[width=0.7\textwidth]{diagrammi_use_case/UC-52.png}
     \caption{Diagramma del caso d'uso UC-52: Conferma ed esportazione del messaggio precompilato}
     \label{fig:uc-52}
 \end{figure}
@@ -2806,7 +2808,7 @@ Gli attori rappresentano i ruoli assunti dagli utenti umani o dai sistemi estern
     \item[\glslink{scenario-principale}{Scenario Principale}]
     \begin{enumerate}[leftmargin=*, nosep]
         \item Il sistema interrompe la procedura di caricamento del documento.
-        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza un messaggio di errore con i formati supportati: PDF, PNG, JPG, TIFF.
+        \item Il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} visualizza un messaggio di errore con il solo formato supportato, ossia PDF.
     \end{enumerate}
 \end{description}
 
@@ -3214,21 +3216,21 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     \hline
     RF79-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di eliminare il singolo documento. & \hyperref[fig:uc-50]{UC-50} \\
     \hline
-    RF80-OB & Il sistema deve generare automaticamente il contenuto del messaggio di invio per il documento da spedire. & \hyperref[fig:uc-51]{UC-51} \\
+    RF80-OB & Il sistema deve generare automaticamente il contenuto del messaggio precompilato per il documento da spedire. & \hyperref[fig:uc-51]{UC-51} \\
     \hline
-    RF81-OB & Il sistema deve visualizzare il destinatario del messaggio di invio generato automaticamente. & \hyperref[fig:uc-51.1]{UC-51.1} \\
+    RF81-OB & Il sistema deve visualizzare il destinatario del messaggio precompilato generato automaticamente. & \hyperref[fig:uc-51.1]{UC-51.1} \\
     \hline
-    RF82-OB & Il sistema deve visualizzare l'oggetto del messaggio di invio generato automaticamente. & \hyperref[fig:uc-51.2]{UC-51.2} \\
+    RF82-OB & Il sistema deve visualizzare l'oggetto del messaggio precompilato generato automaticamente. & \hyperref[fig:uc-51.2]{UC-51.2} \\
     \hline
-    RF83-OB & Il sistema deve visualizzare il testo del messaggio di invio generato automaticamente. & \hyperref[fig:uc-51.3]{UC-51.3} \\
+    RF83-OB & Il sistema deve visualizzare il testo del messaggio precompilato generato automaticamente. & \hyperref[fig:uc-51.3]{UC-51.3} \\
     \hline
-    RF84-OB & Il sistema deve permettere la conferma e l'effettivo invio del messaggio al destinatario. & \hyperref[fig:uc-52]{UC-52} \\
+    RF84-OB & Il sistema deve permettere la conferma e lo scaricamento del messaggio precompilato. & \hyperref[fig:uc-52]{UC-52} \\
     \hline
-    RF85-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di modificare il destinatario del messaggio di invio. & \hyperref[fig:uc-53]{UC-53} \\
+    RF85-OB & Il sistema deve permettere al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di modificare il destinatario del messaggio precompilato & \hyperref[fig:uc-53]{UC-53} \\
     \hline
-    RF86-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio di invio. & \hyperref[fig:uc-54]{UC-54} \\
+    RF86-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio precompilato. & \hyperref[fig:uc-54]{UC-54} \\
     \hline
-    RF87-OB & Il sistema deve permettere la modifica del testo del messaggio di invio. & \hyperref[fig:uc-55]{UC-55} \\
+    RF87-OB & Il sistema deve permettere la modifica del testo del messaggio precompilato & \hyperref[fig:uc-55]{UC-55} \\
     \hline
     RF88-OB & Il sistema deve fornire all'\glslink{analista-dati}{Analista dati} una \glslink{dashboard}{dashboard} dedicata con metriche di monitoraggio del modulo \glslink{intelligenza-artificiale-ai}{AI} Co-Pilot. & \hyperref[fig:uc-56]{UC-56} \\
     \hline
@@ -3247,7 +3249,7 @@ I \glslink{requisiti-funzionali}{requisiti funzionali} specificano le funzionali
     \hline
     RF94-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & \hyperref[errore-uc-57]{UC-57} \\
     \hline
-    RF95-OP & Il sistema deve notificare l'utente in caso di indirizzo e-mail non valido durante l'inoltro del documento. & \hyperref[errore-uc-58]{UC-58} \\
+    RF95-OB & Il sistema deve notificare l'utente in caso di indirizzo e-mail non valido durante l'inoltro del documento. & \hyperref[errore-uc-58]{UC-58} \\
     \hline
     RF96-OB & Il sistema deve notificare il \glslink{redattore}{Redattore} quando la ricerca nello storico delle generazioni non produce risultati. & \hyperref[errore-uc-59]{UC-59} \\
     \hline
@@ -3603,15 +3605,15 @@ La tabella seguente riporta il tracciamento tra i \glslink{caso-d-uso-uc}{casi d
     \hline
     \hyperref[fig:uc-49]{UC-49} & RF78-OB \\
     \hline
-    \hyperref[fig:uc-49.1]{UC-49.1} & RF79-OB \\
+    \hyperref[fig:uc-50]{UC-50} & RF79-OB \\
     \hline
-    \hyperref[fig:uc-49.2]{UC-49.2} & RF80-OB \\
+    \hyperref[fig:uc-51]{UC-51} & RF80-OB \\
     \hline
-    \hyperref[fig:uc-49.3]{UC-49.3} & RF81-OB \\
+    \hyperref[fig:uc-51.1]{UC-51.1} & RF81-OB \\
     \hline
-    \hyperref[fig:uc-50]{UC-50} & RF82-OB \\
+    \hyperref[fig:uc-51.2]{UC-51.2} & RF82-OB \\
     \hline
-    \hyperref[fig:uc-51]{UC-51} & RF83-OB \\
+    \hyperref[fig:uc-51.3]{UC-51.3} & RF83-OB \\
     \hline
     \hyperref[fig:uc-52]{UC-52} & RF84-OB \\
     \hline
@@ -3619,22 +3621,22 @@ La tabella seguente riporta il tracciamento tra i \glslink{caso-d-uso-uc}{casi d
     \hline
     \hyperref[fig:uc-54]{UC-54} & RF86-OB \\
     \hline
-    \hyperref[fig:uc-54.1]{UC-54.1} & RF87-OB \\
+    \hyperref[fig:uc-55]{UC-55} & RF87-OB \\
     \hline
-    \hyperref[fig:uc-54.2]{UC-54.2} & RF88-OB \\
+    \hyperref[fig:uc-56]{UC-56} & RF88-OB \\
     \hline
-    \hyperref[fig:uc-54.3]{UC-54.3} & RF89-OB \\
+    \hyperref[fig:uc-56.1]{UC-56.1} & RF89-OB \\
     \hline
-    \hyperref[fig:uc-54.4]{UC-54.4} & RF90-OB \\
+    \hyperref[fig:uc-56.2]{UC-56.2} & RF90-OB \\
     \hline
-    \hyperref[fig:uc-54.5]{UC-54.5} & RF91-OB \\
+    \hyperref[fig:uc-56.3]{UC-56.3} & RF91-OB \\
+    \hline
+    \hyperref[fig:uc-56.4]{UC-56.4} & RF92-OB \\
+    \hline
+    \hyperref[fig:uc-56.5]{UC-56.5} & RF93-OB \\
     \hline
 
     \multicolumn{2}{|l|}{\cellcolor{gray!12}\textbf{Gestione Errori}} \\
-    \hline
-    \hyperref[errore-uc-55]{UC-55} & RF92-OB \\
-    \hline
-    \hyperref[errore-uc-56]{UC-56} & RF93-OP \\
     \hline
     \hyperref[errore-uc-57]{UC-57} & RF94-OB \\
     \hline
@@ -3660,11 +3662,11 @@ La tabella seguente riporta il tracciamento tra i \glslink{caso-d-uso-uc}{casi d
     \hline
     \hyperref[errore-uc-68]{UC-68} & RF105-OB \\
     \hline
-    \hyperref[errore-uc-69]{UC-69} & RF106-OP \\
+    \hyperref[errore-uc-69]{UC-69} & RF106-OB \\
     \hline
     \hyperref[errore-uc-70]{UC-70} & RF107-OP \\
     \hline
-    \hyperref[errore-uc-71]{UC-71} & RF108-OB \\
+    \hyperref[errore-uc-71]{UC-71} & RF108-OP \\
     \hline
     \hyperref[errore-uc-72]{UC-72} & RF109-OB \\
     \hline
@@ -3696,13 +3698,13 @@ La tabella seguente riepiloga il numero di requisiti individuati per categoria e
     \hline
     \endlastfoot
 
-    Funzionali & 93 & 16 & 109 \\
+    Funzionali & 94 & 15 & 109 \\
     \hline
     Di qualità & 9 & 0 & 9 \\
     \hline
     Di vincolo & 18 & 1 & 19 \\
     \hline
-    \rowcolor{gray!12}\textbf{Totale} & \textbf{120} & \textbf{17} & \textbf{137} \\
+    \rowcolor{gray!12}\textbf{Totale} & \textbf{121} & \textbf{16} & \textbf{137} \\
 
 \end{longtable}
 
