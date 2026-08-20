@@ -514,28 +514,27 @@ I \glslink{test-di-integrazione}{test di integrazione} verificano il corretto co
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Moduli} & \textbf{Stato} \\
     \hline
-   
 \endfirsthead
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Moduli} & \textbf{Stato} \\
     \hline
-    \endhead
+\endhead
     \hline
-    \endfoot
+\endfoot
     \hline
-    \endlastfoot
-    TI-001 & Verifica che il sistema scambi correttamente i dati tra frontend e backend tramite API REST. & UI (SPA) $\leftrightarrow$ Laravel 12 & NI \\
+\endlastfoot
+    TI-001 & Verifica che il sistema scambi correttamente i dati tra frontend e backend tramite API REST. & UI (SPA) $\leftrightarrow$ Laravel 12 & S \\
     \hline
-    TI-002 & Verifica che il sistema invii il \glslink{prompt}{prompt} e riceva la risposta generata dal servizio \glslink{intelligenza-artificiale-ai}{AI}. & Backend $\leftrightarrow$ Amazon Bedrock & NI \\
+    TI-002 & Verifica che il sistema invii il \glslink{prompt}{prompt} e riceva la risposta generata dal servizio \glslink{intelligenza-artificiale-ai}{AI}. & Backend $\leftrightarrow$ Amazon Bedrock & S \\
     \hline
-    TI-003 & Verifica che il sistema persista e recuperi correttamente i dati applicativi dal database. & Backend $\leftrightarrow$ PostgreSQL Cloud & NI \\
+    TI-003 & Verifica che il sistema persista e recuperi correttamente i dati applicativi dal database. & Backend $\leftrightarrow$ PostgreSQL Cloud & S \\
     \hline
-    TI-004 & Verifica che il sistema esegua la pipeline \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e la classificazione dei documenti tramite \glslink{ai-analyst}{AI Analyst}. & Backend $\leftrightarrow$ Amazon Textract / Bedrock & NI \\
+    TI-004 & Verifica che il sistema esegua la pipeline \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e la classificazione dei documenti tramite \glslink{ai-analyst}{AI Analyst}. & Backend $\leftrightarrow$ Amazon Textract / Bedrock & S \\
     \hline
-    TI-005 & Verifica che il sistema gestisca correttamente l'upload, lo storage e l'accesso ai file. & Backend $\leftrightarrow$ AWS S3 Object Storage & NI \\
+    TI-005 & Verifica che il sistema gestisca correttamente l'upload, lo storage e l'accesso ai file. & Backend $\leftrightarrow$ AWS S3 Object Storage & S \\
     \hline
-    TI-006 & Verifica che il sistema esegua correttamente i job in modalità asincrona tramite le code. & Backend $\leftrightarrow$ Amazon SQS / Redis & NI \\
+    TI-006 & Verifica che il sistema esegua correttamente i job in modalità asincrona tramite le code. & Backend $\leftrightarrow$ Amazon SQS / Redis & S \\
     \hline
 \end{longtable}
 
@@ -553,293 +552,293 @@ I \glslink{test-di-sistema}{test di sistema} verificano il corretto comportament
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
     \hline
-    \endfirsthead
+\endfirsthead
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
     \hline
-    \endhead
+\endhead
     \hline
-    \endfoot
+\endfoot
     \hline
-    \endlastfoot
+\endlastfoot
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti funzionali}} \\
     \hline
-    TS-F-001 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di compilare il \glslink{prompt}{prompt} testuale descrittivo del contenuto da generare. & RF1-OB & NI \\
+    TS-F-001 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di compilare il \glslink{prompt}{prompt} testuale descrittivo del contenuto da generare. & RF1-OB & S \\
     \hline
-    TS-F-002 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di selezionare il \glslink{tono-comunicativo}{tono comunicativo} della \glslink{bozza-draft}{bozza} da generare. & RF2-OB & NI \\
+    TS-F-002 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di selezionare il \glslink{tono-comunicativo}{tono comunicativo} della \glslink{bozza-draft}{bozza} da generare. & RF2-OB & S \\
     \hline
-    TS-F-003 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di selezionare lo \glslink{stile-editoriale}{stile editoriale} della \glslink{bozza-draft}{bozza} da generare. & RF3-OB & NI \\
+    TS-F-003 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di selezionare lo \glslink{stile-editoriale}{stile editoriale} della \glslink{bozza-draft}{bozza} da generare. & RF3-OB & S \\
     \hline
-    TS-F-004 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di selezionare la lunghezza desiderata per la \glslink{bozza-draft}{bozza} da generare. & RF4-OP & NI \\
+    TS-F-004 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di selezionare la lunghezza desiderata per la \glslink{bozza-draft}{bozza} da generare. & RF4-OP & S \\
     \hline
-    TS-F-005 & Verifica che il sistema avvii la generazione del contenuto tramite AI a partire dal prompt e dai parametri configurati. & RF5-OB & NI \\
+    TS-F-005 & Verifica che il sistema avvii la generazione del contenuto tramite AI a partire dal prompt e dai parametri configurati. & RF5-OB & S \\
     \hline
-    TS-F-006 & Verifica che il sistema visualizzi un'anteprima della bozza generata. & RF6-OB & NI \\
+    TS-F-006 & Verifica che il sistema visualizzi un'anteprima della bozza generata. & RF6-OB & I \\
     \hline
-    TS-F-007 & Verifica che il sistema visualizzi il titolo della bozza generata nell'anteprima. & RF7-OB & NI \\
+    TS-F-007 & Verifica che il sistema visualizzi il titolo della bozza generata nell'anteprima. & RF7-OB & I \\
     \hline
-    TS-F-008 & Verifica che il sistema visualizzi il testo della bozza generata nell'anteprima. & RF8-OB & NI \\
+    TS-F-008 & Verifica che il sistema visualizzi il testo della bozza generata nell'anteprima. & RF8-OB & I \\
     \hline
-    TS-F-009 & Verifica che il sistema visualizzi l'immagine di copertina della bozza generata nell'anteprima. & RF9-OB & NI \\
+    TS-F-009 & Verifica che il sistema visualizzi l'immagine di copertina della bozza generata nell'anteprima. & RF9-OB & I \\
     \hline
-    TS-F-010 & Verifica che il sistema permetta al Redattore di modificare manualmente il titolo della bozza. & RF10-OB & NI \\
+    TS-F-010 & Verifica che il sistema permetta al Redattore di modificare manualmente il titolo della bozza. & RF10-OB & S \\
     \hline
-    TS-F-011 & Verifica che il sistema permetta al Redattore di modificare manualmente il testo della bozza. & RF11-OB & NI \\
+    TS-F-011 & Verifica che il sistema permetta al Redattore di modificare manualmente il testo della bozza. & RF11-OB & S \\
     \hline
-    TS-F-012 & Verifica che il sistema permetta al Redattore di sostituire l'immagine di copertina con un file locale. & RF12-OB & NI \\
+    TS-F-012 & Verifica che il sistema permetta al Redattore di sostituire l'immagine di copertina con un file locale. & RF12-OB & S \\
     \hline
-    TS-F-013 & Verifica che il sistema permetta al Redattore di richiedere la rigenerazione della bozza. & RF13-OB & NI \\
+    TS-F-013 & Verifica che il sistema permetta al Redattore di richiedere la rigenerazione della bozza. & RF13-OB & S \\
     \hline
-    TS-F-014 & Verifica che il sistema permetta al Redattore di eliminare la bozza generata corrente. & RF14-OB & NI \\
+    TS-F-014 & Verifica che il sistema permetta al Redattore di eliminare la bozza generata corrente. & RF14-OB & S \\
     \hline
-    TS-F-015 & Verifica che il sistema permetta al Redattore di annullare le modifiche manuali apportate alla bozza. & RF15-OP & NI \\
+    TS-F-015 & Verifica che il sistema permetta al Redattore di annullare le modifiche manuali apportate alla bozza. & RF15-OP & S \\
     \hline
-    TS-F-016 & Verifica che il sistema permetta il salvataggio della bozza nello storico. & RF16-OB & NI \\
+    TS-F-016 & Verifica che il sistema permetta il salvataggio della bozza nello storico. & RF16-OB & S \\
     \hline
-    TS-F-017 & Verifica che il sistema permetta al Redattore di visualizzare un'anteprima del documento finale. & RF17-OP & NI \\
+    TS-F-017 & Verifica che il sistema permetta al Redattore di visualizzare un'anteprima del documento finale. & RF17-OP & I \\
     \hline
-    TS-F-018 & Verifica che il sistema permetta la pubblicazione del documento e l'esportazione in PDF. & RF18-OB & NI \\
+    TS-F-018 & Verifica che il sistema permetta la pubblicazione del documento e l'esportazione in PDF. & RF18-OB & S \\
     \hline
-    TS-F-019 & Verifica che il sistema permetta al Redattore di inoltrare il documento finalizzato via e-mail. & RF19-OB & NI \\
+    TS-F-019 & Verifica che il sistema permetta al Redattore di inoltrare il documento finalizzato via e-mail. & RF19-OB & S \\
     \hline
-    TS-F-020 & Verifica che il sistema fornisca al Redattore la libreria personale con lo storico delle generazioni. & RF20-OB & NI \\
+    TS-F-020 & Verifica che il sistema fornisca al Redattore la libreria personale con lo storico delle generazioni. & RF20-OB & I \\
     \hline
-    TS-F-021 & Verifica che il sistema permetta la ricerca e il filtraggio dello storico delle generazioni. & RF21-OB & NI \\
+    TS-F-021 & Verifica che il sistema permetta la ricerca e il filtraggio dello storico delle generazioni. & RF21-OB & S \\
     \hline
-    TS-F-022 & Verifica che il sistema permetta il filtraggio dello storico tramite ricerca per parola chiave. & RF22-OB & NI \\
+    TS-F-022 & Verifica che il sistema permetta il filtraggio dello storico tramite ricerca per parola chiave. & RF22-OB & S \\
     \hline
-    TS-F-023 & Verifica che il sistema permetta il filtraggio dello storico per tono comunicativo. & RF23-OB & NI \\
+    TS-F-023 & Verifica che il sistema permetta il filtraggio dello storico per tono comunicativo. & RF23-OB & S \\
     \hline
-    TS-F-024 & Verifica che il sistema permetta il filtraggio dello storico per stile editoriale. & RF24-OB & NI \\
+    TS-F-024 & Verifica che il sistema permetta il filtraggio dello storico per stile editoriale. & RF24-OB & S \\
     \hline
-    TS-F-025 & Verifica che il sistema permetta il filtraggio dello storico per data. & RF25-OB & NI \\
+    TS-F-025 & Verifica che il sistema permetta il filtraggio dello storico per data. & RF25-OB & S \\
     \hline
-    TS-F-026 & Verifica che il sistema permetta al Redattore di salvare la configurazione del prompt nella libreria. & RF26-OB & NI \\
+    TS-F-026 & Verifica che il sistema permetta al Redattore di salvare la configurazione del prompt nella libreria. & RF26-OB & S \\
     \hline
-    TS-F-027 & Verifica che il sistema permetta il caricamento e il riutilizzo di una configurazione prompt archiviata. & RF27-OB & NI \\
+    TS-F-027 & Verifica che il sistema permetta il caricamento e il riutilizzo di una configurazione prompt archiviata. & RF27-OB & S \\
     \hline
-    TS-F-028 & Verifica che il sistema permetta al Redattore di contrassegnare una generazione come preferita. & RF28-OB & NI \\
+    TS-F-028 & Verifica che il sistema permetta al Redattore di contrassegnare una generazione come preferita. & RF28-OB & S \\
     \hline
-    TS-F-029 & Verifica che il sistema permetta al Redattore di rimuovere una generazione dai preferiti. & RF29-OB & NI \\
+    TS-F-029 & Verifica che il sistema permetta al Redattore di rimuovere una generazione dai preferiti. & RF29-OB & S \\
     \hline
-    TS-F-030 & Verifica che il sistema permetta l'eliminazione di elementi dallo storico e dalla libreria. & RF30-OP & NI \\
+    TS-F-030 & Verifica che il sistema permetta l'eliminazione di elementi dallo storico e dalla libreria. & RF30-OP & S \\
     \hline
-    TS-F-031 & Verifica che il sistema permetta al Redattore di assegnare un rating numerico alla bozza. & RF31-OB & NI \\
+    TS-F-031 & Verifica che il sistema permetta al Redattore di assegnare un rating numerico alla bozza. & RF31-OB & S \\
     \hline
-    TS-F-032 & Verifica che il sistema permetta al Redattore di aggiungere un commento testuale qualitativo. & RF32-OB & NI \\
+    TS-F-032 & Verifica che il sistema permetta al Redattore di aggiungere un commento testuale qualitativo. & RF32-OB & S \\
     \hline
-    TS-F-033 & Verifica che il sistema fornisca all'Analista dati una dashboard con le metriche dell'AI Assistant. & RF33-OB & NI \\
+    TS-F-033 & Verifica che il sistema fornisca all'Analista dati una dashboard con le metriche dell'AI Assistant. & RF33-OB & I \\
     \hline
-    TS-F-034 & Verifica che il sistema visualizzi nella dashboard le statistiche di utilizzo del modulo AI Assistant. & RF34-OB & NI \\
+    TS-F-034 & Verifica che il sistema visualizzi nella dashboard le statistiche di utilizzo del modulo AI Assistant. & RF34-OB & I \\
     \hline
-    TS-F-035 & Verifica che il sistema visualizzi nella dashboard il rating medio delle bozze generate. & RF35-OB & NI \\
+    TS-F-035 & Verifica che il sistema visualizzi nella dashboard il rating medio delle bozze generate. & RF35-OB & I \\
     \hline
-    TS-F-036 & Verifica che il sistema permetta all'Analista dati di consultare i feedback testuali. & RF36-OB & NI \\
+    TS-F-036 & Verifica che il sistema permetta all'Analista dati di consultare i feedback testuali. & RF36-OB & S \\
     \hline
-    TS-F-037 & Verifica che il sistema permetta l'applicazione di filtri dinamici nella dashboard analitica. & RF37-OB & NI \\
+    TS-F-037 & Verifica che il sistema permetta l'applicazione di filtri dinamici nella dashboard analitica. & RF37-OB & S \\
     \hline
-    TS-F-038 & Verifica che il sistema permetta di filtrare i dati della dashboard per intervallo di date. & RF38-OB & NI \\
+    TS-F-038 & Verifica che il sistema permetta di filtrare i dati della dashboard per intervallo di date. & RF38-OB & S \\
     \hline
-    TS-F-039 & Verifica che il sistema permetta di filtrare i dati della dashboard per tono comunicativo. & RF39-OB & NI \\
+    TS-F-039 & Verifica che il sistema permetta di filtrare i dati della dashboard per tono comunicativo. & RF39-OB & S \\
     \hline
-    TS-F-040 & Verifica che il sistema permetta di filtrare i dati della dashboard per stile editoriale. & RF40-OB & NI \\
+    TS-F-040 & Verifica che il sistema permetta di filtrare i dati della dashboard per stile editoriale. & RF40-OB & S \\
     \hline
-    TS-F-041 & Verifica che il sistema permetta il caricamento di singoli documenti per l'analisi AI automatica. & RF41-OB & NI \\
+    TS-F-041 & Verifica che il sistema permetta il caricamento di singoli documenti per l'analisi AI automatica. & RF41-OB & S \\
     \hline
-    TS-F-042 & Verifica che il sistema permetta il caricamento di documenti con metadati inseriti manualmente. & RF42-OB & NI \\
+    TS-F-042 & Verifica che il sistema permetta il caricamento di documenti con metadati inseriti manualmente. & RF42-OB & S \\
     \hline
-    TS-F-043 & Verifica che il sistema permetta la selezione della tipologia del documento in fase di caricamento manuale. & RF43-OB & NI \\
+    TS-F-043 & Verifica che il sistema permetta la selezione della tipologia del documento in fase di caricamento manuale. & RF43-OB & S \\
     \hline
-    TS-F-044 & Verifica che il sistema permetta l'inserimento del mese di riferimento in fase di caricamento manuale. & RF44-OB & NI \\
+    TS-F-044 & Verifica che il sistema permetta l'inserimento del mese di riferimento in fase di caricamento manuale. & RF44-OB & S \\
     \hline
-    TS-F-045 & Verifica che il sistema permetta l'inserimento dell'anno di riferimento in fase di caricamento manuale. & RF45-OB & NI \\
+    TS-F-045 & Verifica che il sistema permetta l'inserimento dell'anno di riferimento in fase di caricamento manuale. & RF45-OB & S \\
     \hline
-    TS-F-046 & Verifica che il sistema permetta l'inserimento dell'azienda di riferimento in fase di caricamento manuale. & RF46-OB & NI \\
+    TS-F-046 & Verifica che il sistema permetta l'inserimento dell'azienda di riferimento in fase di caricamento manuale. & RF46-OB & S \\
     \hline
-    TS-F-047 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & RF47-OB & NI \\
+    TS-F-047 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & RF47-OB & I \\
     \hline
-    TS-F-048 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite criteri multipli. & RF48-OB & NI \\
+    TS-F-048 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite criteri multipli. & RF48-OB & S \\
     \hline
-    TS-F-049 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite barra di ricerca testuale. & RF49-OB & NI \\
+    TS-F-049 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite barra di ricerca testuale. & RF49-OB & S \\
     \hline
-    TS-F-050 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & RF50-OB & NI \\
+    TS-F-050 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & RF50-OB & S \\
     \hline
-    TS-F-051 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & RF51-OB & NI \\
+    TS-F-051 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & RF51-OB & S \\
     \hline
-    TS-F-052 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & RF52-OB & NI \\
+    TS-F-052 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & RF52-OB & S \\
     \hline
-    TS-F-053 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & RF53-OB & NI \\
+    TS-F-053 & Verifica che il sistema permetta al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & RF53-OB & I \\
     \hline
-    TS-F-054 & Verifica che il sistema visualizzi la porzione di documento relativa al dipendente (versione splittata). & RF54-OB & NI \\
+    TS-F-054 & Verifica che il sistema visualizzi la porzione di documento relativa al dipendente (versione splittata). & RF54-OB & I \\
     \hline
-    TS-F-055 & Verifica che il sistema visualizzi il documento originale completo (non splittato). & RF55-OB & NI \\
+    TS-F-055 & Verifica che il sistema visualizzi il documento originale completo (non splittato). & RF55-OB & I \\
     \hline
-    TS-F-056 & Verifica che il sistema visualizzi il nome e cognome del dipendente associato al documento. & RF56-OB & NI \\
+    TS-F-056 & Verifica che il sistema visualizzi il nome e cognome del dipendente associato al documento. & RF56-OB & I \\
     \hline
-    TS-F-057 & Verifica che il sistema visualizzi l'azienda associata al documento. & RF57-OB & NI \\
+    TS-F-057 & Verifica che il sistema visualizzi l'azienda associata al documento. & RF57-OB & I \\
     \hline
-    TS-F-058 & Verifica che il sistema visualizzi il nome del file del documento. & RF58-OB & NI \\
+    TS-F-058 & Verifica che il sistema visualizzi il nome del file del documento. & RF58-OB & I \\
     \hline
-    TS-F-059 & Verifica che il sistema visualizzi la data del documento. & RF59-OB & NI \\
+    TS-F-059 & Verifica che il sistema visualizzi la data del documento. & RF59-OB & I \\
     \hline
-    TS-F-060 & Verifica che il sistema visualizzi il numero di pagine del documento. & RF60-OB & NI \\
+    TS-F-060 & Verifica che il sistema visualizzi il numero di pagine del documento. & RF60-OB & I \\
     \hline
-    TS-F-061 & Verifica che il sistema visualizzi la tipologia del documento. & RF61-OB & NI \\
+    TS-F-061 & Verifica che il sistema visualizzi la tipologia del documento. & RF61-OB & I \\
     \hline
-    TS-F-062 & Verifica che il sistema visualizzi la breve descrizione del documento. & RF62-OB & NI \\
+    TS-F-062 & Verifica che il sistema visualizzi la breve descrizione del documento. & RF62-OB & I \\
     \hline
-    TS-F-063 & Verifica che il sistema visualizzi il livello di confidenza in percentuale del documento. & RF63-OB & NI \\
+    TS-F-063 & Verifica che il sistema visualizzi il livello di confidenza in percentuale del documento. & RF63-OB & I \\
     \hline
-    TS-F-064 & Verifica che il sistema visualizzi lo stato del documento, comprensivo di stato di revisione e stato di invio. & RF64-OB & NI \\
+    TS-F-064 & Verifica che il sistema visualizzi lo stato del documento, comprensivo di stato di revisione e stato di invio. & RF64-OB & I \\
     \hline
-    TS-F-065 & Verifica che il sistema visualizzi l'e-mail del destinatario del documento. & RF65-OP & NI \\
+    TS-F-065 & Verifica che il sistema visualizzi l'e-mail del destinatario del documento. & RF65-OP & I \\
     \hline
-    TS-F-066 & Verifica che il sistema visualizzi il codice fiscale del destinatario. & RF66-OP & NI \\
+    TS-F-066 & Verifica che il sistema visualizzi il codice fiscale del destinatario. & RF66-OP & I \\
     \hline
-    TS-F-067 & Verifica che il sistema visualizzi la matricola del dipendente. & RF67-OP & NI \\
+    TS-F-067 & Verifica che il sistema visualizzi la matricola del dipendente. & RF67-OP & I \\
     \hline
-    TS-F-068 & Verifica che il sistema visualizzi la data e ora di caricamento del documento. & RF68-OP & NI \\
+    TS-F-068 & Verifica che il sistema visualizzi la data e ora di caricamento del documento. & RF68-OP & I \\
     \hline
-    TS-F-069 & Verifica che il sistema permetta al Consulente del lavoro di modificare il nome e cognome del dipendente. & RF69-OB & NI \\
+    TS-F-069 & Verifica che il sistema permetta al Consulente del lavoro di modificare il nome e cognome del dipendente. & RF69-OB & S \\
     \hline
-    TS-F-070 & Verifica che il sistema permetta la modifica dell'azienda associata al documento. & RF70-OB & NI \\
+    TS-F-070 & Verifica che il sistema permetta la modifica dell'azienda associata al documento. & RF70-OB & S \\
     \hline
-    TS-F-071 & Verifica che il sistema permetta la modifica della data del documento. & RF71-OB & NI \\
+    TS-F-071 & Verifica che il sistema permetta la modifica della data del documento. & RF71-OB & S \\
     \hline
-    TS-F-072 & Verifica che il sistema permetta la modifica della tipologia del documento. & RF72-OB & NI \\
+    TS-F-072 & Verifica che il sistema permetta la modifica della tipologia del documento. & RF72-OB & S \\
     \hline
-    TS-F-073 & Verifica che il sistema permetta la modifica della breve descrizione del documento. & RF73-OB & NI \\
+    TS-F-073 & Verifica che il sistema permetta la modifica della breve descrizione del documento. & RF73-OB & S \\
     \hline
-    TS-F-074 & Verifica che il sistema permetta la modifica dell'indirizzo e-mail del destinatario. & RF74-OP & NI \\
+    TS-F-074 & Verifica che il sistema permetta la modifica dell'indirizzo e-mail del destinatario. & RF74-OP & S \\
     \hline
-    TS-F-075 & Verifica che il sistema permetta la modifica del codice fiscale del destinatario. & RF75-OP & NI \\
+    TS-F-075 & Verifica che il sistema permetta la modifica del codice fiscale del destinatario. & RF75-OP & S \\
     \hline
-    TS-F-076 & Verifica che il sistema permetta la modifica della matricola del dipendente. & RF76-OP & NI \\
+    TS-F-076 & Verifica che il sistema permetta la modifica della matricola del dipendente. & RF76-OP & S \\
     \hline
-    TS-F-077 & Verifica che il sistema generi automaticamente il contenuto del messaggio di invio per il documento. & RF77-OB & NI \\
+    TS-F-077 & Verifica che il sistema generi automaticamente il contenuto del messaggio di invio per il documento. & RF77-OB & S \\
     \hline
-    TS-F-078 & Verifica che il sistema visualizzi il destinatario del messaggio di invio generato automaticamente. & RF78-OB & NI \\
+    TS-F-078 & Verifica che il sistema visualizzi il destinatario del messaggio di invio generato automaticamente. & RF78-OB & I \\
     \hline
-    TS-F-079 & Verifica che il sistema visualizzi l'oggetto del messaggio di invio generato automaticamente. & RF79-OB & NI \\
+    TS-F-079 & Verifica che il sistema visualizzi l'oggetto del messaggio di invio generato automaticamente. & RF79-OB & I \\
     \hline
-    TS-F-080 & Verifica che il sistema visualizzi il testo del messaggio di invio generato automaticamente. & RF80-OB & NI \\
+    TS-F-080 & Verifica che il sistema visualizzi il testo del messaggio di invio generato automaticamente. & RF80-OB & I \\
     \hline
-    TS-F-081 & Verifica che il sistema permetta la conferma e l'effettivo invio del messaggio al destinatario. & RF81-OB & NI \\
+    TS-F-081 & Verifica che il sistema permetta la conferma e l'effettivo invio del messaggio al destinatario. & RF81-OB & S \\
     \hline
-    TS-F-082 & Verifica che il sistema permetta al Consulente del lavoro di modificare il destinatario del messaggio di invio. & RF82-OB & NI \\
+    TS-F-082 & Verifica che il sistema permetta al Consulente del lavoro di modificare il destinatario del messaggio di invio. & RF82-OB & S \\
     \hline
-    TS-F-083 & Verifica che il sistema permetta la modifica dell'oggetto del messaggio di invio. & RF83-OB & NI \\
+    TS-F-083 & Verifica che il sistema permetta la modifica dell'oggetto del messaggio di invio. & RF83-OB & S \\
     \hline
-    TS-F-084 & Verifica che il sistema permetta la modifica del testo del messaggio di invio. & RF84-OB & NI \\
+    TS-F-084 & Verifica che il sistema permetta la modifica del testo del messaggio di invio. & RF84-OB & S \\
     \hline
-    TS-F-085 & Verifica che il sistema fornisca all'Analista dati una dashboard dedicata con metriche del modulo AI Co-Pilot. & RF85-OB & NI \\
+    TS-F-085 & Verifica che il sistema fornisca all'Analista dati una dashboard dedicata con metriche del modulo AI Co-Pilot. & RF85-OB & I \\
     \hline
-    TS-F-086 & Verifica che il sistema visualizzi nella dashboard il numero totale di documenti analizzati. & RF86-OB & NI \\
+    TS-F-086 & Verifica che il sistema visualizzi nella dashboard il numero totale di documenti analizzati. & RF86-OB & I \\
     \hline
-    TS-F-087 & Verifica che il sistema visualizzi nella dashboard la percentuale di classificazioni corrette. & RF87-OB & NI \\
+    TS-F-087 & Verifica che il sistema visualizzi nella dashboard la percentuale di classificazioni corrette. & RF87-OB & I \\
     \hline
-    TS-F-088 & Verifica che il sistema visualizzi nella dashboard i documenti sotto soglia di confidenza. & RF88-OB & NI \\
+    TS-F-088 & Verifica che il sistema visualizzi nella dashboard i documenti sotto soglia di confidenza. & RF88-OB & I \\
     \hline
-    TS-F-089 & Verifica che il sistema visualizzi nella dashboard la percentuale di destinatari riconosciuti automaticamente. & RF89-OB & NI \\
+    TS-F-089 & Verifica che il sistema visualizzi nella dashboard la percentuale di destinatari riconosciuti automaticamente. & RF89-OB & I \\
     \hline
-    TS-F-090 & Verifica che il sistema visualizzi nella dashboard il tempo medio di analisi dei documenti. & RF90-OB & NI \\
+    TS-F-090 & Verifica che il sistema visualizzi nella dashboard il tempo medio di analisi dei documenti. & RF90-OB & I \\
     \hline
-    TS-F-091 & Verifica che il sistema notifichi il Redattore in caso di formato file non valido (copertina). & RF91-OB & NI \\
+    TS-F-091 & Verifica che il sistema notifichi il Redattore in caso di formato file non valido (copertina). & RF91-OB & S \\
     \hline
-    TS-F-092 & Verifica che il sistema notifichi l'utente in caso di indirizzo e-mail non valido durante l'inoltro. & RF92-OB & NI \\
+    TS-F-092 & Verifica che il sistema notifichi l'utente in caso di indirizzo e-mail non valido durante l'inoltro. & RF92-OB & S \\
     \hline
-    TS-F-093 & Verifica che il sistema notifichi il Redattore quando la ricerca nello storico non produce risultati. & RF93-OB & NI \\
+    TS-F-093 & Verifica che il sistema notifichi il Redattore quando la ricerca nello storico non produce risultati. & RF93-OB & S \\
     \hline
-    TS-F-094 & Verifica che il sistema notifichi il Redattore quando il commento testuale supera il limite di caratteri. & RF94-OB & NI \\
+    TS-F-094 & Verifica che il sistema notifichi il Redattore quando il commento testuale supera il limite di caratteri. & RF94-OB & S \\
     \hline
-    TS-F-095 & Verifica che il sistema notifichi l'Analista dati quando i dati analitici non sono disponibili. & RF95-OB & NI \\
+    TS-F-095 & Verifica che il sistema notifichi l'Analista dati quando i dati analitici non sono disponibili. & RF95-OB & S \\
     \hline
-    TS-F-096 & Verifica che il sistema rilevi i documenti duplicati durante l'upload e richieda conferma prima del caricamento. & RF96-OB & NI \\
+    TS-F-096 & Verifica che il sistema rilevi i documenti duplicati durante l'upload e richieda conferma prima del caricamento. & RF96-OB & S \\
     \hline
-    TS-F-097 & Verifica che il sistema rilevi i formati file non supportati durante l'upload. & RF97-OB & NI \\
+    TS-F-097 & Verifica che il sistema rilevi i formati file non supportati durante l'upload. & RF97-OB & S \\
     \hline
-    TS-F-098 & Verifica che il sistema notifichi l'utente quando nessun documento corrisponde ai criteri dello storico. & RF98-OB & NI \\
+    TS-F-098 & Verifica che il sistema notifichi l'utente quando nessun documento corrisponde ai criteri dello storico. & RF98-OB & S \\
     \hline
-    TS-F-099 & Verifica che il sistema gestisca il caso in cui il nome e cognome del dipendente non siano disponibili (indicatore). & RF99-OB & NI \\
+    TS-F-099 & Verifica che il sistema gestisca il caso in cui il nome e cognome del dipendente non siano disponibili (indicatore). & RF99-OB & S \\
     \hline
-    TS-F-100 & Verifica che il sistema gestisca il caso in cui l'azienda non sia disponibile (indicatore). & RF100-OB & NI \\
+    TS-F-100 & Verifica che il sistema gestisca il caso in cui l'azienda non sia disponibile (indicatore). & RF100-OB & S \\
     \hline
-    TS-F-101 & Verifica che il sistema gestisca il caso in cui la data del documento non sia disponibile (indicatore). & RF101-OB & NI \\
+    TS-F-101 & Verifica che il sistema gestisca il caso in cui la data del documento non sia disponibile (indicatore). & RF101-OB & S \\
     \hline
-    TS-F-102 & Verifica che il sistema gestisca il caso in cui la tipologia del documento non sia disponibile (indicatore). & RF102-OB & NI \\
+    TS-F-102 & Verifica che il sistema gestisca il caso in cui la tipologia del documento non sia disponibile (indicatore). & RF102-OB & S \\
     \hline
-    TS-F-103 & Verifica che il sistema gestisca il caso in cui la breve descrizione non sia disponibile (indicatore). & RF103-OB & NI \\
+    TS-F-103 & Verifica che il sistema gestisca il caso in cui la breve descrizione non sia disponibile (indicatore). & RF103-OB & S \\
     \hline
-    TS-F-104 & Verifica che il sistema gestisca il caso in cui il livello di confidenza non sia disponibile (indicatore). & RF104-OB & NI \\
+    TS-F-104 & Verifica che il sistema gestisca il caso in cui il livello di confidenza non sia disponibile (indicatore). & RF104-OB & S \\
     \hline
-    TS-F-105 & Verifica che il sistema gestisca il caso in cui l'e-mail del destinatario non sia disponibile (indicatore). & RF105-OP & NI \\
+    TS-F-105 & Verifica che il sistema gestisca il caso in cui l'e-mail del destinatario non sia disponibile (indicatore). & RF105-OP & S \\
     \hline
-    TS-F-106 & Verifica che il sistema notifichi il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & RF106-OP & NI \\
+    TS-F-106 & Verifica che il sistema notifichi il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & RF106-OP & S \\
     \hline
-    TS-F-107 & Verifica che il sistema notifichi il Redattore quando il testo del prompt è mancante o insufficiente. & RF107-OB & NI \\
+    TS-F-107 & Verifica che il sistema notifichi il Redattore quando il testo del prompt è mancante o insufficiente. & RF107-OB & S \\
     \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di qualità}} \\
     \hline
-    TS-Q-001 & Verifica che l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} sia completa di casi d'uso modellati tramite UML. & RQ1-OB & NI \\
+    TS-Q-001 & Verifica che l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} sia completa di casi d'uso modellati tramite UML. & RQ1-OB & S \\
     \hline
-    TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle \glslink{norme-di-progetto}{Norme di Progetto} adottate dal gruppo. & RQ2-OB & NI \\
+    TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle \glslink{norme-di-progetto}{Norme di Progetto} adottate dal gruppo. & RQ2-OB & S \\
     \hline
-    TS-Q-003 & Verifica che il prodotto superi tutti i test automatizzati con una copertura del codice non inferiore all'80\%. & RQ3-OB & NI \\
+    TS-Q-003 & Verifica che il prodotto superi tutti i test automatizzati con una copertura del codice non inferiore all'80\%. & RQ3-OB & S \\
     \hline
-    TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle \glslink{norme-di-progetto}{Norme di Progetto}. & RQ4-OB & NI \\
+    TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle \glslink{norme-di-progetto}{Norme di Progetto}. & RQ4-OB & S \\
     \hline
-    TS-Q-005 & Verifica che il sorgente sia gestito tramite un sistema di versionamento con istruzioni di setup incluse nel \glslink{repository}{repository}. & RQ5-OB & NI \\
+    TS-Q-005 & Verifica che il sorgente sia gestito tramite un sistema di versionamento con istruzioni di setup incluse nel \glslink{repository}{repository}. & RQ5-OB & S \\
     \hline
-    TS-Q-006 & Verifica che il manuale utente del prodotto sia prodotto e aggiornato. & RQ6-OB & NI \\
+    TS-Q-006 & Verifica che il manuale utente del prodotto sia prodotto e aggiornato. & RQ6-OB & S \\
     \hline
-    TS-Q-007 & Verifica tramite sessione di user testing che gli utenti siano in grado di apprendere le funzionalità principali del sistema in meno di 30 minuti. & MPD11 & NI \\
+    TS-Q-007 & Verifica tramite sessione di user testing che gli utenti siano in grado di apprendere le funzionalità principali del sistema in meno di 30 minuti. & MPD11 & S \\
     \hline
-    TS-Q-008 & Verifica che il codice sorgente sia versionato tramite Git su un repository condiviso. & RQ7-OB & NI \\
+    TS-Q-008 & Verifica che il codice sorgente sia versionato tramite Git su un repository condiviso. & RQ7-OB & S \\
     \hline
-    TS-Q-009 & Verifica che il codice sorgente rispetti le regole di formattazione definite da Laravel Pint. & RQ8-OB & NI \\
+    TS-Q-009 & Verifica che il codice sorgente rispetti le regole di formattazione definite da Laravel Pint. & RQ8-OB & S \\
     \hline
-    TS-Q-010 & Verifica che la suite di test automatizzati sia scritta con il framework Pest. & RQ9-OB & NI \\
+    TS-Q-010 & Verifica che la suite di test automatizzati sia scritta con il framework Pest. & RQ9-OB & S \\
     \hline
     \multicolumn{4}{|l|}{\cellcolor{gray!12}\textbf{Requisiti di vincolo}} \\
     \hline
-    TS-V-001 & Verifica che il backend sia sviluppato con il framework Laravel 12 su PHP 8.4. & RVC1-OB & NI \\
+    TS-V-001 & Verifica che il backend sia sviluppato con il framework Laravel 12 su PHP 8.4. & RVC1-OB & S \\
     \hline
-    TS-V-002 & Verifica che la persistenza relazionale del sistema si basi su PostgreSQL erogato come servizio gestito in cloud. & RVC2-OB & NI \\
+    TS-V-002 & Verifica che la persistenza relazionale del sistema si basi su PostgreSQL erogato come servizio gestito in cloud. & RVC2-OB & S \\
     \hline
-    TS-V-003 & Verifica che la cache applicativa e l'archiviazione delle sessioni si basino su Redis erogato in cloud. & RVC3-OB & NI \\
+    TS-V-003 & Verifica che la cache applicativa e l'archiviazione delle sessioni si basino su Redis erogato in cloud. & RVC3-OB & S \\
     \hline
-    TS-V-004 & Verifica che il frontend sia realizzato come Single Page Application in React con TypeScript, basata su Vite. & RVC4-OB & NI \\
+    TS-V-004 & Verifica che il frontend sia realizzato come Single Page Application in React con TypeScript, basata su Vite. & RVC4-OB & S \\
     \hline
-    TS-V-005 & Verifica che l'esecuzione del sistema avvenga su infrastruttura cloud distribuita con orchestrazione di container. & RVC5-OB & NI \\
+    TS-V-005 & Verifica che l'esecuzione del sistema avvenga su infrastruttura cloud distribuita con orchestrazione di container. & RVC5-OB & S \\
     \hline
-    TS-V-006 & Verifica che l'accesso al sistema avvenga attraverso un ingress/gateway gestito con terminazione TLS. & RVC6-OB & NI \\
+    TS-V-006 & Verifica che l'accesso al sistema avvenga attraverso un ingress/gateway gestito con terminazione TLS. & RVC6-OB & S \\
     \hline
-    TS-V-007 & Verifica che lo storage dei file caricati si basi su un object storage gestito in cloud compatibile con le API Amazon S3. & RVC7-OB & NI \\
+    TS-V-007 & Verifica che lo storage dei file caricati si basi su un object storage gestito in cloud compatibile con le API Amazon S3. & RVC7-OB & S \\
     \hline
-    TS-V-008 & Verifica che le funzionalità AI si basino su Amazon Bedrock e Amazon Textract erogati in cloud. & RVC8-OB & NI \\
+    TS-V-008 & Verifica che le funzionalità AI si basino su Amazon Bedrock e Amazon Textract erogati in cloud. & RVC8-OB & S \\
     \hline
-    TS-V-009 & Verifica che il sistema superi i controlli di accessibilità eseguiti tramite pa11y e axe sulle interfacce principali. & RVC9-OB & NI \\
+    TS-V-009 & Verifica che il sistema superi i controlli di accessibilità eseguiti tramite pa11y e axe sulle interfacce principali. & RVC9-OB & S \\
     \hline
-    TS-V-010 & Verifica che il sistema sia fruibile sui principali browser moderni evergreen (Chrome, Edge, Firefox, Safari). & RVC10-OB & NI \\
+    TS-V-010 & Verifica che il sistema sia fruibile sui principali browser moderni evergreen (Chrome, Edge, Firefox, Safari). & RVC10-OB & S \\
     \hline
-    TS-V-011 & Verifica che lo stack applicativo di esecuzione comprenda tutti i servizi cloud minimi integrati richiesti. & RVC11-OB & NI \\
+    TS-V-011 & Verifica che lo stack applicativo di esecuzione comprenda tutti i servizi cloud minimi integrati richiesti. & RVC11-OB & S \\
     \hline
-    TS-V-012 & Verifica che l'ambiente di esecuzione scali orizzontalmente in HTTPS attraverso l'ingress/gateway gestito. & RVC12-OB & NI \\
+    TS-V-012 & Verifica che l'ambiente di esecuzione scali orizzontalmente in HTTPS attraverso l'ingress/gateway gestito. & RVC12-OB & S \\
     \hline
-    TS-V-013 & Verifica che l'utilizzo delle funzionalità AI richieda credenziali valide del provider cloud e connettività outbound. & RVC13-OB & NI \\
+    TS-V-013 & Verifica che l'utilizzo delle funzionalità AI richieda credenziali valide del provider cloud e connettività outbound. & RVC13-OB & S \\
     \hline
-    TS-V-014 & Verifica che l'elaborazione asincrona dei job si appoggi a una coda di messaggi gestita in cloud compatibile con Amazon SQS. & RVC14-OB & NI \\
+    TS-V-014 & Verifica che l'elaborazione asincrona dei job si appoggi a una coda di messaggi gestita in cloud compatibile con Amazon SQS. & RVC14-OB & S \\
     \hline
-    TS-V-015 & Verifica che la gestione di segreti e parametri avvenga tramite un servizio gestito cloud dedicato. & RVC15-OB & NI \\
+    TS-V-015 & Verifica che la gestione di segreti e parametri avvenga tramite un servizio gestito cloud dedicato. & RVC15-OB & S \\
     \hline
-    TS-V-016 & Verifica che l'osservabilità del sistema si basi su strumentazione OpenTelemetry esportata verso un backend dedicato. & RVC16-OB & NI \\
+    TS-V-016 & Verifica che l'osservabilità del sistema si basi su strumentazione OpenTelemetry esportata verso un backend dedicato. & RVC16-OB & S \\
     \hline
-    TS-V-017 & Verifica che l'autenticazione degli utenti avvenga tramite un identity provider con token JWT. & RVC17-OB & NI \\
+    TS-V-017 & Verifica che l'autenticazione degli utenti avvenga tramite un identity provider con token JWT. & RVC17-OB & S \\
     \hline
-    TS-V-018 & Verifica che il provisioning dell'infrastruttura cloud sia gestito tramite Infrastructure-as-Code. & RVC18-OB & NI \\
+    TS-V-018 & Verifica che il provisioning dell'infrastruttura cloud sia gestito tramite Infrastructure-as-Code. & RVC18-OB & S \\
     \hline
-    TS-V-019 & Verifica che l'invio di email e notifiche avvenga tramite un servizio cloud gestito dedicato (SES/SNS). & RVC19-OP & NI \\
+    TS-V-019 & Verifica che l'invio di email e notifiche avvenga tramite un servizio cloud gestito dedicato (SES/SNS). & RVC19-OP & S \\
     \hline
 \end{longtable}
 
@@ -854,75 +853,75 @@ I \glslink{test-di-accettazione}{test di accettazione} verificano che il sistema
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
     \hline
-    \endfirsthead
+\endfirsthead
     \hline
     \rowcolor{gray!20}
     \textbf{Codice} & \textbf{Descrizione} & \textbf{Riferimento} & \textbf{Stato} \\
     \hline
-    \endhead
+\endhead
     \hline
-    \endfoot
+\endfoot
     \hline
-    \endlastfoot
-    TA-001 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di configurare completamente i parametri del \glslink{prompt}{prompt} (tono, stile, lunghezza) e avviare la generazione \glslink{intelligenza-artificiale-ai}{AI} con successo. & UC-1 & NI \\
+\endlastfoot
+    TA-001 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di configurare completamente i parametri del \glslink{prompt}{prompt} (tono, stile, lunghezza) e avviare la generazione \glslink{intelligenza-artificiale-ai}{AI} con successo. & UC-1 & S \\
     \hline
-    TA-002 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora tenti di avviare la generazione con il campo \glslink{prompt}{prompt} assente o insufficiente. & UC-1 & NI \\
+    TA-002 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora tenti di avviare la generazione con il campo \glslink{prompt}{prompt} assente o insufficiente. & UC-1 & S \\
     \hline
-    TA-003 & Verifica che il sistema visualrizz correttamente l'anteprima della \glslink{bozza-draft}{bozza} generata con titolo, testo e immagine di copertina. & UC-2 & NI \\
+    TA-003 & Verifica che il sistema visualizzi correttamente l'anteprima della \glslink{bozza-draft}{bozza} generata con titolo, testo e immagine di copertina. & UC-2 & I \\
     \hline
-    TA-004 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di modificare manualmente il titolo e il testo della \glslink{bozza-draft}{bozza} e di visualizzare il contenuto aggiornato. & UC-2 & NI \\
+    TA-004 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di modificare manualmente il titolo e il testo della \glslink{bozza-draft}{bozza} e di visualizzare il contenuto aggiornato. & UC-2 & S \\
     \hline
-    TA-005 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di rigenerare la \glslink{bozza-draft}{bozza} mantenendo la configurazione del \glslink{prompt}{prompt} corrente. & UC-2 & NI \\
+    TA-005 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di rigenerare la \glslink{bozza-draft}{bozza} mantenendo la configurazione del \glslink{prompt}{prompt} corrente. & UC-2 & S \\
     \hline
-    TA-006 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di eliminare la \glslink{bozza-draft}{bozza} generata corrente. & UC-2 & NI \\
+    TA-006 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di eliminare la \glslink{bozza-draft}{bozza} generata corrente. & UC-2 & S \\
     \hline
-    TA-007 & Verifica che il sistema permetta il salvataggio del documento finalizzato come \glslink{bozza-draft}{bozza} nello storico. & UC-3 & NI \\
+    TA-007 & Verifica che il sistema permetta il salvataggio del documento finalizzato come \glslink{bozza-draft}{bozza} nello storico. & UC-3 & S \\
     \hline
-    TA-008 & Verifica che il sistema permetta l'esportazione del documento finalizzato in formato PDF, con anteprima pre-esportazione. & UC-3 & NI \\
+    TA-008 & Verifica che il sistema permetta l'esportazione del documento finalizzato in formato PDF, con anteprima pre-esportazione. & UC-3 & S \\
     \hline
-    TA-009 & Verifica che il sistema permetta l'inoltro del documento finalizzato via e-mail e notifichi il \glslink{redattore}{Redattore} in caso di indirizzo non valido. & UC-3 & NI \\
+    TA-009 & Verifica che il sistema permetta l'inoltro del documento finalizzato via e-mail e notifichi il \glslink{redattore}{Redattore} in caso di indirizzo non valido. & UC-3 & S \\
     \hline
-    TA-010 & Verifica che il sistema visualizzi la libreria personale con lo storico delle generazioni e i \glslink{prompt}{prompt} salvati, con possibilità di eliminazione. & UC-4 & NI \\
+    TA-010 & Verifica che il sistema visualizzi la libreria personale con lo storico delle generazioni e i \glslink{prompt}{prompt} salvati, con possibilità di eliminazione. & UC-4 & I \\
     \hline
-    TA-011 & Verifica che il sistema permetta la ricerca, il filtraggio e il riutilizzo di una configurazione \glslink{prompt}{prompt} dalla libreria personale. & UC-4 & NI \\
+    TA-011 & Verifica che il sistema permetta la ricerca, il filtraggio e il riutilizzo di una configurazione \glslink{prompt}{prompt} dalla libreria personale. & UC-4 & S \\
     \hline
-    TA-012 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di inserire e inviare una valutazione qualitativa con \glslink{rating}{rating} numerico sulla \glslink{bozza-draft}{bozza} generata. & UC-5 & NI \\
+    TA-012 & Verifica che il sistema permetta al \glslink{redattore}{Redattore} di inserire e inviare una valutazione qualitativa con \glslink{rating}{rating} numerico sulla \glslink{bozza-draft}{bozza} generata. & UC-5 & S \\
     \hline
-    TA-013 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora tenti di inviare la valutazione senza aver assegnato un \glslink{rating}{rating}. & UC-5 & NI \\
+    TA-013 & Verifica che il sistema notifichi il \glslink{redattore}{Redattore} qualora tenti di inviare la valutazione senza aver assegnato un \glslink{rating}{rating}. & UC-5 & S \\
     \hline
-    TA-014 & Verifica che il sistema esponga all'\glslink{analista-dati}{Analista dati} la \glslink{dashboard}{dashboard} \glslink{intelligenza-artificiale-ai}{AI} Assistant con panoramica dell'attività complessiva e statistiche di utilizzo. & UC-6 & NI \\
+    TA-014 & Verifica che il sistema esponga all'\glslink{analista-dati}{Analista dati} la \glslink{dashboard}{dashboard} \glslink{intelligenza-artificiale-ai}{AI} Assistant con panoramica dell'attività complessiva e statistiche di utilizzo. & UC-6 & I \\
     \hline
-    TA-015 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} \glslink{intelligenza-artificiale-ai}{AI} Assistant il \glslink{rating}{rating} medio delle bozze e permetta la consultazione dei feedback testuali. & UC-6 & NI \\
+    TA-015 & Verifica che il sistema visualizzi nella \glslink{dashboard}{dashboard} \glslink{intelligenza-artificiale-ai}{AI} Assistant il \glslink{rating}{rating} medio delle bozze e permetta la consultazione dei feedback testuali. & UC-6 & I \\
     \hline
-    TA-016 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare un singolo documento nel \glslink{repository}{repository} con classificazione automatica tramite \glslink{ai-analyst}{AI Analyst}. & UC-7, UC-8 & NI \\
+    TA-016 & Verifica che il sistema permetta al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} di caricare un singolo documento nel \glslink{repository}{repository} con classificazione automatica tramite \glslink{ai-analyst}{AI Analyst}. & UC-7, UC-8 & S \\
     \hline
-    TA-017 & Verifica che il sistema permetta l'upload di un lotto di documenti e rilevi i duplicati richiedendo conferma al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}. & UC-7 & NI \\
+    TA-017 & Verifica che il sistema permetta l'upload di un lotto di documenti e rilevi i duplicati richiedendo conferma al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}. & UC-7 & S \\
     \hline
-    TA-018 & Verifica che il sistema rilevi un file in formato non supportato durante l'upload e notifichi il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}. & UC-7 & NI \\
+    TA-018 & Verifica che il sistema rilevi un file in formato non supportato durante l'upload e notifichi il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}. & UC-7 & S \\
     \hline
-    TA-019 & Verifica che il sistema visualizzi al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} lo storico dei documenti analizzati e notifichi in caso di assenza di risultati. & UC-9, UC-9.E1 & NI \\
+    TA-019 & Verifica che il sistema visualizzi al \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} lo storico dei documenti analizzati e notifichi in caso di assenza di risultati. & UC-9, UC-9.E1 & I \\
     \hline
-    TA-020 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la combinazione di più criteri contemporaneamente. & UC-10 & NI \\
+    TA-020 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la combinazione di più criteri contemporaneamente. & UC-10 & S \\
     \hline
-    TA-021 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la barra di ricerca testuale. & UC-11 & NI \\
+    TA-021 & Verifica che il sistema permetta il filtraggio dello storico documenti tramite la barra di ricerca testuale. & UC-11 & S \\
     \hline
-    TA-022 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & UC-12 & NI \\
+    TA-022 & Verifica che il sistema permetta il filtraggio dello storico documenti per stato di invio. & UC-12 & S \\
     \hline
-    TA-023 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi \glslink{intelligenza-artificiale-ai}{AI}. & UC-13 & NI \\
+    TA-023 & Verifica che il sistema permetta il filtraggio dello storico documenti per livello di confidenza dell'analisi \glslink{intelligenza-artificiale-ai}{AI}. & UC-13 & S \\
     \hline
-    TA-024 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & UC-14 & NI \\
+    TA-024 & Verifica che il sistema permetta il filtraggio dello storico documenti per mese e anno. & UC-14 & S \\
     \hline
-    TA-025 & Verifica che il sistema visualizzi i dettagli completi di un documento dallo storico, inclusi i \glslink{metadati}{metadati} associati e la versione splittata del documento originale. & UC-15 & NI \\
+    TA-025 & Verifica che il sistema visualizzi i dettagli completi di un documento dallo storico, inclusi i \glslink{metadati}{metadati} associati e la versione splittata del documento originale. & UC-15 & I \\
     \hline
-    TA-026 & Verifica che il sistema permetta la modifica dei \glslink{metadati}{metadati} principali di un documento (nome destinatario, azienda, data, tipologia, descrizione) e il relativo salvataggio. & UC-16 & NI \\
+    TA-026 & Verifica che il sistema permetta la modifica dei \glslink{metadati}{metadati} principali di un documento (nome destinatario, azienda, data, tipologia, descrizione) e il relativo salvataggio. & UC-16 & S \\
     \hline
-    TA-027 & Verifica che il sistema notifichi il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} in caso di e-mail o codice fiscale in formato non valido durante la modifica dei \glslink{metadati}{metadati}. & UC-16 & NI \\
+    TA-027 & Verifica che il sistema notifichi il \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro} in caso di e-mail o codice fiscale in formato non valido durante la modifica dei \glslink{metadati}{metadati}. & UC-16 & S \\
     \hline
-    TA-028 & Verifica che il sistema generi automaticamente il messaggio di invio per il documento selezionato e ne visualizzi destinatario, oggetto e testo. & UC-17 & NI \\
+    TA-028 & Verifica che il sistema generi automaticamente il messaggio di invio per il documento selezionato e ne visualizzi destinatario, oggetto e testo. & UC-17 & S \\
     \hline
-    TA-029 & Verifica che il sistema permetta la modifica del contenuto del messaggio di invio generato e la conferma della spedizione al destinatario. & UC-18 & NI \\
+    TA-029 & Verifica che il sistema permetta la modifica del contenuto del messaggio di invio generato e la conferma della spedizione al destinatario. & UC-18 & S \\
     \hline
-    TA-030 & Verifica che il sistema esponga all'\glslink{analista-dati}{Analista dati} la \glslink{dashboard}{dashboard} Co-Pilot con metriche di monitoraggio dell'analisi documentale (totale documenti, classificazioni corrette, documenti sotto soglia, destinatari riconosciuti, tempo medio di analisi). & UC-19 & NI \\
+    TA-030 & Verifica che il sistema esponga all'\glslink{analista-dati}{Analista dati} la \glslink{dashboard}{dashboard} Co-Pilot con metriche di monitoraggio dell'analisi documentale (totale documenti, classificazioni corrette, documenti sotto soglia, destinatari riconosciuti, tempo medio di analisi). & UC-19 & I \\
     \hline
 \end{longtable}
 
