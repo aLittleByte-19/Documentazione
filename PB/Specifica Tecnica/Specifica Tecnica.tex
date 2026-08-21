@@ -229,9 +229,33 @@
 \makeatother
 
 \newpage
+
+\begin{center}
+    {\Large \textbf{Indice delle Tabelle}}
+\end{center}
+
+\vspace{0.6cm}
+
+\makeatletter
+\@starttoc{lot}
+\makeatother
+
+\newpage
+
+\begin{center}
+    {\Large \textbf{Indice dei Listing}}
+\end{center}
+
+\vspace{0.6cm}
+
+\makeatletter
+\@starttoc{lol}
+\makeatother
+
+\newpage
 \pagenumbering{arabic}
 \hypersetup{pageanchor=true}
-\setcounter{page}{5}
+\setcounter{page}{7}
 \fancyfoot[R]{Specifica Tecnica\hspace{0.8em}\thepage}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -2429,16 +2453,18 @@ Contenitore puro degli identificativi di correlazione (request id, correlation i
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{requestId: string}.
-    \item \texttt{correlationId: string}.
-    \item \texttt{tenantId: string}.
+    \item \texttt{requestId: ?string}.
+    \item \texttt{correlationId: ?string}.
+    \item \texttt{tenantId: ?string}.
 \end{itemize}
+
+Tutti e tre nullable: inizializzati a \texttt{null} e azzerati da \texttt{clear()}, valorizzati solo fra un \texttt{bind()} e la fine dell'esecuzione corrente.
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{bind(requestId, correlationId, tenantId): void} --- imposta gli identificativi di correlazione per l'esecuzione corrente.
+    \item \texttt{bind(?requestId, ?correlationId, ?tenantId): void} --- imposta gli identificativi di correlazione per l'esecuzione corrente; parametri nullable, una stringa vuota è normalizzata a \texttt{null}.
     \item \texttt{clear(): void} --- azzera il contesto a fine esecuzione.
-    \item \texttt{requestId(): string}, \texttt{correlationId(): string}, \texttt{tenantId(): string} --- accessori di sola lettura.
+    \item \texttt{requestId(): ?string}, \texttt{correlationId(): ?string}, \texttt{tenantId(): ?string} --- accessori di sola lettura.
 \end{itemize}
 
 \paragraph{Actor}
@@ -2611,7 +2637,7 @@ Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contr
 
 Lo stato condiviso fra le pagine non vive nel ViewModel: una sola istanza di \texttt{MvpStateStore}, fornita a livello di applicazione (\texttt{providedIn: "root"}), conserva lo stato restituito dal backend e sopravvive ai cambi di rotta. Ogni ViewModel riceve lo Store come una qualunque altra dipendenza nel proprio costruttore e lo consuma in sola lettura per derivare i propri segnali \texttt{computed}; le mutazioni (generazione, upload, revisione, eliminazione) non aggiornano lo stato localmente, ma rimpiazzano l'intero stato con quello autorevole restituito dal backend nella risposta, evitando divergenze fra ciò che la SPA mostra e ciò che il backend ha effettivamente persistito.
 
-Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. L'\texttt{effect()} però si limita a leggere i segnali sorgente (lo storico condiviso, i filtri attivi) e a chiamare \texttt{vm.reload()}: la chiamata di ricerca vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo, su \texttt{AssistantPage} e \texttt{CopilotPage} il template non legge mai \texttt{store.*} direttamente: anche \texttt{error}, \texttt{loading} e le metriche sono esposti come segnali \texttt{computed} pass-through sul ViewModel (\texttt{vm.error()}, \texttt{vm.loading()}, \texttt{vm.metrics()}), che si limita a leggerli dallo Store già ricevuto come dipendenza. \texttt{OverviewPage} è l'eccezione documentata in Sezione 6.7, dove il template legge lo Store direttamente in più punti.
+Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. L'\texttt{effect()} però si limita a leggere i segnali sorgente (lo storico condiviso, i filtri attivi) e a chiamare \texttt{vm.reload()}: la chiamata di ricerca vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo, su \texttt{AssistantPage} e \texttt{CopilotPage} il template legge quasi sempre \texttt{vm.*}, mai \texttt{store.*} direttamente, con un'unica eccezione deliberata su entrambe le pagine: il banner d'errore principale (\texttt{(retry)="store.reload()"}), un problema dello stato condiviso, non della logica specifica della feature. I segnali \texttt{computed} pass-through sul ViewModel non sono però identici sulle due pagine: \texttt{CopilotPage} espone tutti e tre \texttt{vm.error()}, \texttt{vm.loading()} e \texttt{vm.metrics()}; \texttt{AssistantPage}, che non mostra un pannello di metriche proprio (Sezione 6.6), espone solo \texttt{vm.error()}. \texttt{OverviewPage} è l'eccezione più ampia, documentata in Sezione 6.7, dove il template legge lo Store direttamente in più punti.
 
 Angular offre già disaccoppiamento e testabilità tramite i propri servizi e la dependency injection, quindi un ViewModel separato potrebbe sembrare ridondante rispetto a testare direttamente il componente con \texttt{TestBed}. Il motivo per cui si è scelto comunque questo confine è pratico, non dogmatico: un test su \texttt{TestBed} richiede l'avvio del modulo, la compilazione del template e la risoluzione dell'albero di dependency injection a ogni esecuzione, mentre un test sul ViewModel istanzia la classe con \texttt{new} passando dipendenze fittizie create a mano: più veloce da eseguire e più semplice da scrivere, perché isola la logica applicativa dal ciclo di vita di Angular. Per questo il confine è tracciato solo sulle tre pagine principali, dove quella logica è più densa, e non esteso a ogni componente della SPA.
 
@@ -3080,7 +3106,7 @@ Metodi
 
 \subsubsection{MetricCardComponent, MetricsPanelComponent}
 
-\texttt{MetricCardComponent} mostra una singola coppia valore/etichetta. \texttt{MetricsPanelComponent} la compone in una griglia, gestendo da sé i tre stati della richiesta a monte: caricamento (\texttt{LoadingStateComponent}), elenco vuoto (\texttt{EmptyStateComponent}) o dati presenti, così ogni pannello di metriche della SPA (Overview, Assistant, Co-Pilot) ottiene lo stesso comportamento senza ripeterlo.
+\texttt{MetricCardComponent} mostra una singola coppia valore/etichetta. \texttt{MetricsPanelComponent} la compone in una griglia, gestendo da sé i tre stati della richiesta a monte: caricamento (\texttt{LoadingStateComponent}), elenco vuoto (\texttt{EmptyStateComponent}) o dati presenti, così ogni pannello di metriche della SPA (i due di \texttt{OverviewPage}, uno per \texttt{CopilotPage}) ottiene lo stesso comportamento senza ripeterlo; \texttt{AssistantPage} non ne monta uno proprio.
 
 \begin{figure}[H]
     \centering
@@ -3222,7 +3248,7 @@ La pagina più semplice: nessun \texttt{FormGroup}, nessun \texttt{effect()}, pe
 
 Istanzia il ViewModel con \texttt{new OverviewPageViewModel(store, router, scrollToElement)}; i pulsanti di richiamo all'azione nella sezione hero delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scorrimento verso la sezione target sulla pagina di destinazione.
 
-A differenza di \texttt{AssistantPage}/\texttt{CopilotPage}, qui la View legge lo Store direttamente in più punti, non solo nel banner d'errore (\texttt{[canRetry]="true" (retry)="store.reload()"}): anche i due pannelli di metriche per strumento leggono \texttt{store.loading()} e \texttt{store.state()} senza passare da un pass-through del ViewModel. Non è un'incoerenza rispetto al pattern, ma una conseguenza della sua assenza qui: \texttt{OverviewPageViewModel} non espone segnali derivati per le metriche degli strumenti (a differenza di \texttt{vm.error()}/\texttt{vm.loading()}/\texttt{vm.metrics()} sulle altre due pagine), perché quei dati sono già letture dirette e non filtrate dello stato condiviso, senza logica di dominio propria della pagina da isolare.
+A differenza di \texttt{AssistantPage}/\texttt{CopilotPage}, qui la View legge lo Store direttamente in più punti, non solo nel banner d'errore (\texttt{[canRetry]="true" (retry)="store.reload()"}): anche i due pannelli di metriche per strumento leggono \texttt{store.loading()} e \texttt{store.state()} senza passare da un pass-through del ViewModel. Non è un'incoerenza rispetto al pattern, ma una conseguenza della sua assenza qui: \texttt{OverviewPageViewModel} non espone segnali derivati per le metriche degli strumenti, perché quei dati sono già letture dirette e non filtrate dello stato condiviso, senza logica di dominio propria della pagina da isolare. Il confronto con le altre due pagine non è simmetrico: \texttt{CopilotPage} espone tutti e tre i pass-through (\texttt{vm.error()}/\texttt{vm.loading()}/\texttt{vm.metrics()}), mentre \texttt{AssistantPage}, priva di un pannello di metriche proprio (Sezione 6.6), espone solo \texttt{vm.error()}.
 
 \begin{figure}[H]
     \centering
@@ -3735,7 +3761,7 @@ export class AssistantPageViewModel {
   readonly selectedDraftId: WritableSignal<number | null> = signal(null);
   readonly latestDraft: WritableSignal<GeneratedDraft | null> = signal(null);
 
-  // [...] altri diciassette signal/computed per storico, configurazioni,
+  // [...] altri ventidue signal/computed per storico, configurazioni,
   // filtri, stati di caricamento delle singole azioni.
 
   readonly error: Signal<string | null> = computed(() => this.store.error());
@@ -3783,17 +3809,45 @@ Il sistema non ha una tabella \texttt{users}: l'identità (tenant, attore) è ri
 
 \subsection{Schema ER}
 
-% TODO: diagramma ER (immagine) da produrre e includere qui con \includegraphics, sul modello della Figura 19 di BugBusters.
+Le relazioni con vincolo di integrità referenziale dichiarato sono solo due: lo split produce i sotto-documenti (\texttt{original\_documents} 1---N \texttt{sub\_documents}, \textit{on delete cascade}) e l'estrazione produce i dati strutturati (\texttt{sub\_documents} 1---1 \texttt{extracted\_data}, \textit{on delete cascade}). Le altre relazioni visibili nel diagramma sono polimorfiche e non vincolate a livello di database: \texttt{workflow\_tasks} si riferisce a un \texttt{original\_documents} o a una \texttt{communications} tramite la coppia \texttt{subject\_type}/\texttt{subject\_id} (Sezione 8.4), mentre \texttt{audit\_events} si riferisce a un \texttt{original\_documents}, una \texttt{communications}, un \texttt{sub\_documents} o una \texttt{prompt\_configurations} tramite \texttt{resource\_type}/\texttt{resource\_id} (i quattro soli valori usati dai listener che scrivono l'audit trail, Sezione 7.1.6) --- nessuna tabella di dominio è quindi realmente isolata dal resto: coerentemente con l'assenza di una tabella utenti (Sezione 8), ogni tabella resta comunque scoperta dal proprio \texttt{tenant\_id}, non da una foreign key.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=90, height=1\textheight]{ImmaginiSpecificaTecnica/Database/DiagrammaER.drawio.png}
+    \caption{Schema ER}
+\end{figure}
 
 \subsection{Schema Relazionale}
 
-% TODO: diagramma dello schema relazionale (immagine) da produrre e includere qui con \includegraphics, sul modello della Figura 20 di BugBusters.
+A differenza dello Schema ER (Sezione 8.1), qui compaiono i tipi di colonna effettivi e le foreign key dichiarate esplicitamente: le due sole relazioni con vincolo di integrità referenziale reale (\texttt{sub\_documents.original\_document\_id} e \texttt{extracted\_data.sub\_document\_id}, entrambe \textit{on delete cascade}) sono frecce continue, mentre le quattro relazioni polimorfiche restano tratteggiate, senza vincolo dichiarato nel database. Il vincolo di unicità su \texttt{prompt\_configurations} (\texttt{tenant\_id}, \texttt{name}) è riportato come nota nella tabella stessa, non come relazione.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.85\textheight]{ImmaginiSpecificaTecnica/Database/schema-relazionale.png}
+    \caption{Schema Relazionale}
+\end{figure}
+
+\subsection{Schema ERD (Entity-Relationship Diagram)}
+
+Stesse tabelle, stesse colonne e stessi vincoli della Sezione 8.2, qui ridisegnati con la cardinalità indicata direttamente sulle linee di collegamento invece che a parole: un pallino vuoto indica cardinalità opzionale (0), una barra indica cardinalità obbligatoria (1), il ramo aperto indica ``molti''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.85\textheight]{ImmaginiSpecificaTecnica/Database/schema-erd.png}
+    \caption{Schema ERD}
+\end{figure}
 
 \subsection{Descrizione tabelle}
 
 \subsubsection{communications}
 
 Aggregato radice del modulo AI Assistant Generativo: l'intero ciclo di vita di una bozza di comunicazione, dal prompt iniziale fino allo stato finale, vive su questa unica riga. Accumula sia lo stato editoriale deciso dall'operatore (\texttt{status}, \texttt{is\_favorite}, \texttt{rating}) sia lo stato tecnico della pipeline asincrona di generazione (\texttt{generation\_status}, \texttt{cover\_status}, i riferimenti all'esecuzione Step Functions), perché l'entità di dominio \texttt{Communication} (Sezione 5.2) le governa entrambe nello stesso posto invece di separarle su tabelle diverse.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/communications.png}
+    \caption{Tabella communications}
+\end{figure}
 
 Colonne
 \begin{itemize}\raggedright
@@ -3810,6 +3864,12 @@ Colonne
 
 Aggregato radice del modulo AI Co-Pilot: il file caricato dall'utente, il testo e le pagine riconosciute dall'OCR, e lo stato del workflow Step Functions che lo elabora fino allo split in sotto-documenti. I metadati \texttt{manual\_*} (tipo documento, azienda, mese/anno di riferimento), se impostati in fase di upload, prevalgono sempre su quelli estratti successivamente dall'AI (Sezione 5.1, \texttt{UploadDocumentService}).
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/original_documents.png}
+    \caption{Tabella original\_documents}
+\end{figure}
+
 Colonne
 \begin{itemize}\raggedright
     \item \texttt{tenant\_id}, \texttt{created\_by}.
@@ -3825,6 +3885,12 @@ Colonne
 
 Un segmento del documento originale prodotto dallo split AI, associato a un singolo destinatario individuato. Governa la propria revisione (\texttt{review\_status}) e il proprio stato di invio (\texttt{send\_status}), oltre alle eventuali sovrascritture manuali del messaggio precompilato che l'operatore invia fuori piattaforma (Sezione 5.1, \texttt{SendMessageService}).
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/sub_documents.png}
+    \caption{Tabella sub\_documents}
+\end{figure}
+
 Colonne
 \begin{itemize}\raggedright
     \item \texttt{original\_document\_id}: FK verso \texttt{original\_documents}, \textit{on delete cascade}.
@@ -3838,18 +3904,31 @@ Colonne
 
 I campi strutturati che l'AI estrae per un singolo sotto-documento (nominativo, azienda, data, tipo documento), in relazione 1-1 con \texttt{sub\_documents}. \texttt{ai\_payload} conserva lo snapshot integrale e non tipizzato dell'output del modello: la revisione manuale che corregge le colonne tipizzate non cancella così il dato originale prodotto dall'AI.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/extracted_data.png}
+    \caption{Tabella extracted\_data}
+\end{figure}
+
 Colonne
 \begin{itemize}\raggedright
     \item \texttt{sub\_document\_id}: FK univoca verso \texttt{sub\_documents}, \textit{on delete cascade}.
     \item \texttt{employee\_first\_name}, \texttt{employee\_last\_name}, \texttt{company\_name}, \texttt{recipient\_email}, \texttt{fiscal\_code}, \texttt{employee\_id}.
     \item \texttt{document\_date}, \texttt{document\_type}, \texttt{description}.
     \item \texttt{confidence\_score} (0–100, nullable): combina la confidenza media OCR con la completezza dei campi chiave trovati (Sezione 5.1, \texttt{ExtractSubDocumentFieldsService}).
+    \item \texttt{field\_confidence} (json, nullable): confidenza scomposta per singolo campo chiave, non solo il valore aggregato di \texttt{confidence\_score}. Introdotta perché la confidenza restituita da Textract è quasi sempre alta di per sé: il segnale utile in pratica non era il punteggio OCR complessivo, ma la presenza o assenza dei singoli campi chiave, che riduceva l'esito a poche combinazioni discrete; scomporre la confidenza per campo rende quel segnale esplicito invece di appiattirlo in un unico numero.
     \item \texttt{ai\_payload} (json).
 \end{itemize}
 
 \subsubsection{workflow\_tasks}
 
 Tabella unica dei task di callback dai worker asincroni verso Step Functions/SQS, condivisa da entrambi i domini invece di duplicata per modulo: la presa in carico atomica e la deduplicazione sul token vivono in un solo posto, e il dominio del task è identificato dalla coppia polimorfica \texttt{subject\_type}/\texttt{subject\_id} invece di una foreign key dedicata. Sostituisce la precedente \texttt{document\_workflow\_tasks}, specifica del solo modulo Documents, ritirata quando la stessa meccanica è servita anche a Communications.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/workflow_tasks.png}
+    \caption{Tabella workflow\_tasks}
+\end{figure}
 
 Colonne
 \begin{itemize}\raggedright
@@ -3863,6 +3942,12 @@ Colonne
 
 Combinazioni di prompt, tono e stile salvate dall'utente per essere riutilizzate come preset del form di generazione, indipendenti da qualunque generazione effettiva (Sezione 5.2, \texttt{PromptConfigurationService}). Il nome è univoco per tenant, protetto da un vincolo di unicità a livello di database oltre che dalla logica applicativa.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.32\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/prompt_configurations.png}
+    \caption{Tabella prompt\_configurations}
+\end{figure}
+
 Colonne
 \begin{itemize}\raggedright
     \item \texttt{tenant\_id}, \texttt{created\_by}.
@@ -3872,6 +3957,12 @@ Colonne
 \subsubsection{audit\_events}
 
 Log di audit trasversale a entrambi i domini, popolato dai listener degli eventi di dominio (Sezione 7.1.6, Observer) invece che da chiamate dirette sparse nei singoli casi d'uso. Ogni riga registra chi ha compiuto un'azione, su quale risorsa, correlata alla richiesta HTTP che l'ha generata.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.38\textwidth]{ImmaginiSpecificaTecnica/Database/Tabelle/audit_events.png}
+    \caption{Tabella audit\_events}
+\end{figure}
 
 Colonne
 \begin{itemize}\raggedright
