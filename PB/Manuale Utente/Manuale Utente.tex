@@ -349,7 +349,12 @@ Tutte le viste condividono la stessa cornice.
     \item \textbf{Area di lavoro.} Il contenuto della vista, organizzato in sezioni successive. Un pulsante \ui{Torna su} compare dopo aver sceso nella pagina.
 \end{itemize}
 
-\screenshottodo{shell-completa}{Cornice dell'applicazione con barra laterale e intestazione}{Catturare l'intera finestra del browser sulla vista Overview, con la sidebar visibile a sinistra (gruppi Panoramica, AI Assistant, Co-Pilot CdL), il titolo ``Overview operativa'' e il selettore di tema in alto a destra. Preferire il tema chiaro, a larghezza desktop.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/shell-completa.png}
+\caption{Cornice dell'applicazione con barra laterale e intestazione}
+\label{fig:shell-completa}
+\end{figure}
 
 \subsubsection{Navigazione}
 
@@ -361,13 +366,23 @@ Tutte le viste condividono la stessa cornice.
 
 I collegamenti profondi funzionano: l'indirizzo \path{https://localhost:8443/assistant} riapre direttamente l'Assistant.
 
-\screenshottodo{sidebar-navigazione}{Barra laterale di navigazione}{Ritaglio della sola sidebar, con un gruppo espanso (ad esempio Assistant) e la voce attiva evidenziata.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{immagini/sidebar-navigazione.png}
+\caption{Barra laterale di navigazione}
+\label{fig:sidebar-navigazione}
+\end{figure}
 
 \subsubsection{Cambio tema}
 
 Il pulsante sole/luna nell'intestazione commuta il tema. L'etichetta accessibile è \ui{Attiva tema scuro} oppure \ui{Attiva tema chiaro}. La scelta è locale al browser.
 
-\screenshottodo{header-tema}{Intestazione con selettore del tema}{Ritaglio dell'header NEXUM con il titolo della pagina e il pulsante tema. Eventualmente una coppia chiaro/scuro affiancata.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/header-tema.png}
+\caption{Intestazione con selettore del tema}
+\label{fig:header-tema}
+\end{figure}
 
 \subsection{Overview operativa}
 
@@ -384,7 +399,12 @@ Il riquadro iniziale recita: \textit{``Gestione assistita di comunicazioni inter
 
 Sotto, la sezione \ui{Da dove partire} riassume i tre punti d'ingresso: Assistant, Co-Pilot e metriche operative (queste ultime restano dentro le pagine degli strumenti, non in una vista analytics separata).
 
-\screenshottodo{overview-hero}{Overview: avvio rapido}{Schermata della parte alta della Overview, con il testo introduttivo e i due pulsanti ``Crea contenuto'' e ``Carica documenti''.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/overview-hero.png}
+\caption{Overview: avvio rapido}
+\label{fig:overview-hero}
+\end{figure}
 
 \subsubsection{Priorità e metriche}
 
@@ -400,7 +420,12 @@ Più in basso, \ui{Metriche strumenti} ripete i pannelli dell'Assistant e del Co
 
 Un errore di caricamento mostra un riquadro con pulsante \ui{Riprova}.
 
-\screenshottodo{overview-metriche}{Overview: priorità, metriche e attività recenti}{Schermata completa sotto l'hero: le tre card di priorità, i due pannelli metriche (AI Assistant e Co-Pilot) e la tabella Attività recenti, con almeno una riga di esempio.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/overview-metriche.png}
+\caption{Overview: priorità, metriche e attività recenti}
+\label{fig:overview-metriche}
+\end{figure}
 
 \subsection{AI Assistant Generativo}
 
@@ -423,7 +448,12 @@ Non è possibile aggiungere toni o stili personalizzati, né selezionare un'azie
 
 Sotto il form, \ui{Salva configurazione} memorizza prompt, tono e stile come preset riutilizzabile, senza avviare una generazione. Si può assegnare un nome (al massimo 150 caratteri) oppure lasciarlo vuoto: in quel caso il sistema attribuisce un'etichetta progressiva del tipo \texttt{Senza nome (1)}. Se il nome è già usato, viene comunque assegnata un'etichetta progressiva. Il pulsante è disabilitato finché il prompt non è valido.
 
-\screenshottodo{assistant-composizione}{Modulo di generazione della bozza}{Sezione ``Crea una bozza'' compilata con un prompt di esempio, tono e stile selezionati, pulsante ``Genera bozza'' visibile e, sotto, il pulsante ``Salva configurazione''.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-composizione.png}
+\caption{Modulo di generazione della bozza}
+\label{fig:assistant-composizione}
+\end{figure}
 
 \subsubsection{Avanzamento della generazione}
 
@@ -439,7 +469,12 @@ Dopo l'invio compare una barra di avanzamento e un messaggio di stato. Le fasi, 
 
 Se la richiesta resta in lavorazione a lungo, può comparire \textit{``Generazione ancora in corso. Lo stato verrà aggiornato.''} In caso di errore (modello irraggiungibile, credenziali, risposta non valida) lo stato diventa un messaggio di fallimento e la bozza non è utilizzabile. Non vengono mai mostrati testi di ripiego.
 
-\screenshottodo{assistant-avanzamento}{Barra di avanzamento della generazione}{Stesso modulo durante una generazione in corso: barra parzialmente piena e messaggio di stato (ad esempio ``Generazione del testo in corso'').}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-avanzamento.png}
+\caption{Barra di avanzamento della generazione}
+\label{fig:assistant-avanzamento}
+\end{figure}
 
 \subsubsection{Revisione del contenuto}
 
@@ -457,19 +492,34 @@ Quando la bozza è pronta si vedono, dall'alto:
     \item le azioni \ui{Salva nello storico}, \ui{Rigenera bozza} e \ui{Scarta bozza}.
 \end{itemize}
 
-\screenshottodo{assistant-revisione}{Anteprima della bozza generata}{Sezione ``Controlla il contenuto'' con copertina, titolo, testo, badge di stato ``Bozza'', azioni sulla copertina e pulsanti in basso. Usare una generazione conclusa con copertina visibile.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-revisione.png}
+\caption{Anteprima della bozza generata}
+\label{fig:assistant-revisione}
+\end{figure}
 
 \paragraph{Modifica di titolo e testo}
 
 \ui{Modifica} abilita i due campi. \ui{Salva} persiste le correzioni; \ui{Annulla} le scarta e ripristina i valori precedenti. La modifica è consentita finché la bozza non è \ui{Scartata}, anche dopo il salvataggio nello storico. Una rigenerazione sostituisce titolo, testo e copertina e chiude un'eventuale modifica non salvata.
 
-\screenshottodo{assistant-modifica}{Bozza in modalità modifica}{Stessa anteprima con i campi titolo e testo editabili e i pulsanti ``Annulla'' e ``Salva'' al posto di ``Modifica''.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-modifica.png}
+\caption{Bozza in modalità modifica}
+\label{fig:assistant-modifica}
+\end{figure}
 
 \paragraph{Valutazione}
 
 Ogni generazione si valuta una sola volta, da 1 a 5 stelle, con un commento facoltativo di al massimo 1000 caratteri. Si selezionano le stelle, si scrive eventualmente il commento e si conferma con \ui{Invia valutazione}. Senza un punteggio il pulsante resta disabilitato. Dopo l'invio compare \textit{``Valutazione registrata con successo.''} e, se presente, il commento salvato. La valutazione non è modificabile e non è obbligatoria per salvare nello storico.
 
-\screenshottodo{assistant-valutazione}{Valutazione a stelle della bozza}{Ritaglio del blocco ``Valuta questa bozza'': stelle, campo commento con contatore caratteri e pulsante ``Invia valutazione''. In alternativa, lo stato successivo alla registrazione.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-valutazione.png}
+\caption{Valutazione a stelle della bozza}
+\label{fig:assistant-valutazione}
+\end{figure}
 
 \paragraph{Salvataggio nello storico, rigenerazione e scarto}
 
@@ -479,7 +529,12 @@ Ogni generazione si valuta una sola volta, da 1 a 5 stelle, con un commento faco
     \item \ui{Scarta bozza} chiede conferma: \textit{``Sei sicuro di voler scartare questa bozza? Non sarà più modificabile né rigenerabile.''} Con \ui{Conferma eliminazione} lo stato diventa \ui{Scartata}: la bozza resta tracciata ma esce dallo storico attivo. \ui{Annulla} chiude la richiesta di conferma.
 \end{itemize}
 
-\screenshottodo{assistant-azioni}{Azioni sulla bozza: storico, rigenerazione, scarto}{Ritaglio dei pulsanti ``Salva nello storico'', ``Rigenera bozza'' e ``Scarta bozza''. In una seconda cattura, il messaggio di conferma dello scarto.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-azioni.png}
+\caption{Azioni sulla bozza: storico, rigenerazione, scarto}
+\label{fig:assistant-azioni}
+\end{figure}
 
 \subsubsection{Storico contenuti}
 
@@ -498,7 +553,12 @@ I filtri si applicano sia alle comunicazioni sia alle configurazioni salvate, co
 
 Se i filtri non trovano nulla, compare \textit{``Nessuna comunicazione corrisponde ai filtri selezionati.''} Senza filtri e senza record: \textit{``Le bozze generate compariranno qui.''}
 
-\screenshottodo{assistant-filtri}{Filtri dello storico contenuti}{Riga dei filtri (parola chiave, tono, stile, data, Azzera filtri) sopra l'elenco.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-filtri.png}
+\caption{Filtri dello storico contenuti}
+\label{fig:assistant-filtri}
+\end{figure}
 
 \paragraph{Configurazioni salvate}
 
@@ -509,7 +569,12 @@ Sopra le card delle comunicazioni, se esistono preset che superano i filtri, com
     \item L'icona cestino chiede \textit{``Eliminare definitivamente questa configurazione salvata?''} con \ui{Conferma eliminazione} e \ui{Annulla}.
 \end{itemize}
 
-\screenshottodo{assistant-configurazioni}{Preset di prompt salvati}{Blocco ``Configurazioni salvate'' con almeno un preset, pulsante ``Usa'' e icona di eliminazione.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-configurazioni.png}
+\caption{Preset di prompt salvati}
+\label{fig:assistant-configurazioni}
+\end{figure}
 
 \paragraph{Card dello storico}
 
@@ -522,7 +587,12 @@ In basso a destra:
     \item l'icona cestino chiede \textit{``Eliminare definitivamente questo elemento dallo storico?''}. La conferma rimuove il record in modo irreversibile.
 \end{itemize}
 
-\screenshottodo{assistant-storico}{Elenco dello storico contenuti}{Due o tre card nello storico, di cui una selezionata (bordo evidenziato), con stella preferiti e icona elimina. Includere se possibile una stella attiva.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-storico.png}
+\caption{Elenco dello storico contenuti}
+\label{fig:assistant-storico}
+\end{figure}
 
 \subsubsection{Stati della comunicazione}
 
