@@ -641,7 +641,12 @@ Vincoli sul file, oltre al formato:
 
 Un rifiuto viene mostrato come errore applicativo (ad esempio \textit{``I PDF cifrati o protetti da password non sono supportati.''}).
 
-\screenshottodo{copilot-caricamento}{Pannello di caricamento documenti}{Sezione ``Carica nel repository'' con tipologia selezionata, mese/anno/azienda compilati e area tratteggiata di upload, senza elaborazione in corso.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-caricamento.png}
+\caption{Pannello di caricamento documenti}
+\label{fig:copilot-caricamento}
+\end{figure}
 
 \subsubsection{Avanzamento dell'elaborazione}
 
@@ -657,7 +662,12 @@ Dopo l'accettazione del file, una barra segue le fasi:
 
 Se l'elaborazione si prolunga può comparire \textit{``Elaborazione ancora in corso. Lo stato verrà aggiornato.''} Un fallimento di split o estrazione lascia il documento in stato \ui{Fallito}, con un messaggio nell'area di dettaglio. Non vengono inventati destinatari o campi per mascherare l'errore.
 
-\screenshottodo{copilot-avanzamento}{Avanzamento dell'analisi documentale}{Stesso pannello durante l'elaborazione, con barra di progresso e messaggio (ad esempio ``Analisi OCR del documento in corso'').}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-avanzamento.png}
+\caption{Avanzamento dell'analisi documentale}
+\label{fig:copilot-avanzamento}
+\end{figure}
 
 \subsubsection{Storico documenti analizzati}
 
@@ -677,7 +687,12 @@ La sezione \ui{Storico documenti analizzati} elenca i sotto-documenti del tenant
 
 Senza documenti: \textit{``I documenti caricati compariranno qui.''}
 
-\screenshottodo{copilot-storico}{Tabella dello storico documenti}{Tabella con almeno due righe, colonne visibili (Destinatario, Documento, File, Date, Conf., Stato, Invio, Azioni) e una riga con ``Consulta'' attivo.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-storico.png}
+\caption{Tabella dello storico documenti}
+\label{fig:copilot-storico}
+\end{figure}
 
 \paragraph{Filtri}
 
@@ -693,7 +708,12 @@ I criteri sono applicati dal backend, sul solo tenant corrente:
 
 Con filtri attivi e nessun risultato: \textit{``Nessun documento corrisponde ai filtri selezionati.''}
 
-\screenshottodo{copilot-filtri}{Filtri dello storico documenti}{Riga completa dei filtri sopra la tabella: ricerca, stato invio, confidenza, soglia, mese, anno, Azzera filtri.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-filtri.png}
+\caption{Filtri dello storico documenti}
+\label{fig:copilot-filtri}
+\end{figure}
 
 \subsubsection{Dettaglio e revisione}
 
@@ -708,7 +728,12 @@ Il dettaglio è affiancato:
 
 Se la confidenza è sotto l'80\% il pannello dei dati è evidenziato come da controllare con priorità.
 
-\screenshottodo{copilot-dettaglio}{Dettaglio documento: anteprima e dati estratti}{Vista affiancata: PDF a sinistra, ispettore campi a destra, con legenda modificabile/sola lettura e stato di revisione visibile. Usare un documento già elaborato.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-dettaglio.png}
+\caption{Dettaglio documento: anteprima e dati estratti}
+\label{fig:copilot-dettaglio}
+\end{figure}
 
 \paragraph{Campi in sola lettura}
 
@@ -752,7 +777,12 @@ Fuori dalla modalità modifica:
 
 In modifica, \ui{Salva} persiste le correzioni e \ui{Annulla} le scarta. Gli errori di validazione compaiono sotto il campo interessato (ad esempio \textit{``Formato e-mail non valido.''} o \textit{``Il codice fiscale non supera il controllo di validità formale.''}).
 
-\screenshottodo{copilot-revisione}{Modifica dei dati estratti}{Ispettore in modalità modifica, con almeno un campo evidenziato da errore (email o codice fiscale) e i pulsanti ``Annulla'' e ``Salva''.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-revisione.png}
+\caption{Modifica dei dati estratti}
+\label{fig:copilot-revisione}
+\end{figure}
 
 \subsubsection{Stati di revisione e di invio}
 
@@ -805,7 +835,12 @@ Sotto i campi, in sola lettura:
 
 Il recapito al dipendente avviene fuori da NEXUM (posta elettronica dello studio, altri canali). La piattaforma si ferma alla preparazione del plico.
 
-\screenshottodo{copilot-messaggio}{Pannello del messaggio di invio}{Blocco ``Messaggio di invio'' aperto, con destinatario, oggetto e testo precompilati, più i collegamenti ``Apri anteprima'' e ``Scarica PDF''.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-messaggio.png}
+\caption{Pannello del messaggio di invio}
+\label{fig:copilot-messaggio}
+\end{figure}
 
 \subsubsection{Metriche del Co-Pilot}
 
@@ -822,7 +857,12 @@ La sezione \ui{Qualità e performance OCR} riporta i volumi del tenant:
 
 Non esiste una vista analytics con filtri temporali, grafici di accuratezza o tempo medio di analisi: quelle elaborazioni restano fuori perimetro. Le stesse metriche, in forma compatta, compaiono anche in Overview.
 
-\screenshottodo{copilot-metriche}{Pannello metriche del Co-Pilot}{Sezione ``Qualità e performance OCR'' con le card delle metriche popolate.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/copilot-metriche.png}
+\caption{Pannello metriche del Co-Pilot}
+\label{fig:copilot-metriche}
+\end{figure}
 
 \section{Metriche dell'AI Assistant}
 
