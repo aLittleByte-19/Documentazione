@@ -289,6 +289,7 @@ La struttura del presente documento è articolata nelle seguenti sezioni princip
     \item \textbf{Sezione 6 - Architettura Frontend:} Descrive i principi di progettazione della SPA Angular, il pattern MVVM adottato, i modelli di dati, i servizi di comunicazione col backend e i componenti UI, micro e macro.
     \item \textbf{Sezione 7 - Design Pattern:} Documenta i design pattern applicati esplicitamente nel backend e nel frontend, con l'intento di ciascuno, dove si trova nel codice e cosa succederebbe senza.
     \item \textbf{Sezione 8 - Database:} Descrive il modello dei dati del sistema: schema ER, schema relazionale e la descrizione di ciascuna tabella.
+    \item \textbf{Sezione 9 - Requisiti Funzionali Soddisfatti:} Riporta lo stato di implementazione di ciascun requisito funzionale identificato nell'Analisi dei Requisiti, verificato sul codice sorgente del sistema.
 \end{itemize}
 
 \subsection{Glossario}
@@ -525,7 +526,7 @@ Una richiesta HTTPS attraversa diversi livelli prima di raggiungere il codice ap
     \textbf{Nome} & \textbf{Versione} & \textbf{Descrizione} \\
     \hline
     \endhead
-    Traefik & 3.4 & Reverse proxy posizionato davanti a tutti i servizi. Si occupa della terminazione TLS, dello smistamento delle richieste in base all'host e dell'esposizione delle metriche per il sistema di osservabilità. \\
+    Traefik & 3.4 & Reverse proxy posizionato davanti a tutti i servizi. Si occupa della terminazione TLS e dello smistamento delle richieste in base all'host. \\
     \hline
     Nginx (applicativo) & 1.27 & Web server utilizzato come proxy per le chiamate \texttt{/api} verso PHP-FPM tramite FastCGI. Immagine di produzione, buildata e scansionata, che non conosce LocalStack. \\
     \hline
@@ -612,43 +613,17 @@ I dati del sistema hanno nature diverse e vengono gestiti con strumenti dedicati
 % ── 2.9 ──────────────────────────────────────────────────────────────────────
 \subsection{Osservabilità}
 
-Il sistema è strumentato con OpenTelemetry, uno standard indipendente dal fornitore che consente di raccogliere metriche, tracce e log senza vincolarsi a prodotti specifici. I log applicativi vengono inviati via OTLP al Collector, mentre le metriche sono esposte dall'applicazione su un endpoint dedicato (\texttt{/internal/metrics}) e raccolte dal Collector tramite campionamento periodico; entrambi i segnali vengono poi smistati verso i rispettivi backend di storage, mentre Grafana li correla in cruscotti unificati.
+Il sistema affida l'osservabilità operativa a tre meccanismi applicativi, senza uno stack di monitoraggio dedicato né un collector:
 
-\renewcommand{\arraystretch}{1.3}
-\rowcolors{2}{gray!8}{white}
-{\small
-\setlength{\LTleft}{0pt}
-\setlength{\LTright}{0pt}
-\begin{longtable}{|p{3.5cm}|p{1.8cm}|p{9.2cm}|}
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Nome} & \textbf{Versione} & \textbf{Descrizione} \\
-    \hline
-    \endfirsthead
-    \hline
-    \rowcolor{gray!20}
-    \textbf{Nome} & \textbf{Versione} & \textbf{Descrizione} \\
-    \hline
-    \endhead
-    OpenTelemetry (OTel) & --- & Standard open source per la strumentazione delle applicazioni. Definisce il formato OTLP con cui log (e potenzialmente tracce) vengono inviati al Collector, consentendo di cambiare backend di osservabilità senza modificare il codice applicativo. \\
-    \hline
-    OTel Collector & 0.153.0 & Componente centrale che riceve i log via OTLP e le metriche tramite campionamento periodico, smistandoli verso Prometheus (metriche), Tempo (tracce) e Loki (log). Le metriche raccolte sono quelle applicative esposte da Nginx (\texttt{nginx:8081/internal/metrics}, non le metriche di Nginx stesso), quelle di Traefik e quelle del Collector stesso. \\
-    \hline
-    Prometheus & 3.9.0 & Sistema di raccolta e storage delle metriche. Raccoglie le metriche esposte dai servizi tramite scrape e definisce le regole su cui Alertmanager genera gli avvisi. \\
-    \hline
-    Grafana Tempo & 2.9.0 & Backend per le tracce distribuite. Riceve le tracce dal Collector e consente la correlazione con metriche e log all'interno di Grafana. \\
-    \hline
-    Grafana Loki & 3.3.2 & Sistema di aggregazione dei log. Riceve i log dal Collector via OTLP e da Alloy, indicizzandoli per consentire ricerche contestuali. \\
-    \hline
-    Grafana Alloy & 1.5.1 & Agente per la raccolta dei log dai container Docker Compose. Invia i log di container a Loki tramite pipeline di raccolta. \\
-    \hline
-    Grafana & 12.3.0 & Piattaforma di visualizzazione. Correla metriche, tracce e log in cruscotti unificati, consentendo l'analisi contestuale degli eventi senza dover ricorrere a stack separati come ELK o Jaeger. \\
-    \hline
-    Alertmanager & 0.29.0 & Componente per la gestione e l'instradamento degli alert. Genera avvisi a partire da regole definite su Prometheus, legate a eventi concreti del dominio applicativo. \\
-    \hline
-    \caption{Stack di osservabilità}
-\end{longtable}
-}
+\begin{itemize}
+    \item \textbf{Audit trail di compliance}: \texttt{AuditLogger} (Sezione 5.3) registra ogni evento rilevante (upload, elaborazione, revisione, generazione, valutazione...) sulla tabella \texttt{audit\_events}, append-only (Sezione 8). Non è un sistema di monitoraggio operativo ma un registro di conformità: risponde a "chi ha fatto cosa, quando", non a "il sistema sta bene adesso?".
+    \item \textbf{Correlation/request ID}: il middleware \texttt{CorrelateRequests} lato backend, con l'equivalente lato frontend nella cartella \texttt{core} (Sezione 6.1), taggano ogni richiesta HTTP e ogni messaggio SQS con un identificativo di correlazione, propagato nei log strutturati per ricostruire il percorso di una richiesta attraverso i tre processi backend (API, due Worker).
+    \item \textbf{Metriche operative verso CloudWatch}: \texttt{EmfMetricsRecorder} scrive righe in CloudWatch Embedded Metric Format (EMF) su un canale di log dedicato (\texttt{metrics}); CloudWatch le interpreta automaticamente come dato di metrica quando la riga arriva da CloudWatch Logs, senza endpoint di scrape né SDK applicativo verso \texttt{PutMetricData}. Il listener \texttt{RecordRequestMetrics} lo invoca a ogni richiesta HTTP (evento nativo \texttt{RequestHandled}, non un middleware: un'eccezione che risale la pipeline farebbe comunque terminare la richiesta prima che il codice dopo \texttt{\$next()} di un middleware venga eseguito) per \texttt{RequestCount}, \texttt{Latency} ed \texttt{Errors}; il comando \texttt{php artisan mvp:metrics:dlq-depth} lo invoca per \texttt{DlqDepth} per pipeline.
+\end{itemize}
+
+I log strutturati sul canale \texttt{stderr} sono già in formato JSON con i campi di correlazione iniettati da \texttt{CorrelateRequests}: instradabili verso CloudWatch Logs tramite il log driver del container host, senza chiamate SDK applicative dedicate. La diagnosi di un incidente passa da questi log e da due comandi diagnostici manuali: \texttt{php artisan mvp:dlq:list}, che interroga direttamente SQS per ispezionare il contenuto di una DLQ, e il già citato \texttt{mvp:metrics:dlq-depth} per la sola profondità.
+
+Le metriche mostrate agli utenti nei pannelli Angular (Assistant, Co-Pilot, Overview — Sezione 6.2, 6.6) sono un sistema distinto dai precedenti: \texttt{MvpStateService} le calcola sull'intero tenant a ogni \texttt{GET /api/v1/state}, e la SPA le legge da lì.
 
 % ── 2.10 ─────────────────────────────────────────────────────────────────────
 \subsection{CI e quality gate}
@@ -800,6 +775,8 @@ Gestione del ciclo di vita completo di una comunicazione generata dall'AI Assist
     \hline
     \path|/api/v1/prompt-configurations/{promptConfiguration}| & DELETE & Elimina definitivamente una configurazione di prompt salvata. \\
     \hline
+    \path|/api/v1/assistant/metrics/export| & GET & Download del report riepilogativo delle metriche dell'AI Assistant come PDF allegato. \\
+    \hline
     \caption{Communications API}
 \end{longtable}
 }
@@ -838,6 +815,8 @@ Gestione del ciclo di vita dei documenti caricati dall'AI Co-Pilot, della relati
     \path|/api/v1/documents/{subDocument}/review| & POST & Segna un sotto-documento come validato manualmente, ad esempio a valle di una revisione human-in-the-loop per i casi a bassa confidenza. \\
     \hline
     \path|/api/v1/documents/{subDocument}/preview| & GET & Restituisce l'anteprima in formato PDF del sotto-documento. \\
+    \hline
+    \path|/api/v1/documents/{subDocument}/original-preview| & GET & Restituisce l'anteprima in formato PDF del documento originale completo, non splittato, alternativa indipendente quando quella del sotto-documento non è disponibile. \\
     \hline
     \path|/api/v1/documents/{subDocument}/send-preview| & GET & Anteprima PDF del messaggio di invio precompilato per il sotto-documento. \\
     \hline
@@ -907,7 +886,7 @@ Il dominio contiene le regole di business e le porte che definiscono le capacit�
 Implementano la comunicazione con i sistemi esterni: il database PostgreSQL tramite repository Eloquent, i modelli AI tramite gli adapter di Bedrock e Textract, lo storage documentale tramite Flysystem e S3.
 
 \paragraph{Esempio: il dominio Documents}
-Un Controller riceve l'upload, lo valida e delega l'esecuzione al caso d'uso corrispondente, che salva il file e avvia la pipeline asincrona senza conoscere i dettagli di Step Functions. Il Worker raggiunge lo stesso dominio applicativo tramite un adapter primario diverso, guidato dal workflow, e delega ai casi d'uso di OCR, estrazione dei campi e finalizzazione della pipeline. La revisione umana delle estrazioni a bassa confidenza avviene invece in modo sincrono, tramite un Controller HTTP dedicato invocato dall'operatore, non dal Worker. Il risultato è persistito tramite il repository del dominio; un evento dedicato notifica audit e metriche. Il dominio Communications segue lo stesso schema.
+Un Controller riceve l'upload, lo valida e delega l'esecuzione al caso d'uso corrispondente, che salva il file e avvia la pipeline asincrona senza conoscere i dettagli di Step Functions. Il Worker raggiunge lo stesso dominio applicativo tramite un adapter primario diverso, guidato dal workflow, e delega ai casi d'uso di OCR, estrazione dei campi e finalizzazione della pipeline. La revisione umana delle estrazioni a bassa confidenza avviene invece in modo sincrono, tramite un Controller HTTP dedicato invocato dall'operatore, non dal Worker. Il risultato è persistito tramite il repository del dominio; un evento dedicato notifica l'audit. Il dominio Communications segue lo stesso schema.
 
 \begin{figure}[H]
     \centering
@@ -929,12 +908,12 @@ La tabella seguente quantifica la composizione interna dei due domini: casi d'us
 \begin{longtable}{|p{2.6cm}|p{1.8cm}|p{2.6cm}|p{2.6cm}|p{5.7cm}|}
     \hline
     \rowcolor{gray!20}
-    \textbf{Dominio} & \textbf{Casi d'uso} & \textbf{Porte secondarie} & \textbf{Eventi (= listener)} & \textbf{Adapter primario} \\
+    \textbf{Dominio} & \textbf{Casi d'uso} & \textbf{Porte secondarie} & \textbf{Eventi} & \textbf{Adapter primario} \\
     \hline
     \endfirsthead
     \hline
     \rowcolor{gray!20}
-    \textbf{Dominio} & \textbf{Casi d'uso} & \textbf{Porte secondarie} & \textbf{Eventi (= listener)} & \textbf{Adapter primario} \\
+    \textbf{Dominio} & \textbf{Casi d'uso} & \textbf{Porte secondarie} & \textbf{Eventi} & \textbf{Adapter primario} \\
     \hline
     \endhead
     Documents & 12 & 6 & 14 & 4 Controller HTTP + \texttt{WorkflowTaskHandler} \\
@@ -1139,7 +1118,7 @@ Metodi
 
 \paragraph{DocumentPreviewController, SendMessageController}
 
-Due Controller separati da \texttt{DocumentController}, sullo stesso principio di traduzione pura verso una porta primaria: \texttt{DocumentPreviewController} espone la sola anteprima del file del sotto-documento (non del documento originale, che non ha un endpoint di anteprima proprio), \texttt{SendMessageController} l'intero ciclo del messaggio di invio (anteprima PDF composta, esportazione, correzione delle sovrascritture manuali). Entrambi traducono un fallimento applicativo in una risposta HTTP appropriata invece di lasciarlo propagare: \texttt{DocumentPreviewController} converte \texttt{DocumentPreviewUnavailableException} in un 404 e un \texttt{RuntimeException} generico (storage non raggiungibile) in un 503.
+Due Controller separati da \texttt{DocumentController}, sullo stesso principio di traduzione pura verso una porta primaria: \texttt{DocumentPreviewController} espone l'anteprima del file del sotto-documento e, con \texttt{originalPreview()}, anche quella del documento originale completo non splittato, come alternativa indipendente quando la prima non è disponibile; \texttt{SendMessageController} copre l'intero ciclo del messaggio di invio (anteprima PDF composta, esportazione, correzione delle sovrascritture manuali). Entrambi traducono un fallimento applicativo in una risposta HTTP appropriata invece di lasciarlo propagare: \texttt{DocumentPreviewController} converte \texttt{DocumentPreviewUnavailableException} in un 404 e un \texttt{RuntimeException} generico (storage non raggiungibile) in un 503, per entrambi i suoi metodi.
 
 \begin{figure}[H]
     \centering
@@ -1161,6 +1140,7 @@ Attributi
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{preview(request: Request, subDocument: SubDocument, preview: PreviewDocumentUseCase): Response}
+    \item \texttt{originalPreview(request: Request, subDocument: SubDocument, preview: PreviewDocumentUseCase): Response}
     \item \texttt{sendPreview(request: Request, subDocument: SubDocument, sendMessage: SendMessageUseCase): Response}
     \item \texttt{sendExport(request: Request, subDocument: SubDocument, sendMessage: SendMessageUseCase): Response}
     \item \texttt{updateSendMessage(request: UpdateSendMessageRequest, subDocument: SubDocument, sendMessage: SendMessageUseCase, state: MvpStateService): JsonResponse}
@@ -1187,6 +1167,7 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{taskTypes(): array}
     \item \texttt{subjectType(): string}
+    \item \texttt{pipeline(): string} --- restituisce l'identificativo della pipeline di appartenenza (\texttt{"documents"}).
     \item \texttt{auditEventPrefix(): string} --- prefisso (\texttt{"mvp-document-workflow-task-"}) usato dal runner condiviso per nominare gli eventi di audit di questo dominio.
     \item \texttt{resolveSubject(message: array): WorkflowSubject}
     \item \texttt{execute(taskType: string, subject: WorkflowSubject, message: array): array}
@@ -1207,7 +1188,7 @@ Prima della sua introduzione, tre punti diversi del codice (l'avvio del workflow
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{id}, \texttt{tenantId}, \texttt{filePath}, i metadati manuali di caricamento, \texttt{processingStatus}, il risultato OCR, i riferimenti all'esecuzione Step Functions.
+    \item \texttt{id}, \texttt{tenantId}, \texttt{filePath}, \texttt{originalFilename}, i metadati manuali di caricamento, \texttt{processingStatus}, il risultato OCR, i riferimenti all'esecuzione Step Functions.
 \end{itemize}
 
 Metodi
@@ -1340,9 +1321,11 @@ Metodi
 
 \paragraph{ExtractSubDocumentFieldsService}
 
-Implementa \texttt{ExtractSubDocumentFieldsUseCase}: estrae i campi strutturati (nominativo, azienda, data, tipo documento) di un singolo sotto-documento tramite Bedrock, un destinatario alla volta. Fino a un refactor recente era un'unica classe di quasi 480 righe insieme a \texttt{ProcessDocumentService}, perché lo split del documento invocava internamente l'estrazione per ogni segmento appena creato; la separazione isola oggi questa logica dalla manipolazione PDF che la rendeva testabile solo insieme a quest'ultima.
+Implementa \texttt{ExtractSubDocumentFieldsUseCase}: estrae nove campi (nome, cognome, azienda, data documento, tipo documento, descrizione, email destinatario, codice fiscale, matricola) di un singolo sotto-documento tramite Bedrock, un destinatario alla volta. Separata da \texttt{ProcessDocumentService} (che orchestra lo split PDF e invoca questa porta per ciascun destinatario appena creato), per isolare questa logica dalla manipolazione PDF che la rendeva testabile solo insieme a quest'ultima.
 
-I metadati dichiarati manualmente in fase di upload prevalgono sempre su quelli estratti dall'AI. Calcola un punteggio di confidenza combinando la confidenza media OCR sull'intervallo di pagine del sotto-documento con la completezza dei campi chiave effettivamente trovati, e ne deriva lo stato di revisione: sopra soglia il sotto-documento è validato automaticamente, altrimenti marcato per revisione manuale. Un output AI non conforme allo schema atteso mette il sotto-documento in quarantena invece di propagare l'errore.
+I metadati dichiarati manualmente in fase di upload prevalgono sempre su quelli estratti dall'AI, ed escludono il campo corrispondente dal calcolo della confidenza (un'azienda o una data dichiarate dall'utente non hanno bisogno di essere lette dall'AI per essere affidabili). Codice fiscale, email e matricola sono identificativi, non semplici estrazioni: un valore che non supera il proprio controllo formale (email tramite \texttt{filter\_var}, codice fiscale tramite \texttt{CodiceFiscale::isValid()}) torna a \texttt{null} invece di essere salvato — un dato falso che l'operatore non avrebbe modo di riconoscere come tale. La matricola non ha una forma dichiarata e passa così com'è.
+
+Il punteggio di confidenza del sotto-documento è la confidenza più bassa fra i suoi campi chiave (nome, cognome, azienda, data — non la media: un documento è affidabile quanto il suo dato meno affidabile), ciascuna letta dalla riga OCR specifica da cui il campo proviene tramite \texttt{FieldConfidence} (Sezione 5.1, \texttt{TextractOcrAdapter}, ADR 0013), con la confidenza media di pagina come ripiego quando un campo non è rintracciabile fra le righe. Un campo chiave assente azzera il punteggio. Sopra soglia (\texttt{confidenceThreshold}, default 80) il sotto-documento è validato automaticamente — salvo che porti un codice fiscale sotto la propria soglia dedicata (\texttt{fiscalCodeConfidenceThreshold}, default 95, più alta perché un carattere letto male assegnerebbe il documento alla persona sbagliata) — altrimenti è marcato per revisione manuale. Un output AI non conforme allo schema atteso mette il sotto-documento in quarantena invece di propagare l'errore.
 
 \begin{figure}[H]
     \centering
@@ -1352,7 +1335,7 @@ I metadati dichiarati manualmente in fase di upload prevalgono sempre su quelli 
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{documents: DocumentRepository}, \texttt{ai: DocumentAiGatewayPort}, \texttt{events: DocumentEventDispatcherPort}, \texttt{logger: LoggerInterface}, \texttt{ocrRange: OcrRangeReader}, \texttt{tx: TransactionManagerPort}, \texttt{confidenceThreshold: int} (default 80).
+    \item \texttt{documents: DocumentRepository}, \texttt{ai: DocumentAiGatewayPort}, \texttt{events: DocumentEventDispatcherPort}, \texttt{logger: LoggerInterface}, \texttt{ocrRange: OcrRangeReader}, \texttt{tx: TransactionManagerPort}, \texttt{confidenceThreshold: int} (default 80), \texttt{fiscalCodeConfidenceThreshold: int} (default 95).
 \end{itemize}
 
 Metodi
@@ -1429,7 +1412,7 @@ Metodi
 
 Implementa \texttt{ReviewDocumentUseCase}: gestisce la revisione manuale di un sotto-documento da parte dell'operatore, con due metodi che coprono due percorsi distinti.
 
-\texttt{updateExtractedData()} applica correzioni ai campi estratti e, in base al parametro esplicito ricevuto dal chiamante, marca il sotto-documento come validato manualmente oppure lo rimanda in revisione; scrive comunque i dati estratti se il sotto-documento non ne ha ancora, anche in assenza di modifiche. \texttt{markReviewed()} valida invece un sotto-documento senza modificarne i campi, e rifiuta l'operazione se non esistono ancora dati estratti da validare.
+\texttt{updateExtractedData()} applica correzioni ai campi estratti; scrive comunque i dati estratti se il sotto-documento non ne ha ancora, anche in assenza di modifiche. Lo stato di revisione che ne segue non è un semplice riflesso del parametro \texttt{markAsValidated} ricevuto dal chiamante: se \textit{true} valida manualmente il sotto-documento, ma se \textit{false} lo rimanda in revisione solo quando non era già validato manualmente — una correzione non declassa una scheda che una persona aveva già confermato, perché quei dati sono appena passati un'altra volta sotto i suoi occhi, e declassarli chiederebbe di confermare due volte la stessa scheda. \texttt{markReviewed()} valida invece un sotto-documento senza modificarne i campi, e rifiuta l'operazione se non esistono ancora dati estratti da validare.
 
 \begin{figure}[H]
     \centering
@@ -1452,7 +1435,9 @@ Metodi
 
 Implementa \texttt{PreviewDocumentUseCase}: restituisce il contenuto grezzo del file di un sotto-documento per l'anteprima nella SPA, verificando prima che esista ancora sullo storage. Distinta da \texttt{SendMessageService::preview()}, che genera invece un PDF composto a partire dai dati estratti, non il file originale.
 
-Verifica anche l'autorizzazione: se il tenant dell'attore non coincide con quello del documento originale, solleva \texttt{DocumentNotAuthorizedException} prima di leggere il file.
+\texttt{previewOriginal()} risale invece dal sotto-documento al suo \texttt{OriginalDocument} e ne restituisce il file completo, non splittato: un'alternativa indipendente dallo stato dell'anteprima del sotto-documento, utile quando quest'ultima non è disponibile ma il documento originale caricato è ancora leggibile dallo storage.
+
+Verifica anche l'autorizzazione: se il tenant dell'attore non coincide con quello del documento (originale o del sotto-documento, a seconda del metodo), solleva \texttt{DocumentNotAuthorizedException} prima di leggere il file.
 
 \begin{figure}[H]
     \centering
@@ -1468,13 +1453,14 @@ Attributi
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{preview(subDocumentId: int, actor: Actor): PreviewableDocument}
+    \item \texttt{previewOriginal(subDocumentId: int, actor: Actor): PreviewableDocument}
 \end{itemize}
 
 \paragraph{SendMessageService}
 
-Implementa \texttt{SendMessageUseCase}: compone il messaggio di invio precompilato a partire dai dati già estratti (nessuna generazione AI coinvolta) e ne orchestra anteprima, esportazione e correzione manuale. Destinatario, oggetto e corpo hanno un valore proposto di default, sovrascrivibile dall'operatore tramite le sovrascritture salvate sul sotto-documento.
+Implementa \texttt{SendMessageUseCase}: compone il messaggio di invio precompilato a partire dai dati già estratti (nessuna generazione AI coinvolta) e ne orchestra anteprima, esportazione e correzione manuale. Destinatario, corpo e oggetto hanno un valore proposto di default, sovrascrivibile dall'operatore tramite le sovrascritture salvate sul sotto-documento; l'oggetto proposto nomina il tipo di documento e il suo periodo di riferimento (mese/anno, se dichiarati), non l'invio in sé, che a quel punto non è ancora avvenuto. Sia l'anteprima sia l'esportazione accodano al PDF composto anche il documento originale del destinatario (letto dallo storage tramite \texttt{DocumentStoragePort}, \texttt{SendMessageAttachmentUnavailableException} se assente): chi riceve il messaggio riceve anche il documento a cui si riferisce, non solo il testo.
 
-Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osservare l'invio reale, è il download del PDF esportato a marcare lo stato come \textit{Sent}, in una transizione a senso unico: un secondo download non la ripete. Tutti e tre i metodi pubblici verificano l'autorizzazione tramite un metodo privato condiviso (\texttt{assertActorOwnsSubDocument()}), che solleva \texttt{DocumentNotAuthorizedException} in caso di tenant non corrispondente.
+Il download è ora vincolato a una revisione umana già avvenuta: \texttt{export()} rifiuta con \texttt{SendMessageNotConfirmedException} se il sotto-documento non è ancora \textit{ManuallyValidated} — il pannello tiene spento il comando finché non lo è, ma la API resterebbe altrimenti chiamabile anche senza passare dal pannello. Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osservare l'invio reale, è proprio il download del PDF esportato a marcare lo stato come \textit{Sent}, in una transizione a senso unico: un secondo download non la ripete. Tutti e tre i metodi pubblici verificano l'autorizzazione tramite un metodo privato condiviso (\texttt{assertActorOwnsSubDocument()}), che solleva \texttt{DocumentNotAuthorizedException} in caso di tenant non corrispondente.
 
 \begin{figure}[H]
     \centering
@@ -1484,7 +1470,7 @@ Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osserva
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{documents: DocumentRepository}, \texttt{renderer: SendMessageRendererPort}, \texttt{events: DocumentEventDispatcherPort}.
+    \item \texttt{documents: DocumentRepository}, \texttt{renderer: SendMessageRendererPort}, \texttt{storage: DocumentStoragePort}, \texttt{events: DocumentEventDispatcherPort}.
 \end{itemize}
 
 Metodi
@@ -1565,7 +1551,7 @@ Metodi
 
 \paragraph{Adapter AI e OCR: TextractOcrAdapter, BedrockDocumentAiAdapter}
 
-I due adapter che collegano il dominio ai servizi AI esterni. \texttt{TextractOcrAdapter} implementa \texttt{OcrGatewayPort} sopra Amazon Textract e restituisce il risultato grezzo del riconoscimento ottico, senza toccare la persistenza: è il caso d'uso chiamante a decidere cosa salvarne. Se Textract è disattivato (\texttt{TEXTRACT\_ENABLED=false}, il default), non contatta AWS: restituisce un risultato vuoto (\texttt{enabled: false}) e registra una metrica dedicata, così la pipeline prosegue comunque fino alla classificazione AI senza un OCR reale alle spalle.
+I due adapter che collegano il dominio ai servizi AI esterni. \texttt{TextractOcrAdapter} implementa \texttt{OcrGatewayPort} sopra Amazon Textract e restituisce il risultato grezzo del riconoscimento ottico, senza toccare la persistenza: è il caso d'uso chiamante a decidere cosa salvarne. Se Textract è disattivato (\texttt{TEXTRACT\_ENABLED=false}, il default), non contatta AWS: restituisce un risultato vuoto (\texttt{enabled: false}), così la pipeline prosegue comunque fino alla classificazione AI senza un OCR reale alle spalle.
 
 \texttt{BedrockDocumentAiAdapter} implementa \texttt{DocumentAiGatewayPort} sopra il servizio condiviso \texttt{BedrockService} (Sezione 2.7), per lo split del documento e l'estrazione dei campi.
 
@@ -1583,7 +1569,7 @@ I due adapter che collegano il dominio ai servizi AI esterni. \texttt{TextractOc
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{TextractOcrAdapter}: \texttt{client: TextractClient}, \texttt{metrics: MetricsRecorder}, \texttt{heartbeat: WorkflowTaskHeartbeat}.
+    \item \texttt{TextractOcrAdapter}: \texttt{client: TextractClient}, \texttt{heartbeat: WorkflowTaskHeartbeat}.
     \item \texttt{BedrockDocumentAiAdapter}: \texttt{bedrock: BedrockService}.
 \end{itemize}
 
@@ -1600,7 +1586,7 @@ Metodi
 
 Due adapter secondari di supporto. \texttt{FlysystemDocumentStorageAdapter} implementa \texttt{DocumentStoragePort} sopra il disco Laravel/Flysystem configurato per i documenti, generando per ogni file caricato un nome univoco (UUID) nella directory di destinazione, per evitare collisioni fra upload concorrenti.
 
-\texttt{DompdfSendMessageRenderer} implementa \texttt{SendMessageRendererPort} sopra Dompdf e la vista Blade dedicata, applicando lo stesso timbro di piè di pagina (\texttt{PdfFooterStamper}) condiviso con l'esportazione delle comunicazioni.
+\texttt{DompdfSendMessageRenderer} implementa \texttt{SendMessageRendererPort} sopra Dompdf e la vista Blade dedicata, applicando lo stesso timbro di piè di pagina (\texttt{PdfFooterStamper}) condiviso con l'esportazione delle comunicazioni. Accoda al messaggio anche il documento del destinatario, quando fornito: lo unisce tramite Fpdi (la stessa libreria che ha già tagliato il documento originale nei sotto-documenti, quindi il file è già importabile per costruzione), copiando le pagine del documento così come sono, senza sovrastamparci numeri o marcatori — è un documento di terzi. Il piè di pagina numera l'intero file risultante (messaggio più documento accodato), non la sola lettera.
 
 \begin{figure}[H]
     \centering
@@ -1624,12 +1610,12 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{storeFromLocalPath(absoluteSourcePath: string, directory: string): string}
     \item \texttt{read(path: string): string}, \texttt{write(path: string, contents: string): void}, \texttt{delete(path: string): void}, \texttt{exists(path: string): bool}
-    \item \texttt{renderPdf(composition: SendMessageComposition): string}
+    \item \texttt{renderPdf(composition: SendMessageComposition, attachmentPdf: ?string): string}
 \end{itemize}
 
 \paragraph{LaravelDocumentEventDispatcher}
 
-Adapter secondario minimo: implementa \texttt{DocumentEventDispatcherPort} appoggiandosi al dispatcher di eventi nativo di Laravel. I 14 listener del dominio (Sezione 4.4) sono registrati nel service provider, non in questa classe, che si limita a inoltrare l'evento.
+Adapter secondario minimo: implementa \texttt{DocumentEventDispatcherPort} appoggiandosi al dispatcher di eventi nativo di Laravel. I 13 listener del dominio (su 14 eventi dispatchati: \texttt{DocumentWorkflowCompleted} non ha un listener registrato) sono registrati nel service provider, non in questa classe, che si limita a inoltrare l'evento.
 
 \begin{figure}[H]
     \centering
@@ -1871,6 +1857,7 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{taskTypes(): array}
     \item \texttt{subjectType(): string}
+    \item \texttt{pipeline(): string} --- restituisce l'identificativo della pipeline di appartenenza (\texttt{"communications"}).
     \item \texttt{auditEventPrefix(): string} --- prefisso (\texttt{"mvp-communication-workflow-task-"}) usato dal runner condiviso per nominare gli eventi di audit di questo dominio.
     \item \texttt{resolveSubject(message: array): WorkflowSubject}
     \item \texttt{execute(taskType: string, subject: WorkflowSubject, message: array): array}
@@ -2272,7 +2259,7 @@ Metodi
 
 \paragraph{FlysystemCommunicationCoverAdapter, DompdfCommunicationPdfRenderer}
 
-Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemDocumentStorageAdapter} e \texttt{DompdfSendMessageRenderer} sul dominio Documents. \texttt{FlysystemCommunicationCoverAdapter} implementa \texttt{CommunicationCoverStoragePort} sopra Flysystem, registrando ogni fallimento di lettura/scrittura come metrica dedicata (\texttt{communication\_cover\_storage\_failed\_total}) oltre che nel log applicativo.
+Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemDocumentStorageAdapter} e \texttt{DompdfSendMessageRenderer} sul dominio Documents. \texttt{FlysystemCommunicationCoverAdapter} implementa \texttt{CommunicationCoverStoragePort} sopra Flysystem, registrando ogni fallimento di lettura/scrittura nel log applicativo.
 
 \texttt{DompdfCommunicationPdfRenderer} implementa \texttt{CommunicationPdfRendererPort} sopra Dompdf: prima di renderizzare calcola un'impronta SHA-1 del contenuto (titolo, corpo, stato e percorso della copertina) e, se un PDF con la stessa impronta è già stato materializzato su disco, lo restituisce direttamente invece di rigenerarlo; applica inoltre una filigrana diagonale (\textit{"Creato da AI Assistant"}) e lo stesso timbro di piè di pagina condiviso con \texttt{DompdfSendMessageRenderer}.
 
@@ -2290,7 +2277,7 @@ Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemD
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{FlysystemCommunicationCoverAdapter}: \texttt{metrics: MetricsRecorder}.
+    \item \texttt{FlysystemCommunicationCoverAdapter}: nessuno, nessun costruttore proprio (usa il disco storage tramite la facade \texttt{Storage}).
     \item \texttt{DompdfCommunicationPdfRenderer}: \texttt{footerStamper: PdfFooterStamper}.
 \end{itemize}
 
@@ -2303,7 +2290,7 @@ Metodi
 
 \paragraph{LaravelCommunicationEventDispatcher}
 
-Adapter secondario minimo, equivalente concettuale del \texttt{LaravelDocumentEventDispatcher}: implementa \texttt{CommunicationEventDispatcherPort} appoggiandosi al dispatcher di eventi nativo di Laravel. I 21 listener del dominio (Sezione 4.4) sono registrati nel service provider.
+Adapter secondario minimo, equivalente concettuale del \texttt{LaravelDocumentEventDispatcher}: implementa \texttt{CommunicationEventDispatcherPort} appoggiandosi al dispatcher di eventi nativo di Laravel. I 20 listener del dominio (su 21 eventi dispatchati: \texttt{CommunicationWorkflowCompleted} non ha un listener registrato, simmetricamente a \texttt{DocumentWorkflowCompleted}) sono registrati nel service provider.
 
 \begin{figure}[H]
     \centering
@@ -2354,7 +2341,7 @@ Metodi
 
 \paragraph{WorkflowTaskRunner}
 
-Punto di ingresso generico invocato da \texttt{ConsumeWorkflowTasks} per ogni messaggio SQS: deduplica il task tramite il suo token hash, lo prende in carico atomicamente a database, delega l'esecuzione all'handler risolto tramite \texttt{WorkflowTaskRegistry} e registra audit e metriche in modo indipendente dal dominio del task.
+Punto di ingresso generico invocato da \texttt{ConsumeWorkflowTasks} per ogni messaggio SQS: deduplica il task tramite il suo token hash, lo prende in carico atomicamente a database, delega l'esecuzione all'handler risolto tramite \texttt{WorkflowTaskRegistry} e registra l'audit in modo indipendente dal dominio del task.
 
 \begin{figure}[H]
     \centering
@@ -2366,7 +2353,6 @@ Attributi
 \begin{itemize}\raggedright
     \item \texttt{registry: WorkflowTaskRegistry}.
     \item \texttt{audit: AuditLogger}.
-    \item \texttt{metrics: MetricsRecorder}.
 \end{itemize}
 
 Metodi
@@ -2391,7 +2377,7 @@ Attributi
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{handle(sqs, stepFunctions, runner, heartbeat, context, metrics): int} --- ricevuti per dependency injection dal metodo (non dal costruttore, come da convenzione dei comandi Artisan): riceve i messaggi da SQS, delega l'esecuzione a \texttt{WorkflowTaskRunner}, invia il callback di esito a Step Functions e cancella il messaggio dalla coda solo a callback confermato.
+    \item \texttt{handle(sqs, stepFunctions, runner, heartbeat, context): int} --- ricevuti per dependency injection dal metodo (non dal costruttore, come da convenzione dei comandi Artisan): riceve i messaggi da SQS, delega l'esecuzione a \texttt{WorkflowTaskRunner}, invia il callback di esito a Step Functions e cancella il messaggio dalla coda solo a callback confermato.
 \end{itemize}
 
 \paragraph{WorkflowTaskHeartbeat}
@@ -2407,7 +2393,6 @@ Unico adapter condiviso della porta \texttt{WorkflowHeartbeatPort}, invocata dai
 Attributi
 \begin{itemize}\raggedright
     \item \texttt{stepFunctions: SfnClient}.
-    \item \texttt{metrics: MetricsRecorder}.
     \item \texttt{taskToken: string} --- token del task attivo, impostato da \texttt{activate()}.
     \item \texttt{taskType: string}.
     \item \texttt{lastBeatAt: float} --- timestamp Unix (\texttt{microtime(true)}) dell'ultimo segnale inviato.
@@ -2566,43 +2551,6 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{record(eventType, actor, resourceType, resourceId, metadata, request, tenantId): AuditEvent} --- registra un evento di audit; fuori da una richiesta HTTP (worker SQS) gli id di correlazione arrivano da \texttt{WorkflowContext} anziché dalla request.
 \end{itemize}
-
-\paragraph{MetricsRecorder}
-
-Raccoglie le metriche applicative (HTTP e di dominio) in un file condiviso protetto da lock, lette poi da \texttt{PrometheusExporter}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/MetricsRecorder.png}
-    \caption{Classe --- MetricsRecorder}
-\end{figure}
-
-Metodi
-\begin{itemize}\raggedright
-    \item \texttt{snapshot(): array} --- legge lo stato corrente di tutte le metriche.
-    \item \texttt{recordHttp(request, response, durationSeconds): void} --- incrementa i contatori e l'istogramma di durata per una richiesta HTTP.
-    \item \texttt{recordDomainCounter(name, labels, amount): void} --- incrementa un contatore di dominio generico (ad esempio i fallimenti di callback verso Step Functions).
-\end{itemize}
-
-\paragraph{PrometheusExporter}
-
-Espone le metriche applicative raccolte da \texttt{MetricsRecorder}, insieme a metriche di stato lette direttamente dal database, sull'endpoint \texttt{/internal/metrics} descritto nella Sezione 2.9.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleCondivise/PrometheusExporter.png}
-    \caption{Classe --- PrometheusExporter}
-\end{figure}
-
-Attributi
-\begin{itemize}\raggedright
-    \item \texttt{metrics: MetricsRecorder}.
-\end{itemize}
-
-Metodi
-\begin{itemize}\raggedright
-    \item \texttt{render(): string} --- produce il testo in formato Prometheus con le metriche HTTP, di dominio e i readiness check.
-\end{itemize}
 \end{sloppypar}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -2633,15 +2581,17 @@ La figura seguente illustra il pattern e la comunicazione fra i suoi tre compone
 
 Le tre pagine principali applicano MVVM in senso classico: un \emph{ViewModel} (più precisamente un \emph{Presentation Model} nel senso di Fowler) è una classe TypeScript che non tocca il DOM né l'infrastruttura di rendering o di dependency injection di Angular (nessun \texttt{@Component}, \texttt{inject()}, decoratore, injection context, chiamata diretta a \texttt{document}/\texttt{window}); riceve le proprie dipendenze dal costruttore, ed è quindi istanziabile con un semplice \texttt{new} e testabile senza \texttt{TestBed}, con dipendenze fittizie create a mano. L'unica eccezione apparente è l'uso di \texttt{signal}/\texttt{computed} di \texttt{@angular/core}: restano nel ViewModel non come parte del motore di rendering, ma come primitiva reattiva di piattaforma (l'equivalente di \texttt{INotifyPropertyChanged} in WPF), quindi non compromettono l'istanziabilità con \texttt{new} né la testabilità senza Angular avviato; è questa distinzione, non un conteggio letterale degli import da \texttt{@angular/core}, a rendere la classe un Presentation Model genuino.
 
-Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contratto OpenAPI e i modelli di dominio specifici di ciascuna feature. La \emph{View} è la pagina stessa (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}): l'unico punto accoppiato ad Angular e al DOM, che si procura le dipendenze con \texttt{inject()} nel proprio costruttore e le passa al ViewModel per costruirlo, poi lega il template ai segnali e ai metodi pubblici che il ViewModel espone (\texttt{vm.stato()}, \texttt{(evento)="vm.metodo()"}). Anche l'unica operazione DOM richiesta da alcuni ViewModel (lo scorrimento verso una sezione dopo un'azione) resta un'operazione della View: \texttt{AssistantPageViewModel} e \texttt{OverviewPageViewModel} la ricevono come funzione dal costruttore (\texttt{scrollToElement}, definita in \texttt{shared/util/scroll.ts}), così possono \emph{chiedere} uno scorrimento senza \emph{eseguirlo} direttamente.
+Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contratto OpenAPI e i modelli di dominio specifici di ciascuna feature. La \emph{View} è la pagina stessa (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}): l'unico punto accoppiato ad Angular e al DOM, che si procura le dipendenze con \texttt{inject()} nel proprio costruttore e le passa al ViewModel per costruirlo, poi lega il template ai segnali e ai metodi pubblici che il ViewModel espone (\texttt{vm.stato()}, \texttt{(evento)="vm.metodo()"}). Anche l'unica operazione DOM richiesta da alcuni ViewModel (lo scorrimento verso una sezione dopo un'azione) resta un'operazione della View, ma non tramite una funzione-callback ricevuta dal costruttore: \texttt{AssistantPageViewModel} e \texttt{OverviewPageViewModel} scrivono un segnale osservabile, \texttt{pendingScrollTarget: WritableSignal<string | null>}, e un \texttt{effect()} nella View lo legge, chiama \texttt{scrollToElement} (definita in \texttt{shared/util/scroll.ts}) quando non è nullo, poi lo azzera. È l'ultimo passo di un refactoring esplicito documentato nel codice stesso: anche una funzione passata dal costruttore restava, dal punto di vista del ViewModel, una chiamata indiretta alla View; un segnale osservato è invece un fatto dichiarativo puro, che la View può scegliere di leggere o ignorare senza che il ViewModel sappia se lo ha fatto. Se non azzerasse il segnale dopo averlo consumato, la stessa destinazione richiesta due volte di seguito non ritriggererebbe l'\texttt{effect()}, che reagisce solo a un cambio di valore.
 
 Lo stato condiviso fra le pagine non vive nel ViewModel: una sola istanza di \texttt{MvpStateStore}, fornita a livello di applicazione (\texttt{providedIn: "root"}), conserva lo stato restituito dal backend e sopravvive ai cambi di rotta. Ogni ViewModel riceve lo Store come una qualunque altra dipendenza nel proprio costruttore e lo consuma in sola lettura per derivare i propri segnali \texttt{computed}; le mutazioni (generazione, upload, revisione, eliminazione) non aggiornano lo stato localmente, ma rimpiazzano l'intero stato con quello autorevole restituito dal backend nella risposta, evitando divergenze fra ciò che la SPA mostra e ciò che il backend ha effettivamente persistito.
 
-Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. L'\texttt{effect()} però si limita a leggere i segnali sorgente (lo storico condiviso, i filtri attivi) e a chiamare \texttt{vm.reload()}: la chiamata di ricerca vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo, su \texttt{AssistantPage} e \texttt{CopilotPage} il template legge quasi sempre \texttt{vm.*}, mai \texttt{store.*} direttamente, con un'unica eccezione deliberata su entrambe le pagine: il banner d'errore principale (\texttt{(retry)="store.reload()"}), un problema dello stato condiviso, non della logica specifica della feature. I segnali \texttt{computed} pass-through sul ViewModel non sono però identici sulle due pagine: \texttt{CopilotPage} espone tutti e tre \texttt{vm.error()}, \texttt{vm.loading()} e \texttt{vm.metrics()}; \texttt{AssistantPage}, che non mostra un pannello di metriche proprio (Sezione 6.6), espone solo \texttt{vm.error()}. \texttt{OverviewPage} è l'eccezione più ampia, documentata in Sezione 6.7, dove il template legge lo Store direttamente in più punti.
+Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. Gli \texttt{effect()} però si limitano a leggere i segnali sorgente (lo storico o i documenti condivisi, i filtri attivi, il documento selezionato) e a chiamare un metodo del ViewModel (\texttt{vm.reload()}, \texttt{vm.loadPreviewStatus()}...): la chiamata vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo il template delle tre pagine legge sempre e solo \texttt{vm.*}, mai \texttt{store.*} direttamente: anche il banner d'errore principale, che in una versione precedente chiamava \texttt{(retry)="store.reload()"} sullo Store condiviso, ora chiama un metodo del ViewModel — \texttt{vm.reloadState()} su \texttt{AssistantPage} e \texttt{CopilotPage}, \texttt{vm.reload()} su \texttt{OverviewPage} (l'unica delle tre il cui ViewModel non distingue fra ricarica dello stato condiviso e ricarica di uno storico proprio, non avendone uno). L'eccezione che permetteva a una View di raggiungere lo Store direttamente dal markup non esiste più su nessuna delle tre pagine: il campo \texttt{store}, ancora \texttt{inject()}ato su tutte e tre, serve solo a costruire il ViewModel nel costruttore e, su \texttt{AssistantPage}/\texttt{CopilotPage}, come segnale sorgente letto dall'\texttt{effect()} di ricerca — mai referenziato nel template.
+
+I segnali \texttt{computed} pass-through sul ViewModel non sono più asimmetrici come nella versione precedente di questo documento: tutte e tre le pagine espongono \texttt{vm.error()} e \texttt{vm.loading()}; \texttt{AssistantPage} e \texttt{CopilotPage} espongono inoltre \texttt{vm.metrics()} (l'elenco di metriche del proprio modulo, filtrato delle voci che il pannello non mostra come scheda a sé) e \texttt{vm.metricsPresentation()} (la mappa che indica a \texttt{MetricsPanelComponent}, Sezione 6.6, come disegnare ciascuna scheda). \texttt{OverviewPage} non monta più un pannello di metriche generico: il suo ViewModel espone segnali propri più mirati (\texttt{vm.priorities()}, \texttt{vm.assistantQuality()}, \texttt{vm.copilotQuality()}, \texttt{vm.quarantined()}), descritti nella sua sottosezione più sotto.
 
 Angular offre già disaccoppiamento e testabilità tramite i propri servizi e la dependency injection, quindi un ViewModel separato potrebbe sembrare ridondante rispetto a testare direttamente il componente con \texttt{TestBed}. Il motivo per cui si è scelto comunque questo confine è pratico, non dogmatico: un test su \texttt{TestBed} richiede l'avvio del modulo, la compilazione del template e la risoluzione dell'albero di dependency injection a ogni esecuzione, mentre un test sul ViewModel istanzia la classe con \texttt{new} passando dipendenze fittizie create a mano: più veloce da eseguire e più semplice da scrivere, perché isola la logica applicativa dal ciclo di vita di Angular. Per questo il confine è tracciato solo sulle tre pagine principali, dove quella logica è più densa, e non esteso a ogni componente della SPA.
 
-L'assenza di \texttt{inject()} e dell'infrastruttura di rendering nel ViewModel non è un'omissione stilistica: è la condizione che rende possibile l'obiettivo dichiarato sopra. \texttt{inject()} funziona solo dentro un injection context, quindi una classe che lo usasse sarebbe istanziabile solo da Angular: per testarla servirebbe comunque \texttt{TestBed.runInInjectionContext()} o un \texttt{TestBed.inject()}, lo stesso costo che l'estrazione del ViewModel vuole evitare. Lo stesso vale per il rendering: un ViewModel che manipolasse il DOM richiederebbe un ambiente browser (o \texttt{jsdom}) anche solo per verificarne la logica. Estendere questo pattern a ogni componente della SPA, non solo alle tre pagine principali, non è però la conclusione corretta: il beneficio (test framework-indipendenti su logica applicativa densa) va confrontato con il costo (un file e un'indirection in più). I dodici componenti condivisi (Sezione 6.6) non hanno quasi logica propria (ricevono un \texttt{input()} e lo mostrano), e un ViewModel dedicato aggiungerebbe solo un file vuoto da mantenere, senza nulla di significativo da isolare che il codice non mostri già direttamente.
+L'assenza di \texttt{inject()} e dell'infrastruttura di rendering nel ViewModel non è un'omissione stilistica: è la condizione che rende possibile l'obiettivo dichiarato sopra. \texttt{inject()} funziona solo dentro un injection context, quindi una classe che lo usasse sarebbe istanziabile solo da Angular: per testarla servirebbe comunque \texttt{TestBed.runInInjectionContext()} o un \texttt{TestBed.inject()}, lo stesso costo che l'estrazione del ViewModel vuole evitare. Lo stesso vale per il rendering: un ViewModel che manipolasse il DOM richiederebbe un ambiente browser (o \texttt{jsdom}) anche solo per verificarne la logica. Estendere questo pattern a ogni componente della SPA, non solo alle tre pagine principali, non è però la conclusione corretta: il beneficio (test framework-indipendenti su logica applicativa densa) va confrontato con il costo (un file e un'indirection in più). I componenti condivisi (Sezione 6.6) non hanno quasi logica propria (ricevono un \texttt{input()} e lo mostrano), e un ViewModel dedicato aggiungerebbe solo un file vuoto da mantenere, senza nulla di significativo da isolare che il codice non mostri già direttamente.
 
 \subsubsection{Esempio di pattern MVVM nel progetto}
 
@@ -2666,7 +2616,7 @@ Questo spiega anche la scelta di MVVM invece di MVP: un Presenter MVP dovrebbe a
 
 \subsubsection{AssistantPageViewModel}
 
-Il ViewModel più corposo dei tre, perché copre l'intero ciclo di vita di una bozza (generazione, rigenerazione, valutazione, copertina, storico, configurazioni di prompt salvate). Il test unitario associato (\texttt{assistant-page.view-model.spec.ts}) lo costruisce con \texttt{new} passando un \texttt{AssistantService}, un \texttt{MvpStateStore} e una funzione di scorrimento simulati a mano (senza avviare Angular), a riprova diretta che qui MVVM non è solo nominale.
+Il ViewModel più corposo dei tre, perché copre l'intero ciclo di vita di una bozza (generazione, rigenerazione, valutazione, copertina, storico, configurazioni di prompt salvate) oltre alla presentazione delle proprie metriche. Il test unitario associato (\texttt{assistant-page.view-model.spec.ts}) lo costruisce con \texttt{new} passando un \texttt{AssistantService} e un \texttt{MvpStateStore} simulati a mano (senza avviare Angular), a riprova diretta che qui MVVM non è solo nominale.
 
 \begin{figure}[H]
     \centering
@@ -2676,9 +2626,15 @@ Il ViewModel più corposo dei tre, perché copre l'intero ciclo di vita di una b
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{assistant: AssistantService}, \texttt{store: MvpStateStore}, \texttt{scrollTo: (elementId: string) => void}: dipendenze ricevute dal costruttore, non da \texttt{inject()}; \texttt{scrollTo} è \texttt{scrollToElement} passata dalla View.
+    \item \texttt{assistant: AssistantService}, \texttt{store: MvpStateStore}: dipendenze ricevute dal costruttore, non da \texttt{inject()}.
     \item \texttt{phase}, \texttt{isGenerating}, \texttt{latestDraft}, \texttt{previewDraft}, \texttt{status}: segnali sullo stato della generazione in corso e della bozza visualizzata.
-    \item \texttt{error: Signal<string | null>}: pass-through su \texttt{store.error()}, così il template non legge mai lo Store direttamente.
+    \item \texttt{pendingScrollTarget: WritableSignal<string | null>}: destinazione di uno scorrimento richiesto dal ViewModel, non ancora consumato dalla View (si veda l'inizio della Sezione 6.2); scritto da \texttt{selectDraft()}, \texttt{discard()}, \texttt{useConfiguration()} e da \texttt{handleProgress()}, azzerato dalla View dopo averlo eseguito.
+    \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, così il template non legge mai lo Store direttamente.
+    \item \texttt{metrics}: pass-through su \texttt{store.assistantMetrics()}, esclusa la voce \texttt{assistant.drafts} (le bozze da valutare sono una priorità e vivono nella Overview; qui sono già la parte "in bozza" di \texttt{draftComposition}, sotto).
+    \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: per ciascuna delle quattro metriche mostrate (\texttt{assistant.total}, \texttt{assistant.prompt\_configurations}, \texttt{assistant.rated}, \texttt{assistant.rating\_average} — un andamento, un conteggio, una quota e una media a stelle, tutte a due celle), la forma della scheda e il suo ingombro nella griglia, letta da \texttt{MetricsPanelComponent} (Sezione 6.6). Le metriche puramente operative mostrate in precedenza (generazioni/copertine fallite o bloccate) sono state rimosse perché non richieste da alcun caso d'uso del documento di Analisi dei Requisiti.
+    \item \texttt{recentFeedback: Signal<Communication[]>}: pass-through su \texttt{store.recentFeedback()} (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale — non solo la media, che resta in \texttt{metricsPresentation} sopra.
+    \item \texttt{metricsReportExportUrl: string}: URL statico del download del report riepilogativo delle metriche (\texttt{/api/v1/assistant/metrics/export}, RF34-OB), letto direttamente dal template come \texttt{href} del link di esportazione.
+    \item \texttt{draftComposition: Signal<CompositionSlice[]>}: ripartizione delle comunicazioni fra "In bozza" e "Decise" (il totale meno le bozze), derivata dalle stesse metriche di tenant.
     \item \texttt{activeFilters}, \texttt{filteredCommunications}, \texttt{historyError}: segnali sullo storico, letti dal template; scritti solo internamente da \texttt{reload()}.
 \end{itemize}
 
@@ -2693,12 +2649,13 @@ Metodi
     \item \texttt{saveConfiguration(payload: SavePromptConfigurationRequest): void}, \texttt{useConfiguration(configuration: PromptConfiguration): void}, \texttt{deleteConfiguration(configurationId: number): void}
     \item \texttt{setActiveFilters(filters: CommunicationFilters): void}
     \item \texttt{reload(): void}: rilegge lo storico con i filtri correnti; stessa forma delle altre azioni, chiamata dall'\texttt{effect()} della View a ogni cambio di filtro o di stato condiviso. Annulla la propria sottoscrizione precedente prima di avviarne una nuova (fix di una regressione: senza questa cancellazione, una risposta di ricerca arrivata in ritardo poteva sovrascrivere un risultato più recente).
+    \item \texttt{reloadState(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()}, invocato dal pulsante "Riprova" del banner d'errore principale. Distinto da \texttt{reload()}, che rilegge solo lo storico comunicazioni: confonderli lascerebbe lo stato globale in errore pur avendo ricaricato l'elenco.
     \item \texttt{destroy(): void}: chiamato dalla View alla distruzione del componente (tramite \texttt{DestroyRef}): annulla solo la sottoscrizione di lettura in corso, non le azioni di scrittura (\texttt{generate()}, \texttt{discard()}...), che devono completare lato server anche se l'utente ha già navigato altrove.
 \end{itemize}
 
 \subsubsection{CopilotPageViewModel}
 
-Stessa forma di \texttt{AssistantPageViewModel} applicata al Co-Pilot, con una superficie più piccola: copre upload, eliminazione, revisione dei dati estratti e correzione del messaggio di invio. Non riceve la dipendenza di scorrimento dal costruttore, perché questa pagina non ne ha mai avuto bisogno.
+Stessa forma di \texttt{AssistantPageViewModel} applicata al Co-Pilot, con una superficie più piccola: copre upload, eliminazione, revisione dei dati estratti e correzione del messaggio di invio. Non ha mai avuto bisogno di una dipendenza di scorrimento (nessuna delle sue azioni richiede di spostare la pagina verso una sezione), ma possiede ora una fetch propria oltre allo storico documenti: la raggiungibilità dell'anteprima del documento selezionato.
 
 \begin{figure}[H]
     \centering
@@ -2710,16 +2667,25 @@ Attributi
 \begin{itemize}\raggedright
     \item \texttt{workflow: DocumentWorkflowService}, \texttt{store: MvpStateStore}: dipendenze ricevute dal costruttore, non da \texttt{inject()}.
     \item \texttt{selectedDocumentId}, \texttt{selectedDocument}, \texttt{selectedDocumentIdForList}: segnali sul sotto-documento attualmente in revisione.
+    \item \texttt{previewStatus: WritableSignal<DocumentPreviewStatus>}: raggiungibilità dell'anteprima del documento selezionato (\textit{idle}, \textit{loading}, \textit{available}, \textit{unavailable}, \textit{unreachable}), verificata prima che il dettaglio monti l'iframe del PDF; segue \texttt{selectedDocument}, richiesta di nuovo a ogni cambio tramite \texttt{loadPreviewStatus()}.
     \item \texttt{isUploading}, \texttt{uploadStatus}, \texttt{uploadPhase}, \texttt{isDeleting}, \texttt{isSavingReview}, \texttt{reviewError}, \texttt{reviewFieldErrors}, \texttt{isSavingSendMessage}, \texttt{sendMessageError}: segnali di stato per le rispettive azioni asincrone.
     \item \texttt{activeFilters}, \texttt{hasActiveFilters}, \texttt{filteredDocuments}, \texttt{documentsError}: segnali sullo storico documenti, scritti solo internamente da \texttt{reload()}.
-    \item \texttt{error}, \texttt{loading}, \texttt{metrics}: pass-through su \texttt{store.error()}/\texttt{loading()}/\texttt{copilotMetrics()}, così il template non legge mai lo Store direttamente.
+    \item \texttt{currentPage: WritableSignal<number>} (default 1), \texttt{totalDocuments: WritableSignal<number>} (default 0), \texttt{pageSize}: paginazione dello storico, dieci righe a pagina — prima esisteva solo lato backend, che rispondeva con i primi quaranta risultati mentre la vista ne scartava il totale, e i documenti oltre il quarantesimo sparivano senza che nulla lo segnalasse.
+    \item \texttt{totalPages: Signal<number>}, \texttt{hasPreviousPage: Signal<boolean>}, \texttt{hasNextPage: Signal<boolean>}: segnali derivati da \texttt{currentPage}/\texttt{totalDocuments}, letti da \texttt{DocumentListComponent} per i controlli di paginazione.
+    \item \texttt{error}, \texttt{loading}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, così il template non legge mai lo Store direttamente.
+    \item \texttt{metrics}: pass-through su \texttt{store.copilotMetrics()}, escluse le voci che il pannello non mostra come scheda a sé (\texttt{copilot.ocr\_confidence}, \texttt{copilot.validated}, \texttt{copilot.quarantined}, \texttt{copilot.sub\_documents}): \texttt{validated} e \texttt{quarantined} sono esiti di validazione, \texttt{quarantined} vive anche come priorità nella Overview; \texttt{sub\_documents} è il totale su cui si misurano le quote; \texttt{ocr\_confidence} non risponde a nessun caso d'uso UC-56, ma resta nel contratto perché la Overview la legge (\texttt{vm.copilotQuality()}, Sezione 6.2).
+    \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: stesso ruolo di \texttt{AssistantPageViewModel.metricsPresentation}, per le cinque metriche mostrate (\texttt{copilot.documents}, \texttt{copilot.processing\_seconds} — due andamenti stretti — e tre quote larghe: \texttt{copilot.auto\_classified} per UC-56.2, \texttt{copilot.needs\_review} per UC-56.3, \texttt{copilot.recipient\_auto\_matched} per UC-56.4). L'ordine delle chiavi non è arbitrario: la griglia CSS non ricompone le righe per colmare i vuoti, quindi le due schede strette devono precedere le tre larghe perché le righe si chiudano senza celle vuote (due celle, poi sei, chiudono due righe da quattro).
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{setActiveFilters(filters: DocumentFilters): void}
-    \item \texttt{reload(): void}: stessa cancellazione della sottoscrizione precedente vista in \texttt{AssistantPageViewModel.reload()}.
-    \item \texttt{destroy(): void}, \texttt{selectDocument(documentId: string | null): void}
+    \item \texttt{setActiveFilters(filters: DocumentFilters): void}: azzera anche \texttt{currentPage} a 1 — cambiare filtro rimescola i risultati, e restare su una pagina che con il nuovo filtro non esiste più mostrerebbe una tabella vuota senza spiegazione.
+    \item \texttt{goToPage(page: number): void}: va alla pagina indicata, vincolata fra 1 e \texttt{totalPages()}; se cambia, aggiorna \texttt{currentPage} e richiama \texttt{reload()}.
+    \item \texttt{reload(): void}: stessa cancellazione della sottoscrizione precedente vista in \texttt{AssistantPageViewModel.reload()}; legge anche \texttt{currentPage}/\texttt{pageSize} nella richiesta al backend.
+    \item \texttt{loadPreviewStatus(previewUrl: string | null): void}: richiede di nuovo la raggiungibilità dell'anteprima, stessa forma di \texttt{reload()} ma sul documento selezionato invece che sullo storico; annulla la propria sottoscrizione precedente, così una risposta tardiva su un documento ormai deselezionato non sovrascrive lo stato di quello corrente. Con \texttt{previewUrl} nullo azzera lo stato a \textit{idle} senza chiamare il backend.
+    \item \texttt{reloadState(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()}, invocato dal pulsante "Riprova" del banner d'errore principale; distinto da \texttt{reload()} come nel ViewModel dell'Assistant.
+    \item \texttt{destroy(): void}: annulla sia la sottoscrizione di ricerca sia quella di anteprima.
+    \item \texttt{selectDocument(documentId: string | null): void}
     \item \texttt{upload(request: DocumentUploadRequest): void}, \texttt{deleteDocument(documentId: string): void}
     \item \texttt{markReviewed(documentId: string): void}
     \item \texttt{saveReview(event: \{documentId: string, payload: UpdateExtractedDataRequest\}): void}
@@ -2728,24 +2694,31 @@ Metodi
 
 \subsubsection{OverviewPageViewModel}
 
-Il più semplice dei tre: nessuna azione di scrittura, solo segnali derivati dallo Store condiviso e la navigazione verso le altre due pagine. I conteggi (\texttt{generatedDrafts}, \texttt{documentsToReview}, \texttt{readyDocuments}) leggono metriche sull'intero tenant tramite \texttt{store.metric()}, non ricalcolandole sulle liste locali: \texttt{history} e \texttt{documents} nello Store sono finestre limitate (rispettivamente 10 e 40 elementi), e un conteggio derivato da quelle finestre darebbe un numero silenziosamente sbagliato appena i dati reali le superano.
+Il più semplice dei tre nella forma del costruttore (nessuna azione di scrittura verso il backend), ma non più il più povero nei segnali esposti: dove prima mostrava conteggi grezzi, ora sintetizza priorità operative e indicatori di qualità per entrambi i moduli, sostituendo la lettura diretta dello Store che la View faceva in precedenza. Tutti i valori derivano da metriche sull'intero tenant tramite \texttt{store.metricEntry()}, non da un ricalcolo sulle liste locali: \texttt{history} e \texttt{documents} nello Store sono finestre limitate (rispettivamente 10 e 40 elementi), e un valore derivato da quelle finestre sarebbe silenziosamente sbagliato appena i dati reali le superano.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontend/OverviewPageViewModel.png}
+    \includegraphics[width=0.6\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontend/OverviewPageViewModel.png}
     \caption{Classe --- OverviewPageViewModel}
 \end{figure}
 
+Due tipi di supporto, definiti in questo stesso file, formattano i dati prima che raggiungano il template: \texttt{QualityMetric} (\texttt{label}, \texttt{value}, \texttt{unit}, \texttt{numeric}, \texttt{threshold}) per un indicatore di qualità già pronto per una scheda su scala; \texttt{PriorityMetric} (\texttt{key}, \texttt{label}, \texttt{value}, \texttt{tone}, \texttt{history}, \texttt{context}) per una priorità operativa con il proprio andamento a sette giorni.
+
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{store: MvpStateStore}, \texttt{router: Router}, \texttt{scrollTo: (elementId: string) => void}: dipendenze ricevute dal costruttore.
+    \item \texttt{store: MvpStateStore}, \texttt{router: Router}: dipendenze ricevute dal costruttore (non più una funzione di scorrimento: si veda \texttt{pendingScrollTarget} sotto).
     \item \texttt{communications}: pass-through su \texttt{store.history()}.
-    \item \texttt{generatedDrafts}, \texttt{documentsToReview}, \texttt{readyDocuments}: segnali derivati dalle metriche di tenant.
+    \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, come già su \texttt{AssistantPageViewModel} e \texttt{CopilotPageViewModel} — prima questa era l'unica pagina il cui template raggiungeva lo Store direttamente.
+    \item \texttt{priorities: Signal<PriorityMetric[]>}: le tre metriche su cui si agisce (\textit{da verificare}, \textit{in quarantena}, \textit{bozze da valutare}), non un riassunto di tutte: i conteggi puramente descrittivi restano nelle pagine dei rispettivi moduli.
+    \item \texttt{assistantQuality: Signal<QualityMetric | null>}, \texttt{copilotQuality: Signal<QualityMetric | null>}: un solo indicatore di qualità per modulo (voto medio delle bozze per l'Assistant, confidenza media OCR per il Co-Pilot), con rimando alla pagina che ne porta il dettaglio.
+    \item \texttt{quarantined: Signal<number>}: numero di sotto-documenti in quarantena, letto da \texttt{store.metricEntry("copilot.quarantined")}, usato per decidere se mostrare la segnalazione d'attenzione in cima alla sezione priorità.
+    \item \texttt{pendingScrollTarget: WritableSignal<string | null>}: stesso ruolo e stesso protocollo di consumo/azzeramento di \texttt{AssistantPageViewModel.pendingScrollTarget}, scritto da \texttt{navigate()}.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{navigate(view: MvpView, targetId: string): void}: naviga verso un'altra pagina e, a navigazione completata, chiede lo scorrimento verso la sezione target.
+    \item \texttt{navigate(view: MvpView, targetId: string): void}: naviga verso un'altra pagina e, a navigazione completata, chiede lo scorrimento verso la sezione target scrivendo \texttt{pendingScrollTarget}.
+    \item \texttt{reload(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()}, invocato dal pulsante "Riprova" del banner d'errore principale. A differenza degli altri due ViewModel non esiste un \texttt{reloadState()} distinto: la Overview non ha uno storico proprio da rileggere separatamente dallo stato condiviso.
 \end{itemize}
 
 \subsubsection{MvpStateStore (stato condiviso fra i ViewModel)}
@@ -2762,16 +2735,17 @@ Attributi
 \begin{itemize}\raggedright
     \item \texttt{api: AlittlebyteMVPAPIService}: client HTTP generato dal contratto OpenAPI, iniettato tramite \texttt{inject()} (unico punto della classe accoppiato ad Angular, essendo un vero \texttt{@Injectable} e non un ViewModel puro).
     \item \texttt{state: Signal<MvpState | null>}, \texttt{loading: Signal<boolean>}, \texttt{error: Signal<string | null>}: segnali di sola lettura.
-    \item \texttt{documents}, \texttt{history}, \texttt{promptConfigurations}, \texttt{assistantMetrics}, \texttt{copilotMetrics}: segnali derivati (\texttt{computed}) sulle diverse viste dello stato.
+    \item \texttt{documents}, \texttt{history}, \texttt{recentFeedback}, \texttt{promptConfigurations}, \texttt{assistantMetrics}, \texttt{copilotMetrics}: segnali derivati (\texttt{computed}) sulle diverse viste dello stato; \texttt{recentFeedback} è il più recente (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{loadOnce(): void}: carica lo stato al primo montaggio della shell applicativa; a differenza di prima non usa più un flag "già richiesto" a senso unico, ma deriva la guardia dallo stato reale dei segnali (\texttt{loading} o \texttt{state} già valorizzato), così un primo tentativo fallito può essere ritentato da una chiamata successiva invece di restare bloccato per sempre.
-    \item \texttt{reload(): void}: ricarica lo stato dal backend, con un tentativo di retry per errori temporanei.
+    \item \texttt{reload(): void}: ricarica lo stato dal backend, con un tentativo di retry per errori temporanei. Ignora una chiamata mentre una richiesta è già in volo, la stessa guardia già applicata da \texttt{loadOnce()}: senza di essa un doppio click su "Riprova" avvierebbe due \texttt{GET /state} in parallelo, l'ultima risposta vincerebbe comunque ma la richiesta in più sarebbe sprecata.
     \item \texttt{setState(state: MvpState): void}: rimpiazza lo stato con quello autorevole restituito da una mutazione.
     \item \texttt{upsertDocument(document: SubDocument): void}: inserisce o aggiorna in testa un sotto-documento ricevuto dallo stream SSE, senza ricaricare l'intero stato.
-    \item \texttt{metric(key: string): number}: legge una metrica per chiave stabile, evitando di ricalcolarla su elenchi parzialmente caricati.
+    \item \texttt{metric(key: string): number}: legge il valore di una metrica per chiave stabile, evitando di ricalcolarla su elenchi parzialmente caricati; \texttt{0} se la chiave non esiste o lo stato non è ancora caricato.
+    \item \texttt{metricEntry(key: string): Metric | null}: come \texttt{metric()} ma restituisce la metrica completa (compresa \texttt{history}, che il solo valore non porta) o \texttt{null} finché lo stato non è disponibile, invece di collassare l'assenza su \texttt{0} — una scheda che mostrasse \texttt{0} durante il caricamento affermerebbe un dato che non ha ancora, il difetto che le priorità della Overview avevano prima di questo metodo. \texttt{metric()} lo chiama internamente invece di duplicarne la logica di ricerca.
 \end{itemize}
 
 % ── 6.3 ──────────────────────────────────────────────────────────────────────
@@ -2905,6 +2879,16 @@ Avanzamento dell'upload e dell'elaborazione di un documento, con l'identificativ
     \caption{Tipo --- DocumentUploadProgress}
 \end{figure}
 
+\paragraph{DocumentPage}
+
+Una pagina dello storico documenti, con il totale che le sta dietro: senza \texttt{total} la vista non può sapere quante pagine esistono. Prima esisteva solo la paginazione lato backend, che rispondeva con i primi quaranta risultati mentre \texttt{searchDocuments()} ne scartava il totale — oltre il quarantesimo i documenti sparivano dall'elenco senza che nulla lo segnalasse; \texttt{CopilotPageViewModel} (Sezione 6.2) ora naviga esplicitamente fra le pagine tramite \texttt{goToPage()}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendModel/DocumentPage.png}
+    \caption{Tipo --- DocumentPage}
+\end{figure}
+
 \paragraph{DocumentPreviewStatus}
 
 Stato dell'anteprima PDF di un sotto-documento, dal caricamento all'eventuale indisponibilità.
@@ -2999,7 +2983,7 @@ Metodi
     \item \texttt{saveExtractedData(documentId: string, payload: UpdateExtractedDataRequest):}\\ \hspace*{1.5em}\texttt{Observable<UpdateSubDocumentReviewResponse>}
     \item \texttt{markReviewed(documentId: string):}\\ \hspace*{1.5em}\texttt{Observable<UpdateSubDocumentReviewResponse>}
     \item \texttt{saveSendMessage(documentId: string, payload: UpdateSendMessageRequest):}\\ \hspace*{1.5em}\texttt{Observable<UpdateSubDocumentReviewResponse>}
-    \item \texttt{searchDocuments(filters: DocumentFilters):}\\ \hspace*{1.5em}\texttt{Observable<SubDocument[]>}
+    \item \texttt{searchDocuments(filters: DocumentFilters, page: number, perPage: number):}\\ \hspace*{1.5em}\texttt{Observable<DocumentPage>}: restituisce la pagina intera (\texttt{items} più \texttt{total}), non i soli elementi — senza il totale la vista non può sapere quante pagine esistono.
     \item \texttt{previewStatus(previewUrl: string):}\\ \hspace*{1.5em}\texttt{Observable<DocumentPreviewStatus>}
 \end{itemize}
 
@@ -3033,13 +3017,13 @@ A differenza di un backend Rails con serializer scritti a mano per ogni risorsa,
 % ── 6.6 ──────────────────────────────────────────────────────────────────────
 \subsection{Micro componenti UI}
 
-I componenti condivisi (\texttt{shared/components}) sono privi di logica di dominio: ricevono dati tramite segnali di input e riemettono eventi tramite \texttt{output()}, senza conoscere da quale feature vengono usati. Sono dodici in tutto: \texttt{ButtonComponent}, \texttt{AlertComponent}, \texttt{ErrorStateComponent}, \texttt{EmptyStateComponent}, \texttt{LoadingStateComponent}, \texttt{StatusBadgeComponent}, \texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{ProgressBarComponent}, \texttt{SelectFieldComponent}, \texttt{TextAreaFieldComponent}, \texttt{FileDropzoneComponent}. La cartella \texttt{data-table} contiene solo un foglio di stile condiviso, non un componente: le tabelle restano markup HTML nativo nelle singole pagine, non un elemento riutilizzabile a sé.
+I componenti condivisi (\texttt{shared/components}) sono privi di logica di dominio: ricevono dati tramite segnali di input e riemettono eventi tramite \texttt{output()}, senza conoscere da quale feature vengono usati. Sono ventuno in tutto: \texttt{ButtonComponent}, \texttt{AlertComponent}, \texttt{ErrorStateComponent}, \texttt{EmptyStateComponent}, \texttt{LoadingStateComponent}, \texttt{StatusBadgeComponent}, \texttt{StatusDotComponent}, \texttt{AttentionNoteComponent}, \texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{MetricShareComponent}, \texttt{MetricGaugeComponent}, \texttt{MetricStatusComponent}, \texttt{MetricBreakdownComponent}, \texttt{MetricStarsComponent}, \texttt{MetricCompositionComponent}, \texttt{StageProgressComponent}, \texttt{StarRating}, \texttt{SelectFieldComponent}, \texttt{TextAreaFieldComponent}, \texttt{FileDropzoneComponent}. La cartella \texttt{data-table} contiene solo un foglio di stile condiviso, non un componente: le tabelle restano markup HTML nativo nelle singole pagine, non un elemento riutilizzabile a sé.
 
-Resta fuori da questo conteggio \texttt{StarRatingComponent}: vive in \texttt{app/components}, non in \texttt{shared/components}, ed è usato oggi da un solo punto (\texttt{GeneratedCommunicationPreviewComponent} nel modulo Assistant, per la valutazione a stelle della bozza), non classificato come condiviso perché non ne esiste ancora un secondo utilizzo.
+Il numero è cambiato più volte nel tempo. \texttt{ProgressBarComponent} è stato rimosso e sostituito da \texttt{StageProgressComponent}, non un'aggiunta ma una diversa scelta di rappresentazione per lo stesso problema (si veda più sotto). \texttt{MetricsPanelComponent} è diventato un dispatcher con più componenti di presentazione dedicati, ciascuno la risposta visiva a un tipo diverso di domanda che una metrica può porre (un andamento, una quota, una posizione su scala, una ripartizione...): da una sola forma di scheda originaria se ne sono aggiunte prima sette, poi due (\texttt{MetricPhasesComponent}, \texttt{MetricDistributionComponent}) sono state rimosse insieme alle metriche di durata che le usavano, quando le due dashboard sono state riallineate ai casi d'uso richiesti dal documento di Analisi dei Requisiti — restano cinque forme dedicate oltre a quella di default (Sezione successiva). \texttt{StarRating} (rinominato da \texttt{StarRatingComponent}) è stato inoltre spostato da \texttt{app/components} a \texttt{shared/components}: ha guadagnato un secondo punto di utilizzo (la scheda \texttt{assistant.rating\_average} nel pannello metriche dell'Assistant, oltre alla valutazione della bozza in anteprima), il criterio che nella versione precedente ne giustificava l'esclusione dal conteggio dei componenti condivisi.
 
 \subsubsection{ButtonComponent}
 
-Il più semplice dei componenti condivisi: non introduce un nuovo elemento HTML, ma si applica come attributo su un \texttt{<button>} nativo (\texttt{<button mvpButton variant="secondary">}). In questo modo il componente lascia al browser tipo, stato disabilitato, attributi ARIA ed eventi nativi, occupandosi solo della variante di stile applicata all'host.
+Il più semplice dei componenti condivisi: non introduce un nuovo elemento HTML, ma si applica come attributo su un \texttt{<button>} nativo (\texttt{<button mvpButton variant="secondary">}). In questo modo il componente lascia al browser tipo, stato disabilitato, attributi ARIA ed eventi nativi, occupandosi solo della variante di stile applicata all'host. \texttt{busy} segnala che il comando è in corso senza toccarne l'etichetta: prima ogni pulsante la riscriveva a mano ("Salvataggio" → "Salvataggio…"), il testo cambiava sotto lo sguardo dell'utente e la larghezza del pulsante saltava a metà clic; ora resta ferma, e \texttt{aria-busy} porta la stessa informazione alle tecnologie assistive.
 
 \begin{figure}[H]
     \centering
@@ -3051,6 +3035,7 @@ Attributi
 \begin{itemize}\raggedright
     \item \texttt{variant: InputSignal<"primary" | "secondary" | "icon">}: variante di stile, di default \textit{primary}.
     \item \texttt{type: InputSignal<string>}: tipo dell'attributo HTML \texttt{type}, di default \textit{button}.
+    \item \texttt{busy: InputSignal<boolean>}: default \textit{false}; mostra uno spinner sull'host e imposta \texttt{aria-busy}, senza sostituire il contenuto proiettato.
 \end{itemize}
 
 Metodi
@@ -3082,14 +3067,14 @@ Metodi
     \item \texttt{AlertComponent}: nessuno.
 \end{itemize}
 
-\subsubsection{EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent}
+\subsubsection{EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent, StatusDotComponent}
 
-Tre componenti minimi di visualizzazione, senza alcuna logica: si limitano a proiettare contenuto o un'etichetta dentro un elemento con lo stile e la semantica ARIA corretti (\texttt{role="status"} per il caricamento, colori diversi per tono sull'etichetta di stato).
+Quattro componenti minimi di visualizzazione, senza alcuna logica: si limitano a proiettare contenuto o un'etichetta dentro un elemento con lo stile e la semantica ARIA corretti (\texttt{role="status"} per il caricamento, colori diversi per tono sull'etichetta di stato). \texttt{StatusDotComponent} è il più recente: un indicatore binario (fatto/non fatto) da affiancare a \texttt{StatusBadgeComponent} senza confondersi con esso, perché rispondono a due domande diverse — l'etichetta dice in quale dei quattro stati di revisione si trova un sotto-documento, il pallino se è stato scaricato o no. Pieno contro vuoto non è il solo colore a portare l'informazione (SC 1.4.1): il pallino è comunque \texttt{aria-hidden}, perché ripete un'informazione che il testo proiettato accanto dice già.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/EmptyLoadingStatus.png}
-    \caption{Classi --- EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent}
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/EmptyLoadingStatus.png}
+    \caption{Classi --- EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent, StatusDotComponent}
 \end{figure}
 
 Attributi
@@ -3097,6 +3082,7 @@ Attributi
     \item \texttt{EmptyStateComponent}: nessuno, solo \texttt{<ng-content>}.
     \item \texttt{LoadingStateComponent}: \texttt{label: InputSignal<string>} (default \textit{"Caricamento in corso."}).
     \item \texttt{StatusBadgeComponent}: \texttt{tone: InputSignal<StatusTone>} (\textit{info}, \textit{success}, \textit{warning}, \textit{danger}, default \textit{neutral}).
+    \item \texttt{StatusDotComponent}: \texttt{done: InputSignal<boolean>} (default \textit{false}).
 \end{itemize}
 
 Metodi
@@ -3104,20 +3090,42 @@ Metodi
     \item Nessuno.
 \end{itemize}
 
-\subsubsection{MetricCardComponent, MetricsPanelComponent}
+\subsubsection{AttentionNoteComponent}
 
-\texttt{MetricCardComponent} mostra una singola coppia valore/etichetta. \texttt{MetricsPanelComponent} la compone in una griglia, gestendo da sé i tre stati della richiesta a monte: caricamento (\texttt{LoadingStateComponent}), elenco vuoto (\texttt{EmptyStateComponent}) o dati presenti, così ogni pannello di metriche della SPA (i due di \texttt{OverviewPage}, uno per \texttt{CopilotPage}) ottiene lo stesso comportamento senza ripeterlo; \texttt{AssistantPage} non ne monta uno proprio.
+Riga che segnala qualcosa su cui agire, con l'azione che la risolve: una scheda metrica dice \textit{quanto} ("23 da verificare"), questo componente dice \textit{cosa fare}, con un pulsante opzionale che porta alla coda interessata. Va montato solo quando c'è davvero qualcosa da fare (\texttt{OverviewPage} lo mostra solo se \texttt{vm.quarantined() > 0}, Sezione 6.7): mostrato sempre diventerebbe arredamento, e si smetterebbe di leggerlo.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/MetricCardPanel.png}
+    \includegraphics[width=0.4\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/AttentionNoteComponent.png}
+    \caption{Classe --- AttentionNoteComponent}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{title: InputSignal<string>} (obbligatorio), \texttt{detail: InputSignal<string | null>} (default \textit{null}).
+    \item \texttt{tone: InputSignal<"watch" | "alert">} (default \textit{watch}): cambia glifo e colore insieme, mai il solo colore.
+    \item \texttt{actionLabel: InputSignal<string | null>} (default \textit{null}): quando valorizzato monta il pulsante d'azione.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{acted: OutputEmitterRef<void>}: emesso al click sul pulsante d'azione.
+\end{itemize}
+
+\subsubsection{MetricCardComponent, MetricsPanelComponent}
+
+\texttt{MetricCardComponent} mostra la forma di scheda di default (un conteggio e il proprio andamento a sette giorni). \texttt{MetricsPanelComponent} è ora un dispatcher, non più un semplice compositore a griglia: per ciascuna metrica ricevuta sceglie, in base alla mappa \texttt{presentation} passata dalla pagina (il tipo \texttt{MetricPresentation}, Sezione 6.2), quale fra sei componenti di presentazione montare (Sezione successiva) — \texttt{MetricCardComponent} resta la scelta di default quando la mappa non specifica un \texttt{kind} diverso. Gestisce inoltre da sé gli stati della richiesta a monte: caricamento (schede segnaposto con \texttt{isLoading}), errore (messaggio dedicato, distinto da "nessuna metrica": in errore i dati esistono, è la lettura ad essere fallita) o elenco vuoto (\texttt{EmptyStateComponent}). Montato da \texttt{AssistantPage} e \texttt{CopilotPage}; \texttt{OverviewPage} non lo usa più (Sezione 6.7).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/MetricCardPanel.png}
     \caption{Classi --- MetricCardComponent, MetricsPanelComponent}
 \end{figure}
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{MetricCardComponent}: \texttt{value: InputSignal<string | number>} (obbligatorio), \texttt{label: InputSignal<string>} (obbligatorio).
-    \item \texttt{MetricsPanelComponent}: \texttt{isLoading: InputSignal<boolean>} (default \textit{false}), \texttt{metrics: InputSignal<Metric[]>} (default \texttt{[]}).
+    \item \texttt{MetricCardComponent}: \texttt{label: InputSignal<string>} (obbligatorio), \texttt{value: InputSignal<string | number | null>} (obbligatorio, \texttt{null} distinto da zero: uno zero durante il caricamento affermerebbe un dato che non c'è ancora), \texttt{unit}, \texttt{tone}, \texttt{context}, \texttt{history: InputSignal<readonly number[] | undefined>} (flusso degli ultimi sette giorni, disegnato a barre — non a linea, perché sono ingressi distinti, non un valore continuo), \texttt{isLoading}.
+    \item \texttt{MetricsPanelComponent}: \texttt{isLoading: InputSignal<boolean>} (default \textit{false}), \texttt{hasError: InputSignal<boolean>} (default \textit{false}), \texttt{metrics: InputSignal<Metric[]>} (default \texttt{[]}), \texttt{ariaLabel: InputSignal<string>} (default \textit{"Metriche"}), \texttt{presentation: InputSignal<Record<string, MetricPresentation>>} (default \texttt{\{\}}): forma, rilievo e ingombro nella griglia per ciascuna chiave di metrica, decisi dalla pagina che conosce il contesto, non dal pannello.
 \end{itemize}
 
 Metodi
@@ -3125,25 +3133,90 @@ Metodi
     \item Nessuno.
 \end{itemize}
 
-\subsubsection{ProgressBarComponent}
+\subsubsection{Le forme di scheda del pannello metriche}
 
-Barra di avanzamento orizzontale condivisa fra le pipeline asincrone di entrambi i moduli: non conosce le fasi di dominio (\textit{extracting}, \textit{generating-cover}...), riceve già una percentuale e uno stato visivo generico, ed è ogni feature a mappare la propria fase su questi ultimi. Finché lo stato è \textit{active} un bagliore scorre da sinistra a destra; con \texttt{prefers-reduced-motion} resta fermo, per conformità WCAG 2.3.3.
+Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? — il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate esclusivamente da \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina. Due forme precedenti, \texttt{MetricPhasesComponent} (un tempo medio ripartito fra le fasi che lo consumano) e \texttt{MetricDistributionComponent} (la densità delle durate come curva continua), sono state rimosse insieme alle metriche di durata articolate che rappresentavano: \texttt{copilot.processing\_seconds} e \texttt{assistant.generation\_seconds} sono oggi una singola media in secondi (kind \textit{trend}, come un conteggio qualunque), non più un tempo scomposto per fase o una distribuzione — nessuna delle due dashboard richiedeva quel dettaglio in nessun caso d'uso del documento di Analisi dei Requisiti. Attualmente nessuna delle due pagine usa \texttt{MetricGaugeComponent} o \texttt{MetricStatusComponent} tramite il pannello (le rispettive \texttt{metricsPresentation}, Sezione 6.2, non hanno più chiavi di kind \textit{gauge} o \textit{status}): restano comunque forme valide del dispatcher, e \texttt{MetricGaugeComponent} resta montato direttamente da \texttt{OverviewPage} (Sezione 6.7) per la qualità del Co-Pilot.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/ProgressBarComponent.png}
-    \caption{Classe --- ProgressBarComponent}
+    \includegraphics[width=0.75\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/MetricPresentationKinds.png}
+    \caption{Classi --- le cinque forme di scheda dispacciate da MetricsPanelComponent}
 \end{figure}
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{value: InputSignal<number>} (obbligatorio), \texttt{state: InputSignal<ProgressState>} (\textit{idle}, \textit{active}, \textit{done}, \textit{error}), \texttt{label: InputSignal<string>}.
-    \item \texttt{clamped: Signal<number>}: segnale derivato che vincola \texttt{value} fra 0 e 100 prima di applicarlo alla larghezza della barra.
+    \item \texttt{MetricShareComponent}: \texttt{label}, \texttt{value: InputSignal<number | null>}, \texttt{total: InputSignal<number | null>} (obbligatori), \texttt{restTone: InputSignal<"alert" | "neutral">} (default \textit{alert}: distingue un residuo che chiede un intervento da uno che è solo il complemento di una misura), \texttt{restNoun}, \texttt{isLoading}.
+    \item \texttt{MetricGaugeComponent}: \texttt{label}, \texttt{value: InputSignal<string>} (obbligatori, già formattato), \texttt{numeric: InputSignal<number | null>} (posiziona il riempimento), \texttt{max} (default 100), \texttt{threshold: InputSignal<number | null>}, \texttt{unit}, \texttt{tone}, \texttt{context}, \texttt{isLoading}.
+    \item \texttt{MetricStatusComponent}: \texttt{label}, \texttt{value: InputSignal<number | null>} (obbligatori), \texttt{okLabel} (default \textit{"Nessun caso"}), \texttt{issueLabel} (default \textit{"da esaminare"}), \texttt{issueTone: InputSignal<"danger" | "warning">} (default \textit{danger}: un guasto blocca, un degrado no), \texttt{context}, \texttt{isLoading}.
+    \item \texttt{MetricBreakdownComponent}: \texttt{label: InputSignal<string>} (obbligatorio), \texttt{parts: InputSignal<MetricPart[] | undefined>}, \texttt{emptyLabel}, \texttt{isLoading}.
+    \item \texttt{MetricStarsComponent}: \texttt{label}, \texttt{value: InputSignal<string>} (obbligatori, già formattato), \texttt{numeric: InputSignal<number | null>} (riempie le stelle), \texttt{max} (default 5), \texttt{context}, \texttt{isLoading}.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno: ciascuna deriva internamente solo i segnali \texttt{computed} necessari al proprio disegno (l'arco dell'anello, il riempimento della scala, i segmenti della barra...), senza superficie pubblica oltre agli \texttt{input()}.
+\end{itemize}
+
+\subsubsection{MetricCompositionComponent}
+
+Barra segmentata di una partizione completa, usata dove i conteggi affiancati nasconderebbero le proporzioni: la ripartizione delle bozze fra "in bozza" e "decise" in \texttt{AssistantPage} (\texttt{vm.draftComposition()}, Sezione 6.2) è la sola istanza attuale, montata fuori da \texttt{MetricsPanelComponent} perché non è una metrica di per sé, ma una vista sulla stessa metrica \texttt{assistant.total}/\texttt{assistant.drafts} già mostrata come scheda. Le fette usano una scala monocromatica derivata dal colore primario, non colori di stato: verde e rosso qui suggerirebbero un giudizio che una composizione non esprime.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/MetricCompositionComponent.png}
+    \caption{Classe --- MetricCompositionComponent}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{parts: InputSignal<readonly CompositionSlice[]>} (obbligatorio): coppie \texttt{\{label, value\}}.
+    \item \texttt{emptyLabel: InputSignal<string>} (default \textit{"Nessun elemento da ripartire."}), \texttt{subject: InputSignal<string>} (default \textit{"elementi"}): nome della grandezza ripartita, usato nella descrizione accessibile.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
     \item Nessuno.
+\end{itemize}
+
+\subsubsection{StageProgressComponent}
+
+Avanzamento per tappe, non più a percentuale: sostituisce \texttt{ProgressBarComponent}, rimosso perché la barra rappresentava una tabella fissa fase → numero (20, 40, 60, 85, 100) che non corrispondeva ad alcuna misura reale — un documento "al 60\%" non era a sei decimi di nulla. Le tappe (\texttt{ProgressStage}, \texttt{\{id, label\}}) sono invece gli stati reali che arrivano dallo stream SSE, quindi la stessa informazione è mostrata senza inventare una quantità; un contatore del tempo trascorso scorre accanto, perché senza di esso un'attesa lunga è indistinguibile da un blocco. Condiviso fra le pipeline asincrone di entrambi i moduli tramite due adattatori di feature (\texttt{GenerationProgressComponent} per l'Assistant, quattro tappe; \texttt{UploadProgressComponent} per il Co-Pilot, cinque), che mappano le rispettive fasi di dominio sull'elenco di \texttt{ProgressStage} ricevuto.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/StageProgressComponent.png}
+    \caption{Classe --- StageProgressComponent}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{stages: InputSignal<readonly ProgressStage[]>} (obbligatorio), \texttt{currentId: InputSignal<string | null>} (default \textit{null}, tappa raggiunta), \texttt{failed}, \texttt{slow} (annotazione sulla tappa corrente, non una tappa a sé: la pipeline resta nello stesso stato, solo da più tempo del previsto), \texttt{label} (default \textit{"Avanzamento elaborazione"}).
+    \item \texttt{elapsedSeconds: Signal<number | null>}: cronometro interno, azzerato quando l'avanzamento torna indietro o riparte dopo essersi fermato — altrimenti una corsa nuova erediterebbe il tempo di quella precedente.
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item Nessuno: la sola logica è l'\texttt{effect()} nel costruttore che aggiorna il cronometro, interno al componente.
+\end{itemize}
+
+\subsubsection{StarRating}
+
+Valutazione a stelle come gruppo di radio ARIA (il pattern che l'APG indica per una scala a valori discreti), non più cinque \texttt{<button>} senza nome accessibile: le frecce scorrono i punteggi, il gruppo ha un nome, e ogni valore ne annuncia uno proprio ("3 stelle su 5"). Il disegno è un SVG disegnato due volte (contorno e riempimento ritagliato), così non dipende dal glifo di sistema; il contorno resta visibile in entrambi gli stati, cosicché chi non distingue i colori legga comunque quante stelle sono piene (SC 1.4.1).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{ImmaginiSpecificaTecnica/ClassiSingoleFrontendMicro/StarRatingComponent.png}
+    \caption{Classe --- StarRating}
+\end{figure}
+
+Attributi
+\begin{itemize}\raggedright
+    \item \texttt{rating: InputSignal<number>} (default 0), \texttt{disabled: InputSignal<boolean>} (default \textit{false}), \texttt{label: InputSignal<string>} (default \textit{"Valutazione da 1 a 5 stelle"}).
+\end{itemize}
+
+Metodi
+\begin{itemize}\raggedright
+    \item \texttt{rated: OutputEmitterRef<number>}: emesso alla selezione di un punteggio; il punteggio mostrato resta guidato dal chiamante, il componente non lo applica da sé.
 \end{itemize}
 
 \subsubsection{SelectFieldComponent, TextAreaFieldComponent}
@@ -3190,15 +3263,15 @@ Metodi
 % ── 6.7 ──────────────────────────────────────────────────────────────────────
 \subsection{Macro componenti UI (pagine)}
 
-Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha (i \texttt{FormGroup} reattivi dei filtri e l'\texttt{effect()} che li collega al ViewModel), oltre a un'unica azione locale priva di logica di dominio (\texttt{resetFilters()}); nessuna chiamata HTTP e nessuna regola di business vive più nella pagina.
+Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha (i \texttt{FormGroup} reattivi dei filtri e l'\texttt{effect()} che li collega al ViewModel), oltre a poche azioni locali prive di logica di dominio (\texttt{resetFilters()}, e su \texttt{CopilotPage} anche lo scorrimento verso il dettaglio in \texttt{selectDocument()}); nessuna chiamata HTTP e nessuna regola di business vive più nella pagina.
 
 \subsubsection{AssistantPage}
 
-Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent}) e quello di anteprima (\texttt{GeneratedCommunicationPreviewComponent}), entrambi componenti di feature, insieme a componenti condivisi per stato di errore e stato vuoto, legando quasi ogni input e ogni evento del template a un segnale o un metodo di \texttt{vm} (\texttt{AssistantPageViewModel}, Sezione 6.2). L'unica eccezione deliberata è il banner d'errore principale: \texttt{[canRetry]="true" (retry)="store.reload()"} chiama direttamente lo Store, non il ViewModel, perché un errore di caricamento a livello di pagina è un problema dello stato condiviso, non della logica specifica di questa feature.
+Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent}) e quello di anteprima (\texttt{GeneratedCommunicationPreviewComponent}), entrambi componenti di feature, insieme all'elenco delle configurazioni di prompt salvate (\texttt{PromptConfigurationListComponent}) e allo storico comunicazioni (\texttt{CommunicationHistoryListComponent}, sostituisce il markup di lista che una versione precedente montava inline), al proprio pannello di metriche (\texttt{MetricsPanelComponent}, Sezione 6.6, più \texttt{MetricCompositionComponent} per la ripartizione delle bozze e \texttt{RecentFeedbackListComponent}, componente di feature, per gli ultimi feedback testuali, UC-27.3) e a componenti condivisi per stato di errore e stato vuoto, legando ogni input e ogni evento del template a un segnale o un metodo di \texttt{vm} (\texttt{AssistantPageViewModel}, Sezione 6.2) — senza eccezioni: anche il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non più lo Store direttamente (Sezione 6.2).
 
-Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), store, scrollToElement)}, passandogli anche l'unica funzione che tocca il DOM così il ViewModel resta un Presentation Model puro.
+Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), this.store)}: non riceve più una funzione di scorrimento, perché \texttt{AssistantPageViewModel} non la chiede più al costruttore (Sezione 6.2).
 
-Collega inoltre un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Registra anche \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
+Collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Un secondo \texttt{effect()}, nuovo rispetto alla versione precedente, legge \texttt{vm.pendingScrollTarget()} e, quando non è nullo, chiama \texttt{scrollToElement} (l'unica operazione DOM richiesta dal ViewModel) poi azzera il segnale — è la View, non più una funzione passata al costruttore, a eseguire lo scorrimento richiesto. Registra infine \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
 
 \begin{figure}[H]
     \centering
@@ -3208,7 +3281,7 @@ Collega inoltre un \texttt{FormGroup} di filtri e un \texttt{effect()} che si li
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected} (non più \texttt{private}): il template la legge direttamente solo per il retry del banner d'errore principale (\texttt{store.reload()}), oltre a passarla al costruttore del ViewModel e leggerla come segnale sorgente nell'\texttt{effect()}.
+    \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected}: passata al costruttore del ViewModel e letta come segnale sorgente nell'\texttt{effect()} di ricerca; il template non la referenzia mai (Sezione 6.2).
     \item \texttt{vm: AssistantPageViewModel}: istanziato nel costruttore, punto a cui si lega il resto del template.
     \item \texttt{filterForm: FormGroup}: form reattivo dei filtri dello storico, resta sulla View perché \texttt{ReactiveFormsModule} richiede un injection context.
 \end{itemize}
@@ -3220,9 +3293,9 @@ Metodi
 
 \subsubsection{CopilotPage}
 
-Stessa struttura di \texttt{AssistantPage}, applicata al Co-Pilot: compone il pannello di upload (\texttt{DocumentUploadPanelComponent}), l'elenco documenti (\texttt{DocumentListComponent}) e il pannello di revisione del sotto-documento selezionato (\texttt{SubDocumentListComponent}), leggendo dal template anche \texttt{vm.error()}, \texttt{vm.loading()} e \texttt{vm.metrics()} invece dei rispettivi segnali sullo Store, con la stessa unica eccezione di \texttt{AssistantPage}: il banner d'errore principale usa \texttt{[canRetry]="true" (retry)="store.reload()"} direttamente sullo Store. Istanzia il ViewModel con \texttt{new CopilotPageViewModel(inject(DocumentWorkflowService), store)}, senza la dipendenza di scorrimento perché questo ViewModel non ne ha mai avuto bisogno (Sezione 6.2).
+Stessa struttura di \texttt{AssistantPage}, applicata al Co-Pilot: compone il pannello di upload (\texttt{DocumentUploadPanelComponent}), l'elenco documenti (\texttt{DocumentListComponent}, a cui passa \texttt{[page]="vm.currentPage()"} e \texttt{[totalPages]="vm.totalPages()"}, inoltrando \texttt{(goToPage)} a \texttt{vm.goToPage(\$event)}), il pannello di revisione del sotto-documento selezionato (\texttt{SubDocumentListComponent}, a cui passa anche \texttt{[previewStatus]="vm.previewStatus()"}) e il proprio pannello di metriche (\texttt{MetricsPanelComponent}, con \texttt{[presentation]="vm.metricsPresentation()"}), leggendo dal template solo \texttt{vm.*}: anche qui il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non più lo Store direttamente (Sezione 6.2). Istanzia il ViewModel con \texttt{new CopilotPageViewModel(inject(DocumentWorkflowService), store)}, senza la dipendenza di scorrimento perché questo ViewModel non ne ha mai avuto bisogno (Sezione 6.2).
 
-Collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocumentFilterForm()}) e un \texttt{effect()} che rilegge lo storico documentale chiamando \texttt{vm.reload()} a ogni cambio di filtro o di stato condiviso; registra inoltre \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}.
+Collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocumentFilterForm()}) e un \texttt{effect()} che rilegge lo storico documentale chiamando \texttt{vm.reload()} a ogni cambio di filtro o di stato condiviso. Un secondo \texttt{effect()}, nuovo rispetto alla versione precedente, legge \texttt{vm.selectedDocument()} e chiama \texttt{vm.loadPreviewStatus(document?.previewUrl ?? null)}: la fetch della raggiungibilità dell'anteprima segue la selezione, non un elenco a parte. Registra inoltre \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}.
 
 \begin{figure}[H]
     \centering
@@ -3232,23 +3305,24 @@ Collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocument
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected}: stesso ruolo e stessa eccezione (retry del banner d'errore) che ha su \texttt{AssistantPage}.
+    \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected}: passata al costruttore del ViewModel e letta come segnale sorgente nel primo \texttt{effect()} (quello di ricerca); il secondo legge solo \texttt{vm.selectedDocument()}. Il template non la referenzia mai, stesso ruolo che ha su \texttt{AssistantPage}.
     \item \texttt{vm: CopilotPageViewModel}: istanziato nel costruttore.
     \item \texttt{filterForm: FormGroup}: form reattivo dei filtri dello storico documenti.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{resetFilters(): void}: unico metodo proprio della View.
+    \item \texttt{selectDocument(documentId: string | null): void}: apre il dettaglio del sotto-documento selezionato e vi scorre la pagina (verso \texttt{copilot-document-detail}), solo se \texttt{documentId} non è nullo. Lo scorrimento resta nella View e non nel ViewModel perché è lei l'unica responsabile della resa visiva (ADR 0011).
+    \item \texttt{resetFilters(): void}.
 \end{itemize}
 
 \subsubsection{OverviewPage}
 
-La pagina più semplice: nessun \texttt{FormGroup}, nessun \texttt{effect()}, perché la Overview non ha uno storico filtrabile proprio: mostra solo le metriche aggregate e le attività recenti già presenti nello Store. Compone componenti condivisi (\texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{StatusBadgeComponent}, \texttt{EmptyStateComponent}) senza alcun componente di feature proprio.
+La pagina più semplice nella logica di collegamento (nessun \texttt{FormGroup}, perché la Overview non ha uno storico filtrabile proprio), ma non più quella con la composizione più povera: mostra le priorità operative (\texttt{AttentionNoteComponent}, montato solo se \texttt{vm.quarantined() > 0}, più una griglia di \texttt{MetricCardComponent} per \texttt{vm.priorities()}), gli indicatori di qualità per modulo (\texttt{MetricStarsComponent} per \texttt{vm.assistantQuality()}, \texttt{MetricGaugeComponent} per \texttt{vm.copilotQuality()}, Sezione 6.6) e le attività recenti già presenti nello Store, in una tabella con \texttt{StatusBadgeComponent}/\texttt{EmptyStateComponent}. Non monta più \texttt{MetricsPanelComponent}: mostra direttamente le sue schede mirate, non un pannello generico.
 
-Istanzia il ViewModel con \texttt{new OverviewPageViewModel(store, router, scrollToElement)}; i pulsanti di richiamo all'azione nella sezione hero delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scorrimento verso la sezione target sulla pagina di destinazione.
+Istanzia il ViewModel con \texttt{new OverviewPageViewModel(this.store, inject(Router))}: non riceve più una funzione di scorrimento, per lo stesso motivo di \texttt{AssistantPage}. I pulsanti di richiamo all'azione nella sezione hero e i due link "Vedi tutte le metriche" delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scorrimento verso la sezione target sulla pagina di destinazione; un \texttt{effect()} nel costruttore — l'unico della View, dove in precedenza non ce n'era nessuno — legge \texttt{vm.pendingScrollTarget()} e lo esegue, stesso schema di \texttt{AssistantPage}/\texttt{CopilotPage}.
 
-A differenza di \texttt{AssistantPage}/\texttt{CopilotPage}, qui la View legge lo Store direttamente in più punti, non solo nel banner d'errore (\texttt{[canRetry]="true" (retry)="store.reload()"}): anche i due pannelli di metriche per strumento leggono \texttt{store.loading()} e \texttt{store.state()} senza passare da un pass-through del ViewModel. Non è un'incoerenza rispetto al pattern, ma una conseguenza della sua assenza qui: \texttt{OverviewPageViewModel} non espone segnali derivati per le metriche degli strumenti, perché quei dati sono già letture dirette e non filtrate dello stato condiviso, senza logica di dominio propria della pagina da isolare. Il confronto con le altre due pagine non è simmetrico: \texttt{CopilotPage} espone tutti e tre i pass-through (\texttt{vm.error()}/\texttt{vm.loading()}/\texttt{vm.metrics()}), mentre \texttt{AssistantPage}, priva di un pannello di metriche proprio (Sezione 6.6), espone solo \texttt{vm.error()}.
+A differenza della versione precedente di questo documento, qui la View non legge più lo Store in nessun punto del template, banner d'errore compreso (\texttt{(retry)="vm.reload()"}): era l'unica delle tre pagine a farlo, e non lo è più. Il cambiamento non è cosmetico: prima \texttt{OverviewPageViewModel} non esponeva segnali propri per le metriche degli strumenti, quindi il template le leggeva direttamente dallo Store senza filtro; ora il ViewModel sintetizza priorità e qualità (Sezione 6.2), e il campo \texttt{store} sulla View resta solo per costruire il ViewModel, esattamente come su \texttt{AssistantPage} e \texttt{CopilotPage}.
 
 \begin{figure}[H]
     \centering
@@ -3258,13 +3332,13 @@ A differenza di \texttt{AssistantPage}/\texttt{CopilotPage}, qui la View legge l
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, usata sia dalla View (per \texttt{store.error()}/\texttt{store.loading()} e per il retry, \texttt{store.reload()}) sia passata al ViewModel.
+    \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected}: passata al costruttore del ViewModel; il template non la referenzia mai.
     \item \texttt{vm: OverviewPageViewModel}: istanziato nel costruttore insieme a \texttt{inject(Router)}.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
-    \item Nessuno: a differenza delle altre due pagine, non ha bisogno di cablare filtri o effetti reattivi propri.
+    \item Nessuno: a differenza delle altre due pagine, non ha bisogno di cablare filtri propri; l'unico \texttt{effect()} è logica di collegamento nel costruttore, non un metodo della classe.
 \end{itemize}
 
 \end{sloppypar}
@@ -3303,7 +3377,7 @@ I design pattern individuati nel sistema si dividono in due categorie: quelli ap
     \hline
     Singleton & Creazionale & Binding dei client AWS e degli adapter nel service provider, bindati all'interfaccia di porta \\
     \hline
-    Observer & Comportamentale & Porte dispatcher di eventi dei due domini → dispatcher Laravel, 14 + 21 listener \\
+    Observer & Comportamentale & Porte dispatcher di eventi dei due domini → dispatcher Laravel, 13 + 20 listener \\
     \hline
     Command & Comportamentale & Ogni caso d'uso applicativo, una classe per una porta primaria \\
     \hline
@@ -3355,7 +3429,7 @@ class BedrockDocumentAiAdapter implements DocumentAiGatewayPort
 
 Risolve il problema di un componente infrastrutturale condiviso da più domini che deve restare agnostico rispetto al passo di business specifico di ciascuno, delegando solo quel passo a un'implementazione selezionata a runtime invece di conoscerla in anticipo.
 
-Esempio nel progetto. \texttt{WorkflowTaskHandler} è la porta primaria implementata da \texttt{DocumentWorkflowTaskHandler} e \texttt{CommunicationWorkflowTaskHandler} (Sezione 5): \texttt{WorkflowTaskRunner}, il collaboratore condiviso che riceve un task da Step Functions/SQS, resta completamente agnostico rispetto al dominio (deduplicazione, presa in carico, audit e metriche sono identici per entrambi) e delega il solo passo di business all'handler selezionato da \texttt{WorkflowTaskRegistry} in base al tipo di task. Senza questo pattern, \texttt{WorkflowTaskRunner} avrebbe bisogno di un \texttt{match}/\texttt{if} sul dominio del task, violando la Dependency Rule verificata in CI (Sezione 4.7): l'infrastruttura di workflow condivisa dovrebbe conoscere i dettagli interni di Documents e Communications.
+Esempio nel progetto. \texttt{WorkflowTaskHandler} è la porta primaria implementata da \texttt{DocumentWorkflowTaskHandler} e \texttt{CommunicationWorkflowTaskHandler} (Sezione 5): \texttt{WorkflowTaskRunner}, il collaboratore condiviso che riceve un task da Step Functions/SQS, resta completamente agnostico rispetto al dominio (deduplicazione, presa in carico e audit sono identici per entrambi) e delega il solo passo di business all'handler selezionato da \texttt{WorkflowTaskRegistry} in base al tipo di task. Senza questo pattern, \texttt{WorkflowTaskRunner} avrebbe bisogno di un \texttt{match}/\texttt{if} sul dominio del task, violando la Dependency Rule verificata in CI (Sezione 4.7): l'infrastruttura di workflow condivisa dovrebbe conoscere i dettagli interni di Documents e Communications.
 
 \begin{lstlisting}[style=phplisting, caption={WorkflowTaskRunner -- selezione della Strategy concreta e delega del passo di business}]
 // app/Mvp/Workflow/Services/WorkflowTaskRunner.php
@@ -3364,7 +3438,6 @@ class WorkflowTaskRunner
     public function __construct(
         private readonly WorkflowTaskRegistry $registry,
         private readonly AuditLogger $audit,
-        private readonly MetricsRecorder $metrics,
     ) {}
 
     public function handle(array $message): array
@@ -3576,11 +3649,11 @@ $this->app->singleton(WorkflowEnginePort::class, SfnWorkflowEngineAdapter::class
 
 \textbf{Intent:} definire una dipendenza uno-a-molti fra oggetti, così che quando un oggetto cambia stato tutti i suoi dipendenti vengano notificati automaticamente, senza che il soggetto li conosca singolarmente.
 
-Disaccoppia l'esecuzione di una regola di business dalle sue conseguenze collaterali (audit, metriche) che diventano reazioni indipendenti a un evento invece di chiamate esplicite ripetute in ogni caso d'uso che ne ha bisogno.
+Disaccoppia l'esecuzione di una regola di business dalla sua conseguenza collaterale (l'audit) che diventa una reazione indipendente a un evento invece di una chiamata esplicita ripetuta in ogni caso d'uso che ne ha bisogno.
 
-Esempio nel progetto. Applicato simmetricamente a entrambi i domini, con porte separate perché gli eventi sono specifici di dominio: Documents dispatcha 14 eventi (\texttt{DocumentEventDispatcherPort} → \texttt{LaravelDocumentEventDispatcher}, 14 listener), Communications 21 (\texttt{CommunicationEventDispatcherPort} → \texttt{LaravelCommunicationEventDispatcher}, 21 listener); si veda la Sezione 5 per l'elenco delle classi che li dispatchano.
+Esempio nel progetto. Applicato simmetricamente a entrambi i domini, con porte separate perché gli eventi sono specifici di dominio: Documents dispatcha 14 eventi (\texttt{DocumentEventDispatcherPort} → \texttt{LaravelDocumentEventDispatcher}, 13 listener), Communications 21 (\texttt{CommunicationEventDispatcherPort} → \texttt{LaravelCommunicationEventDispatcher}, 20 listener; si veda la Sezione 5 per l'elenco delle classi che li dispatchano). In ciascun dominio un evento di completamento pipeline (\texttt{DocumentWorkflowCompleted}, \texttt{CommunicationWorkflowCompleted}) non ha un listener registrato: lo stato che segnala è già persistito direttamente dal caso d'uso che lo dispatcha, non da una reazione all'evento. Ogni listener dipende da un solo collaboratore, \texttt{AuditLogger} (Sezione 5.3).
 
-Prima dell'adozione sistematica del pattern, le chiamate ad audit e metriche erano sparse manualmente in ogni caso d'uso: la coppia audit+metrica per "copertina degradata" era duplicata in due punti distinti (degrado da errore del modello o dello storage, degrado da timeout in \texttt{FinalizeCommunicationService}); con l'evento unico quella duplicazione sparisce. Senza Observer, ogni nuova reazione a un evento di dominio richiederebbe toccare ogni caso d'uso che genera quell'evento, invece di aggiungere un listener.
+Prima dell'adozione sistematica del pattern, le chiamate ad audit erano sparse manualmente in ogni caso d'uso: la chiamata di audit per "copertina degradata" era duplicata in due punti distinti (degrado da errore del modello o dello storage, degrado da timeout in \texttt{FinalizeCommunicationService}); con l'evento unico quella duplicazione sparisce. Senza Observer, ogni nuova reazione a un evento di dominio richiederebbe toccare ogni caso d'uso che genera quell'evento, invece di aggiungere un listener.
 
 \begin{lstlisting}[style=phplisting, caption={Registrazione del listener in AppServiceProvider e reazione in RecordDocumentProcessingStarted}]
 // app/Providers/AppServiceProvider.php (boot())
@@ -3588,7 +3661,7 @@ Event::listen(DocumentUploadAccepted::class, RecordDocumentUploadAccepted::class
 Event::listen(DocumentProcessingStarted::class, RecordDocumentProcessingStarted::class);
 Event::listen(DocumentProcessingCompleted::class, RecordDocumentProcessingCompleted::class);
 Event::listen(DocumentProcessingFailed::class, RecordDocumentProcessingFailed::class);
-// [...] altri 10 listener per Documents, 21 per Communications: stesso
+// [...] altri 9 listener per Documents, 20 per Communications: stesso
 // schema, un Event::listen per coppia evento/listener.
 
 // app/Mvp/Documents/Application/Listeners/RecordDocumentProcessingStarted.php
@@ -3722,6 +3795,16 @@ private trackGeneration(
               observer.complete();
             }
           },
+          onNamedError: (message) => {
+            observer.next({
+              status: message || "Generazione non disponibile. Controlla lo stato della bozza.",
+              phase: "failed",
+              communicationId: response.communicationId
+            });
+            closeStream?.();
+            this.store.reload();
+            observer.complete();
+          },
           onConnectionError: () => {
             closeStream?.();
             this.store.reload();
@@ -3761,15 +3844,15 @@ export class AssistantPageViewModel {
   readonly selectedDraftId: WritableSignal<number | null> = signal(null);
   readonly latestDraft: WritableSignal<GeneratedDraft | null> = signal(null);
 
-  // [...] altri ventidue signal/computed per storico, configurazioni,
-  // filtri, stati di caricamento delle singole azioni.
+  // [...] altri ventisei signal/computed per storico, configurazioni,
+  // filtri, presentazione delle metriche, stati di caricamento delle
+  // singole azioni.
 
   readonly error: Signal<string | null> = computed(() => this.store.error());
 
   constructor(
     private readonly assistant: AssistantService,
-    private readonly store: MvpStateStore,
-    private readonly scrollTo: (elementId: string) => void
+    private readonly store: MvpStateStore
   ) {}
 
   generate(payload: CommunicationDraftForm): void {
@@ -3794,7 +3877,7 @@ export class AssistantPageViewModel {
 }
 \end{lstlisting}
 
-Le dipendenze (\texttt{AssistantService}, \texttt{MvpStateStore}, la funzione \texttt{scrollTo}) arrivano dal costruttore, non da \texttt{inject()}: la classe è istanziabile con \texttt{new AssistantPageViewModel(...)} in un test senza \texttt{TestBed}, il requisito che ha guidato la scelta di questo pattern al posto del \texttt{@Component} stesso come ViewModel (si veda oltre).
+Le dipendenze (\texttt{AssistantService}, \texttt{MvpStateStore}) arrivano dal costruttore, non da \texttt{inject()}: la classe è istanziabile con \texttt{new AssistantPageViewModel(...)} in un test senza \texttt{TestBed}, il requisito che ha guidato la scelta di questo pattern al posto del \texttt{@Component} stesso come ViewModel (si veda oltre).
 
 Il minimo richiesto sarebbe il \texttt{@Component} stesso come ViewModel (MVVM in senso lasco): scartato come unica implementazione perché non regge a un test costruito con \texttt{new}, il requisito esplicito del refactor. Senza questo pattern, ogni test sulla logica di una pagina richiederebbe \texttt{TestBed}/\texttt{Injector.create()}: il costo che l'intera Sezione 6.2 spiega di voler evitare, e solo dove il beneficio lo giustifica (le tre pagine principali, non ogni componente della SPA).
 
@@ -3916,7 +3999,7 @@ Colonne
     \item \texttt{employee\_first\_name}, \texttt{employee\_last\_name}, \texttt{company\_name}, \texttt{recipient\_email}, \texttt{fiscal\_code}, \texttt{employee\_id}.
     \item \texttt{document\_date}, \texttt{document\_type}, \texttt{description}.
     \item \texttt{confidence\_score} (0–100, nullable): combina la confidenza media OCR con la completezza dei campi chiave trovati (Sezione 5.1, \texttt{ExtractSubDocumentFieldsService}).
-    \item \texttt{field\_confidence} (json, nullable): confidenza scomposta per singolo campo chiave, non solo il valore aggregato di \texttt{confidence\_score}. Introdotta perché la confidenza restituita da Textract è quasi sempre alta di per sé: il segnale utile in pratica non era il punteggio OCR complessivo, ma la presenza o assenza dei singoli campi chiave, che riduceva l'esito a poche combinazioni discrete; scomporre la confidenza per campo rende quel segnale esplicito invece di appiattirlo in un unico numero.
+    \item \texttt{field\_confidences} (json, nullable): confidenza scomposta per singolo campo chiave, non solo il valore aggregato di \texttt{confidence\_score}. Introdotta perché la confidenza restituita da Textract è quasi sempre alta di per sé: il segnale utile in pratica non era il punteggio OCR complessivo, ma la presenza o assenza dei singoli campi chiave, che riduceva l'esito a poche combinazioni discrete; scomporre la confidenza per campo rende quel segnale esplicito invece di appiattirlo in un unico numero.
     \item \texttt{ai\_payload} (json).
 \end{itemize}
 
@@ -3972,6 +4055,278 @@ Colonne
     \item \texttt{request\_id}, \texttt{correlation\_id}: propagati dagli stessi header di correlazione usati dallo stream SSE (Sezione 6.4).
     \item \texttt{metadata} (json).
 \end{itemize}
+
+\end{sloppypar}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Requisiti Funzionali Soddisfatti}
+
+\begin{sloppypar}
+
+Questo capitolo riporta lo stato di implementazione di ciascun requisito funzionale identificato nell'Analisi dei Requisiti, verificato direttamente sul codice sorgente del sistema alla data di redazione di questo documento. I requisiti funzionali si dividono in obbligatori e opzionali a seconda della loro importanza per il progetto: ne sono stati identificati 109, di cui 94 obbligatori e 15 opzionali, derivati dall'analisi dei casi d'uso (Analisi dei Requisiti, Sezione 4.1).
+
+\subsection{Completamento requisiti}
+
+\begin{itemize}
+    \item \textbf{Requisiti Obbligatori}: 90/94 requisiti funzionali soddisfatti.
+    \item \textbf{Requisiti Opzionali}: 11/15 requisiti funzionali soddisfatti.
+\end{itemize}
+
+Gli otto requisiti non ancora soddisfatti alla data di redazione:
+\begin{itemize}
+    \item \textbf{RF38-OB, RF39-OB, RF40-OB, RF41-OB}: la dashboard delle metriche dell'AI Assistant (\texttt{AssistantPageViewModel::metrics}) non è filtrabile per data, tono o stile: è calcolata direttamente da \texttt{store.assistantMetrics()}, indipendente dai filtri (\texttt{activeFilters}) che esistono ma si applicano solo allo storico delle generazioni (RF22-26), non alle metriche.
+    \item \textbf{RF4-OP}: nessun parametro di lunghezza della bozza né nella richiesta di generazione (\texttt{GenerateCommunicationCommand}) né nel form di generazione.
+    \item \textbf{RF16-OP}: nessun metodo di ripristino del contenuto generato dall'AI dopo una modifica manuale; \texttt{CommunicationDraftService::update()} (Sezione 5.2) sovrascrive titolo e corpo senza conservare una copia del contenuto originale.
+    \item \textbf{RF20-OP}: nessuna funzionalità di inoltro via e-mail per una comunicazione generata; l'invio precompilato via e-mail esiste solo sul modulo Co-Pilot (\texttt{SendMessageService}, Sezione 5.1).
+    \item \textbf{RF107-OP}: il campo e-mail del destinatario, se assente, è mostrato come casella vuota anziché con un indicatore esplicito di dato non disponibile, a differenza degli altri campi dello stesso pannello (nome, azienda, data, tipologia, descrizione, confidenza), che lo hanno.
+\end{itemize}
+
+\subsection{Tabella di tracciamento dei requisiti}
+
+\renewcommand{\arraystretch}{1.3}
+\rowcolors{2}{gray!8}{white}
+{\footnotesize
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{|p{1.8cm}|p{8.7cm}|p{2.4cm}|p{2.1cm}|}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Stato} & \textbf{Priorità} \\
+    \hline
+    \endfirsthead
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Codice} & \textbf{Descrizione} & \textbf{Stato} & \textbf{Priorità} \\
+    \hline
+    \endhead
+    \multicolumn{4}{l}{\textit{AI Assistant Generativo}} \\
+    \hline
+    RF1-OB & Il sistema deve permettere al Redattore di inserire il prompt testuale per la generazione del contenuto. & Implementato & Obbligatorio \\
+    \hline
+    RF2-OB & Il sistema deve permettere al Redattore di selezionare il tono comunicativo della bozza da generare. & Implementato & Obbligatorio \\
+    \hline
+    RF3-OB & Il sistema deve permettere al Redattore di selezionare lo stile editoriale della bozza da generare. & Implementato & Obbligatorio \\
+    \hline
+    RF4-OP & Il sistema deve permettere al Redattore di selezionare la lunghezza desiderata per la bozza da generare. & Non implementato & Opzionale \\
+    \hline
+    RF5-OB & Il sistema deve avviare la generazione del contenuto tramite AI a partire dal prompt e dai parametri configurati. & Implementato & Obbligatorio \\
+    \hline
+    RF6-OB & Il sistema deve visualizzare un'anteprima della bozza generata. & Implementato & Obbligatorio \\
+    \hline
+    RF7-OB & Il sistema deve visualizzare il titolo della bozza generata nell'anteprima. & Implementato & Obbligatorio \\
+    \hline
+    RF8-OB & Il sistema deve visualizzare il testo della bozza generata nell'anteprima. & Implementato & Obbligatorio \\
+    \hline
+    RF9-OB & Il sistema deve visualizzare l'immagine di copertina della bozza generata nell'anteprima. & Implementato & Obbligatorio \\
+    \hline
+    RF10-OB & Il sistema deve permettere al Redattore di modificare manualmente il titolo della bozza. & Implementato & Obbligatorio \\
+    \hline
+    RF11-OB & Il sistema deve permettere al Redattore di modificare manualmente il testo della bozza. & Implementato & Obbligatorio \\
+    \hline
+    RF12-OB & Il sistema deve permettere al Redattore di sostituire l'immagine di copertina della bozza con un file caricato localmente. & Implementato & Obbligatorio \\
+    \hline
+    RF13-OB & Il sistema deve permettere al Redattore di eliminare l'immagine di copertina della bozza. & Implementato & Obbligatorio \\
+    \hline
+    RF14-OB & Il sistema deve permettere al Redattore di richiedere la rigenerazione della bozza mantenendo i parametri di configurazione. & Implementato & Obbligatorio \\
+    \hline
+    RF15-OB & Il sistema deve permettere al Redattore di eliminare la bozza generata corrente. & Implementato & Obbligatorio \\
+    \hline
+    RF16-OP & Il sistema deve permettere al Redattore di annullare le modifiche manuali apportate alla bozza, ripristinando il contenuto originariamente generato. & Non implementato & Opzionale \\
+    \hline
+    RF17-OB & Il sistema deve permettere il salvataggio della bozza nello storico. & Implementato & Obbligatorio \\
+    \hline
+    RF18-OP & Il sistema deve permettere al Redattore di visualizzare un'anteprima del documento prima dell'esportazione definitiva. & Implementato & Opzionale \\
+    \hline
+    RF19-OB & Il sistema deve permettere la pubblicazione del documento generato e la sua esportazione in formato PDF. & Implementato & Obbligatorio \\
+    \hline
+    RF20-OP & Il sistema deve permettere al Redattore di inoltrare il documento finalizzato tramite posta elettronica. & Non implementato & Opzionale \\
+    \hline
+    RF21-OB & Il sistema deve fornire al Redattore la libreria personale con lo storico delle generazioni passate e i prompt salvati. & Implementato & Obbligatorio \\
+    \hline
+    RF22-OB & Il sistema deve permettere la ricerca e il filtraggio dello storico delle generazioni e dei prompt salvati. & Implementato & Obbligatorio \\
+    \hline
+    RF23-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni tramite ricerca per parola chiave. & Implementato & Obbligatorio \\
+    \hline
+    RF24-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni per tono comunicativo. & Implementato & Obbligatorio \\
+    \hline
+    RF25-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni per stile editoriale. & Implementato & Obbligatorio \\
+    \hline
+    RF26-OB & Il sistema deve permettere al Redattore di filtrare lo storico delle generazioni per data. & Implementato & Obbligatorio \\
+    \hline
+    RF27-OB & Il sistema deve permettere al Redattore di salvare la configurazione corrente del prompt nella libreria personale, assegnandole un nome identificativo. & Implementato & Obbligatorio \\
+    \hline
+    RF28-OB & Il sistema deve permettere il caricamento e il riutilizzo di una configurazione prompt salvata. & Implementato & Obbligatorio \\
+    \hline
+    RF29-OB & Il sistema deve permettere al Redattore di contrassegnare una generazione come preferita nella libreria personale. & Implementato & Obbligatorio \\
+    \hline
+    RF30-OB & Il sistema deve permettere al Redattore di rimuovere una generazione dai preferiti nella libreria personale. & Implementato & Obbligatorio \\
+    \hline
+    RF31-OP & Il sistema deve permettere l'eliminazione di elementi dallo storico e dalla libreria dei prompt. & Implementato & Opzionale \\
+    \hline
+    RF32-OB & Il sistema deve permettere al Redattore di assegnare un rating numerico alla bozza generata. & Implementato & Obbligatorio \\
+    \hline
+    RF33-OB & Il sistema deve permettere al Redattore di aggiungere un commento testuale qualitativo alla valutazione della bozza. & Implementato & Obbligatorio \\
+    \hline
+    RF34-OB & Il sistema deve fornire all'Analista dati una dashboard con metriche dell'AI Assistant, con possibilità di esportare un report riepilogativo. & Implementato & Obbligatorio \\
+    \hline
+    RF35-OB & Il sistema deve visualizzare nella dashboard le statistiche di utilizzo del modulo AI Assistant. & Implementato & Obbligatorio \\
+    \hline
+    RF36-OB & Il sistema deve visualizzare nella dashboard il rating medio delle bozze generate. & Implementato & Obbligatorio \\
+    \hline
+    RF37-OB & Il sistema deve permettere all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & Implementato & Obbligatorio \\
+    \hline
+    RF38-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica. & Non implementato & Obbligatorio \\
+    \hline
+    RF39-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per intervallo di date. & Non implementato & Obbligatorio \\
+    \hline
+    RF40-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per tono comunicativo. & Non implementato & Obbligatorio \\
+    \hline
+    RF41-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per stile editoriale. & Non implementato & Obbligatorio \\
+    \hline
+    \multicolumn{4}{l}{\textit{AI Co-Pilot per Consulenti del Lavoro}} \\
+    \hline
+    RF42-OB & Il sistema deve permettere al Consulente del lavoro di caricare un singolo documento per l'analisi AI automatica. & Implementato & Obbligatorio \\
+    \hline
+    RF43-OB & Il sistema deve permettere al Consulente del lavoro di caricare documenti con classificazione e metadati inseriti manualmente. & Implementato & Obbligatorio \\
+    \hline
+    RF44-OB & Il sistema deve permettere la selezione della tipologia del documento durante il caricamento manuale. & Implementato & Obbligatorio \\
+    \hline
+    RF45-OB & Il sistema deve permettere l'inserimento del mese di riferimento del documento durante il caricamento manuale. & Implementato & Obbligatorio \\
+    \hline
+    RF46-OB & Il sistema deve permettere l'inserimento dell'anno di riferimento del documento durante il caricamento manuale. & Implementato & Obbligatorio \\
+    \hline
+    RF47-OB & Il sistema deve permettere l'inserimento dell'azienda di riferimento del documento durante il caricamento manuale. & Implementato & Obbligatorio \\
+    \hline
+    RF48-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare lo storico dei documenti analizzati. & Implementato & Obbligatorio \\
+    \hline
+    RF49-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite criteri multipli. & Implementato & Obbligatorio \\
+    \hline
+    RF50-OB & Il sistema deve permettere il filtraggio dello storico documenti tramite barra di ricerca testuale. & Implementato & Obbligatorio \\
+    \hline
+    RF51-OB & Il sistema deve permettere il filtraggio dello storico documenti per stato di scaricamento. & Implementato & Obbligatorio \\
+    \hline
+    RF52-OB & Il sistema deve permettere il filtraggio dello storico documenti per livello di confidenza dell'analisi AI. & Implementato & Obbligatorio \\
+    \hline
+    RF53-OB & Il sistema deve permettere il filtraggio dello storico documenti per mese e anno. & Implementato & Obbligatorio \\
+    \hline
+    RF54-OB & Il sistema deve permettere al Consulente del lavoro di visualizzare i dettagli di un singolo documento dallo storico. & Implementato & Obbligatorio \\
+    \hline
+    RF55-OB & Il sistema deve visualizzare la porzione di documento relativa al dipendente (versione splittata). & Implementato & Obbligatorio \\
+    \hline
+    RF56-OB & Il sistema deve visualizzare il documento originale completo (non splittato). & Implementato & Obbligatorio \\
+    \hline
+    RF57-OB & Il sistema deve visualizzare il nome e cognome del dipendente associato al documento. & Implementato & Obbligatorio \\
+    \hline
+    RF58-OB & Il sistema deve visualizzare l'azienda associata al documento. & Implementato & Obbligatorio \\
+    \hline
+    RF59-OB & Il sistema deve visualizzare il nome del file del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF60-OB & Il sistema deve visualizzare la data del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF61-OB & Il sistema deve visualizzare il numero di pagine del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF62-OB & Il sistema deve visualizzare la tipologia del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF63-OB & Il sistema deve visualizzare la breve descrizione del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF64-OB & Il sistema deve visualizzare il livello di confidenza in percentuale del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF65-OP & Il sistema deve visualizzare lo stato del documento, comprensivo di stato di revisione e stato di scaricamento. & Implementato & Opzionale \\
+    \hline
+    RF66-OP & Il sistema deve visualizzare l'e-mail del destinatario del documento. & Implementato & Opzionale \\
+    \hline
+    RF67-OP & Il sistema deve visualizzare il codice fiscale del destinatario. & Implementato & Opzionale \\
+    \hline
+    RF68-OP & Il sistema deve visualizzare la matricola del dipendente. & Implementato & Opzionale \\
+    \hline
+    RF69-OP & Il sistema deve visualizzare la data e ora di caricamento del documento. & Implementato & Opzionale \\
+    \hline
+    RF70-OB & Il sistema deve permettere al Consulente del lavoro di modificare il nome e cognome del dipendente associato al documento. & Implementato & Obbligatorio \\
+    \hline
+    RF71-OB & Il sistema deve permettere la modifica dell'azienda associata al documento. & Implementato & Obbligatorio \\
+    \hline
+    RF72-OB & Il sistema deve permettere la modifica della data del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF73-OB & Il sistema deve permettere la modifica della tipologia del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF74-OB & Il sistema deve permettere la modifica della breve descrizione del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF75-OP & Il sistema deve permettere la modifica dell'indirizzo e-mail del destinatario. & Implementato & Opzionale \\
+    \hline
+    RF76-OP & Il sistema deve permettere la modifica del codice fiscale del destinatario. & Implementato & Opzionale \\
+    \hline
+    RF77-OP & Il sistema deve permettere la modifica della matricola del dipendente. & Implementato & Opzionale \\
+    \hline
+    RF78-OB & Il sistema deve permettere al Consulente del lavoro di annullare le modifiche dei dati del singolo documento. & Implementato & Obbligatorio \\
+    \hline
+    RF79-OB & Il sistema deve permettere al Consulente del lavoro di eliminare il singolo documento. & Implementato & Obbligatorio \\
+    \hline
+    RF80-OB & Il sistema deve generare automaticamente il contenuto del messaggio precompilato per il documento da spedire. & Implementato & Obbligatorio \\
+    \hline
+    RF81-OB & Il sistema deve visualizzare il destinatario del messaggio precompilato generato automaticamente. & Implementato & Obbligatorio \\
+    \hline
+    RF82-OB & Il sistema deve visualizzare l'oggetto del messaggio precompilato generato automaticamente. & Implementato & Obbligatorio \\
+    \hline
+    RF83-OB & Il sistema deve visualizzare il testo del messaggio precompilato generato automaticamente. & Implementato & Obbligatorio \\
+    \hline
+    RF84-OB & Il sistema deve permettere la conferma e lo scaricamento del messaggio precompilato. & Implementato & Obbligatorio \\
+    \hline
+    RF85-OB & Il sistema deve permettere al Consulente del lavoro di modificare il destinatario del messaggio precompilato. & Implementato & Obbligatorio \\
+    \hline
+    RF86-OB & Il sistema deve permettere la modifica dell'oggetto del messaggio precompilato. & Implementato & Obbligatorio \\
+    \hline
+    RF87-OB & Il sistema deve permettere la modifica del testo del messaggio precompilato. & Implementato & Obbligatorio \\
+    \hline
+    RF88-OB & Il sistema deve fornire all'Analista dati una dashboard dedicata con metriche di monitoraggio del modulo AI Co-Pilot. & Implementato & Obbligatorio \\
+    \hline
+    RF89-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il numero totale di documenti analizzati. & Implementato & Obbligatorio \\
+    \hline
+    RF90-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di classificazioni corrette. & Implementato & Obbligatorio \\
+    \hline
+    RF91-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot i documenti sotto soglia di confidenza. & Implementato & Obbligatorio \\
+    \hline
+    RF92-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot la percentuale di destinatari riconosciuti automaticamente. & Implementato & Obbligatorio \\
+    \hline
+    RF93-OB & Il sistema deve visualizzare nella dashboard del Co-Pilot il tempo medio di analisi dei documenti. & Implementato & Obbligatorio \\
+    \hline
+    \multicolumn{4}{l}{\textit{Gestione Errori}} \\
+    \hline
+    RF94-OB & Il sistema deve notificare il Redattore in caso di formato file non valido durante la sostituzione dell'immagine di copertina. & Implementato & Obbligatorio \\
+    \hline
+    RF95-OB & Il sistema deve notificare l'utente in caso di indirizzo e-mail non valido durante l'inoltro del documento. & Implementato & Obbligatorio \\
+    \hline
+    RF96-OB & Il sistema deve notificare il Redattore quando la ricerca nello storico delle generazioni non produce risultati. & Implementato & Obbligatorio \\
+    \hline
+    RF97-OB & Il sistema deve notificare il Redattore quando il commento testuale supera il limite di caratteri consentito. & Implementato & Obbligatorio \\
+    \hline
+    RF98-OB & Il sistema deve notificare l'Analista dati quando i dati analitici non sono disponibili per i criteri selezionati. & Implementato & Obbligatorio \\
+    \hline
+    RF99-OB & Il sistema deve rilevare i formati file non supportati durante l'upload e notificare il Consulente del lavoro. & Implementato & Obbligatorio \\
+    \hline
+    RF100-OB & Il sistema deve notificare l'utente quando nessun documento corrisponde ai criteri di visualizzazione dello storico. & Implementato & Obbligatorio \\
+    \hline
+    RF101-OB & Il sistema deve gestire il caso in cui il nome e cognome del dipendente non siano disponibili, visualizzando un opportuno indicatore. & Implementato & Obbligatorio \\
+    \hline
+    RF102-OB & Il sistema deve gestire il caso in cui l'azienda non sia disponibile, visualizzando un opportuno indicatore. & Implementato & Obbligatorio \\
+    \hline
+    RF103-OB & Il sistema deve gestire il caso in cui la data del documento non sia disponibile, visualizzando un opportuno indicatore. & Implementato & Obbligatorio \\
+    \hline
+    RF104-OB & Il sistema deve gestire il caso in cui la tipologia del documento non sia disponibile, visualizzando un opportuno indicatore. & Implementato & Obbligatorio \\
+    \hline
+    RF105-OB & Il sistema deve gestire il caso in cui la breve descrizione non sia disponibile, visualizzando un opportuno indicatore. & Implementato & Obbligatorio \\
+    \hline
+    RF106-OB & Il sistema deve gestire il caso in cui il livello di confidenza non sia disponibile, visualizzando un opportuno indicatore. & Implementato & Obbligatorio \\
+    \hline
+    RF107-OP & Il sistema deve gestire il caso in cui l'e-mail del destinatario non sia disponibile, visualizzando un opportuno indicatore. & Non implementato & Opzionale \\
+    \hline
+    RF108-OP & Il sistema deve notificare il Consulente del lavoro in caso di codice fiscale non valido durante la modifica. & Implementato & Opzionale \\
+    \hline
+    RF109-OB & Il sistema deve notificare il Redattore quando il testo del prompt è mancante o insufficiente per avviare la generazione. & Implementato & Obbligatorio \\
+    \hline
+    \caption{Tabella di tracciamento dei requisiti funzionali}
+\end{longtable}
+}
 
 \end{sloppypar}
 
