@@ -712,7 +712,7 @@ Espone lo stato corrente dei due moduli applicativi, utilizzato dalla SPA per po
     \textbf{Endpoint} & \textbf{Metodo} & \textbf{Descrizione} \\
     \hline
     \endhead
-    \path|/api/v1/state| & GET & Restituisce in un'unica risposta le metriche e lo storico delle comunicazioni dell'AI Assistant Generativo, insieme alle metriche e ai sotto-documenti dell'AI Co-Pilot. \\
+    \path|/api/v1/state| & GET & Restituisce in un'unica risposta le metriche e lo storico delle comunicazioni dell'AI Assistant Generativo, insieme alle metriche e ai sotto-documenti dell'AI Co-Pilot. Accetta quattro parametri di query opzionali (\texttt{tone}, \texttt{style}, \texttt{dateFrom}, \texttt{dateTo}) che filtrano solo la sezione Metriche dell'AI Assistant, senza incidere sui numeri del Co-Pilot. \\
     \hline
     \caption{State API}
 \end{longtable}
@@ -2629,12 +2629,13 @@ Attributi
     \item \texttt{assistant: AssistantService}, \texttt{store: MvpStateStore}: dipendenze ricevute dal costruttore, non da \texttt{inject()}.
     \item \texttt{phase}, \texttt{isGenerating}, \texttt{latestDraft}, \texttt{previewDraft}, \texttt{status}: segnali sullo stato della generazione in corso e della bozza visualizzata.
     \item \texttt{pendingScrollTarget: WritableSignal<string | null>}: destinazione di uno scorrimento richiesto dal ViewModel, non ancora consumato dalla View (si veda l'inizio della Sezione 6.2); scritto da \texttt{selectDraft()}, \texttt{discard()}, \texttt{useConfiguration()} e da \texttt{handleProgress()}, azzerato dalla View dopo averlo eseguito.
-    \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, così il template non legge mai lo Store direttamente.
-    \item \texttt{metrics}: pass-through su \texttt{store.assistantMetrics()}, esclusa la voce \texttt{assistant.drafts} (le bozze da valutare sono una priorità e vivono nella Overview; qui sono già la parte "in bozza" di \texttt{draftComposition}, sotto).
+    \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: combinano \texttt{store.error()}/\texttt{store.loading()} con \texttt{store.filteredAssistantError()}/\texttt{store.filteredAssistantLoading()}, così il banner e lo spinner principali riflettono anche un fallimento o un caricamento della sola sezione Metriche filtrata, non solo dello stato condiviso.
+    \item \texttt{metricsFilters: WritableSignal<AssistantMetricsFilters>}, \texttt{hasActiveMetricsFilters: Signal<boolean>}: filtri della sezione Metriche (tono, stile, intervallo di date — RF38-OB..RF41-OB), separati da \texttt{activeFilters} sotto: filtrare le metriche non deve filtrare anche lo storico, e viceversa.
+    \item \texttt{metrics}: pass-through su \texttt{store.filteredAssistantState()?.metrics}, esclusa la voce \texttt{assistant.drafts} (le bozze da valutare sono una priorità e vivono nella Overview; qui sono già la parte "in bozza" di \texttt{draftComposition}, sotto). Legge dalla fetta filtrata dello Store, non da \texttt{store.assistantMetrics()}: quest'ultima resterebbe sempre sul totale non filtrato.
     \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: per ciascuna delle quattro metriche mostrate (\texttt{assistant.total}, \texttt{assistant.prompt\_configurations}, \texttt{assistant.rated}, \texttt{assistant.rating\_average} — un andamento, un conteggio, una quota e una media a stelle, tutte a due celle), la forma della scheda e il suo ingombro nella griglia, letta da \texttt{MetricsPanelComponent} (Sezione 6.6). Le metriche puramente operative mostrate in precedenza (generazioni/copertine fallite o bloccate) sono state rimosse perché non richieste da alcun caso d'uso del documento di Analisi dei Requisiti.
-    \item \texttt{recentFeedback: Signal<Communication[]>}: pass-through su \texttt{store.recentFeedback()} (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale — non solo la media, che resta in \texttt{metricsPresentation} sopra.
+    \item \texttt{recentFeedback: Signal<Communication[]>}: pass-through su \texttt{store.filteredAssistantState()?.recentFeedback} (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale, ricalcolati secondo \texttt{metricsFilters} come il resto della sezione — non solo la media, che resta in \texttt{metricsPresentation} sopra.
     \item \texttt{metricsReportExportUrl: string}: URL statico del download del report riepilogativo delle metriche (\texttt{/api/v1/assistant/metrics/export}, RF34-OB), letto direttamente dal template come \texttt{href} del link di esportazione.
-    \item \texttt{draftComposition: Signal<CompositionSlice[]>}: ripartizione delle comunicazioni fra "In bozza" e "Decise" (il totale meno le bozze), derivata dalle stesse metriche di tenant.
+    \item \texttt{draftComposition: Signal<CompositionSlice[]>}: ripartizione delle comunicazioni fra "In bozza" e "Decise" (il totale meno le bozze), derivata dalla stessa fetta filtrata di \texttt{metrics} sopra.
     \item \texttt{activeFilters}, \texttt{filteredCommunications}, \texttt{historyError}: segnali sullo storico, letti dal template; scritti solo internamente da \texttt{reload()}.
 \end{itemize}
 
@@ -2648,8 +2649,10 @@ Metodi
     \item \texttt{toggleFavorite(communication: Communication): void}
     \item \texttt{saveConfiguration(payload: SavePromptConfigurationRequest): void}, \texttt{useConfiguration(configuration: PromptConfiguration): void}, \texttt{deleteConfiguration(configurationId: number): void}
     \item \texttt{setActiveFilters(filters: CommunicationFilters): void}
+    \item \texttt{setMetricsFilters(filters: AssistantMetricsFilters): void}
+    \item \texttt{refreshFilteredMetrics(): void}: rilegge la sezione Metriche con il filtro attivo corrente, tramite \texttt{store.reloadFilteredAssistantMetrics()} (RF38-OB).
     \item \texttt{reload(): void}: rilegge lo storico con i filtri correnti; stessa forma delle altre azioni, chiamata dall'\texttt{effect()} della View a ogni cambio di filtro o di stato condiviso. Annulla la propria sottoscrizione precedente prima di avviarne una nuova (fix di una regressione: senza questa cancellazione, una risposta di ricerca arrivata in ritardo poteva sovrascrivere un risultato più recente).
-    \item \texttt{reloadState(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()}, invocato dal pulsante "Riprova" del banner d'errore principale. Distinto da \texttt{reload()}, che rilegge solo lo storico comunicazioni: confonderli lascerebbe lo stato globale in errore pur avendo ricaricato l'elenco.
+    \item \texttt{reloadState(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()} e la sezione Metriche filtrata tramite \texttt{refreshFilteredMetrics()}, invocato dal pulsante "Riprova" del banner d'errore principale. Distinto da \texttt{reload()}, che rilegge solo lo storico comunicazioni: confonderli lascerebbe lo stato globale in errore pur avendo ricaricato l'elenco.
     \item \texttt{destroy(): void}: chiamato dalla View alla distruzione del componente (tramite \texttt{DestroyRef}): annulla solo la sottoscrizione di lettura in corso, non le azioni di scrittura (\texttt{generate()}, \texttt{discard()}...), che devono completare lato server anche se l'utente ha già navigato altrove.
 \end{itemize}
 
@@ -2736,12 +2739,14 @@ Attributi
     \item \texttt{api: AlittlebyteMVPAPIService}: client HTTP generato dal contratto OpenAPI, iniettato tramite \texttt{inject()} (unico punto della classe accoppiato ad Angular, essendo un vero \texttt{@Injectable} e non un ViewModel puro).
     \item \texttt{state: Signal<MvpState | null>}, \texttt{loading: Signal<boolean>}, \texttt{error: Signal<string | null>}: segnali di sola lettura.
     \item \texttt{documents}, \texttt{history}, \texttt{recentFeedback}, \texttt{promptConfigurations}, \texttt{assistantMetrics}, \texttt{copilotMetrics}: segnali derivati (\texttt{computed}) sulle diverse viste dello stato; \texttt{recentFeedback} è il più recente (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale.
+    \item \texttt{filteredAssistantState: Signal<MvpState["assistant"] | null>}, \texttt{filteredAssistantLoading: Signal<boolean>}, \texttt{filteredAssistantError: Signal<string | null>}: fetta di stato separata da \texttt{state} per la sezione Metriche filtrata dell'AI Assistant (RF38-OB..RF41-OB, tono/stile/intervallo di date): applicare un filtro qui non cambia i numeri non filtrati che Overview e Co-Pilot leggono da \texttt{state}.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{loadOnce(): void}: carica lo stato al primo montaggio della shell applicativa; a differenza di prima non usa più un flag "già richiesto" a senso unico, ma deriva la guardia dallo stato reale dei segnali (\texttt{loading} o \texttt{state} già valorizzato), così un primo tentativo fallito può essere ritentato da una chiamata successiva invece di restare bloccato per sempre.
     \item \texttt{reload(): void}: ricarica lo stato dal backend, con un tentativo di retry per errori temporanei. Ignora una chiamata mentre una richiesta è già in volo, la stessa guardia già applicata da \texttt{loadOnce()}: senza di essa un doppio click su "Riprova" avvierebbe due \texttt{GET /state} in parallelo, l'ultima risposta vincerebbe comunque ma la richiesta in più sarebbe sprecata.
+    \item \texttt{reloadFilteredAssistantMetrics(filters: AssistantMetricsFilters): void}: ricarica solo la fetta Assistant della sezione Metriche, filtrata; stessa guardia anti-doppia-richiesta di \texttt{reload()}, ma su uno stato separato. Chiamato da un \texttt{effect()} della View a ogni cambio filtro: l'intero corpo gira dentro \texttt{untracked()}, perché senza isolare la lettura della propria guardia da quell'effect, l'effect la riscriverebbe subito dopo averla letta, innescando un ciclo di richieste che non si ferma mai.
     \item \texttt{setState(state: MvpState): void}: rimpiazza lo stato con quello autorevole restituito da una mutazione.
     \item \texttt{upsertDocument(document: SubDocument): void}: inserisce o aggiorna in testa un sotto-documento ricevuto dallo stream SSE, senza ricaricare l'intero stato.
     \item \texttt{metric(key: string): number}: legge il valore di una metrica per chiave stabile, evitando di ricalcolarla su elenchi parzialmente caricati; \texttt{0} se la chiave non esiste o lo stato non è ancora caricato.
@@ -3263,7 +3268,7 @@ Metodi
 % ── 6.7 ──────────────────────────────────────────────────────────────────────
 \subsection{Macro componenti UI (pagine)}
 
-Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha (i \texttt{FormGroup} reattivi dei filtri e l'\texttt{effect()} che li collega al ViewModel), oltre a poche azioni locali prive di logica di dominio (\texttt{resetFilters()}, e su \texttt{CopilotPage} anche lo scorrimento verso il dettaglio in \texttt{selectDocument()}); nessuna chiamata HTTP e nessuna regola di business vive più nella pagina.
+Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha (i \texttt{FormGroup} reattivi dei filtri e l'\texttt{effect()} che li collega al ViewModel), oltre a poche azioni locali prive di logica di dominio (\texttt{resetFilters()}, su \texttt{AssistantPage} anche \texttt{resetMetricsFilters()} per il filtro separato della sezione Metriche, e su \texttt{CopilotPage} anche lo scorrimento verso il dettaglio in \texttt{selectDocument()}); nessuna chiamata HTTP e nessuna regola di business vive più nella pagina.
 
 \subsubsection{AssistantPage}
 
@@ -3271,7 +3276,7 @@ Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent
 
 Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), this.store)}: non riceve più una funzione di scorrimento, perché \texttt{AssistantPageViewModel} non la chiede più al costruttore (Sezione 6.2).
 
-Collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Un secondo \texttt{effect()}, nuovo rispetto alla versione precedente, legge \texttt{vm.pendingScrollTarget()} e, quando non è nullo, chiama \texttt{scrollToElement} (l'unica operazione DOM richiesta dal ViewModel) poi azzera il segnale — è la View, non più una funzione passata al costruttore, a eseguire lo scorrimento richiesto. Registra infine \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
+Collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Un secondo \texttt{effect()} legge \texttt{vm.metricsFilters()} e chiama \texttt{vm.refreshFilteredMetrics()} per la sezione Metriche (RF38-OB..RF41-OB), filtro separato da quello dello storico e collegato a un \texttt{FormGroup} proprio (\texttt{metricsFilterForm}). Un terzo \texttt{effect()} legge \texttt{vm.pendingScrollTarget()} e, quando non è nullo, chiama \texttt{scrollToElement} (l'unica operazione DOM richiesta dal ViewModel) poi azzera il segnale — è la View, non più una funzione passata al costruttore, a eseguire lo scorrimento richiesto. Registra infine \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
 
 \begin{figure}[H]
     \centering
@@ -3284,11 +3289,13 @@ Attributi
     \item \texttt{store: MvpStateStore}: dipendenza Angular procurata con \texttt{inject()}, campo \texttt{protected}: passata al costruttore del ViewModel e letta come segnale sorgente nell'\texttt{effect()} di ricerca; il template non la referenzia mai (Sezione 6.2).
     \item \texttt{vm: AssistantPageViewModel}: istanziato nel costruttore, punto a cui si lega il resto del template.
     \item \texttt{filterForm: FormGroup}: form reattivo dei filtri dello storico, resta sulla View perché \texttt{ReactiveFormsModule} richiede un injection context.
+    \item \texttt{metricsFilterForm: FormGroup}: form reattivo dei filtri della sezione Metriche (tono, stile, intervallo di date), separato da \texttt{filterForm}: non condivide stato con lo storico.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{resetFilters(): void}: unico metodo proprio della View, oltre alla logica di collegamento nel costruttore.
+    \item \texttt{resetFilters(): void}: azzera il form dei filtri dello storico.
+    \item \texttt{resetMetricsFilters(): void}: azzera il form dei filtri della sezione Metriche.
 \end{itemize}
 
 \subsubsection{CopilotPage}
@@ -4063,18 +4070,17 @@ Colonne
 
 \begin{sloppypar}
 
-Questo capitolo riporta lo stato di implementazione di ciascun requisito funzionale identificato nell'Analisi dei Requisiti, verificato direttamente sul codice sorgente del sistema alla data di redazione di questo documento. I requisiti funzionali si dividono in obbligatori e opzionali a seconda della loro importanza per il progetto: ne sono stati identificati 109, di cui 94 obbligatori e 15 opzionali, derivati dall'analisi dei casi d'uso (Analisi dei Requisiti, Sezione 4.1).
+Questo capitolo riporta lo stato di implementazione di ciascun requisito funzionale identificato nell'Analisi dei Requisiti, verificato direttamente sul codice sorgente del sistema alla data di redazione di questo documento. I requisiti funzionali si dividono in obbligatori e opzionali a seconda della loro importanza per il progetto: ne sono stati identificati 109, di cui 94 obbligatori e 15 opzionali, derivati dall'analisi dei casi d'uso (Analisi dei Requisiti, Sezione 4.1). Tutti i requisiti obbligatori risultano soddisfatti.
 
 \subsection{Completamento requisiti}
 
 \begin{itemize}
-    \item \textbf{Requisiti Obbligatori}: 90/94 requisiti funzionali soddisfatti.
+    \item \textbf{Requisiti Obbligatori}: 94/94 requisiti funzionali soddisfatti.
     \item \textbf{Requisiti Opzionali}: 11/15 requisiti funzionali soddisfatti.
 \end{itemize}
 
-Gli otto requisiti non ancora soddisfatti alla data di redazione:
+I quattro requisiti opzionali non ancora soddisfatti alla data di redazione:
 \begin{itemize}
-    \item \textbf{RF38-OB, RF39-OB, RF40-OB, RF41-OB}: la dashboard delle metriche dell'AI Assistant (\texttt{AssistantPageViewModel::metrics}) non è filtrabile per data, tono o stile: è calcolata direttamente da \texttt{store.assistantMetrics()}, indipendente dai filtri (\texttt{activeFilters}) che esistono ma si applicano solo allo storico delle generazioni (RF22-26), non alle metriche.
     \item \textbf{RF4-OP}: nessun parametro di lunghezza della bozza né nella richiesta di generazione (\texttt{GenerateCommunicationCommand}) né nel form di generazione.
     \item \textbf{RF16-OP}: nessun metodo di ripristino del contenuto generato dall'AI dopo una modifica manuale; \texttt{CommunicationDraftService::update()} (Sezione 5.2) sovrascrive titolo e corpo senza conservare una copia del contenuto originale.
     \item \textbf{RF20-OP}: nessuna funzionalità di inoltro via e-mail per una comunicazione generata; l'invio precompilato via e-mail esiste solo sul modulo Co-Pilot (\texttt{SendMessageService}, Sezione 5.1).
@@ -4176,13 +4182,13 @@ Gli otto requisiti non ancora soddisfatti alla data di redazione:
     \hline
     RF37-OB & Il sistema deve permettere all'Analista dati di consultare i feedback testuali ricevuti dagli utenti. & Implementato & Obbligatorio \\
     \hline
-    RF38-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica. & Non implementato & Obbligatorio \\
+    RF38-OB & Il sistema deve permettere all'Analista dati di applicare filtri dinamici ai dati visualizzati nella dashboard analitica. & Implementato & Obbligatorio \\
     \hline
-    RF39-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per intervallo di date. & Non implementato & Obbligatorio \\
+    RF39-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per intervallo di date. & Implementato & Obbligatorio \\
     \hline
-    RF40-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per tono comunicativo. & Non implementato & Obbligatorio \\
+    RF40-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per tono comunicativo. & Implementato & Obbligatorio \\
     \hline
-    RF41-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per stile editoriale. & Non implementato & Obbligatorio \\
+    RF41-OB & Il sistema deve permettere all'Analista dati di filtrare i dati della dashboard per stile editoriale. & Implementato & Obbligatorio \\
     \hline
     \multicolumn{4}{l}{\textit{AI Co-Pilot per Consulenti del Lavoro}} \\
     \hline
