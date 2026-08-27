@@ -628,6 +628,48 @@ In basso a destra:
 \end{tabularx}
 \end{center}
 
+\subsubsection{Qualità della generazione}
+
+La sezione \ui{Qualità della generazione} riepiloga l'andamento dell'Assistant su un intervallo scelto dal redattore. In alto è disponibile \ui{Esporta report}, che genera un PDF con le stesse metriche e i feedback recenti visibili a schermo.
+
+\paragraph{Filtri}
+
+\begin{itemize}
+    \item \ui{Tono} e \ui{Stile}: gli stessi elenchi del form di generazione, più l'opzione ``tutti'';
+    \item \ui{Da} e \ui{A}: intervallo di date sulla generazione;
+    \item \ui{Azzera filtri} ripulisce tutti i campi e riporta le metriche sull'intero storico.
+\end{itemize}
+
+Questo filtro è indipendente da quello dello \ui{Storico contenuti}: agisce solo sulle card di questa sezione.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-metriche.png}
+\caption{Filtri e mosaico delle metriche dell'AI Assistant}
+\label{fig:assistant-metriche}
+\end{figure}
+
+\paragraph{Card metriche}
+
+\begin{itemize}
+    \item \ui{Contenuti generati}: totale delle generazioni nel periodo filtrato, con andamento giornaliero;
+    \item \ui{Configurazioni di prompt salvate}: numero di preset presenti;
+    \item \ui{Bozze valutate}: percentuale di generazioni con un voto, su quante ancora senza;
+    \item \ui{Media stelle}: media aritmetica dei punteggi 1--5;
+    \item \ui{Esito delle bozze}: barra che ripartisce le generazioni fra \ui{In bozza} e \ui{Decise} (approvate o scartate).
+\end{itemize}
+
+\paragraph{Feedback recenti}
+
+Sotto il mosaico compare l'elenco delle valutazioni più recenti: titolo della comunicazione, voto in stelle, data e, se presente, il commento lasciato in fase di valutazione. Senza valutazioni compare \textit{``Nessun feedback ricevuto finora.''}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{immagini/assistant-feedback-recenti.png}
+\caption{Elenco dei feedback recenti}
+\label{fig:assistant-feedback-recenti}
+\end{figure}
+
 \subsection{AI Co-Pilot per i Consulenti del Lavoro}
 
 Il modulo analizza un PDF di qualsiasi tipologia, riconosce almeno un destinatario, eventuale \glslink{split-automatico}{split} in sotto-documenti e estrae i campi principali. Dopo l'analisi l'operatore interviene in ottica \glslink{human-in-the-loop}{human-in-the-loop}: corregge, valida e prepara il messaggio di invio. L'invio vero e proprio resta fuori dalla piattaforma.
@@ -738,7 +780,7 @@ Selezionando \ui{Consulta} si apre la sezione di verifica, con titolo del docume
 Il dettaglio è affiancato:
 
 \begin{itemize}
-    \item \textbf{a sinistra, \ui{Anteprima documento}:} il PDF del sotto-documento in un riquadro, con collegamento \ui{Apri in una nuova scheda}. Se lo storage non è raggiungibile compare \textit{``Storage documento non raggiungibile.''}; se il file manca, \textit{``Anteprima non disponibile.''}; in attesa, \textit{``Caricamento anteprima in corso.''}
+    \item \textbf{a sinistra, \ui{Anteprima documento}:} il PDF del sotto-documento in un riquadro, con collegamento \ui{Apri in una nuova scheda}. Se lo storage non è raggiungibile compare \textit{``Storage documento non raggiungibile.''}; se il file manca, \textit{``Anteprima non disponibile.''}; in attesa, \textit{``Caricamento anteprima in corso.''} Indipendentemente da questo stato, il pulsante \ui{Documento originale} apre in una nuova scheda il PDF originale caricato (prima dello split), utile per confrontare il sotto-documento con il file di partenza (RF56-OB).
     \item \textbf{a destra, \ui{Dati estratti dall'OCR}:} i campi strutturati, con una legenda \ui{Modificabile} / \ui{Sola lettura}.
 \end{itemize}
 
@@ -863,15 +905,14 @@ Il recapito al dipendente avviene fuori da NEXUM (posta elettronica dello studio
 La sezione \ui{Qualità e performance OCR} riporta i volumi del tenant:
 
 \begin{itemize}
-    \item \ui{Documenti analizzati}: file originali caricati;
-    \item \ui{Sotto-documenti rilevati};
-    \item \ui{Campi con confidenza}: estrazioni al di sopra della soglia;
-    \item \ui{Da verificare};
-    \item \ui{Documenti pronti};
-    \item \ui{In quarantena}.
+    \item \ui{Documenti analizzati}: file originali caricati, con andamento giornaliero;
+    \item \ui{Tempo medio di elaborazione}: durata media della pipeline OCR, dalla ricezione al risultato;
+    \item \ui{Classificazioni corrette senza intervento}: percentuale di sotto-documenti validati automaticamente, sul totale di quelli arrivati a una validazione (UC-56.2). Chi è ancora da revisionare o in quarantena non entra nel conto;
+    \item \ui{Sotto la soglia di confidenza}: percentuale di sotto-documenti da revisionare perché sotto la soglia, sul totale analizzato;
+    \item \ui{Destinatari riconosciuti in automatico}: percentuale di destinatari confermati che l'AI aveva già riconosciuto correttamente, mai corretti a mano (UC-56.4).
 \end{itemize}
 
-Non esiste una vista analytics con filtri temporali, grafici di accuratezza o tempo medio di analisi: quelle elaborazioni restano fuori perimetro. Le stesse metriche, in forma compatta, compaiono anche in Overview.
+Non esiste una vista analytics con filtri temporali o grafici di accuratezza nel dettaglio: quelle elaborazioni restano fuori perimetro. Le stesse metriche, in forma compatta, compaiono anche in Overview.
 
 \begin{figure}[H]
 \centering
@@ -882,16 +923,7 @@ Non esiste una vista analytics con filtri temporali, grafici di accuratezza o te
 
 \section{Metriche dell'AI Assistant}
 
-Nell'Overview e, in forma equivalente, nello stato caricato dall'Assistant, il redattore vede:
-
-\begin{itemize}
-    \item \ui{Contenuti generati}: totale delle generazioni;
-    \item \ui{Bozze generate}: comunicazioni ancora in bozza;
-    \item \ui{Valutazioni ricevute}: quante generazioni hanno un \glslink{rating}{rating};
-    \item \ui{Media stelle}: media aritmetica dei punteggi, oppure un trattino se non ci sono valutazioni.
-\end{itemize}
-
-Non sono presenti grafici per tono e stile, né un filtro temporale sulle metriche. Il segnale di qualità percepita è la valutazione 1--5, unica per generazione.
+Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{AI Assistant} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che porta alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di prompt salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
 
 \section{Problemi frequenti}
 
@@ -971,6 +1003,10 @@ Le immagini vanno salvate in \texttt{PB/Manuale Utente/immagini/} con i nomi ind
 \hline
 \texttt{assistant-storico.png} & Card dello storico, una selezionata. \\
 \hline
+\texttt{assistant-metriche.png} & Filtri (tono/stile/data) e mosaico \ui{Qualità della generazione}. \\
+\hline
+\texttt{assistant-feedback-recenti.png} & Esito delle bozze e lista feedback recenti. \\
+\hline
 \texttt{copilot-caricamento.png} & Upload con metadati. \\
 \hline
 \texttt{copilot-avanzamento.png} & Barra di elaborazione documento. \\
@@ -979,13 +1015,13 @@ Le immagini vanno salvate in \texttt{PB/Manuale Utente/immagini/} con i nomi ind
 \hline
 \texttt{copilot-filtri.png} & Filtri documenti. \\
 \hline
-\texttt{copilot-dettaglio.png} & Anteprima PDF e dati estratti affiancati. \\
+\texttt{copilot-dettaglio.png} & Anteprima PDF e dati estratti affiancati, con pulsante \ui{Documento originale}. \\
 \hline
 \texttt{copilot-revisione.png} & Campi in modifica, possibilmente con errore di validazione. \\
 \hline
 \texttt{copilot-messaggio.png} & Messaggio di invio precompilato. \\
 \hline
-\texttt{copilot-metriche.png} & Card metriche OCR. \\
+\texttt{copilot-metriche.png} & Mosaico \ui{Qualità e performance OCR} (classificazioni, confidenza, destinatari). \\
 \hline
 \end{longtable}
 }
