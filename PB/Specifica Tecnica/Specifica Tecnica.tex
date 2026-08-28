@@ -1009,14 +1009,14 @@ Il modulo Documents è la componente del sistema dedicata alla gestione e all'el
 % la stessa giustificazione.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/diagrammaClassi_Documents.png}
+    \rotatebox{90}{\includegraphics[width=\textheight,height=\textwidth,keepaspectratio]{ImmaginiSpecificaTecnica/Esagonale/diagrammaClassi_Documents.png}}
     \caption{Diagramma delle classi --- Modulo Documents}
     \label{fig:documents-class-diagram}
 \end{figure}
 
 \subsubsection{Diagrammi delle classi parziali del modulo Documents}
 
-I diagrammi seguenti mostrano porzioni del diagramma delle classi complessivo, raggruppate per flusso applicativo, utili a leggere le dipendenze reali senza dover tenere sott'occhio l'intero grafo.
+I diagrammi seguenti mostrano porzioni del diagramma delle classsi complessivo, raggruppate per flusso applicativo, utili a leggere le dipendenze reali senza dover tenere sott'occhio l'intero grafo.
 
 Il primo diagramma mostra \texttt{DocumentController}, l'adapter primario che riceve tutte le richieste HTTP del modulo e le smista verso i cinque casi d'uso corrispondenti.
 
@@ -1118,7 +1118,7 @@ Metodi
 
 \paragraph{DocumentPreviewController, SendMessageController}
 
-Due Controller separati da \texttt{DocumentController}, sullo stesso principio di traduzione pura verso una porta primaria: \texttt{DocumentPreviewController} espone l'anteprima del file del sotto-documento e, con \texttt{originalPreview()}, anche quella del documento originale completo non splittato, come alternativa indipendente quando la prima non è disponibile; \texttt{SendMessageController} copre l'intero ciclo del messaggio di invio (anteprima PDF composta, esportazione, correzione delle sovrascritture manuali). Entrambi traducono un fallimento applicativo in una risposta HTTP appropriata invece di lasciarlo propagare: \texttt{DocumentPreviewController} converte \texttt{DocumentPreviewUnavailableException} in un 404 e un \texttt{RuntimeException} generico (storage non raggiungibile) in un 503, per entrambi i suoi metodi.
+Due Controller separati da \texttt{DocumentController}, sullo stesso principio di traduzione pura verso una porta primaria: \texttt{DocumentPreviewController} espone l'anteprima del file del sotto-documento e, con \texttt{originalPreview()}, anche quella del documento originale completo non splittato, come alternativa indipendente quando la prima non è disponibile; \texttt{SendMessageController} copre l'intero ciclo del messaggio di invio (anteprima PDF composta, esportazione, correzione delle sovrascritture manuali). \texttt{DocumentPreviewController} traduce un fallimento applicativo in una risposta HTTP appropriata per entrambi i suoi metodi, invece di lasciarlo propagare: converte \texttt{DocumentPreviewUnavailableException} in un 404 e un \texttt{RuntimeException} generico (storage non raggiungibile) in un 503. \texttt{SendMessageController} fa l'opposto di proposito: non cattura più \texttt{SendMessageNotConfirmedException}/\texttt{SendMessageAttachmentUnavailableException}, lasciandole risalire al gestore centralizzato in \texttt{bootstrap/app.php} come ogni altro errore di dominio, così la risposta porta sempre \texttt{requestId}/\texttt{correlationId}, che una risposta costruita a mano qui non includerebbe.
 
 \begin{figure}[H]
     \centering
@@ -1178,7 +1178,7 @@ Metodi
 
 Entità di dominio che rappresenta il documento caricato dall'utente e il suo avanzamento nella pipeline di elaborazione. Non è una semplice proiezione dei dati salvati: governa da sé le proprie transizioni di stato, invece di lasciare a ogni caso d'uso il compito di scriverle correttamente a mano.
 
-Prima della sua introduzione, tre punti diversi del codice (l'avvio del workflow, il riconoscimento ottico, l'elaborazione AI) impostavano lo stato di fallimento con combinazioni di campi diverse e incoerenti fra loro; oggi \texttt{startProcessing()} e \texttt{fail()} consolidano quella logica in un unico posto, distinguendo sempre il messaggio pensato per l'operatore dal dettaglio tecnico usato per il troubleshooting. Non governa invece i campi restituiti dal riconoscimento ottico (testo, pagine, confidenza): non sono una transizione di stato, solo dati letti dal gateway OCR e scritti direttamente dal caso d'uso che li riceve.
+\texttt{startProcessing()} e \texttt{fail()} consolidano in un unico posto la logica di transizione allo stato di fallimento, distinguendo sempre il messaggio pensato per l'operatore dal dettaglio tecnico usato per il troubleshooting. Non governa invece i campi restituiti dal riconoscimento ottico (testo, pagine, confidenza): non sono una transizione di stato, solo dati letti dal gateway OCR e scritti direttamente dal caso d'uso che li riceve.
 
 \begin{figure}[H]
     \centering
@@ -1234,7 +1234,7 @@ Metodi
 
 Implementa \texttt{UploadDocumentUseCase} ed è il punto di ingresso della pipeline documentale: riceve il file già validato dall'adapter HTTP, lo salva su storage e crea il record del documento originale con stato \textit{Pending}. Deliberatamente non avvia la pipeline di elaborazione: quella è una decisione distinta, delegata a \texttt{StartDocumentWorkflowUseCase} e invocata in sequenza dallo stesso Controller.
 
-L'audit non passa più da un \texttt{AuditLogger} chiamato direttamente: il caso d'uso dispatcha l'evento di dominio \texttt{DocumentUploadAccepted} (id documento, attore, nome file, metadati manuali), registrato da un listener dedicato: stesso principio già in uso per il resto degli eventi di dominio.
+L'audit passa dal dispatch dell'evento di dominio \texttt{DocumentUploadAccepted} (id documento, attore, nome file, metadati manuali), registrato da un listener dedicato: stesso principio in uso per il resto degli eventi di dominio.
 
 \begin{figure}[H]
     \centering
@@ -1254,9 +1254,9 @@ Metodi
 
 \paragraph{StartDocumentWorkflowService}
 
-Implementa \texttt{StartDocumentWorkflowUseCase}: avvia l'esecuzione Step Functions della pipeline per un documento già persistito, subito dopo \texttt{UploadDocumentService} nello stesso ciclo di richiesta. È idempotente rispetto a un documento già in elaborazione, ed esegue un controllo esplicito a runtime: quando Textract reale è abilitato, verifica che i documenti risiedano effettivamente su S3 reale e non sul disco LocalStack, fallendo subito con un messaggio azionabile invece di lasciare che Textract fallisca più a valle con un errore criptico. In caso di errore nell'avvio, marca il documento come fallito tramite \texttt{OriginalDocument::fail()} prima di rilanciare l'eccezione.
+Implementa \texttt{StartDocumentWorkflowUseCase}: avvia l'esecuzione Step Functions della pipeline per un documento già persistito, subito dopo \texttt{UploadDocumentService} nello stesso ciclo di richiesta. È idempotente rispetto a un documento già in elaborazione: il controllo "è già in corso?" e la scrittura che lo rende vero (oltre alla chiamata a Step Functions) girano dentro un'unica transazione, con lettura tramite \texttt{DocumentRepository::findOriginalDocumentForUpdate()} (lock pessimistico sulla riga) — senza, due richieste quasi simultanee potrebbero superare entrambe il controllo e avviare due esecuzioni per lo stesso documento, una delle quali resterebbe orfana. Gli eventi di dominio (avvio riuscito o fallito) sono dispatchati solo dopo che la transazione ha commesso, altrimenti un rollback sul ramo di fallimento annullerebbe anche il salvataggio dello stato "fallito" appena scritto. Esegue anche un controllo esplicito a runtime: quando Textract reale è abilitato, verifica che i documenti risiedano effettivamente su S3 reale e non sul disco LocalStack, fallendo subito con un messaggio azionabile invece di lasciare che Textract fallisca più a valle con un errore criptico. In caso di errore nell'avvio, marca il documento come fallito tramite \texttt{OriginalDocument::fail()} prima di rilanciare l'eccezione.
 
-Non legge più configurazione tramite \texttt{config()} al proprio interno: ARN della state machine, URL della coda, flag Textract, disco e bucket di storage sono risolti una sola volta in \texttt{AppServiceProvider} e iniettati come scalari nel costruttore: lo stesso trattamento già riservato a soglia di confidenza e prefisso storage altrove nel dominio. Poiché anche \texttt{WorkflowContext} è una classe pura senza dipendenze da Illuminate, \texttt{start()} è interamente istanziabile ed eseguibile in un test Pest puro, senza avviare Laravel.
+Non legge configurazione tramite \texttt{config()} al proprio interno: ARN della state machine, URL della coda, flag Textract, disco e bucket di storage sono risolti una sola volta in \texttt{AppServiceProvider} e iniettati come scalari nel costruttore, lo stesso trattamento riservato a soglia di confidenza e prefisso storage altrove nel dominio. Poiché anche \texttt{WorkflowContext} è una classe pura senza dipendenze da Illuminate, \texttt{start()} è interamente istanziabile ed eseguibile in un test Pest puro, senza avviare Laravel.
 
 \begin{figure}[H]
     \centering
@@ -1266,8 +1266,8 @@ Non legge più configurazione tramite \texttt{config()} al proprio interno: ARN 
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{documents: DocumentRepository}, \texttt{workflowEngine: WorkflowEnginePort}, \texttt{events: DocumentEventDispatcherPort}, \texttt{context: WorkflowContext}, \texttt{clock: ClockInterface}, \texttt{ids: UniqueIdGeneratorPort}.
-    \item \texttt{stateMachineArn: string}, \texttt{taskQueueUrl: string}, \texttt{textractEnabled: bool}, \texttt{storageDisk: string}, \texttt{documentBucketFallback: string}, \texttt{documentKeyPrefix: string}: scalari risolti da configurazione in \texttt{AppServiceProvider}, non più letti internamente.
+    \item \texttt{documents: DocumentRepository}, \texttt{workflowEngine: WorkflowEnginePort}, \texttt{events: DocumentEventDispatcherPort}, \texttt{context: WorkflowContext}, \texttt{clock: ClockInterface}, \texttt{ids: UniqueIdGeneratorPort}, \texttt{transactions: TransactionManagerPort}.
+    \item \texttt{stateMachineArn: string}, \texttt{taskQueueUrl: string}, \texttt{textractEnabled: bool}, \texttt{storageDisk: string}, \texttt{documentBucketFallback: string}, \texttt{documentKeyPrefix: string}: scalari risolti da configurazione in \texttt{AppServiceProvider}.
 \end{itemize}
 
 Metodi
@@ -1299,7 +1299,7 @@ Metodi
 
 \paragraph{ProcessDocumentService}
 
-Coordina la fase più corposa della pipeline documentale: la classificazione del documento tramite Bedrock e, per ogni destinatario individuato, la delega dell'estrazione dei campi a \texttt{ExtractSubDocumentFieldsService}. Fino a una revisione recente era un'unica classe di quasi 480 righe, perché lo split del documento invocava internamente la logica di estrazione per ogni segmento appena creato; le due responsabilità sono state separate in classi distinte, mantenendo però la stessa forma di orchestrazione esterna.
+Coordina la fase più corposa della pipeline documentale: la classificazione del documento tramite Bedrock e, per ogni destinatario individuato, la delega dell'estrazione dei campi a \texttt{ExtractSubDocumentFieldsService}.
 
 Le sue dipendenze sono fra le più numerose del dominio, perché riflettono quante integrazioni coordina in un solo passo: un repository, uno storage, un gateway AI, un dispatcher di eventi, un heartbeat verso Step Functions (per segnalare che l'elaborazione è ancora viva durante chiamate AI che possono durare minuti), oltre a un generatore di identificativi e un lettore OCR condiviso.
 
@@ -1321,7 +1321,7 @@ Metodi
 
 \paragraph{ExtractSubDocumentFieldsService}
 
-Implementa \texttt{ExtractSubDocumentFieldsUseCase}: estrae nove campi (nome, cognome, azienda, data documento, tipo documento, descrizione, email destinatario, codice fiscale, matricola) di un singolo sotto-documento tramite Bedrock, un destinatario alla volta. Separata da \texttt{ProcessDocumentService} (che orchestra lo split PDF e invoca questa porta per ciascun destinatario appena creato), per isolare questa logica dalla manipolazione PDF che la rendeva testabile solo insieme a quest'ultima.
+Implementa \texttt{ExtractSubDocumentFieldsUseCase}: estrae nove campi (nome, cognome, azienda, data documento, tipo documento, descrizione, email destinatario, codice fiscale, matricola) di un singolo sotto-documento tramite Bedrock, un destinatario alla volta. Separata da \texttt{ProcessDocumentService} (che orchestra lo split PDF e invoca questa porta per ciascun destinatario appena creato), per isolare questa logica dalla manipolazione PDF: è così testabile indipendentemente da quest'ultima.
 
 I metadati dichiarati manualmente in fase di upload prevalgono sempre su quelli estratti dall'AI, ed escludono il campo corrispondente dal calcolo della confidenza (un'azienda o una data dichiarate dall'utente non hanno bisogno di essere lette dall'AI per essere affidabili). Codice fiscale, email e matricola sono identificativi, non semplici estrazioni: un valore che non supera il proprio controllo formale (email tramite \texttt{filter\_var}, codice fiscale tramite \texttt{CodiceFiscale::isValid()}) torna a \texttt{null} invece di essere salvato — un dato falso che l'operatore non avrebbe modo di riconoscere come tale. La matricola non ha una forma dichiarata e passa così com'è.
 
@@ -1410,7 +1410,7 @@ Metodi
 
 \paragraph{ReviewDocumentService}
 
-Implementa \texttt{ReviewDocumentUseCase}: gestisce la revisione manuale di un sotto-documento da parte dell'operatore, con due metodi che coprono due percorsi distinti.
+Implementa \texttt{ReviewDocumentUseCase}: gestisce la revisione manuale di un sotto-documento da parte dell'operatore, con due metodi che coprono due percorsi distinti. Entrambi verificano per primi che il tenant dell'attore coincida con quello del documento originale del sotto-documento (\texttt{DocumentNotAuthorizedException} altrimenti, difesa in profondità dietro il controllo già fatto a livello HTTP — a differenza degli altri casi d'uso di Documents, questa classe non aveva ancora quel controllo).
 
 \texttt{updateExtractedData()} applica correzioni ai campi estratti; scrive comunque i dati estratti se il sotto-documento non ne ha ancora, anche in assenza di modifiche. Lo stato di revisione che ne segue non è un semplice riflesso del parametro \texttt{markAsValidated} ricevuto dal chiamante: se \textit{true} valida manualmente il sotto-documento, ma se \textit{false} lo rimanda in revisione solo quando non era già validato manualmente — una correzione non declassa una scheda che una persona aveva già confermato, perché quei dati sono appena passati un'altra volta sotto i suoi occhi, e declassarli chiederebbe di confermare due volte la stessa scheda. \texttt{markReviewed()} valida invece un sotto-documento senza modificarne i campi, e rifiuta l'operazione se non esistono ancora dati estratti da validare.
 
@@ -1427,8 +1427,8 @@ Attributi
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{updateExtractedData(subDocumentId: int, fieldUpdates: array, markAsValidated: bool, actor: ?Actor): string}
-    \item \texttt{markReviewed(subDocumentId: int, actor: ?Actor): void}
+    \item \texttt{updateExtractedData(subDocumentId: int, fieldUpdates: array, markAsValidated: bool, actor: Actor): string}
+    \item \texttt{markReviewed(subDocumentId: int, actor: Actor): void}
 \end{itemize}
 
 \paragraph{PreviewDocumentService}
@@ -1460,7 +1460,7 @@ Metodi
 
 Implementa \texttt{SendMessageUseCase}: compone il messaggio di invio precompilato a partire dai dati già estratti (nessuna generazione AI coinvolta) e ne orchestra anteprima, esportazione e correzione manuale. Destinatario, corpo e oggetto hanno un valore proposto di default, sovrascrivibile dall'operatore tramite le sovrascritture salvate sul sotto-documento; l'oggetto proposto nomina il tipo di documento e il suo periodo di riferimento (mese/anno, se dichiarati), non l'invio in sé, che a quel punto non è ancora avvenuto. Sia l'anteprima sia l'esportazione accodano al PDF composto anche il documento originale del destinatario (letto dallo storage tramite \texttt{DocumentStoragePort}, \texttt{SendMessageAttachmentUnavailableException} se assente): chi riceve il messaggio riceve anche il documento a cui si riferisce, non solo il testo.
 
-Il download è ora vincolato a una revisione umana già avvenuta: \texttt{export()} rifiuta con \texttt{SendMessageNotConfirmedException} se il sotto-documento non è ancora \textit{ManuallyValidated} — il pannello tiene spento il comando finché non lo è, ma la API resterebbe altrimenti chiamabile anche senza passare dal pannello. Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osservare l'invio reale, è proprio il download del PDF esportato a marcare lo stato come \textit{Sent}, in una transizione a senso unico: un secondo download non la ripete. Tutti e tre i metodi pubblici verificano l'autorizzazione tramite un metodo privato condiviso (\texttt{assertActorOwnsSubDocument()}), che solleva \texttt{DocumentNotAuthorizedException} in caso di tenant non corrispondente.
+Il download è vincolato a una revisione umana già avvenuta: \texttt{export()} rifiuta con \texttt{SendMessageNotConfirmedException} se il sotto-documento non è ancora \textit{ManuallyValidated} — il pannello tiene spento il comando finché non lo è, ma la API resterebbe altrimenti chiamabile anche senza passare dal pannello. Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osservare l'invio reale, è proprio il download del PDF esportato a marcare lo stato come \textit{Sent}, in una transizione a senso unico: un secondo download non la ripete. Tutti e tre i metodi pubblici verificano l'autorizzazione tramite un metodo privato condiviso (\texttt{assertActorOwnsSubDocument()}), che solleva \texttt{DocumentNotAuthorizedException} in caso di tenant non corrispondente.
 
 \begin{figure}[H]
     \centering
@@ -1482,7 +1482,7 @@ Metodi
 
 \paragraph{ListDocumentsService, DeleteDocumentService}
 
-Due casi d'uso minimi, simmetrici ai rispettivi sul dominio Communications. \texttt{ListDocumentsService} implementa \texttt{ListDocumentsUseCase} e inoltra la paginazione al repository tramite \texttt{DocumentListFilters} (value object tipizzato, non più un array grezzo), senza logica propria.
+Due casi d'uso minimi, simmetrici ai rispettivi sul dominio Communications. \texttt{ListDocumentsService} implementa \texttt{ListDocumentsUseCase} e inoltra la paginazione al repository tramite \texttt{DocumentListFilters} (value object tipizzato), senza logica propria.
 
 \texttt{DeleteDocumentService} implementa \texttt{DeleteDocumentUseCase}: verifica che l'attore appartenga allo stesso tenant del documento originale (\texttt{DocumentNotAuthorizedException} altrimenti), elimina un sotto-documento e, se non resta alcun altro sotto-documento collegato allo stesso documento originale, elimina anche quest'ultimo insieme ai suoi task di workflow pendenti. In entrambi i casi il record resta rimosso dal database anche se la pulizia dello storage fallisce: un guasto di rete verso S3 non deve far fallire un'eliminazione già avvenuta dal punto di vista dell'utente, a costo di lasciare temporaneamente un file orfano.
 
@@ -1529,6 +1529,7 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{createOriginalDocument(document: NewOriginalDocument): int}
     \item \texttt{findOriginalDocument(id: int): OriginalDocument}
+    \item \texttt{findOriginalDocumentForUpdate(id: int): OriginalDocument}: come \texttt{findOriginalDocument()}, ma con \texttt{lockForUpdate()}, usato dai casi d'uso che racchiudono un controllo "è già in corso?" e la scrittura che lo rende vero in un'unica transazione (\texttt{StartDocumentWorkflowService}).
     \item \texttt{updateOriginalDocument(id: int, changes: OriginalDocumentChanges): void}
     \item \texttt{saveOriginalDocument(document: OriginalDocument): void}
     \item \texttt{deleteOriginalDocumentWithWorkflowTasks(id: int): void}
@@ -1840,7 +1841,7 @@ Metodi
 
 Adapter primario guidato da Step Functions/SQS, equivalente concettuale del \texttt{DocumentWorkflowTaskHandler} sul dominio gemello: traduce i task di callback della pipeline di generazione in chiamate ai casi d'uso di dominio tramite le loro porte primarie, senza contenere regole di business proprie.
 
-Fino a una revisione recente chiamava staticamente un metodo di formattazione errori sulla classe concreta \texttt{BedrockService} per costruire un messaggio di ripiego; è stato allineato al comportamento del suo equivalente sul dominio Documents, che usa direttamente il messaggio dell'eccezione.
+Per costruire un messaggio di ripiego usa direttamente il messaggio dell'eccezione, stesso comportamento del suo equivalente sul dominio Documents.
 
 \begin{figure}[H]
     \centering
@@ -1868,7 +1869,7 @@ Metodi
 
 Entità di dominio che governa l'intero ciclo di vita di una bozza di comunicazione, ed è la più estesa dei due domini perché accumula responsabilità distinte (preferiti, approvazione e scarto della bozza, valutazione a stelle, copertina manuale o generata dall'AI, l'intera pipeline di generazione fino alla rigenerazione) invece delle una o due tipiche di \texttt{SubDocument} e \texttt{OriginalDocument}.
 
-Assorbe anche un'invariante che in precedenza viveva in un value object a parte, oggi ritirato: una copertina non può mai essere applicata prima che il testo sia stato generato, verificato dalla stessa entità ogni volta che riceve l'esito della generazione AI. Come le altre due entità, ogni metodo verifica la propria guardia (una comunicazione già scartata non può essere approvata, una valutazione già assegnata non può essere ripetuta) e accumula il proprio delta in un oggetto di modifiche interno, letto una sola volta dall'adapter di persistenza.
+Verifica anche un'invariante propria: una copertina non può mai essere applicata prima che il testo sia stato generato, controllata ogni volta che l'entità riceve l'esito della generazione AI. Come le altre due entità, ogni metodo verifica la propria guardia (una comunicazione già scartata non può essere approvata, una valutazione già assegnata non può essere ripetuta) e accumula il proprio delta in un oggetto di modifiche interno, letto una sola volta dall'adapter di persistenza.
 
 \begin{figure}[H]
     \centering
@@ -1900,7 +1901,7 @@ Metodi
 
 Implementa \texttt{GenerateCommunicationUseCase} ed è il punto di ingresso della pipeline di generazione: crea la comunicazione con stato \textit{Draft} e generazione \textit{Pending} a partire da prompt, tono e stile, e restituisce l'identificativo appena creato. Come il suo equivalente sul dominio Documents, non avvia da sé la pipeline: quella responsabilità è delegata a \texttt{StartCommunicationWorkflowUseCase}, invocato subito dopo dallo stesso Controller.
 
-L'audit non passa più da un \texttt{AuditLogger} diretto ma dal dispatch dell'evento \texttt{CommunicationGenerationRequested}, stesso principio già applicato a \texttt{UploadDocumentService} sul dominio Documents.
+L'audit passa dal dispatch dell'evento \texttt{CommunicationGenerationRequested}, non da un \texttt{AuditLogger} diretto, stesso principio già applicato a \texttt{UploadDocumentService} sul dominio Documents.
 
 \begin{figure}[H]
     \centering
@@ -1920,9 +1921,9 @@ Metodi
 
 \paragraph{StartCommunicationWorkflowService}
 
-Implementa \texttt{StartCommunicationWorkflowUseCase}: avvia l'esecuzione Step Functions della pipeline di generazione, equivalente concettuale di \texttt{StartDocumentWorkflowService} sul dominio Documents, con la stessa idempotenza verso un'esecuzione già in corso. Espone anche \texttt{regenerate()}: riporta la comunicazione allo stato di rigenerazione, elimina l'eventuale copertina precedente dallo storage e riavvia la pipeline richiamando internamente \texttt{start()}, così che prima generazione e rigenerazione condividano sempre la stessa logica di avvio.
+Implementa \texttt{StartCommunicationWorkflowUseCase}: avvia l'esecuzione Step Functions della pipeline di generazione, equivalente concettuale di \texttt{StartDocumentWorkflowService} sul dominio Documents, con la stessa idempotenza verso un'esecuzione già in corso: il controllo "è già in corso?" e la scrittura che lo rende vero girano dentro un'unica transazione, con lettura tramite \texttt{CommunicationRepository::findCommunicationForUpdate()} (lock pessimistico sulla riga) — senza, due richieste quasi simultanee potrebbero superare entrambe il controllo e avviare due esecuzioni per la stessa comunicazione. Gli eventi di dominio (avvio riuscito o fallito) sono dispatchati solo dopo che la transazione ha commesso, stesso schema di \texttt{CommunicationDraftService::favorite()}/\texttt{unfavorite()}. Espone anche \texttt{regenerate()}: verifica il tenant dell'attore (\texttt{CommunicationNotAuthorizedException} altrimenti), riporta la comunicazione allo stato di rigenerazione, elimina l'eventuale copertina precedente dallo storage e riavvia la pipeline richiamando internamente \texttt{start()}, così che prima generazione e rigenerazione condividano sempre la stessa logica di avvio. Non ha bisogno di un lock proprio: nessun controllo di stato concorrente da proteggere qui, il lock su \texttt{start()} (chiamato subito dopo) resta la difesa contro un doppio avvio.
 
-Stesso trattamento della configurazione del suo equivalente Documents: ARN della state machine e URL della coda non sono più letti tramite \texttt{config()} internamente, ma risolti una volta in \texttt{AppServiceProvider} e iniettati come scalari: stessa istanziabilità in un test Pest puro, senza avviare Laravel.
+Stesso trattamento della configurazione del suo equivalente Documents: ARN della state machine e URL della coda sono risolti una volta in \texttt{AppServiceProvider} e iniettati come scalari, non letti tramite \texttt{config()} internamente: stessa istanziabilità in un test Pest puro, senza avviare Laravel.
 
 \begin{figure}[H]
     \centering
@@ -1932,14 +1933,14 @@ Stesso trattamento della configurazione del suo equivalente Documents: ARN della
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{communications: CommunicationRepository}, \texttt{coverStorage: CommunicationCoverStoragePort}, \texttt{workflowEngine: WorkflowEnginePort}, \texttt{events: CommunicationEventDispatcherPort}, \texttt{context: WorkflowContext}, \texttt{clock: ClockInterface}, \texttt{ids: UniqueIdGeneratorPort}.
+    \item \texttt{communications: CommunicationRepository}, \texttt{coverStorage: CommunicationCoverStoragePort}, \texttt{workflowEngine: WorkflowEnginePort}, \texttt{events: CommunicationEventDispatcherPort}, \texttt{context: WorkflowContext}, \texttt{clock: ClockInterface}, \texttt{ids: UniqueIdGeneratorPort}, \texttt{transactions: TransactionManagerPort}.
     \item \texttt{stateMachineArn: string}, \texttt{taskQueueUrl: string}: scalari risolti da configurazione in \texttt{AppServiceProvider}.
 \end{itemize}
 
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{start(communicationId: int, correlationId: ?string, requestId: ?string): void}
-    \item \texttt{regenerate(communicationId: int, actor: ?Actor, correlationId: ?string, requestId: ?string): void}
+    \item \texttt{regenerate(communicationId: int, actor: Actor, correlationId: ?string, requestId: ?string): void}
 \end{itemize}
 
 \paragraph{GenerateCommunicationTextService, GenerateCommunicationCoverService}
@@ -2013,9 +2014,9 @@ Metodi
 
 \paragraph{CommunicationDraftService}
 
-Implementa \texttt{CommunicationDraftUseCase}: raccoglie le operazioni sul ciclo di vita editoriale della bozza (preferiti, modifica, approvazione, scarto) dietro cui il \texttt{CommunicationController} delega senza contenere logica propria. Ogni metodo segue lo stesso schema: recupera l'entità, invoca la transizione corrispondente (che verifica da sé le proprie guardie), persiste e pubblica l'evento di dominio associato.
+Implementa \texttt{CommunicationDraftUseCase}: raccoglie le operazioni sul ciclo di vita editoriale della bozza (preferiti, modifica, approvazione, scarto) dietro cui il \texttt{CommunicationController} delega senza contenere logica propria. Ogni metodo segue lo stesso schema: recupera l'entità con lock pessimistico, verifica che il tenant dell'attore coincida con quello della comunicazione (\texttt{CommunicationNotAuthorizedException} altrimenti — difesa in profondità: il controllo HTTP già protegge la rotta, ma il caso d'uso non si affida solo a chi lo chiama), invoca la transizione corrispondente (che verifica da sé le proprie guardie), persiste e pubblica l'evento di dominio associato.
 
-\texttt{favorite()}/\texttt{unfavorite()} racchiudono lettura-per-aggiornamento e scrittura in una transazione tramite \texttt{TransactionManagerPort}, per evitare una corsa fra due toggle concorrenti sullo stesso preferito; \texttt{update()}/\texttt{save()}/\texttt{discard()} restano fuori transazione.
+Tutti e cinque i metodi racchiudono lettura-per-aggiornamento e scrittura in un'unica transazione tramite \texttt{TransactionManagerPort}: senza il lock, un \texttt{save()} e un \texttt{discard()} quasi simultanei sulla stessa bozza leggerebbero entrambi lo stato prima che l'altro scriva, supererebbero entrambi il proprio controllo in \texttt{Communication}, e l'ultimo a scrivere vincerebbe — una bozza appena scartata potrebbe tornare "approvata" per puro timing, bypassando l'invariante di dominio.
 
 \begin{figure}[H]
     \centering
@@ -2037,7 +2038,7 @@ Metodi
 
 \paragraph{RateCommunicationService}
 
-Implementa \texttt{RateCommunicationUseCase}: registra la valutazione a stelle di una comunicazione insieme a un commento opzionale, normalizzando un commento composto solo da spazi bianchi a \texttt{null} prima di passarlo all'entità. Lettura-per-aggiornamento, mutazione e salvataggio avvengono dentro una transazione (\texttt{TransactionManagerPort}), stessa cautela di \texttt{CommunicationDraftService::favorite()}/\texttt{unfavorite()} contro valutazioni concorrenti sulla stessa comunicazione.
+Implementa \texttt{RateCommunicationUseCase}: registra la valutazione a stelle di una comunicazione insieme a un commento opzionale, normalizzando un commento composto solo da spazi bianchi a \texttt{null} prima di passarlo all'entità. Lettura-per-aggiornamento, verifica del tenant dell'attore (\texttt{CommunicationNotAuthorizedException} altrimenti, difesa in profondità dietro il controllo già fatto a livello HTTP), mutazione e salvataggio avvengono dentro una transazione (\texttt{TransactionManagerPort}), stessa cautela di \texttt{CommunicationDraftService::favorite()}/\texttt{unfavorite()} contro valutazioni concorrenti sulla stessa comunicazione.
 
 \begin{figure}[H]
     \centering
@@ -2057,7 +2058,7 @@ Metodi
 
 \paragraph{UpdateCommunicationCoverService}
 
-Implementa \texttt{UpdateCommunicationCoverUseCase}: gestisce la sostituzione manuale della copertina da parte dell'utente, in alternativa a quella generata dall'AI. Rifiuta l'operazione solo se la bozza è già scartata (\texttt{Communication::isEditable()}): una bozza approvata resta modificabile anche dopo il salvataggio nello storico, come previsto dal perimetro MVP: testo, rigenerazione e copertina restano tutti ammessi finché la bozza non è scartata.
+Implementa \texttt{UpdateCommunicationCoverUseCase}: gestisce la sostituzione manuale della copertina da parte dell'utente, in alternativa a quella generata dall'AI. Entrambi i metodi verificano per primi che il tenant dell'attore coincida con quello della comunicazione (\texttt{CommunicationNotAuthorizedException} altrimenti, difesa in profondità dietro il controllo già fatto a livello HTTP). \texttt{update()} rifiuta poi l'operazione solo se la bozza è già scartata (\texttt{Communication::isEditable()}): una bozza approvata resta modificabile anche dopo il salvataggio nello storico, come previsto dal perimetro MVP: testo, rigenerazione e copertina restano tutti ammessi finché la bozza non è scartata.
 
 Genera un percorso univoco per ogni nuova copertina caricata e rimuove quella precedente dallo storage solo dopo che la nuova è stata salvata con successo, per non lasciare la comunicazione temporaneamente senza copertina in caso di errore a metà operazione.
 
@@ -2113,7 +2114,7 @@ Metodi
 
 Due casi d'uso minimi, equivalenti concettuali di \texttt{ListDocumentsService} e \texttt{DeleteDocumentService}. \texttt{ListCommunicationsService} implementa \texttt{ListCommunicationsUseCase} e inoltra la paginazione al repository.
 
-\texttt{DeleteCommunicationService} implementa \texttt{DeleteCommunicationUseCase}: elimina la comunicazione e, se presente, la sua copertina dallo storage: con lo stesso trattamento delle eliminazioni sul dominio Documents, un guasto nella pulizia dello storage viene solo loggato, non propagato, perché il record è già rimosso dal punto di vista dell'utente.
+\texttt{DeleteCommunicationService} implementa \texttt{DeleteCommunicationUseCase}: verifica che il tenant dell'attore coincida con quello della comunicazione (\texttt{CommunicationNotAuthorizedException} altrimenti, difesa in profondità dietro il controllo già fatto a livello HTTP), poi elimina la comunicazione e, se presente, la sua copertina dallo storage: con lo stesso trattamento delle eliminazioni sul dominio Documents, un guasto nella pulizia dello storage viene solo loggato, non propagato, perché il record è già rimosso dal punto di vista dell'utente.
 
 \begin{figure}[H]
     \centering
@@ -2162,9 +2163,9 @@ Metodi
 
 \paragraph{PromptConfigurationService}
 
-Implementa \texttt{PromptConfigurationUseCase}: gestisce le configurazioni di prompt salvate dall'utente (combinazioni di prompt, tono e stile riutilizzabili). Se il nome richiesto è vuoto o già in uso per il tenant, \texttt{save()} non restituisce un errore all'utente ma assegna un'etichetta progressiva (\textit{"Senza nome (1)"}, \textit{"(2)"}, ...) tramite un resolver privato, scegliendo sempre di lasciar salvare la configurazione piuttosto che bloccare l'utente su un conflitto di nome: invariato rispetto a prima.
+Implementa \texttt{PromptConfigurationUseCase}: gestisce le configurazioni di prompt salvate dall'utente (combinazioni di prompt, tono e stile riutilizzabili). Se il nome richiesto è vuoto o già in uso per il tenant, \texttt{save()} non restituisce un errore all'utente ma assegna un'etichetta progressiva (\textit{"Senza nome (1)"}, \textit{"(2)"}, ...) tramite un resolver privato, scegliendo sempre di lasciar salvare la configurazione piuttosto che bloccare l'utente su un conflitto di nome.
 
-Il nome è ora protetto anche da un vincolo di unicità a livello di database: \texttt{save()} tenta il salvataggio fino a 8 volte, e se l'adapter di persistenza segnala una collisione (\texttt{PromptConfigurationNameTakenException}, tradotta da una violazione del vincolo unico) rigenera un nome e riprova. È una difesa contro la corsa fra due richieste concorrenti che il resolver, da solo, non può escludere: solo dopo 8 tentativi falliti l'eccezione risale al chiamante.
+Il nome è protetto anche da un vincolo di unicità a livello di database: \texttt{save()} tenta il salvataggio fino a 8 volte, e se l'adapter di persistenza segnala una collisione (\texttt{PromptConfigurationNameTakenException}, tradotta da una violazione del vincolo unico) rigenera un nome e riprova. È una difesa contro la corsa fra due richieste concorrenti che il resolver, da solo, non può escludere: solo dopo 8 tentativi falliti l'eccezione risale al chiamante.
 
 \texttt{delete()} verifica invece l'autorizzazione: se il tenant della configurazione non coincide con quello dell'attore, solleva \texttt{PromptConfigurationNotAuthorizedException}.
 
@@ -2187,9 +2188,7 @@ Metodi
 
 \paragraph{EloquentCommunicationRepository}
 
-Adapter secondario che implementa \texttt{CommunicationRepository} sopra Eloquent, equivalente concettuale dell'\texttt{EloquentDocumentRepository}: consuma i value object tipizzati del dominio (\texttt{NewCommunication}, \texttt{CommunicationChanges}) invece di array grezzi.
-
-È il punto di scrittura più consolidato di tutto il refactor verso l'architettura esagonale: prima della sua introduzione, lo stesso aggregato veniva scritto da diciotto punti diversi, distribuiti su otto casi d'uso.
+Adapter secondario che implementa \texttt{CommunicationRepository} sopra Eloquent, equivalente concettuale dell'\texttt{EloquentDocumentRepository}: consuma i value object tipizzati del dominio (\texttt{NewCommunication}, \texttt{CommunicationChanges}) invece di array grezzi. È l'unico punto di scrittura dell'aggregato \texttt{Communication}, condiviso da tutti gli otto casi d'uso che lo modificano.
 
 \begin{figure}[H]
     \centering
@@ -2215,7 +2214,7 @@ Metodi
 
 \paragraph{EloquentPromptConfigurationRepository}
 
-Adapter secondario che implementa \texttt{PromptConfigurationRepository} sopra Eloquent, per la persistenza delle configurazioni di prompt salvate dall'utente: un aggregato distinto da \texttt{Communication}, con un proprio repository invece di essere annegato in quello principale. \texttt{create()} riceve ora il value object tipizzato \texttt{NewPromptConfiguration} invece di un array grezzo, e traduce una violazione del vincolo unico a livello database in \texttt{PromptConfigurationNameTakenException}: è questa traduzione che \texttt{PromptConfigurationService::save()} intercetta nel proprio ciclo di retry.
+Adapter secondario che implementa \texttt{PromptConfigurationRepository} sopra Eloquent, per la persistenza delle configurazioni di prompt salvate dall'utente: un aggregato distinto da \texttt{Communication}, con un proprio repository invece di essere annegato in quello principale. \texttt{create()} riceve il value object tipizzato \texttt{NewPromptConfiguration} invece di un array grezzo, e traduce una violazione del vincolo unico a livello database in \texttt{PromptConfigurationNameTakenException}: è questa traduzione che \texttt{PromptConfigurationService::save()} intercetta nel proprio ciclo di retry.
 
 \begin{figure}[H]
     \centering
@@ -2428,7 +2427,7 @@ Metodi
 
 \paragraph{WorkflowContext}
 
-Contenitore puro degli identificativi di correlazione (request id, correlation id, tenant) propagati lungo l'esecuzione di un caso d'uso, senza alcuna dipendenza da Illuminate: il tagging dei log (\texttt{Log::withContext()}) non vive più qui, ma nel middleware HTTP \texttt{CorrelateRequests} e, per il worker SQS, in \texttt{ConsumeWorkflowTasks}.
+Contenitore puro degli identificativi di correlazione (request id, correlation id, tenant) propagati lungo l'esecuzione di un caso d'uso, senza alcuna dipendenza da Illuminate: il tagging dei log (\texttt{Log::withContext()}) vive nel middleware HTTP \texttt{CorrelateRequests} e, per il worker SQS, in \texttt{ConsumeWorkflowTasks}.
 
 \begin{figure}[H]
     \centering
@@ -2581,13 +2580,13 @@ La figura seguente illustra il pattern e la comunicazione fra i suoi tre compone
 
 Le tre pagine principali applicano MVVM in senso classico: un \emph{ViewModel} (più precisamente un \emph{Presentation Model} nel senso di Fowler) è una classe TypeScript che non tocca il DOM né l'infrastruttura di rendering o di dependency injection di Angular (nessun \texttt{@Component}, \texttt{inject()}, decoratore, injection context, chiamata diretta a \texttt{document}/\texttt{window}); riceve le proprie dipendenze dal costruttore, ed è quindi istanziabile con un semplice \texttt{new} e testabile senza \texttt{TestBed}, con dipendenze fittizie create a mano. L'unica eccezione apparente è l'uso di \texttt{signal}/\texttt{computed} di \texttt{@angular/core}: restano nel ViewModel non come parte del motore di rendering, ma come primitiva reattiva di piattaforma (l'equivalente di \texttt{INotifyPropertyChanged} in WPF), quindi non compromettono l'istanziabilità con \texttt{new} né la testabilità senza Angular avviato; è questa distinzione, non un conteggio letterale degli import da \texttt{@angular/core}, a rendere la classe un Presentation Model genuino.
 
-Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contratto OpenAPI e i modelli di dominio specifici di ciascuna feature. La \emph{View} è la pagina stessa (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}): l'unico punto accoppiato ad Angular e al DOM, che si procura le dipendenze con \texttt{inject()} nel proprio costruttore e le passa al ViewModel per costruirlo, poi lega il template ai segnali e ai metodi pubblici che il ViewModel espone (\texttt{vm.stato()}, \texttt{(evento)="vm.metodo()"}). Anche l'unica operazione DOM richiesta da alcuni ViewModel (lo scorrimento verso una sezione dopo un'azione) resta un'operazione della View, ma non tramite una funzione-callback ricevuta dal costruttore: \texttt{AssistantPageViewModel} e \texttt{OverviewPageViewModel} scrivono un segnale osservabile, \texttt{pendingScrollTarget: WritableSignal<string | null>}, e un \texttt{effect()} nella View lo legge, chiama \texttt{scrollToElement} (definita in \texttt{shared/util/scroll.ts}) quando non è nullo, poi lo azzera. È l'ultimo passo di un refactoring esplicito documentato nel codice stesso: anche una funzione passata dal costruttore restava, dal punto di vista del ViewModel, una chiamata indiretta alla View; un segnale osservato è invece un fatto dichiarativo puro, che la View può scegliere di leggere o ignorare senza che il ViewModel sappia se lo ha fatto. Se non azzerasse il segnale dopo averlo consumato, la stessa destinazione richiesta due volte di seguito non ritriggererebbe l'\texttt{effect()}, che reagisce solo a un cambio di valore.
+Il \emph{Model} resta quanto descritto in Sezione 6.3: i tipi generati dal contratto OpenAPI e i modelli di dominio specifici di ciascuna feature. La \emph{View} è la pagina stessa (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}): l'unico punto accoppiato ad Angular e al DOM, che si procura le dipendenze con \texttt{inject()} nel proprio costruttore e le passa al ViewModel per costruirlo, poi lega il template ai segnali e ai metodi pubblici che il ViewModel espone (\texttt{vm.stato()}, \texttt{(evento)="vm.metodo()"}). Anche l'unica operazione DOM richiesta da alcuni ViewModel (lo scorrimento verso una sezione dopo un'azione) resta un'operazione della View, ma non tramite una funzione-callback ricevuta dal costruttore: \texttt{AssistantPageViewModel} e \texttt{OverviewPageViewModel} scrivono un segnale osservabile, \texttt{pendingScrollTarget: WritableSignal<string | null>}, e un \texttt{effect()} nella View lo legge, chiama \texttt{scrollToElement} (definita in \texttt{shared/util/scroll.ts}) quando non è nullo, poi lo azzera. Un segnale osservato è un fatto dichiarativo puro, che la View può scegliere di leggere o ignorare senza che il ViewModel sappia se lo ha fatto. Se non azzerasse il segnale dopo averlo consumato, la stessa destinazione richiesta due volte di seguito non ritriggererebbe l'\texttt{effect()}, che reagisce solo a un cambio di valore.
 
 Lo stato condiviso fra le pagine non vive nel ViewModel: una sola istanza di \texttt{MvpStateStore}, fornita a livello di applicazione (\texttt{providedIn: "root"}), conserva lo stato restituito dal backend e sopravvive ai cambi di rotta. Ogni ViewModel riceve lo Store come una qualunque altra dipendenza nel proprio costruttore e lo consuma in sola lettura per derivare i propri segnali \texttt{computed}; le mutazioni (generazione, upload, revisione, eliminazione) non aggiornano lo stato localmente, ma rimpiazzano l'intero stato con quello autorevole restituito dal backend nella risposta, evitando divergenze fra ciò che la SPA mostra e ciò che il backend ha effettivamente persistito.
 
-Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. Gli \texttt{effect()} però si limitano a leggere i segnali sorgente (lo storico o i documenti condivisi, i filtri attivi, il documento selezionato) e a chiamare un metodo del ViewModel (\texttt{vm.reload()}, \texttt{vm.loadPreviewStatus()}...): la chiamata vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che un tempo la View chiamava direttamente per inoltrare il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono ora privati: dettagli interni di \texttt{reload()}, non più superficie pubblica del ViewModel. Per lo stesso motivo il template delle tre pagine legge sempre e solo \texttt{vm.*}, mai \texttt{store.*} direttamente: anche il banner d'errore principale, che in una versione precedente chiamava \texttt{(retry)="store.reload()"} sullo Store condiviso, ora chiama un metodo del ViewModel — \texttt{vm.reloadState()} su \texttt{AssistantPage} e \texttt{CopilotPage}, \texttt{vm.reload()} su \texttt{OverviewPage} (l'unica delle tre il cui ViewModel non distingue fra ricarica dello stato condiviso e ricarica di uno storico proprio, non avendone uno). L'eccezione che permetteva a una View di raggiungere lo Store direttamente dal markup non esiste più su nessuna delle tre pagine: il campo \texttt{store}, ancora \texttt{inject()}ato su tutte e tre, serve solo a costruire il ViewModel nel costruttore e, su \texttt{AssistantPage}/\texttt{CopilotPage}, come segnale sorgente letto dall'\texttt{effect()} di ricerca — mai referenziato nel template.
+Un'eccezione è documentata esplicitamente nel codice: \texttt{effect()} e \texttt{takeUntilDestroyed()} restano nella View perché richiedono un injection context che il ViewModel non ha per costruzione. Gli \texttt{effect()} però si limitano a leggere i segnali sorgente (lo storico o i documenti condivisi, i filtri attivi, il documento selezionato) e a chiamare un metodo del ViewModel (\texttt{vm.reload()}, \texttt{vm.loadPreviewStatus()}...): la chiamata vera e propria (stessa forma di ogni altra azione del ViewModel, come \texttt{generate()} o \texttt{discard()}) vive nel ViewModel, non nella View. I metodi che inoltrano il risultato (\texttt{setFilteredCommunications()}, \texttt{handleHistoryError()}) sono privati: dettagli interni di \texttt{reload()}, non superficie pubblica del ViewModel. Per lo stesso motivo il template delle tre pagine legge sempre e solo \texttt{vm.*}, mai \texttt{store.*} direttamente: anche il banner d'errore principale chiama un metodo del ViewModel — \texttt{vm.reloadState()} su \texttt{AssistantPage} e \texttt{CopilotPage}, \texttt{vm.reload()} su \texttt{OverviewPage} (l'unica delle tre il cui ViewModel non distingue fra ricarica dello stato condiviso e ricarica di uno storico proprio, non avendone uno). Nessuna delle tre pagine permette a una View di raggiungere lo Store direttamente dal markup: il campo \texttt{store}, \texttt{inject()}ato su tutte e tre, serve solo a costruire il ViewModel nel costruttore e, su \texttt{AssistantPage}/\texttt{CopilotPage}, come segnale sorgente letto dall'\texttt{effect()} di ricerca — mai referenziato nel template.
 
-I segnali \texttt{computed} pass-through sul ViewModel non sono più asimmetrici come nella versione precedente di questo documento: tutte e tre le pagine espongono \texttt{vm.error()} e \texttt{vm.loading()}; \texttt{AssistantPage} e \texttt{CopilotPage} espongono inoltre \texttt{vm.metrics()} (l'elenco di metriche del proprio modulo, filtrato delle voci che il pannello non mostra come scheda a sé) e \texttt{vm.metricsPresentation()} (la mappa che indica a \texttt{MetricsPanelComponent}, Sezione 6.6, come disegnare ciascuna scheda). \texttt{OverviewPage} non monta più un pannello di metriche generico: il suo ViewModel espone segnali propri più mirati (\texttt{vm.priorities()}, \texttt{vm.assistantQuality()}, \texttt{vm.copilotQuality()}, \texttt{vm.quarantined()}), descritti nella sua sottosezione più sotto.
+I segnali \texttt{computed} pass-through sul ViewModel seguono lo stesso schema su tutte e tre le pagine: tutte e tre espongono \texttt{vm.error()} e \texttt{vm.loading()}; \texttt{AssistantPage} e \texttt{CopilotPage} espongono inoltre \texttt{vm.metrics()} (l'elenco di metriche del proprio modulo, filtrato delle voci che il pannello non mostra come scheda a sé) e \texttt{vm.metricsPresentation()} (la mappa che indica a \texttt{MetricsPanelComponent}, Sezione 6.6, come disegnare ciascuna scheda). \texttt{OverviewPage} non monta un pannello di metriche generico: il suo ViewModel espone segnali propri più mirati (\texttt{vm.priorities()}, \texttt{vm.assistantQuality()}, \texttt{vm.copilotQuality()}, \texttt{vm.quarantined()}), descritti nella sua sottosezione più sotto.
 
 Angular offre già disaccoppiamento e testabilità tramite i propri servizi e la dependency injection, quindi un ViewModel separato potrebbe sembrare ridondante rispetto a testare direttamente il componente con \texttt{TestBed}. Il motivo per cui si è scelto comunque questo confine è pratico, non dogmatico: un test su \texttt{TestBed} richiede l'avvio del modulo, la compilazione del template e la risoluzione dell'albero di dependency injection a ogni esecuzione, mentre un test sul ViewModel istanzia la classe con \texttt{new} passando dipendenze fittizie create a mano: più veloce da eseguire e più semplice da scrivere, perché isola la logica applicativa dal ciclo di vita di Angular. Per questo il confine è tracciato solo sulle tre pagine principali, dove quella logica è più densa, e non esteso a ogni componente della SPA.
 
@@ -2632,7 +2631,7 @@ Attributi
     \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: combinano \texttt{store.error()}/\texttt{store.loading()} con \texttt{store.filteredAssistantError()}/\texttt{store.filteredAssistantLoading()}, così il banner e lo spinner principali riflettono anche un fallimento o un caricamento della sola sezione Metriche filtrata, non solo dello stato condiviso.
     \item \texttt{metricsFilters: WritableSignal<AssistantMetricsFilters>}, \texttt{hasActiveMetricsFilters: Signal<boolean>}: filtri della sezione Metriche (tono, stile, intervallo di date — RF38-OB..RF41-OB), separati da \texttt{activeFilters} sotto: filtrare le metriche non deve filtrare anche lo storico, e viceversa.
     \item \texttt{metrics}: pass-through su \texttt{store.filteredAssistantState()?.metrics}, esclusa la voce \texttt{assistant.drafts} (le bozze da valutare sono una priorità e vivono nella Overview; qui sono già la parte "in bozza" di \texttt{draftComposition}, sotto). Legge dalla fetta filtrata dello Store, non da \texttt{store.assistantMetrics()}: quest'ultima resterebbe sempre sul totale non filtrato.
-    \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: per ciascuna delle quattro metriche mostrate (\texttt{assistant.total}, \texttt{assistant.prompt\_configurations}, \texttt{assistant.rated}, \texttt{assistant.rating\_average} — un andamento, un conteggio, una quota e una media a stelle, tutte a due celle), la forma della scheda e il suo ingombro nella griglia, letta da \texttt{MetricsPanelComponent} (Sezione 6.6). Le metriche puramente operative mostrate in precedenza (generazioni/copertine fallite o bloccate) sono state rimosse perché non richieste da alcun caso d'uso del documento di Analisi dei Requisiti.
+    \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: per ciascuna delle quattro metriche mostrate (\texttt{assistant.total}, \texttt{assistant.prompt\_configurations}, \texttt{assistant.rated}, \texttt{assistant.rating\_average} — un andamento, un conteggio, una quota e una media a stelle, tutte a due celle), la forma della scheda e il suo ingombro nella griglia, letta da \texttt{MetricsPanelComponent} (Sezione 6.6).
     \item \texttt{recentFeedback: Signal<Communication[]>}: pass-through su \texttt{store.filteredAssistantState()?.recentFeedback} (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale, ricalcolati secondo \texttt{metricsFilters} come il resto della sezione — non solo la media, che resta in \texttt{metricsPresentation} sopra.
     \item \texttt{metricsReportExportUrl: string}: URL statico del download del report riepilogativo delle metriche (\texttt{/api/v1/assistant/metrics/export}, RF34-OB), letto direttamente dal template come \texttt{href} del link di esportazione.
     \item \texttt{draftComposition: Signal<CompositionSlice[]>}: ripartizione delle comunicazioni fra "In bozza" e "Decise" (il totale meno le bozze), derivata dalla stessa fetta filtrata di \texttt{metrics} sopra.
@@ -2651,14 +2650,14 @@ Metodi
     \item \texttt{setActiveFilters(filters: CommunicationFilters): void}
     \item \texttt{setMetricsFilters(filters: AssistantMetricsFilters): void}
     \item \texttt{refreshFilteredMetrics(): void}: rilegge la sezione Metriche con il filtro attivo corrente, tramite \texttt{store.reloadFilteredAssistantMetrics()} (RF38-OB).
-    \item \texttt{reload(): void}: rilegge lo storico con i filtri correnti; stessa forma delle altre azioni, chiamata dall'\texttt{effect()} della View a ogni cambio di filtro o di stato condiviso. Annulla la propria sottoscrizione precedente prima di avviarne una nuova (fix di una regressione: senza questa cancellazione, una risposta di ricerca arrivata in ritardo poteva sovrascrivere un risultato più recente).
+    \item \texttt{reload(): void}: rilegge lo storico con i filtri correnti; stessa forma delle altre azioni, chiamata dall'\texttt{effect()} della View a ogni cambio di filtro o di stato condiviso. Annulla la propria sottoscrizione precedente prima di avviarne una nuova: senza questa cancellazione, una risposta di ricerca arrivata in ritardo potrebbe sovrascrivere un risultato più recente.
     \item \texttt{reloadState(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()} e la sezione Metriche filtrata tramite \texttt{refreshFilteredMetrics()}, invocato dal pulsante "Riprova" del banner d'errore principale. Distinto da \texttt{reload()}, che rilegge solo lo storico comunicazioni: confonderli lascerebbe lo stato globale in errore pur avendo ricaricato l'elenco.
     \item \texttt{destroy(): void}: chiamato dalla View alla distruzione del componente (tramite \texttt{DestroyRef}): annulla solo la sottoscrizione di lettura in corso, non le azioni di scrittura (\texttt{generate()}, \texttt{discard()}...), che devono completare lato server anche se l'utente ha già navigato altrove.
 \end{itemize}
 
 \subsubsection{CopilotPageViewModel}
 
-Stessa forma di \texttt{AssistantPageViewModel} applicata al Co-Pilot, con una superficie più piccola: copre upload, eliminazione, revisione dei dati estratti e correzione del messaggio di invio. Non ha mai avuto bisogno di una dipendenza di scorrimento (nessuna delle sue azioni richiede di spostare la pagina verso una sezione), ma possiede ora una fetch propria oltre allo storico documenti: la raggiungibilità dell'anteprima del documento selezionato.
+Stessa forma di \texttt{AssistantPageViewModel} applicata al Co-Pilot, con una superficie più piccola: copre upload, eliminazione, revisione dei dati estratti e correzione del messaggio di invio. Non ha bisogno di una dipendenza di scorrimento (nessuna delle sue azioni richiede di spostare la pagina verso una sezione), ma possiede una fetch propria oltre allo storico documenti: la raggiungibilità dell'anteprima del documento selezionato.
 
 \begin{figure}[H]
     \centering
@@ -2673,7 +2672,7 @@ Attributi
     \item \texttt{previewStatus: WritableSignal<DocumentPreviewStatus>}: raggiungibilità dell'anteprima del documento selezionato (\textit{idle}, \textit{loading}, \textit{available}, \textit{unavailable}, \textit{unreachable}), verificata prima che il dettaglio monti l'iframe del PDF; segue \texttt{selectedDocument}, richiesta di nuovo a ogni cambio tramite \texttt{loadPreviewStatus()}.
     \item \texttt{isUploading}, \texttt{uploadStatus}, \texttt{uploadPhase}, \texttt{isDeleting}, \texttt{isSavingReview}, \texttt{reviewError}, \texttt{reviewFieldErrors}, \texttt{isSavingSendMessage}, \texttt{sendMessageError}: segnali di stato per le rispettive azioni asincrone.
     \item \texttt{activeFilters}, \texttt{hasActiveFilters}, \texttt{filteredDocuments}, \texttt{documentsError}: segnali sullo storico documenti, scritti solo internamente da \texttt{reload()}.
-    \item \texttt{currentPage: WritableSignal<number>} (default 1), \texttt{totalDocuments: WritableSignal<number>} (default 0), \texttt{pageSize}: paginazione dello storico, dieci righe a pagina — prima esisteva solo lato backend, che rispondeva con i primi quaranta risultati mentre la vista ne scartava il totale, e i documenti oltre il quarantesimo sparivano senza che nulla lo segnalasse.
+    \item \texttt{currentPage: WritableSignal<number>} (default 1), \texttt{totalDocuments: WritableSignal<number>} (default 0), \texttt{pageSize}: paginazione dello storico, dieci righe a pagina.
     \item \texttt{totalPages: Signal<number>}, \texttt{hasPreviousPage: Signal<boolean>}, \texttt{hasNextPage: Signal<boolean>}: segnali derivati da \texttt{currentPage}/\texttt{totalDocuments}, letti da \texttt{DocumentListComponent} per i controlli di paginazione.
     \item \texttt{error}, \texttt{loading}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, così il template non legge mai lo Store direttamente.
     \item \texttt{metrics}: pass-through su \texttt{store.copilotMetrics()}, escluse le voci che il pannello non mostra come scheda a sé (\texttt{copilot.ocr\_confidence}, \texttt{copilot.validated}, \texttt{copilot.quarantined}, \texttt{copilot.sub\_documents}): \texttt{validated} e \texttt{quarantined} sono esiti di validazione, \texttt{quarantined} vive anche come priorità nella Overview; \texttt{sub\_documents} è il totale su cui si misurano le quote; \texttt{ocr\_confidence} non risponde a nessun caso d'uso UC-56, ma resta nel contratto perché la Overview la legge (\texttt{vm.copilotQuality()}, Sezione 6.2).
@@ -2684,7 +2683,7 @@ Metodi
 \begin{itemize}\raggedright
     \item \texttt{setActiveFilters(filters: DocumentFilters): void}: azzera anche \texttt{currentPage} a 1 — cambiare filtro rimescola i risultati, e restare su una pagina che con il nuovo filtro non esiste più mostrerebbe una tabella vuota senza spiegazione.
     \item \texttt{goToPage(page: number): void}: va alla pagina indicata, vincolata fra 1 e \texttt{totalPages()}; se cambia, aggiorna \texttt{currentPage} e richiama \texttt{reload()}.
-    \item \texttt{reload(): void}: stessa cancellazione della sottoscrizione precedente vista in \texttt{AssistantPageViewModel.reload()}; legge anche \texttt{currentPage}/\texttt{pageSize} nella richiesta al backend.
+    \item \texttt{reload(): void}: stessa cancellazione della sottoscrizione precedente vista in \texttt{AssistantPageViewModel.reload()}; legge anche \texttt{currentPage}/\texttt{pageSize} nella richiesta al backend. Il corpo gira dentro \texttt{untracked()}: \texttt{CopilotPage} lo chiama da un \texttt{effect()} che legge solo \texttt{store.documents()}/\texttt{activeFilters()} apposta, per non far ripartire la ricerca due volte a ogni cambio pagina (\texttt{goToPage()} richiama già \texttt{reload()} da sé) — senza \texttt{untracked()}, la lettura di \texttt{currentPage()} qui dentro diventerebbe comunque una dipendenza nascosta di quell'effect, e ogni "pagina successiva" scatenerebbe due richieste invece di una.
     \item \texttt{loadPreviewStatus(previewUrl: string | null): void}: richiede di nuovo la raggiungibilità dell'anteprima, stessa forma di \texttt{reload()} ma sul documento selezionato invece che sullo storico; annulla la propria sottoscrizione precedente, così una risposta tardiva su un documento ormai deselezionato non sovrascrive lo stato di quello corrente. Con \texttt{previewUrl} nullo azzera lo stato a \textit{idle} senza chiamare il backend.
     \item \texttt{reloadState(): void}: ricarica lo stato condiviso tramite \texttt{store.reload()}, invocato dal pulsante "Riprova" del banner d'errore principale; distinto da \texttt{reload()} come nel ViewModel dell'Assistant.
     \item \texttt{destroy(): void}: annulla sia la sottoscrizione di ricerca sia quella di anteprima.
@@ -2697,7 +2696,7 @@ Metodi
 
 \subsubsection{OverviewPageViewModel}
 
-Il più semplice dei tre nella forma del costruttore (nessuna azione di scrittura verso il backend), ma non più il più povero nei segnali esposti: dove prima mostrava conteggi grezzi, ora sintetizza priorità operative e indicatori di qualità per entrambi i moduli, sostituendo la lettura diretta dello Store che la View faceva in precedenza. Tutti i valori derivano da metriche sull'intero tenant tramite \texttt{store.metricEntry()}, non da un ricalcolo sulle liste locali: \texttt{history} e \texttt{documents} nello Store sono finestre limitate (rispettivamente 10 e 40 elementi), e un valore derivato da quelle finestre sarebbe silenziosamente sbagliato appena i dati reali le superano.
+Il più semplice dei tre nella forma del costruttore (nessuna azione di scrittura verso il backend): sintetizza priorità operative e indicatori di qualità per entrambi i moduli, così il template legge solo \texttt{vm.*} invece di raggiungere direttamente lo Store. Tutti i valori derivano da metriche sull'intero tenant tramite \texttt{store.metricEntry()}, non da un ricalcolo sulle liste locali: \texttt{history} e \texttt{documents} nello Store sono finestre limitate (rispettivamente 10 e 40 elementi), e un valore derivato da quelle finestre sarebbe silenziosamente sbagliato appena i dati reali le superano.
 
 \begin{figure}[H]
     \centering
@@ -2709,9 +2708,9 @@ Due tipi di supporto, definiti in questo stesso file, formattano i dati prima ch
 
 Attributi
 \begin{itemize}\raggedright
-    \item \texttt{store: MvpStateStore}, \texttt{router: Router}: dipendenze ricevute dal costruttore (non più una funzione di scorrimento: si veda \texttt{pendingScrollTarget} sotto).
+    \item \texttt{store: MvpStateStore}, \texttt{router: Router}: dipendenze ricevute dal costruttore (nessuna funzione di scorrimento: si veda \texttt{pendingScrollTarget} sotto).
     \item \texttt{communications}: pass-through su \texttt{store.history()}.
-    \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, come già su \texttt{AssistantPageViewModel} e \texttt{CopilotPageViewModel} — prima questa era l'unica pagina il cui template raggiungeva lo Store direttamente.
+    \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, come già su \texttt{AssistantPageViewModel} e \texttt{CopilotPageViewModel}.
     \item \texttt{priorities: Signal<PriorityMetric[]>}: le tre metriche su cui si agisce (\textit{da verificare}, \textit{in quarantena}, \textit{bozze da valutare}), non un riassunto di tutte: i conteggi puramente descrittivi restano nelle pagine dei rispettivi moduli.
     \item \texttt{assistantQuality: Signal<QualityMetric | null>}, \texttt{copilotQuality: Signal<QualityMetric | null>}: un solo indicatore di qualità per modulo (voto medio delle bozze per l'Assistant, confidenza media OCR per il Co-Pilot), con rimando alla pagina che ne porta il dettaglio.
     \item \texttt{quarantined: Signal<number>}: numero di sotto-documenti in quarantena, letto da \texttt{store.metricEntry("copilot.quarantined")}, usato per decidere se mostrare la segnalazione d'attenzione in cima alla sezione priorità.
@@ -2744,13 +2743,13 @@ Attributi
 
 Metodi
 \begin{itemize}\raggedright
-    \item \texttt{loadOnce(): void}: carica lo stato al primo montaggio della shell applicativa; a differenza di prima non usa più un flag "già richiesto" a senso unico, ma deriva la guardia dallo stato reale dei segnali (\texttt{loading} o \texttt{state} già valorizzato), così un primo tentativo fallito può essere ritentato da una chiamata successiva invece di restare bloccato per sempre.
+    \item \texttt{loadOnce(): void}: carica lo stato al primo montaggio della shell applicativa; deriva la guardia dallo stato reale dei segnali (\texttt{loading} o \texttt{state} già valorizzato), così un primo tentativo fallito può essere ritentato da una chiamata successiva invece di restare bloccato per sempre.
     \item \texttt{reload(): void}: ricarica lo stato dal backend, con un tentativo di retry per errori temporanei. Ignora una chiamata mentre una richiesta è già in volo, la stessa guardia già applicata da \texttt{loadOnce()}: senza di essa un doppio click su "Riprova" avvierebbe due \texttt{GET /state} in parallelo, l'ultima risposta vincerebbe comunque ma la richiesta in più sarebbe sprecata.
-    \item \texttt{reloadFilteredAssistantMetrics(filters: AssistantMetricsFilters): void}: ricarica solo la fetta Assistant della sezione Metriche, filtrata; stessa guardia anti-doppia-richiesta di \texttt{reload()}, ma su uno stato separato. Chiamato da un \texttt{effect()} della View a ogni cambio filtro: l'intero corpo gira dentro \texttt{untracked()}, perché senza isolare la lettura della propria guardia da quell'effect, l'effect la riscriverebbe subito dopo averla letta, innescando un ciclo di richieste che non si ferma mai.
+    \item \texttt{reloadFilteredAssistantMetrics(filters: AssistantMetricsFilters): void}: ricarica solo la fetta Assistant della sezione Metriche, filtrata, su uno stato separato da \texttt{state}. Annulla la richiesta filtrata precedente ancora in volo prima di avviarne una nuova, stesso schema di \texttt{AssistantPageViewModel::reload()} per lo storico: un cambio di filtro mentre la risposta al precedente non è ancora arrivata non deve andare perso, altrimenti il pannello resterebbe fermo su un filtro che i controlli non mostrano più. Chiamato da un \texttt{effect()} della View a ogni cambio filtro: l'intero corpo gira dentro \texttt{untracked()}, perché una lettura di segnale al suo interno diventerebbe altrimenti una dipendenza di quell'effect, innescando un ciclo di richieste che non si ferma mai.
     \item \texttt{setState(state: MvpState): void}: rimpiazza lo stato con quello autorevole restituito da una mutazione.
     \item \texttt{upsertDocument(document: SubDocument): void}: inserisce o aggiorna in testa un sotto-documento ricevuto dallo stream SSE, senza ricaricare l'intero stato.
     \item \texttt{metric(key: string): number}: legge il valore di una metrica per chiave stabile, evitando di ricalcolarla su elenchi parzialmente caricati; \texttt{0} se la chiave non esiste o lo stato non è ancora caricato.
-    \item \texttt{metricEntry(key: string): Metric | null}: come \texttt{metric()} ma restituisce la metrica completa (compresa \texttt{history}, che il solo valore non porta) o \texttt{null} finché lo stato non è disponibile, invece di collassare l'assenza su \texttt{0} — una scheda che mostrasse \texttt{0} durante il caricamento affermerebbe un dato che non ha ancora, il difetto che le priorità della Overview avevano prima di questo metodo. \texttt{metric()} lo chiama internamente invece di duplicarne la logica di ricerca.
+    \item \texttt{metricEntry(key: string): Metric | null}: come \texttt{metric()} ma restituisce la metrica completa (compresa \texttt{history}, che il solo valore non porta) o \texttt{null} finché lo stato non è disponibile, invece di collassare l'assenza su \texttt{0} — una scheda che mostrasse \texttt{0} durante il caricamento affermerebbe un dato che non ha ancora. \texttt{metric()} lo chiama internamente invece di duplicarne la logica di ricerca.
 \end{itemize}
 
 % ── 6.3 ──────────────────────────────────────────────────────────────────────
@@ -2886,7 +2885,7 @@ Avanzamento dell'upload e dell'elaborazione di un documento, con l'identificativ
 
 \paragraph{DocumentPage}
 
-Una pagina dello storico documenti, con il totale che le sta dietro: senza \texttt{total} la vista non può sapere quante pagine esistono. Prima esisteva solo la paginazione lato backend, che rispondeva con i primi quaranta risultati mentre \texttt{searchDocuments()} ne scartava il totale — oltre il quarantesimo i documenti sparivano dall'elenco senza che nulla lo segnalasse; \texttt{CopilotPageViewModel} (Sezione 6.2) ora naviga esplicitamente fra le pagine tramite \texttt{goToPage()}.
+Una pagina dello storico documenti, con il totale che le sta dietro: senza \texttt{total} la vista non può sapere quante pagine esistono. \texttt{CopilotPageViewModel} (Sezione 6.2) naviga esplicitamente fra le pagine tramite \texttt{goToPage()}.
 
 \begin{figure}[H]
     \centering
@@ -2933,7 +2932,7 @@ Ogni feature ha un servizio dedicato (\texttt{AssistantService}, \texttt{Documen
 
 Il servizio più corposo del frontend, perché incapsula anche il consumo dello stream SSE lato client, simmetrico a quello che il backend espone (Sezione 3.2). \texttt{trackGeneration()} avvolge la chiamata HTTP iniziale e la connessione SSE risultante in un unico \texttt{Observable}: chi lo sottoscrive riceve una sequenza di stati di avanzamento (\textit{queued} → testo → copertina → \textit{completed}/\textit{failed}) senza dover gestire direttamente gli eventi SSE.
 
-La connessione non usa più \texttt{EventSource} direttamente: la meccanica di basso livello (apertura dello stream, parsing dei frame, distinzione fra evento nominato \texttt{error} e caduta della connessione) è stata estratta in \texttt{SseClient} (Sezione 6.4, più avanti in questa sezione); questo servizio resta responsabile solo dell'orchestrazione specifica di feature (interpretazione degli eventi \textit{progress}/\textit{text}/\textit{cover}/\textit{done}, aggiornamento dello Store).
+La meccanica di basso livello (apertura dello stream, parsing dei frame, distinzione fra evento nominato \texttt{error} e caduta della connessione) vive in \texttt{SseClient} (più avanti in questa sezione); questo servizio resta responsabile solo dell'orchestrazione specifica di feature (interpretazione degli eventi \textit{progress}/\textit{text}/\textit{cover}/\textit{done}, aggiornamento dello Store).
 
 \begin{figure}[H]
     \centering
@@ -2966,7 +2965,7 @@ Metodi
 
 \subsubsection{DocumentWorkflowService}
 
-Equivalente Co-Pilot di \texttt{AssistantService}, con lo stesso incapsulamento dello stream SSE lato client. \texttt{upload()} avvolge la chiamata HTTP di caricamento e la connessione SSE risultante in un unico \texttt{Observable}, esattamente come \texttt{trackGeneration()}: anche qui la meccanica di basso livello è delegata a \texttt{SseClient} (sottosezione successiva), non più a un \texttt{EventSource} costruito direttamente in questa classe.
+Equivalente Co-Pilot di \texttt{AssistantService}, con lo stesso incapsulamento dello stream SSE lato client. \texttt{upload()} avvolge la chiamata HTTP di caricamento e la connessione SSE risultante in un unico \texttt{Observable}, esattamente come \texttt{trackGeneration()}: anche qui la meccanica di basso livello è delegata a \texttt{SseClient} (sottosezione successiva).
 
 \texttt{previewStatus()} è invece un caso specifico di questo modulo, assente sul dominio Communications e indipendente da SSE: verifica il \textit{content-type} della risposta prima di montare l'iframe di anteprima, perché l'endpoint può restituire il PDF (200), un 404 se il file non è ancora disponibile o un 503 JSON se lo storage non è raggiungibile: tre esiti che il componente chiamante deve distinguere per mostrare lo stato corretto.
 
@@ -3024,11 +3023,11 @@ A differenza di un backend Rails con serializer scritti a mano per ogni risorsa,
 
 I componenti condivisi (\texttt{shared/components}) sono privi di logica di dominio: ricevono dati tramite segnali di input e riemettono eventi tramite \texttt{output()}, senza conoscere da quale feature vengono usati. Sono ventuno in tutto: \texttt{ButtonComponent}, \texttt{AlertComponent}, \texttt{ErrorStateComponent}, \texttt{EmptyStateComponent}, \texttt{LoadingStateComponent}, \texttt{StatusBadgeComponent}, \texttt{StatusDotComponent}, \texttt{AttentionNoteComponent}, \texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{MetricShareComponent}, \texttt{MetricGaugeComponent}, \texttt{MetricStatusComponent}, \texttt{MetricBreakdownComponent}, \texttt{MetricStarsComponent}, \texttt{MetricCompositionComponent}, \texttt{StageProgressComponent}, \texttt{StarRating}, \texttt{SelectFieldComponent}, \texttt{TextAreaFieldComponent}, \texttt{FileDropzoneComponent}. La cartella \texttt{data-table} contiene solo un foglio di stile condiviso, non un componente: le tabelle restano markup HTML nativo nelle singole pagine, non un elemento riutilizzabile a sé.
 
-Il numero è cambiato più volte nel tempo. \texttt{ProgressBarComponent} è stato rimosso e sostituito da \texttt{StageProgressComponent}, non un'aggiunta ma una diversa scelta di rappresentazione per lo stesso problema (si veda più sotto). \texttt{MetricsPanelComponent} è diventato un dispatcher con più componenti di presentazione dedicati, ciascuno la risposta visiva a un tipo diverso di domanda che una metrica può porre (un andamento, una quota, una posizione su scala, una ripartizione...): da una sola forma di scheda originaria se ne sono aggiunte prima sette, poi due (\texttt{MetricPhasesComponent}, \texttt{MetricDistributionComponent}) sono state rimosse insieme alle metriche di durata che le usavano, quando le due dashboard sono state riallineate ai casi d'uso richiesti dal documento di Analisi dei Requisiti — restano cinque forme dedicate oltre a quella di default (Sezione successiva). \texttt{StarRating} (rinominato da \texttt{StarRatingComponent}) è stato inoltre spostato da \texttt{app/components} a \texttt{shared/components}: ha guadagnato un secondo punto di utilizzo (la scheda \texttt{assistant.rating\_average} nel pannello metriche dell'Assistant, oltre alla valutazione della bozza in anteprima), il criterio che nella versione precedente ne giustificava l'esclusione dal conteggio dei componenti condivisi.
+\texttt{MetricsPanelComponent} è un dispatcher con più componenti di presentazione dedicati, ciascuno la risposta visiva a un tipo diverso di domanda che una metrica può porre (un andamento, una quota, una posizione su scala, una ripartizione...): cinque forme dedicate oltre a quella di default (Sezione successiva). \texttt{StarRating} vive in \texttt{shared/components} con due punti di utilizzo: la scheda \texttt{assistant.rating\_average} nel pannello metriche dell'Assistant, e la valutazione della bozza in anteprima.
 
 \subsubsection{ButtonComponent}
 
-Il più semplice dei componenti condivisi: non introduce un nuovo elemento HTML, ma si applica come attributo su un \texttt{<button>} nativo (\texttt{<button mvpButton variant="secondary">}). In questo modo il componente lascia al browser tipo, stato disabilitato, attributi ARIA ed eventi nativi, occupandosi solo della variante di stile applicata all'host. \texttt{busy} segnala che il comando è in corso senza toccarne l'etichetta: prima ogni pulsante la riscriveva a mano ("Salvataggio" → "Salvataggio…"), il testo cambiava sotto lo sguardo dell'utente e la larghezza del pulsante saltava a metà clic; ora resta ferma, e \texttt{aria-busy} porta la stessa informazione alle tecnologie assistive.
+Il più semplice dei componenti condivisi: non introduce un nuovo elemento HTML, ma si applica come attributo su un \texttt{<button>} nativo (\texttt{<button mvpButton variant="secondary">}). In questo modo il componente lascia al browser tipo, stato disabilitato, attributi ARIA ed eventi nativi, occupandosi solo della variante di stile applicata all'host. \texttt{busy} segnala che il comando è in corso senza toccare l'etichetta, che resta ferma invece di cambiare a metà clic; \texttt{aria-busy} porta la stessa informazione alle tecnologie assistive.
 
 \begin{figure}[H]
     \centering
@@ -3052,7 +3051,7 @@ Metodi
 
 \texttt{AlertComponent} è il riquadro di base per un messaggio con titolo, usato ovunque serva segnalare qualcosa con enfasi (\texttt{role="alert"}, \texttt{aria-live="polite"}).
 
-\texttt{ErrorStateComponent} non duplica quel markup: lo compone, fissando un titolo di default (\textit{"Servizio non disponibile"}) e passando il messaggio d'errore come contenuto proiettato: è il componente che compare in cima a ogni pagina quando lo stato di errore è valorizzato. Espone ora anche un pulsante di ripetizione opzionale (\textit{"Riprova"}), renderizzato solo quando \texttt{canRetry()} è vero: alla pressione emette l'evento \texttt{retry}, lasciando al chiamante decidere cosa ritentare.
+\texttt{ErrorStateComponent} non duplica quel markup: lo compone, fissando un titolo di default (\textit{"Servizio non disponibile"}) e passando il messaggio d'errore come contenuto proiettato: è il componente che compare in cima a ogni pagina quando lo stato di errore è valorizzato. Espone anche un pulsante di ripetizione opzionale (\textit{"Riprova"}), renderizzato solo quando \texttt{canRetry()} è vero: alla pressione emette l'evento \texttt{retry}, lasciando al chiamante decidere cosa ritentare.
 
 \begin{figure}[H]
     \centering
@@ -3074,7 +3073,7 @@ Metodi
 
 \subsubsection{EmptyStateComponent, LoadingStateComponent, StatusBadgeComponent, StatusDotComponent}
 
-Quattro componenti minimi di visualizzazione, senza alcuna logica: si limitano a proiettare contenuto o un'etichetta dentro un elemento con lo stile e la semantica ARIA corretti (\texttt{role="status"} per il caricamento, colori diversi per tono sull'etichetta di stato). \texttt{StatusDotComponent} è il più recente: un indicatore binario (fatto/non fatto) da affiancare a \texttt{StatusBadgeComponent} senza confondersi con esso, perché rispondono a due domande diverse — l'etichetta dice in quale dei quattro stati di revisione si trova un sotto-documento, il pallino se è stato scaricato o no. Pieno contro vuoto non è il solo colore a portare l'informazione (SC 1.4.1): il pallino è comunque \texttt{aria-hidden}, perché ripete un'informazione che il testo proiettato accanto dice già.
+Quattro componenti minimi di visualizzazione, senza alcuna logica: si limitano a proiettare contenuto o un'etichetta dentro un elemento con lo stile e la semantica ARIA corretti (\texttt{role="status"} per il caricamento, colori diversi per tono sull'etichetta di stato). \texttt{StatusDotComponent} è un indicatore binario (fatto/non fatto) da affiancare a \texttt{StatusBadgeComponent} senza confondersi con esso, perché rispondono a due domande diverse — l'etichetta dice in quale dei quattro stati di revisione si trova un sotto-documento, il pallino se è stato scaricato o no. Pieno contro vuoto non è il solo colore a portare l'informazione (SC 1.4.1): il pallino è comunque \texttt{aria-hidden}, perché ripete un'informazione che il testo proiettato accanto dice già.
 
 \begin{figure}[H]
     \centering
@@ -3119,7 +3118,7 @@ Metodi
 
 \subsubsection{MetricCardComponent, MetricsPanelComponent}
 
-\texttt{MetricCardComponent} mostra la forma di scheda di default (un conteggio e il proprio andamento a sette giorni). \texttt{MetricsPanelComponent} è ora un dispatcher, non più un semplice compositore a griglia: per ciascuna metrica ricevuta sceglie, in base alla mappa \texttt{presentation} passata dalla pagina (il tipo \texttt{MetricPresentation}, Sezione 6.2), quale fra sei componenti di presentazione montare (Sezione successiva) — \texttt{MetricCardComponent} resta la scelta di default quando la mappa non specifica un \texttt{kind} diverso. Gestisce inoltre da sé gli stati della richiesta a monte: caricamento (schede segnaposto con \texttt{isLoading}), errore (messaggio dedicato, distinto da "nessuna metrica": in errore i dati esistono, è la lettura ad essere fallita) o elenco vuoto (\texttt{EmptyStateComponent}). Montato da \texttt{AssistantPage} e \texttt{CopilotPage}; \texttt{OverviewPage} non lo usa più (Sezione 6.7).
+\texttt{MetricCardComponent} mostra la forma di scheda di default (un conteggio e il proprio andamento a sette giorni). \texttt{MetricsPanelComponent} è un dispatcher: per ciascuna metrica ricevuta sceglie, in base alla mappa \texttt{presentation} passata dalla pagina (il tipo \texttt{MetricPresentation}, Sezione 6.2), quale fra sei componenti di presentazione montare (Sezione successiva) — \texttt{MetricCardComponent} resta la scelta di default quando la mappa non specifica un \texttt{kind} diverso. Gestisce inoltre da sé gli stati della richiesta a monte: caricamento (schede segnaposto con \texttt{isLoading}), errore (messaggio dedicato, distinto da "nessuna metrica": in errore i dati esistono, è la lettura ad essere fallita) o elenco vuoto (\texttt{EmptyStateComponent}). Montato da \texttt{AssistantPage} e \texttt{CopilotPage}; \texttt{OverviewPage} non lo usa (Sezione 6.7).
 
 \begin{figure}[H]
     \centering
@@ -3140,7 +3139,7 @@ Metodi
 
 \subsubsection{Le forme di scheda del pannello metriche}
 
-Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? — il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate esclusivamente da \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina. Due forme precedenti, \texttt{MetricPhasesComponent} (un tempo medio ripartito fra le fasi che lo consumano) e \texttt{MetricDistributionComponent} (la densità delle durate come curva continua), sono state rimosse insieme alle metriche di durata articolate che rappresentavano: \texttt{copilot.processing\_seconds} e \texttt{assistant.generation\_seconds} sono oggi una singola media in secondi (kind \textit{trend}, come un conteggio qualunque), non più un tempo scomposto per fase o una distribuzione — nessuna delle due dashboard richiedeva quel dettaglio in nessun caso d'uso del documento di Analisi dei Requisiti. Attualmente nessuna delle due pagine usa \texttt{MetricGaugeComponent} o \texttt{MetricStatusComponent} tramite il pannello (le rispettive \texttt{metricsPresentation}, Sezione 6.2, non hanno più chiavi di kind \textit{gauge} o \textit{status}): restano comunque forme valide del dispatcher, e \texttt{MetricGaugeComponent} resta montato direttamente da \texttt{OverviewPage} (Sezione 6.7) per la qualità del Co-Pilot.
+Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? — il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate esclusivamente da \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina. \texttt{copilot.processing\_seconds} e \texttt{assistant.generation\_seconds} sono una singola media in secondi (kind \textit{trend}, come un conteggio qualunque). Nessuna delle due pagine usa \texttt{MetricGaugeComponent} o \texttt{MetricStatusComponent} tramite il pannello: restano forme valide del dispatcher, e \texttt{MetricGaugeComponent} è montato direttamente da \texttt{OverviewPage} (Sezione 6.7) per la qualità del Co-Pilot.
 
 \begin{figure}[H]
     \centering
@@ -3185,7 +3184,7 @@ Metodi
 
 \subsubsection{StageProgressComponent}
 
-Avanzamento per tappe, non più a percentuale: sostituisce \texttt{ProgressBarComponent}, rimosso perché la barra rappresentava una tabella fissa fase → numero (20, 40, 60, 85, 100) che non corrispondeva ad alcuna misura reale — un documento "al 60\%" non era a sei decimi di nulla. Le tappe (\texttt{ProgressStage}, \texttt{\{id, label\}}) sono invece gli stati reali che arrivano dallo stream SSE, quindi la stessa informazione è mostrata senza inventare una quantità; un contatore del tempo trascorso scorre accanto, perché senza di esso un'attesa lunga è indistinguibile da un blocco. Condiviso fra le pipeline asincrone di entrambi i moduli tramite due adattatori di feature (\texttt{GenerationProgressComponent} per l'Assistant, quattro tappe; \texttt{UploadProgressComponent} per il Co-Pilot, cinque), che mappano le rispettive fasi di dominio sull'elenco di \texttt{ProgressStage} ricevuto.
+Avanzamento per tappe, non a percentuale: le tappe (\texttt{ProgressStage}, \texttt{\{id, label\}}) sono gli stati reali che arrivano dallo stream SSE, quindi l'avanzamento è mostrato senza inventare una quantità — un documento non è mai "al 60\%" di niente; un contatore del tempo trascorso scorre accanto, perché senza di esso un'attesa lunga è indistinguibile da un blocco. Condiviso fra le pipeline asincrone di entrambi i moduli tramite due adattatori di feature (\texttt{GenerationProgressComponent} per l'Assistant, quattro tappe; \texttt{UploadProgressComponent} per il Co-Pilot, cinque), che mappano le rispettive fasi di dominio sull'elenco di \texttt{ProgressStage} ricevuto.
 
 \begin{figure}[H]
     \centering
@@ -3206,7 +3205,7 @@ Metodi
 
 \subsubsection{StarRating}
 
-Valutazione a stelle come gruppo di radio ARIA (il pattern che l'APG indica per una scala a valori discreti), non più cinque \texttt{<button>} senza nome accessibile: le frecce scorrono i punteggi, il gruppo ha un nome, e ogni valore ne annuncia uno proprio ("3 stelle su 5"). Il disegno è un SVG disegnato due volte (contorno e riempimento ritagliato), così non dipende dal glifo di sistema; il contorno resta visibile in entrambi gli stati, cosicché chi non distingue i colori legga comunque quante stelle sono piene (SC 1.4.1).
+Valutazione a stelle come gruppo di radio ARIA (il pattern che l'APG indica per una scala a valori discreti): le frecce scorrono i punteggi, il gruppo ha un nome, e ogni valore ne annuncia uno proprio ("3 stelle su 5"). Il disegno è un SVG disegnato due volte (contorno e riempimento ritagliato), così non dipende dal glifo di sistema; il contorno resta visibile in entrambi gli stati, cosicché chi non distingue i colori legga comunque quante stelle sono piene (SC 1.4.1).
 
 \begin{figure}[H]
     \centering
@@ -3272,11 +3271,11 @@ Le pagine sono i componenti radice di ciascuna feature, montati dal router: \tex
 
 \subsubsection{AssistantPage}
 
-Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent}) e quello di anteprima (\texttt{GeneratedCommunicationPreviewComponent}), entrambi componenti di feature, insieme all'elenco delle configurazioni di prompt salvate (\texttt{PromptConfigurationListComponent}) e allo storico comunicazioni (\texttt{CommunicationHistoryListComponent}, sostituisce il markup di lista che una versione precedente montava inline), al proprio pannello di metriche (\texttt{MetricsPanelComponent}, Sezione 6.6, più \texttt{MetricCompositionComponent} per la ripartizione delle bozze e \texttt{RecentFeedbackListComponent}, componente di feature, per gli ultimi feedback testuali, UC-27.3) e a componenti condivisi per stato di errore e stato vuoto, legando ogni input e ogni evento del template a un segnale o un metodo di \texttt{vm} (\texttt{AssistantPageViewModel}, Sezione 6.2) — senza eccezioni: anche il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non più lo Store direttamente (Sezione 6.2).
+Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent}) e quello di anteprima (\texttt{GeneratedCommunicationPreviewComponent}), entrambi componenti di feature, insieme all'elenco delle configurazioni di prompt salvate (\texttt{PromptConfigurationListComponent}) e allo storico comunicazioni (\texttt{CommunicationHistoryListComponent}), al proprio pannello di metriche (\texttt{MetricsPanelComponent}, Sezione 6.6, più \texttt{MetricCompositionComponent} per la ripartizione delle bozze e \texttt{RecentFeedbackListComponent}, componente di feature, per gli ultimi feedback testuali, UC-27.3) e a componenti condivisi per stato di errore e stato vuoto, legando ogni input e ogni evento del template a un segnale o un metodo di \texttt{vm} (\texttt{AssistantPageViewModel}, Sezione 6.2) — senza eccezioni: anche il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non lo Store direttamente (Sezione 6.2).
 
-Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), this.store)}: non riceve più una funzione di scorrimento, perché \texttt{AssistantPageViewModel} non la chiede più al costruttore (Sezione 6.2).
+Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), this.store)}: non riceve una funzione di scorrimento, perché \texttt{AssistantPageViewModel} non la chiede al costruttore (Sezione 6.2).
 
-Collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Un secondo \texttt{effect()} legge \texttt{vm.metricsFilters()} e chiama \texttt{vm.refreshFilteredMetrics()} per la sezione Metriche (RF38-OB..RF41-OB), filtro separato da quello dello storico e collegato a un \texttt{FormGroup} proprio (\texttt{metricsFilterForm}). Un terzo \texttt{effect()} legge \texttt{vm.pendingScrollTarget()} e, quando non è nullo, chiama \texttt{scrollToElement} (l'unica operazione DOM richiesta dal ViewModel) poi azzera il segnale — è la View, non più una funzione passata al costruttore, a eseguire lo scorrimento richiesto. Registra infine \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
+Collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Un secondo \texttt{effect()} legge \texttt{vm.metricsFilters()} e chiama \texttt{vm.refreshFilteredMetrics()} per la sezione Metriche (RF38-OB..RF41-OB), filtro separato da quello dello storico e collegato a un \texttt{FormGroup} proprio (\texttt{metricsFilterForm}). Un terzo \texttt{effect()} legge \texttt{vm.pendingScrollTarget()} e, quando non è nullo, chiama \texttt{scrollToElement} (l'unica operazione DOM richiesta dal ViewModel) poi azzera il segnale — è la View a eseguire lo scorrimento richiesto. Registra infine \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
 
 \begin{figure}[H]
     \centering
@@ -3300,9 +3299,9 @@ Metodi
 
 \subsubsection{CopilotPage}
 
-Stessa struttura di \texttt{AssistantPage}, applicata al Co-Pilot: compone il pannello di upload (\texttt{DocumentUploadPanelComponent}), l'elenco documenti (\texttt{DocumentListComponent}, a cui passa \texttt{[page]="vm.currentPage()"} e \texttt{[totalPages]="vm.totalPages()"}, inoltrando \texttt{(goToPage)} a \texttt{vm.goToPage(\$event)}), il pannello di revisione del sotto-documento selezionato (\texttt{SubDocumentListComponent}, a cui passa anche \texttt{[previewStatus]="vm.previewStatus()"}) e il proprio pannello di metriche (\texttt{MetricsPanelComponent}, con \texttt{[presentation]="vm.metricsPresentation()"}), leggendo dal template solo \texttt{vm.*}: anche qui il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non più lo Store direttamente (Sezione 6.2). Istanzia il ViewModel con \texttt{new CopilotPageViewModel(inject(DocumentWorkflowService), store)}, senza la dipendenza di scorrimento perché questo ViewModel non ne ha mai avuto bisogno (Sezione 6.2).
+Stessa struttura di \texttt{AssistantPage}, applicata al Co-Pilot: compone il pannello di upload (\texttt{DocumentUploadPanelComponent}), l'elenco documenti (\texttt{DocumentListComponent}, a cui passa \texttt{[page]="vm.currentPage()"} e \texttt{[totalPages]="vm.totalPages()"}, inoltrando \texttt{(goToPage)} a \texttt{vm.goToPage(\$event)}), il pannello di revisione del sotto-documento selezionato (\texttt{SubDocumentListComponent}, a cui passa anche \texttt{[previewStatus]="vm.previewStatus()"}) e il proprio pannello di metriche (\texttt{MetricsPanelComponent}, con \texttt{[presentation]="vm.metricsPresentation()"}), leggendo dal template solo \texttt{vm.*}: anche qui il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non lo Store direttamente (Sezione 6.2). Istanzia il ViewModel con \texttt{new CopilotPageViewModel(inject(DocumentWorkflowService), store)}, senza la dipendenza di scorrimento perché questo ViewModel non ne ha mai avuto bisogno (Sezione 6.2).
 
-Collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocumentFilterForm()}) e un \texttt{effect()} che rilegge lo storico documentale chiamando \texttt{vm.reload()} a ogni cambio di filtro o di stato condiviso. Un secondo \texttt{effect()}, nuovo rispetto alla versione precedente, legge \texttt{vm.selectedDocument()} e chiama \texttt{vm.loadPreviewStatus(document?.previewUrl ?? null)}: la fetch della raggiungibilità dell'anteprima segue la selezione, non un elenco a parte. Registra inoltre \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}.
+Collega allo stesso modo un \texttt{FormGroup} di filtri (\texttt{createDocumentFilterForm()}) e un \texttt{effect()} che rilegge lo storico documentale chiamando \texttt{vm.reload()} a ogni cambio di filtro o di stato condiviso. Un secondo \texttt{effect()} legge \texttt{vm.selectedDocument()} e chiama \texttt{vm.loadPreviewStatus(document?.previewUrl ?? null)}: la fetch della raggiungibilità dell'anteprima segue la selezione, non un elenco a parte. Registra inoltre \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}.
 
 \begin{figure}[H]
     \centering
@@ -3325,11 +3324,11 @@ Metodi
 
 \subsubsection{OverviewPage}
 
-La pagina più semplice nella logica di collegamento (nessun \texttt{FormGroup}, perché la Overview non ha uno storico filtrabile proprio), ma non più quella con la composizione più povera: mostra le priorità operative (\texttt{AttentionNoteComponent}, montato solo se \texttt{vm.quarantined() > 0}, più una griglia di \texttt{MetricCardComponent} per \texttt{vm.priorities()}), gli indicatori di qualità per modulo (\texttt{MetricStarsComponent} per \texttt{vm.assistantQuality()}, \texttt{MetricGaugeComponent} per \texttt{vm.copilotQuality()}, Sezione 6.6) e le attività recenti già presenti nello Store, in una tabella con \texttt{StatusBadgeComponent}/\texttt{EmptyStateComponent}. Non monta più \texttt{MetricsPanelComponent}: mostra direttamente le sue schede mirate, non un pannello generico.
+La pagina più semplice nella logica di collegamento (nessun \texttt{FormGroup}, perché la Overview non ha uno storico filtrabile proprio): mostra le priorità operative (\texttt{AttentionNoteComponent}, montato solo se \texttt{vm.quarantined() > 0}, più una griglia di \texttt{MetricCardComponent} per \texttt{vm.priorities()}), gli indicatori di qualità per modulo (\texttt{MetricStarsComponent} per \texttt{vm.assistantQuality()}, \texttt{MetricGaugeComponent} per \texttt{vm.copilotQuality()}, Sezione 6.6) e le attività recenti già presenti nello Store, in una tabella con \texttt{StatusBadgeComponent}/\texttt{EmptyStateComponent}. Non monta \texttt{MetricsPanelComponent}: mostra direttamente le sue schede mirate, non un pannello generico.
 
-Istanzia il ViewModel con \texttt{new OverviewPageViewModel(this.store, inject(Router))}: non riceve più una funzione di scorrimento, per lo stesso motivo di \texttt{AssistantPage}. I pulsanti di richiamo all'azione nella sezione hero e i due link "Vedi tutte le metriche" delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scorrimento verso la sezione target sulla pagina di destinazione; un \texttt{effect()} nel costruttore — l'unico della View, dove in precedenza non ce n'era nessuno — legge \texttt{vm.pendingScrollTarget()} e lo esegue, stesso schema di \texttt{AssistantPage}/\texttt{CopilotPage}.
+Istanzia il ViewModel con \texttt{new OverviewPageViewModel(this.store, inject(Router))}: non riceve una funzione di scorrimento nel costruttore, per lo stesso motivo di \texttt{AssistantPage}. I pulsanti di richiamo all'azione nella sezione hero e i due link "Vedi tutte le metriche" delegano interamente a \texttt{vm.navigate()}, che naviga e poi chiede lo scorrimento verso la sezione target sulla pagina di destinazione; un \texttt{effect()} nel costruttore legge \texttt{vm.pendingScrollTarget()} e lo esegue, stesso schema di \texttt{AssistantPage}/\texttt{CopilotPage}.
 
-A differenza della versione precedente di questo documento, qui la View non legge più lo Store in nessun punto del template, banner d'errore compreso (\texttt{(retry)="vm.reload()"}): era l'unica delle tre pagine a farlo, e non lo è più. Il cambiamento non è cosmetico: prima \texttt{OverviewPageViewModel} non esponeva segnali propri per le metriche degli strumenti, quindi il template le leggeva direttamente dallo Store senza filtro; ora il ViewModel sintetizza priorità e qualità (Sezione 6.2), e il campo \texttt{store} sulla View resta solo per costruire il ViewModel, esattamente come su \texttt{AssistantPage} e \texttt{CopilotPage}.
+Qui la View non legge lo Store in nessun punto del template, banner d'errore compreso (\texttt{(retry)="vm.reload()"}): il ViewModel sintetizza priorità e qualità (Sezione 6.2), e il campo \texttt{store} sulla View resta solo per costruire il ViewModel, esattamente come su \texttt{AssistantPage} e \texttt{CopilotPage}.
 
 \begin{figure}[H]
     \centering
@@ -3660,7 +3659,7 @@ Disaccoppia l'esecuzione di una regola di business dalla sua conseguenza collate
 
 Esempio nel progetto. Applicato simmetricamente a entrambi i domini, con porte separate perché gli eventi sono specifici di dominio: Documents dispatcha 14 eventi (\texttt{DocumentEventDispatcherPort} → \texttt{LaravelDocumentEventDispatcher}, 13 listener), Communications 21 (\texttt{CommunicationEventDispatcherPort} → \texttt{LaravelCommunicationEventDispatcher}, 20 listener; si veda la Sezione 5 per l'elenco delle classi che li dispatchano). In ciascun dominio un evento di completamento pipeline (\texttt{DocumentWorkflowCompleted}, \texttt{CommunicationWorkflowCompleted}) non ha un listener registrato: lo stato che segnala è già persistito direttamente dal caso d'uso che lo dispatcha, non da una reazione all'evento. Ogni listener dipende da un solo collaboratore, \texttt{AuditLogger} (Sezione 5.3).
 
-Prima dell'adozione sistematica del pattern, le chiamate ad audit erano sparse manualmente in ogni caso d'uso: la chiamata di audit per "copertina degradata" era duplicata in due punti distinti (degrado da errore del modello o dello storage, degrado da timeout in \texttt{FinalizeCommunicationService}); con l'evento unico quella duplicazione sparisce. Senza Observer, ogni nuova reazione a un evento di dominio richiederebbe toccare ogni caso d'uso che genera quell'evento, invece di aggiungere un listener.
+Senza Observer, ogni nuova reazione a un evento di dominio richiederebbe toccare ogni caso d'uso che genera quell'evento, invece di aggiungere un listener.
 
 \begin{lstlisting}[style=phplisting, caption={Registrazione del listener in AppServiceProvider e reazione in RecordDocumentProcessingStarted}]
 // app/Providers/AppServiceProvider.php (boot())
@@ -3886,7 +3885,7 @@ export class AssistantPageViewModel {
 
 Le dipendenze (\texttt{AssistantService}, \texttt{MvpStateStore}) arrivano dal costruttore, non da \texttt{inject()}: la classe è istanziabile con \texttt{new AssistantPageViewModel(...)} in un test senza \texttt{TestBed}, il requisito che ha guidato la scelta di questo pattern al posto del \texttt{@Component} stesso come ViewModel (si veda oltre).
 
-Il minimo richiesto sarebbe il \texttt{@Component} stesso come ViewModel (MVVM in senso lasco): scartato come unica implementazione perché non regge a un test costruito con \texttt{new}, il requisito esplicito del refactor. Senza questo pattern, ogni test sulla logica di una pagina richiederebbe \texttt{TestBed}/\texttt{Injector.create()}: il costo che l'intera Sezione 6.2 spiega di voler evitare, e solo dove il beneficio lo giustifica (le tre pagine principali, non ogni componente della SPA).
+Il minimo richiesto sarebbe il \texttt{@Component} stesso come ViewModel (MVVM in senso lasco): scartato come unica implementazione perché non regge a un test costruito con \texttt{new}. Senza questo pattern, ogni test sulla logica di una pagina richiederebbe \texttt{TestBed}/\texttt{Injector.create()}: il costo che l'intera Sezione 6.2 spiega di voler evitare, e solo dove il beneficio lo giustifica (le tre pagine principali, non ogni componente della SPA).
 
 \end{sloppypar}
 
@@ -4012,7 +4011,7 @@ Colonne
 
 \subsubsection{workflow\_tasks}
 
-Tabella unica dei task di callback dai worker asincroni verso Step Functions/SQS, condivisa da entrambi i domini invece di duplicata per modulo: la presa in carico atomica e la deduplicazione sul token vivono in un solo posto, e il dominio del task è identificato dalla coppia polimorfica \texttt{subject\_type}/\texttt{subject\_id} invece di una foreign key dedicata. Sostituisce la precedente \texttt{document\_workflow\_tasks}, specifica del solo modulo Documents, ritirata quando la stessa meccanica è servita anche a Communications.
+Tabella unica dei task di callback dai worker asincroni verso Step Functions/SQS, condivisa da entrambi i domini invece di duplicata per modulo: la presa in carico atomica e la deduplicazione sul token vivono in un solo posto, e il dominio del task è identificato dalla coppia polimorfica \texttt{subject\_type}/\texttt{subject\_id} invece di una foreign key dedicata.
 
 \begin{figure}[H]
     \centering
