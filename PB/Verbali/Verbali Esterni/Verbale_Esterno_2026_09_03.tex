@@ -1,0 +1,179 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tabularx} % Per l'ambiente tabularx (tabelle)
+\usepackage{calc} % Sempre per le tabelle
+\usepackage[table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{xcolor}  
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{colortbl}
+\usepackage{eurosym}
+\usepackage[dvipsnames]{xcolor}
+
+\newcommand{\groupmail}{alittlebyte.swe@gmail.com}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
+
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=331pt,
+    includeheadfoot
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Verbale 2026-09-03}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \begin{tabular}{c}
+                \includegraphics[height=10cm]{\grouplogo}\\[1ex]
+                \small\texttt{\groupmail}
+            \end{tabular}%
+        }
+    }
+    \fancyfoot[L]{\includegraphics[height=0.6cm]{\groupsymbol}\hspace{0.45em}aLittleByte}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[R]{Verbale 2026-09-03}
+}
+
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\vspace*{0.5cm}
+
+\begin{center}
+    {\LARGE \textbf{Verbale Esterno - 2026-09-03}}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tcolorbox}[
+        width=0.92\textwidth,
+        colback=gray!6,
+        colframe=gray!45,
+        boxrule=0.5pt,
+        arc=2mm,
+        boxsep=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt
+    ]
+        \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
+            Gruppo      & aLittleByte (gruppo 19) \\
+            Redattore   & A. Oloni \\
+            Verificatori& E. Bellet\\
+            Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
+            Data        & 2026-09-03\\
+        \end{tabularx}
+    \end{tcolorbox}
+\end{center}
+
+\newpage
+
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot}
+\tableofcontents
+\newpage
+
+\section{Informazioni Generali}
+\section*{Specifiche Documento}
+\hrule
+\vspace{1cm}
+
+\begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
+Luogo Riunione & Google Meet \\[6pt]
+
+Orario (Inizio - Fine) & 15:15 -- 15.35 \\[6pt]
+
+\glslink{redattore}{Redattore} &
+A. Oloni\\[6pt]
+
+\glslink{amministratore}{Amministratore} & 
+L. Soligo\\[6pt]
+
+\glslink{verificatore}{Verificatore} &
+E. Bellet\\[6pt]
+
+Partecipanti &
+  A. Maule \\ &
+  A. Oloni\\ &
+  A. Gastaldello\\ &
+  E. Bellet\\ & 
+  D. Belluz\\ &
+  L. Soligo\\ &
+  V.Y. Kaneda Fernandes\\[6pt]
+
+  Partecipanti Esterni &
+  Luca Iuzzolino\\ &
+  GianPaolo Ferrarin\\ [6pt]
+
+\end{tabular}
+
+
+\section{Ordine del Giorno}
+    \begin{itemize}
+    \item Presentazione dell'MVP (Minimum Viable Product) del progetto e dimostrazione live.
+    \item Discussione e chiarimenti sulle metriche di affidabilità dell'applicativo.
+    \item Valutazione e approvazione finale da parte dell'azienda referente.
+    \end{itemize}
+
+
+\section{Attività svolte}
+\subsection{Presentazione dell'MVP del progetto e dimostrazione live.}
+\textbf{Leonardo Soligo} ha guidato la presentazione dell'MVP rivolta ai referenti aziendali. Tramite la condivisione dello schermo, è stato mostrato l'applicativo in funzione. È stato confermato che lo stack tecnologico utilizzato è rimasto invariato rispetto alle scelte architetturali precedenti. Sono stati mostrati quindi:
+\begin{itemize}
+    \item Overview iniziale: panoramica su documenti da verificare, bozze da valutare e dati medi.
+    \item Modulo AI Assistant: generazione automatica di testo, copertina e PDF finale, sistema di rating, storico documenti con filtri e metriche.
+    \item Modulo Co-pilot: caricamento documenti, stato di validazione (automatica, da verificare, verificata manualmente) e metriche di utilizzo (es. documenti analizzati, tempi medi di elaborazione).
+\end{itemize}
+
+\subsection{Discussione e chiarimenti sulle metriche di affidabilità dell'applicativo.}
+I referenti aziendali hanno richiesto chiarimenti specifici sul metodo di calcolo della percentuale di affidabilità/confidenza mostrata dal sistema. Leonardo Soligo ha quindi fornito le relative spiegazioni, illustrando anche visivamente le modalità con cui tali percentuali vengono determinate.
+
+\subsection{Valutazione e approvazione finale da parte dell'azienda referente.}
+L'azienda si è espressa in modo \textbf{positivo} riguardo al lavoro svolto e alle funzionalità presentate. Ha complimentato il team per i risultati raggiunti e ha \textbf{approvato} ufficialmente l'MVP presentato.
+\section{To-Do List}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
+    \hline
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
+    \hline
+        \textit{Alex Oloni} & Redigere il verbale 2026-09-03 & \href{https://github.com/aLittleByte-19/Documentazione/issues/175}{\#175} \\
+    \hline
+    \end{tabular}
+    \label{tab:placeholder}
+\end{table}
+
+\end{document}
