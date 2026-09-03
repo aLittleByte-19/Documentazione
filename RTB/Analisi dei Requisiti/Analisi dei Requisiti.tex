@@ -3407,13 +3407,11 @@ I requisiti di vincolo definiscono i limiti tecnologici entro cui il sistema dev
     \hline
     RVC15-OB & La gestione di segreti e parametri di configurazione deve avvenire tramite un servizio gestito di gestione dei segreti. & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC16-OB & L'osservabilità del sistema (metriche, tracing e log) deve basarsi su strumentazione OpenTelemetry, esportata verso un backend di osservabilità gestito (backend non vincolato). & Interna/\glslink{committente-proponente}{Proponente} \\
+    RVC16-OB & L'osservabilità del sistema (log e metriche) deve basarsi su log strutturati JSON e metriche in formato CloudWatch EMF, esportati verso un backend di osservabilità gestito (backend non vincolato). & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
-    RVC17-OB & L'autenticazione degli utenti deve avvenire tramite un identity provider con token JWT; lo specifico provider non è vincolato. & Interna/\glslink{committente-proponente}{Proponente} \\
+    RVC17-OB & Il provisioning dell'infrastruttura cloud deve essere descritto e gestito tramite Infrastructure-as-Code. & Interna \\
     \hline
-    RVC18-OB & Il provisioning dell'infrastruttura cloud deve essere descritto e gestito tramite Infrastructure-as-Code. & Interna \\
-    \hline
-    RVC19-OP & L'invio di email e notifiche deve avvenire tramite un servizio gestito (es.\ Amazon SES per le email, Amazon SNS per le notifiche). & Interna/\glslink{committente-proponente}{Proponente} \\
+    RVC18-OP & L'invio di email e notifiche deve avvenire tramite un servizio gestito (es.\ Amazon SES per le email, Amazon SNS per le notifiche). & Interna/\glslink{committente-proponente}{Proponente} \\
     \hline
 
 
