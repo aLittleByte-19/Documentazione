@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{eurosym}
@@ -17,7 +18,15 @@
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{patterns}
 \usepackage{listings}
+\usepackage{titlesec}
 \graphicspath{{./}{../../}}
+\titleformat{\paragraph}
+    {\normalfont\bfseries}
+    {\theparagraph}
+    {1em}
+    {}
+\titlespacing*{\paragraph}
+    {0pt}{2.5ex plus 1ex minus .2ex}{0.75em}
 
 \lstdefinestyle{codelisting}{
     basicstyle=\ttfamily\footnotesize,
@@ -285,7 +294,7 @@ La struttura del presente documento è articolata nelle seguenti sezioni princip
     \item \textbf{Sezione 2 - Tecnologie:} Descrive lo stack tecnologico adottato, suddiviso per categoria: linguaggi, framework, librerie, ambiente locale, edge, servizi cloud AWS, persistenza dei dati, osservabilità e CI/quality gate.
     \item \textbf{Sezione 3 - API:} Descrive il contratto REST esposto dal backend, organizzato per area funzionale (stato applicativo, AI Assistant Generativo, AI Co-Pilot).
     \item \textbf{Sezione 4 - Architettura del Sistema:} Descrive il contesto di sistema, l'architettura applicativa e logica interna del backend, il dettaglio dei componenti, la distribuzione, la containerizzazione e lo stile architetturale complessivo.
-    \item \textbf{Sezione 5 - Descrizione architettura (Backend):} Scende al livello delle singole classi dei due domini di prodotto (Documents, Communications): entità di dominio, casi d'uso applicativi e adapter secondari.
+    \item \textbf{Sezione 5 - Descrizione architettura (Backend):} Scende al livello delle singole classi dei due domini di prodotto (Documents, Communications): adapter primari, entità di dominio, casi d'uso applicativi e adapter secondari.
     \item \textbf{Sezione 6 - Architettura Frontend:} Descrive i principi di progettazione della SPA Angular, il pattern MVVM adottato, i modelli di dati, i servizi di comunicazione col backend e i componenti UI, micro e macro.
     \item \textbf{Sezione 7 - Design Pattern:} Documenta i design pattern applicati esplicitamente nel backend e nel frontend, con l'intento di ciascuno, dove si trova nel codice e cosa succederebbe senza.
     \item \textbf{Sezione 8 - Database:} Descrive il modello dei dati del sistema: schema ER, schema relazionale e la descrizione di ciascuna tabella.
@@ -618,7 +627,7 @@ Il sistema affida l'osservabilità operativa a tre meccanismi applicativi, senza
 \begin{itemize}
     \item \textbf{Audit trail di compliance}: \texttt{AuditLogger} (Sezione 5.3) registra ogni evento rilevante (upload, elaborazione, revisione, generazione, valutazione...) sulla tabella \texttt{audit\_events}, append-only (Sezione 8). Non è un sistema di monitoraggio operativo ma un registro di conformità: risponde a "chi ha fatto cosa, quando", non a "il sistema sta bene adesso?".
     \item \textbf{Correlation/request ID}: il middleware \texttt{CorrelateRequests} lato backend, con l'equivalente lato frontend nella cartella \texttt{core} (Sezione 6.1), taggano ogni richiesta HTTP e ogni messaggio SQS con un identificativo di correlazione, propagato nei log strutturati per ricostruire il percorso di una richiesta attraverso i tre processi backend (API, due Worker).
-    \item \textbf{Metriche operative verso CloudWatch}: \texttt{EmfMetricsRecorder} scrive righe in CloudWatch Embedded Metric Format (EMF) su un canale di log dedicato (\texttt{metrics}); CloudWatch le interpreta automaticamente come dato di metrica quando la riga arriva da CloudWatch Logs, senza endpoint di scrape né SDK applicativo verso \texttt{PutMetricData}. Il listener \texttt{RecordRequestMetrics} lo invoca a ogni richiesta HTTP (evento nativo \texttt{RequestHandled}, non un middleware: un'eccezione che risale la pipeline farebbe comunque terminare la richiesta prima che il codice dopo \texttt{\$next()} di un middleware venga eseguito) per \texttt{RequestCount}, \texttt{Latency} ed \texttt{Errors}; il comando \texttt{php artisan mvp:metrics:dlq-depth} lo invoca per \texttt{DlqDepth} per pipeline.
+    \item \textbf{Metriche operative verso CloudWatch}: \texttt{EmfMetricsRecorder} scrive righe in CloudWatch Embedded Metric Format (EMF) su un canale di log dedicato (\texttt{metrics}); CloudWatch le interpreta automaticamente come dato di metrica quando la riga arriva da CloudWatch Logs, senza endpoint di scrape né SDK applicativo verso \texttt{PutMetricData}. Il listener \texttt{RecordRequestMetrics} lo invoca a ogni richiesta HTTP (evento nativo \texttt{RequestHandled}, non un middleware: un'eccezione che risale la pipeline farebbe comunque terminare la richiesta prima che il codice dopo \texttt{\$next()} di un middleware venga eseguito) per \texttt{RequestCount}, \texttt{Latency} ed \texttt{Errors}; il comando \texttt{php artisan mvp:metrics:dlq-depth} lo invoca per \texttt{DlqDepth}, una per pipeline.
 \end{itemize}
 
 I log strutturati sul canale \texttt{stderr} sono già in formato JSON con i campi di correlazione iniettati da \texttt{CorrelateRequests}: instradabili verso CloudWatch Logs tramite il log driver del container host, senza chiamate SDK applicative dedicate. La diagnosi di un incidente passa da questi log e da due comandi diagnostici manuali: \texttt{php artisan mvp:dlq:list}, che interroga direttamente SQS per ispezionare il contenuto di una DLQ, e il già citato \texttt{mvp:metrics:dlq-depth} per la sola profondità.
@@ -666,7 +675,7 @@ Ogni modifica inviata al repository attiva la pipeline di integrazione continua 
     \hline
     Jest & 30.4 & Qualità frontend & Framework di testing JavaScript utilizzato per i test unitari del frontend Angular, in combinazione con TypeScript. \\
     \hline
-    Redocly + Orval diff & 8.23 & Contratto API & Redocly (sempre ultima versione) valida il contratto OpenAPI e Orval rigenera il client tipizzato; un diff verifica che il client generato sia allineato con il contratto aggiornato. \\
+    Redocly + Orval diff & Orval 8.23 / Redocly latest & Contratto API & Redocly (sempre ultima versione) valida il contratto OpenAPI e Orval rigenera il client tipizzato; un diff verifica che il client generato sia allineato con il contratto aggiornato. \\
     \hline
     terraform validate & 1.10.5 & IaC & Valida formato e correttezza sintattica/semantica della configurazione Terraform prima di qualsiasi applicazione. \\
     \hline
@@ -874,7 +883,7 @@ Sviluppato in Angular come Single Page Application, gestisce l'interfaccia e l'i
 
 \subsubsection{Backend: Architettura Esagonale}
 
-Il backend adotta un'architettura esagonale, applicata ai due domini di prodotto: \texttt{Documents} (AI Co-Pilot) e \texttt{Communications} (AI Assistant Generativo). La logica di business è disaccoppiata dai dettagli tecnici (framework, database, SDK esterni) per garantire manutenibilità, testabilità e sostituibilità dei singoli componenti. Il backend si articola in quattro parti.
+Il backend adotta un'architettura esagonale, applicata ai due domini di prodotto: \texttt{Documents} (AI Co-Pilot) e \texttt{Communications} (AI Assistant Generativo). La logica di business è disaccoppiata dai dettagli tecnici (framework, database, SDK esterni) per garantire manutenibilità, testabilità e sostituibilità dei singoli componenti. Il backend si articola in tre parti.
 
 \paragraph{Adapter primari}
 Ricevono uno stimolo esterno e lo traducono in una chiamata a un caso d'uso, senza contenere regole di business. Nella forma più comune sono i Controller HTTP. Il gestore dei task di workflow è un adapter primario equivalente, guidato da un messaggio SQS o da una callback di Step Functions invece che da una richiesta HTTP.
@@ -905,7 +914,8 @@ La tabella seguente quantifica la composizione interna dei due domini: casi d'us
 {\small
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
-\begin{longtable}{|p{2.6cm}|p{1.8cm}|p{2.6cm}|p{2.6cm}|p{5.7cm}|}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{|p{2.3cm}|p{1.6cm}|p{2.4cm}|p{1.6cm}|p{5.6cm}|}
     \hline
     \rowcolor{gray!20}
     \textbf{Dominio} & \textbf{Casi d'uso} & \textbf{Porte secondarie} & \textbf{Eventi} & \textbf{Adapter primario} \\
@@ -933,7 +943,7 @@ La separazione fra i due domini è verificata automaticamente a ogni build della
 
 Copre l'intera pipeline dell'AI Co-Pilot: dall'ingresso del documento caricato dall'utente, attraverso l'orchestrazione asincrona di riconoscimento ottico, classificazione ed estrazione dei campi, fino alla consultazione, alla revisione umana dei dati estratti e alla composizione del documento precompilato per il destinatario, che l'operatore scarica ed invia fuori piattaforma. Le porte secondarie isolano il dominio dalla persistenza, dai gateway AI di riconoscimento ottico e classificazione, dallo storage documentale, dal rendering del documento di invio e dalla pubblicazione degli eventi di dominio.
 
-Il diagramma seguente si concentra sulla pipeline centrale (upload, orchestrazione asincrona, revisione); i controller e i casi d'uso di sola consultazione (\texttt{DocumentPreviewController}, \texttt{SendMessageController} e i rispettivi casi d'uso di lista, cancellazione e polling) non compaiono qui: il conteggio completo dei 4 Controller HTTP e dei 12 casi d'uso è nella Tabella~\ref{tab:component-metrics} della Sezione 4.4, il dettaglio di ciascuno nella Sezione 5.1.
+Il diagramma seguente si concentra sulla pipeline centrale (upload, orchestrazione asincrona, revisione); i controller e i casi d'uso di sola consultazione (\texttt{DocumentPreviewController}, \allowbreak\texttt{SendMessageController} e i rispettivi casi d'uso di lista, cancellazione e polling) non compaiono qui: il conteggio completo dei 4 Controller HTTP e dei 12 casi d'uso è nella Tabella~\ref{tab:component-metrics} della Sezione 4.4, il dettaglio di ciascuno nella Sezione 5.1.
 
 \begin{figure}[H]
     \centering
@@ -975,7 +985,7 @@ L'intero stack è containerizzato; i dettagli di ciascun servizio sono descritti
     \item \textbf{Emulazione AWS (LocalStack) e provisioning (Terraform):} riproducono in locale, senza credenziali reali, i servizi AWS emulabili (Sezione 2.7); Bedrock e Textract restano un'eccezione e parlano sempre con AWS reale.
 \end{itemize}
 
-Il pool PHP-FPM del container Backend è dimensionato esplicitamente (\texttt{docker/php/www-pool.conf}), invece di restare sul default dell'immagine base (\texttt{pm.max\_children=5}). Il rischio non era il timeout di Traefik o di Nginx verso lo stream SSE (l'heartbeat inviato ogni secondo lo tiene vivo), ma il pool PHP-FPM stesso: ogni connessione SSE occupa un worker per l'intera durata dello stream (fino a 1800 secondi per i documenti), quindi pochi upload concorrenti avrebbero esaurito l'intero pool, bloccando anche l'endpoint \texttt{/health} per tutte le richieste in arrivo.
+Il pool PHP-FPM del container Backend è dimensionato esplicitamente (\texttt{docker/\allowbreak php/\allowbreak www-pool.conf}), invece di restare sul default dell'immagine base (\texttt{pm.max\_children=5}). Il rischio non era il timeout di Traefik o di Nginx verso lo stream SSE (l'heartbeat inviato ogni secondo lo tiene vivo), ma il pool PHP-FPM stesso: ogni connessione SSE occupa un worker per l'intera durata dello stream (fino a 1800 secondi per i documenti), quindi pochi upload concorrenti avrebbero esaurito l'intero pool, bloccando anche l'endpoint \texttt{/health} per tutte le richieste in arrivo.
 
 % ── 4.7 ──────────────────────────────────────────────────────────────────────
 \subsection{Stile architetturale}
@@ -1194,11 +1204,12 @@ Attributi
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{fromRecord(record: OriginalDocumentRecord): self}
+    \item \texttt{processingStatus(): ProcessingStatus}, \texttt{errorMessage(): ?string}, \texttt{s3Bucket(): ?string}, \texttt{s3Key(): ?string}, \texttt{workflowExecutionArn(): ?string}, \texttt{workflowCompleted(): bool}: accessori di sola lettura sui rispettivi attributi privati.
+    \item \texttt{hasManualUploadMetadata(): bool} --- vero se l'utente ha fornito almeno uno dei metadati manuali di caricamento (tipo documento, ragione sociale, mese/anno di riferimento).
     \item \texttt{startProcessing(executionArn: string, s3Bucket: string, s3Key: string, startedAt: DateTimeImmutable): void}
     \item \texttt{fail(errorMessage: string, technicalReason: ?string, failedAt: DateTimeImmutable): void}
     \item \texttt{complete(): void}
     \item \texttt{markWorkflowCompleted(completedAt: DateTimeImmutable): void}
-    \item \texttt{hasManualUploadMetadata(): bool} --- vero se l'utente ha fornito almeno uno dei metadati manuali di caricamento (tipo documento, ragione sociale, mese/anno di riferimento).
     \item \texttt{pendingChanges(): OriginalDocumentChanges}
 \end{itemize}
 
@@ -1222,6 +1233,7 @@ Attributi
 Metodi
 \begin{itemize}\raggedright
     \item \texttt{fromRecord(record: SubDocumentRecord, reviewStatus: ReviewStatus): self}
+    \item \texttt{reviewStatus(): ReviewStatus}, \texttt{sendStatus(): SendStatus}: accessori di sola lettura sui rispettivi attributi privati.
     \item \texttt{markAutoValidated(): void}
     \item \texttt{markNeedsReview(): void}
     \item \texttt{markQuarantined(reason: string): void}
@@ -1641,7 +1653,7 @@ Il modulo Communications è la componente del sistema dedicata alla generazione 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{ImmaginiSpecificaTecnica/Esagonale/diagrammaClassi_Communications.png}
+    \rotatebox{90}{\includegraphics[width=\textheight,height=\textwidth,keepaspectratio]{ImmaginiSpecificaTecnica/Esagonale/diagrammaClassi_Communications.png}}
     \caption{Diagramma delle classi --- Modulo Communications}
     \label{fig:communications-class-diagram}
 \end{figure}
@@ -2993,7 +3005,7 @@ Metodi
 
 \subsubsection{SseClient}
 
-Client SSE condiviso da entrambi i servizi di feature, iniettabile a livello applicazione (\texttt{providedIn: "root"}). A differenza di \texttt{EventSource}, è basato su \texttt{fetch}: può quindi inviare gli header di correlazione (\texttt{X-Request-Id}, \texttt{X-Correlation-Id}) sulla richiesta iniziale di apertura dello stream, cosa che \texttt{EventSource} non permette.
+Client SSE condiviso da entrambi i servizi di feature, iniettabile a livello applicazione (\texttt{providedIn: "root"}). A differenza di \texttt{EventSource}, è basato su \texttt{fetch}: può quindi inviare gli header di correlazione (\texttt{X-Request-ID}, \texttt{X-Correlation-ID}) sulla richiesta iniziale di apertura dello stream, cosa che \texttt{EventSource} non permette.
 
 Distingue esplicitamente l'evento SSE nominato \texttt{error} (dati applicativi, es. un messaggio di errore) dalla caduta della connessione o da una risposta non riuscita: due condizioni che \texttt{EventSource} collassa in un unico \texttt{onerror}, costringendo il chiamante a indovinare quale sia successo.
 
@@ -3139,7 +3151,7 @@ Metodi
 
 \subsubsection{Le forme di scheda del pannello metriche}
 
-Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? — il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate esclusivamente da \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina. \texttt{copilot.processing\_seconds} e \texttt{assistant.generation\_seconds} sono una singola media in secondi (kind \textit{trend}, come un conteggio qualunque). Nessuna delle due pagine usa \texttt{MetricGaugeComponent} o \texttt{MetricStatusComponent} tramite il pannello: restano forme valide del dispatcher, e \texttt{MetricGaugeComponent} è montato direttamente da \texttt{OverviewPage} (Sezione 6.7) per la qualità del Co-Pilot.
+Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? — il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate esclusivamente da \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina. \texttt{copilot.processing\_seconds} è una singola media in secondi (kind \textit{trend}, come un conteggio qualunque): il modulo Communications non ha una metrica equivalente, la durata della generazione non è oggi esposta come voce del contratto \texttt{/api/v1/state}. Nessuna delle due pagine usa \texttt{MetricGaugeComponent} o \texttt{MetricStatusComponent} tramite il pannello: restano forme valide del dispatcher, e \texttt{MetricGaugeComponent} è montato direttamente da \texttt{OverviewPage} (Sezione 6.7) per la qualità del Co-Pilot.
 
 \begin{figure}[H]
     \centering
@@ -3273,7 +3285,7 @@ Le pagine sono i componenti radice di ciascuna feature, montati dal router: \tex
 
 Compone il pannello di generazione (\texttt{CommunicationGeneratorPanelComponent}) e quello di anteprima (\texttt{GeneratedCommunicationPreviewComponent}), entrambi componenti di feature, insieme all'elenco delle configurazioni di prompt salvate (\texttt{PromptConfigurationListComponent}) e allo storico comunicazioni (\texttt{CommunicationHistoryListComponent}), al proprio pannello di metriche (\texttt{MetricsPanelComponent}, Sezione 6.6, più \texttt{MetricCompositionComponent} per la ripartizione delle bozze e \texttt{RecentFeedbackListComponent}, componente di feature, per gli ultimi feedback testuali, UC-27.3) e a componenti condivisi per stato di errore e stato vuoto, legando ogni input e ogni evento del template a un segnale o un metodo di \texttt{vm} (\texttt{AssistantPageViewModel}, Sezione 6.2) — senza eccezioni: anche il banner d'errore principale chiama \texttt{(retry)="vm.reloadState()"}, non lo Store direttamente (Sezione 6.2).
 
-Nel costruttore instanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), this.store)}: non riceve una funzione di scorrimento, perché \texttt{AssistantPageViewModel} non la chiede al costruttore (Sezione 6.2).
+Nel costruttore istanzia il ViewModel con \texttt{new AssistantPageViewModel(inject(AssistantService), this.store)}: non riceve una funzione di scorrimento, perché \texttt{AssistantPageViewModel} non la chiede al costruttore (Sezione 6.2).
 
 Collega un \texttt{FormGroup} di filtri e un \texttt{effect()} che si limita a leggere lo storico condiviso e i filtri attivi del ViewModel, poi chiama \texttt{vm.reload()}: la chiamata di ricerca vera e propria vive nel ViewModel, non qui. Un secondo \texttt{effect()} legge \texttt{vm.metricsFilters()} e chiama \texttt{vm.refreshFilteredMetrics()} per la sezione Metriche (RF38-OB..RF41-OB), filtro separato da quello dello storico e collegato a un \texttt{FormGroup} proprio (\texttt{metricsFilterForm}). Un terzo \texttt{effect()} legge \texttt{vm.pendingScrollTarget()} e, quando non è nullo, chiama \texttt{scrollToElement} (l'unica operazione DOM richiesta dal ViewModel) poi azzera il segnale — è la View a eseguire lo scorrimento richiesto. Registra infine \texttt{inject(DestroyRef).onDestroy(() => vm.destroy())}, così la sottoscrizione di lettura in corso viene annullata alla distruzione del componente senza che il ViewModel sappia nulla del ciclo di vita di Angular.
 
@@ -3745,7 +3757,7 @@ Nota di onestà: l'idea "un caso d'uso = una classe con un solo metodo pubblico"
 
 \subsubsection{Pattern nativi del framework}
 
-Laravel contribuisce due pattern propri, adottati così come sono anziché reimplementati: Eloquent (variante di \textit{Active Record}, POEAA) per il mapping oggetti-tabelle, usato però solo dentro gli adapter di persistenza, mai nel dominio: è proprio ciò che l'Adapter (Sezione 7.1.1) isola. Il Service Container di Laravel fornisce la dependency injection su cui si appoggiano sia il binding a Singleton (Sezione 7.1.5) sia la risoluzione automatica dei costruttori dei casi d'uso. Da non confondere con l'omonimo pattern Facade di Laravel (\texttt{Log::}, \texttt{Storage::}, \texttt{Auth::}: un accesso statico ai binding del container, un'accezione diversa dal GoF Facade applicato ai casi d'uso in Sezione 7.1.3): quelle Facade restano infrastruttura ai margini del sistema, mai usate dentro Documents o Communications; lo stesso script di CI che verifica la Dependency Rule (Sezione 4.7) lo impedirebbe.
+Laravel contribuisce due pattern propri, adottati così come sono anziché reimplementati: Eloquent (variante di \textit{Active Record}, POEAA) per il mapping oggetti-tabelle, usato però solo dentro gli adapter di persistenza, mai nel dominio: è proprio ciò che l'Adapter (Sezione 7.1.1) isola. Il Service Container di Laravel fornisce la dependency injection su cui si appoggiano sia il binding a Singleton (Sezione 7.1.5) sia la risoluzione automatica dei costruttori dei casi d'uso. Da non confondere con l'omonimo pattern Facade di Laravel (\texttt{Log::}, \texttt{Storage::}, \texttt{Auth::}: un accesso statico ai binding del container, un'accezione diversa dal GoF Facade applicato ai casi d'uso in Sezione 7.1.3): quelle Facade restano confinate agli adapter secondari (es. \texttt{Storage::} in \texttt{FlysystemDocumentStorageAdapter}, \texttt{Log::} in \texttt{TextractOcrAdapter}): mai usate nel Dominio di Documents e Communications, dove lo stesso script di CI che verifica la Dependency Rule (Sezione 4.7) blocca esplicitamente ogni riferimento a \texttt{Illuminate\textbackslash*}. Nell'Applicazione lo script è più permissivo e non vieta \texttt{Illuminate\textbackslash*} in generale (solo \texttt{Aws\textbackslash*}, i model Eloquent e il namespace dell'altro dominio): quelle tre Facade restano comunque assenti anche lì, ma per disciplina di progetto, non per un vincolo meccanico.
 
 Due pattern sono stati valutati e scartati esplicitamente, non per assenza di un candidato ma perché inapplicabili al problema reale: \textbf{Proxy} (caching o circuit-breaking davanti ai gateway Bedrock/Textract) contraddirebbe una scelta esplicita del progetto: nessun fallimento di un servizio AI deve essere mascherato da un comportamento sostitutivo automatico. \textbf{Abstract Factory} non ha un candidato reale: non esiste nel progetto una famiglia di adapter correlati da costruire coerentemente insieme (gli adapter per LocalStack e per AWS reale non sono famiglie diverse, sono la stessa classe con endpoint e credenziali diversi), e l'unico bisogno di selezione a runtime è già coperto dal Factory Method di \texttt{WorkflowTaskRegistry}.
 
@@ -3837,7 +3849,7 @@ Il chiamante (\texttt{AssistantPageViewModel::generate()}, si veda il Listing su
 
 A differenza del Facade, non è un pattern GoF ma architetturale (POEAA, come Repository o Active Record). Separa la logica applicativa di una pagina dal framework che la ospita, rendendola verificabile senza avviare l'infrastruttura di rendering: al prezzo di un file in più per ogni pagina a cui viene applicato.
 
-Esempio nel progetto. Descritto per intero in Sezione 6.2: ogni pagina principale (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}) ha un \texttt{*ViewModel} sibling (classe TypeScript pura, costruita con \texttt{new}, senza \texttt{inject()} né riferimenti al DOM) che il Component costruisce e a cui lega l'intero template.
+Esempio nel progetto. Descritto per intero in Sezione 6.2: ogni pagina principale (\texttt{AssistantPage}, \texttt{CopilotPage}, \texttt{OverviewPage}) ha un \texttt{*ViewModel} gemello (classe TypeScript pura, costruita con \texttt{new}, senza \texttt{inject()} né riferimenti al DOM) che il Component costruisce e a cui lega l'intero template.
 
 \begin{lstlisting}[style=tslisting, caption={AssistantPageViewModel -- classe pura costruita con new(), niente inject() né riferimenti al DOM}]
 // apps/frontend/src/app/features/assistant/assistant-page.view-model.ts
@@ -3850,11 +3862,11 @@ export class AssistantPageViewModel {
   readonly selectedDraftId: WritableSignal<number | null> = signal(null);
   readonly latestDraft: WritableSignal<GeneratedDraft | null> = signal(null);
 
-  // [...] altri ventisei signal/computed per storico, configurazioni,
+  // [...] altri ventotto signal/computed per storico, configurazioni,
   // filtri, presentazione delle metriche, stati di caricamento delle
   // singole azioni.
 
-  readonly error: Signal<string | null> = computed(() => this.store.error());
+  readonly error: Signal<string | null> = computed(() => this.store.error() ?? this.store.filteredAssistantError());
 
   constructor(
     private readonly assistant: AssistantService,
@@ -3898,7 +3910,7 @@ Il sistema non ha una tabella \texttt{users}: l'identità (tenant, attore) è ri
 
 \subsection{Schema ER}
 
-Le relazioni con vincolo di integrità referenziale dichiarato sono solo due: lo split produce i sotto-documenti (\texttt{original\_documents} 1---N \texttt{sub\_documents}, \textit{on delete cascade}) e l'estrazione produce i dati strutturati (\texttt{sub\_documents} 1---1 \texttt{extracted\_data}, \textit{on delete cascade}). Le altre relazioni visibili nel diagramma sono polimorfiche e non vincolate a livello di database: \texttt{workflow\_tasks} si riferisce a un \texttt{original\_documents} o a una \texttt{communications} tramite la coppia \texttt{subject\_type}/\texttt{subject\_id} (Sezione 8.4), mentre \texttt{audit\_events} si riferisce a un \texttt{original\_documents}, una \texttt{communications}, un \texttt{sub\_documents} o una \texttt{prompt\_configurations} tramite \texttt{resource\_type}/\texttt{resource\_id} (i quattro soli valori usati dai listener che scrivono l'audit trail, Sezione 7.1.6) --- nessuna tabella di dominio è quindi realmente isolata dal resto: coerentemente con l'assenza di una tabella utenti (Sezione 8), ogni tabella resta comunque scoperta dal proprio \texttt{tenant\_id}, non da una foreign key.
+Le relazioni con vincolo di integrità referenziale dichiarato sono solo due: lo split produce i sotto-documenti (\texttt{original\_documents} 1---N \texttt{sub\_documents}, \textit{on delete cascade}) e l'estrazione produce i dati strutturati (\texttt{sub\_documents} 1---1 \texttt{extracted\_data}, \textit{on delete cascade}). Le altre relazioni visibili nel diagramma sono polimorfiche e non vincolate a livello di database: \texttt{workflow\_tasks} si riferisce a un \texttt{original\_documents} o a una \texttt{communications} tramite la coppia \texttt{subject\_type}/\texttt{subject\_id} (Sezione 8.4), mentre \texttt{audit\_events} si riferisce a un \texttt{original\_documents}, una \texttt{communications}, un \texttt{sub\_documents} o una \texttt{prompt\_configurations} tramite \texttt{resource\_type}/\texttt{resource\_id} (i quattro soli valori usati dai listener che scrivono l'audit trail, Sezione 7.1.6) --- nessuna tabella di dominio è quindi realmente isolata dal resto: coerentemente con l'assenza di una tabella utenti (Sezione 8), ogni tabella resta comunque coperta dal proprio \texttt{tenant\_id}, non da una foreign key.
 
 \begin{figure}[H]
     \centering
