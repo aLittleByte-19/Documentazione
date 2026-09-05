@@ -186,7 +186,7 @@ La stesura del seguente documento segue un \glslink{approccio-incrementale}{appr
 
 
 \subsection{Scopo del prodotto}
-Il prodotto da realizzare consiste in una piattaforma software \textit{stand-alone} sviluppata su richiesta dell'azienda \glslink{committente-proponente}{proponente} \textit{Eggon}, che si affianca a \textit{\glslink{nexum}{Nexum}} — piattaforma digitale dedicata alla comunicazione interna e alla gestione HR — comunicando con essa tramite API. Il sistema è architetturalmente indipendente da \glslink{nexum}{Nexum} e comprende due moduli basati sull'\glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}:
+Il prodotto da realizzare consiste in una piattaforma software \textit{stand-alone} sviluppata su richiesta dell'azienda \glslink{committente-proponente}{proponente} \textit{Eggon}, che si affianca a \textit{\glslink{nexum}{Nexum}} — piattaforma digitale dedicata alla comunicazione interna e alla gestione HR — comunicando con essa tramite \glslink{api-application-programming-interface}{API}. Il sistema è architetturalmente indipendente da \glslink{nexum}{Nexum} e comprende due moduli basati sull'\glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}:
 \begin{itemize}
     \item \textbf{\glslink{ai-assistant-generativo}{AI Assistant Generativo}:} Un modulo dedicato agli utenti amministrativi (\glslink{dashboard}{dashboard}) che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini di copertina) a partire da un \glslink{prompt}{prompt}, garantendo l'adeguamento automatico del tono e dello stile del messaggio.
     \item \textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per Consulenti del Lavoro (CdL)}:} Un sistema avanzato in grado di riconoscere automaticamente la tipologia di documenti caricati (es. cedolini, comunicazioni), estrarne i destinatari tramite tecniche di \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} ed \textbf{\glslink{entity-resolution}{Entity Resolution}}, e automatizzare lo smistamento e il \glslink{dispaccio}{dispaccio} massivo.
@@ -310,7 +310,7 @@ Fase nevralgica per la definizione del perimetro del prodotto. Per garantire chi
         \item UC-[Numero] identifica i casi d'uso.
         \item {} [Caso Padre].[\glslink{sottocaso}{Sottocaso}] indica le scomposizioni logiche (es. \textit{UC-1.1} per un \glslink{sottocaso}{sottocaso} di \textit{UC-1}).
     \end{itemize}
-    \item \textbf{Struttura Descrittiva:} Ogni \glslink{caso-d-uso-uc}{caso d'uso} documentato deve presentare una scheda strutturata contenente: Attori coinvolti, Trigger, Pre e Post-condizioni, \glslink{scenario-principale}{Scenario Principale} (sequenza ottimale numerata), Scenario Alternativo.
+    \item \textbf{Struttura Descrittiva:} Ogni \glslink{caso-d-uso-uc}{caso d'uso} documentato deve presentare una scheda strutturata contenente: Attori coinvolti, \glslink{trigger}{Trigger}, Pre e Post-condizioni, \glslink{scenario-principale}{Scenario Principale} (sequenza ottimale numerata), \glslink{scenario-alternativo}{Scenario Alternativo}.
 \end{itemize}
 
 \paragraph{Progettazione Architetturale}
@@ -331,7 +331,7 @@ La progettazione traduce le specifiche in un'infrastruttura flessibile e scalabi
 \end{itemize}
 
 \subparagraph{Standard Stilistici}
-Il codice PHP prodotto deve essere conforme allo standard \textbf{PSR-12} (\textit{PHP Standards Recommendations 12}), adottato ufficialmente dalla comunità PHP e seguito nativamente da \glslink{laravel}{Laravel} 12. PSR-12 definisce regole precise su indentazione (4 spazi), apertura delle parentesi, dichiarazione dei tipi e struttura delle classi, garantendo uniformità in tutto il codebase indipendentemente dal membro che scrive il codice.
+Il codice \glslink{php}{PHP} prodotto deve essere conforme allo standard \textbf{PSR-12} (\textit{\glslink{php}{PHP} Standards Recommendations 12}), adottato ufficialmente dalla comunità \glslink{php}{PHP} e seguito nativamente da \glslink{laravel}{Laravel} 12. PSR-12 definisce regole precise su indentazione (4 spazi), apertura delle parentesi, dichiarazione dei tipi e struttura delle classi, garantendo uniformità in tutto il codebase indipendentemente dal membro che scrive il codice.
 
 \subparagraph{Convenzioni di Naming nel Codice}
 Le convenzioni seguono gli standard \glslink{laravel}{Laravel} e PSR-12:
@@ -341,13 +341,13 @@ Le convenzioni seguono gli standard \glslink{laravel}{Laravel} e PSR-12:
     \item \textbf{Variabili:} camelCase — es. \texttt{\$userId}, \texttt{\$documentPath}
     \item \textbf{Costanti:} UPPER\_SNAKE\_CASE — es. \texttt{MAX\_RETRY\_COUNT}
     \item \textbf{Tabelle e colonne DB:} snake\_case, tabelle al plurale — es. \texttt{processed\_documents}, \texttt{document\_type}
-    \item \textbf{File Blade:} kebab-case — es. \texttt{invoice-list.blade.php}
-    \item \textbf{Variabili d'ambiente:} UPPER\_SNAKE\_CASE — es. \texttt{MINIO\_BUCKET}, \texttt{DB\_CONNECTION}
+    \item \textbf{File Blade:} kebab-case — es. \texttt{invoice-list.blade.\glslink{php}{php}}
+    \item \textbf{Variabili d'ambiente:} UPPER\_SNAKE\_CASE — es. \texttt{\glslink{minio}{MINIO}\_BUCKET}, \texttt{DB\_CONNECTION}
 \end{itemize}
 
 \subparagraph{Strumenti di Linting e Formattazione}
 \begin{itemize}
-    \item \textbf{\glslink{laravel}{Laravel} Pint:} Tool ufficiale di formattazione per \glslink{laravel}{Laravel}, basato su PHP CS Fixer. Applica automaticamente PSR-12 al codebase. Deve essere eseguito prima di ogni commit; il codice non conforme non può essere integrato nel \glslink{branch}{branch} principale.
+    \item \textbf{\glslink{laravel}{Laravel} Pint:} Tool ufficiale di formattazione per \glslink{laravel}{Laravel}, basato su \glslink{php}{PHP} CS Fixer. Applica automaticamente PSR-12 al codebase. Deve essere eseguito prima di ogni commit; il codice non conforme non può essere integrato nel \glslink{branch}{branch} principale.
     \item \textbf{Larastan:} Estensione di PHPStan ottimizzata per \glslink{laravel}{Laravel}. Esegue \glslink{analisi-statica}{analisi statica} del codice per rilevare errori di tipo, chiamate a metodi inesistenti e potenziali bug a runtime, senza eseguire il codice. Il livello minimo di analisi adottato è il \textbf{livello 5}.
 \end{itemize}
 
@@ -364,7 +364,7 @@ Per gestire in modo efficiente la stesura, la revisione, l'automazione e il vers
 \begin{itemize}
     \item \textbf{\glslink{github}{GitHub}:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e \glslink{pull-request}{pull request} per garantire che ogni modifica venga revisionata in modo asincrono.
     \item \textbf{\glslink{github}{GitHub} Projects:} Utilizzato come strumento principale di project management. Il team gestisce il flusso di lavoro tramite una board Kanban dedicata (''aLittleByte - \glslink{dashboard}{Dashboard}'') che permette di visualizzare lo stato di tutte le attività.
-    \item \textbf{\glslink{github}{GitHub} Actions e \glslink{github}{GitHub} Pages:} Impiegati per l'automazione (Continuous Integration/Continuous Deployment) e per la pubblicazione automatica e trasparente del sito web documentale.
+    \item \textbf{\glslink{github}{GitHub} Actions e \glslink{github}{GitHub} Pages:} Impiegati per l'automazione (\glslink{ci-cd-continuous-integration-continuous-deployment}{Continuous Integration/Continuous Deployment}) e per la pubblicazione automatica e trasparente del sito web documentale.
     \item \textbf{\glslink{latex}{LaTeX}:} Scelto per la stesura di tutti i documenti tecnici e formali, garantendo un'impaginazione professionale.
     \item \textbf{Python:} Linguaggio di scripting utilizzato per automatizzare task specifici, come la generazione dinamica della struttura del sito web tramite script proprietari.
 \end{itemize}
@@ -501,7 +501,7 @@ Il \glslink{workflow}{workflow} principale, nominato \texttt{Site Deploy}, regol
 Il processo automatizzato prevede:
 \begin{enumerate}
     \item Il setup dell'ambiente virtuale e del linguaggio Python.
-    \item L'esecuzione dello script proprietario \texttt{.github/site-src/update\_index.py}, che genera dinamicamente la struttura statica del sito (HTML, CSS e asset associati).
+    \item L'esecuzione dello script proprietario \texttt{.\glslink{github}{github}/site-src/update\_index.py}, che genera dinamicamente la struttura statica del sito (HTML, CSS e asset associati).
     \item Il caricamento e rilascio automatico (Deploy) del risultato sull'ambiente \texttt{github-pages}.
 \end{enumerate}
 
@@ -511,9 +511,9 @@ La convenzione principale prevede l'uso dello \textit{snake\_case} (tutto minusc
 
 L'alberatura della \glslink{repository}{repository} documentale è strutturata in modo logico e gerarchico per separare le fasi del progetto didattico. Le directory principali includono:
 \begin{itemize}
-    \item \texttt{.github}: Contiene i \glslink{workflow}{workflow} di automazione e gli script Python necessari al rilascio.
+    \item \texttt{.\glslink{github}{github}}: Contiene i \glslink{workflow}{workflow} di automazione e gli script Python necessari al rilascio.
     \item \texttt{candidatura}: Contiene i documenti relativi alla fase di candidatura.
-    \item \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}}: Contiene la documentazione in sviluppo per la \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline}}. Al suo interno è prevista un'ulteriore categorizzazione rigida, come ad esempio la separazione dei verbali in \texttt{RTB/Verbali/Verbali Interni} e \texttt{RTB/Verbali/Verbali Esterni}.
+    \item \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}}: Contiene la documentazione in sviluppo per la \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline}}. Al suo interno è prevista un'ulteriore categorizzazione rigida, come ad esempio la separazione dei verbali in \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}/Verbali/Verbali Interni} e \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}/Verbali/Verbali Esterni}.
 \end{itemize}
 
 \subsubsection{Qualifica}
@@ -565,13 +565,13 @@ I test d'unità si focalizzano sulla verifica isolata di singole componenti soft
 Il fine di questa attività risiede nel confermare che ogni unità generi i risultati previsti partendo da input determinati. Questo processo consente di intercettare precocemente difetti di implementazione o errori nella logica funzionale durante le fasi iniziali della progettazione.
 
 \subparagraph{Ambiente e Procedura Operativa}
-Il framework adottato è \textbf{\glslink{pest}{Pest} PHP}, incluso nativamente in \glslink{laravel}{Laravel} 12. I test risiedono nella directory \texttt{tests/Unit/} del progetto.
+Il framework adottato è \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}, incluso nativamente in \glslink{laravel}{Laravel} 12. I test risiedono nella directory \texttt{tests/Unit/} del progetto.
 
 Il \glslink{programmatore}{programmatore} è tenuto a seguire questa procedura prima di aprire una \textit{\glslink{pull-request}{Pull Request}}:
 \begin{enumerate}
     \item Scrivere i \glslink{test-di-unita}{test di unità} che coprono la logica del codice prodotto.
-    \item Verificare che tutti i test passino in locale con il comando \texttt{./vendor/bin/pest}.
-    \item Calcolare la \textit{code coverage} con \texttt{./vendor/bin/pest -{}-coverage} (richiede il driver \textbf{Xdebug} attivo nel container PHP-FPM). La copertura minima richiesta per ogni unità è dell'\textbf{80\%}, in conformità con la metrica \textbf{MPC-CC}.
+    \item Verificare che tutti i test passino in locale con il comando \texttt{./vendor/bin/\glslink{pest}{pest}}.
+    \item Calcolare la \textit{code coverage} con \texttt{./vendor/bin/\glslink{pest}{pest} -{}-coverage} (richiede il driver \textbf{Xdebug} attivo nel \glslink{container}{container} \glslink{php-fpm}{PHP-FPM}). La copertura minima richiesta per ogni unità è dell'\textbf{80\%}, in conformità con la metrica \textbf{MPC-CC}.
     \item Allegare l'esito del report nella descrizione della \textit{\glslink{pull-request}{Pull Request}}.
 \end{enumerate}
 La pipeline di CI verifica automaticamente questi requisiti a ogni push; una PR con copertura inferiore alla soglia o con test falliti non può essere approvata.
@@ -579,17 +579,17 @@ La pipeline di CI verifica automaticamente questi requisiti a ogni push; una PR 
 \paragraph{Test di Regressione}
 L'esecuzione dei \glslink{test-di-regressione}{test di regressione} è finalizzata ad accertare che interventi correttivi o evolutivi sul codice non abbiano introdotto nuovi difetti o problemi nelle funzionalità già esistenti.
 
-Non richiedono la scrittura di test ad hoc: sono garantiti dall'esecuzione automatica dell'intera suite \glslink{pest}{Pest} PHP (unità + integrazione) nella pipeline di CI ad ogni \textit{push} o apertura di \textit{\glslink{pull-request}{Pull Request}}. Un test precedentemente verde che diventa rosso segnala una regressione e blocca il merge fino alla risoluzione.
+Non richiedono la scrittura di test ad hoc: sono garantiti dall'esecuzione automatica dell'intera suite \glslink{pest}{Pest} \glslink{php}{PHP} (unità + integrazione) nella pipeline di CI ad ogni \textit{push} o apertura di \textit{\glslink{pull-request}{Pull Request}}. Un test precedentemente verde che diventa rosso segnala una regressione e blocca il merge fino alla risoluzione.
 
 \paragraph{Test di Integrazione}
 L'esecuzione dei test d'integrazione è mirata a confermare che le varie componenti del software operino tra loro in modo sinergico e privo di errori.
 
-I \glslink{test-di-integrazione}{test di integrazione} sono scritti con \textbf{\glslink{pest}{Pest} PHP} e risiedono in \texttt{tests/Feature/}. A differenza dei \glslink{test-di-unita}{test di unità}, questi test eseguono richieste HTTP reali contro l'applicazione \glslink{laravel}{Laravel} utilizzando il database \glslink{postgresql}{PostgreSQL} di test (definito in \texttt{.env.testing}), verificando l'interazione tra controller, service layer e database. Anche per questi test vale il requisito di copertura minima dell'\textbf{80\%} e l'obbligo di esecuzione prima di aprire una \textit{\glslink{pull-request}{Pull Request}}.
+I \glslink{test-di-integrazione}{test di integrazione} sono scritti con \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}} e risiedono in \texttt{tests/Feature/}. A differenza dei \glslink{test-di-unita}{test di unità}, questi test eseguono richieste HTTP reali contro l'applicazione \glslink{laravel}{Laravel} utilizzando il database \glslink{postgresql}{PostgreSQL} di test (definito in \texttt{.env.testing}), verificando l'interazione tra controller, service layer e database. Anche per questi test vale il requisito di copertura minima dell'\textbf{80\%} e l'obbligo di esecuzione prima di aprire una \textit{\glslink{pull-request}{Pull Request}}.
 
 \paragraph{Test di Sistema}
 I \glslink{test-di-sistema}{test di sistema} hanno l'obiettivo di accertare che il comportamento globale del prodotto rispetti integralmente i requisiti software stabiliti durante l'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti}.
 
-Vengono eseguiti sull'applicazione deployata nell'ambiente Docker Compose completo (Nginx, PHP-FPM, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis}, \glslink{minio}{MinIO}), simulando scenari end-to-end che attraversano tutti i livelli dello stack. MinIO viene utilizzato nell'ambiente di test come object storage compatibile con le API S3. Ogni \glslink{test-di-sistema}{test di sistema} è tracciato ai \glslink{requisito-funzionale}{requisiti funzionali} dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e, ove applicabile, al relativo \glslink{caso-d-uso-uc}{caso d'uso}, tramite i codici di riferimento riportati nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}. I risultati e lo stato di copertura dei requisiti sono riportati nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}.
+Vengono eseguiti sull'applicazione deployata nell'ambiente \glslink{docker-compose}{Docker Compose} completo (\glslink{nginx}{Nginx}, \glslink{php-fpm}{PHP-FPM}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis}, \glslink{minio}{MinIO}), simulando scenari end-to-end che attraversano tutti i livelli dello stack. \glslink{minio}{MinIO} viene utilizzato nell'ambiente di test come object storage compatibile con le \glslink{api-application-programming-interface}{API} \glslink{s3-simple-storage-service}{S3}. Ogni \glslink{test-di-sistema}{test di sistema} è tracciato ai \glslink{requisito-funzionale}{requisiti funzionali} dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e, ove applicabile, al relativo \glslink{caso-d-uso-uc}{caso d'uso}, tramite i codici di riferimento riportati nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}. I risultati e lo stato di copertura dei requisiti sono riportati nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}.
 
 \subsection{Validazione}
 La validazione rappresenta il processo finale che conferma in modo definitivo che le caratteristiche del prodotto software siano pienamente conformi ai bisogni dell'utilizzo finale e agli obiettivi d'uso previsti. L'obiettivo principale è rispondere al quesito: \textit{''Did I build the right system?''} 
@@ -616,7 +616,7 @@ Per concretizzare tali obiettivi, l'organizzazione del gruppo \textit{aLittleByt
     
     \item \textbf{Monitoraggio e controllo:} Supervisione costante dello stato di avanzamento dei lavori
     
-    \item \textbf{Prevenzione e gestione dei rischi:} Identificazione delle potenziali criticità tecnologiche o organizzative, unita all'adozione di protocolli strutturati per governare le modifiche e per prevenire i possibili imprevisti.
+    \item \textbf{Prevenzione e gestione \glslink{mitigazione-dei-rischi}{dei rischi}:} Identificazione delle potenziali criticità tecnologiche o organizzative, unita all'adozione di protocolli strutturati per governare le modifiche e per prevenire i possibili imprevisti.
     
     \item \textbf{Interventi correttivi:} Prontezza e reattività nell'intervenire qualora le metriche di controllo evidenzino deviazioni significative rispetto al \glslink{piano-di-progetto}{Piano di Progetto}.
     
@@ -634,7 +634,7 @@ L'organizzazione di ogni singola iterazione è scandita da una riunione, organiz
 \begin{itemize}
     \item \textbf{\glslink{pianificazione}{Pianificazione}:} Il team seleziona gli obiettivi operativi da raggiungere, scompone il lavoro in \textit{task} gestibili e li assegna ai vari componenti, cercando di bilanciare equamente i carichi di lavoro.
     \item \textbf{\glslink{sprint}{Sprint} Review:} Si analizza lo \glslink{sprint}{sprint} appena concluso per la verifica concreta dei risultati prodotti. Costituisce l'occasione per valutare il lavoro completato, discutere le criticità tecniche emerse e misurare l'avanzamento effettivo rispetto al piano generale. In questa sede, il team deve obbligatoriamente confrontare le ore preventivate con le ore effettivamente consuntivate: gli scostamenti principali (sottostime, attività impreviste, dipendenze esterne) devono essere motivati e registrati, al fine di aggiornare sistematicamente le previsioni di costo a finire (EAC).
-    \item \textbf{\glslink{sprint}{Sprint} Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo. In questa fase è obbligatorio revisionare e aggiornare il Registro dei Rischi: per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi durante lo \glslink{sprint}{sprint}, il gruppo deve documentare formalmente nel registro la causa scatenante, l'impatto effettivo sul progetto e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista e assegnare. 
+    \item \textbf{\glslink{sprint}{Sprint} Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo. In questa fase è obbligatorio revisionare e aggiornare il Registro \glslink{mitigazione-dei-rischi}{dei Rischi}: per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi durante lo \glslink{sprint}{sprint}, il gruppo deve documentare formalmente nel registro la causa scatenante, l'impatto effettivo sul progetto e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista e assegnare. 
 \end{itemize}
 
 \paragraph{Gestione del Flusso di Lavoro tramite Kanban}
@@ -1031,7 +1031,7 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 
 \paragraph{MPC-PRI --- Percentuale Rischi Inattesi}
 \begin{itemize}
-    \item \textbf{Descrizione:} Percentuale di rischi effettivamente manifestatisi che non erano stati identificati nel registro dei rischi del \glslink{piano-di-progetto}{Piano di Progetto}. Valori bassi indicano una \glslink{pianificazione}{pianificazione} del \glslink{rischio}{rischio} efficace e un registro dei rischi completo.
+    \item \textbf{Descrizione:} Percentuale di rischi effettivamente manifestatisi che non erano stati identificati nel registro \glslink{mitigazione-dei-rischi}{dei rischi} del \glslink{piano-di-progetto}{Piano di Progetto}. Valori bassi indicano una \glslink{pianificazione}{pianificazione} del \glslink{rischio}{rischio} efficace e un registro \glslink{mitigazione-dei-rischi}{dei rischi} completo.
     \item \textbf{Formula:}
     $$\text{PRI} = \frac{N_{\text{rischi inattesi}}}{N_{\text{rischi totali manifestati}}} \times 100\%$$
     \item \textbf{Unità di misura:} percentuale (\%)
