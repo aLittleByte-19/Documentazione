@@ -200,25 +200,25 @@ Il documento spiega, schermata per schermata, cosa fa la \glslink{mvp-minimum-vi
 
 \subsection{Scopo del prodotto}
 
-\glslink{nexum}{NEXUM} è la piattaforma di consulenza e documentazione previdenziale prevista dal \glslink{capitolato}{capitolato} C5 di Eggon. La \glslink{mvp-minimum-viable-product}{MVP} consegnata in questa fase è un'applicazione \glslink{standalone}{stand-alone}: non è integrata nella \glslink{dashboard}{dashboard} amministrativa né nella \glslink{pwa-progressive-web-app}{PWA} di NEXUM, e opera in modo autonomo.
+\glslink{nexum}{NEXUM} è la piattaforma di consulenza e documentazione previdenziale prevista dal \glslink{capitolato}{capitolato} C5 di Eggon. La \glslink{mvp-minimum-viable-product}{MVP} consegnata in questa fase è un'applicazione \glslink{standalone}{stand-alone}: non è integrata nella \glslink{dashboard}{dashboard} amministrativa né nella \glslink{pwa-progressive-web-app}{PWA} di \glslink{nexum}{NEXUM}, e opera in modo autonomo.
 
 Due moduli coprono i flussi principali:
 
 \begin{itemize}
     \item \textbf{\glslink{ai-assistant-generativo}{AI Assistant Generativo}:} il \glslink{redattore}{redattore} descrive la comunicazione da preparare, sceglie \glslink{tono-comunicativo}{tono} e \glslink{stile-editoriale}{stile}, ottiene una \glslink{bozza-draft}{bozza} (titolo, testo e copertina), la rivede e la conserva nello storico solo quando lo decide esplicitamente.
-    \item \textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per i Consulenti del Lavoro}:} il \glslink{consulente-del-lavoro-cdl}{consulente} carica un PDF, il sistema ne riconosce tipologia e destinatari dal testo \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}, lo suddivide in sotto-documenti e ne estrae i campi. L'obiettivo dichiarato dal committente è la \textbf{corretta identificazione del destinatario}.
+    \item \textbf{\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot per i Consulenti del Lavoro}:} il \glslink{consulente-del-lavoro-cdl}{consulente} carica un PDF, il sistema ne riconosce tipologia e destinatari dal testo \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}, lo suddivide in sotto-documenti e ne estrae i campi. L'obiettivo dichiarato dal \glslink{committente-proponente}{committente} è la \textbf{corretta identificazione del destinatario}.
 \end{itemize}
 
 L'applicazione è una console operativa in tre viste (\textit{Overview}, \textit{Assistant}, \textit{Co-Pilot}), raggiungibile da browser all'indirizzo locale \texttt{https://localhost:8443}. Non esiste autenticazione degli utenti: l'identità è simulata e non va interpretata come un accesso nominativo.
 
 \subsection{Perimetro della MVP}
 
-Il perimetro è quello concordato con il committente il 15 luglio 2026. Per evitare attese errate, le esclusioni rilevanti per chi usa il prodotto sono le seguenti.
+Il perimetro è quello concordato con il \glslink{committente-proponente}{committente} il 15 luglio 2026. Per evitare attese errate, le esclusioni rilevanti per chi usa il prodotto sono le seguenti.
 
 \begin{itemize}
     \item \textbf{Nessun invio reale delle comunicazioni.} Il Co-Pilot prepara un messaggio di invio (destinatario, oggetto, testo), ne mostra l'anteprima e ne consente lo scaricamento in PDF. Lo stato \ui{Inviato} coincide con l'avvenuto scaricamento di quel PDF, non con un recapito via email o altri canali.
-    \item \textbf{Nessun accesso nominativo.} Non c'è login, non ci sono ruoli distinti in interfaccia e non esiste un revisore dedicato. Lo stato \ui{Approvata} di una comunicazione significa che il redattore l'ha salvata nello storico, non che un altro utente l'ha validata.
-    \item \textbf{Nessun deploy su infrastruttura cloud del committente.} Lo stack gira in locale (Docker, LocalStack). I servizi AWS reali usati dalla \glslink{mvp-minimum-viable-product}{MVP} restano \glslink{amazon-bedrock}{Amazon Bedrock} e, se abilitato, Amazon Textract insieme a uno storage S3 reale.
+    \item \textbf{Nessun accesso nominativo.} Non c'è login, non ci sono ruoli distinti in interfaccia e non esiste un revisore dedicato. Lo stato \ui{Approvata} di una comunicazione significa che il \glslink{redattore}{redattore} l'ha salvata nello storico, non che un altro utente l'ha validata.
+    \item \textbf{Nessun deploy su infrastruttura cloud del \glslink{committente-proponente}{committente}.} Lo stack gira in locale (\glslink{docker}{Docker}, \glslink{localstack}{LocalStack}). I servizi \glslink{aws}{AWS} reali usati dalla \glslink{mvp-minimum-viable-product}{MVP} restano \glslink{amazon-bedrock}{Amazon Bedrock} e, se abilitato, Amazon \glslink{textract}{Textract} insieme a uno storage \glslink{s3-simple-storage-service}{S3} reale.
     \item \textbf{Un solo PDF per caricamento}, in formato PDF non cifrato. Non sono previsti upload massivi, né file CSV, JPEG o PNG come documento da analizzare.
 \end{itemize}
 
@@ -241,7 +241,7 @@ I termini tecnici la cui definizione è nel \glslink{glossario}{Glossario} sono 
 \subsubsection{Riferimenti normativi}
 
 \begin{itemize}
-    \item \textbf{\glslink{capitolato}{Capitolato} d'appalto C5 -- NEXUM (Eggon):}\\
+    \item \textbf{\glslink{capitolato}{Capitolato} d'appalto C5 -- \glslink{nexum}{NEXUM} (Eggon):}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}\\
     \textit{Data ultimo accesso: 19/08/2026}
     \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto}:}\\
@@ -258,7 +258,7 @@ I termini tecnici la cui definizione è nel \glslink{glossario}{Glossario} sono 
     \item \textbf{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} v2.0.0:}\\
     \url{https://alittlebyte-19.github.io/Documentazione/RTB/Analisi\%20dei\%20Requisiti/Analisi\%20dei\%20Requisiti.pdf}\\
     \textit{Data ultimo accesso: 19/08/2026}
-    \item \textbf{\glslink{repository}{Repository} della MVP:}\\
+    \item \textbf{\glslink{repository}{Repository} della \glslink{mvp-minimum-viable-product}{MVP}:}\\
     \url{https://github.com/aLittleByte-19/MVP}\\
     \textit{Data ultimo accesso: 19/08/2026}
     \item \textbf{Sito della documentazione:}\\
@@ -270,12 +270,12 @@ I termini tecnici la cui definizione è nel \glslink{glossario}{Glossario} sono 
 
 \subsection{Requisiti hardware}
 
-L'applicazione è una SPA consultabile da browser. Per eseguirla in locale (unico modo previsto dalla \glslink{mvp-minimum-viable-product}{MVP}) si consiglia un computer con:
+L'applicazione è una \glslink{spa-single-page-application}{SPA} consultabile da browser. Per eseguirla in locale (unico modo previsto dalla \glslink{mvp-minimum-viable-product}{MVP}) si consiglia un computer con:
 
 \begin{itemize}
     \item processore con almeno 2 vCPU;
-    \item 8~GB di RAM (16~GB consigliati: lo stack comprende database, emulazione AWS, worker e osservabilità);
-    \item almeno 15~GB di spazio libero su disco per immagini Docker e volumi;
+    \item 8~GB di RAM (16~GB consigliati: lo stack comprende database, emulazione \glslink{aws}{AWS}, \glslink{worker}{worker} e osservabilità);
+    \item almeno 15~GB di spazio libero su disco per immagini \glslink{docker}{Docker} e volumi;
     \item connessione di rete stabile, necessaria per i modelli \glslink{amazon-bedrock}{Amazon Bedrock}.
 \end{itemize}
 
@@ -283,20 +283,20 @@ L'applicazione è una SPA consultabile da browser. Per eseguirla in locale (unic
 
 \begin{itemize}
     \item Sistema operativo Unix-like (macOS o Linux). Gli script di avvio usano \texttt{make}.
-    \item \textbf{Docker} e \textbf{Docker Compose}, in versione recente (si consiglia Docker Desktop 4.3 o superiore, oppure un motore Docker equivalente).
+    \item \textbf{\glslink{docker}{Docker}} e \textbf{\glslink{docker-compose}{Docker Compose}}, in versione recente (si consiglia \glslink{docker}{Docker} Desktop 4.3 o superiore, oppure un motore \glslink{docker}{Docker} equivalente).
     \item \textbf{Make} e \textbf{\glslink{git}{Git}}.
     \item Un browser aggiornato: Google Chrome 120+, Mozilla Firefox 115+, Microsoft Edge 120+ o Safari 17+.
 \end{itemize}
 
-Il certificato TLS locale è self-signed. Al primo accesso il browser segnala che la connessione non è attendibile: è il comportamento previsto. Per eliminare l'avviso si può generare un certificato fidato con \texttt{make trusted-local-tls} (richiede \texttt{mkcert} installato sulla macchina).
+Il certificato \glslink{tls-transport-layer-security}{TLS} locale è self-signed. Al primo accesso il browser segnala che la connessione non è attendibile: è il comportamento previsto. Per eliminare l'avviso si può generare un certificato fidato con \texttt{make trusted-local-\glslink{tls-transport-layer-security}{tls}} (richiede \texttt{mkcert} installato sulla macchina).
 
 \subsection{Credenziali AI}
 
-La generazione dei testi, delle copertine e l'analisi documentale usano \glslink{amazon-bedrock}{Amazon Bedrock}. LocalStack non emula Bedrock: anche in ambiente locale servono credenziali AWS reali con accesso ai modelli abilitato nella console della region configurata.
+La generazione dei testi, delle copertine e l'analisi documentale usano \glslink{amazon-bedrock}{Amazon Bedrock}. \glslink{localstack}{LocalStack} non emula Bedrock: anche in ambiente locale servono credenziali \glslink{aws}{AWS} reali con accesso ai modelli abilitato nella console della region configurata.
 
-Senza un modello di testo raggiungibile la generazione della bozza fallisce e il sistema mostra un errore applicativo, senza contenuti sostitutivi. Senza un modello di immagini raggiungibile il testo viene comunque prodotto: la copertina risulta non disponibile, con un messaggio esplicito, e la bozza resta utilizzabile.
+Senza un modello di testo raggiungibile la generazione della \glslink{bozza-draft}{bozza} fallisce e il sistema mostra un errore applicativo, senza contenuti sostitutivi. Senza un modello di immagini raggiungibile il testo viene comunque prodotto: la copertina risulta non disponibile, con un messaggio esplicito, e la \glslink{bozza-draft}{bozza} resta utilizzabile.
 
-L'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} via Amazon Textract è disabilitato di default. Se lo si attiva, il documento deve risiedere su un bucket S3 reale (Textract non legge lo storage emulato).
+L'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} via Amazon \glslink{textract}{Textract} è disabilitato di default. Se lo si attiva, il documento deve risiedere su un bucket \glslink{s3-simple-storage-service}{S3} reale (\glslink{textract}{Textract} non legge lo storage emulato).
 
 \section{Installazione e avvio}
 
@@ -313,20 +313,20 @@ cd MVP
 
 \subsection{Configurare l'ambiente}
 
-Copiare il file \texttt{.env.example} in \texttt{.env} e compilare almeno le credenziali AWS reali usate da Bedrock:
+Copiare il file \texttt{.env.example} in \texttt{.env} e compilare almeno le credenziali \glslink{aws}{AWS} reali usate da Bedrock:
 
 \begin{itemize}
-    \item \texttt{AWS\_REAL\_ACCESS\_KEY\_ID} e \texttt{AWS\_REAL\_SECRET\_ACCESS\_KEY};
-    \item \texttt{AWS\_REAL\_SESSION\_TOKEN}, solo se le credenziali sono temporanee;
+    \item \texttt{\glslink{aws}{AWS}\_REAL\_ACCESS\_KEY\_ID} e \texttt{\glslink{aws}{AWS}\_REAL\_SECRET\_ACCESS\_KEY};
+    \item \texttt{\glslink{aws}{AWS}\_REAL\_SESSION\_TOKEN}, solo se le credenziali sono temporanee;
     \item \texttt{BEDROCK\_REGION} e \texttt{BEDROCK\_MODEL\_ID} per il modello di testo\\
     (default: \texttt{amazon.nova-lite-v1:0});
     \item \texttt{BEDROCK\_IMAGE\_REGION} e \texttt{BEDROCK\_IMAGE\_MODEL\_ID} per le copertine.\\
     I modelli immagine vivono in region diverse da quelli testo.
 \end{itemize}
 
-Non inserire commenti sulla stessa riga di un valore: il file li tratterebbe come parte del valore. Dopo ogni modifica alle variabili \texttt{AWS\_REAL\_*} o Bedrock, una volta avviato lo stack, eseguire \texttt{make refresh-runtime} perché i nuovi valori arrivino ai processi.
+Non inserire commenti sulla stessa riga di un valore: il file li tratterebbe come parte del valore. Dopo ogni modifica alle variabili \texttt{\glslink{aws}{AWS}\_REAL\_*} o Bedrock, una volta avviato lo stack, eseguire \texttt{make refresh-runtime} perché i nuovi valori arrivino ai processi.
 
-I valori di default coprono LocalStack, PostgreSQL, Redis e l'osservabilità. Non vanno modificati se non si sta cambiando deliberatamente l'ambiente.
+I valori di default coprono \glslink{localstack}{LocalStack}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis} e l'osservabilità. Non vanno modificati se non si sta cambiando deliberatamente l'ambiente.
 
 \subsection{Avviare lo stack}
 
@@ -336,13 +336,13 @@ Dalla radice del \glslink{repository}{repository}:
 make setup
 \end{verbatim}
 
-Il comando genera il certificato TLS locale se manca, costruisce le immagini, avvia i servizi, applica Terraform su LocalStack, esegue le migrazioni e mette in marcia applicazione, worker e ingress HTTPS.
+Il comando genera il certificato \glslink{tls-transport-layer-security}{TLS} locale se manca, costruisce le immagini, avvia i servizi, applica \glslink{terraform}{Terraform} su \glslink{localstack}{LocalStack}, esegue le migrazioni e mette in marcia applicazione, \glslink{worker}{worker} e ingress HTTPS.
 
 Al termine, aprire il browser su:
 
 \url{https://localhost:8443}
 
-La SPA è servita dall'emulatore CDN locale; le API rispondono sullo stesso host. Non è richiesto alcun accesso: si atterra direttamente sulla \textit{Overview operativa}.
+La \glslink{spa-single-page-application}{SPA} è servita dall'emulatore \glslink{cdn-content-delivery-network}{CDN} locale; le \glslink{api-application-programming-interface}{API} rispondono sullo stesso host. Non è richiesto alcun accesso: si atterra direttamente sulla \textit{Overview operativa}.
 
 \subsection{Verificare che l'applicazione sia pronta}
 
@@ -353,7 +353,7 @@ curl -k https://localhost:8443/health
 curl -k https://localhost:8443/ready
 \end{verbatim}
 
-Una risposta positiva indica che il backend è in ascolto. I log dello stack si consultano con \texttt{make logs}. Un reset completo dell'ambiente (distruttivo: cancella i volumi locali) si ottiene con \texttt{make reset-all}.
+Una risposta positiva indica che il \glslink{backend}{backend} è in ascolto. I log dello stack si consultano con \texttt{make logs}. Un reset completo dell'ambiente (distruttivo: cancella i volumi locali) si ottiene con \texttt{make reset-all}.
 
 \section{Istruzioni per l'uso}
 
@@ -362,8 +362,8 @@ Una risposta positiva indica che il backend è in ascolto. I log dello stack si 
 Tutte le viste condividono la stessa cornice.
 
 \begin{itemize}
-    \item \textbf{Barra laterale sinistra.} In alto il logo aLittleByte. Sotto, tre gruppi: \ui{Panoramica}, \ui{AI Assistant}, \ui{Co-Pilot CdL}. Ogni gruppo ha una voce principale e dei collegamenti alle sezioni della pagina (evidenziati mentre si scorre).
-    \item \textbf{Intestazione.} L'etichetta \ui{NEXUM} e il titolo della vista corrente (\ui{Overview operativa}, \ui{AI Assistant Generativo} o \ui{AI Co-Pilot per i CdL}). A destra, il pulsante per passare dal tema chiaro a quello scuro e viceversa.
+    \item \textbf{Barra laterale sinistra.} In alto il logo aLittleByte. Sotto, tre gruppi: \ui{Panoramica}, \ui{AI Assistant}, \ui{Co-Pilot \glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{CdL}}. Ogni gruppo ha una voce principale e dei collegamenti alle sezioni della pagina (evidenziati mentre si scorre).
+    \item \textbf{Intestazione.} L'etichetta \ui{\glslink{nexum}{NEXUM}} e il titolo della vista corrente (\ui{Overview operativa}, \ui{\glslink{ai-assistant-generativo}{AI Assistant Generativo}} o \ui{AI Co-Pilot per i \glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{CdL}}). A destra, il pulsante per passare dal tema chiaro a quello scuro e viceversa.
     \item \textbf{Area di lavoro.} Il contenuto della vista, organizzato in sezioni successive. Un pulsante \ui{Torna su} compare dopo aver sceso nella pagina.
 \end{itemize}
 
@@ -411,8 +411,8 @@ All'apertura si vede la console di sintesi. Non è una \glslink{dashboard}{dashb
 Il riquadro iniziale recita: \textit{``Gestione assistita di comunicazioni interne e documenti del personale.''} Due pulsanti scorciano i flussi:
 
 \begin{itemize}
-    \item \ui{Crea contenuto} porta alla sezione di generazione dell'Assistant.
-    \item \ui{Carica documenti} porta alla sezione di caricamento del Co-Pilot.
+    \item \ui{Crea contenuto} \glslink{porta}{porta} alla sezione di generazione dell'Assistant.
+    \item \ui{Carica documenti} \glslink{porta}{porta} alla sezione di caricamento del Co-Pilot.
 \end{itemize}
 
 Sotto, la sezione \ui{Da dove partire} riassume i tre punti d'ingresso: Assistant, Co-Pilot e metriche operative (queste ultime restano dentro le pagine degli strumenti, non in una vista analytics separata).
@@ -426,10 +426,10 @@ Sotto, la sezione \ui{Da dove partire} riassume i tre punti d'ingresso: Assistan
 
 \subsubsection{Priorità e metriche}
 
-La sezione \ui{Priorità essenziali} mostra tre conteggi sul tenant, non sulla sola pagina visibile:
+La sezione \ui{Priorità essenziali} mostra tre conteggi sul \glslink{tenant}{tenant}, non sulla sola pagina visibile:
 
 \begin{itemize}
-    \item \ui{Bozze generate}: comunicazioni ancora in stato di bozza.
+    \item \ui{Bozze generate}: comunicazioni ancora in stato di \glslink{bozza-draft}{bozza}.
     \item \ui{Documenti da verificare}: sotto-documenti in attesa di revisione umana.
     \item \ui{Documenti pronti}: sotto-documenti validati automaticamente o a mano (la quarantena non conta come ``pronto'').
 \end{itemize}
@@ -447,24 +447,24 @@ Un errore di caricamento mostra un riquadro con pulsante \ui{Riprova}.
 
 \subsection{AI Assistant Generativo}
 
-Il modulo prepara comunicazioni interne a partire da un \glslink{prompt}{prompt}, da un \glslink{tono-comunicativo}{tono} e da uno \glslink{stile-editoriale}{stile}. La generazione è asincrona: l'interfaccia accetta la richiesta subito e aggiorna l'avanzamento in tempo reale. Il testo arriva per primo, la copertina dopo. Senza testo la bozza è fallita; senza copertina la bozza resta valida.
+Il modulo prepara comunicazioni interne a partire da un \glslink{prompt}{prompt}, da un \glslink{tono-comunicativo}{tono} e da uno \glslink{stile-editoriale}{stile}. La generazione è asincrona: l'interfaccia accetta la richiesta subito e aggiorna l'avanzamento in tempo reale. Il testo arriva per primo, la copertina dopo. Senza testo la \glslink{bozza-draft}{bozza} è fallita; senza copertina la \glslink{bozza-draft}{bozza} resta valida.
 
 La pagina è divisa in tre blocchi, nello stesso ordine in cui si lavora: composizione, revisione, storico.
 
 \subsubsection{Composizione della bozza}
 
-La sezione \ui{Crea una bozza} contiene:
+La sezione \ui{Crea una \glslink{bozza-draft}{bozza}} contiene:
 
 \begin{itemize}
-    \item il campo \ui{Prompt}, obbligatorio, da 12 a 5000 caratteri. Deve descrivere cosa comunicare (destinatari interni, obiettivo, vincoli di contenuto). Un testo troppo corto impedisce l'invio;
+    \item il campo \ui{\glslink{prompt}{Prompt}}, obbligatorio, da 12 a 5000 caratteri. Deve descrivere cosa comunicare (destinatari interni, obiettivo, vincoli di contenuto). Un testo troppo corto impedisce l'invio;
     \item il menu \ui{Tono}, con i valori fissi \ui{Chiaro e diretto}, \ui{Più istituzionale}, \ui{Più sintetico}, \ui{Empatico}, \ui{Tecnico};
     \item il menu \ui{Stile}, con i valori fissi \ui{Testo informativo}, \ui{Avviso operativo}, \ui{Aggiornamento breve};
-    \item il pulsante \ui{Genera bozza}. Durante l'elaborazione l'etichetta diventa \ui{Generazione} e il pulsante si disabilita.
+    \item il pulsante \ui{Genera \glslink{bozza-draft}{bozza}}. Durante l'elaborazione l'etichetta diventa \ui{Generazione} e il pulsante si disabilita.
 \end{itemize}
 
 Non è possibile aggiungere toni o stili personalizzati, né selezionare un'azienda di riferimento: i tre parametri sono quelli mostrati.
 
-Sotto il form, \ui{Salva configurazione} memorizza prompt, tono e stile come preset riutilizzabile, senza avviare una generazione. Si può assegnare un nome (al massimo 150 caratteri) oppure lasciarlo vuoto: in quel caso il sistema attribuisce un'etichetta progressiva del tipo \texttt{Senza nome (1)}. Se il nome è già usato, viene comunque assegnata un'etichetta progressiva. Il pulsante è disabilitato finché il prompt non è valido.
+Sotto il form, \ui{Salva configurazione} memorizza \glslink{prompt}{prompt}, tono e stile come preset riutilizzabile, senza avviare una generazione. Si può assegnare un nome (al massimo 150 caratteri) oppure lasciarlo vuoto: in quel caso il sistema attribuisce un'etichetta progressiva del tipo \texttt{Senza nome (1)}. Se il nome è già usato, viene comunque assegnata un'etichetta progressiva. Il pulsante è disabilitato finché il \glslink{prompt}{prompt} non è valido.
 
 \begin{figure}[H]
 \centering
@@ -482,10 +482,10 @@ Dopo l'invio compare una barra di avanzamento e un messaggio di stato. Le fasi, 
     \item \textit{Generazione del testo in corso.}
     \item \textit{Testo generato. Generazione copertina in corso.}
     \item \textit{Copertina generata.} oppure \textit{Copertina non disponibile.}
-    \item \textit{Bozza generata correttamente.}
+    \item \textit{\glslink{bozza-draft}{Bozza} generata correttamente.}
 \end{enumerate}
 
-Se la richiesta resta in lavorazione a lungo, può comparire \textit{``Generazione ancora in corso. Lo stato verrà aggiornato.''} In caso di errore (modello irraggiungibile, credenziali, risposta non valida) lo stato diventa un messaggio di fallimento e la bozza non è utilizzabile. Non vengono mai mostrati testi di ripiego.
+Se la richiesta resta in lavorazione a lungo, può comparire \textit{``Generazione ancora in corso. Lo stato verrà aggiornato.''} In caso di errore (modello irraggiungibile, credenziali, risposta non valida) lo stato diventa un messaggio di fallimento e la \glslink{bozza-draft}{bozza} non è utilizzabile. Non vengono mai mostrati testi di ripiego.
 
 \begin{figure}[H]
 \centering
@@ -496,18 +496,18 @@ Se la richiesta resta in lavorazione a lungo, può comparire \textit{``Generazio
 
 \subsubsection{Revisione del contenuto}
 
-La sezione \ui{Controlla il contenuto} mostra la bozza corrente, oppure il record dello storico selezionato. In assenza di bozza compare \textit{``La bozza generata apparira qui.''}
+La sezione \ui{Controlla il contenuto} mostra la \glslink{bozza-draft}{bozza} corrente, oppure il record dello storico selezionato. In assenza di \glslink{bozza-draft}{bozza} compare \textit{``La \glslink{bozza-draft}{bozza} generata apparira qui.''}
 
-Quando la bozza è pronta si vedono, dall'alto:
+Quando la \glslink{bozza-draft}{bozza} è pronta si vedono, dall'alto:
 
 \begin{itemize}
-    \item l'immagine di copertina, se presente. Durante la generazione compare \textit{``Generazione copertina in corso.''}; se manca o è stata tolta, \textit{``Nessuna copertina per questa bozza.''}; se la generazione dell'immagine è fallita, un avviso con il motivo;
-    \item i pulsanti \ui{Cambia immagine} e \ui{Rimuovi immagine} (assenti se la bozza è stata scartata). L'immagine sostitutiva deve essere PNG, JPEG o WebP, massimo 5~MB;
+    \item l'immagine di copertina, se presente. Durante la generazione compare \textit{``Generazione copertina in corso.''}; se manca o è stata tolta, \textit{``Nessuna copertina per questa \glslink{bozza-draft}{bozza}.''}; se la generazione dell'immagine è fallita, un avviso con il motivo;
+    \item i pulsanti \ui{Cambia immagine} e \ui{Rimuovi immagine} (assenti se la \glslink{bozza-draft}{bozza} è stata scartata). L'immagine sostitutiva deve essere PNG, JPEG o WebP, massimo 5~MB;
     \item i campi \ui{Titolo} (massimo 255 caratteri) e \ui{Testo} (massimo 20\,000 caratteri), in sola lettura finché non si preme \ui{Modifica};
-    \item il blocco \ui{Documento finale}, visibile solo a generazione conclusa e se la bozza non è scartata: \ui{Apri anteprima} (nuova scheda) e \ui{Scarica PDF}. Ogni pagina del documento riporta il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} \textit{``Creato da AI Assistant''};
+    \item il blocco \ui{Documento finale}, visibile solo a generazione conclusa e se la \glslink{bozza-draft}{bozza} non è scartata: \ui{Apri anteprima} (nuova scheda) e \ui{Scarica PDF}. Ogni pagina del documento riporta il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} \textit{``Creato da AI Assistant''};
     \item la valutazione a stelle (paragrafo successivo);
-    \item lo stato della bozza (\ui{Bozza}, \ui{Approvata} o \ui{Scartata}) e la dicitura \textit{``Creato da AI Assistant''};
-    \item le azioni \ui{Salva nello storico}, \ui{Rigenera bozza} e \ui{Scarta bozza}.
+    \item lo stato della \glslink{bozza-draft}{bozza} (\ui{\glslink{bozza-draft}{Bozza}}, \ui{Approvata} o \ui{Scartata}) e la dicitura \textit{``Creato da AI Assistant''};
+    \item le azioni \ui{Salva nello storico}, \ui{Rigenera \glslink{bozza-draft}{bozza}} e \ui{Scarta \glslink{bozza-draft}{bozza}}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -519,7 +519,7 @@ Quando la bozza è pronta si vedono, dall'alto:
 
 \paragraph{Modifica di titolo e testo}
 
-\ui{Modifica} abilita i due campi. \ui{Salva} persiste le correzioni; \ui{Annulla} le scarta e ripristina i valori precedenti. La modifica è consentita finché la bozza non è \ui{Scartata}, anche dopo il salvataggio nello storico. Una rigenerazione sostituisce titolo, testo e copertina e chiude un'eventuale modifica non salvata.
+\ui{Modifica} abilita i due campi. \ui{Salva} persiste le correzioni; \ui{Annulla} le scarta e ripristina i valori precedenti. La modifica è consentita finché la \glslink{bozza-draft}{bozza} non è \ui{Scartata}, anche dopo il salvataggio nello storico. Una rigenerazione sostituisce titolo, testo e copertina e chiude un'eventuale modifica non salvata.
 
 \begin{figure}[H]
 \centering
@@ -542,9 +542,9 @@ Ogni generazione si valuta una sola volta, da 1 a 5 stelle, con un commento faco
 \paragraph{Salvataggio nello storico, rigenerazione e scarto}
 
 \begin{itemize}
-    \item \ui{Salva nello storico} sposta la bozza nello stato \ui{Approvata} e la fa comparire nello storico. Finché non si preme, la generazione resta nell'area di lavoro e non compare nell'elenco. Il salvataggio non congela il contenuto: titolo, testo e copertina restano modificabili e la bozza resta rigenerabile. Il pulsante scompare quando lo stato è già \ui{Approvata}.
-    \item \ui{Rigenera bozza} chiede una nuova variante con gli stessi prompt, tono e stile. Sostituisce testo e copertina della bozza corrente. È disponibile anche dopo il salvataggio nello storico, non su una bozza scartata.
-    \item \ui{Scarta bozza} chiede conferma: \textit{``Sei sicuro di voler scartare questa bozza? Non sarà più modificabile né rigenerabile.''} Con \ui{Conferma eliminazione} lo stato diventa \ui{Scartata}: la bozza resta tracciata ma esce dallo storico attivo. \ui{Annulla} chiude la richiesta di conferma.
+    \item \ui{Salva nello storico} sposta la \glslink{bozza-draft}{bozza} nello stato \ui{Approvata} e la fa comparire nello storico. Finché non si preme, la generazione resta nell'area di lavoro e non compare nell'elenco. Il salvataggio non congela il contenuto: titolo, testo e copertina restano modificabili e la \glslink{bozza-draft}{bozza} resta rigenerabile. Il pulsante scompare quando lo stato è già \ui{Approvata}.
+    \item \ui{Rigenera \glslink{bozza-draft}{bozza}} chiede una nuova variante con gli stessi \glslink{prompt}{prompt}, tono e stile. Sostituisce testo e copertina della \glslink{bozza-draft}{bozza} corrente. È disponibile anche dopo il salvataggio nello storico, non su una \glslink{bozza-draft}{bozza} scartata.
+    \item \ui{Scarta \glslink{bozza-draft}{bozza}} chiede conferma: \textit{``Sei sicuro di voler scartare questa \glslink{bozza-draft}{bozza}? Non sarà più modificabile né rigenerabile.''} Con \ui{Conferma eliminazione} lo stato diventa \ui{Scartata}: la \glslink{bozza-draft}{bozza} resta tracciata ma esce dallo storico attivo. \ui{Annulla} chiude la richiesta di conferma.
 \end{itemize}
 
 \begin{figure}[H]
@@ -556,14 +556,14 @@ Ogni generazione si valuta una sola volta, da 1 a 5 stelle, con un commento faco
 
 \subsubsection{Storico contenuti}
 
-La sezione \ui{Storico contenuti} elenca solo le comunicazioni in stato \ui{Approvata}. Una bozza appena generata, o una bozza scartata, non vi compare. Accanto al titolo della sezione è indicato il numero di record.
+La sezione \ui{Storico contenuti} elenca solo le comunicazioni in stato \ui{Approvata}. Una \glslink{bozza-draft}{bozza} appena generata, o una \glslink{bozza-draft}{bozza} scartata, non vi compare. Accanto al titolo della sezione è indicato il numero di record.
 
 \paragraph{Filtri}
 
 I filtri si applicano sia alle comunicazioni sia alle configurazioni salvate, con un breve ritardo di digitazione:
 
 \begin{itemize}
-    \item \ui{Parola chiave}: cerca nel prompt (e, per i preset, anche nel nome);
+    \item \ui{Parola chiave}: cerca nel \glslink{prompt}{prompt} (e, per i preset, anche nel nome);
     \item \ui{Tono} e \ui{Stile}: gli stessi elenchi del form di generazione, più l'opzione ``tutti'';
     \item \ui{Data}: giorno di creazione;
     \item \ui{Azzera filtri} ripulisce tutti i campi.
@@ -583,7 +583,7 @@ Se i filtri non trovano nulla, compare \textit{``Nessuna comunicazione corrispon
 Sopra le card delle comunicazioni, se esistono preset che superano i filtri, compare il blocco \ui{Configurazioni salvate}. Ogni riga mostra nome, data, \ui{Usa} e l'icona di eliminazione.
 
 \begin{itemize}
-    \item \ui{Usa} ricompila il form di generazione con prompt, tono e stile del preset. Non avvia una nuova generazione. Non si applica a una bozza già salvata nello storico: su quella restano modifica e rigenerazione dirette.
+    \item \ui{Usa} ricompila il form di generazione con \glslink{prompt}{prompt}, tono e stile del preset. Non avvia una nuova generazione. Non si applica a una \glslink{bozza-draft}{bozza} già salvata nello storico: su quella restano modifica e rigenerazione dirette.
     \item L'icona cestino chiede \textit{``Eliminare definitivamente questa configurazione salvata?''} con \ui{Conferma eliminazione} e \ui{Annulla}.
 \end{itemize}
 
@@ -621,9 +621,9 @@ In basso a destra:
 \rowcolor{gray!20}
 \textbf{Stato} & \textbf{Significato per l'utente} \\
 \hline
-\ui{Bozza} & Generazione conclusa (o in corso) nell'area di lavoro. Non compare nello storico. \\
+\ui{\glslink{bozza-draft}{Bozza}} & Generazione conclusa (o in corso) nell'area di lavoro. Non compare nello storico. \\
 \hline
-\ui{Approvata} & Il redattore l'ha salvata nello storico. Resta modificabile e rigenerabile. Non è una validazione da parte di un altro ruolo. \\
+\ui{Approvata} & Il \glslink{redattore}{redattore} l'ha salvata nello storico. Resta modificabile e rigenerabile. Non è una validazione da parte di un altro ruolo. \\
 \hline
 \ui{Scartata} & Esclusa dallo storico attivo. Non più modificabile né rigenerabile. \\
 \hline
@@ -632,7 +632,7 @@ In basso a destra:
 
 \subsubsection{Qualità della generazione}
 
-La sezione \ui{Qualità della generazione} riepiloga l'andamento dell'Assistant su un intervallo scelto dal redattore. In alto è disponibile \ui{Esporta report}, che genera un PDF con le stesse metriche e i feedback recenti visibili a schermo.
+La sezione \ui{Qualità della generazione} riepiloga l'andamento dell'Assistant su un intervallo scelto dal \glslink{redattore}{redattore}. In alto è disponibile \ui{Esporta report}, che genera un PDF con le stesse metriche e i feedback recenti visibili a schermo.
 
 \paragraph{Filtri}
 
@@ -655,10 +655,10 @@ Questo filtro è indipendente da quello dello \ui{Storico contenuti}: agisce sol
 
 \begin{itemize}
     \item \ui{Contenuti generati}: totale delle generazioni nel periodo filtrato, con andamento giornaliero;
-    \item \ui{Configurazioni di prompt salvate}: numero di preset presenti;
+    \item \ui{Configurazioni di \glslink{prompt}{prompt} salvate}: numero di preset presenti;
     \item \ui{Bozze valutate}: percentuale di generazioni con un voto, su quante ancora senza;
     \item \ui{Media stelle}: media aritmetica dei punteggi 1--5;
-    \item \ui{Esito delle bozze}: barra che ripartisce le generazioni fra \ui{In bozza} e \ui{Decise} (approvate o scartate).
+    \item \ui{Esito delle bozze}: barra che ripartisce le generazioni fra \ui{In \glslink{bozza-draft}{bozza}} e \ui{Decise} (approvate o scartate).
 \end{itemize}
 
 \paragraph{Feedback recenti}
@@ -678,7 +678,7 @@ Il modulo analizza un PDF di qualsiasi tipologia, riconosce almeno un destinatar
 
 \subsubsection{Caricamento}
 
-La sezione \ui{Carica nel repository} accetta un solo file per volta. Prima del file si possono indicare dei \glslink{metadati}{metadati} facoltativi. Quello che viene dichiarato qui \textbf{fa fede}: l'AI continua a produrre la propria estrazione, consultabile, ma tipologia, mese, anno e azienda indicati a mano non vengono sovrascritti.
+La sezione \ui{Carica nel \glslink{repository}{repository}} accetta un solo file per volta. Prima del file si possono indicare dei \glslink{metadati}{metadati} facoltativi. Quello che viene dichiarato qui \textbf{fa fede}: l'\glslink{intelligenza-artificiale-ai}{AI} continua a produrre la propria estrazione, consultabile, ma tipologia, mese, anno e azienda indicati a mano non vengono sovrascritti.
 
 \begin{itemize}
     \item \ui{Tipologia documento}: \ui{cedolino}, \ui{CU}, \ui{comunicazione}, \ui{documento da firmare}, \ui{lettera}, \ui{altro}. Un secondo clic sulla stessa tipologia la deseleziona.
@@ -687,7 +687,7 @@ La sezione \ui{Carica nel repository} accetta un solo file per volta. Prima del 
     \item \ui{Azienda}: testo libero, massimo 500 caratteri.
 \end{itemize}
 
-L'area tratteggiata \ui{Seleziona o trascina un documento} apre il selettore file. È accettato solo \texttt{application/pdf}. Durante l'upload i metadati si disabilitano.
+L'area tratteggiata \ui{Seleziona o trascina un documento} apre il selettore file. È accettato solo \texttt{application/pdf}. Durante l'upload i \glslink{metadati}{metadati} si disabilitano.
 
 Vincoli sul file, oltre al formato:
 
@@ -715,7 +715,7 @@ Dopo l'accettazione del file, una barra segue le fasi:
 \begin{enumerate}
     \item upload in corso;
     \item \textit{Documento in coda di elaborazione;}
-    \item \textit{Analisi OCR del documento in corso;}
+    \item \textit{Analisi \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} del documento in corso;}
     \item \textit{Estrazione dati dai sotto-documenti in corso;}
     \item \textit{Elaborazione completata.}
 \end{enumerate}
@@ -731,7 +731,7 @@ Se l'elaborazione si prolunga può comparire \textit{``Elaborazione ancora in co
 
 \subsubsection{Storico documenti analizzati}
 
-La sezione \ui{Storico documenti analizzati} elenca i sotto-documenti del tenant. Ogni riga mostra:
+La sezione \ui{Storico documenti analizzati} elenca i sotto-documenti del \glslink{tenant}{tenant}. Ogni riga mostra:
 
 \begin{itemize}
     \item destinatario (nome e cognome) e azienda;
@@ -756,12 +756,12 @@ Senza documenti: \textit{``I documenti caricati compariranno qui.''}
 
 \paragraph{Filtri}
 
-I criteri sono applicati dal backend, sul solo tenant corrente:
+I criteri sono applicati dal \glslink{backend}{backend}, sul solo \glslink{tenant}{tenant} corrente:
 
 \begin{itemize}
     \item \ui{Nome, cognome o azienda}: ricerca testuale;
     \item \ui{Stato invio}: \ui{Inviato} o \ui{Non inviato} (in interfaccia le etichette degli stati in tabella sono \ui{Inviato} e \ui{Da inviare});
-    \item \ui{Confidenza}: \ui{Minore di} o \ui{Maggiore di} una \ui{Soglia (\%)} da 0 a 100;
+    \item \ui{\glslink{confidenza-confidence-score}{Confidenza}}: \ui{Minore di} o \ui{Maggiore di} una \ui{Soglia (\%)} da 0 a 100;
     \item \ui{Mese} e \ui{Anno} del documento;
     \item \ui{Azzera filtri}.
 \end{itemize}
@@ -783,10 +783,10 @@ Il dettaglio è affiancato:
 
 \begin{itemize}
     \item \textbf{a sinistra, \ui{Anteprima documento}:} il PDF del sotto-documento in un riquadro, con collegamento \ui{Apri in una nuova scheda}. Se lo storage non è raggiungibile compare \textit{``Storage documento non raggiungibile.''}; se il file manca, \textit{``Anteprima non disponibile.''}; in attesa, \textit{``Caricamento anteprima in corso.''} Indipendentemente da questo stato, il pulsante \ui{Documento originale} apre in una nuova scheda il PDF originale caricato (prima dello split), utile per confrontare il sotto-documento con il file di partenza (RF56-OB).
-    \item \textbf{a destra, \ui{Dati estratti dall'OCR}:} i campi strutturati, con una legenda \ui{Modificabile} / \ui{Sola lettura}.
+    \item \textbf{a destra, \ui{Dati estratti dall'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}}:} i campi strutturati, con una legenda \ui{Modificabile} / \ui{Sola lettura}.
 \end{itemize}
 
-Se la confidenza è sotto l'80\% il pannello dei dati è evidenziato come da controllare con priorità.
+Se la \glslink{confidenza-confidence-score}{confidenza} è sotto l'80\% il pannello dei dati è evidenziato come da controllare con priorità.
 
 \begin{figure}[H]
 \centering
@@ -800,9 +800,9 @@ Se la confidenza è sotto l'80\% il pannello dei dati è evidenziato come da con
 \begin{itemize}
     \item nome file;
     \item numero pagine;
-    \item confidenza;
+    \item \glslink{confidenza-confidence-score}{confidenza};
     \item stato revisione;
-    \item email destinatario rilevata in sola lettura (con pulsante di copia negli appunti, se valorizzata). Questa email \textbf{non} è compilata dalla pipeline OCR/Bedrock: va inserita a mano nel campo modificabile omonimo;
+    \item email destinatario rilevata in sola lettura (con pulsante di copia negli appunti, se valorizzata). Questa email \textbf{non} è compilata dalla pipeline \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}/Bedrock: va inserita a mano nel campo modificabile omonimo;
     \item data e ora di caricamento.
 \end{itemize}
 
@@ -812,7 +812,7 @@ Se la confidenza è sotto l'80\% il pannello dei dati è evidenziato come da con
     \item nome e cognome;
     \item azienda;
     \item data documento;
-    \item tipologia (l'elenco comprende le sei tipologie predefinite; se l'AI ha proposto un valore fuori elenco, quel valore resta selezionabile);
+    \item tipologia (l'elenco comprende le sei tipologie predefinite; se l'\glslink{intelligenza-artificiale-ai}{AI} ha proposto un valore fuori elenco, quel valore resta selezionabile);
     \item descrizione;
     \item email destinatario, con controllo di formato;
     \item codice fiscale, con controllo del carattere di controllo italiano (16 caratteri; un valore formalmente invalido viene rifiutato);
@@ -823,7 +823,7 @@ Email, codice fiscale e matricola \textbf{non} sono estratti automaticamente: re
 
 \paragraph{Come si calcola la confidenza}
 
-La \glslink{confidenza-confidence-score}{confidenza} non è un'auto-valutazione del modello. Misura la leggibilità \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} ponderata sulla completezza dei campi lasciati all'AI. I metadati dichiarati in caricamento restano fuori dal calcolo: dichiarare tipologia o azienda non ``gonfia'' il punteggio. La \glslink{soglia-di-confidenza}{soglia} operativa di default è 80\%.
+La \glslink{confidenza-confidence-score}{confidenza} non è un'auto-valutazione del modello. Misura la leggibilità \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} ponderata sulla completezza dei campi lasciati all'\glslink{intelligenza-artificiale-ai}{AI}. I \glslink{metadati}{metadati} dichiarati in caricamento restano fuori dal calcolo: dichiarare tipologia o azienda non ``gonfia'' il punteggio. La \glslink{soglia-di-confidenza}{soglia} operativa di default è 80\%.
 
 \paragraph{Azioni di revisione}
 
@@ -855,7 +855,7 @@ In modifica, \ui{Salva} persiste le correzioni e \ui{Annulla} le scarta. Gli err
 \hline
 \ui{Da revisionare} & L'estrazione automatica richiede un controllo umano. \\
 \hline
-\ui{Validato automaticamente} & I campi automatici superano la soglia di confidenza. \\
+\ui{Validato automaticamente} & I campi automatici superano la \glslink{soglia-di-confidenza}{soglia di confidenza}. \\
 \hline
 \ui{Validato manualmente} & L'operatore ha confermato o corretto i dati. \\
 \hline
@@ -893,7 +893,7 @@ Sotto i campi, in sola lettura:
     \item \ui{Scarica PDF} scarica quel PDF. Il primo scaricamento fa passare lo stato di invio a \ui{Inviato}. Uno scaricamento successivo non lo riporta indietro.
 \end{itemize}
 
-Il recapito al dipendente avviene fuori da NEXUM (posta elettronica dello studio, altri canali). La piattaforma si ferma alla preparazione del plico.
+Il recapito al dipendente avviene fuori da \glslink{nexum}{NEXUM} (posta elettronica dello studio, altri canali). La piattaforma si ferma alla preparazione del plico.
 
 \begin{figure}[H]
 \centering
@@ -904,14 +904,14 @@ Il recapito al dipendente avviene fuori da NEXUM (posta elettronica dello studio
 
 \subsubsection{Metriche del Co-Pilot}
 
-La sezione \ui{Qualità e performance OCR} riporta i volumi del tenant:
+La sezione \ui{Qualità e performance \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}} riporta i volumi del \glslink{tenant}{tenant}:
 
 \begin{itemize}
     \item \ui{Documenti analizzati}: file originali caricati, con andamento giornaliero;
-    \item \ui{Tempo medio di elaborazione}: durata media della pipeline OCR, dalla ricezione al risultato;
+    \item \ui{Tempo medio di elaborazione}: durata media della pipeline \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}, dalla ricezione al risultato;
     \item \ui{Classificazioni corrette senza intervento}: percentuale di sotto-documenti validati automaticamente, sul totale di quelli arrivati a una validazione (UC-56.2). Chi è ancora da revisionare o in quarantena non entra nel conto;
-    \item \ui{Sotto la soglia di confidenza}: percentuale di sotto-documenti da revisionare perché sotto la soglia, sul totale analizzato;
-    \item \ui{Destinatari riconosciuti in automatico}: percentuale di destinatari confermati che l'AI aveva già riconosciuto correttamente, mai corretti a mano (UC-56.4).
+    \item \ui{Sotto la \glslink{soglia-di-confidenza}{soglia di confidenza}}: percentuale di sotto-documenti da revisionare perché sotto la soglia, sul totale analizzato;
+    \item \ui{Destinatari riconosciuti in automatico}: percentuale di destinatari confermati che l'\glslink{intelligenza-artificiale-ai}{AI} aveva già riconosciuto correttamente, mai corretti a mano (UC-56.4).
 \end{itemize}
 
 Non esiste una vista analytics con filtri temporali o grafici di accuratezza nel dettaglio: quelle elaborazioni restano fuori perimetro. Le stesse metriche, in forma compatta, compaiono anche in Overview.
@@ -925,7 +925,7 @@ Non esiste una vista analytics con filtri temporali o grafici di accuratezza nel
 
 \section{Metriche dell'AI Assistant}
 
-Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{AI Assistant} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che porta alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di prompt salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
+Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{AI Assistant} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che \glslink{porta}{porta} alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di \glslink{prompt}{prompt} salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
 
 \section{Problemi frequenti}
 
@@ -936,15 +936,15 @@ Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{AI Assistant
 \rowcolor{gray!20}
 \textbf{Sintomo} & \textbf{Cosa fare} \\
 \hline
-Il browser segnala un certificato non attendibile. & È atteso con il certificato self-signed. Procedere comunque al sito, oppure generare un certificato fidato con \texttt{make trusted-local-tls} e riavviare Traefik. \\
+Il browser segnala un certificato non attendibile. & È atteso con il certificato self-signed. Procedere comunque al sito, oppure generare un certificato fidato con \texttt{make trusted-local-\glslink{tls-transport-layer-security}{tls}} e riavviare \glslink{traefik}{Traefik}. \\
 \hline
 La pagina non si apre su \texttt{localhost:8443}. & Verificare che \texttt{make setup} sia terminato e che \texttt{/health} e \texttt{/ready} rispondano. Consultare \texttt{make logs}. \\
 \hline
-\ui{Genera bozza} fallisce subito. & Controllare credenziali e region Bedrock nel \texttt{.env}, poi \texttt{make refresh-runtime}. Senza modello di testo non esiste contenuto sostitutivo. \\
+\ui{Genera \glslink{bozza-draft}{bozza}} fallisce subito. & Controllare credenziali e region Bedrock nel \texttt{.env}, poi \texttt{make refresh-runtime}. Senza modello di testo non esiste contenuto sostitutivo. \\
 \hline
-La bozza c'è ma manca la copertina. & Comportamento previsto se il modello immagini non è raggiungibile. Si può caricare un'immagine propria o procedere senza. \\
+La \glslink{bozza-draft}{bozza} c'è ma manca la copertina. & Comportamento previsto se il modello immagini non è raggiungibile. Si può caricare un'immagine propria o procedere senza. \\
 \hline
-Il pulsante di generazione non parte. & Il prompt deve avere almeno 12 caratteri. Completare tono e stile (hanno già un default). \\
+Il pulsante di generazione non parte. & Il \glslink{prompt}{prompt} deve avere almeno 12 caratteri. Completare tono e stile (hanno già un default). \\
 \hline
 La generazione non compare nello storico. & Premere \ui{Salva nello storico}. Solo lo stato \ui{Approvata} entra nell'elenco. \\
 \hline
@@ -954,14 +954,14 @@ L'analisi resta in coda o fallisce. & Attendere l'aggiornamento in tempo reale. 
 \hline
 L'email del destinatario è vuota. & Va compilata a mano in revisione: la pipeline non la estrae. \\
 \hline
-\ui{Inviato} non corrisponde a una mail partita. & Lo stato cambia allo scaricamento del PDF del messaggio. L'invio reale è fuori dalla MVP. \\
+\ui{Inviato} non corrisponde a una mail partita. & Lo stato cambia allo scaricamento del PDF del messaggio. L'invio reale è fuori dalla \glslink{mvp-minimum-viable-product}{MVP}. \\
 \hline
 \end{tabularx}
 \end{center}
 
 \section{Appendice: elenco delle schermate da catturare}
 
-Le immagini vanno salvate in \texttt{PB/Manuale Utente/immagini/} con i nomi indicati, a larghezza desktop, tema chiaro, senza dati personali reali. Dopo il salvataggio, sostituire nel sorgente \LaTeX{} ogni \texttt{\textbackslash screenshottodo} con un \texttt{\textbackslash includegraphics} dello stesso file.
+Le immagini vanno salvate in \texttt{\glslink{pb-product-baseline}{PB}/Manuale Utente/immagini/} con i nomi indicati, a larghezza desktop, tema chiaro, senza dati personali reali. Dopo il salvataggio, sostituire nel sorgente \LaTeX{} ogni \texttt{\textbackslash screenshottodo} con un \texttt{\textbackslash includegraphics} dello stesso file.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
@@ -981,17 +981,17 @@ Le immagini vanno salvate in \texttt{PB/Manuale Utente/immagini/} con i nomi ind
 \hline
 \texttt{sidebar-navigazione.png} & Solo sidebar, voce attiva visibile. \\
 \hline
-\texttt{header-tema.png} & Header NEXUM con pulsante tema. \\
+\texttt{header-tema.png} & Header \glslink{nexum}{NEXUM} con pulsante tema. \\
 \hline
 \texttt{overview-hero.png} & Introduzione Overview e pulsanti di avvio. \\
 \hline
 \texttt{overview-metriche.png} & Priorità, metriche strumenti, attività recenti. \\
 \hline
-\texttt{assistant-composizione.png} & Form ``Crea una bozza'' compilato. \\
+\texttt{assistant-composizione.png} & Form ``Crea una \glslink{bozza-draft}{bozza}'' compilato. \\
 \hline
 \texttt{assistant-avanzamento.png} & Barra di generazione in corso. \\
 \hline
-\texttt{assistant-revisione.png} & Anteprima completa di una bozza con copertina. \\
+\texttt{assistant-revisione.png} & Anteprima completa di una \glslink{bozza-draft}{bozza} con copertina. \\
 \hline
 \texttt{assistant-modifica.png} & Titolo e testo in modifica. \\
 \hline
@@ -1009,7 +1009,7 @@ Le immagini vanno salvate in \texttt{PB/Manuale Utente/immagini/} con i nomi ind
 \hline
 \texttt{assistant-feedback-recenti.png} & Esito delle bozze e lista feedback recenti. \\
 \hline
-\texttt{copilot-caricamento.png} & Upload con metadati. \\
+\texttt{copilot-caricamento.png} & Upload con \glslink{metadati}{metadati}. \\
 \hline
 \texttt{copilot-avanzamento.png} & Barra di elaborazione documento. \\
 \hline
@@ -1023,7 +1023,7 @@ Le immagini vanno salvate in \texttt{PB/Manuale Utente/immagini/} con i nomi ind
 \hline
 \texttt{copilot-messaggio.png} & Messaggio di invio precompilato. \\
 \hline
-\texttt{copilot-metriche.png} & Mosaico \ui{Qualità e performance OCR} (classificazioni, confidenza, destinatari). \\
+\texttt{copilot-metriche.png} & Mosaico \ui{Qualità e performance \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR}} (classificazioni, \glslink{confidenza-confidence-score}{confidenza}, destinatari). \\
 \hline
 \end{longtable}
 }
