@@ -76,11 +76,11 @@
     ]
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
-            Versione & 2.0.0 \\
+            Versione & 3.0.0 \\
             Redattore   & V. Y. Kaneda Fernandes, Leonardo Soligo, Eleonora Bellet \\
             Verificatori & Angela Maule, Eleonora Bellet, Diego Belluz\\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 23/06/2026
+            Data        & 04/09/2026
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -103,6 +103,9 @@
         \hline
         \rowcolor{gray!20}
         \textbf{Versione} & \textbf{Data} & \textbf{Descrizione} & \textbf{Redattore} & \textbf{Verificatore} & \textbf{Approvatore} \\
+        3.0.0 & 04/06/2026 & Approvazione versione 3.0.0 & - & - & Diego Belluz \\
+        2.2.0 & 27/08/2026 & Aggiunti termini del Manuale Utente. & Angelica Gastaldello & Angela Maule & - \\
+        2.1.0 & 26/08/2026 & Aggiunti termini della Specifica Tecnica. & Angelica Gastaldello & Angela Maule & - \\
         2.0.0 & 23/06/2026 & Approvazione versione 2.0.0 & - & - & Alex Oloni \\
         1.0.1 & 22/06/2026 & Aggiunti termini dell'Analisi dei Requisiti. & V. Y. Kaneda Fernandes & Eleonora Bellet & - \\
         1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Alex Oloni \\
@@ -130,6 +133,15 @@
 
 
 \section{A}
+
+\subsection{Adapter}
+Componente che traduce l'interfaccia di una tecnologia esterna nell'interfaccia richiesta dal dominio applicativo.
+
+\subsection{API (Application Programming Interface)}
+Insieme di operazioni e regole che permettono a componenti software diversi di comunicare.
+
+\subsection{Architettura Esagonale}
+Stile architetturale che separa la logica di dominio dalle tecnologie esterne tramite porte e adapter.
 
 \subsection{Agile}
 Modello di sviluppo basato su sprint bisettimanali, adottato dal team.
@@ -173,6 +185,21 @@ Figura che supervisiona l'efficienza del sistema, monitorando le performance del
 \subsection{Angular}
 Framework open-source per lo sviluppo web.
 
+\subsection{Audit trail}
+Registro cronologico delle operazioni eseguite all'interno del sistema, utile per la tracciabilità e la sicurezza.
+
+\subsection{AuditLogger}
+Componente responsabile della registrazione degli eventi nel audit trail, garantendo la tracciabilità delle operazioni.
+
+\subsection{AWS}
+Fornitore di servizi cloud utilizzati dal sistema per AI, storage, code e orchestrazione.
+
+\subsection{AWS S3}
+Nome del servizio AWS di object storage utilizzato per i file del sistema.
+
+\subsection{AWS SQS}
+Nome del servizio AWS di code di messaggi utilizzato per i task asincroni.
+
 \subsection{Approccio Incrementale}
 Metodo di stesura e sviluppo in cui i documenti e il prodotto vengono costantemente aggiornati e affinati nel tempo.
 
@@ -195,8 +222,17 @@ Stato temporaneo di un documento salvato prima della validazione o invio definit
 \subsection{Branch}
 Ramificazione del repository Git per lo sviluppo isolato.
 
+\subsection{Backend}
+Parte server-side del sistema che espone le API e implementa la logica applicativa.
+
+\subsection{Bootstrap}
+Avvio e configurazione iniziale dell'applicazione e dei suoi servizi.
+
 
 \section{C}
+
+\subsection{Callback}
+Risposta inviata a un orchestratore per comunicare l'esito di un'attività asincrona.
 \subsection{Capitolato}
 Documento tecnico fornito dal proponente che definisce requisiti e obiettivi.
 
@@ -211,6 +247,21 @@ Suddivisione del lavoro in periodi ricorrenti (sprint).
 
 \subsection{Code Review}
 Revisione del codice effettuata tra pari.
+
+\subsection{CloudFront}
+Servizio AWS di distribuzione dei contenuti statici tramite rete CDN.
+
+\subsection{CloudWatch}
+Servizio AWS per il monitoraggio e la gestione dei log e delle metriche delle risorse cloud.
+
+\subsection{Container}
+Ambiente isolato che esegue un'applicazione e le sue dipendenze.
+
+\subsection{CI/CD (Continuous Integration/Continuous Deployment)}
+Pratiche di integrazione, verifica e rilascio automatico del software.
+
+\subsection{CDN (Content Delivery Network)}
+Rete distribuita che avvicina agli utenti la distribuzione di contenuti statici.
 
 
 \subsection{Committente (Proponente)}
@@ -227,7 +278,6 @@ Rendiconto delle ore effettivamente impiegate e dei costi sostenuti.
 
 \subsection{Copie Atomiche}
 Singole parti risultanti dallo split di un documento massivo.
-
 
 \section{D}
 \subsection{Dashboard}
@@ -248,6 +298,21 @@ Documento per il tracciamento settimanale delle attività.
 \subsection{Dispaccio}
 Processo automatico di invio dei documenti ai destinatari.
 
+\subsection{Docker}
+Piattaforma per la costruzione e l'esecuzione di applicazioni containerizzate.
+
+\subsection{Docker Compose}
+Strumento per orchestrare più container tramite una configurazione comune.
+
+\subsection{Dompdf}
+Libreria PHP per trasformare contenuti HTML in documenti PDF.
+
+\subsection{DLQ (Dead Letter Queue)}
+Coda che raccoglie i messaggi non elaborati dopo il numero massimo di tentativi.
+
+\subsection{Dependency Injection}
+Tecnica con cui le dipendenze di una classe vengono fornite dall'esterno invece di essere create al suo interno.
+
 \section{E}
 
 \subsection{Entity Resolution}
@@ -255,6 +320,21 @@ Processo di riconoscimento e associazione dei destinatari ai documenti.
 
 \subsection{Esecuzione Asincrona}
 Modalità di esecuzione di operazioni lunghe in background.
+
+\subsection{ETag}
+Identificatore della versione di una risorsa HTTP usato per evitare trasferimenti o rigenerazioni inutili.
+
+\subsection{Eloquent}
+ORM di Laravel utilizzato per mappare modelli applicativi e tabelle del database.
+
+\subsection{EMF}
+Eclipse Modeling Framework, un framework per la modellazione e la generazione di codice basato su modelli.
+
+\subsection{Entity}
+Oggetto di dominio dotato di identità e comportamento propri.
+
+\subsection{Event-Driven}
+Approccio in cui le componenti comunicano reagendo alla pubblicazione di eventi.
 
 \section{F}
 \subsection{Figma}
@@ -265,6 +345,15 @@ Framework PHP per interfacce amministrative, parte dello stack tecnologico.
 
 \subsection{Filtro dinamico}
 Strumento che aggiorna istantaneamente i dati visualizzati.
+
+\subsection{Flysystem}
+Libreria PHP per l'astrazione del filesystem, che permette di interagire con diversi tipi di storage in modo uniforme.
+
+\subsection{Facade}
+Interfaccia unificata che semplifica l'accesso a più componenti di un sottosistema.
+
+\subsection{FPDF e FPDI}
+Librerie PHP utilizzate rispettivamente per generare PDF e importare pagine da PDF esistenti.
 
 \section{G}
 \subsection{GDPR}
@@ -279,9 +368,21 @@ Piattaforma per hosting e gestione collaborativa di repository.
 \subsection{Glossario}
 Documento che definisce i termini tecnici e ambigui del progetto.
 
+\subsection{GHCR (GitHub Container Registry)}
+Registro GitHub per la pubblicazione delle immagini Docker prodotte dal progetto.
+
+\subsection{Gateway}
+Componente che espone un punto di accesso verso un servizio o sistema esterno.
+
+\subsection{Quality Gate}
+Controllo automatico che deve essere superato prima di integrare o rilasciare una modifica.
+
 \section{H}
 \subsection{Human-in-the-loop}
 Approccio con revisione umana per casi a bassa confidenza dell'AI.
+
+\subsection{Heartbeat}
+Segnale periodico che indica a un orchestratore che un'elaborazione è ancora attiva.
 
 \section{I}
 \subsection{Indice di Gulpease (MPC-IG)}
@@ -293,9 +394,28 @@ Tecnologie che permettono ai computer di svolgere attività che richiederebbero 
 \subsection{Issue}
 Strumento per tracciare task su GitHub.
 
+\subsection{IaC (Infrastructure as Code)}
+Gestione dell'infrastruttura tramite file di configurazione versionati e riproducibili.
+
+\subsection{Idempotenza}
+Proprietà per cui ripetere un'operazione produce lo stesso effetto della sua prima esecuzione.
+
+\subsection{JSON}
+Formato testuale per lo scambio di dati strutturati tra frontend e backend.
+
+\subsection{JSONB}
+Tipo binario di PostgreSQL per memorizzare dati JSON semi-strutturati.
+
+\section{J}
+\subsection{JWT (JSON Web Token)}
+Token firmato utilizzato per rappresentare l'identità e autorizzare le richieste.
+
 \section{K}
 \subsection{KLOC}
 Migliaia di linee di codice.
+
+\subsection{KMS (Key Management Service)}
+Servizio AWS per la gestione delle chiavi crittografiche usate nella cifratura dei dati.
 
 \subsection{KPI (Key Performance Indicator)}
 Indicatori numerici per misurare le performance del sistema.
@@ -317,6 +437,15 @@ Modello di linguaggio di grandi dimensioni per la generazione di testo.
 
 \subsection{Lotto Documentale}
 Insieme di file caricati simultaneamente nel sistema.
+
+\subsection{LocalStack}
+Emulatore locale dei servizi AWS utilizzato per lo sviluppo e i test senza credenziali reali.
+
+\subsection{Listener}
+Componente che reagisce a un evento pubblicato dal sistema, ad esempio per audit o metriche.
+
+\subsection{LLM Gateway}
+Interfaccia applicativa verso un modello linguistico esterno.
 
 \section{M}
 \subsection{Marcatore di trasparenza}
@@ -346,6 +475,9 @@ Approccio metodologico adottato (Agile/SCRUM).
 \subsection{Moduli Esterni}
 Sistemi terzi con cui il software scambia dati (AI Analyst, AI Post Generator).
 
+\subsection{MVVM (Model-View-ViewModel)}
+Pattern che separa dati, logica di presentazione e interfaccia utente.
+
 \subsection{MVP (Minimum Viable Product)}
 Versione con funzionalità minime necessarie.
 
@@ -356,9 +488,30 @@ Piattaforma digitale di Eggon per comunicazione e gestione HR.
 \subsection{Norme di Progetto}
 Documento che definisce Way of Working, ruoli, strumenti e procedure.
 
+\subsection{Nginx}
+Web server e reverse proxy utilizzato per servire la SPA e inoltrare le richieste a PHP-FPM.
+
+\subsection{Node.js}
+Runtime JavaScript utilizzato dagli strumenti di build e sviluppo del frontend.
+
 \section{O}
 \subsection{OCR (Riconoscimento Ottico dei Caratteri)}
 Tecnologia per estrarre testo da immagini o PDF scannerizzati.
+
+\subsection{OpenAPI}
+Specifica standard che descrive il contratto delle API REST e permette di generare client tipizzati.
+
+\subsection{OpenTelemetry (OTel)}
+Standard per raccogliere e trasportare metriche, tracce e log applicativi.
+
+\subsection{Orval}
+Strumento che genera automaticamente il client TypeScript a partire da una specifica OpenAPI.
+
+\subsection{ORM (Object-Relational Mapping)}
+Tecnica che rappresenta le tabelle di un database tramite oggetti del linguaggio di programmazione.
+
+\subsection{OTLP (OpenTelemetry Protocol)}
+Protocollo usato da OpenTelemetry per inviare segnali osservabili a un Collector.
 
 \section{P}
 \subsection{PB (Product Baseline)}
@@ -385,6 +538,27 @@ Stato finale del sistema dopo un caso d'uso.
 
 \subsection{PostgreSQL}
 Database relazionale del sistema.
+
+\subsection{Porta}
+Interfaccia astratta attraverso cui il dominio comunica con un adapter primario o secondario.
+
+\subsection{PHP-FPM}
+Gestore di processi PHP che esegue l'applicazione Laravel tramite FastCGI.
+
+\subsection{PHP}
+Linguaggio utilizzato per lo sviluppo del backend Laravel.
+
+\subsection{SQL (Structured Query Language)}
+Linguaggio utilizzato per definire e interrogare i dati del database relazionale.
+
+\subsection{Prometheus}
+Sistema per la raccolta e l'archiviazione di metriche esposte dai servizi.
+
+\subsection{PSR-20}
+Standard PHP che definisce l'interfaccia comune per un orologio astratto.
+
+\subsection{Proxy Inverso}
+Server che riceve le richieste dei client e le inoltra ai servizi interni appropriati.
 
 \subsection{Precondizioni}
 Stato obbligatorio prima di un caso d'uso.
@@ -418,7 +592,7 @@ Controllo degli accessi basato sui ruoli.
 Utente che utilizza l'AI Assistant per creare comunicazioni.
 
 \subsection{Redis}
-Sistema per code asincrone e caching.
+Sistema in-memory utilizzato per cache, sessioni e rate limiting; non gestisce la coda della pipeline.
 
 \subsection{Requisiti Funzionali}
 Specifiche che descrivono i comportamenti, i servizi e le funzioni che il sistema deve eseguire per soddisfare i bisogni dell'utente.
@@ -438,6 +612,15 @@ Archivio digitale per documenti e codice.
 \subsection{RTB (Requirements and Technology Baseline)}
 Milestone di progetto finalizzata alla validazione dei requisiti analizzati e al consolidamento dell'architettura tecnologica tramite prototipazione (PoC).
 
+\subsection{REST (Representational State Transfer)}
+Stile per la progettazione di servizi web basati su risorse e metodi HTTP.
+
+\subsection{RxJS}
+Libreria TypeScript per la programmazione reattiva tramite Observable e stream asincroni.
+
+\subsection{Reactive Forms}
+API Angular per definire e validare form tramite oggetti e controlli espliciti.
+
 \section{S}
 \subsection{Scenario Alternativo}
 Percorso di gestione di errori o eccezioni.
@@ -453,6 +636,30 @@ Scomposizione di un caso d'uso complesso.
 
 \subsection{Split Automatico}
 Suddivisione di documenti multi-destinatario.
+
+\subsection{S3 (Simple Storage Service)}
+Servizio AWS di object storage per documenti, sotto-documenti e asset statici.
+
+\subsection{SQS (Simple Queue Service)}
+Servizio AWS di code di messaggi usato per distribuire i task asincroni ai worker.
+
+\subsection{SSE (Server-Sent Events)}
+Tecnologia che consente al server di inviare aggiornamenti in tempo reale al browser tramite una connessione HTTP persistente.
+
+\subsection{State Machine}
+Modello che descrive stati e transizioni di una procedura orchestrata, come una pipeline asincrona.
+
+\subsection{Step Functions}
+Servizio AWS che orchestra le fasi delle pipeline asincrone tramite una state machine.
+
+\subsection{Strategy}
+Pattern che incapsula algoritmi intercambiabili e ne consente la selezione a runtime.
+
+\subsection{SPA (Single Page Application)}
+Applicazione web che aggiorna le viste senza ricaricare interamente la pagina.
+
+\subsection{TLS (Transport Layer Security)}
+Protocollo crittografico utilizzato per proteggere le comunicazioni HTTPS.
 
 \subsection{Sprint}
 Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi
@@ -485,8 +692,23 @@ Test su singole funzioni in isolamento.
 \subsection{Timeout}
 Interruzione di un'operazione che supera il tempo massimo.
 
+\subsection{Textract}
+Servizio AWS di OCR che estrae testo e dati strutturati da documenti.
+
+\subsection{Terraform}
+Strumento per descrivere e creare l'infrastruttura tramite Infrastructure as Code.
+
+\subsection{Tenant}
+Organizzazione o spazio logico isolato i cui dati sono identificati da un tenant ID.
+
+\subsection{TypeScript}
+Superset tipizzato di JavaScript utilizzato per lo sviluppo del frontend Angular.
+
 \subsection{Tono Comunicativo}
 Parametro che calibra il tono dell'AI.
+
+\subsection{Traefik}
+Proxy inverso e load balancer per microservizi, che gestisce automaticamente il routing del traffico.
 
 \subsection{Trigger}
 Evento che innesca un caso d'uso.
@@ -494,6 +716,12 @@ Evento che innesca un caso d'uso.
 \section{U}
 \subsection{Utente Operativo}
 Utente autorizzato alle funzionalità ordinarie.
+
+\subsection{UUID (Universally Unique Identifier)}
+Identificatore progettato per essere univoco, usato per nominare risorse e file.
+
+\subsection{Observable}
+Astrazione RxJS che rappresenta una sequenza di valori prodotti nel tempo.
 
 \section{V}
 \subsection{Verbale Esterno}
@@ -508,6 +736,9 @@ Ruolo responsabile della verifica di documenti e codice.
 \subsection{Versioning}
 Sistema che tiene traccia delle versioni.
 
+\subsection{Value Object}
+Oggetto di dominio definito dal proprio valore, privo di identità autonoma.
+
 \section{W}
 \subsection{Walkthrough}
 Metodo di revisione informale di documenti o codice.
@@ -517,5 +748,8 @@ Insieme di norme, strumenti e procedure del gruppo.
 
 \subsection{Workflow}
 Sequenza automatica di passaggi per l'elaborazione.
+
+\subsection{Worker}
+Processo che consuma task da una coda ed esegue le operazioni asincrone assegnate.
 
 \end{document}
