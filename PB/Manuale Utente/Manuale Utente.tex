@@ -316,15 +316,15 @@ cd MVP
 Copiare il file \texttt{.env.example} in \texttt{.env} e compilare almeno le credenziali \glslink{aws}{AWS} reali usate da Bedrock:
 
 \begin{itemize}
-    \item \texttt{\glslink{aws}{AWS}\_REAL\_ACCESS\_KEY\_ID} e \texttt{\glslink{aws}{AWS}\_REAL\_SECRET\_ACCESS\_KEY};
-    \item \texttt{\glslink{aws}{AWS}\_REAL\_SESSION\_TOKEN}, solo se le credenziali sono temporanee;
+    \item \texttt{AWS\_REAL\_ACCESS\_KEY\_ID} e \texttt{AWS\_REAL\_SECRET\_ACCESS\_KEY};
+    \item \texttt{AWS\_REAL\_SESSION\_TOKEN}, solo se le credenziali sono temporanee;
     \item \texttt{BEDROCK\_REGION} e \texttt{BEDROCK\_MODEL\_ID} per il modello di testo\\
     (default: \texttt{amazon.nova-lite-v1:0});
     \item \texttt{BEDROCK\_IMAGE\_REGION} e \texttt{BEDROCK\_IMAGE\_MODEL\_ID} per le copertine.\\
     I modelli immagine vivono in region diverse da quelli testo.
 \end{itemize}
 
-Non inserire commenti sulla stessa riga di un valore: il file li tratterebbe come parte del valore. Dopo ogni modifica alle variabili \texttt{\glslink{aws}{AWS}\_REAL\_*} o Bedrock, una volta avviato lo stack, eseguire \texttt{make refresh-runtime} perché i nuovi valori arrivino ai processi.
+Non inserire commenti sulla stessa riga di un valore: il file li tratterebbe come parte del valore. Dopo ogni modifica alle variabili \texttt{AWS\_REAL\_*} o Bedrock, una volta avviato lo stack, eseguire \texttt{make refresh-runtime} perché i nuovi valori arrivino ai processi.
 
 I valori di default coprono \glslink{localstack}{LocalStack}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis} e l'osservabilità. Non vanno modificati se non si sta cambiando deliberatamente l'ambiente.
 
@@ -411,8 +411,8 @@ All'apertura si vede la console di sintesi. Non è una \glslink{dashboard}{dashb
 Il riquadro iniziale recita: \textit{``Gestione assistita di comunicazioni interne e documenti del personale.''} Due pulsanti scorciano i flussi:
 
 \begin{itemize}
-    \item \ui{Crea contenuto} \glslink{porta}{porta} alla sezione di generazione dell'Assistant.
-    \item \ui{Carica documenti} \glslink{porta}{porta} alla sezione di caricamento del Co-Pilot.
+    \item \ui{Crea contenuto} porta alla sezione di generazione dell'Assistant.
+    \item \ui{Carica documenti} porta alla sezione di caricamento del Co-Pilot.
 \end{itemize}
 
 Sotto, la sezione \ui{Da dove partire} riassume i tre punti d'ingresso: Assistant, Co-Pilot e metriche operative (queste ultime restano dentro le pagine degli strumenti, non in una vista analytics separata).
@@ -925,7 +925,7 @@ Non esiste una vista analytics con filtri temporali o grafici di accuratezza nel
 
 \section{Metriche dell'AI Assistant}
 
-Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{AI Assistant} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che \glslink{porta}{porta} alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di \glslink{prompt}{prompt} salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
+Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{\glslink{ai-assistant-generativo}{AI Assistant}} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che porta alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di \glslink{prompt}{prompt} salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
 
 \section{Problemi frequenti}
 
