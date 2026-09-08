@@ -51,6 +51,8 @@
     \fancyfoot[R]{Verbale 2026-07-14}
 }
 
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
+
 \begin{document}
 
 \thispagestyle{firstpage}
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 18:00 -- 18:30 \\[6pt]
 
-Redattore &
+\glslink{redattore}{Redattore} &
     L. Soligo\\[6pt]
 
 Amministratore & 
     D. Belluz\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
     A. Oloni\\[6pt]
 
 Partecipanti &
@@ -122,16 +124,16 @@ Partecipanti &
 
 \section{Ordine del Giorno}
     \begin{itemize}
-    \item Strategia repo PB/MVP: nuova repo e sostituzione occorrenze
+    \item Strategia repo \glslink{pb-product-baseline}{PB}/\glslink{mvp-minimum-viable-product}{MVP}: nuova repo e sostituzione occorrenze
     \item Aggiornamento azienda e richiesta riunione
-    \item Definizione documentale: manuale utente e specifica tecnica in bozza
+    \item Definizione documentale: manuale utente e specifica tecnica in \glslink{bozza-draft}{bozza}
     \item Prossime attività di sviluppo
     \end{itemize}
 
 
 \section{Attività svolte}
 \subsection{Strategia repo PB/MVP: nuova repo e sostituzione occorrenze}
-Si definiscono compiti di avvio: Leonardo crea la repository dell'MVP(Minimum Viable Product), Angelica si occuperà del refactoring dei nomi dei package,
+Si definiscono compiti di avvio: Leonardo crea la \glslink{repository}{repository} dell'\glslink{mvp-minimum-viable-product}{MVP}(\glslink{mvp-minimum-viable-product}{Minimum Viable Product}), Angelica si occuperà del refactoring dei nomi dei package,
 dei file, e delle varie parti del codice necessarie.
 
 \subsection{Aggiornamento azienda e richiesta riunione}
@@ -141,39 +143,39 @@ si ipotizza lunedì o martedì della prossima settimana; l’idea è inviare gi�
 \subsection{Inizio stesura documenti PB}
 Angela Maule si occuperà della stesura del manuale utente e delle specifiche tecniche. Si discute inoltre che
 la manualistica potrebbe essere verso la fine, mentre la specifica tecnica è molto più corposa.
-Vinicius Y. Kaneda Fernandes si occuperà poi della sistemazione dei vari documenti che hanno avuto un riscontro avverso da parte dei professori nella correzione dell'RTB, che poi andranno implementati nella fase PB.
+Vinicius Y. Kaneda Fernandes si occuperà poi della sistemazione dei vari documenti che hanno avuto un riscontro avverso da parte dei professori nella correzione dell'\glslink{rtb-requirements-and-technology-baseline}{RTB}, che poi andranno implementati nella fase \glslink{pb-product-baseline}{PB}.
 
 \subsection{Prossime attività di sviluppo}
 Il team inoltre ha definito le prossime task da svolgere nell'ambito dello sviluppo del software, che includono:
 \begin{itemize}
 \item Implementare la valutazione della risposta generata
-\item Modifica manuale della bozza generata
+\item Modifica manuale della \glslink{bozza-draft}{bozza} generata
 \item Generazione automatica/modifica manuale(/retry) dell’immagine di copertina contestuale al messaggio
 \item Sistema di download come pdf per comunicazioni ai assistant
 \end{itemize}
-Si è deciso di procedere per step graduali, Alex Oloni si dedicherà alla parte di implementazione dell'immagine di copertina, mentre il rating della risposta generata e modifica manuale delle bozze sarà implementato da Diego Belluz e Eleonora Bellet.
+Si è deciso di procedere per step graduali, Alex Oloni si dedicherà alla parte di implementazione dell'immagine di copertina, mentre il \glslink{rating}{rating} della risposta generata e modifica manuale delle bozze sarà implementato da Diego Belluz e Eleonora Bellet.
 \newpage
 \section{To-Do List}
 \begin{table}[h]
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
-        \textit {Leonardo Soligo} & Creazione nuova repository per sviluppo MVP & \href{https://github.com/aLittleByte-19/Documentazione/issues/148}{\#148}\\
+        \textit {Leonardo Soligo} & Creazione nuova \glslink{repository}{repository} per sviluppo \glslink{mvp-minimum-viable-product}{MVP} & \href{https://github.com/aLittleByte-19/Documentazione/issues/148}{\#148}\\
     \hline
-        \textit {Angelica Gastaldello} &  Refactoring per nuova repository & \href{https://github.com/aLittleByte-19/Documentazione/issues/149}{\#149}\\
+        \textit {Angelica Gastaldello} &  Refactoring per nuova \glslink{repository}{repository} & \href{https://github.com/aLittleByte-19/Documentazione/issues/149}{\#149}\\
     \hline
         \textit{Angela Maule} & Prima stesura Manuale Utente e Specifiche Tecniche & \href{https://github.com/aLittleByte-19/Documentazione/issues/150}{\#150}\\
     \hline
         \textit{Alex Oloni} & Implementazione immagine di copertina & \href{https://github.com/aLittleByte-19/Documentazione/issues/151}{\#151}\\
     \hline
-        \textit{Eleonora Bellet e Diego Belluz} & Implementazione rating della risposta generata e modifica manuale delle bozze & \href{https://github.com/aLittleByte-19/Documentazione/issues/152}{\#152}\\
+        \textit{Eleonora Bellet e Diego Belluz} & Implementazione \glslink{rating}{rating} della risposta generata e modifica manuale delle bozze & \href{https://github.com/aLittleByte-19/Documentazione/issues/152}{\#152}\\
     \hline
         \textit{V.Y. Kaneda Fernandes} & Correzione documenti & 
         \href{https://github.com/aLittleByte-19/Documentazione/issues/153}{\#153}\\
     \hline
-        \textit{Alex Oloni} & Stesura Verbale Interno 14/07/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/154}{\#154}\\
+        \textit{Alex Oloni} & Stesura \glslink{verbale-interno}{Verbale Interno} 14/07/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/154}{\#154}\\
     \hline
     \end{tabular}
     \label{tab:placeholder}
