@@ -37,6 +37,7 @@ node_modules/
 *.fdb_latexmk
 *.fls
 *.lof
+*.lol
 *.lot
 *.out
 *.run.xml
