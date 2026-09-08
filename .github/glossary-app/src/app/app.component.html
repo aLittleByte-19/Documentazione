@@ -1,0 +1,252 @@
+<a class="skip-link" href="#main-content">Vai al contenuto</a>
+
+<header class="site-header">
+  <nav class="site-navigation" aria-label="Navigazione del glossario">
+    <div class="document-heading">
+      <a class="brand-link" href="../index.html" aria-label="aLittleByte, torna alla documentazione">
+        <img id="header-logo" src="assets/logo.png" alt="">
+        <span class="brand-name">aLittleByte</span>
+      </a>
+      <span class="brand-context" aria-current="page">{{ title() }}</span>
+    </div>
+
+    <div class="header-controls">
+      <search class="header-search" aria-label="Ricerca nel glossario">
+        <label class="sr-only" for="glossary-search">Cerca nel glossario</label>
+        <p-iconfield class="search-field">
+          <p-inputicon>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+          </p-inputicon>
+          <input
+            #searchInput
+            id="glossary-search"
+            type="search"
+            pInputText
+            autocomplete="off"
+            [placeholder]="searchPlaceholder()"
+            aria-controls="glossary-results"
+            [disabled]="state() !== 'ready'"
+            [value]="query()"
+            (input)="updateQuery($event)"
+          >
+          @if (query()) {
+            <button
+              type="button"
+              class="clear-search"
+              aria-label="Cancella ricerca"
+              (click)="clearSearch(searchInput)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m7 7 10 10M17 7 7 17"></path>
+              </svg>
+            </button>
+          }
+        </p-iconfield>
+      </search>
+
+      <button
+        type="button"
+        class="filter-toggle"
+        [class.is-active]="filtersOpen() || searchScope() !== 'all'"
+        aria-label="Filtri di ricerca"
+        aria-controls="filter-panel"
+        [attr.aria-expanded]="filtersOpen()"
+        (click)="toggleFilters($event)"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 7h10M18 7h2M4 17h2M10 17h10"></path>
+          <circle cx="16" cy="7" r="2"></circle>
+          <circle cx="8" cy="17" r="2"></circle>
+        </svg>
+      </button>
+
+      @if (filtersOpen()) {
+        <div id="filter-panel" class="filter-popover" (click)="keepFiltersOpen($event)">
+          <fieldset>
+            <legend>Cerca in</legend>
+            @for (option of scopeOptions; track option.value) {
+              <label class="filter-option" [class.is-selected]="searchScope() === option.value">
+                <input
+                  type="radio"
+                  name="search-scope"
+                  [value]="option.value"
+                  [checked]="searchScope() === option.value"
+                  (change)="updateSearchScope($event)"
+                >
+                <span>{{ option.label }}</span>
+              </label>
+            }
+          </fieldset>
+          @if (hasActiveFilters()) {
+            <button type="button" class="reset-filters" (click)="resetFilters(searchInput)">
+              Azzera filtri
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </nav>
+</header>
+
+<div class="page-scroll" (scroll)="onPageScroll($event)">
+<main id="main-content" class="page-shell">
+  <section class="hero" aria-labelledby="page-title">
+    <h1 id="page-title">Glossario</h1>
+    <p>Termini, definizioni ed alias legati al progetto</p>
+  </section>
+
+  @if (state() === 'ready') {
+    <section class="tools-section" aria-labelledby="alphabet-title">
+      <div class="tools-meta">
+        <h2 id="alphabet-title">Filtra per iniziale</h2>
+        <output class="result-count" for="glossary-search" aria-live="polite">
+          {{ countLabel() }}
+        </output>
+      </div>
+
+      <nav class="alphabet-nav" aria-label="Filtra il glossario per iniziale">
+        <div class="alphabet-list">
+          <button
+            type="button"
+            class="alphabet-all"
+            [class.is-active]="letterFilter() === ''"
+            [attr.aria-pressed]="letterFilter() === ''"
+            (click)="filterByLetter('')"
+          >Tutte</button>
+          @for (letter of alphabet; track letter) {
+            @if (availableLetters().has(letter)) {
+              <button
+                type="button"
+                [class.is-active]="letterFilter() === letter"
+                [attr.aria-pressed]="letterFilter() === letter"
+                [attr.aria-label]="'Mostra le voci con iniziale ' + letter"
+                (click)="filterByLetter(letter)"
+              >{{ letter }}</button>
+            }
+          }
+        </div>
+      </nav>
+    </section>
+
+  }
+
+  @if (fragmentFeedback()) {
+    <section class="feedback-panel fragment-feedback" aria-label="Collegamento non disponibile">
+      <div>
+        <strong>Voce non trovata</strong>
+        <p>{{ fragmentFeedback() }}</p>
+      </div>
+      <button type="button" class="secondary-action" (click)="dismissFragmentFeedback()">
+        Mostra il glossario
+      </button>
+    </section>
+  }
+
+  <div id="glossary-results" class="results" [attr.aria-busy]="state() === 'loading'">
+    @if (state() === 'loading') {
+      <section class="loading-state" aria-label="Caricamento del glossario">
+        <span class="sr-only" role="status">Caricamento del glossario in corso.</span>
+        @for (item of [1, 2, 3, 4]; track item) {
+          <div class="skeleton-card" aria-hidden="true">
+            <p-skeleton width="28%" height="1.5rem" borderRadius="4px" />
+            <p-skeleton width="92%" height="1rem" borderRadius="4px" />
+            <p-skeleton width="68%" height="1rem" borderRadius="4px" />
+          </div>
+        }
+      </section>
+    } @else if (state() === 'error') {
+      <section class="feedback-panel error-state" aria-labelledby="error-title">
+        <div>
+          <strong id="error-title">Caricamento non riuscito.</strong>
+          <p>{{ errorMessage() }}</p>
+        </div>
+        <button type="button" class="primary-action" (click)="loadGlossary()">
+          Riprova
+        </button>
+      </section>
+    } @else if (visibleCount() === 0) {
+      <section class="empty-state" aria-labelledby="empty-title">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4M8.5 11h5"></path>
+        </svg>
+        <div>
+          <h2 id="empty-title">Nessun risultato</h2>
+          <p>Modifica la ricerca, il campo o l’iniziale selezionata.</p>
+        </div>
+        <button type="button" class="secondary-action" (click)="resetFilters(searchInput)">
+          Azzera filtri
+        </button>
+      </section>
+    } @else {
+      @for (group of visibleGroups(); track group.letter) {
+        <section
+          class="letter-section"
+          [id]="'letter-' + group.letter"
+          [attr.aria-labelledby]="'heading-' + group.letter"
+        >
+          <div class="letter-heading">
+            <h2 [id]="'heading-' + group.letter">{{ group.letter }}</h2>
+            <span>{{ group.entries.length }} {{ group.entries.length === 1 ? 'voce' : 'voci' }}</span>
+          </div>
+
+          <div class="entry-list">
+            @for (entry of group.entries; track entry.id) {
+              <article
+                class="entry-card"
+                [class.is-fragment-target]="activeFragment() === 'gls-' + entry.id"
+                [id]="'gls-' + entry.id"
+                tabindex="-1"
+                [attr.aria-labelledby]="'term-' + entry.id"
+              >
+                <div class="entry-term">
+                  <h3 [id]="'term-' + entry.id">{{ entry.term }}</h3>
+                  @if (entry.aliases.length) {
+                    <p class="aliases">{{ entry.aliases.join(', ') }}</p>
+                  }
+                </div>
+                <div class="entry-body">
+                  <p>{{ entry.definition }}</p>
+                </div>
+                <button
+                  type="button"
+                  class="copy-button"
+                  [class.is-copied]="copiedEntryId() === entry.id"
+                  [attr.aria-label]="copiedEntryId() === entry.id ? 'Link copiato' : 'Copia link a ' + entry.term"
+                  [attr.title]="copiedEntryId() === entry.id ? 'Link copiato' : 'Copia link'"
+                  (click)="copyEntryLink(entry)"
+                >
+                  @if (copiedEntryId() === entry.id) {
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="m5 12 4 4L19 6"></path>
+                    </svg>
+                  } @else {
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path>
+                      <path d="M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.1-1.1"></path>
+                    </svg>
+                  }
+                </button>
+              </article>
+            }
+          </div>
+        </section>
+      }
+    }
+  </div>
+</main>
+
+<span class="sr-only" aria-live="polite">{{ copyAnnouncement() }}</span>
+
+@if (showBackToTop()) {
+  <button type="button" class="back-to-top" aria-label="Torna all'inizio" (click)="scrollToTop()">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 19V5"></path>
+      <path d="m5 12 7-7 7 7"></path>
+    </svg>
+  </button>
+}
+</div>
