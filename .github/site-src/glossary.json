@@ -2,6 +2,12 @@
   "title": "Glossario",
   "entries": [
     {
+      "id": "adapter",
+      "term": "Adapter",
+      "definition": "Componente che traduce l'interfaccia di una tecnologia esterna nell'interfaccia richiesta dal dominio applicativo.",
+      "aliases": []
+    },
+    {
       "id": "agile",
       "term": "Agile",
       "definition": "Modello di sviluppo basato su sprint bisettimanali, adottato dal team.",
@@ -92,9 +98,24 @@
       "aliases": []
     },
     {
+      "id": "api-application-programming-interface",
+      "term": "API (Application Programming Interface)",
+      "definition": "Insieme di operazioni e regole che permettono a componenti software diversi di comunicare.",
+      "aliases": [
+        "API",
+        "Application Programming Interface"
+      ]
+    },
+    {
       "id": "approccio-incrementale",
       "term": "Approccio Incrementale",
       "definition": "Metodo di stesura e sviluppo in cui i documenti e il prodotto vengono costantemente aggiornati e affinati nel tempo.",
+      "aliases": []
+    },
+    {
+      "id": "architettura-esagonale",
+      "term": "Architettura Esagonale",
+      "definition": "Stile architetturale che separa la logica di dominio dalle tecnologie esterne tramite porte e adapter.",
       "aliases": []
     },
     {
@@ -116,9 +137,51 @@
       "aliases": []
     },
     {
+      "id": "audit-trail",
+      "term": "Audit trail",
+      "definition": "Registro cronologico delle operazioni eseguite all'interno del sistema, utile per la tracciabilità e la sicurezza.",
+      "aliases": []
+    },
+    {
+      "id": "auditlogger",
+      "term": "AuditLogger",
+      "definition": "Componente responsabile della registrazione degli eventi nel audit trail, garantendo la tracciabilità delle operazioni.",
+      "aliases": []
+    },
+    {
+      "id": "aws",
+      "term": "AWS",
+      "definition": "Fornitore di servizi cloud utilizzati dal sistema per AI, storage, code e orchestrazione.",
+      "aliases": []
+    },
+    {
+      "id": "aws-s3",
+      "term": "AWS S3",
+      "definition": "Nome del servizio AWS di object storage utilizzato per i file del sistema.",
+      "aliases": []
+    },
+    {
+      "id": "aws-sqs",
+      "term": "AWS SQS",
+      "definition": "Nome del servizio AWS di code di messaggi utilizzato per i task asincroni.",
+      "aliases": []
+    },
+    {
+      "id": "backend",
+      "term": "Backend",
+      "definition": "Parte server-side del sistema che espone le API e implementa la logica applicativa.",
+      "aliases": []
+    },
+    {
       "id": "bookmark",
       "term": "Bookmark",
       "definition": "Funzionalità che permette di contrassegnare e salvare i prompt preferiti.",
+      "aliases": []
+    },
+    {
+      "id": "bootstrap",
+      "term": "Bootstrap",
+      "definition": "Avvio e configurazione iniziale dell'applicazione e dei suoi servizi.",
       "aliases": []
     },
     {
@@ -137,6 +200,12 @@
       "aliases": []
     },
     {
+      "id": "callback",
+      "term": "Callback",
+      "definition": "Risposta inviata a un orchestratore per comunicare l'esito di un'attività asincrona.",
+      "aliases": []
+    },
+    {
       "id": "capitolato",
       "term": "Capitolato",
       "definition": "Documento tecnico fornito dal proponente che definisce requisiti e obiettivi.",
@@ -152,15 +221,45 @@
       ]
     },
     {
+      "id": "cdn-content-delivery-network",
+      "term": "CDN (Content Delivery Network)",
+      "definition": "Rete distribuita che avvicina agli utenti la distribuzione di contenuti statici.",
+      "aliases": [
+        "CDN",
+        "Content Delivery Network"
+      ]
+    },
+    {
       "id": "cedolini-massivi",
       "term": "Cedolini Massivi",
       "definition": "File contenente le buste paga di più dipendenti, da suddividere automaticamente.",
       "aliases": []
     },
     {
+      "id": "ci-cd-continuous-integration-continuous-deployment",
+      "term": "CI/CD (Continuous Integration/Continuous Deployment)",
+      "definition": "Pratiche di integrazione, verifica e rilascio automatico del software.",
+      "aliases": [
+        "CI/CD",
+        "Continuous Integration/Continuous Deployment"
+      ]
+    },
+    {
       "id": "ciclo-iterativo",
       "term": "Ciclo Iterativo",
       "definition": "Suddivisione del lavoro in periodi ricorrenti (sprint).",
+      "aliases": []
+    },
+    {
+      "id": "cloudfront",
+      "term": "CloudFront",
+      "definition": "Servizio AWS di distribuzione dei contenuti statici tramite rete CDN.",
+      "aliases": []
+    },
+    {
+      "id": "cloudwatch",
+      "term": "CloudWatch",
+      "definition": "Servizio AWS per il monitoraggio e la gestione dei log e delle metriche delle risorse cloud.",
       "aliases": []
     },
     {
@@ -203,6 +302,12 @@
       "aliases": []
     },
     {
+      "id": "container",
+      "term": "Container",
+      "definition": "Ambiente isolato che esegue un'applicazione e le sue dipendenze.",
+      "aliases": []
+    },
+    {
       "id": "copie-atomiche",
       "term": "Copie Atomiche",
       "definition": "Singole parti risultanti dallo split di un documento massivo.",
@@ -212,6 +317,12 @@
       "id": "dashboard",
       "term": "Dashboard",
       "definition": "Interfaccia grafica per visualizzare metriche e statistiche.",
+      "aliases": []
+    },
+    {
+      "id": "dependency-injection",
+      "term": "Dependency Injection",
+      "definition": "Tecnica con cui le dipendenze di una classe vengono fornite dall'esterno invece di essere create al suo interno.",
       "aliases": []
     },
     {
@@ -245,6 +356,51 @@
       "aliases": []
     },
     {
+      "id": "dlq-dead-letter-queue",
+      "term": "DLQ (Dead Letter Queue)",
+      "definition": "Coda che raccoglie i messaggi non elaborati dopo il numero massimo di tentativi.",
+      "aliases": [
+        "DLQ",
+        "Dead Letter Queue"
+      ]
+    },
+    {
+      "id": "docker",
+      "term": "Docker",
+      "definition": "Piattaforma per la costruzione e l'esecuzione di applicazioni containerizzate.",
+      "aliases": []
+    },
+    {
+      "id": "docker-compose",
+      "term": "Docker Compose",
+      "definition": "Strumento per orchestrare più container tramite una configurazione comune.",
+      "aliases": []
+    },
+    {
+      "id": "dompdf",
+      "term": "Dompdf",
+      "definition": "Libreria PHP per trasformare contenuti HTML in documenti PDF.",
+      "aliases": []
+    },
+    {
+      "id": "eloquent",
+      "term": "Eloquent",
+      "definition": "ORM di Laravel utilizzato per mappare modelli applicativi e tabelle del database.",
+      "aliases": []
+    },
+    {
+      "id": "emf",
+      "term": "EMF",
+      "definition": "Eclipse Modeling Framework, un framework per la modellazione e la generazione di codice basato su modelli.",
+      "aliases": []
+    },
+    {
+      "id": "entity",
+      "term": "Entity",
+      "definition": "Oggetto di dominio dotato di identità e comportamento propri.",
+      "aliases": []
+    },
+    {
       "id": "entity-resolution",
       "term": "Entity Resolution",
       "definition": "Processo di riconoscimento e associazione dei destinatari ai documenti.",
@@ -254,6 +410,24 @@
       "id": "esecuzione-asincrona",
       "term": "Esecuzione Asincrona",
       "definition": "Modalità di esecuzione di operazioni lunghe in background.",
+      "aliases": []
+    },
+    {
+      "id": "etag",
+      "term": "ETag",
+      "definition": "Identificatore della versione di una risorsa HTTP usato per evitare trasferimenti o rigenerazioni inutili.",
+      "aliases": []
+    },
+    {
+      "id": "event-driven",
+      "term": "Event-Driven",
+      "definition": "Approccio in cui le componenti comunicano reagendo alla pubblicazione di eventi.",
+      "aliases": []
+    },
+    {
+      "id": "facade",
+      "term": "Facade",
+      "definition": "Interfaccia unificata che semplifica l'accesso a più componenti di un sottosistema.",
       "aliases": []
     },
     {
@@ -275,10 +449,37 @@
       "aliases": []
     },
     {
+      "id": "flysystem",
+      "term": "Flysystem",
+      "definition": "Libreria PHP per l'astrazione del filesystem, che permette di interagire con diversi tipi di storage in modo uniforme.",
+      "aliases": []
+    },
+    {
+      "id": "fpdf-e-fpdi",
+      "term": "FPDF e FPDI",
+      "definition": "Librerie PHP utilizzate rispettivamente per generare PDF e importare pagine da PDF esistenti.",
+      "aliases": []
+    },
+    {
+      "id": "gateway",
+      "term": "Gateway",
+      "definition": "Componente che espone un punto di accesso verso un servizio o sistema esterno.",
+      "aliases": []
+    },
+    {
       "id": "gdpr",
       "term": "GDPR",
       "definition": "Regolamento europeo sulla protezione dei dati personali.",
       "aliases": []
+    },
+    {
+      "id": "ghcr-github-container-registry",
+      "term": "GHCR (GitHub Container Registry)",
+      "definition": "Registro GitHub per la pubblicazione delle immagini Docker prodotte dal progetto.",
+      "aliases": [
+        "GHCR",
+        "GitHub Container Registry"
+      ]
     },
     {
       "id": "git",
@@ -299,9 +500,30 @@
       "aliases": []
     },
     {
+      "id": "heartbeat",
+      "term": "Heartbeat",
+      "definition": "Segnale periodico che indica a un orchestratore che un'elaborazione è ancora attiva.",
+      "aliases": []
+    },
+    {
       "id": "human-in-the-loop",
       "term": "Human-in-the-loop",
       "definition": "Approccio con revisione umana per casi a bassa confidenza dell'AI.",
+      "aliases": []
+    },
+    {
+      "id": "iac-infrastructure-as-code",
+      "term": "IaC (Infrastructure as Code)",
+      "definition": "Gestione dell'infrastruttura tramite file di configurazione versionati e riproducibili.",
+      "aliases": [
+        "IaC",
+        "Infrastructure as Code"
+      ]
+    },
+    {
+      "id": "idempotenza",
+      "term": "Idempotenza",
+      "definition": "Proprietà per cui ripetere un'operazione produce lo stesso effetto della sua prima esecuzione.",
       "aliases": []
     },
     {
@@ -329,10 +551,40 @@
       "aliases": []
     },
     {
+      "id": "json",
+      "term": "JSON",
+      "definition": "Formato testuale per lo scambio di dati strutturati tra frontend e backend.",
+      "aliases": []
+    },
+    {
+      "id": "jsonb",
+      "term": "JSONB",
+      "definition": "Tipo binario di PostgreSQL per memorizzare dati JSON semi-strutturati.",
+      "aliases": []
+    },
+    {
+      "id": "jwt-json-web-token",
+      "term": "JWT (JSON Web Token)",
+      "definition": "Token firmato utilizzato per rappresentare l'identità e autorizzare le richieste.",
+      "aliases": [
+        "JWT",
+        "JSON Web Token"
+      ]
+    },
+    {
       "id": "kloc",
       "term": "KLOC",
       "definition": "Migliaia di linee di codice.",
       "aliases": []
+    },
+    {
+      "id": "kms-key-management-service",
+      "term": "KMS (Key Management Service)",
+      "definition": "Servizio AWS per la gestione delle chiavi crittografiche usate nella cifratura dei dati.",
+      "aliases": [
+        "KMS",
+        "Key Management Service"
+      ]
     },
     {
       "id": "kpi-key-performance-indicator",
@@ -362,6 +614,12 @@
       "aliases": []
     },
     {
+      "id": "listener",
+      "term": "Listener",
+      "definition": "Componente che reagisce a un evento pubblicato dal sistema, ad esempio per audit o metriche.",
+      "aliases": []
+    },
+    {
       "id": "llm-large-language-model",
       "term": "LLM (Large Language Model)",
       "definition": "Modello di linguaggio di grandi dimensioni per la generazione di testo.",
@@ -369,6 +627,18 @@
         "LLM",
         "Large Language Model"
       ]
+    },
+    {
+      "id": "llm-gateway",
+      "term": "LLM Gateway",
+      "definition": "Interfaccia applicativa verso un modello linguistico esterno.",
+      "aliases": []
+    },
+    {
+      "id": "localstack",
+      "term": "LocalStack",
+      "definition": "Emulatore locale dei servizi AWS utilizzato per lo sviluppo e i test senza credenziali reali.",
+      "aliases": []
     },
     {
       "id": "lotto-documentale",
@@ -443,9 +713,30 @@
       ]
     },
     {
+      "id": "mvvm-model-view-viewmodel",
+      "term": "MVVM (Model-View-ViewModel)",
+      "definition": "Pattern che separa dati, logica di presentazione e interfaccia utente.",
+      "aliases": [
+        "MVVM",
+        "Model-View-ViewModel"
+      ]
+    },
+    {
       "id": "nexum",
       "term": "Nexum",
       "definition": "Piattaforma digitale di Eggon per comunicazione e gestione HR.",
+      "aliases": []
+    },
+    {
+      "id": "nginx",
+      "term": "Nginx",
+      "definition": "Web server e reverse proxy utilizzato per servire la SPA e inoltrare le richieste a PHP-FPM.",
+      "aliases": []
+    },
+    {
+      "id": "node-js",
+      "term": "Node.js",
+      "definition": "Runtime JavaScript utilizzato dagli strumenti di build e sviluppo del frontend.",
       "aliases": []
     },
     {
@@ -455,12 +746,57 @@
       "aliases": []
     },
     {
+      "id": "observable",
+      "term": "Observable",
+      "definition": "Astrazione RxJS che rappresenta una sequenza di valori prodotti nel tempo.",
+      "aliases": []
+    },
+    {
       "id": "ocr-riconoscimento-ottico-dei-caratteri",
       "term": "OCR (Riconoscimento Ottico dei Caratteri)",
       "definition": "Tecnologia per estrarre testo da immagini o PDF scannerizzati.",
       "aliases": [
         "OCR",
         "Riconoscimento Ottico dei Caratteri"
+      ]
+    },
+    {
+      "id": "openapi",
+      "term": "OpenAPI",
+      "definition": "Specifica standard che descrive il contratto delle API REST e permette di generare client tipizzati.",
+      "aliases": []
+    },
+    {
+      "id": "opentelemetry-otel",
+      "term": "OpenTelemetry (OTel)",
+      "definition": "Standard per raccogliere e trasportare metriche, tracce e log applicativi.",
+      "aliases": [
+        "OpenTelemetry",
+        "OTel"
+      ]
+    },
+    {
+      "id": "orm-object-relational-mapping",
+      "term": "ORM (Object-Relational Mapping)",
+      "definition": "Tecnica che rappresenta le tabelle di un database tramite oggetti del linguaggio di programmazione.",
+      "aliases": [
+        "ORM",
+        "Object-Relational Mapping"
+      ]
+    },
+    {
+      "id": "orval",
+      "term": "Orval",
+      "definition": "Strumento che genera automaticamente il client TypeScript a partire da una specifica OpenAPI.",
+      "aliases": []
+    },
+    {
+      "id": "otlp-opentelemetry-protocol",
+      "term": "OTLP (OpenTelemetry Protocol)",
+      "definition": "Protocollo usato da OpenTelemetry per inviare segnali osservabili a un Collector.",
+      "aliases": [
+        "OTLP",
+        "OpenTelemetry Protocol"
       ]
     },
     {
@@ -485,6 +821,18 @@
       "aliases": []
     },
     {
+      "id": "php",
+      "term": "PHP",
+      "definition": "Linguaggio utilizzato per lo sviluppo del backend Laravel.",
+      "aliases": []
+    },
+    {
+      "id": "php-fpm",
+      "term": "PHP-FPM",
+      "definition": "Gestore di processi PHP che esegue l'applicazione Laravel tramite FastCGI.",
+      "aliases": []
+    },
+    {
       "id": "pianificazione",
       "term": "Pianificazione",
       "definition": "Attività di definizione di compiti, scadenze e responsabilità.",
@@ -500,6 +848,12 @@
       "id": "piano-di-qualifica",
       "term": "Piano di Qualifica",
       "definition": "Documento con metriche, test e obiettivi di qualità.",
+      "aliases": []
+    },
+    {
+      "id": "porta",
+      "term": "Porta",
+      "definition": "Interfaccia astratta attraverso cui il dominio comunica con un adapter primario o secondario.",
       "aliases": []
     },
     {
@@ -539,9 +893,27 @@
       "aliases": []
     },
     {
+      "id": "prometheus",
+      "term": "Prometheus",
+      "definition": "Sistema per la raccolta e l'archiviazione di metriche esposte dai servizi.",
+      "aliases": []
+    },
+    {
       "id": "prompt",
       "term": "Prompt",
       "definition": "Testo fornito all'AI per generare un contenuto.",
+      "aliases": []
+    },
+    {
+      "id": "proxy-inverso",
+      "term": "Proxy Inverso",
+      "definition": "Server che riceve le richieste dei client e le inoltra ai servizi interni appropriati.",
+      "aliases": []
+    },
+    {
+      "id": "psr-20",
+      "term": "PSR-20",
+      "definition": "Standard PHP che definisce l'interfaccia comune per un orologio astratto.",
       "aliases": []
     },
     {
@@ -560,6 +932,12 @@
       ]
     },
     {
+      "id": "quality-gate",
+      "term": "Quality Gate",
+      "definition": "Controllo automatico che deve essere superato prima di integrare o rilasciare una modifica.",
+      "aliases": []
+    },
+    {
       "id": "rating",
       "term": "Rating",
       "definition": "Punteggio assegnato dall'utente al contenuto generato.",
@@ -575,6 +953,12 @@
       ]
     },
     {
+      "id": "reactive-forms",
+      "term": "Reactive Forms",
+      "definition": "API Angular per definire e validare form tramite oggetti e controlli espliciti.",
+      "aliases": []
+    },
+    {
       "id": "redattore",
       "term": "Redattore",
       "definition": "Utente che utilizza l'AI Assistant per creare comunicazioni.",
@@ -583,7 +967,7 @@
     {
       "id": "redis",
       "term": "Redis",
-      "definition": "Sistema per code asincrone e caching.",
+      "definition": "Sistema in-memory utilizzato per cache, sessioni e rate limiting; non gestisce la coda della pipeline.",
       "aliases": []
     },
     {
@@ -611,6 +995,15 @@
       "aliases": []
     },
     {
+      "id": "rest-representational-state-transfer",
+      "term": "REST (Representational State Transfer)",
+      "definition": "Stile per la progettazione di servizi web basati su risorse e metodi HTTP.",
+      "aliases": [
+        "REST",
+        "Representational State Transfer"
+      ]
+    },
+    {
       "id": "rischio",
       "term": "Rischio",
       "definition": "Evento o condizione incerta la cui occorrenza può influire (positivamente o negativamente) su costi, tempi o qualità degli obiettivi di progetto.",
@@ -623,6 +1016,21 @@
       "aliases": [
         "RTB",
         "Requirements and Technology Baseline"
+      ]
+    },
+    {
+      "id": "rxjs",
+      "term": "RxJS",
+      "definition": "Libreria TypeScript per la programmazione reattiva tramite Observable e stream asincroni.",
+      "aliases": []
+    },
+    {
+      "id": "s3-simple-storage-service",
+      "term": "S3 (Simple Storage Service)",
+      "definition": "Servizio AWS di object storage per documenti, sotto-documenti e asset statici.",
+      "aliases": [
+        "S3",
+        "Simple Storage Service"
       ]
     },
     {
@@ -650,6 +1058,15 @@
       "aliases": []
     },
     {
+      "id": "spa-single-page-application",
+      "term": "SPA (Single Page Application)",
+      "definition": "Applicazione web che aggiorna le viste senza ricaricare interamente la pagina.",
+      "aliases": [
+        "SPA",
+        "Single Page Application"
+      ]
+    },
+    {
       "id": "split-automatico",
       "term": "Split Automatico",
       "definition": "Suddivisione di documenti multi-destinatario.",
@@ -660,6 +1077,33 @@
       "term": "Sprint",
       "definition": "Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi",
       "aliases": []
+    },
+    {
+      "id": "sql-structured-query-language",
+      "term": "SQL (Structured Query Language)",
+      "definition": "Linguaggio utilizzato per definire e interrogare i dati del database relazionale.",
+      "aliases": [
+        "SQL",
+        "Structured Query Language"
+      ]
+    },
+    {
+      "id": "sqs-simple-queue-service",
+      "term": "SQS (Simple Queue Service)",
+      "definition": "Servizio AWS di code di messaggi usato per distribuire i task asincroni ai worker.",
+      "aliases": [
+        "SQS",
+        "Simple Queue Service"
+      ]
+    },
+    {
+      "id": "sse-server-sent-events",
+      "term": "SSE (Server-Sent Events)",
+      "definition": "Tecnologia che consente al server di inviare aggiornamenti in tempo reale al browser tramite una connessione HTTP persistente.",
+      "aliases": [
+        "SSE",
+        "Server-Sent Events"
+      ]
     },
     {
       "id": "stakeholder",
@@ -674,9 +1118,39 @@
       "aliases": []
     },
     {
+      "id": "state-machine",
+      "term": "State Machine",
+      "definition": "Modello che descrive stati e transizioni di una procedura orchestrata, come una pipeline asincrona.",
+      "aliases": []
+    },
+    {
+      "id": "step-functions",
+      "term": "Step Functions",
+      "definition": "Servizio AWS che orchestra le fasi delle pipeline asincrone tramite una state machine.",
+      "aliases": []
+    },
+    {
       "id": "stile-editoriale",
       "term": "Stile Editoriale",
       "definition": "Parametro che calibra lo stile di scrittura dell'AI.",
+      "aliases": []
+    },
+    {
+      "id": "strategy",
+      "term": "Strategy",
+      "definition": "Pattern che incapsula algoritmi intercambiabili e ne consente la selezione a runtime.",
+      "aliases": []
+    },
+    {
+      "id": "tenant",
+      "term": "Tenant",
+      "definition": "Organizzazione o spazio logico isolato i cui dati sono identificati da un tenant ID.",
+      "aliases": []
+    },
+    {
+      "id": "terraform",
+      "term": "Terraform",
+      "definition": "Strumento per descrivere e creare l'infrastruttura tramite Infrastructure as Code.",
       "aliases": []
     },
     {
@@ -710,15 +1184,36 @@
       "aliases": []
     },
     {
+      "id": "textract",
+      "term": "Textract",
+      "definition": "Servizio AWS di OCR che estrae testo e dati strutturati da documenti.",
+      "aliases": []
+    },
+    {
       "id": "timeout",
       "term": "Timeout",
       "definition": "Interruzione di un'operazione che supera il tempo massimo.",
       "aliases": []
     },
     {
+      "id": "tls-transport-layer-security",
+      "term": "TLS (Transport Layer Security)",
+      "definition": "Protocollo crittografico utilizzato per proteggere le comunicazioni HTTPS.",
+      "aliases": [
+        "TLS",
+        "Transport Layer Security"
+      ]
+    },
+    {
       "id": "tono-comunicativo",
       "term": "Tono Comunicativo",
       "definition": "Parametro che calibra il tono dell'AI.",
+      "aliases": []
+    },
+    {
+      "id": "traefik",
+      "term": "Traefik",
+      "definition": "Proxy inverso e load balancer per microservizi, che gestisce automaticamente il routing del traffico.",
       "aliases": []
     },
     {
@@ -728,9 +1223,30 @@
       "aliases": []
     },
     {
+      "id": "typescript",
+      "term": "TypeScript",
+      "definition": "Superset tipizzato di JavaScript utilizzato per lo sviluppo del frontend Angular.",
+      "aliases": []
+    },
+    {
       "id": "utente-operativo",
       "term": "Utente Operativo",
       "definition": "Utente autorizzato alle funzionalità ordinarie.",
+      "aliases": []
+    },
+    {
+      "id": "uuid-universally-unique-identifier",
+      "term": "UUID (Universally Unique Identifier)",
+      "definition": "Identificatore progettato per essere univoco, usato per nominare risorse e file.",
+      "aliases": [
+        "UUID",
+        "Universally Unique Identifier"
+      ]
+    },
+    {
+      "id": "value-object",
+      "term": "Value Object",
+      "definition": "Oggetto di dominio definito dal proprio valore, privo di identità autonoma.",
       "aliases": []
     },
     {
@@ -771,6 +1287,12 @@
         "Way of Working",
         "WoW"
       ]
+    },
+    {
+      "id": "worker",
+      "term": "Worker",
+      "definition": "Processo che consuma task da una coda ed esegue le operazioni asincrone assegnate.",
+      "aliases": []
     },
     {
       "id": "workflow",
