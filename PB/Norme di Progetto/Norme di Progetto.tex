@@ -83,10 +83,10 @@
         \begin{tabularx}{\linewidth}{>{\bfseries}p{3.5cm} X}
             Gruppo      & aLittleByte (gruppo 19) \\
             Versione    & 2.0.0 \\
-            Redattori   & Eleonora Bellet, Diego Belluz, Alex Oloni, Angelica Gastaldello \\
-            Verificatori& V.Y. Kaneda Fernandes, Eleonora Bellet, Angela Maule \\
+            Redattori   & Eleonora Bellet, Diego Belluz, Alex Oloni, Angelica Gastaldello, Angela Maule, Leonardo Soligo, V.Y. Kaneda Fernandes \\
+            Verificatori& V.Y. Kaneda Fernandes, Eleonora Bellet, Angela Maule, Alex Oloni, Diego Belluz, Angelica Gastaldello \\
             Destinatari & Prof. Tullio Vardanega, Prof. Riccardo Cardin \\
-            Data        & 04/09/2026 \\
+            Data        & 08/09/2026 \\
         \end{tabularx}
     \end{tcolorbox}
 \end{center}
@@ -121,11 +121,31 @@
         \endfoot
         \hline
         \endlastfoot
-        2.0.0 & 04/09/2026 & Approvazione versione 2.0.0 & - & - & Leonardo Soligo \\
+        2.0.0 & 08/09/2026 & Approvazione versione 2.0.0 & - & - & Leonardo Soligo \\
         \hline
-        1.2.0 & 25/08/2026 &aggiornamento e correzione di errori testuali & Angelica Gastaldello & Alex Oloni & - \\
+        1.12.0 & 08/09/2026 & Ristrutturazione delle sezioni dell'architettura dei processi secondo uno schema uniforme e in stile procedurale & Angelica Gastaldello & Alex Oloni & - \\
         \hline
-        1.1.0 & 14/08/2026 & Aggiunta della redazione di Specifica Tecnica e Manuale Utente in fase PB a cura del Progettista & Angelica Gastaldello & Alex Oloni & - \\
+        1.11.0 & 05/09/2026 & Aggiunta sezioni accertamento della qualità, infrastruttura, formazione e miglioramento dei processi & Leonardo Soligo & Angela Maule & - \\
+        \hline
+        1.10.0 & 02/09/2026 & Aggiunta sezioni stato di un documento e convenzioni di versionamento & Eleonora Bellet & Diego Belluz & - \\
+        \hline
+        1.9.0 & 25/08/2026 & Aggiornamento e correzione di errori testuali & Alex Oloni & Eleonora Bellet & - \\
+        \hline
+        1.8.0 & 21/08/2026 & Aggiunta sezione applicazione del tailoring & Leonardo Soligo & Angela Maule & - \\
+        \hline
+        1.7.0 & 14/08/2026 & Aggiunta della redazione di Specifica Tecnica e Manuale Utente in fase PB a cura del Progettista & Angelica Gastaldello & Alex Oloni & - \\
+        \hline
+        1.6.0 & 11/08/2026 & Aggiunta sezioni test di sistema e test di regressione & Angelica Gastaldello & Diego Belluz & - \\
+        \hline
+        1.5.0 & 05/08/2026 & Aggiunta sezioni test di unità e test di integrazione & Leonardo Soligo & Angela Maule & - \\
+        \hline
+        1.4.0 & 29/07/2026 & Aggiunta sezione analisi statica automatica & Angela Maule & Diego Belluz & - \\
+        \hline
+        1.3.0 & 23/07/2026 & Aggiunta sezione automazione e rilascio continuo (CI/CD) & Angela Maule & Alex Oloni & - \\
+        \hline
+        1.2.0 & 17/07/2026 & Aggiunta sezione nomenclatura dei branch e alberatura della repository & Angela Maule & Angelica Gastaldello & - \\
+        \hline
+        1.1.0 & 14/07/2026 & Aggiunta sezione tracciamento delle ore & V.Y. Kaneda Fernandes & Eleonora Bellet & - \\
         \hline
         1.0.0 & 28/05/2026 & Approvazione versione 1.0.0 & - & - & Angelica Gastaldello \\
         \hline
@@ -232,110 +252,151 @@ I termini tecnici, gli acronimi e le parole con un significato specifico all'int
     \end{itemize}
 \end{itemize}
 \section{Architettura dei processi}
-Per la realizzazione di un prodotto di qualità che soddisfi le esigenze del cliente e degli utenti, il gruppo aLittleByte ha deciso di adottare un'architettura specifica e suddividere i vari processi di costruzione del software in quattro macro-aree:
-\begin{itemize}
-    \item Processi primari
-    \item Processi di supporto
-    \item Processi organizzativi
-    \item Validazione
-\end{itemize}
-
-\subsection{Processi Primari}
-In questa sezione viene descritto come nasce il software. I processi primari indicano tutte quelle attività che sono direttamente coinvolte nella creazione del prodotto software, è possibile classificare i processi primari in:
-\begin{itemize}
-    \item Processi di fornitura 
-    \item Processi di sviluppo
-\end{itemize}
-
-\subsubsection{Processi di fornitura}
-I processi di fornitura comprendono tutte le attività preliminari che permettono di avviare lo sviluppo del progetto, in particolar modo la \glslink{pianificazione}{pianificazione}: suddivisione del lavoro in fasi e \glslink{milestone}{milestone} come \textit{\glslink{rtb-requirements-and-technology-baseline}{RTB}} e \textit{\glslink{pb-product-baseline}{PB}}, l’analisi: come vengono analizzati i capitolati, la stima: come si stimano vari costi e stime.
-
-\paragraph{Scopo e obiettivi}
-Il processo di fornitura definisce le procedure e le attività che il gruppo mette in atto per stabilire un accordo operativo con la \glslink{committente-proponente}{proponente} (\textit{Eggon}). L'obiettivo è trasformare le necessità espresse nel \glslink{capitolato}{capitolato} C5 in un insieme di requisiti tecnici e vincoli contrattuali ben definiti. In questa fase si stabiliscono le basi metodologiche del \textit{"\glslink{way-of-working-wow}{Way of Working}''} del team, garantendo che ogni attività sia pianificata, tracciabile e verificabile.
-
-\paragraph{Attività Operative}
-Il team si impegna nelle seguenti attività chiave:
-\begin{itemize}
-    \item \textbf{Analisi e Valutazione del \glslink{capitolato}{Capitolato}:} Studio critico della proposta C5 per identificare rischi tecnologici, opportunità di apprendimento e coerenza con le competenze del team.
-    \item \textbf{Stima e \glslink{pianificazione}{Pianificazione}:} Definizione del budget (12.575€) e delle scadenze temporali (consegna finale entro il 10 settembre 2026), con la suddivisione del lavoro in cicli iterativi (\glslink{sprint}{Sprint}).
-    \item \textbf{Negoziazione e Definizione dell’\glslink{mvp-minimum-viable-product}{MVP}:} Collaborazione con \textit{Eggon} per identificare il \textit{\glslink{mvp-minimum-viable-product}{Minimum Viable Product}}, garantendo che le funzionalità core (\glslink{intelligenza-artificiale-ai}{AI} Assistant e Co-Pilot) siano prioritizzate correttamente.
-    \item \textbf{Accertamento della Qualità:} Definizione degli obiettivi di qualità per i processi e per il prodotto finale.
-\end{itemize}
-
-\paragraph{Documentazione Prodotta (Core della Fornitura)}
-La documentazione non è solo un onere burocratico, ma lo strumento principale per garantire la trasparenza verso i committenti e la coerenza interna. Di seguito sono elencati i documenti redatti e mantenuti dal team:
-\begin{itemize}
-    \item \textbf{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}:} Documento cardine che formalizza le funzionalità del sistema. Include la modellazione degli attori (\glslink{redattore}{Redattore}, \glslink{analista-dati}{Analista dati}, \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}), la descrizione dei casi d'uso (\glslink{caso-d-uso-uc}{UC}) e la classificazione dei \glslink{requisiti-funzionali}{requisiti funzionali}, qualitativi e di vincolo.
-    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto}:} Definiscono il regolamento interno del gruppo. Contengono gli standard di codifica, le procedure di gestione dei ticket su \glslink{github}{GitHub}, le convenzioni di naming e le metodologie di lavoro adottate.
-    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto}:} Strumento di gestione manageriale che descrive l'allocazione delle risorse, l'\glslink{analisi-dei-rischi}{analisi dei rischi} e il \glslink{preventivo}{preventivo} economico. Viene aggiornato periodicamente con il \glslink{consuntivo}{consuntivo} delle ore per monitorare lo stato del budget.
-    \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}:} Specifica la strategia per garantire che il software sia privo di difetti critici. Definisce le metriche (es. \textit{Code Coverage} $\geq$ 80\%) e i test (unità, integrazione, sistema) necessari alla validazione.
-    \item \textbf{\glslink{glossario}{Glossario}:} Raccolta di termini tecnici e acronimi per eliminare ambiguità terminologiche tra sviluppatori, committenti e utenti finali.
-    \item \textbf{Specifica Tecnica:} Documento di design che descrive l'architettura di sistema (\glslink{modello-c4}{modello C4}), i diagrammi delle classi UML e i design pattern scelti per l'implementazione.
-    \item \textbf{Manuale Utente:}  Guida operativa destinata agli utenti finali per facilitare l'onboarding sulla piattaforma \glslink{nexum}{Nexum} e spiegare l'utilizzo degli assistenti \glslink{intelligenza-artificiale-ai}{AI}.
-    \item \textbf{Lettera di Candidatura e Presentazione:}  Documenti formali per l'ufficializzazione della partecipazione all'appalto e per la consegna dei vari rilasci (\glslink{rtb-requirements-and-technology-baseline}{RTB} e \glslink{pb-product-baseline}{PB}).
-    \item \textbf{Verbali (Interni ed Esterni):} Report che tracciano l'ordine del giorno, le discussioni e le decisioni prese durante le riunioni di team o con i referenti di Eggon.
-\end{itemize}
-
-\paragraph{Comunicazione e Strumenti di Supporto}
-Per la gestione dei processi di fornitura, il gruppo si avvale di:
+Per la realizzazione di un prodotto di qualità che soddisfi le esigenze del cliente e degli utenti, il gruppo \textit{aLittleByte} adotta la classificazione dei processi di ciclo di vita prevista dallo standard ISO/IEC 12207, suddividendoli in tre macro-aree:
 
 \begin{itemize}
-    \item \textbf{\glslink{github}{GitHub}:} Per il versionamento della documentazione tramite \textit{\glslink{pull-request}{Pull Request}} e per l'integrazione con il codice preesistente.
-    \item \textbf{Comunicazione Ufficiale:} L'interfaccia con Eggon avviene tramite incontri bisettimanali e via email/Telegram per comunicazioni rapide.
-    \item \textbf{Tracciamento:} Ogni decisione rilevante viene convertita in una \textit{\glslink{issue}{issue}} su \glslink{github}{GitHub} per garantirne l'assegnazione e il completamento.
+    \item \textbf{Processi primari:} i processi che concorrono direttamente alla realizzazione del prodotto, ovvero fornitura e sviluppo.
+    \item \textbf{Processi di supporto:} i processi che sostengono i processi primari garantendone la qualità e la tracciabilità, ovvero documentazione, gestione della configurazione, accertamento della qualità, verifica e validazione.
+    \item \textbf{Processi organizzativi:} i processi che governano il modo in cui il gruppo lavora, ovvero gestione dei processi, infrastruttura, formazione e miglioramento dei processi.
 \end{itemize}
 
-\subsubsection{Processi di Sviluppo}
-Questa sezione codifica l'insieme delle pratiche ingegneristiche e operative indispensabili per costruire materialmente la piattaforma software stand-alone richiesta dal \glslink{capitolato}{capitolato}. L'obiettivo è tradurre i requisiti concordati in un applicativo funzionante e architetturalmente indipendente dal sistema originario (\textit{\glslink{nexum}{Nexum}}), passando attraverso fasi rigorose di design, programmazione e collaudo.
-
-\paragraph{Attività Operative e Ciclo di Vita}
-Il ciclo di sviluppo per l'integrazione dei modelli di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} richiede una sequenza logica di operazioni ingegneristiche specifiche:
-\begin{itemize}
-    \item \textbf{Analisi e Modellazione del Dominio:} Studio sistemistico per separare nettamente i flussi di lavoro aziendali (creazione contenuti) da quelli consulenziali (gestione documentale massiva).
-    \item \textbf{Progettazione Architetturale:} Definizione di un'infrastruttura \textit{stand-alone} che comunichi in modo asincrono con i \glslink{moduli-esterni}{moduli esterni} di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} (\glslink{ai-post-generator}{AI Post Generator} e \glslink{ai-analyst}{AI Analyst}), per non bloccare l'interfaccia utente durante le operazioni \textit{time-consuming}.
-    \item \textbf{Sviluppo Modulare:} L'applicativo viene frammentato in macro-componenti indipendenti (es. modulo di \glslink{rating}{rating}/feedback, modulo di split documentale, \glslink{dashboard}{dashboard} analitica).
-    \item \textbf{Validazione "\glslink{human-in-the-loop}{Human-in-the-loop}":} Implementazione di flussi di sviluppo che prevedano sempre un passaggio di validazione umana per le operazioni \glslink{intelligenza-artificiale-ai}{AI} a bassa \glslink{confidenza-confidence-score}{confidenza} (es. revisione dei destinatari estratti o modifica del testo generato).
-    \item \textbf{Collaudo e Rilascio:} Esecuzione di test formali sulle metriche di qualità (es. tempi di risposta, tasso di successo dell'\glslink{intelligenza-artificiale-ai}{AI}) prima dell'approvazione finale.
-\end{itemize}
-
-\paragraph{Analisi e Tracciamento dei Requisiti}
-Fase nevralgica per la definizione del perimetro del prodotto. Per garantire chiarezza e tracciabilità, il team adotta standard di modellazione e nomenclatura precisi per attori e casi d'uso.
+Per rendere il presente capitolo effettivamente utilizzabile durante lo svolgimento delle attività, ogni processo è normato secondo il medesimo schema espositivo:
 
 \begin{itemize}
-    \item \textbf{Modellazione degli Attori:} Il sistema riconosce due categorie di attori per separare le responsabilità di business da quelle computazionali:
-    \begin{itemize}
-        \item \textit{Utenti Operativi (Primari):} Utenti umani che innescano le operazioni (\glslink{amministratore}{Amministratore}, \glslink{redattore}{Redattore}, \glslink{analista-dati}{Analista dati}, \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}).
-        \item \textit{\glslink{moduli-esterni}{Moduli Esterni} (Secondari):} Entità di sistema chiamate in causa per completare l'operazione (\glslink{ai-post-generator}{AI Post Generator}, \glslink{ai-analyst}{AI Analyst}).
-    \end{itemize}
-    \item \textbf{Nomenclatura dei Casi d'Uso (Use Case):} Il team adotta una convenzione basata sui prefissi per separare logicamente le aree dell'applicativo:
-    \begin{itemize}
-        \item UC-[Numero] identifica i casi d'uso.
-        \item {} [Caso Padre].[\glslink{sottocaso}{Sottocaso}] indica le scomposizioni logiche (es. \textit{UC-1.1} per un \glslink{sottocaso}{sottocaso} di \textit{UC-1}).
-    \end{itemize}
-    \item \textbf{Struttura Descrittiva:} Ogni \glslink{caso-d-uso-uc}{caso d'uso} documentato deve presentare una scheda strutturata contenente: Attori coinvolti, \glslink{trigger}{Trigger}, Pre e Post-condizioni, \glslink{scenario-principale}{Scenario Principale} (sequenza ottimale numerata), \glslink{scenario-alternativo}{Scenario Alternativo}.
+    \item \textbf{Scopo:} il risultato che il processo deve produrre e la ragione per cui il gruppo lo applica.
+    \item \textbf{Strumenti a supporto:} gli strumenti che devono essere impiegati nello svolgimento del processo.
+    \item \textbf{Attività previste:} l'elenco delle attività in cui il processo si articola.
+    \item \textbf{Procedure operative:} per ciascuna attività, la sequenza numerata dei passi da eseguire, con indicazione del ruolo responsabile di ogni passo.
 \end{itemize}
 
-\paragraph{Progettazione Architetturale}
-La progettazione traduce le specifiche in un'infrastruttura flessibile e scalabile.
+All'interno delle procedure, il ruolo indicato all'inizio di ogni passo è il responsabile della sua esecuzione. Le formulazioni con ``deve'' individuano obblighi vincolanti per tutti i membri del gruppo, mentre quelle con ``può'' individuano facoltà il cui esercizio è rimesso al giudizio del ruolo indicato.
+
+\subsection{Processi primari}
+In questa sezione viene descritto come nasce il software. I processi primari comprendono tutte le attività direttamente coinvolte nella creazione del prodotto e si articolano in fornitura e sviluppo.
+
+\subsubsection{Fornitura}
+
+\paragraph{Scopo}
+Il processo di fornitura deve trasformare le necessità espresse nel \glslink{capitolato}{capitolato} C5 in un insieme di requisiti tecnici e di vincoli operativi concordati con la \glslink{committente-proponente}{proponente} \textit{Eggon}, stabilendo il perimetro del lavoro, il budget e le scadenze entro cui il gruppo si impegna a consegnare il prodotto.
+
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{Disaccoppiamento e Asincronia:} Data la natura \textit{data-driven} e i tempi di \glslink{latenza}{latenza} dell'\glslink{intelligenza-artificiale-ai}{AI}, l'architettura deve garantire l'\glslink{esecuzione-asincrona}{esecuzione asincrona} delle operazioni pesanti (es. elaborazione \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} o \glslink{entity-resolution}{entity resolution}).
-    \item \textbf{Modellazione Visiva:} La struttura del codice viene rappresentata tramite diagrammi UML per la definizione dei casi d'uso e la struttura statica. Si adotta inoltre un approccio a componenti per isolare le funzionalità trasversali (raccolta log, gestione ruoli, telemetria).
-
+    \item \textbf{\glslink{github}{GitHub}:} per il versionamento della documentazione di fornitura e per la conversione di ogni impegno assunto in una \textit{\glslink{issue}{Issue}} assegnata.
+    \item \textbf{\glslink{latex}{LaTeX}:} per la redazione dei documenti contrattuali e di pianificazione.
+    \item \textbf{Posta elettronica e Telegram:} per le comunicazioni formali e per i chiarimenti rapidi con il referente aziendale, secondo le regole definite nel paragrafo sulla comunicazione.
+    \item \textbf{Google Meet:} per gli incontri periodici con la \glslink{committente-proponente}{proponente}.
 \end{itemize}
+
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Analisi e valutazione del \glslink{capitolato}{capitolato}.
+    \item Stima e \glslink{pianificazione}{pianificazione} delle risorse.
+    \item Negoziazione e definizione dell'\glslink{mvp-minimum-viable-product}{MVP}.
+    \item Produzione della documentazione di fornitura.
+\end{enumerate}
+
+\paragraph{Analisi e valutazione del capitolato}
+\begin{enumerate}
+    \item Ogni membro del gruppo studia i capitolati disponibili e ne valuta i rischi tecnologici, le opportunità di apprendimento e la coerenza con le competenze del team.
+    \item Il gruppo raccoglie gli esiti delle valutazioni individuali nel documento di \textit{Analisi dei Capitolati}, confrontando le alternative sulla base dei medesimi criteri.
+    \item Il \glslink{responsabile}{Responsabile} organizza un colloquio con ciascuna azienda \glslink{committente-proponente}{proponente} dei capitolati ritenuti idonei e ne fa redigere il \glslink{verbale-esterno}{verbale esterno}.
+    \item Il gruppo delibera la scelta del \glslink{capitolato}{capitolato} in riunione interna e la motivazione della scelta deve essere riportata nel relativo \glslink{verbale-interno}{verbale interno}.
+    \item Il \glslink{responsabile}{Responsabile} formalizza la candidatura inviando la \textit{Lettera di Candidatura} all'indirizzo del corpo docente.
+\end{enumerate}
+
+\paragraph{Stima e pianificazione delle risorse}
+\begin{enumerate}
+    \item Il \glslink{responsabile}{Responsabile} scompone il lavoro complessivo nelle fasi delimitate dalle \glslink{milestone}{milestone} \textit{\glslink{rtb-requirements-and-technology-baseline}{RTB}} e \textit{\glslink{pb-product-baseline}{PB}}, fissando come termine di consegna il 10 settembre 2026.
+    \item Il \glslink{responsabile}{Responsabile} definisce il \glslink{preventivo}{preventivo} di periodo nel \glslink{piano-di-progetto}{Piano di Progetto}, ripartendo il budget complessivo di 12.575 € tra i ruoli e le iterazioni previste.
+    \item Il \glslink{responsabile}{Responsabile} suddivide ogni fase in \glslink{sprint}{Sprint} di durata fissa e ne pianifica il contenuto secondo la procedura di \glslink{pianificazione}{pianificazione} definita nel processo di gestione dei processi.
+    \item Al termine di ogni \glslink{sprint}{Sprint} il \glslink{responsabile}{Responsabile} aggiorna il \glslink{consuntivo}{consuntivo} e le previsioni di costo a finire, motivando nel \glslink{piano-di-progetto}{Piano di Progetto} gli scostamenti rilevati.
+\end{enumerate}
+
+\paragraph{Negoziazione e definizione dell'MVP}
+\begin{enumerate}
+    \item L'\glslink{analista}{Analista} raccoglie le richieste della \glslink{committente-proponente}{proponente} durante gli incontri esterni e le formalizza come requisiti nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}.
+    \item L'\glslink{analista}{Analista} classifica ogni requisito per tipologia e per urgenza, distinguendo i \glslink{requisiti-funzionali}{requisiti funzionali} obbligatori da quelli \glslink{requisiti-opzionali}{opzionali}.
+    \item Il gruppo concorda con \textit{Eggon} il perimetro del \textit{\glslink{mvp-minimum-viable-product}{Minimum Viable Product}}, verificando che le funzionalità core (\glslink{ai-assistant-generativo}{AI Assistant Generativo} e \glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot}) siano incluse e prioritarie.
+    \item Ogni variazione del perimetro concordata dopo l'accordo iniziale deve essere verbalizzata nel \glslink{verbale-esterno}{verbale esterno} dell'incontro in cui è stata discussa e recepita nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} entro l'iterazione successiva.
+\end{enumerate}
+
+\paragraph{Produzione della documentazione di fornitura}
+La documentazione è lo strumento principale con cui il gruppo garantisce trasparenza verso i committenti e coerenza interna. I documenti che il processo di fornitura deve produrre e mantenere aggiornati sono i seguenti:
+
+\begin{itemize}
+    \item \textbf{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}:} formalizza le funzionalità del sistema. Include la modellazione degli attori (\glslink{redattore}{Redattore}, \glslink{analista-dati}{Analista dati}, \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}), la descrizione dei casi d'uso (\glslink{caso-d-uso-uc}{UC}) e la classificazione dei \glslink{requisiti-funzionali}{requisiti funzionali}, qualitativi e di vincolo.
+    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto}:} definiscono il regolamento interno del gruppo, contenendo gli standard di codifica, le procedure di gestione dei ticket su \glslink{github}{GitHub}, le convenzioni di denominazione e le metodologie di lavoro adottate.
+    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto}:} descrive l'allocazione delle risorse, l'\glslink{analisi-dei-rischi}{analisi dei rischi} e il \glslink{preventivo}{preventivo} economico; viene aggiornato periodicamente con il \glslink{consuntivo}{consuntivo} delle ore per monitorare lo stato del budget.
+    \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}:} specifica la strategia con cui il gruppo garantisce l'assenza di difetti critici, definendo le soglie delle metriche e i test necessari alla qualifica del prodotto.
+    \item \textbf{\glslink{glossario}{Glossario}:} raccoglie termini tecnici e acronimi per eliminare le ambiguità terminologiche tra sviluppatori, committenti e utenti finali.
+    \item \textbf{Specifica Tecnica:} descrive l'architettura di sistema (\glslink{modello-c4}{modello C4}), i \glslink{diagramma-delle-classi-uml}{diagrammi delle classi} e i design pattern scelti per l'implementazione.
+    \item \textbf{Manuale Utente:} guida operativa destinata agli utenti finali per l'onboarding sulla piattaforma \glslink{nexum}{Nexum} e per l'utilizzo degli assistenti \glslink{intelligenza-artificiale-ai}{AI}.
+    \item \textbf{Lettera di Candidatura e Lettera di Presentazione:} documenti formali per l'ufficializzazione della partecipazione all'appalto e per la consegna dei rilasci \glslink{rtb-requirements-and-technology-baseline}{RTB} e \glslink{pb-product-baseline}{PB}.
+    \item \textbf{Verbali interni ed esterni:} tracciano ordine del giorno, discussioni e decisioni prese durante le riunioni di team o con i referenti di \textit{Eggon}.
+\end{itemize}
+
+Le procedure di redazione, verifica e pubblicazione di questi documenti sono quelle definite nel processo di documentazione.
+
+\subsubsection{Sviluppo}
+
+\paragraph{Scopo}
+Il processo di sviluppo deve tradurre i requisiti concordati in un applicativo funzionante e architetturalmente \glslink{standalone}{indipendente} dal sistema \textit{\glslink{nexum}{Nexum}}, attraversando le fasi di analisi, progettazione, codifica e collaudo con un livello di qualità verificabile in ogni passaggio.
+
+\paragraph{Strumenti a supporto}
+\begin{itemize}
+    \item \textbf{\glslink{laravel}{Laravel} 12 e \glslink{filament}{Filament}:} per la realizzazione rispettivamente del backend applicativo e delle interfacce amministrative.
+    \item \textbf{\glslink{amazon-bedrock}{Amazon Bedrock}:} per l'erogazione delle funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}.
+    \item \textbf{\glslink{docker-compose}{Docker Compose}:} per l'esecuzione locale dello stack applicativo, nella stessa composizione impiegata per i \glslink{test-di-sistema}{test di sistema}.
+    \item \textbf{\glslink{laravel}{Laravel} Pint, Larastan e \glslink{pest}{Pest} \glslink{php}{PHP}:} per la formattazione, l'\glslink{analisi-statica}{analisi statica} e i test del codice prodotto.
+    \item \textbf{\glslink{github}{GitHub}:} per il versionamento del codice, la \glslink{code-review}{revisione tra pari} e l'esecuzione delle \glslink{workflow}{pipeline} di integrazione continua.
+\end{itemize}
+
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Analisi e tracciamento dei requisiti.
+    \item Progettazione dell'architettura.
+    \item Codifica.
+    \item Collaudo e rilascio.
+\end{enumerate}
+
+\paragraph{Analisi e tracciamento dei requisiti}
+\begin{enumerate}
+    \item L'\glslink{analista}{Analista} separa i flussi di lavoro aziendali di creazione dei contenuti da quelli consulenziali di gestione documentale massiva, in modo che le due aree dell'applicativo restino indipendenti.
+    \item L'\glslink{analista}{Analista} classifica gli attori del sistema in \glslink{utente-operativo}{utenti operativi} (\glslink{attore-primario}{primari}), ovvero gli utenti umani che innescano le operazioni (\glslink{amministratore}{Amministratore}, \glslink{redattore}{Redattore}, \glslink{analista-dati}{Analista dati}, \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}), e \glslink{moduli-esterni}{moduli esterni} (\glslink{attore-secondario}{secondari}), ovvero le entità di sistema chiamate in causa per completare l'operazione (\glslink{ai-post-generator}{AI Post Generator}, \glslink{ai-analyst}{AI Analyst}).
+    \item L'\glslink{analista}{Analista} identifica ogni caso d'uso con il codice \texttt{UC-[Numero]} e ne indica le scomposizioni logiche nella forma \texttt{[Caso Padre].[\glslink{sottocaso}{Sottocaso}]}, ad esempio \textit{UC-1.1} per un \glslink{sottocaso}{sottocaso} di \textit{UC-1}.
+    \item L'\glslink{analista}{Analista} compila per ogni \glslink{caso-d-uso-uc}{caso d'uso} una scheda contenente attori coinvolti, \glslink{trigger}{trigger}, \glslink{precondizioni}{precondizioni} e \glslink{postcondizioni}{postcondizioni}, \glslink{scenario-principale}{scenario principale} in forma di sequenza numerata e \glslink{scenario-alternativo}{scenari alternativi}.
+    \item L'\glslink{analista}{Analista} associa a ogni requisito il riferimento al \glslink{caso-d-uso-uc}{caso d'uso} e alla fonte da cui deriva, così che il tracciamento resti verificabile durante la validazione.
+\end{enumerate}
+
+\paragraph{Progettazione dell'architettura}
+\begin{enumerate}
+    \item Il \glslink{progettista}{Progettista} definisce un'infrastruttura \glslink{standalone}{stand-alone} che comunichi con i \glslink{moduli-esterni}{moduli esterni} di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} tramite \glslink{esecuzione-asincrona}{esecuzione asincrona}, in modo che le operazioni soggette a \glslink{latenza}{latenza} non blocchino l'interfaccia utente.
+    \item Il \glslink{progettista}{Progettista} frammenta l'applicativo in macro-componenti a responsabilità singola (ad esempio il modulo di \glslink{rating}{rating} e feedback, il modulo di \glslink{split-automatico}{split} documentale e la \glslink{dashboard}{dashboard} analitica) e isola le funzionalità trasversali quali raccolta dei log, gestione dei ruoli e telemetria.
+    \item Il \glslink{progettista}{Progettista} prevede per ogni operazione \glslink{intelligenza-artificiale-ai}{AI} a bassa \glslink{confidenza-confidence-score}{confidenza} un passaggio di validazione \glslink{human-in-the-loop}{human-in-the-loop}, ad esempio la revisione dei destinatari estratti o la modifica del testo generato.
+    \item Il \glslink{progettista}{Progettista} documenta l'architettura nella \textit{Specifica Tecnica} utilizzando il \glslink{modello-c4}{modello C4} per i livelli di astrazione e i \glslink{diagramma-delle-classi-uml}{diagrammi delle classi} UML per la struttura statica.
+    \item Il \glslink{progettista}{Progettista} sottopone il \textit{design} al \glslink{verificatore}{Verificatore} prima che la codifica delle componenti interessate abbia inizio.
+\end{enumerate}
 
 \paragraph{Codifica}
+\begin{enumerate}
+    \item Il \glslink{programmatore}{Programmatore} prende in carico la propria \textit{\glslink{issue}{Issue}} e crea il \glslink{branch}{branch} di lavoro dedicato prima di scrivere qualsiasi riga di codice.
+    \item Il \glslink{programmatore}{Programmatore} implementa la funzionalità rispettando i pattern architetturali, lo standard stilistico e le convenzioni di denominazione definiti nei sottoparagrafi seguenti.
+    \item Il \glslink{programmatore}{Programmatore} esegue \glslink{laravel}{Laravel} Pint e Larastan in locale e corregge tutte le segnalazioni prima del \textit{commit}.
+    \item Il \glslink{programmatore}{Programmatore} scrive i test previsti dal processo di verifica e ne accerta il superamento in locale.
+    \item Il \glslink{programmatore}{Programmatore} apre la \textit{\glslink{pull-request}{Pull Request}} verso il ramo di integrazione assegnandola al \glslink{verificatore}{Verificatore} designato e allegando l'esito dei test.
+\end{enumerate}
 
-\subparagraph{Pattern Architetturali}
+\subparagraph{Pattern architetturali}
 \begin{itemize}
-    \item \textbf{Modularità e Riuso:} Suddivisione del codice in moduli con responsabilità singola (es. libreria dei \glslink{prompt}{prompt} separata dal motore di generazione). Applicazione di pattern architetturali per evitare dipendenze dirette e favorire la manutenibilità.
-    \item \textbf{Gestione degli Errori e Resilienza:} Implementazione di meccanismi robusti per la gestione di anomalie, retry di rete e fallback nel caso in cui i servizi \glslink{intelligenza-artificiale-ai}{AI} esterni non siano temporaneamente disponibili (come mappato negli scenari alternativi dei casi d'uso).
-    \item \textbf{Tracciabilità e Qualità:} Versionamento continuo del codice, revisione tra pari (\textit{\glslink{code-review}{Code Review}}) e test automatizzati per validare non solo le logiche applicative, ma anche l'integrazione corretta dei parametri (tono, stile, \glslink{metadati}{metadati}) passati ai core di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale}.
+    \item \textbf{Modularità e riuso:} il codice deve essere suddiviso in moduli con responsabilità singola (ad esempio la libreria dei \glslink{prompt}{prompt} separata dal motore di generazione) e i pattern architetturali devono essere applicati per evitare dipendenze dirette e favorire la manutenibilità.
+    \item \textbf{Gestione degli errori e resilienza:} devono essere implementati meccanismi di gestione delle anomalie, \textit{retry} di rete e \textit{fallback} per il caso in cui i servizi \glslink{intelligenza-artificiale-ai}{AI} esterni non siano temporaneamente disponibili, coerentemente con gli \glslink{scenario-alternativo}{scenari alternativi} dei casi d'uso.
+    \item \textbf{Tracciabilità e qualità:} ogni modifica deve essere versionata, sottoposta a \glslink{code-review}{Code Review} e coperta da test automatizzati che validino sia le logiche applicative sia la corretta integrazione dei parametri (\glslink{tono-comunicativo}{tono}, \glslink{stile-editoriale}{stile}, \glslink{metadati}{metadati}) passati ai moduli di \glslink{intelligenza-artificiale-ai}{intelligenza artificiale}.
 \end{itemize}
 
-\subparagraph{Standard Stilistici}
+\subparagraph{Standard stilistici}
 Il codice \glslink{php}{PHP} prodotto deve essere conforme allo standard \textbf{PSR-12} (\textit{\glslink{php}{PHP} Standards Recommendations 12}), adottato ufficialmente dalla comunità \glslink{php}{PHP} e seguito nativamente da \glslink{laravel}{Laravel} 12. PSR-12 definisce regole precise su indentazione (4 spazi), apertura delle parentesi, dichiarazione dei tipi e struttura delle classi, garantendo uniformità in tutto il codebase indipendentemente dal membro che scrive il codice.
 
-\subparagraph{Convenzioni di Naming nel Codice}
+\subparagraph{Convenzioni di denominazione nel codice}
 Le convenzioni seguono gli standard \glslink{laravel}{Laravel} e PSR-12:
 \begin{itemize}
     \item \textbf{Classi:} PascalCase — es. \texttt{UserController}, \texttt{DocumentService}
@@ -347,213 +408,305 @@ Le convenzioni seguono gli standard \glslink{laravel}{Laravel} e PSR-12:
     \item \textbf{Variabili d'ambiente:} UPPER\_SNAKE\_CASE — es. \texttt{\glslink{minio}{MINIO}\_BUCKET}, \texttt{DB\_CONNECTION}
 \end{itemize}
 
-\subparagraph{Strumenti di Linting e Formattazione}
+\subparagraph{Strumenti di linting e formattazione}
 \begin{itemize}
-    \item \textbf{\glslink{laravel}{Laravel} Pint:} Tool ufficiale di formattazione per \glslink{laravel}{Laravel}, basato su \glslink{php}{PHP} CS Fixer. Applica automaticamente PSR-12 al codebase. Deve essere eseguito prima di ogni commit; il codice non conforme non può essere integrato nel \glslink{branch}{branch} principale.
-    \item \textbf{Larastan:} Estensione di PHPStan ottimizzata per \glslink{laravel}{Laravel}. Esegue \glslink{analisi-statica}{analisi statica} del codice per rilevare errori di tipo, chiamate a metodi inesistenti e potenziali bug a runtime, senza eseguire il codice. Il livello minimo di analisi adottato è il \textbf{livello 5}.
+    \item \textbf{\glslink{laravel}{Laravel} Pint:} tool ufficiale di formattazione per \glslink{laravel}{Laravel}, basato su \glslink{php}{PHP} CS Fixer. Applica automaticamente PSR-12 al codebase e deve essere eseguito prima di ogni \textit{commit}; il codice non conforme non può essere integrato nel \glslink{branch}{branch} principale.
+    \item \textbf{Larastan:} estensione di PHPStan ottimizzata per \glslink{laravel}{Laravel}. Esegue l'\glslink{analisi-statica}{analisi statica} del codice per rilevare errori di tipo, chiamate a metodi inesistenti e potenziali bug a runtime, senza eseguire il codice. Il livello minimo di analisi adottato è il \textbf{livello 5}.
 \end{itemize}
 
+\paragraph{Collaudo e rilascio}
+\begin{enumerate}
+    \item Il \glslink{verificatore}{Verificatore} esegue sulla \textit{\glslink{pull-request}{Pull Request}} le attività previste dal processo di verifica e ne registra l'esito nei commenti.
+    \item Il \glslink{verificatore}{Verificatore} misura le metriche di prodotto pertinenti alla modifica e ne riporta i valori nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
+    \item Il \glslink{verificatore}{Verificatore} approva la \textit{\glslink{pull-request}{Pull Request}} solo se tutti i test sono superati e le soglie delle metriche sono rispettate; in caso contrario richiede le correzioni all'autore.
+    \item Il \glslink{responsabile}{Responsabile} autorizza l'integrazione nel ramo di rilascio e la conseguente chiusura della \textit{\glslink{issue}{Issue}} collegata.
+\end{enumerate}
+
 \subsection{Processi di supporto}
-I processi di supporto comprendono tutte le attività, i metodi e gli strumenti che non sono direttamente legati alla scrittura del codice, ma che risultano indispensabili per sostenere i processi primari di sviluppo e fornitura. Per il nostro team, definire questi processi significa stabilire delle regole di base condivise, necessarie per collaborare in modo efficiente ed evitare disorganizzazione durante le varie fasi del progetto didattico. Ciò ci permette, a livello pratico, di garantire la tracciabilità di ogni decisione tecnica e organizzativa presa dal gruppo e di assicurare che tutto il materiale prodotto (documenti, codice, \glslink{issue}{issue}) sia costantemente coerente, aggiornato e facilmente accessibile a tutti i membri del team e al \glslink{committente-proponente}{committente}.
+I processi di supporto comprendono le attività, i metodi e gli strumenti che non producono direttamente il codice, ma che sono indispensabili per sostenere i processi primari. Definirli significa stabilire regole condivise che garantiscono la tracciabilità di ogni decisione tecnica e organizzativa e la coerenza costante di documenti, codice e \glslink{issue}{Issue}. I processi di supporto applicati dal gruppo sono documentazione, gestione della configurazione, accertamento della qualità, verifica e validazione.
 
 \subsubsection{Documentazione}
 
 \paragraph{Scopo}
-Lo scopo del processo di documentazione è stabilire regole e metodologie pratiche per la creazione, la gestione e l'aggiornamento continuo dei documenti di progetto. Per il nostro gruppo, impegnarci a produrre materiale che si mantenga costantemente chiaro, accessibile e aggiornato ci permette di agevolare e rendere trasparente la comunicazione interna tra i membri del gruppo. Inoltre, una \glslink{repository}{repository} ben strutturata facilita notevolmente il confronto e l'allineamento con gli \glslink{stakeholder}{stakeholder} esterni e l'azienda \textit{Eggon}. Questo approccio rigoroso garantisce un'accurata tracciabilità delle decisioni organizzative e progettuali prese nel corso dello sviluppo, assicurando al contempo che l'intero progetto venga gestito in piena conformità agli standard di qualità che ci siamo prefissati di rispettare.
+Il processo di documentazione deve garantire che ogni decisione, requisito e scelta tecnica del progetto sia registrata in un artefatto scritto, verificato e accessibile, così che la comunicazione interna resti tracciabile e che \glslink{stakeholder}{stakeholder} e \glslink{committente-proponente}{committente} possano osservare l'avanzamento del lavoro senza ricorrere a canali informali.
 
-\paragraph{Strumenti Utilizzati}
-Per gestire in modo efficiente la stesura, la revisione, l'automazione e il versionamento della documentazione, il gruppo \textit{aLittleByte} ha scelto di utilizzare i seguenti strumenti:
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{\glslink{github}{GitHub}:} Rappresenta la nostra piattaforma principale per l'archiviazione e il tracciamento storico dei file. Sfruttiamo le funzionalità di branching e \glslink{pull-request}{pull request} per garantire che ogni modifica venga revisionata in modo asincrono.
-    \item \textbf{\glslink{github}{GitHub} Projects:} Utilizzato come strumento principale di project management. Il team gestisce il flusso di lavoro tramite una board Kanban dedicata (''aLittleByte - \glslink{dashboard}{Dashboard}'') che permette di visualizzare lo stato di tutte le attività.
-    \item \textbf{\glslink{github}{GitHub} Actions e \glslink{github}{GitHub} Pages:} Impiegati per l'automazione (\glslink{ci-cd-continuous-integration-continuous-deployment}{Continuous Integration/Continuous Deployment}) e per la pubblicazione automatica e trasparente del sito web documentale.
-    \item \textbf{\glslink{latex}{LaTeX}:} Scelto per la stesura di tutti i documenti tecnici e formali, garantendo un'impaginazione professionale.
-    \item \textbf{Python:} Linguaggio di scripting utilizzato per automatizzare task specifici, come la generazione dinamica della struttura del sito web tramite script proprietari.
+    \item \textbf{\glslink{latex}{LaTeX}:} per la stesura di tutti i documenti tecnici e formali, con impaginazione uniforme garantita dai preamboli condivisi.
+    \item \textbf{\glslink{github}{GitHub}:} per l'archiviazione, il tracciamento storico dei file e la revisione asincrona tramite \glslink{branch}{branch} e \textit{\glslink{pull-request}{Pull Request}}.
+    \item \textbf{\glslink{github}{GitHub} Projects:} per la gestione del flusso di lavoro tramite la board Kanban ``aLittleByte - \glslink{dashboard}{Dashboard}''.
+    \item \textbf{\glslink{github}{GitHub} Actions e \glslink{github}{GitHub} Pages:} per l'automazione della compilazione e per la pubblicazione del sito web documentale.
+    \item \textbf{Python:} per gli script di generazione dinamica della struttura del sito.
 \end{itemize}
 
-\paragraph{Documenti Prodotti}
-I documenti ufficiali previsti per il progetto, i quali saranno costantemente aggiornati e mantenuti sotto controllo di versione all'interno del \glslink{repository}{repository}, sono i seguenti: 
-\begin{itemize}
-    \item \textbf{\glslink{analisi-dei-requisiti-adr}{Analisi dei requisiti}:} Il documento in cui vengono estrapolati, classificati e descritti tutti i requisiti del sistema (funzionali e non), i casi d'uso individuati e i rispettivi criteri per l'accettazione finale.
-    \item \textbf{\glslink{norme-di-progetto}{Norme di progetto}:} Il documento in esame, avente lo scopo di codificare il nostro \glslink{way-of-working-wow}{Way of Working}, illustrando nel dettaglio le metodologie operative, gli strumenti scelti e le regole di collaborazione interne al team.
-    \item \textbf{\glslink{piano-di-progetto}{Piano di progetto}:} Il piano strategico che scandisce le tempistiche di sviluppo, regola l'allocazione delle risorse umane ed economiche e pianifica le varie fasi di avanzamento del lavoro.
-    \item \textbf{\glslink{piano-di-qualifica}{Piano di qualifica}:} Il documento volto a fissare le direttive per l'assicurazione della qualità. Al suo interno vengono delineate le metriche di valutazione e le procedure di testing, con l'obiettivo specifico di garantire una copertura del codice non inferiore all'80\%.
-    \item \textbf{\glslink{glossario}{Glossario}:} Uno strumento di supporto testuale che definisce in modo inequivocabile la terminologia specifica, tecnica e di dominio, oltre agli acronimi impiegati in tutta la documentazione.
-    \item \textbf{Specifica Tecnica:} Documento di design che descrive l'architettura di sistema (\glslink{modello-c4}{modello C4}), i diagrammi delle classi UML e i design pattern scelti per l'implementazione, a cura del \glslink{progettista}{Progettista} a partire dalla fase \glslink{pb-product-baseline}{PB}.
-    \item \textbf{Manuale Utente:} Guida operativa destinata agli utenti finali per facilitare l'onboarding sulla piattaforma \glslink{nexum}{Nexum} e spiegare l'utilizzo degli assistenti \glslink{intelligenza-artificiale-ai}{AI}, a cura del \glslink{progettista}{Progettista} a partire dalla fase \glslink{pb-product-baseline}{PB}.
-    \item \textbf{Lettera di Presentazione:} La documentazione formale di accompagnamento, debitamente firmata, necessaria per certificare e presentare ufficialmente il \glslink{rtb-requirements-and-technology-baseline}{RTB} al \glslink{committente-proponente}{committente}.
-    \item \textbf{Verbali:} I Verbali (interni ed esterni) tengono traccia degli incontri e delle decisioni sia tra i membri del gruppo e che tra il gruppo e la \glslink{committente-proponente}{proponente}.
-\end{itemize}
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Produzione dei documenti.
+    \item Verifica e approvazione.
+    \item Pubblicazione.
+    \item Manutenzione.
+\end{enumerate}
+
+I tre paragrafi che seguono l'elenco delle attività definiscono i vincoli che ogni documento deve rispettare a prescindere dall'attività in corso, ovvero struttura, stato e denominazione; le procedure delle quattro attività sono riportate subito dopo.
 
 \paragraph{Struttura dei documenti}
-Tutti i documenti (eccetto i verbali e i diari di bordo) hanno la seguente struttura generale: 
+Tutti i documenti, eccetto i verbali e i diari di bordo, devono presentare la seguente struttura:
 \begin{itemize}
-    \item \textbf{Copertina:} Riporta il logo, l'indirizzo email del gruppo, il titolo del documento, il nome del gruppo e i \glslink{metadati}{metadati} essenziali (redattori, verificatori, destinatari e data).
-    \item \textbf{Registro delle modifiche:} Tabella posta all'inizio del file per il tracciamento delle versioni. Per ogni aggiornamento indica: numero di versione, data, descrizione della modifica, \glslink{redattore}{redattore} e approvatore/\glslink{verificatore}{verificatore}.
-    \item \textbf{Indice:} Elenco gerarchico dei contenuti con rinvii numerici alle pagine, per favorire una navigazione rapida e mirata.
-    \item \textbf{Introduzione:} Contiene lo scopo del documento, \glslink{glossario}{glossario} e riferimenti. 
-    \item \textbf{Contenuto:} Corpo centrale del testo organizzato in sezioni e sottosezioni numerate (es. 1, 1.1), redatto in stile chiaro e esecutivo.
+    \item \textbf{Copertina:} riporta il logo, l'indirizzo email del gruppo, il titolo del documento, il nome del gruppo e i \glslink{metadati}{metadati} essenziali (redattori, verificatori, destinatari e data).
+    \item \textbf{Registro delle modifiche:} tabella posta all'inizio del file per il tracciamento delle versioni. Per ogni aggiornamento indica numero di versione, data, descrizione della modifica, \glslink{redattore}{redattore}, \glslink{verificatore}{verificatore} e approvatore.
+    \item \textbf{Indice:} elenco gerarchico dei contenuti con rinvii numerici alle pagine, per favorire una navigazione rapida e mirata.
+    \item \textbf{Introduzione:} contiene lo scopo del documento, il rinvio al \glslink{glossario}{Glossario} e i riferimenti normativi e informativi.
+    \item \textbf{Contenuto:} corpo centrale del testo organizzato in sezioni e sottosezioni numerate (es. 1, 1.1), redatto in stile chiaro ed esecutivo.
 \end{itemize}
 
-\paragraph{Struttura dei verbali}\label{sec:documentazione}
+\subparagraph{Struttura dei verbali}\label{sec:documentazione}
 \begin{itemize}
-    \item \textbf{Copertina:} Riporta gli elementi visivi e identificativi del gruppo, il titolo (specificando se \glslink{verbale-interno}{verbale interno} o esterno e la data), i ruoli assunti per la stesura (\glslink{redattore}{redattore} e \glslink{verificatore}{verificatore}) e l'elenco dei destinatari.
-    \item \textbf{Indice:} Elenco cliccabile delle sezioni per facilitare la navigazione del documento.
-    \item \textbf{Informazioni generali:} Tabella riassuntiva contenente i dettagli logistici dell'incontro: luogo o piattaforma utilizzata (\glslink{discord}{Discord}), orario di inizio e fine, e l'elenco puntuale dei partecipanti.
-    \item \textbf{Ordine del giorno:} Elenco sintetico degli argomenti pianificati e discussi durante la riunione.
-    \item \textbf{Attività svolte:} Resoconto testuale, suddiviso in sottoparagrafi, che descrive in modo oggettivo le discussioni affrontate, le problematiche analizzate e le decisioni prese per ciascun punto all'ordine del giorno.
-    \item \textbf{To-Do List:} Sezione conclusiva dedicata al tracciamento delle azioni da intraprendere a seguito della riunione. Per ogni task viene indicato il \glslink{responsabile}{responsabile} e viene inserito il collegamento ipertestuale diretto alla rispettiva \textit{\glslink{issue}{Issue}} \glslink{github}{GitHub}, garantendo tracciabilità completa tra decisione e attività operativa.
+    \item \textbf{Copertina:} riporta gli elementi visivi e identificativi del gruppo, il titolo con l'indicazione del tipo di verbale e della data, i ruoli assunti per la stesura (\glslink{redattore}{redattore} e \glslink{verificatore}{verificatore}) e l'elenco dei destinatari.
+    \item \textbf{Indice:} elenco cliccabile delle sezioni per facilitare la navigazione del documento.
+    \item \textbf{Informazioni generali:} tabella riassuntiva con i dettagli logistici dell'incontro, ovvero luogo o piattaforma utilizzata (\glslink{discord}{Discord}), orario di inizio e fine ed elenco puntuale dei partecipanti.
+    \item \textbf{Ordine del giorno:} elenco sintetico degli argomenti pianificati e discussi durante la riunione.
+    \item \textbf{Attività svolte:} resoconto suddiviso in sottoparagrafi che descrive in modo oggettivo le discussioni affrontate, le problematiche analizzate e le decisioni prese per ciascun punto all'ordine del giorno.
+    \item \textbf{To-Do List:} sezione conclusiva dedicata al tracciamento delle azioni conseguenti alla riunione. Per ogni \textit{task} devono essere indicati il \glslink{responsabile}{responsabile} e il collegamento diretto alla rispettiva \textit{\glslink{issue}{Issue}} \glslink{github}{GitHub}, garantendo la tracciabilità completa tra decisione e attività operativa.
 \end{itemize}
 
-\paragraph{Struttura dei diari di bordo}
-I Diari di Bordo sono delle diapositive realizzate per gli incontri settimanali con i docenti per vedere lo stato di avanzamento del lavoro. Il loro scopo principale è condividere rapidamente con i docenti e i colleghi i progressi effettuati e gli ostacoli incontrati dal gruppo \textit{aLittleByte}. 
-
-Sono documenti brevi che trattano dei seguenti argomenti:
-
+\subparagraph{Struttura dei diari di bordo}
+I diari di bordo sono diapositive realizzate per gli incontri con i docenti sullo stato di avanzamento del lavoro e hanno lo scopo di condividere rapidamente progressi e ostacoli. Devono contenere:
 \begin{itemize}
-    \item \textbf{Copertina:} Riporta le informazioni identificative di base, ovvero il logo del team, la data della presentazione, il numero del gruppo e i nomi dei componenti.
-    
-    \item \textbf{Cosa abbiamo fatto:} Un riepilogo sintetico e puntato delle attività concluse nell'ultimo periodo.
-    
-    \item \textbf{Cosa faremo:} La \glslink{pianificazione}{pianificazione} operativa per i giorni successivi, indicando i prossimi \textit{task} da completare.
-    
-    \item \textbf{Difficoltà e dubbi:} Una sezione in cui vengono elencati i problemi affrontati dal team e i dubbi da sottoporre all'attenzione del corpo docente.
+    \item \textbf{Copertina:} logo del team, data della presentazione, numero del gruppo e nomi dei componenti.
+    \item \textbf{Cosa abbiamo fatto:} riepilogo sintetico delle attività concluse nell'ultimo periodo.
+    \item \textbf{Cosa faremo:} \glslink{pianificazione}{pianificazione} operativa per i giorni successivi, con i prossimi \textit{task} da completare.
+    \item \textbf{Difficoltà e dubbi:} problemi affrontati dal team e dubbi da sottoporre al corpo docente.
 \end{itemize}
 
-Questa suddivisione in sezioni permette di ottimizzare i tempi della presentazione, garantendo che i messaggi chiave arrivino in modo chiaro e che ci si possa concentrare immediatamente sulla discussione e risoluzione dei problemi.
+\paragraph{Stato di un documento}\label{sec:stato-documento}
+Ogni documento attraversa una sequenza definita di stati, che rende immediatamente riconoscibile il grado di affidabilità del contenuto e la figura responsabile del passo successivo:
+
+\begin{itemize}
+    \item \textbf{\glslink{bozza-draft}{Bozza}:} il documento è in stesura da parte del \glslink{redattore}{redattore} incaricato. Il contenuto è provvisorio, può essere incompleto e non deve essere considerato attendibile dagli altri membri né citato come riferimento in altri documenti. La relativa \textit{\glslink{issue}{Issue}} si trova nella colonna \textit{In Progress} della board Kanban.
+    \item \textbf{In verifica:} il \glslink{redattore}{redattore} ritiene la stesura completa e ha aperto la \textit{\glslink{pull-request}{Pull Request}} assegnandola al \glslink{verificatore}{verificatore} designato. Il contenuto non può più essere modificato liberamente: ogni intervento deve nascere da un'osservazione registrata nei commenti della \textit{\glslink{pull-request}{Pull Request}}. La relativa \textit{\glslink{issue}{Issue}} passa nella colonna \textit{In Review}.
+    \item \textbf{Verificato:} il \glslink{verificatore}{verificatore}, necessariamente diverso dal \glslink{redattore}{redattore}, ha completato i controlli previsti dal processo di verifica e non rileva ulteriori difetti. Il documento è coerente, corretto e conforme alle presenti \glslink{norme-di-progetto}{Norme di Progetto}, ma non costituisce ancora un rilascio ufficiale.
+    \item \textbf{Approvato:} il \glslink{responsabile}{Responsabile} in carica, nel ruolo di approvatore, ha autorizzato il rilascio del documento verso l'esterno. L'approvazione è registrata nel \textit{Registro delle modifiche} nella colonna \textit{Approvatore} e comporta l'incremento del numero di versione maggiore.
+\end{itemize}
+
+Il passaggio da uno stato al successivo non è mai implicito: deve concretizzarsi in un evento tracciabile su \glslink{github}{GitHub} (apertura della \textit{\glslink{pull-request}{Pull Request}}, approvazione della revisione, \textit{merge} sul ramo \texttt{main}), così che lo stato di ogni documento sia ricostruibile dalla cronologia del \glslink{repository}{repository}.
 
 \paragraph{Denominazione dei documenti}
-
-Il gruppo \textit{aLittleByte} ha adottato una rigorosa politica di denominazione univoca per tutta la documentazione. Tale scelta metodologica è volta a preservare l'uniformità del \glslink{repository}{repository} e a ottimizzare le procedure di ricerca e consultazione dei file.
+Per preservare l'uniformità del \glslink{repository}{repository} e agevolare la ricerca dei file, la denominazione dei documenti deve rispettare le seguenti convenzioni:
 
 \begin{itemize}
-    \item \textbf{Verbali:} I verbali hanno la seguente denominazione: \\
-    \\
-    \centerline{\texttt{<Tipo>\_<Data>}} \\
-    Dove \texttt{<Tipo>} rappresenta:
-    \begin{itemize}
-        \item \textbf{Verbale\_Interno}
-        \item \textbf{Verbale\_Esterno}
-    \end{itemize}
-    Mentre \texttt{<Data>} è la data della riunione scritta nel formato \texttt{AAAA\_MM\_GG}. Ad esempio, \texttt{Verbale\_Interno\_2026\_04\_13.pdf} rappresenta il \glslink{verbale-interno}{verbale interno} del giorno 13/04/2026.
-    \\
-    
-    \item \textbf{Diari di Bordo:} Per i Diari di Bordo viene adottato il seguente standard di denominazione: \texttt{Diario\_di\_Bordo\_AAAA\_MM\_GG.pdf}. Ad esempio, \texttt{Diario\_di\_Bordo\_2026\_04\_13.pdf} rappresenta il \glslink{diario-di-bordo}{diario di bordo} presentato il giorno 13/04/2026.
-    
-    \item \textbf{Documenti:} I restanti documenti ufficiali seguono una convenzione di denominazione esplicita basata sul loro contenuto, come ad esempio \textit{\glslink{norme-di-progetto}{Norme di Progetto}.pdf} o \textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}.pdf}. 
+    \item \textbf{Verbali:} adottano la forma \texttt{<Tipo>\_<Data>}, dove \texttt{<Tipo>} è \texttt{Verbale\_Interno} o \texttt{Verbale\_Esterno} e \texttt{<Data>} è la data della riunione nel formato \texttt{AAAA\_MM\_GG}. Ad esempio \texttt{Verbale\_Interno\_2026\_04\_13.pdf} è il \glslink{verbale-interno}{verbale interno} del 13/04/2026.
+    \item \textbf{Diari di bordo:} adottano la forma \texttt{Diario\_di\_Bordo\_AAAA\_MM\_GG.pdf}. Ad esempio \texttt{Diario\_di\_Bordo\_2026\_04\_13.pdf} è il \glslink{diario-di-bordo}{diario di bordo} presentato il 13/04/2026.
+    \item \textbf{Altri documenti:} adottano il nome esplicito del tipo di documento, ad esempio \textit{\glslink{norme-di-progetto}{Norme di Progetto}.pdf} o \textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}.pdf}.
 \end{itemize}
 
-\paragraph{Produzione}
-Il ciclo di vita di ogni documento prodotto dal team è regolato da una procedura strutturata, volta a massimizzare la qualità, l'uniformità e la tracciabilità delle informazioni. Il processo si articola nelle seguenti fasi:
+\paragraph{Produzione dei documenti}
+\begin{enumerate}
+    \item Il \glslink{responsabile}{Responsabile} stabilisce, in corrispondenza delle scadenze di progetto, quali documenti produrre o aggiornare nell'iterazione corrente.
+    \item Il \glslink{responsabile}{Responsabile} designa per ogni documento un \glslink{redattore}{redattore} e un \glslink{verificatore}{verificatore} distinti, verificando l'assenza di conflitti d'interesse, e apre le relative \textit{\glslink{issue}{Issue}}.
+    \item Il \glslink{redattore}{redattore} crea un \glslink{branch}{branch} dedicato al singolo file, inclusi verbali e diari di bordo, così da isolare completamente il lavoro rispetto al ramo principale.
+    \item Il \glslink{redattore}{redattore} stende il contenuto in \glslink{latex}{LaTeX} rispettando la struttura, la denominazione e le direttive stilistiche definite nei paragrafi precedenti.
+    \item Il \glslink{redattore}{redattore} incrementa il numero di versione e inserisce la corrispondente riga nel \textit{Registro delle modifiche} contestualmente alle modifiche apportate.
+    \item Il \glslink{redattore}{redattore} apre la \textit{\glslink{pull-request}{Pull Request}} verso \texttt{main} assegnandola al \glslink{verificatore}{verificatore} designato, portando così il documento nello stato \textit{In verifica}.
+\end{enumerate}
 
+Durante la stesura il \glslink{redattore}{redattore} deve attenersi alle seguenti direttive stilistiche:
 \begin{itemize}
-    \item \textbf{\glslink{pianificazione}{Pianificazione}:} In corrispondenza delle scadenze di progetto, il gruppo stabilisce quali documenti produrre o aggiornare. Per ogni compito vengono designati un \glslink{redattore}{redattore} e un \glslink{verificatore}{verificatore}, scelti nel rispetto dei ruoli previsti dal \textit{\glslink{way-of-working-wow}{Way of Working}} e garantendo l'assenza di conflitti d'interesse.
-    
-    \item \textbf{Creazione del \glslink{branch}{branch}:} Prima di iniziare la stesura, viene aperto un \textit{\glslink{branch}{branch}} dedicato nel \glslink{repository}{repository} \glslink{github}{GitHub}. Il gruppo \textit{aLittleByte} ha stabilito di creare un ramo separato per ogni singolo file, inclusi i verbali e i diari di bordo, al fine di garantire una gestione granulare delle modifiche e un isolamento totale del lavoro rispetto al ramo principale.
-    
-    \item \textbf{Redazione:} Il \glslink{redattore}{redattore} incaricato sviluppa il contenuto seguendo i template e le direttive stilistiche definite nelle presenti \glslink{norme-di-progetto}{Norme di Progetto}. La scrittura avviene tramite gli strumenti appropriati (ad esempio \textit{\glslink{latex}{LaTeX}}), assicurando un output professionale e coerente.
-    \begin{itemize}
     \item \textbf{Struttura dei periodi:} semplificare i periodi più densi, evitando frasi eccessivamente lunghe o ricche di incisi e separando le informazioni con funzioni diverse.
-    \item \textbf{Terminologia tecnica:} demandare le definizioni e le spiegazioni dei concetti tecnici al \textit{\glslink{glossario}{Glossario}}, evitando di ripeterle all'interno del corpo del documento.
-    \item \textbf{Organizzazione logica:} separare fisicamente e visivamente (ad esempio con paragrafi distinti o elenchi) le parti puramente descrittive dalle parti valutative, dalle motivazioni o dalle conseguenze.
-    \end{itemize}
-    
-    \item \textbf{Revisione:} Terminata la stesura, il documento viene sottoposto a una verifica asincrona. Il \glslink{verificatore}{verificatore} analizza il file tramite una \textit{\glslink{pull-request}{pull request}} su \glslink{github}{GitHub}, segnalando eventuali correzioni necessarie o suggerimenti direttamente nei commenti della piattaforma.
-    
-    \item \textbf{Integrazione e Approvazione:} Una volta superata la revisione e ottenuta l'approvazione formale dal \glslink{responsabile}{Responsabile}, il contenuto viene integrato nel \textit{\glslink{branch}{branch} main} del \glslink{repository}{repository}. In questa fase viene consolidata la versione finale nel registro delle modifiche.
-
+    \item \textbf{Terminologia tecnica:} demandare le definizioni e le spiegazioni dei concetti tecnici al \textit{\glslink{glossario}{Glossario}}, evitando di ripeterle nel corpo del documento.
+    \item \textbf{Organizzazione logica:} separare visivamente, con paragrafi distinti o elenchi, le parti descrittive da quelle valutative, dalle motivazioni e dalle conseguenze.
+    \item \textbf{Stile prescrittivo:} nelle sezioni che normano un'attività, indicare il ruolo responsabile e l'azione richiesta anziché limitarsi a descrivere la prassi in corso.
 \end{itemize}
+
+\paragraph{Verifica e approvazione}
+\begin{enumerate}
+    \item Il \glslink{verificatore}{verificatore} applica al documento le tecniche di \glslink{analisi-statica}{analisi statica} definite nel processo di verifica e annota ogni difetto rilevato nei commenti della \textit{\glslink{pull-request}{Pull Request}}.
+    \item Il \glslink{verificatore}{verificatore} controlla che la versione riportata in copertina coincida con l'ultima riga del \textit{Registro delle modifiche} e che i \glslink{metadati}{metadati} siano completi.
+    \item Il \glslink{redattore}{redattore} applica le correzioni richieste; l'intervento sul testo resta di competenza esclusiva dell'autore, mentre il \glslink{verificatore}{verificatore} si limita a segnalare i difetti.
+    \item Il \glslink{verificatore}{verificatore} ripete i passi 1 e 3 finché non rileva più difetti, quindi approva la revisione portando il documento nello stato \textit{Verificato}.
+    \item Il \glslink{responsabile}{Responsabile}, per i documenti destinati all'esterno, registra l'approvazione nel \textit{Registro delle modifiche} incrementando il numero di versione maggiore.
+\end{enumerate}
+
+\paragraph{Pubblicazione}
+\begin{enumerate}
+    \item Il \glslink{verificatore}{verificatore} che ha approvato la revisione effettua il \textit{merge} della \textit{\glslink{pull-request}{Pull Request}} nel ramo \texttt{main}.
+    \item Il \glslink{workflow}{workflow} di rilascio continuo descritto nel processo di gestione della configurazione compila il sito e pubblica il documento su \glslink{github}{GitHub} Pages senza ulteriori interventi manuali.
+    \item Il \glslink{redattore}{redattore} verifica che il documento risulti effettivamente raggiungibile dal sito del gruppo e, in caso di esito negativo, apre una \textit{\glslink{issue}{Issue}} assegnata all'\glslink{amministratore}{Amministratore}.
+\end{enumerate}
+
+Poiché il \textit{merge} equivale a una pubblicazione, non deve mai essere effettuato su contenuti in stato di \glslink{bozza-draft}{bozza}.
+
+\paragraph{Manutenzione}
+\begin{enumerate}
+    \item Il membro che individua un difetto in un documento già pubblicato apre una \textit{\glslink{issue}{Issue}} descrittiva, indicando il documento, la sezione e la natura del difetto.
+    \item Il \glslink{responsabile}{Responsabile} assegna la \textit{\glslink{issue}{Issue}} a un \glslink{redattore}{redattore} e a un \glslink{verificatore}{verificatore}, secondo la procedura di produzione.
+    \item Il \glslink{redattore}{redattore} incaricato riporta allo stato di \glslink{bozza-draft}{bozza} la sola parte interessata e le fa ripercorrere l'intero ciclo di verifica e approvazione.
+\end{enumerate}
 
 \subsubsection{Gestione della configurazione}
-Il processo di Gestione della Configurazione ha l'obiettivo di tracciare, organizzare e controllare in modo sistematico l'evoluzione di tutti gli artefatti di progetto (codice sorgente, documentazione, script). Adottare questo processo permette al gruppo \textit{aLittleByte} di prevenire conflitti, recuperare versioni precedenti in caso di errore e garantire che ogni rilascio sia coerente e verificabile.
 
-\paragraph{Strumenti utilizzati}
-Al fine di implementare correttamente tale processo, il gruppo ha selezionato i seguenti strumenti tecnici:
+\paragraph{Scopo}
+Il processo di gestione della configurazione deve tracciare, organizzare e controllare l'evoluzione di tutti gli artefatti di progetto, ovvero codice sorgente, documentazione e script, in modo da prevenire conflitti, consentire il recupero di versioni precedenti e garantire che ogni rilascio sia coerente e verificabile.
+
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{\glslink{git}{Git}:} Software per il controllo di versione distribuito che permette di monitorare ogni variazione apportata ai file sorgente e alla documentazione.
-    \item \textbf{\glslink{github}{GitHub}:} Servizio di hosting basato su cloud utilizzato per la gestione centralizzata del \glslink{repository}{repository}. Viene impiegato non solo per l'archiviazione, ma anche per la \glslink{pianificazione}{pianificazione} operativa tramite le \textit{\glslink{issue}{Issue}} e per la revisione del lavoro attraverso le \textit{\glslink{pull-request}{Pull Request}}.
+    \item \textbf{\glslink{git}{Git}:} sistema di controllo di versione distribuito con cui viene monitorata ogni variazione ai file sorgente e alla documentazione.
+    \item \textbf{\glslink{github}{GitHub}:} servizio di hosting del \glslink{repository}{repository} centralizzato, impiegato anche per la \glslink{pianificazione}{pianificazione} operativa tramite le \textit{\glslink{issue}{Issue}} e per la revisione del lavoro tramite le \textit{\glslink{pull-request}{Pull Request}}.
+    \item \textbf{\glslink{github}{GitHub} Actions:} per l'esecuzione automatica delle procedure di compilazione, test e rilascio.
+\end{itemize}
+
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Identificazione della configurazione.
+    \item Controllo della configurazione.
+    \item Registrazione dello stato di configurazione.
+    \item Valutazione della configurazione.
+\end{enumerate}
+
+\paragraph{Identificazione della configurazione}
+\begin{enumerate}
+    \item Ogni artefatto di progetto deve risiedere nel \glslink{repository}{repository} \texttt{aLittleByte-19/Documentazione} e trovare collocazione nell'alberatura secondo la fase di progetto a cui appartiene.
+    \item Ogni documento deve essere identificato dalla coppia composta dal nome definito nelle convenzioni di denominazione e dal numero di versione riportato in copertina.
+    \item Ogni componente software deve essere identificata dal \glslink{branch}{branch} su cui è sviluppata e dalla \textit{\glslink{issue}{Issue}} che ne motiva l'esistenza.
+    \item L'\glslink{amministratore}{Amministratore} verifica che non esistano artefatti privi di collocazione o di identificativo e ne dispone la regolarizzazione.
+\end{enumerate}
+
+\subparagraph{Nomenclatura dei branch e alberatura}
+Il gruppo adotta una convenzione di nomenclatura descrittiva per i \glslink{branch}{branch}, in modo da rendere immediatamente esplicito l'oggetto del lavoro. La convenzione principale prevede l'uso dello \textit{snake\_case} per i documenti generali (es. \texttt{piano\_di\_progetto}, \texttt{norme\_di\_progetto}, \texttt{analisi\_dei\_requisiti}); sono tollerate eccezioni descrittive per i verbali o per attività specifiche di sviluppo (es. \texttt{VerbaleEsterno\_YYYY\_MM\_DD} o \texttt{develop-sito}).
+
+L'alberatura del \glslink{repository}{repository} documentale separa le fasi del progetto didattico. Le directory principali sono:
+\begin{itemize}
+    \item \texttt{.\glslink{github}{github}}: contiene i \glslink{workflow}{workflow} di automazione, gli script Python di rilascio e gli asset condivisi.
+    \item \texttt{candidatura}: contiene i documenti relativi alla fase di candidatura.
+    \item \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}} e \texttt{\glslink{pb-product-baseline}{PB}}: contengono la documentazione delle rispettive \glslink{milestone}{milestone}, con un'ulteriore categorizzazione interna che separa i verbali in \texttt{Verbali/Verbali Interni} e \texttt{Verbali/Verbali Esterni}.
 \end{itemize}
 
 \paragraph{Controllo della configurazione}
+\begin{enumerate}
+    \item Ogni attività, sia essa la stesura di un documento, lo sviluppo di una funzionalità, la correzione di un difetto o il contatto con l'azienda, deve essere preventivamente tracciata da una \textit{\glslink{issue}{Issue}}.
+    \item Il \glslink{responsabile}{Responsabile} assegna la \textit{\glslink{issue}{Issue}} ai membri incaricati e le applica le etichette che ne descrivono il tipo, ad esempio \textit{documentazione} per la stesura dei documenti.
+    \item L'assegnatario sviluppa la modifica sul \glslink{branch}{branch} dedicato: nessun membro è autorizzato a effettuare modifiche dirette sul ramo principale \texttt{main}, che è protetto.
+    \item L'assegnatario apre una \textit{\glslink{pull-request}{Pull Request}}, unico meccanismo ammesso per l'integrazione, assegnando come \textit{reviewer} il \glslink{verificatore}{verificatore} designato.
+    \item L'integrazione è consentita solo a seguito di almeno una revisione positiva da parte di un membro diverso dall'autore; in assenza di approvazione la modifica non entra nella configurazione di progetto.
+\end{enumerate}
 
-Il controllo della configurazione è l'attività preposta alla gestione, tracciabilità e autorizzazione di qualsiasi proposta di modifica del progetto. Per tracciare in modo controllato tutte le modifiche, che vengono approvate o meno, il gruppo \textit{aLittleByte} sfrutta le funzionalità native di \glslink{github}{GitHub}, strutturando il processo attraverso l'uso rigoroso di \textit{\glslink{issue}{Issue}} e \textit{\glslink{pull-request}{Pull Request}}:
+\subparagraph{Automazione e rilascio continuo (CI/CD)}
+Per assicurare che la documentazione fornita agli \glslink{stakeholder}{stakeholder} sia costantemente aggiornata e pubblica, il gruppo ha implementato un processo di \textit{Continuous Deployment} tramite \glslink{github}{GitHub} Actions. Il \glslink{workflow}{workflow} principale, denominato \texttt{Site Deploy}, si attiva automaticamente a ogni \textit{push} o \textit{\glslink{pull-request}{Pull Request}} verso il ramo \texttt{main}, ignorando i file non critici come \texttt{README.md} e \texttt{.gitignore}, ed esegue nell'ordine i seguenti passi:
 
-\begin{itemize}
-    \item \textbf{\glslink{issue}{Issue}:} Ogni singola attività (che si tratti della stesura di un documento, dello sviluppo di una funzionalità, della correzione di un errore o anche semplicemente contattare l'azienda) deve essere preventivamente tracciata tramite l'apertura di un'\textit{\glslink{issue}{Issue}}. Quest'ultima viene assegnata a uno o più membri incaricati di portarla a termine. Per facilitarne la classificazione, ogni \textit{\glslink{issue}{Issue}} è identificata da una nomenclatura univoca (ad esempio per la stesura dei documenti viene usato il tag \textit{documentazione}).
-    
-    \item \textbf{\glslink{pull-request}{Pull Request}:} Rappresenta il meccanismo esclusivo per l'integrazione di qualsiasi modifica all'interno del \glslink{repository}{repository}. Al fine di mantenere un elevato standard qualitativo e prevenire errori, il team ha stabilito che nessun componente è autorizzato a effettuare modifiche dirette sul ramo principale (\texttt{main}). Perciò ogni integrazione deve necessariamente passare per una \textit{\glslink{pull-request}{Pull Request}}, la quale richiede obbligatoriamente un processo di revisione incrociata e può essere inserita nel main solo a seguito di almeno una revisione positiva da parte di altri membri del gruppo. 
-\end{itemize}
+\begin{enumerate}
+    \item Predispone l'ambiente virtuale con Python e Node e installa le dipendenze necessarie.
+    \item Valida i dati del \glslink{glossario}{Glossario} e compila l'applicazione \glslink{angular}{Angular} che ne consente la consultazione.
+    \item Esegue lo script \texttt{.\glslink{github}{github}/site-src/update\_index.py}, che genera dinamicamente la struttura statica del sito (HTML, CSS e asset associati) a partire dall'alberatura del \glslink{repository}{repository}.
+    \item Esegue i test automatici di navigazione e accessibilità del sito, conservando la diagnostica in caso di esito negativo.
+    \item Carica e rilascia il risultato sull'ambiente \texttt{github-pages}, limitatamente ai \textit{push} sul ramo \texttt{main}.
+\end{enumerate}
 
-\paragraph{Registrazione stato di configurazione}
-Ogni documento presenta un \textit{Registro delle modifiche} (eccetto i verbali) per tenere traccia di tutte le modifiche svolte. Il sistema di versionamento è il seguente: \\
+Un esito negativo di uno qualsiasi dei passi impedisce il rilascio: in tal caso l'\glslink{amministratore}{Amministratore} deve intervenire con priorità, poiché il malfunzionamento blocca la pubblicazione di tutti i documenti.
+
+\paragraph{Registrazione dello stato di configurazione}
+Ogni documento presenta un \textit{Registro delle modifiche} per tenere traccia di tutte le modifiche svolte. Il sistema di \glslink{versioning}{versionamento} adottato è il seguente: \\
 
 \centerline{\textbf{X.Y.Z}}
 
-Dove: 
+Dove:
 \begin{itemize}
-    \item \textbf{X:} Subisce un incremento solo quando il file viene approvato dal membro del gruppo incaricato del ruolo di approvatore;
-    \item \textbf{Y:} Indica un avanzamento significativo, come l'aggiunta di interi capitoli o moduli software che hanno superato positivamente la fase di verifica.
-    \item \textbf{Z:} Rappresenta modifiche di dettaglio, correzioni di refusi o aggiornamenti minimi eseguiti durante la stesura o lo sviluppo.
+    \item \textbf{X:} subisce un incremento solo quando il file viene approvato dal membro del gruppo incaricato del ruolo di approvatore;
+    \item \textbf{Y:} indica un avanzamento significativo, come l'aggiunta di interi capitoli o moduli software che hanno superato positivamente la fase di verifica;
+    \item \textbf{Z:} rappresenta modifiche di dettaglio, correzioni di refusi o aggiornamenti minimi eseguiti durante la stesura o lo sviluppo.
 \end{itemize}
 
-\paragraph{Automazione e Rilascio Continuo (CI/CD)}
-Per assicurare che la documentazione fornita agli \glslink{stakeholder}{stakeholder} sia costantemente aggiornata e pubblica, il gruppo ha implementato un processo di \textit{Continuous Deployment} tramite \glslink{github}{GitHub} Actions.
-Il \glslink{workflow}{workflow} principale, nominato \texttt{Site Deploy}, regola il ciclo di vita della pubblicazione del sito web e si attiva in automatico ad ogni evento di push o \glslink{pull-request}{pull request} verso il \glslink{branch}{branch} \texttt{main} (ignorando i file non critici come \texttt{README.md} e \texttt{.gitignore}).
+Nell'applicazione di questo schema devono essere rispettate le regole seguenti:
 
-Il processo automatizzato prevede:
+\begin{itemize}
+    \item \textbf{Incremento e azzeramento:} all'incremento di una cifra, tutte le cifre alla sua destra vengono riportate a zero. La versione successiva alla \texttt{0.4.2}, in caso di avanzamento significativo, è quindi la \texttt{0.5.0} e non la \texttt{0.5.2}; la prima versione approvata successiva alla \texttt{1.3.1} è la \texttt{2.0.0}.
+    \item \textbf{Versione iniziale:} la prima stesura di un documento nasce con versione \texttt{0.1.0}. Le versioni con \textbf{X} pari a \texttt{0} identificano un documento non ancora approvato, quindi soggetto a modifiche sostanziali e non utilizzabile come riferimento verso la \glslink{committente-proponente}{proponente}.
+    \item \textbf{Corrispondenza con lo stato del documento:} l'incremento di \textbf{Z} accompagna le correzioni apportate in stato di \glslink{bozza-draft}{bozza} o a seguito di osservazioni minori del \glslink{verificatore}{verificatore}; l'incremento di \textbf{Y} si applica solo a contenuti che hanno superato la verifica; l'incremento di \textbf{X} è riservato all'approvatore ed è l'unico che segna il passaggio allo stato \textit{Approvato} definito nella sezione~\ref{sec:stato-documento}.
+    \item \textbf{Registrazione obbligatoria:} ogni incremento di versione deve corrispondere a una nuova riga del \textit{Registro delle modifiche}, compilata con versione, data, descrizione sintetica dell'intervento, \glslink{redattore}{redattore}, \glslink{verificatore}{verificatore} e approvatore. I campi non pertinenti sono valorizzati con un trattino: nelle righe di sola approvazione sono quindi compilati unicamente versione, data, descrizione e approvatore.
+    \item \textbf{Coerenza tra copertina e registro:} la versione riportata in copertina deve sempre coincidere con quella dell'ultima riga del \textit{Registro delle modifiche}, e il controllo di questa corrispondenza è parte delle attività del \glslink{verificatore}{verificatore}.
+    \item \textbf{Documenti a \glslink{approccio-incrementale}{approccio incrementale}:} i documenti che crescono insieme al progetto (\glslink{norme-di-progetto}{Norme di Progetto}, \glslink{piano-di-progetto}{Piano di Progetto}, \glslink{piano-di-qualifica}{Piano di Qualifica}) sono versionati e verificati sezione per sezione: una nuova versione è ammessa anche in presenza di sezioni ancora vuote, purché quelle già redatte siano state verificate.
+\end{itemize}
+
+\paragraph{Valutazione della configurazione}
 \begin{enumerate}
-    \item Il setup dell'ambiente virtuale e del linguaggio Python.
-    \item L'esecuzione dello script proprietario \texttt{.\glslink{github}{github}/site-src/update\_index.py}, che genera dinamicamente la struttura statica del sito (HTML, CSS e asset associati).
-    \item Il caricamento e rilascio automatico (Deploy) del risultato sull'ambiente \texttt{github-pages}.
+    \item Il \glslink{verificatore}{Verificatore} controlla, al termine di ogni \glslink{sprint}{Sprint}, che a ciascun requisito dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} corrisponda una componente identificata nella configurazione e almeno un test associato.
+    \item Il \glslink{verificatore}{Verificatore} registra nel \glslink{piano-di-qualifica}{Piano di Qualifica} lo stato di copertura dei requisiti risultante dal controllo.
+    \item Il \glslink{responsabile}{Responsabile} pianifica nell'iterazione successiva le attività necessarie a colmare le lacune di copertura rilevate.
 \end{enumerate}
 
-\paragraph{Nomenclatura dei Branch e Alberatura}
-A differenza dell'utilizzo di identificativi numerici, il gruppo \textit{aLittleByte} adotta una convenzione di nomenclatura descrittiva per i \glslink{branch}{branch}, in modo da rendere immediatamente esplicito l'oggetto del lavoro.
-La convenzione principale prevede l'uso dello \textit{snake\_case} (tutto minuscolo con trattini bassi) per i documenti generali (es. \texttt{piano\_di\_progetto}, \texttt{norme\_di\_progetto}, \texttt{analisi\_dei\_requisiti}). Vengono tollerate eccezioni descrittive per i verbali o attività specifiche di sviluppo (es. \texttt{VerbaleEsterno\_YYYY\_MM\_DD} o \texttt{develop-sito}).
+\subsubsection{Accertamento della qualità}
 
-L'alberatura della \glslink{repository}{repository} documentale è strutturata in modo logico e gerarchico per separare le fasi del progetto didattico. Le directory principali includono:
+\paragraph{Scopo}
+Il processo di accertamento della qualità deve verificare che i processi applicati e i prodotti realizzati siano conformi a quanto stabilito dalle presenti \glslink{norme-di-progetto}{Norme di Progetto} e dal \glslink{piano-di-qualifica}{Piano di Qualifica}. Per essere privo di conflitti d'interesse, l'accertamento deve essere svolto da un membro diverso da chi ha eseguito l'attività o realizzato la componente sottoposta a controllo.
+
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \texttt{.\glslink{github}{github}}: Contiene i \glslink{workflow}{workflow} di automazione e gli script Python necessari al rilascio.
-    \item \texttt{candidatura}: Contiene i documenti relativi alla fase di candidatura.
-    \item \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}}: Contiene la documentazione in sviluppo per la \textit{\glslink{rtb-requirements-and-technology-baseline}{Requirements and Technology Baseline}}. Al suo interno è prevista un'ulteriore categorizzazione rigida, come ad esempio la separazione dei verbali in \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}/Verbali/Verbali Interni} e \texttt{\glslink{rtb-requirements-and-technology-baseline}{RTB}/Verbali/Verbali Esterni}.
+    \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}:} contiene le soglie delle metriche e il cruscotto di valutazione con l'andamento storico delle misurazioni.
+    \item \textbf{\glslink{github}{GitHub} Projects:} fornisce i dati di avanzamento e di consuntivo necessari alla misurazione delle metriche di processo.
+    \item \textbf{Foglio di rendicontazione oraria:} fornisce i dati di impiego delle risorse per il calcolo delle metriche economiche.
 \end{itemize}
 
-\subsubsection{Qualifica}
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Accertamento della qualità di processo.
+    \item Accertamento della qualità di prodotto.
+\end{enumerate}
 
-\paragraph{Verifica}
+\paragraph{Accertamento della qualità di processo}
+\begin{enumerate}
+    \item L'\glslink{amministratore}{Amministratore} misura al termine di ogni \glslink{sprint}{Sprint} le metriche di processo definite nel capitolo sulle metriche e ne registra i valori nel cruscotto del \glslink{piano-di-qualifica}{Piano di Qualifica}.
+    \item L'\glslink{amministratore}{Amministratore} confronta ogni valore con la soglia accettabile e segnala al gruppo le metriche fuori soglia durante la \glslink{sprint}{Sprint} Retrospective.
+    \item Il gruppo tratta ogni segnalazione secondo la procedura del processo di miglioramento dei processi.
+\end{enumerate}
 
-Le attività di verifica hanno lo scopo di garantire l'assenza di difetti e la totale aderenza di ogni componente prodotta (sia essa documentale o codice sorgente) rispetto alle specifiche e ai vincoli stabiliti. Applicando i principi dell'Ingegneria del Software, questa pratica metodologica mira a soddisfare la seguente domanda: \textit{''Did I build the system right?''}.
+\paragraph{Accertamento della qualità di prodotto}
+\begin{enumerate}
+    \item Il \glslink{verificatore}{Verificatore} misura le metriche di prodotto sulle componenti sviluppate nell'iterazione, avvalendosi degli esiti dei test e degli strumenti di \glslink{analisi-statica}{analisi statica}.
+    \item Il \glslink{verificatore}{Verificatore} registra i valori rilevati nel \glslink{piano-di-qualifica}{Piano di Qualifica} e non approva le modifiche che portino una metrica sotto la soglia accettabile.
+    \item Il \glslink{verificatore}{Verificatore} verifica che ogni requisito dichiarato soddisfatto sia coperto da almeno un test superato, riportando l'esito nel tracciamento dei requisiti.
+\end{enumerate}
 
-L'intera reportistica riguardante i controlli effettuati, i parametri misurati e gli esiti dei collaudi è raccolta e analizzata all'interno del \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}}. 
+\subsubsection{Verifica}
 
-\paragraph{Attività di Verifica}
+\paragraph{Scopo}
+Il processo di verifica deve garantire l'assenza di difetti e l'aderenza di ogni componente prodotta, documentale o software, alle specifiche e ai vincoli stabiliti, rispondendo alla domanda \textit{``Did I build the system right?''}. L'intera reportistica dei controlli effettuati, dei parametri misurati e degli esiti dei collaudi è raccolta nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
 
-La verifica interviene nelle singole fasi del nostro progetto, con lo scopo di assicurarci che il lavoro appena svolto non abbia introdotto errori. In termini pratici, questa attività serve a controllare che il risultato ottenuto alla fine di una determinata fase sia sempre coerente con le informazioni e i requisiti che avevamo in partenza.
-
-In questa prima parte del lavoro, il gruppo \textit{aLittleByte} si è dedicato principalmente alla verifica della documentazione. Tramite revisioni incrociate tra i membri, ci siamo assicurati che i contenuti fossero corretti e che i testi rispettassero le regole grammaticali, sintattiche e di formattazione che ci siamo dati nelle presenti \glslink{norme-di-progetto}{Norme di Progetto}.
-
-Per quanto riguarda invece la verifica del codice sorgente e del prodotto software, ce ne occuperemo nel dettaglio una volta superata la revisione \textit{\glslink{rtb-requirements-and-technology-baseline}{RTB}}. In ogni caso, tutte le decisioni prese, i metodi di controllo utilizzati e i risultati di queste verifiche verranno sempre riportati in modo esaustivo nel documento \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}}.
-
-\paragraph{Analisi Statica}
-L'\glslink{analisi-statica}{analisi statica} è una tecnica di verifica che viene applicata all'oggetto di studio senza richiederne l'esecuzione. Questo approccio ci permette di individuare anomalie e difetti fin dalle primissime fasi del ciclo di vita del software, ben prima che la scrittura del codice sia ultimata.
-
-Questo tipo di analisi può avvenire tramite metodi formali o, più comunemente nel nostro caso, attraverso tecniche di lettura. Il nostro team adotta principalmente due metodologie:
-
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{\glslink{walkthrough}{Walkthrough}:} Consiste in una revisione estensiva e senza preconcetti. Il \glslink{verificatore}{verificatore} analizza il prodotto passo dopo passo, simulandone mentalmente la logica e verificando che le regole prestabilite siano rispettate. È un approccio molto approfondito ma dispendioso in termini di tempo, e richiede un intervento interamente manuale.
-    
-    \item \textbf{Inspection:} Si tratta di un controllo mirato e guidato dall'esperienza. Il \glslink{verificatore}{verificatore} sa già quali sono le criticità più comuni e utilizza delle liste di controllo (\textit{checklist}) specifiche per scovarle. Pur essendo meno estesa del \textit{\glslink{walkthrough}{walkthrough}}, l'ispezione è più rapida e permette di standardizzare la ricerca dei difetti.
+    \item \textbf{\textit{\glslink{pull-request}{Pull Request}} di \glslink{github}{GitHub}:} sede in cui vengono registrati i difetti rilevati e le relative correzioni.
+    \item \textbf{Larastan e \glslink{laravel}{Laravel} Pint:} per l'\glslink{analisi-statica}{analisi statica} automatica e la verifica di conformità stilistica del codice.
+    \item \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}:} per la scrittura e l'esecuzione dei test di unità e di integrazione.
+    \item \textbf{\glslink{docker-compose}{Docker Compose}:} per l'esecuzione dei \glslink{test-di-sistema}{test di sistema} sull'ambiente completo.
 \end{itemize}
 
-Al termine di ogni controllo, le attività svolte e i problemi riscontrati vengono opportunamente documentati. Gli errori vengono discussi in modo costruttivo tra il \glslink{verificatore}{verificatore} e l'autore del documento (o del codice); tuttavia, l'applicazione materiale delle correzioni rimane sempre di competenza dell'autore originale, al fine di garantire coerenza e responsabilità. Tutto ciò viene documentato all'interno della \textit{\glslink{pull-request}{Pull Request}}, che in caso di errori non viene approvata, e nel relativo documento.
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item \glslink{analisi-statica}{Analisi statica}.
+    \item \glslink{analisi-dinamica}{Analisi dinamica}.
+\end{enumerate}
 
-\subparagraph{Analisi Statica Automatica}
-In affiancamento alle tecniche manuali, il team adotta \textbf{Larastan} (PHPStan per \glslink{laravel}{Laravel}) come strumento di \glslink{analisi-statica}{analisi statica} automatica del codice. Larastan viene eseguito al livello di analisi \textbf{5} e si occupa di rilevare automaticamente i \textit{code smell} tracciati dalla metrica \textbf{MPD12} (es. metodi troppo complessi, variabili non tipizzate, chiamate a metodi inesistenti). L'esecuzione avviene in locale prima di ogni \textit{commit} e nella pipeline di \textit{Continuous Integration}: il codice che non supera l'analisi non può essere integrato nel \glslink{branch}{branch} principale.
+La verifica interviene al termine di ogni fase di lavoro, con lo scopo di accertare che il risultato prodotto sia coerente con gli ingressi da cui è stato derivato e che non siano stati introdotti difetti.
 
-\paragraph{Analisi Dinamica}
-A differenza della tecnica statica, l'\glslink{analisi-dinamica}{analisi dinamica} presuppone l'esecuzione dell'oggetto sottoposto a verifica. Tale approccio esamina le reazioni di specifiche porzioni del software applicandovi un numero definito di "casi prova". Questi test devono possedere i requisiti di ripetibilità e automazione.
+\paragraph{Analisi statica}
+L'\glslink{analisi-statica}{analisi statica} è una tecnica di verifica applicata all'oggetto di studio senza richiederne l'esecuzione, e consente di individuare difetti nelle prime fasi del ciclo di vita. La procedura è la seguente:
 
-Ogni sessione di test è definita dai seguenti stati:
+\begin{enumerate}
+    \item Il \glslink{verificatore}{Verificatore} sceglie la tecnica di lettura da applicare tra \glslink{walkthrough}{walkthrough} e \textit{inspection}, in funzione dell'estensione dell'oggetto e del tempo disponibile.
+    \item Il \glslink{verificatore}{Verificatore} esegue la lettura e annota ogni difetto rilevato nei commenti della \textit{\glslink{pull-request}{Pull Request}}, indicando il punto preciso a cui si riferisce.
+    \item Il \glslink{verificatore}{Verificatore} discute i difetti con l'autore in modo costruttivo; l'applicazione materiale delle correzioni resta di competenza dell'autore originale, a garanzia di coerenza e responsabilità.
+    \item Il \glslink{verificatore}{Verificatore} non approva la \textit{\glslink{pull-request}{Pull Request}} finché tutti i difetti rilevati non risultano risolti.
+\end{enumerate}
+
+Le due tecniche di lettura adottate sono:
+\begin{itemize}
+    \item \textbf{\glslink{walkthrough}{Walkthrough}:} revisione estensiva e senza preconcetti, in cui il \glslink{verificatore}{verificatore} analizza il prodotto passo dopo passo simulandone mentalmente la logica e verificando il rispetto delle regole prestabilite. È molto approfondita ma dispendiosa in termini di tempo e richiede un intervento interamente manuale.
+    \item \textbf{Inspection:} controllo mirato e guidato dall'esperienza, in cui il \glslink{verificatore}{verificatore} utilizza \textit{checklist} specifiche per le criticità più comuni. È meno estesa del \glslink{walkthrough}{walkthrough}, ma più rapida e ripetibile.
+\end{itemize}
+
+\subparagraph{Analisi statica automatica}
+In affiancamento alle tecniche manuali, il team adotta \textbf{Larastan} (PHPStan per \glslink{laravel}{Laravel}) come strumento di \glslink{analisi-statica}{analisi statica} automatica del codice. Larastan viene eseguito al livello di analisi \textbf{5} e rileva automaticamente i \textit{code smell} tracciati dalla metrica \textbf{MPD12}, ad esempio metodi troppo complessi, variabili non tipizzate e chiamate a metodi inesistenti. L'esecuzione avviene in locale prima di ogni \textit{commit} e nella pipeline di \textit{Continuous Integration}: il codice che non supera l'analisi non può essere integrato nel \glslink{branch}{branch} principale.
+
+\paragraph{Analisi dinamica}
+L'\glslink{analisi-dinamica}{analisi dinamica} presuppone l'esecuzione dell'oggetto sottoposto a verifica ed esamina le reazioni di specifiche porzioni del software applicandovi un numero definito di casi prova, che devono possedere i requisiti di ripetibilità e automazione. Lo stato di ogni test è indicato con una delle seguenti sigle:
+
 \begin{itemize}
     \item \textbf{NI}: non implementato
     \item \textbf{I}: implementato
@@ -561,253 +714,396 @@ Ogni sessione di test è definita dai seguenti stati:
     \item \textbf{NS}: non superato
 \end{itemize}
 
-\paragraph{Test Di Unità}
-I test d'unità si focalizzano sulla verifica isolata di singole componenti software, come funzioni, classi o metodi, separandole dal resto dell'architettura di sistema.
+La procedura che il \glslink{programmatore}{Programmatore} deve seguire prima di aprire una \textit{\glslink{pull-request}{Pull Request}} è la seguente:
 
-Il fine di questa attività risiede nel confermare che ogni unità generi i risultati previsti partendo da input determinati. Questo processo consente di intercettare precocemente difetti di implementazione o errori nella logica funzionale durante le fasi iniziali della progettazione.
-
-\subparagraph{Ambiente e Procedura Operativa}
-Il framework adottato è \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}, incluso nativamente in \glslink{laravel}{Laravel} 12. I test risiedono nella directory \texttt{tests/Unit/} del progetto.
-
-Il \glslink{programmatore}{programmatore} è tenuto a seguire questa procedura prima di aprire una \textit{\glslink{pull-request}{Pull Request}}:
 \begin{enumerate}
-    \item Scrivere i \glslink{test-di-unita}{test di unità} che coprono la logica del codice prodotto.
+    \item Scrivere i \glslink{test-di-unita}{test di unità} e i \glslink{test-di-integrazione}{test di integrazione} che coprono la logica del codice prodotto.
     \item Verificare che tutti i test passino in locale con il comando \texttt{./vendor/bin/\glslink{pest}{pest}}.
-    \item Calcolare la \textit{code coverage} con \texttt{./vendor/bin/\glslink{pest}{pest} -{}-coverage} (richiede il driver \textbf{Xdebug} attivo nel \glslink{container}{container} \glslink{php-fpm}{PHP-FPM}). La copertura minima richiesta per ogni unità è dell'\textbf{80\%}, in conformità con la metrica \textbf{MPC-CC}.
+    \item Calcolare la \textit{code coverage} con \texttt{./vendor/bin/\glslink{pest}{pest} -{}-coverage}, che richiede il driver \textbf{Xdebug} attivo nel \glslink{container}{container} \glslink{php-fpm}{PHP-FPM}. La copertura minima richiesta è dell'\textbf{80\%}, in conformità con la metrica \textbf{MPC-CC}.
     \item Allegare l'esito del report nella descrizione della \textit{\glslink{pull-request}{Pull Request}}.
 \end{enumerate}
-La pipeline di CI verifica automaticamente questi requisiti a ogni push; una PR con copertura inferiore alla soglia o con test falliti non può essere approvata.
 
-\paragraph{Test di Regressione}
-L'esecuzione dei \glslink{test-di-regressione}{test di regressione} è finalizzata ad accertare che interventi correttivi o evolutivi sul codice non abbiano introdotto nuovi difetti o problemi nelle funzionalità già esistenti.
+La pipeline di \textit{Continuous Integration} verifica automaticamente questi requisiti a ogni \textit{push}: una \textit{\glslink{pull-request}{Pull Request}} con copertura inferiore alla soglia o con test falliti non può essere approvata.
 
-Non richiedono la scrittura di test ad hoc: sono garantiti dall'esecuzione automatica dell'intera suite \glslink{pest}{Pest} \glslink{php}{PHP} (unità + integrazione) nella pipeline di CI ad ogni \textit{push} o apertura di \textit{\glslink{pull-request}{Pull Request}}. Un test precedentemente verde che diventa rosso segnala una regressione e blocca il merge fino alla risoluzione.
+\subparagraph{Test di unità}
+I \glslink{test-di-unita}{test di unità} verificano in isolamento singole componenti software, quali funzioni, classi o metodi, separandole dal resto dell'architettura, e confermano che ogni unità generi i risultati previsti a partire da input determinati. Il framework adottato è \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}, incluso nativamente in \glslink{laravel}{Laravel} 12, e i test risiedono nella directory \texttt{tests/Unit/}.
 
-\paragraph{Test di Integrazione}
-L'esecuzione dei test d'integrazione è mirata a confermare che le varie componenti del software operino tra loro in modo sinergico e privo di errori.
+\subparagraph{Test di integrazione}
+I \glslink{test-di-integrazione}{test di integrazione} confermano che le componenti del software operino tra loro in modo sinergico e privo di errori. Sono scritti con \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}, risiedono in \texttt{tests/Feature/} ed eseguono richieste HTTP reali contro l'applicazione \glslink{laravel}{Laravel} utilizzando il database \glslink{postgresql}{PostgreSQL} di test definito in \texttt{.env.testing}, verificando l'interazione tra controller, service layer e database. Anche per questi test vale il requisito di copertura minima dell'\textbf{80\%}.
 
-I \glslink{test-di-integrazione}{test di integrazione} sono scritti con \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}} e risiedono in \texttt{tests/Feature/}. A differenza dei \glslink{test-di-unita}{test di unità}, questi test eseguono richieste HTTP reali contro l'applicazione \glslink{laravel}{Laravel} utilizzando il database \glslink{postgresql}{PostgreSQL} di test (definito in \texttt{.env.testing}), verificando l'interazione tra controller, service layer e database. Anche per questi test vale il requisito di copertura minima dell'\textbf{80\%} e l'obbligo di esecuzione prima di aprire una \textit{\glslink{pull-request}{Pull Request}}.
+\subparagraph{Test di sistema}
+I \glslink{test-di-sistema}{test di sistema} accertano che il comportamento globale del prodotto rispetti i requisiti stabiliti nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}. Vengono eseguiti sull'applicazione deployata nell'ambiente \glslink{docker-compose}{Docker Compose} completo (\glslink{nginx}{Nginx}, \glslink{php-fpm}{PHP-FPM}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis}, \glslink{minio}{MinIO}), simulando scenari end-to-end che attraversano tutti i livelli dello stack; \glslink{minio}{MinIO} è utilizzato come object storage compatibile con le \glslink{api-application-programming-interface}{API} \glslink{s3-simple-storage-service}{S3}. Ogni \glslink{test-di-sistema}{test di sistema} deve essere tracciato ai \glslink{requisito-funzionale}{requisiti funzionali} e, ove applicabile, al relativo \glslink{caso-d-uso-uc}{caso d'uso}, tramite i codici di riferimento riportati nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
 
-\paragraph{Test di Sistema}
-I \glslink{test-di-sistema}{test di sistema} hanno l'obiettivo di accertare che il comportamento globale del prodotto rispetti integralmente i requisiti software stabiliti durante l'\glslink{analisi-dei-requisiti-adr}{analisi dei requisiti}.
+\subparagraph{Test di regressione}
+I \glslink{test-di-regressione}{test di regressione} accertano che gli interventi correttivi o evolutivi non abbiano introdotto difetti nelle funzionalità già esistenti. Non richiedono la scrittura di test dedicati: sono garantiti dall'esecuzione automatica dell'intera suite \glslink{pest}{Pest} \glslink{php}{PHP} nella pipeline di \textit{Continuous Integration} a ogni \textit{push} o apertura di \textit{\glslink{pull-request}{Pull Request}}. Un test precedentemente superato che risulti fallito segnala una regressione e blocca l'integrazione fino alla risoluzione.
 
-Vengono eseguiti sull'applicazione deployata nell'ambiente \glslink{docker-compose}{Docker Compose} completo (\glslink{nginx}{Nginx}, \glslink{php-fpm}{PHP-FPM}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis}, \glslink{minio}{MinIO}), simulando scenari end-to-end che attraversano tutti i livelli dello stack. \glslink{minio}{MinIO} viene utilizzato nell'ambiente di test come object storage compatibile con le \glslink{api-application-programming-interface}{API} \glslink{s3-simple-storage-service}{S3}. Ogni \glslink{test-di-sistema}{test di sistema} è tracciato ai \glslink{requisito-funzionale}{requisiti funzionali} dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e, ove applicabile, al relativo \glslink{caso-d-uso-uc}{caso d'uso}, tramite i codici di riferimento riportati nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}. I risultati e lo stato di copertura dei requisiti sono riportati nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}.
+\subsubsection{Validazione}
 
-\subsection{Validazione}
-La validazione rappresenta il processo finale che conferma in modo definitivo che le caratteristiche del prodotto software siano pienamente conformi ai bisogni dell'utilizzo finale e agli obiettivi d'uso previsti. L'obiettivo principale è rispondere al quesito: \textit{''Did I build the right system?''} 
+\paragraph{Scopo}
+Il processo di validazione deve confermare che le caratteristiche del prodotto siano conformi ai bisogni d'uso e agli obiettivi della \glslink{committente-proponente}{proponente}, rispondendo alla domanda \textit{``Did I build the right system?''}. Mentre la verifica analizza la correttezza tecnica dell'esecuzione, la validazione si sposta sul piano dell'efficacia, accertando che le funzionalità sviluppate risolvano effettivamente le problematiche operative individuate.
 
-Mentre la verifica analizza la correttezza tecnica dell'esecuzione, la validazione si sposta sul piano dell'efficacia, garantendo che le funzionalità sviluppate siano effettivamente idonee a risolvere le problematiche operative individuate e siano allineate con le aspettative del \glslink{committente-proponente}{committente}.
-
-\paragraph{Processo di Validazione}
-Il gruppo \textit{aLittleByte} ha provveduto a raccogliere, analizzare e formalizzare tutte le necessità espresse dall'azienda \glslink{committente-proponente}{proponente} \textit{Eggon} all'interno del documento di \textit{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}}. Questa operazione di classificazione è fondamentale per garantire un tracciamento rigoroso delle specifiche e per predisporre i futuri \glslink{test-di-accettazione}{test di accettazione}, i quali avranno il compito di accertare che il prodotto software sviluppato rispecchi le richieste del \glslink{committente-proponente}{committente}.
-
-Gli esiti derivanti da queste procedure di validazione saranno riportati e discussi in modo esaustivo nel \textit{\glslink{piano-di-qualifica}{Piano di Qualifica}}, all'interno della specifica sezione dedicata ai \glslink{test-di-accettazione}{Test di Accettazione}.
-
-Si precisa che, in concomitanza con la pubblicazione dei documenti per l'\textit{\glslink{rtb-requirements-and-technology-baseline}{RTB}}, il progetto si trova in una fase antecedente alla codifica e al collaudo del software. Per tale ragione, lo stato di avanzamento dei test riporterà la dicitura temporanea ''Non Implementato''. I dati e i risultati effettivi dei test verranno integrati in questa sezione solamente in vista della consegna della \textit{\glslink{pb-product-baseline}{PB}}.
-
-\subsection{Processi Organizzativi}
-
-\subsubsection{Descrizione e scopo}
-
-In conformità con le direttive tracciate dallo standard ISO/IEC 12207:1997, il processo di gestione comprende l'insieme delle pratiche e delle metodologie necessarie a governare l'intero ciclo di vita del progetto. Lo scopo primario è assicurare il successo dello sviluppo del prodotto software, garantendo che gli obiettivi prefissati vengano raggiunti nel rigoroso rispetto dei vincoli di costo, delle tempistiche stimate e dei requisiti concordati con il \glslink{committente-proponente}{proponente}.
-
-Per concretizzare tali obiettivi, l'organizzazione del gruppo \textit{aLittleByte} si basa su:
-
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{\glslink{pianificazione}{Pianificazione}:} delle attività da svolgere, della definizione delle scadenze e della suddivisione dettagliata delle mansioni.
-    
-    \item \textbf{Monitoraggio e controllo:} Supervisione costante dello stato di avanzamento dei lavori
-    
-    \item \textbf{Prevenzione e gestione \glslink{mitigazione-dei-rischi}{dei rischi}:} Identificazione delle potenziali criticità tecnologiche o organizzative, unita all'adozione di protocolli strutturati per governare le modifiche e per prevenire i possibili imprevisti.
-    
-    \item \textbf{Interventi correttivi:} Prontezza e reattività nell'intervenire qualora le metriche di controllo evidenzino deviazioni significative rispetto al \glslink{piano-di-progetto}{Piano di Progetto}.
-    
-    \item \textbf{Organizzazione del team:} Assegnazione trasparente di ruoli e responsabilità ai membri del gruppo, garantendo al contempo il mantenimento di canali di comunicazione efficaci.
+    \item \textbf{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}:} fornisce i requisiti classificati e il loro tracciamento verso i casi d'uso.
+    \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}:} raccoglie i \glslink{test-di-accettazione}{test di accettazione} e i relativi esiti.
+    \item \textbf{Google Meet e posta elettronica:} per la raccolta strutturata dei \textit{feedback} della \glslink{committente-proponente}{proponente}.
 \end{itemize}
 
-In definitiva, l'applicazione metodica di questi processi garantisce al team di mantenere un progetto solido e tracciabile, costituendo il fondamento necessario per assumere decisioni strategiche in qualsiasi momento dello sviluppo.
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Tracciamento dei requisiti.
+    \item Esecuzione dei \glslink{test-di-accettazione}{test di accettazione}.
+\end{enumerate}
 
-\subsubsection{Gestione degli sprint}
+\paragraph{Tracciamento dei requisiti}
+\begin{enumerate}
+    \item L'\glslink{analista}{Analista} raccoglie e formalizza nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} tutte le necessità espresse da \textit{Eggon}, classificandole per tipologia e urgenza.
+    \item L'\glslink{analista}{Analista} associa a ogni requisito i \glslink{caso-d-uso-uc}{casi d'uso} che lo realizzano, così che il perimetro del prodotto resti verificabile.
+    \item Il \glslink{verificatore}{Verificatore} associa a ogni requisito i test che lo coprono e ne aggiorna lo stato nel \glslink{piano-di-qualifica}{Piano di Qualifica} al termine di ogni \glslink{sprint}{Sprint}.
+    \item Un requisito può essere dichiarato soddisfatto solo quando il codice che lo implementa è coperto da test superati.
+\end{enumerate}
 
-Come già citato in precedenza, il gruppo ha deciso di adottare un approccio iterativo, suddividendo il ciclo di vita del progetto in \glslink{sprint}{sprint} della durata fissa di due settimane. In concomitanza con l'avvio di ogni nuovo \glslink{sprint}{sprint}, il team provvede alla rotazione e all'assegnazione dei ruoli che ciascun membro dovrà ricoprire per l'intera durata dello \glslink{sprint}{sprint}.
+\paragraph{Esecuzione dei test di accettazione}
+\begin{enumerate}
+    \item Il \glslink{verificatore}{Verificatore} predispone i \glslink{test-di-accettazione}{test di accettazione} a partire dagli scenari dei \glslink{caso-d-uso-uc}{casi d'uso} concordati con la \glslink{committente-proponente}{proponente}.
+    \item Il \glslink{responsabile}{Responsabile} presenta a \textit{Eggon} le funzionalità completate durante gli incontri esterni periodici e ne raccoglie i \textit{feedback}.
+    \item Il \glslink{redattore}{redattore} del \glslink{verbale-esterno}{verbale esterno} registra i rilievi espressi dall'azienda e li converte in \textit{\glslink{issue}{Issue}} assegnate.
+    \item Il \glslink{verificatore}{Verificatore} riporta nel \glslink{piano-di-qualifica}{Piano di Qualifica} l'esito di ogni \glslink{test-di-accettazione}{test di accettazione}, utilizzando gli stati definiti per l'\glslink{analisi-dinamica}{analisi dinamica}.
+\end{enumerate}
 
-L'organizzazione di ogni singola iterazione è scandita da una riunione, organizzata nel seguente modo:
+\subsection{Processi organizzativi}
+I processi organizzativi governano il modo in cui il gruppo lavora e si affiancano ai processi primari e di supporto per tutta la durata del progetto. In conformità con lo standard ISO/IEC 12207, il gruppo \textit{aLittleByte} applica i processi di gestione dei processi, infrastruttura, formazione e miglioramento dei processi.
 
+\subsubsection{Gestione dei processi}
+
+\paragraph{Scopo}
+Il processo di gestione dei processi deve assicurare che gli obiettivi di progetto siano raggiunti nel rispetto dei vincoli di costo, delle tempistiche stimate e dei requisiti concordati con la \glslink{committente-proponente}{proponente}, attraverso la \glslink{pianificazione}{pianificazione} delle attività, il monitoraggio dell'avanzamento, la prevenzione dei rischi e l'assegnazione trasparente di ruoli e responsabilità.
+
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{\glslink{pianificazione}{Pianificazione}:} Il team seleziona gli obiettivi operativi da raggiungere, scompone il lavoro in \textit{task} gestibili e li assegna ai vari componenti, cercando di bilanciare equamente i carichi di lavoro.
-    \item \textbf{\glslink{sprint}{Sprint} Review:} Si analizza lo \glslink{sprint}{sprint} appena concluso per la verifica concreta dei risultati prodotti. Costituisce l'occasione per valutare il lavoro completato, discutere le criticità tecniche emerse e misurare l'avanzamento effettivo rispetto al piano generale. In questa sede, il team deve obbligatoriamente confrontare le ore preventivate con le ore effettivamente consuntivate: gli scostamenti principali (sottostime, attività impreviste, dipendenze esterne) devono essere motivati e registrati, al fine di aggiornare sistematicamente le previsioni di costo a finire (EAC).
-    \item \textbf{\glslink{sprint}{Sprint} Retrospective:} Un momento di auto-valutazione finale, essenziale per il miglioramento continuo del gruppo. Il team si confronta in modo trasparente sulle dinamiche relazionali e metodologiche, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere in vista del ciclo successivo. In questa fase è obbligatorio revisionare e aggiornare il Registro \glslink{mitigazione-dei-rischi}{dei Rischi}: per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi durante lo \glslink{sprint}{sprint}, il gruppo deve documentare formalmente nel registro la causa scatenante, l'impatto effettivo sul progetto e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista e assegnare. 
+    \item \textbf{\glslink{github}{GitHub} \glslink{issue}{Issue}:} per la classificazione delle attività da svolgere e la loro assegnazione ai membri del gruppo.
+    \item \textbf{\glslink{github}{GitHub} Projects:} per la gestione del \textit{backlog} e del flusso Kanban tramite la board ``aLittleByte - \glslink{dashboard}{Dashboard}''.
+    \item \textbf{Google Fogli:} per la rendicontazione delle ore di lavoro di ciascun membro e di ciascun ruolo.
+    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto}:} per la registrazione di \glslink{preventivo}{preventivi}, \glslink{consuntivo}{consuntivi} e \glslink{analisi-dei-rischi}{analisi dei rischi}.
+    \item \textbf{\glslink{discord}{Discord}:} per lo svolgimento delle riunioni interne da remoto.
 \end{itemize}
 
-\paragraph{Gestione del Flusso di Lavoro tramite Kanban}
-Per garantire un controllo visivo e immediato sullo stato di avanzamento delle singole \glslink{issue}{Issue} associate al progetto, il gruppo gestisce i task tramite la board \glslink{github}{GitHub} Projects ''aLittleByte - \glslink{dashboard}{Dashboard}''.
-La bacheca è modellata secondo i principi Kanban e si articola nelle seguenti colonne operative:
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item \glslink{pianificazione}{Pianificazione} dell'iterazione.
+    \item Esecuzione e controllo.
+    \item Revisione e valutazione.
+    \item Conclusione dell'iterazione.
+\end{enumerate}
+
+Il gruppo adotta un approccio \glslink{agile}{iterativo}, suddividendo il ciclo di vita del progetto in \glslink{sprint}{Sprint} di durata fissa di due settimane. Le quattro attività elencate scandiscono ogni iterazione; i paragrafi successivi alle relative procedure normano gli elementi trasversali al processo, ovvero ruoli, coordinamento e tracciamento.
+
+\paragraph{Pianificazione dell'iterazione}
+\begin{enumerate}
+    \item All'avvio di ogni \glslink{sprint}{Sprint} il gruppo si riunisce e assegna i ruoli che ciascun membro ricoprirà per l'intera durata dell'iterazione, ruotandoli rispetto all'iterazione precedente.
+    \item Il \glslink{responsabile}{Responsabile} seleziona dal \textit{backlog} gli obiettivi operativi dell'iterazione e li scompone in \textit{task} eseguibili singolarmente.
+    \item Il \glslink{responsabile}{Responsabile} apre una \textit{\glslink{issue}{Issue}} per ogni \textit{task}, la assegna a un membro bilanciando i carichi di lavoro e la colloca nella colonna \textit{Todo} della board.
+    \item Il \glslink{responsabile}{Responsabile} designa per ogni \textit{task} il \glslink{verificatore}{verificatore} che ne curerà la revisione, accertandosi che non coincida con l'assegnatario.
+    \item Il \glslink{responsabile}{Responsabile} compila nel \glslink{piano-di-progetto}{Piano di Progetto} il \glslink{preventivo}{preventivo} di periodo, indicando le ore previste per ruolo e i rischi attesi.
+\end{enumerate}
+
+\paragraph{Esecuzione e controllo}
+\begin{enumerate}
+    \item L'assegnatario sposta la propria \textit{\glslink{issue}{Issue}} nella colonna \textit{In Progress} nel momento in cui inizia a lavorarci.
+    \item L'assegnatario svolge il \textit{task} seguendo la procedura del processo pertinente e, in caso di difficoltà, chiede chiarimenti nella sezione commenti della \textit{\glslink{issue}{Issue}}.
+    \item L'assegnatario apre la \textit{\glslink{pull-request}{Pull Request}} al termine del lavoro e sposta la \textit{\glslink{issue}{Issue}} nella colonna \textit{In Review}.
+    \item Il \glslink{responsabile}{Responsabile} monitora l'avanzamento della board e ridistribuisce i \textit{task} qualora rilevi il rischio di superare le scadenze fissate.
+\end{enumerate}
+
+\subparagraph{Gestione del flusso di lavoro tramite Kanban}
+Per garantire un controllo visivo e immediato sullo stato di avanzamento delle \textit{\glslink{issue}{Issue}}, il gruppo gestisce i \textit{task} tramite la board \glslink{github}{GitHub} Projects ``aLittleByte - \glslink{dashboard}{Dashboard}'', modellata secondo i principi Kanban e articolata nelle seguenti colonne:
 \begin{itemize}
-    \item \textbf{Todo:} Task selezionati e pronti per essere affrontati nel ciclo di lavoro corrente.
-    \item \textbf{In Progress:} Attività su cui il team sta lavorando attivamente (le \glslink{issue}{issue} sono formalmente assegnate ai membri tramite il campo \textit{Assignee}).
-    \item \textbf{In Review:} Task completati nello sviluppo o nella stesura e attualmente in attesa di \textit{Peer Review} tramite l'approvazione della relativa \textit{\glslink{pull-request}{Pull Request}}.
-    \item \textbf{Done:} Lavoro verificato, approvato e unito definitivamente al \glslink{branch}{branch} principale.
+    \item \textbf{Todo:} \textit{task} selezionati e pronti per essere affrontati nel ciclo di lavoro corrente.
+    \item \textbf{In Progress:} attività su cui il team sta lavorando attivamente, con le \textit{\glslink{issue}{Issue}} formalmente assegnate tramite il campo \textit{Assignee}.
+    \item \textbf{In Review:} \textit{task} completati e in attesa di \textit{Peer Review} tramite l'approvazione della relativa \textit{\glslink{pull-request}{Pull Request}}.
+    \item \textbf{Done:} lavoro verificato, approvato e integrato definitivamente nel ramo principale.
 \end{itemize}
 
-\subsubsection{Ruoli}
+\paragraph{Revisione e valutazione}
+\begin{enumerate}
+    \item Al termine dell'iterazione il gruppo svolge la \glslink{sprint}{Sprint} Review, verificando i risultati prodotti e discutendo le criticità tecniche emerse.
+    \item Il \glslink{responsabile}{Responsabile} confronta le ore preventivate con quelle consuntivate e motiva nel \glslink{piano-di-progetto}{Piano di Progetto} gli scostamenti principali, quali sottostime, attività impreviste e dipendenze esterne.
+    \item Il \glslink{responsabile}{Responsabile} aggiorna le previsioni di costo a finire sulla base degli scostamenti rilevati.
+    \item Il gruppo svolge la \glslink{sprint}{Sprint} Retrospective, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere.
+    \item Il \glslink{responsabile}{Responsabile} revisiona il Registro dei Rischi documentando, per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi, la causa scatenante, l'impatto effettivo e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista, che deve essere assegnata a un membro.
+\end{enumerate}
 
-\paragraph{Responsabile}
-Il membro che assume il ruolo di \glslink{responsabile}{Responsabile} agisce come vero e proprio \textit{Project Manager} del gruppo. Ha la responsabilità di coordinare il lavoro del team, pianificare le iterazioni di sviluppo, ottimizzare l'uso delle risorse e fungere da referente principale per le comunicazioni ufficiali con l'azienda \glslink{committente-proponente}{proponente} e il corpo docente.
+\paragraph{Conclusione dell'iterazione}
+Il gruppo adotta la seguente \textit{Definition of Done}: un'attività è conclusa quando la relativa \textit{\glslink{pull-request}{Pull Request}} è stata approvata da un \glslink{verificatore}{verificatore} diverso dall'assegnatario e integrata nel ramo principale. La procedura di chiusura è la seguente:
 
-Dal punto di vista strettamente operativo, il \glslink{responsabile}{Responsabile} si fa carico di distribuire e assegnare i compiti (tramite le \textit{\glslink{issue}{Issue}}) ai vari componenti del gruppo. Inoltre, è sua competenza diretta la stesura e il costante aggiornamento dei seguenti documenti:
+\begin{enumerate}
+    \item L'assegnatario registra nel foglio di rendicontazione le ore effettivamente impiegate sul \textit{task}.
+    \item Il \glslink{verificatore}{verificatore} che ha approvato la \textit{\glslink{pull-request}{Pull Request}} registra a propria volta le ore impiegate nell'attività di verifica.
+    \item L'assegnatario chiude la \textit{\glslink{issue}{Issue}} spostandola nella colonna \textit{Done} ed elimina il \glslink{branch}{branch} di lavoro.
+    \item Il \glslink{responsabile}{Responsabile} compila nel \glslink{piano-di-progetto}{Piano di Progetto} il \glslink{consuntivo}{consuntivo} di periodo e riporta nel \textit{backlog} i \textit{task} non completati.
+\end{enumerate}
 
+\paragraph{Ruoli}
+Durante una medesima iterazione un membro può assumere più ruoli, a condizione che ciò non generi conflitti d'interesse: in particolare, nessuno può verificare un artefatto che ha redatto o sviluppato. I ruoli previsti sono riportati di seguito in ordine alfabetico.
+
+\subparagraph{Amministratore}
+L'\glslink{amministratore}{Amministratore} è la figura di supporto metodologico e tecnologico del team e deve garantire che il gruppo possa procedere con le attività senza impedimenti di natura tecnica o organizzativa. Nello specifico deve:
 \begin{itemize}
-    \item \textbf{Verbali (Interni ed Esterni)}
-    \item \textbf{\glslink{diario-di-bordo}{Diario di Bordo}}
-    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto}}
-    \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}}
+    \item gestire gli ambienti di lavoro e mantenere operativa l'infrastruttura descritta nel processo di infrastruttura;
+    \item supervisionare e aggiornare periodicamente i software e i canali adottati per la comunicazione e la collaborazione asincrona;
+    \item garantire la corretta applicazione delle procedure di \glslink{versioning}{versionamento} a tutti i file e i documenti prodotti;
+    \item curare la stesura, la revisione e l'aggiornamento delle presenti \glslink{norme-di-progetto}{Norme di Progetto}, mantenendole allineate alle reali necessità del gruppo;
+    \item misurare al termine di ogni \glslink{sprint}{Sprint} le metriche di processo e riportarle nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
 \end{itemize}
 
-\paragraph{Amministratore}
-L'\glslink{amministratore}{Amministratore} rappresenta la figura di supporto metodologico e tecnologico del team. Il suo scopo principale è definire, ottimizzare e mantenere sempre operativi i processi e gli strumenti di lavoro, assicurando che l'intero gruppo possa procedere con le attività in modo fluido e senza impedimenti di natura tecnica o organizzativa. 
-
-Oltre a monitorare le scadenze amministrative e a fornire supporto costante ai colleghi, l'\glslink{amministratore}{Amministratore} si fa carico delle seguenti responsabilità operative:
-
+\subparagraph{Analista}
+L'\glslink{analista}{Analista} è il punto di incontro tra le esigenze della \glslink{committente-proponente}{proponente} e il lavoro tecnico del team, e deve trasformare le richieste in requisiti chiari, completi e privi di ambiguità. Nello specifico deve:
 \begin{itemize}
-    \item \textbf{Gestione degli ambienti di lavoro}
-    
-    \item \textbf{Manutenzione degli strumenti:} Supervisionare e aggiornare periodicamente i software e i canali adottati dal gruppo per la comunicazione e la collaborazione asincrona.
-    
-    \item \textbf{Controllo della configurazione:} Garantire la corretta e rigorosa applicazione delle procedure di versionamento per tutti i file e i documenti prodotti dal team.
-    
-    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto}:} Curare la stesura, la revisione e il continuo aggiornamento del presente documento (\textit{\glslink{norme-di-progetto}{Norme di Progetto}}), assicurandosi che le regole interne e il \textit{\glslink{way-of-working-wow}{Way of Working}} siano sempre allineati alle reali necessità del gruppo.
+    \item redigere e mantenere aggiornata l'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, catalogando casi d'uso e specifiche del progetto;
+    \item interfacciarsi con la \glslink{committente-proponente}{proponente} per risolvere incertezze, chiedere chiarimenti e concordare variazioni ai requisiti;
+    \item collaborare con \glslink{progettista}{progettisti} e \glslink{programmatore}{programmatori} affinché le specifiche siano interpretate correttamente e implementate senza deviazioni.
 \end{itemize}
 
-\paragraph{Progettista}
-
-Il \glslink{progettista}{Progettista} è la mente tecnica dietro alla struttura del prodotto software. Il suo compito principale è ideare l'architettura del sistema, assicurandosi che sia in grado di soddisfare tutti i requisiti (sia funzionali che di qualità) concordati con il \glslink{committente-proponente}{proponente}. Lavora a stretto contatto con il resto del gruppo per trasformare le richieste astratte in soluzioni pratiche, efficienti e facili da mantenere nel tempo.
-
-Nello specifico, chi ricopre questo ruolo ha la responsabilità di:
-
+\subparagraph{Programmatore}
+Il \glslink{programmatore}{Programmatore} deve tradurre l'architettura e le specifiche definite dal \glslink{progettista}{Progettista} in codice funzionante, pulito ed efficiente. Nello specifico deve:
 \begin{itemize}
-    \item Valutare e decidere quali linguaggi, \textit{framework} e strumenti tecnici sono più idonei per la realizzazione del progetto.
-
-    \item \textbf{Disegnare l'architettura:} Definire come sarà strutturato il sistema a livello generale, individuando i macro-componenti e il modo in cui dovranno comunicare tra loro.
-
-    \item Supervisionare il lavoro di stesura del codice, assicurandosi che l'implementazione pratica rispetti le specifiche tecniche e non si allontani dall'idea progettuale di partenza.
-
-    \item A partire dalla fase \glslink{pb-product-baseline}{PB}, è sua competenza diretta la stesura e il costante aggiornamento dei seguenti documenti:
-    \begin{itemize}
-        \item \textbf{Specifica Tecnica}
-        \item \textbf{Manuale Utente}
-    \end{itemize}
+    \item scrivere il codice sorgente rispettando le norme stilistiche e gli standard di qualità definiti nel processo di sviluppo;
+    \item sviluppare ed eseguire i test previsti dal processo di verifica prima di sottoporre il proprio lavoro a revisione;
+    \item collaborare con il resto del team per individuare i difetti, correggere i \textit{bug} e implementare le nuove funzionalità in modo coerente con il resto del sistema.
 \end{itemize}
 
-\paragraph{Analista}
-
-L'\glslink{analista}{Analista} rappresenta il punto di incontro tra le esigenze dell'azienda \glslink{committente-proponente}{proponente} e il lavoro tecnico del team di sviluppo. Il suo compito principale è comprendere a fondo il problema, raccogliere le richieste e trasformarle in regole chiare, complete e ben definite, evitando qualsiasi ambiguità. In pratica, lavora per assicurarsi che tutti sappiano esattamente \textit{cosa} deve essere costruito, prima ancora di decidere \textit{come} farlo.
-
-Nello specifico, chi ricopre questo ruolo si fa carico di:
-
+\subparagraph{Progettista}
+Il \glslink{progettista}{Progettista} deve ideare l'architettura del sistema in modo che soddisfi i requisiti funzionali e di qualità concordati con la \glslink{committente-proponente}{proponente}. Nello specifico deve:
 \begin{itemize}
-    \item \textbf{Stesura dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}:} Redigere e mantenere costantemente aggiornato il documento che cataloga tutti i casi d'uso e le specifiche del progetto.
-    
-    \item \textbf{Gestione dei dubbi e delle modifiche:} Interfacciarsi direttamente con il \glslink{committente-proponente}{proponente} per risolvere eventuali incertezze, chiedere chiarimenti o concordare variazioni ai requisiti iniziali.
-    
-    \item \textbf{Supporto al team:} Collaborare con i progettisti e i programmatori per garantire che le specifiche scritte vengano interpretate nel modo corretto e implementate senza deviare dagli obiettivi concordati.
+    \item valutare e decidere linguaggi, \textit{framework} e strumenti tecnici più idonei alla realizzazione del progetto;
+    \item definire la struttura del sistema individuando i macro-componenti e le modalità di comunicazione tra essi;
+    \item supervisionare la stesura del codice, accertando che l'implementazione rispetti le specifiche tecniche;
+    \item redigere e mantenere aggiornati, a partire dalla fase \glslink{pb-product-baseline}{PB}, la \textit{Specifica Tecnica} e il \textit{Manuale Utente}.
 \end{itemize}
 
-\paragraph{Programmatore}
-
-Il \glslink{programmatore}{Programmatore} è la figura operativa che materialmente "dà vita" al prodotto software. Il suo compito principale è tradurre l'architettura e le specifiche pensate dal \glslink{progettista}{Progettista} in codice reale e funzionante. Lavora con l'obiettivo di produrre un software non solo corretto, ma anche pulito, efficiente e facile da mantenere o aggiornare in futuro.
-
-Nello specifico, chi ricopre questo ruolo si fa carico di:
-
+\subparagraph{Responsabile}
+Il \glslink{responsabile}{Responsabile} agisce come \textit{Project Manager} del gruppo e deve coordinare il team, pianificare le iterazioni, ottimizzare l'uso delle risorse e rappresentare il gruppo verso la \glslink{committente-proponente}{proponente} e il corpo docente. Nello specifico deve:
 \begin{itemize}
-    \item \textbf{Stesura del codice:} Scrivere il codice sorgente rispettando rigorosamente le norme stilistiche e gli standard di qualità definiti dal gruppo.
-    
-    \item \textbf{Testing e collaudo preliminare:} Sviluppare ed eseguire i test per verificare che le singole porzioni di codice si comportino come previsto e garantiscano un'elevata affidabilità.
-    
-    \item \textbf{Risoluzione dei problemi:} Lavorare a stretto contatto con il resto del team per individuare i difetti, correggere i \textit{bug} tecnici e implementare nuove funzionalità in modo armonico e coerente con il resto del sistema.
+    \item distribuire e assegnare i compiti tramite le \textit{\glslink{issue}{Issue}}, secondo la procedura di \glslink{pianificazione}{pianificazione} dell'iterazione;
+    \item monitorare l'avanzamento del lavoro e intervenire quando le misurazioni evidenzino scostamenti dal \glslink{piano-di-progetto}{Piano di Progetto};
+    \item approvare i documenti destinati all'esterno, registrando l'approvazione nel \textit{Registro delle modifiche};
+    \item redigere e mantenere aggiornati i verbali interni ed esterni, il \glslink{diario-di-bordo}{Diario di Bordo}, il \glslink{piano-di-progetto}{Piano di Progetto} e il \glslink{piano-di-qualifica}{Piano di Qualifica}.
 \end{itemize}
 
-\paragraph{Verificatore}
-
-Il \glslink{verificatore}{Verificatore} è il "garante della qualità" all'interno del team. Il suo compito è assicurarsi che ogni elemento prodotto, dal singolo documento di testo fino al codice finale, rispetti fedelmente i requisiti stabiliti e gli standard prefissati.
-
-Nello specifico, chi ricopre questo ruolo si fa carico di:
-
+\subparagraph{Verificatore}
+Il \glslink{verificatore}{Verificatore} è il garante della qualità e deve accertare che ogni elemento prodotto, documentale o software, rispetti i requisiti stabiliti e gli standard prefissati. Nello specifico deve:
 \begin{itemize}
-    \item \textbf{Revisione documentale:} Leggere e controllare i documenti redatti dagli altri membri del team (tramite le \textit{\glslink{pull-request}{Pull Request}}), assicurandosi che siano corretti, completi e privi di ambiguità.
-    
-    \item \textbf{Esecuzione dei collaudi:} Pianificare e condurre le varie fasi di \textit{test} sul software (come i collaudi funzionali, di integrazione e di sistema) per verificare il corretto comportamento delle funzionalità.
-    
-    \item \textbf{Segnalazione e tracciamento:} Registrare accuratamente i risultati delle verifiche, segnalando al più presto i difetti o le non conformità agli sviluppatori o agli analisti per permetterne la correzione.
-    
-    \item \textbf{Miglioramento continuo:} Individuare eventuali punti critici o inefficienze nel modo in cui il team lavora, proponendo soluzioni pratiche per ottimizzare i processi operativi e di sviluppo.
+    \item revisionare tramite \textit{\glslink{pull-request}{Pull Request}} i documenti redatti dagli altri membri, accertandone correttezza, completezza e assenza di ambiguità;
+    \item pianificare e condurre i test previsti dal processo di verifica sul software prodotto;
+    \item registrare gli esiti delle verifiche e segnalare tempestivamente difetti e non conformità agli autori;
+    \item individuare i punti critici del \glslink{way-of-working-wow}{Way of Working} e proporre iniziative di miglioramento.
 \end{itemize}
 
-\subsubsection{Tracciamento delle Ore}
+\paragraph{Coordinamento}
+Il coordinamento avviene tramite riunioni pianificate e canali di comunicazione differenziati per formalità e urgenza.
 
-Il gruppo \textit{aLittleByte} adotta un sistema di rendicontazione oraria basato su un \textbf{foglio di calcolo condiviso su Google Fogli}, accessibile a tutti i membri del team.
-
-\paragraph{Strumento}
-Le ore vengono registrate all'interno di un foglio Google Fogli condiviso, organizzato per membro e per ruolo ricoperto. Per ciascun task svolto, il membro indica le ore previste e le ore effettivamente impiegate, consentendo il calcolo automatico degli scostamenti e del saldo ore rimanente.
-
-\paragraph{Frequenza di aggiornamento}
-Ogni membro del gruppo aggiorna il proprio registro orario \textbf{entro la fine di ogni settimana}. Il \glslink{responsabile}{Responsabile} di turno effettua una revisione complessiva del bilancio orario al \textbf{termine di ogni \glslink{sprint}{Sprint}}, verificando che i dati siano completi e coerenti con le attività svolte.
-
-\paragraph{Catalogazione delle ore}
-Le ore sono catalogate secondo due dimensioni:
+\subparagraph{Riunioni interne}
 \begin{itemize}
-    \item \textbf{Per ruolo:} \glslink{responsabile}{Responsabile}, \glslink{amministratore}{Amministratore}, \glslink{analista}{Analista}, \glslink{progettista}{Progettista}, \glslink{programmatore}{Programmatore}, \glslink{verificatore}{Verificatore}.
-    \item \textbf{Per membro:} ciascun componente del gruppo registra separatamente le ore svolte in ogni ruolo, permettendo di tenere traccia del monte ore residuo individuale per ciascuna figura professionale.
+    \item \textbf{Incontro settimanale:} il gruppo si riunisce una volta alla settimana, indicativamente il lunedì, per fare il punto della situazione, organizzare i \textit{task} dei giorni successivi e individuare soluzioni condivise agli ostacoli emersi.
+    \item \textbf{Riunioni straordinarie:} in presenza di urgenze, \textit{bug} bloccanti o decisioni tecniche complesse, i membri interessati possono convocare incontri aggiuntivi.
+    \item \textbf{Piattaforma:} le riunioni si svolgono prevalentemente online sui canali vocali di \textbf{\glslink{discord}{Discord}}.
+    \item \textbf{Verbalizzazione:} al termine di ogni incontro deve essere redatto un \glslink{verbale-interno}{Verbale Interno} secondo la struttura definita nella sezione~\ref{sec:documentazione}.
 \end{itemize}
 
-\paragraph{Monitoraggio}
-Il \glslink{responsabile}{Responsabile} ha il compito di controllare, a fine \glslink{sprint}{Sprint}, che nessun membro abbia esaurito prematuramente le ore assegnate a un determinato ruolo. In caso di criticità, provvede a ridistribuire i task nelle iterazioni successive.
+\subparagraph{Riunioni esterne}
+Gli incontri con la \glslink{committente-proponente}{proponente} si tengono in via telematica su \textbf{Google Meet} con cadenza bisettimanale. A conclusione di ogni incontro il gruppo redige un \glslink{verbale-esterno}{Verbale Esterno} che riepiloga le tematiche affrontate, le decisioni prese e le azioni concordate; il documento viene poi inoltrato al referente aziendale per il controllo incrociato e, previa conferma, sottoposto alla sua firma per approvazione definitiva.
 
-\subsubsection{Tracciamento delle Azioni}
-
-Al termine di ogni riunione, il membro designato redige il verbale seguendo la struttura definita nella sezione~\ref{sec:documentazione}. Ogni compito emerso viene immediatamente trasformato in una \textit{\glslink{issue}{Issue}} su \glslink{github}{GitHub} e assegnato al membro o ai membri incaricati. Qualora il componente assegnato riscontri difficoltà, può utilizzare la sezione commenti della \textit{\glslink{issue}{Issue}} per chiedere chiarimenti al resto del team.
-
-\subsubsection{Comunicazione}
-\paragraph{Comunicazioni Interne}
-Le comunicazioni interne avvengono tramite: 
+\subparagraph{Comunicazioni interne}
 \begin{itemize}
-    \item \textbf{WhatsApp:} Viene utilizzato per le comunicazioni rapide e coordinamento tra i membri del gruppo.
-    \item \textbf{Discussioni \glslink{github}{GitHub}:} Viene utilizzato per discussioni all'interno delle \textit{\glslink{issue}{Issue}} e delle \textit{\glslink{pull-request}{Pull Request}}, per garantire il tracciamento delle decisioni. Sono utili in quanto permettono di comunicare solo con i membri del gruppo relativi alla discussione. 
+    \item \textbf{WhatsApp:} per le comunicazioni rapide e il coordinamento tra i membri del gruppo.
+    \item \textbf{Discussioni su \glslink{github}{GitHub}:} per le discussioni all'interno delle \textit{\glslink{issue}{Issue}} e delle \textit{\glslink{pull-request}{Pull Request}}, in modo da mantenere tracciate le decisioni e coinvolgere solo i membri interessati.
 \end{itemize}
 
-\paragraph{Comunicazioni Esterne}
-
-Per interagire con l'azienda \glslink{committente-proponente}{proponente} e con il corpo docente, il gruppo ha definito dei canali di comunicazione specifici, differenziati in base al livello di formalità e all'urgenza della richiesta:
-
+\subparagraph{Comunicazioni esterne}
 \begin{itemize}
-    \item \textbf{E-mail:} Rappresenta il canale ufficiale per le comunicazioni formali, l'invio della documentazione e gli aggiornamenti periodici sullo stato di avanzamento del progetto. Tutte le comunicazioni via posta elettronica vengono gestite tramite l'indirizzo ufficiale del gruppo (\url{alittlebyte.swe@gmail.com}).
-    
-    \item \textbf{Telegram:} Impiegato per scambi di messaggi rapidi, chiarimenti immediati e per il coordinamento logistico direttamente con il referente dell'azienda \glslink{committente-proponente}{proponente}.
+    \item \textbf{E-mail:} canale ufficiale per le comunicazioni formali, l'invio della documentazione e gli aggiornamenti sullo stato di avanzamento; tutte le comunicazioni sono gestite tramite l'indirizzo \url{alittlebyte.swe@gmail.com}.
+    \item \textbf{Telegram:} per scambi rapidi, chiarimenti immediati e coordinamento logistico con il referente aziendale.
 \end{itemize}
 
-\subsubsection{Riunioni}
+Le comunicazioni esterne sono di competenza del \glslink{responsabile}{Responsabile}, che è l'unico autorizzato a impegnare il gruppo verso la \glslink{committente-proponente}{proponente}.
 
-\paragraph{Riunioni Interne}
-Gli incontri interni del gruppo \textit{aLittleByte} sono pianificati in modo metodico per mantenere un coordinamento efficace e assicurare un avanzamento costante del progetto. Il team ha strutturato i propri momenti di confronto secondo queste modalità:
+\paragraph{Tracciamento delle ore}
+Il gruppo adotta un sistema di rendicontazione oraria basato su un foglio di calcolo condiviso su \textbf{Google Fogli}, accessibile a tutti i membri e organizzato per membro e per ruolo ricoperto. La procedura è la seguente:
 
+\begin{enumerate}
+    \item Per ciascun \textit{task} svolto il membro indica le ore previste e le ore effettivamente impiegate, consentendo il calcolo automatico degli scostamenti e del saldo ore rimanente.
+    \item Ogni membro aggiorna il proprio registro orario entro la fine di ogni settimana.
+    \item Il \glslink{responsabile}{Responsabile} revisiona il bilancio orario al termine di ogni \glslink{sprint}{Sprint}, verificando che i dati siano completi e coerenti con le attività svolte.
+    \item Il \glslink{responsabile}{Responsabile} controlla che nessun membro abbia esaurito prematuramente le ore assegnate a un determinato ruolo e, in caso di criticità, ridistribuisce i \textit{task} nelle iterazioni successive.
+\end{enumerate}
+
+Le ore sono catalogate secondo due dimensioni: \textbf{per ruolo}, tra \glslink{responsabile}{Responsabile}, \glslink{amministratore}{Amministratore}, \glslink{analista}{Analista}, \glslink{progettista}{Progettista}, \glslink{programmatore}{Programmatore} e \glslink{verificatore}{Verificatore}; \textbf{per membro}, in modo che sia sempre noto il monte ore residuo individuale per ciascuna figura professionale. Le ore dedicate alla formazione sono registrate a carico del ruolo per cui la formazione è funzionale.
+
+\paragraph{Tracciamento delle azioni}
+\begin{enumerate}
+    \item Al termine di ogni riunione il membro designato redige il verbale secondo la struttura definita nella sezione~\ref{sec:documentazione}.
+    \item Il \glslink{redattore}{redattore} del verbale converte ogni compito emerso in una \textit{\glslink{issue}{Issue}} su \glslink{github}{GitHub}, assegnandola ai membri incaricati.
+    \item Il \glslink{redattore}{redattore} del verbale riporta nella To-Do List il collegamento diretto a ciascuna \textit{\glslink{issue}{Issue}} creata, in modo che ogni decisione risulti collegata all'attività che la attua.
+    \item L'assegnatario che riscontri difficoltà nello svolgimento del compito utilizza la sezione commenti della \textit{\glslink{issue}{Issue}} per chiedere chiarimenti al resto del team.
+\end{enumerate}
+
+\subsubsection{Infrastruttura}
+
+\paragraph{Scopo}
+Il processo di infrastruttura deve istituire e mantenere operativo l'insieme degli strumenti che sostengono tutti gli altri processi di progetto. Il gruppo concentra l'infrastruttura su un numero ridotto di strumenti, privilegiando quelli integrati nativamente in \glslink{github}{GitHub}, in modo da limitare la dispersione delle informazioni e ridurre il costo di apprendimento.
+
+\paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{Incontro settimanale:} Di norma, il gruppo si riunisce una volta alla settimana (indicativamente il lunedì). Questo momento di allineamento serve per fare il punto della situazione, organizzare i \textit{task} per i giorni successivi e cercare soluzioni condivise agli ostacoli emersi durante il lavoro individuale.
-    
-    \item \textbf{Riunioni straordinarie:} Oltre all'appuntamento fisso, qualora sorgano urgenze, \textit{bug} bloccanti o si debbano prendere decisioni tecniche complesse, i membri interessati possono convocare agilmente degli incontri.
-    
-    \item \textbf{Luoghi e piattaforme:} Per comodità organizzativa e per ottimizzare i tempi, le riunioni si svolgono prevalentemente online utilizzando i canali vocali della piattaforma \textbf{\glslink{discord}{Discord}}.
-    
-    \item \textbf{Verbalizzazione:} A garanzia della massima trasparenza operativa, al termine di ogni incontro viene redatto un \glslink{verbale-interno}{Verbale Interno}.
+    \item \textbf{\glslink{github}{GitHub} e \glslink{git}{Git}:} per il versionamento, la collaborazione e l'automazione.
+    \item \textbf{\glslink{github}{GitHub} Actions e \glslink{github}{GitHub} Pages:} per l'esecuzione delle automazioni e la pubblicazione del sito documentale.
+    \item \textbf{\glslink{docker-compose}{Docker Compose}:} per la replicabilità dell'ambiente di sviluppo del prodotto.
 \end{itemize}
 
-\paragraph{Riunioni Esterne}
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Implementazione dell'infrastruttura.
+    \item Creazione dell'infrastruttura.
+    \item Manutenzione dell'infrastruttura.
+\end{enumerate}
 
-I colloqui con l'azienda \glslink{committente-proponente}{proponente} sono essenziali per garantire il continuo allineamento sugli obiettivi e raccogliere \textit{feedback} sul lavoro svolto.
-Tutte le sedute si tengono in via telematica sfruttando la piattaforma \textbf{Google Meet}. A conclusione di ogni colloquio, il team si occupa di redigere un \glslink{verbale-esterno}{Verbale Esterno} formale che riepiloga puntualmente le tematiche affrontate, le decisioni prese e le future azioni concordate. Tale documento viene infine inoltrato al referente aziendale per un controllo incrociato e, previa conferma di aderenza con quanto discusso, sottoposto alla sua firma per approvazione definitiva.
+\paragraph{Implementazione dell'infrastruttura}
+L'infrastruttura del gruppo è costituita dalle quattro componenti descritte nei sottoparagrafi seguenti, ciascuna a servizio di un insieme definito di processi.
 
-\subsubsection{Processo di Miglioramento Continuo}
-In conformità con i principi agili e gli standard di qualità adottati, il gruppo aLittleByte applica sistematicamente un ciclo di miglioramento continuo del proprio \textit{\glslink{way-of-working-wow}{Way of Working}}. Al termine di ogni iterazione o fase di progetto, il team analizza le misurazioni raccolte nel cruscotto di valutazione all'interno del \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}}. 
+\subparagraph{Infrastruttura di versionamento e collaborazione}
+L'intera documentazione di progetto è ospitata nel \glslink{repository}{repository} \texttt{aLittleByte-19/Documentazione} dell'organizzazione \glslink{github}{GitHub} del gruppo. Gli elementi principali sono:
+\begin{itemize}
+    \item \textbf{Ramo \texttt{main}:} contiene esclusivamente contenuti verificati e rappresenta la fonte di verità del progetto. È protetto: nessun membro può effettuare \textit{push} diretti e ogni modifica deve transitare da una \textit{\glslink{pull-request}{Pull Request}} approvata.
+    \item \textbf{Ramo \texttt{develop}:} ramo di integrazione del codice del prodotto, su cui confluiscono i rami di lavoro dei singoli \glslink{programmatore}{programmatori} prima del consolidamento. L'allineamento periodico di questo ramo è un'attività pianificata e tracciata come qualsiasi altro \textit{task}.
+    \item \textbf{\glslink{issue}{Issue} e \glslink{pull-request}{Pull Request}:} costituiscono rispettivamente l'\textit{issue tracking system} e lo strumento di revisione del gruppo, secondo le modalità definite nel processo di gestione della configurazione.
+    \item \textbf{\glslink{github}{GitHub} Projects:} la board ``aLittleByte - \glslink{dashboard}{Dashboard}'' raccoglie le \glslink{issue}{Issue} di progetto e ne governa il flusso Kanban.
+\end{itemize}
 
-Qualora emergano metriche sotto la soglia di accettabilità o inefficienze operative, il gruppo elabora specifiche ``Iniziative di miglioramento'', documentandole nel \glslink{piano-di-qualifica}{Piano di Qualifica} stesso. Tali iniziative non rimangono semplici osservazioni, ma vengono obbligatoriamente recepite e formalizzate all'interno delle presenti \textbf{\glslink{norme-di-progetto}{Norme di Progetto}} sotto forma di nuove regole operative e procedurali per gli \glslink{sprint}{sprint} successivi. Questo meccanismo garantisce che il metodo di lavoro si evolva costantemente, riducendo i rischi, correggendo le anomalie e massimizzando l'efficienza complessiva del team.
+\subparagraph{Infrastruttura documentale}
+\begin{itemize}
+    \item \textbf{\glslink{latex}{LaTeX}:} tutti i documenti sono sorgenti \texttt{.tex} versionati insieme al resto del progetto. I loghi e gli asset grafici condivisi risiedono in \texttt{.\glslink{github}{github}/site-src/assets}, così che una modifica all'identità visiva si propaghi automaticamente a tutti i documenti alla successiva compilazione.
+    \item \textbf{Python:} lo script \texttt{.\glslink{github}{github}/site-src/update\_index.py} genera la struttura statica del sito documentale a partire dall'alberatura del \glslink{repository}{repository}, evitando la manutenzione manuale delle pagine HTML; la generazione delle anteprime dei PDF si appoggia all'utilità \texttt{poppler-utils}.
+    \item \textbf{Applicazione del \glslink{glossario}{Glossario}:} il \glslink{glossario}{Glossario} è pubblicato anche come applicazione \glslink{angular}{Angular} contenuta in \texttt{.\glslink{github}{github}/glossary-app}, che ne consente la consultazione e la ricerca dal browser. I dati risiedono nel file \texttt{glossary.json} e sono sottoposti a validazione automatica prima di ogni rilascio, per impedire la pubblicazione di voci malformate o di ancore non risolvibili dai collegamenti presenti nei documenti.
+    \item \textbf{\glslink{github}{GitHub} Pages:} ospita il sito del gruppo, che rende disponibile agli \glslink{stakeholder}{stakeholder} l'ultima versione integrata di ogni documento.
+\end{itemize}
+
+\subparagraph{Infrastruttura di sviluppo}
+\begin{itemize}
+    \item \textbf{Ambiente di esecuzione:} l'applicativo viene eseguito localmente tramite \glslink{docker-compose}{Docker Compose} con i servizi \glslink{nginx}{Nginx}, \glslink{php-fpm}{PHP-FPM}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis} e \glslink{minio}{MinIO}, nella stessa composizione utilizzata per i \glslink{test-di-sistema}{test di sistema}.
+    \item \textbf{Framework applicativi:} il backend è realizzato con \glslink{laravel}{Laravel} 12 e le interfacce amministrative con \glslink{filament}{Filament}; le funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} sono erogate tramite \glslink{amazon-bedrock}{Amazon Bedrock}.
+    \item \textbf{Strumenti di qualità:} \glslink{laravel}{Laravel} Pint, Larastan e \glslink{pest}{Pest} \glslink{php}{PHP}, secondo le soglie e le procedure fissate nel processo di verifica.
+\end{itemize}
+
+\subparagraph{Infrastruttura di comunicazione}
+Gli strumenti adottati sono \textbf{\glslink{discord}{Discord}} per le riunioni interne, \textbf{WhatsApp} per il coordinamento rapido, \textbf{Google Meet} e la casella \url{alittlebyte.swe@gmail.com} per i rapporti con la \glslink{committente-proponente}{proponente}, \textbf{Telegram} per i chiarimenti immediati con il referente aziendale e \textbf{Google Fogli} per la rendicontazione oraria. Le finalità e i vincoli d'uso di ciascun canale sono definiti nel paragrafo sul coordinamento.
+
+\paragraph{Creazione dell'infrastruttura}
+\begin{enumerate}
+    \item Chi rileva la necessità di un nuovo strumento o di una nuova automazione apre una \textit{\glslink{issue}{Issue}} che ne descrive la finalità e i processi che ne beneficerebbero.
+    \item Il gruppo delibera l'adozione dello strumento in riunione interna e la decisione è registrata nel relativo \glslink{verbale-interno}{verbale interno}.
+    \item L'\glslink{amministratore}{Amministratore} configura lo strumento e ne documenta l'uso all'interno delle presenti \glslink{norme-di-progetto}{Norme di Progetto} prima che il gruppo inizi a utilizzarlo.
+    \item L'\glslink{amministratore}{Amministratore} integra la modifica tramite \textit{\glslink{pull-request}{Pull Request}} verificata, come previsto per ogni altro artefatto di progetto.
+\end{enumerate}
+
+\paragraph{Manutenzione dell'infrastruttura}
+\begin{enumerate}
+    \item L'\glslink{amministratore}{Amministratore} verifica periodicamente il corretto funzionamento delle automazioni e degli strumenti adottati.
+    \item Chi riscontra un malfunzionamento apre una \textit{\glslink{issue}{Issue}} assegnata all'\glslink{amministratore}{Amministratore}, descrivendo l'effetto del guasto sulle attività in corso.
+    \item L'\glslink{amministratore}{Amministratore} interviene con priorità sui malfunzionamenti che bloccano il lavoro degli altri membri, in particolare su quelli che impediscono il rilascio della documentazione.
+    \item Le richieste di adeguamento emerse durante la \glslink{sprint}{Sprint} Retrospective sono trattate come le altre iniziative di miglioramento definite nel processo di miglioramento dei processi.
+\end{enumerate}
+
+\subsubsection{Formazione}
+
+\paragraph{Scopo}
+Il processo di formazione deve garantire che ogni membro acquisisca le competenze necessarie a ricoprire i ruoli previsti dal \glslink{way-of-working-wow}{Way of Working}, evitando che la conoscenza di uno strumento resti concentrata in una sola persona e diventi un \glslink{rischio}{rischio} per l'avanzamento del progetto.
+
+\paragraph{Strumenti a supporto}
+\begin{itemize}
+    \item \textbf{Documentazione ufficiale delle tecnologie adottate:} fonte primaria di studio, integrata da risorse divulgative solo quando risulti carente sul piano pratico.
+    \item \textbf{Riunioni interne su \glslink{discord}{Discord}:} sede in cui le conoscenze acquisite vengono condivise con il resto del gruppo.
+    \item \textbf{Foglio di rendicontazione oraria:} strumento con cui le ore di formazione vengono registrate e rese visibili nel bilancio dello \glslink{sprint}{Sprint}.
+\end{itemize}
+
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Individuazione delle competenze necessarie.
+    \item Raccolta del materiale di formazione.
+    \item Attuazione della formazione.
+\end{enumerate}
+
+\paragraph{Individuazione delle competenze necessarie}
+A partire dai requisiti raccolti nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} e dalle scelte tecnologiche formalizzate dal \glslink{progettista}{Progettista}, il gruppo ha individuato i seguenti ambiti di formazione:
+
+\begin{itemize}
+    \item \textbf{Documentazione e automazioni:} \glslink{latex}{LaTeX} per la stesura dei documenti, Python per gli script di generazione del sito, \glslink{angular}{Angular} per l'applicazione del \glslink{glossario}{Glossario}, \glslink{git}{Git} e \glslink{github}{GitHub} (\glslink{issue}{Issue}, \glslink{pull-request}{Pull Request}, Projects, Actions, Pages) per il versionamento e le automazioni.
+    \item \textbf{Progettazione:} UML per i \glslink{diagramma-delle-classi-uml}{diagrammi delle classi} e dei casi d'uso, \glslink{modello-c4}{modello C4} per la descrizione dell'architettura su più livelli di astrazione.
+    \item \textbf{Sviluppo:} \glslink{php}{PHP} con lo standard PSR-12, \glslink{laravel}{Laravel} 12 e \glslink{filament}{Filament} per l'applicativo, \glslink{postgresql}{PostgreSQL} per la persistenza, \glslink{redis}{Redis} per code e cache, \glslink{minio}{MinIO} come object storage e \glslink{docker-compose}{Docker Compose} per l'orchestrazione dell'ambiente locale.
+    \item \textbf{Verifica:} \glslink{pest}{Pest} \glslink{php}{PHP} per i test di unità e di integrazione, Larastan e \glslink{laravel}{Laravel} Pint per l'\glslink{analisi-statica}{analisi statica} e la formattazione.
+    \item \textbf{Moduli di Intelligenza Artificiale:} \glslink{amazon-bedrock}{Amazon Bedrock} e i concetti relativi ai \glslink{llm-large-language-model}{Large Language Model}, alla costruzione dei \glslink{prompt}{prompt}, all'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e all'\glslink{entity-resolution}{Entity Resolution}, indispensabili per lo sviluppo dell'\glslink{ai-assistant-generativo}{AI Assistant Generativo} e dell'\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot}.
+\end{itemize}
+
+\paragraph{Raccolta del materiale di formazione}
+I riferimenti condivisi tra i membri del gruppo sono i seguenti:
+
+\begin{itemize}
+    \item \textbf{\glslink{laravel}{Laravel} e \glslink{filament}{Filament}:} \url{https://laravel.com/docs} e \url{https://filamentphp.com/docs}
+    \item \textbf{\glslink{php}{PHP} e PSR-12:} \url{https://www.php.net/docs.php} e \url{https://www.php-fig.org/psr/psr-12/}
+    \item \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}:} \url{https://pestphp.com/docs/installation}
+    \item \textbf{\glslink{postgresql}{PostgreSQL} e \glslink{redis}{Redis}:} \url{https://www.postgresql.org/docs/} e \url{https://redis.io/docs/latest/}
+    \item \textbf{\glslink{docker-compose}{Docker Compose} e \glslink{minio}{MinIO}:} \url{https://docs.docker.com/compose/} e \url{https://min.io/docs/minio/linux/index.html}
+    \item \textbf{\glslink{amazon-bedrock}{Amazon Bedrock}:} \url{https://docs.aws.amazon.com/bedrock/}
+    \item \textbf{\glslink{git}{Git} e \glslink{github}{GitHub}:} \url{https://git-scm.com/doc} e \url{https://docs.github.com/en}
+    \item \textbf{\glslink{latex}{LaTeX} e \glslink{angular}{Angular}:} \url{https://www.latex-project.org/help/documentation/} e \url{https://angular.dev/overview}
+    \item \textbf{\glslink{modello-c4}{Modello C4} e UML:} \url{https://c4model.com/} e \url{https://www.uml-diagrams.org/}
+\end{itemize}
+
+Chi individua una risorsa più efficace di quelle elencate è tenuto a segnalarla al gruppo, così che l'elenco resti aggiornato.
+
+\paragraph{Attuazione della formazione}
+La formazione avviene principalmente in modo asincrono e individuale, secondo la procedura seguente:
+
+\begin{enumerate}
+    \item Prima di assumere un ruolo nuovo in un'iterazione, il membro interessato richiede al \glslink{responsabile}{Responsabile} di riservare parte del proprio carico a un'attività di formazione, che viene pianificata e tracciata come una normale \textit{\glslink{issue}{Issue}}.
+    \item Il membro registra le ore dedicate allo studio a carico del ruolo per cui la formazione è funzionale, secondo la procedura di tracciamento delle ore.
+    \item Il membro che affronta per primo una tecnologia condivide con il gruppo, nella riunione interna successiva, i riferimenti utili e le difficoltà incontrate, così da abbattere il tempo di apprendimento per gli altri componenti.
+    \item Il gruppo riesamina il fabbisogno formativo durante la \glslink{sprint}{Sprint} Retrospective: se un ritardo o un difetto è attribuibile a una competenza insufficiente, viene pianificata un'attività di formazione mirata nell'iterazione successiva anziché la sola riassegnazione del \textit{task}.
+\end{enumerate}
+
+\subsubsection{Miglioramento dei processi}
+
+\paragraph{Scopo}
+Il processo di miglioramento deve consentire al gruppo di aumentare l'efficacia e l'efficienza del proprio \glslink{way-of-working-wow}{Way of Working} a ogni iterazione, traducendo le misurazioni raccolte in modifiche concrete alle procedure normate nel presente documento.
+
+\paragraph{Strumenti a supporto}
+\begin{itemize}
+    \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}:} contiene il cruscotto di valutazione con l'andamento delle metriche e la registrazione delle iniziative di miglioramento.
+    \item \textbf{\glslink{sprint}{Sprint} Retrospective:} sede in cui il gruppo analizza le inefficienze e delibera le azioni correttive.
+    \item \textbf{Presenti \glslink{norme-di-progetto}{Norme di Progetto}:} artefatto in cui ogni miglioramento deliberato deve essere formalizzato come regola operativa.
+\end{itemize}
+
+\paragraph{Attività previste}
+\begin{enumerate}
+    \item Valutazione dei processi.
+    \item Miglioramento dei processi.
+\end{enumerate}
+
+\paragraph{Valutazione dei processi}
+\begin{enumerate}
+    \item L'\glslink{amministratore}{Amministratore} presenta al gruppo, in occasione della \glslink{sprint}{Sprint} Retrospective, le misurazioni raccolte nel cruscotto di valutazione del \glslink{piano-di-qualifica}{Piano di Qualifica}.
+    \item Il gruppo individua le metriche che si collocano sotto la soglia di accettabilità e le inefficienze operative percepite ma non ancora misurate.
+    \item Il gruppo risale alla causa di ciascuna criticità, distinguendo i difetti di procedura da quelli di competenza o di strumento.
+\end{enumerate}
+
+\paragraph{Miglioramento dei processi}
+\begin{enumerate}
+    \item Il gruppo elabora per ogni criticità una specifica iniziativa di miglioramento e la documenta nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
+    \item L'\glslink{amministratore}{Amministratore} recepisce l'iniziativa nelle presenti \glslink{norme-di-progetto}{Norme di Progetto} sotto forma di nuova regola operativa o di modifica a una procedura esistente, aprendo la relativa \textit{\glslink{issue}{Issue}}.
+    \item La modifica alle \glslink{norme-di-progetto}{Norme di Progetto} segue le procedure del processo di documentazione, così che nessuna nuova regola entri in vigore senza essere stata verificata.
+    \item L'\glslink{amministratore}{Amministratore} misura nell'iterazione successiva l'effetto dell'iniziativa sulle metriche interessate e ne riporta l'esito nella Retrospective seguente.
+\end{enumerate}
+
+Questo meccanismo garantisce che le osservazioni emerse dalle retrospettive non restino semplici constatazioni, ma si traducano in norme vincolanti per gli \glslink{sprint}{Sprint} successivi.
+
 
 \section{Qualità del software}
 Con l'espressione ``qualità del software'' si indica la totalità delle proprietà di un'entità che concorrono a soddisfare le necessità degli utenti, siano esse dichiarate esplicitamente o sottintese. Tale valutazione si focalizza su due direttrici fondamentali: il valore del prodotto finito e l'efficacia del processo di realizzazione.
@@ -864,7 +1160,9 @@ Ogni metrica è descritta in termini di:
     \item \textbf{Unità di misura:} unità in cui il valore è espresso.
 \end{itemize}
 
-Le metriche di processo sono identificate dalla sigla \textbf{MPC} (Metrica di Processo e Controllo), mentre le metriche di prodotto dalla sigla \textbf{MPD} (Metrica di Prodotto).
+Le metriche di processo sono identificate dalla sigla \textbf{MPC} (Metrica di Processo e Controllo), seguita da un mnemonico che richiama il nome della metrica, mentre le metriche di prodotto sono identificate dalla sigla \textbf{MPD} (Metrica di Prodotto) seguita da un numero progressivo. Gli identificativi assegnati non devono essere modificati né riutilizzati, poiché sono richiamati dal cruscotto di valutazione del \glslink{piano-di-qualifica}{Piano di Qualifica} e dal tracciamento dei requisiti.
+
+Le metriche di processo sono raggruppate per processo misurato, secondo la medesima classificazione adottata nel capitolo sull'architettura dei processi. I processi dotati di metriche sono fornitura, sviluppo, documentazione, verifica, accertamento della qualità e gestione dei processi. I restanti processi normati, ovvero gestione della configurazione, validazione, infrastruttura, formazione e miglioramento dei processi, non hanno metriche dedicate: il loro andamento è osservato indirettamente attraverso le metriche dei processi che ne dipendono, in particolare tramite \textbf{MPC-QMS} per la conformità complessiva e \textbf{MPD01} per la copertura dei requisiti. Qualora una \glslink{sprint}{Sprint} Retrospective rilevi un'inefficienza non osservabile con le metriche esistenti, la definizione di una nuova metrica è trattata come iniziativa di miglioramento secondo la procedura del processo di miglioramento dei processi.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Metriche per la qualità di processo}
@@ -872,6 +1170,7 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Processi primari --- Fornitura}
+Le metriche seguenti misurano l'aderenza al \glslink{preventivo}{preventivo} e alle scadenze stabilite dall'attività di stima e \glslink{pianificazione}{pianificazione} delle risorse del processo di fornitura. I dati di ingresso sono i \glslink{preventivo}{preventivi} e i \glslink{consuntivo}{consuntivi} registrati dal \glslink{responsabile}{Responsabile} nel \glslink{piano-di-progetto}{Piano di Progetto} e le ore rilevate dal tracciamento delle ore.
 
 \paragraph{MPC-EV --- Earned Value}
 \begin{itemize}
@@ -961,6 +1260,7 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Processi primari --- Sviluppo}
+La metrica seguente misura la stabilità dell'esito dell'attività di analisi e tracciamento dei requisiti del processo di sviluppo. Il dato di ingresso è il numero di requisiti dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} rispetto alla \glslink{milestone}{baseline} precedente.
 
 \paragraph{MPC-RSI --- Requirements Stability Index}
 \begin{itemize}
@@ -972,6 +1272,7 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Processi di supporto --- Documentazione}
+Le metriche seguenti misurano la qualità redazionale dei documenti prodotti dal processo di documentazione e sono rilevate dal \glslink{verificatore}{Verificatore} durante l'attività di verifica e approvazione, prima che il documento passi allo stato \textit{Verificato}.
 
 \paragraph{MPC-IG --- Indice di Gulpease}
 \begin{itemize}
@@ -992,6 +1293,7 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Processi di supporto --- Verifica}
+Le metriche seguenti misurano l'estensione e l'esito dell'attività di \glslink{analisi-dinamica}{analisi dinamica} del processo di verifica. Sono rilevate automaticamente dalla pipeline di \textit{Continuous Integration} a ogni \textit{push} e riportate dal \glslink{programmatore}{Programmatore} nella descrizione della \textit{\glslink{pull-request}{Pull Request}}.
 
 \paragraph{MPC-CC --- Code Coverage}
 \begin{itemize}
@@ -1010,7 +1312,8 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 \end{itemize}
 
 % ─────────────────────────────────────────────────────────────────────────────
-\subsubsection{Processi di supporto --- Gestione della qualità}
+\subsubsection{Processi di supporto --- Accertamento della qualità}
+La metrica seguente sintetizza l'esito delle attività di accertamento della qualità di processo e di prodotto ed è rilevata dall'\glslink{amministratore}{Amministratore} al termine di ogni \glslink{sprint}{Sprint}, come previsto dalla relativa procedura.
 
 \paragraph{MPC-QMS --- Quality Metrics Satisfied}
 \begin{itemize}
@@ -1022,6 +1325,7 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Processi organizzativi --- Gestione dei processi}
+Le metriche seguenti misurano l'efficienza nell'impiego delle risorse e l'efficacia della previsione dei rischi, ovvero gli esiti delle attività di \glslink{pianificazione}{pianificazione} dell'iterazione e di revisione e valutazione del processo di gestione dei processi. I dati di ingresso sono il foglio di rendicontazione oraria e il Registro dei Rischi del \glslink{piano-di-progetto}{Piano di Progetto}.
 
 \paragraph{MPC-TE --- Time Efficiency}
 \begin{itemize}
@@ -1050,6 +1354,8 @@ Queste metriche misurano l'efficacia, l'efficienza e il controllo delle attivit�
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Metriche per la qualità di prodotto}
 Queste metriche misurano le proprietà interne ed esterne del software finale per garantire che il sistema rispetti i requisiti. Lo standard di riferimento è ISO/IEC 9126, adottato come base per la classificazione delle caratteristiche di qualità del prodotto.
+
+I raggruppamenti seguenti corrispondono alle sei caratteristiche di qualità del prodotto elencate nel capitolo sulla qualità del software, ovvero funzionalità, affidabilità, efficienza, usabilità, mantenibilità e portabilità. Tutte le metriche di prodotto sono rilevate dal \glslink{verificatore}{Verificatore} nell'ambito dell'attività di accertamento della qualità di prodotto e nessuna modifica può essere approvata se porta una di esse sotto la soglia accettabile fissata nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Funzionalità}
