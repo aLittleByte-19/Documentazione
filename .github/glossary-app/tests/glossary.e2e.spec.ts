@@ -1,5 +1,60 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+interface GlossaryEntry {
+  id: string;
+  term: string;
+  definition: string;
+  aliases: string[];
+}
+
+interface GlossaryDocument {
+  title: string;
+  entries: GlossaryEntry[];
+}
+
+type SearchScope = 'all' | 'term' | 'aliases' | 'definition';
+
+// Il glossario cresce a ogni revisione della documentazione: le attese sui
+// conteggi si ricavano dal JSON servito, mai da numeri fissi nel test.
+async function readGlossary(page: Page): Promise<GlossaryDocument> {
+  return page.evaluate(async () => (await fetch('/glossary-app/glossary.json')).json());
+}
+
+// Le tre funzioni seguenti replicano le regole di AppComponent (iniziale,
+// normalizzazione e ricerca per campo): se la app cambia criterio vanno allineate.
+function entryLetter(entry: GlossaryEntry): string {
+  const firstCharacter = entry.term.trim().charAt(0).toLocaleUpperCase('it');
+  return /^[A-Z]$/.test(firstCharacter) ? firstCharacter : '#';
+}
+
+function normalize(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('it')
+    .trim();
+}
+
+function searchEntries(
+  entries: GlossaryEntry[],
+  query: string,
+  scope: SearchScope = 'all',
+): GlossaryEntry[] {
+  const tokens = normalize(query).split(/\s+/).filter(Boolean);
+  return entries.filter((entry) => {
+    const fields =
+      scope === 'term'
+        ? [entry.term]
+        : scope === 'aliases'
+          ? entry.aliases
+          : scope === 'definition'
+            ? [entry.definition]
+            : [entry.term, entry.definition, entry.id, ...entry.aliases];
+    const normalizedFields = fields.map(normalize);
+    return tokens.every((token) => normalizedFields.some((field) => field.includes(token)));
+  });
+}
 
 test('renders every JSON entry and passes the serious accessibility scan', async ({ page }) => {
   const runtimeErrors: string[] = [];
@@ -9,7 +64,7 @@ test('renders every JSON entry and passes the serious accessibility scan', async
   page.on('pageerror', (error) => runtimeErrors.push(error.message));
 
   await page.goto('/glossario.html');
-  const glossary = await page.evaluate(async () => (await fetch('/glossary-app/glossary.json')).json());
+  const glossary = await readGlossary(page);
 
   await expect(page.getByRole('heading', { level: 1, name: 'Glossario' })).toBeVisible();
   await expect(page).toHaveTitle('Glossario | aLittleByte');
@@ -71,11 +126,18 @@ test('searches content and restores the complete list', async ({ page }) => {
   await page.goto('/glossario.html');
   const search = page.getByRole('searchbox', { name: 'Cerca nel glossario' });
 
+  const glossary = await readGlossary(page);
+  const matches = searchEntries(glossary.entries, 'entity resolution');
+  expect(matches.length, 'la query di prova deve trovare almeno una voce').toBeGreaterThan(0);
+
   await search.fill('entity resolution');
-  await expect(page.locator('.entry-card')).toHaveCount(2);
-  await expect(page.locator('.result-count')).toHaveText(/2 di \d+ voci/);
+  await expect(page.locator('.entry-card')).toHaveCount(matches.length);
+  await expect(page.locator('.result-count')).toHaveText(
+    `${matches.length} di ${glossary.entries.length} voci`,
+  );
   await expect(page.getByRole('button', { name: 'Cancella ricerca' })).toBeVisible();
 
+  expect(searchEntries(glossary.entries, 'risultato-impossibile-xyz')).toHaveLength(0);
   await search.fill('risultato-impossibile-xyz');
   await expect(page.getByRole('heading', { name: 'Nessun risultato' })).toBeVisible();
 
@@ -89,11 +151,18 @@ test('combines the field menu with the alphabet filter', async ({ page }) => {
   await page.goto('/glossario.html');
   const search = page.getByRole('searchbox', { name: 'Cerca nel glossario' });
 
-  await page.getByRole('button', { name: 'Mostra le voci con iniziale W' }).click();
+  const glossary = await readGlossary(page);
+  const letter = 'W';
+  const letterEntries = glossary.entries.filter((entry) => entryLetter(entry) === letter);
+  expect(letterEntries.length, `il glossario deve avere voci con iniziale ${letter}`).toBeGreaterThan(0);
+
+  await page.getByRole('button', { name: `Mostra le voci con iniziale ${letter}` }).click();
   await expect(page.locator('.letter-section')).toHaveCount(1);
-  await expect(page.locator('.letter-heading h2')).toHaveText('W');
-  await expect(page.locator('.entry-card')).toHaveCount(3);
-  await expect(page.locator('.result-count')).toHaveText('3 di 120 voci');
+  await expect(page.locator('.letter-heading h2')).toHaveText(letter);
+  await expect(page.locator('.entry-card')).toHaveCount(letterEntries.length);
+  await expect(page.locator('.result-count')).toHaveText(
+    `${letterEntries.length} di ${glossary.entries.length} voci`,
+  );
 
   await page.getByRole('button', { name: 'Tutte' }).click();
   const filters = page.getByRole('button', { name: 'Filtri di ricerca' });
@@ -108,13 +177,23 @@ test('combines the field menu with the alphabet filter', async ({ page }) => {
     color: getComputedStyle(element).color,
   }))).toEqual({ background: 'rgb(251, 247, 238)', color: 'rgb(128, 98, 29)' });
 
-  await search.fill('scannerizzati');
+  const onlyInDefinitions = 'scannerizzati';
+  const definitionMatches = searchEntries(glossary.entries, onlyInDefinitions, 'definition');
+  expect(searchEntries(glossary.entries, onlyInDefinitions, 'term')).toHaveLength(0);
+  expect(
+    definitionMatches.length,
+    `"${onlyInDefinitions}" deve comparire in almeno una definizione`,
+  ).toBeGreaterThan(0);
+
+  await search.fill(onlyInDefinitions);
   await expect(page.getByRole('heading', { name: 'Nessun risultato' })).toBeVisible();
 
   await page.getByRole('radio', { name: 'Solo definizioni' }).check();
   await expect(search).toHaveAttribute('placeholder', 'Cerca nelle definizioni');
-  await expect(page.locator('.entry-card')).toHaveCount(1);
-  await expect(page.getByRole('heading', { name: 'OCR (Riconoscimento Ottico dei Caratteri)' })).toBeVisible();
+  await expect(page.locator('.entry-card')).toHaveCount(definitionMatches.length);
+  for (const entry of definitionMatches) {
+    await expect(page.getByRole('heading', { name: entry.term, exact: true })).toBeVisible();
+  }
   await page.keyboard.press('Escape');
   await expect(filters).toHaveAttribute('aria-expanded', 'false');
 });

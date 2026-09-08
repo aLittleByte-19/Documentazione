@@ -1,0 +1,163 @@
+  \documentclass[a4paper,11pt]{letter}
+  \usepackage[utf8]{inputenc}
+  \usepackage[italian]{babel}
+  \usepackage[margin=2.5cm]{geometry}
+  \usepackage{graphicx}
+  \usepackage{xcolor}
+  \usepackage{colortbl}
+  \usepackage{tcolorbox}
+  \usepackage{enumitem}
+  \usepackage{amssymb}
+  \usepackage{tabularx}
+  \usepackage{hyperref}
+  \usepackage{eurosym}
+  \usepackage{multicol}
+
+    \definecolor{primarycolor}{RGB}{112,66,20}
+    \definecolor{secondarycolor}{RGB}{156,101,52}
+    \definecolor{lightgray}{RGB}{242,239,234}
+    \definecolor{darkgray}{RGB}{70,56,43}
+    \definecolor{softsand}{RGB}{248,243,236}
+
+  \hypersetup{
+      colorlinks=true,
+      linkcolor=primarycolor,
+      urlcolor=secondarycolor,
+      citecolor=primarycolor
+  }
+
+  \graphicspath{{./}{../../.github/site-src/assets/}}
+
+  \newcommand{\GruppoFirma}{aLittleByte\\Gruppo 19\\alittlebyte.swe@gmail.com}
+  \newcommand{\TODO}{\textcolor{red}{\textbf{[???]}}}
+
+  \begin{document}
+
+  \begin{letter}{Prof. Tullio Vardanega\\Prof. Riccardo Cardin\\Università degli Studi di Padova\\Dipartimento di Matematica\\Via Trieste, 63\\35121 Padova}
+
+  \begin{tcolorbox}[
+      colback=softsand,
+      colframe=primarycolor!45,
+      coltext=darkgray,
+      arc=1.8mm,
+      boxrule=0.6pt,
+      left=14pt,
+      right=14pt,
+      top=11pt,
+      bottom=11pt
+  ]
+      \begin{minipage}[c]{0.72\textwidth}
+          {\color{primarycolor}\large\bfseries Lettera di Presentazione PB}\\[0.10em]
+          {\color{darkgray}\normalsize Capitolato C5 -- Nexum}
+      \end{minipage}\hfill
+      \begin{minipage}[c]{0.23\textwidth}
+          \raggedleft
+          \IfFileExists{../../.github/site-src/assets/logo_alittlebyte.png}{%
+              \fcolorbox{primarycolor!35}{softsand}{\includegraphics[width=2.4cm,height=2.4cm,keepaspectratio]{../../.github/site-src/assets/logo_alittlebyte.png}}
+          }{%
+              \fcolorbox{primarycolor!35}{softsand}{\parbox[c][2.4cm][c]{2.4cm}{\centering\tiny\color{black}Logo\\non trovato}}
+          }
+      \end{minipage}
+    \\[0.8em]
+      \textcolor{secondarycolor}{\rule{\linewidth}{0.4pt}}\\[0.6em]
+      \begin{tabularx}{\textwidth}{@{}lX@{}}
+          \textcolor{darkgray}{\textbf{Gruppo}} & aLittleByte (Gruppo 19) \\
+          \textcolor{darkgray}{\textbf{Email}} & \href{mailto:alittlebyte.swe@gmail.com}{alittlebyte.swe@gmail.com}
+      \end{tabularx}
+  \end{tcolorbox}
+
+  \vspace{1.5em}
+
+  \date{4 Settembre 2026}
+
+  \opening{Egregio Prof. Vardanega,\\Egregio Prof. Cardin,}
+
+  con il presente documento il gruppo \textit{aLittleByte} intende comunicare la propria volontà di
+  sottoporsi alla revisione della \textit{Product Baseline} riguardo al lavoro
+  svolto nella realizzazione del capitolato proposto da \textbf{Eggon S.r.l.} con titolo:
+
+  \begin{center}
+      \textbf{Nexum}
+  \end{center}
+
+  Nel corso del periodo di sviluppo, il team ha portato a compimento la realizzazione di un \textit{Minimum Viable Product (MVP)}, volto a implementare le principali funzionalità previste per il progetto. L'attuale versione del prodotto è disponibile al seguente indirizzo: 
+  
+  \begin{center} 
+      \url{https://github.com/aLittleByte-19/MVP} 
+  \end{center} 
+  
+  Il prodotto sviluppato è stato successivamente presentato all'azienda committente, la quale ne ha verificato la conformità rispetto agli obiettivi concordati, esprimendo parere \textbf{favorevole}. Tale valutazione è documentata nel \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Esterni/Verbale_Esterno_2026_09_03.html}{Verbale Esterno}, allegato alla presente documentazione. 
+  
+  Parallelamente allo sviluppo del prodotto, è stata predisposta la documentazione necessaria a descriverne le caratteristiche, le scelte progettuali e le modalità di utilizzo. La documentazione completa è disponibile nella sezione \textbf{PB} del sito del team: 
+  
+  \begin{center} 
+      \url{https://alittlebyte-19.github.io/Documentazione/} 
+  \end{center} 
+
+  \newpage
+  In particolare, sono disponibili i seguenti elaborati: 
+
+  \vspace{0.3em}
+
+  \begin{multicols}{2}
+  \begin{itemize}[noitemsep, topsep=0pt]
+    \item Lettera di Presentazione (Questo Documento)
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Analisi%20dei%20Requisiti/Analisi%20dei%20Requisiti.pdf}{Analisi dei Requisiti}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Specifica%20Tecnica/Specifica%20Tecnica.pdf}{Specifica Tecnica}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Manuale%20Utente/Manuale%20Utente.pdf}{Manuale Utente}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Glossario/Glossario.pdf}{Glossario}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Norme%20di%20Progetto/Norme%20di%20Progetto.pdf}{Norme di Progetto}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Piano%20di%20Progetto/Piano%20di%20Progetto.pdf}{Piano di Progetto}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Piano%20di%20Qualifica/Piano%20di%20Qualifica.pdf}{Piano di Qualifica}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Interni/Verbale_Interno_2026_07_14.pdf}{Verbale Interno 14/07/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Interni/Verbale_Interno_2026-07-21.pdf}{Verbale Interno 21/07/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Interni/Verbale_Interno_2026_07_29.pdf}{Verbale Interno 29/07/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Interni/Verbale_Interno_2026_08_04.pdf}{Verbale Interno 04/08/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Interni/Verbale_Interno_2026_08_11.pdf}{Verbale Interno 11/08/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Interni/Verbale_Interno_2026_09_02.pdf}{Verbale Interno 02/09/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Esterni/Verbale_Esterno_2026_07_21.pdf}{Verbale Esterno 21/07/2026}
+    \item \href{https://alittlebyte-19.github.io/Documentazione/PB/Verbali/Verbali%20Esterni/Verbale_Esterno_2026_09_03.pdf}{Verbale Esterno 03/09/2026}
+    
+  \end{itemize}
+  \end{multicols}
+
+  \vspace{0.3em}
+
+  Per quanto riguarda l'aspetto economico, il costo complessivamente sostenuto per lo sviluppo del progetto è pari a \textbf{Euro 11.830}. Tale importo risulta \textbf{inferiore} rispetto alla stima iniziale di \textbf{Euro 12.575} definita in fase di candidatura.
+
+    \vspace{2.0em}
+    
+    \textbf{Membri del gruppo}
+  \begin{center}
+  \setlength{\arrayrulewidth}{0.8pt}
+  \arrayrulecolor{black}
+  \begin{tabular}{|l|l|r|}
+  \hline
+  \rowcolor{primarycolor!20}
+  \textcolor{black}{\textbf{Cognome}} & \textcolor{black}{\textbf{Nome}} & \textcolor{black}{\textbf{Matricola}} \\
+  \hline
+  Bellet & Eleonora & 2111002\\
+  \hline
+  Belluz & Diego & 2043361\\
+  \hline
+  Gastaldello & Angelica & 2111003\\
+  \hline
+  Kaneda Fernandes & Vinicius Yuri & 2082856 \\
+  \hline
+  Maule & Angela & 2110991\\
+  \hline
+  Oloni & Alex & 2080046\\
+  \hline
+  Soligo & Leonardo & 2111042\\
+  \hline
+  \end{tabular}
+  \arrayrulecolor{black}
+  \end{center}
+
+  \vspace{0.8em}
+
+  \closing{Cordiali saluti, \vspace{1.2em} \\ \GruppoFirma}
+
+  \end{letter}
+
+  \end{document}

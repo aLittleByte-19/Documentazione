@@ -51,6 +51,8 @@
     \fancyfoot[R]{Verbale 2026-07-29}
 }
 
+\providecommand{\glslink}[2]{\href{https://alittlebyte-19.github.io/Documentazione/glossario.html\#gls-#1}{\underline{#2}\textsuperscript{\scriptsize G}}}
+
 \begin{document}
 
 \thispagestyle{firstpage}
@@ -95,17 +97,17 @@
 \vspace{1cm}
 
 \begin{tabular}{>{\bfseries}p{5cm} | p{10cm}}
-Luogo Riunione & Discord \\[6pt]
+Luogo Riunione & \glslink{discord}{Discord} \\[6pt]
 
 Orario (Inizio - Fine) & 10:30 -- 11:15 \\[6pt]
 
-Responsabile &
+\glslink{responsabile}{Responsabile} &
     A. Oloni\\[6pt]
 
 Amministratore & 
     A. Maule\\[6pt]
 
-Verificatore &
+\glslink{verificatore}{Verificatore} &
     A. Gastaldello\\[6pt]
 
 Partecipanti &
@@ -123,7 +125,7 @@ Partecipanti &
 \section{Ordine del Giorno}
     \begin{itemize}
     \item Avanzamento del progetto e analisi delle funzionalità mancanti
-    \item Gestione repository: allineamento branch develop
+    \item Gestione \glslink{repository}{repository}: allineamento \glslink{branch}{branch} develop
     \item Assegnazione Use Case 21, 22, 39.12 e 39.15
     \item Gestione riuso della configurazione e Use Case 32
     \end{itemize}
@@ -134,14 +136,14 @@ Partecipanti &
 In primis, il team ha discusso dello stato attuale di avanzamento del progetto, facendo il punto della situazione sulle attività completate e su quelle ancora mancanti per raggiungere i prossimi obiettivi prefissati.
 
 \subsection{Gestione repository e branch develop}
-Successivamente si è discusso dell'allineamento del codice. Si è deciso che Leonardo Soligo si occuperà di raccogliere i lavori svolti ed effettuare il merge di tutto il codice aggiornato all'interno del branch \texttt{develop}.
+Successivamente si è discusso dell'allineamento del codice. Si è deciso che Leonardo Soligo si occuperà di raccogliere i lavori svolti ed effettuare il merge di tutto il codice aggiornato all'interno del \glslink{branch}{branch} \texttt{develop}.
 
 \subsection{Sviluppo Use Case e assegnazione task}
 Il team ha poi esaminato i prossimi casi d'uso (Use Case) da implementare, suddividendo il lavoro come segue:
 \begin{itemize}
-    \item \textbf{UC 21 e 22:} L'implementazione di questi due casi d'uso è stata affidata a Eleonora Bellet.
-    \item \textbf{UC 39.12 e 39.15:} Diego Belluz prenderà in carico questo blocco. Nello specifico, si dovrà occupare delle funzionalità relative all'inserimento della mail e alla modifica dei campi destinatario, data e ora.
-    \item \textbf{Configurazione e UC 32:} Angela Maule e Angelica Gastaldello lavoreranno congiuntamente all'implementazione del caso d'uso 32 e alla logica di riuso delle configurazioni.
+    \item \textbf{\glslink{caso-d-uso-uc}{UC} 21 e 22:} L'implementazione di questi due casi d'uso è stata affidata a Eleonora Bellet.
+    \item \textbf{\glslink{caso-d-uso-uc}{UC} 39.12 e 39.15:} Diego Belluz prenderà in carico questo blocco. Nello specifico, si dovrà occupare delle funzionalità relative all'inserimento della mail e alla modifica dei campi destinatario, data e ora.
+    \item \textbf{Configurazione e \glslink{caso-d-uso-uc}{UC} 32:} Angela Maule e Angelica Gastaldello lavoreranno congiuntamente all'implementazione del \glslink{caso-d-uso-uc}{caso d'uso} 32 e alla logica di riuso delle configurazioni.
 \end{itemize}
 
 
@@ -151,17 +153,17 @@ Il team ha poi esaminato i prossimi casi d'uso (Use Case) da implementare, suddi
     \centering
     \begin{tabular}{|p{4.5cm}|p{5cm}|l|}
     \hline
-        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link Issue} \\
+        \rowcolor{lightgray}\textit{\textbf{Persona Incaricata}}  & \textbf{Task Assegnata} &\textbf{Link \glslink{issue}{Issue}} \\
     \hline
-        \textit {Leonardo Soligo} & Inserimento modifiche e merge nel branch develop & \href{https://github.com/aLittleByte-19/Documentazione/issues/157}{\#157}\\
+        \textit {Leonardo Soligo} & Inserimento modifiche e merge nel \glslink{branch}{branch} develop & \href{https://github.com/aLittleByte-19/Documentazione/issues/157}{\#157}\\
     \hline
-        \textit {Eleonora Bellet} & Implementazione UC 21 e UC 22 & \href{https://github.com/aLittleByte-19/Documentazione/issues/158}{\#158}\\
+        \textit {Eleonora Bellet} & Implementazione \glslink{caso-d-uso-uc}{UC} 21 e \glslink{caso-d-uso-uc}{UC} 22 & \href{https://github.com/aLittleByte-19/Documentazione/issues/158}{\#158}\\
     \hline
-        \textit{Diego Belluz} & Implementazione UC 39.12, 39.15 (mail, destinatario, data, ora) & \href{https://github.com/aLittleByte-19/Documentazione/issues/159}{\#159}\\
+        \textit{Diego Belluz} & Implementazione \glslink{caso-d-uso-uc}{UC} 39.12, 39.15 (mail, destinatario, data, ora) & \href{https://github.com/aLittleByte-19/Documentazione/issues/159}{\#159}\\
     \hline
-        \textit{Angela Maule e Angelica Gastaldello} & Riuso della configurazione e sviluppo UC 32 & \href{https://github.com/aLittleByte-19/Documentazione/issues/160}{\#160}\\
+        \textit{Angela Maule e Angelica Gastaldello} & Riuso della configurazione e sviluppo \glslink{caso-d-uso-uc}{UC} 32 & \href{https://github.com/aLittleByte-19/Documentazione/issues/160}{\#160}\\
     \hline
-        \textit{Diego Belluz} & Stesura Verbale Interno 29/07/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/161}{\#161}\\
+        \textit{Diego Belluz} & Stesura \glslink{verbale-interno}{Verbale Interno} 29/07/2026 & \href{https://github.com/aLittleByte-19/Documentazione/issues/161}{\#161}\\
     \hline
     \end{tabular}
     \label{tab:placeholder}
