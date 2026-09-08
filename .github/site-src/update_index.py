@@ -362,23 +362,39 @@ def discover_phases():
             phases.append(phase)
     return phases
 
+GROUP_DIR_NAMES = {'documenti esterni', 'documenti interni'}
+
 def detect_structure(phase):
-    """Individua nella cartella di fase: lettera, cartella verbali e prodotti."""
+    """Individua nella cartella di fase: lettera, cartella verbali e prodotti.
+
+    I prodotti possono stare direttamente nella cartella di fase oppure, se
+    sono gia' state raggruppate a mano in sottocartelle "Documenti esterni" /
+    "Documenti interni", un livello piu' sotto: in tal caso vengono comunque
+    rilevati (con il loro percorso reale) e riclassificati come al solito.
+    """
     base_abs = os.path.join(ROOT_DIR, phase['base'])
     lettera = None
     verbali = None
-    products = []
+    products = []  # lista di (nome, percorso relativo alla cartella di fase)
 
-    for item in sorted(os.listdir(base_abs)):
-        if item.startswith('.') or not os.path.isdir(os.path.join(base_abs, item)):
-            continue
-        low = item.lower()
-        if 'lettera di presentazione' in low:
-            lettera = item
-        elif 'verbal' in low:
-            verbali = item
-        else:
-            products.append(item)
+    def scan(dir_abs, rel_prefix, allow_group_recursion):
+        nonlocal lettera, verbali
+        for item in sorted(os.listdir(dir_abs)):
+            item_abs = os.path.join(dir_abs, item)
+            if item.startswith('.') or not os.path.isdir(item_abs):
+                continue
+            low = item.lower()
+            rel_path = os.path.join(rel_prefix, item) if rel_prefix else item
+            if 'lettera di presentazione' in low:
+                lettera = rel_path
+            elif 'verbal' in low:
+                verbali = rel_path
+            elif allow_group_recursion and low in GROUP_DIR_NAMES:
+                scan(item_abs, rel_path, allow_group_recursion=False)
+            else:
+                products.append((item, rel_path))
+
+    scan(base_abs, '', allow_group_recursion=True)
 
     if lettera is None:
         print(f"ATTENZIONE: nessuna Lettera di Presentazione trovata nella fase '{phase['id']}'")
@@ -446,7 +462,7 @@ def render_lettera(phase, lettera_dir, current=False):
         '    </div>\n'
     )
 
-def render_groups(phase, groups, current=False):
+def render_groups(phase, groups, name_to_relpath, current=False):
     """Gruppi di prodotti (documenti esterni / interni) come voci di primo livello."""
     if not groups:
         return ''
@@ -457,7 +473,7 @@ def render_groups(phase, groups, current=False):
         html += f'            <h2 class="group-title">{escape(group_title)}</h2>\n'
         html += '            <ul class="product-list">\n'
         for subdir in subdirs:
-            rel_dir = os.path.join(phase['base'], subdir)
+            rel_dir = os.path.join(phase['base'], name_to_relpath.get(subdir, subdir))
             pdfs = []
             if os.path.isdir(os.path.join(ROOT_DIR, rel_dir)):
                 pdfs = filter_signed_only(list_dir_pdfs(rel_dir))
@@ -510,16 +526,18 @@ def render_verbali(phase, verbali_dir, heading_level):
 
 def render_phase_body(phase, heading_level=2, current=False):
     lettera_dir, verbali_dir, products = detect_structure(phase)
+    name_to_relpath = {name: relpath for name, relpath in products}
+    product_names = [name for name, _ in products]
 
     # Nella fase corrente i prodotti attesi ma assenti compaiono come segnaposto
     if current and phase.get('attesi'):
-        present = {p.lower() for p in products}
-        products = products + [a for a in phase['attesi'] if a.lower() not in present]
+        present = {p.lower() for p in product_names}
+        product_names = product_names + [a for a in phase['attesi'] if a.lower() not in present]
 
-    groups = classify_products(phase, products)
+    groups = classify_products(phase, product_names)
     return (
         render_lettera(phase, lettera_dir, current=current)
-        + render_groups(phase, groups, current=current)
+        + render_groups(phase, groups, name_to_relpath, current=current)
         + render_verbali(phase, verbali_dir, heading_level)
     )
 
