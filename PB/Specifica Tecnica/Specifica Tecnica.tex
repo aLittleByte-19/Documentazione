@@ -211,6 +211,14 @@
         \hline
         0.1.0 & 02/08/2026 & Stesura prima versione & Angela Maule & Diego Belluz & - \\
         \hline
+        0.0.4 & 01/08/2026 & Bozza preliminare del capitolo Tecnologie, con il primo elenco dello stack proposto & Angela Maule & V. Y. K. Fernandes & - \\
+        \hline
+        0.0.3 & 26/07/2026 & Prima bozza della sezione Introduzione (scopo del prodotto e struttura del documento) & Eleonora Bellet & A. Oloni & - \\
+        \hline
+        0.0.2 & 21/07/2026 & Redazione dell'indice delle sezioni e definizione della struttura complessiva del documento & Leonardo Soligo & Angelica Gastaldello & - \\
+        \hline
+        0.0.1 & 16/07/2026 & Creazione del template del documento: frontespizio, stile delle tabelle e registro delle modifiche & Diego Belluz & Angela Maule & - \\
+        \hline
 
     \end{longtable}
     }
@@ -274,69 +282,69 @@
 
 \subsection{Contenuto del documento}
 
-Il presente documento costituisce la Specifica Tecnica del sistema sviluppato dal gruppo \textit{aLittleByte} per il \glslink{committente-proponente}{proponente} Eggon S.r.l. nell'ambito del progetto \glslink{nexum}{Nexum}.
+Il presente documento costituisce la Specifica Tecnica del sistema sviluppato dal gruppo \textit{aLittleByte} per il proponente Eggon S.r.l. nell'ambito del progetto Nexum.
 
-Al suo interno vengono illustrate le tecnologie selezionate, il contratto delle \glslink{api-application-programming-interface}{API} \glslink{rest-representational-state-transfer}{REST} esposte dal \glslink{backend}{backend} e le scelte architetturali adottate nella realizzazione del prodotto. Il documento ha lo scopo di fornire una visione organica e dettagliata della struttura del sistema, delle sue componenti e delle interazioni tra esse.
+Al suo interno vengono illustrate le tecnologie selezionate, il contratto delle API REST esposte dal backend e le scelte architetturali adottate nella realizzazione del prodotto. Il documento ha lo scopo di fornire una visione organica e dettagliata della struttura del sistema, delle sue componenti e delle interazioni tra esse.
 
 Deve essere inteso come riferimento tecnico per le attività di progettazione e codifica, garantendo la coerenza tra le decisioni implementative adottate e quanto emerso nella fase di Proof of Concept.
 
 \subsection{Scopo del prodotto}
 
-\glslink{nexum}{Nexum} è la piattaforma sviluppata per Eggon S.r.l. a supporto degli operatori che gestiscono la documentazione del personale e le comunicazioni interne aziendali: i consulenti del lavoro da un lato, i redattori aziendali dall'altro.
+Nexum è la piattaforma sviluppata per Eggon S.r.l. a supporto degli operatori che gestiscono la documentazione del personale e le comunicazioni interne aziendali: i consulenti del lavoro da un lato, i redattori aziendali dall'altro.
 
-L'AI Co-Pilot assiste i consulenti del lavoro nella gestione della documentazione HR: un file caricato viene automaticamente suddiviso, riconosciuto tramite \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e associato al destinatario corretto, lasciando all'operatore solo la revisione dei casi a bassa \glslink{confidenza-confidence-score}{confidenza} invece della classificazione manuale di ogni documento.
+L'AI Co-Pilot assiste i consulenti del lavoro nella gestione della documentazione HR: un file caricato viene automaticamente suddiviso, riconosciuto tramite OCR e associato al destinatario corretto, lasciando all'operatore solo la revisione dei casi a bassa confidenza invece della classificazione manuale di ogni documento.
 
-L'\glslink{ai-assistant-generativo}{AI Assistant Generativo} assiste i redattori aziendali nella produzione di comunicazioni interne, dal titolo al testo fino all'immagine di copertina, a partire da un semplice \glslink{prompt}{prompt}: riduce il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale, poiché ogni \glslink{bozza-draft}{bozza} generata resta modificabile, valutabile e rigenerabile finché non viene scartata.
+L'AI Assistant Generativo assiste i redattori aziendali nella produzione di comunicazioni interne, dal titolo al testo fino all'immagine di copertina, a partire da un semplice prompt: riduce il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale, poiché ogni bozza generata resta modificabile, valutabile e rigenerabile finché non viene scartata.
 
 \subsection{Struttura del documento}
 
 La struttura del presente documento è articolata nelle seguenti sezioni principali:
 \begin{itemize}
-    \item \textbf{Sezione 1 - Introduzione:} Presenta il contenuto e gli obiettivi del documento, il \glslink{glossario}{glossario} dei termini e i riferimenti normativi e informativi adottati.
-    \item \textbf{Sezione 2 - Tecnologie:} Descrive lo stack tecnologico adottato, suddiviso per categoria: linguaggi, framework, librerie, ambiente locale, edge, servizi cloud \glslink{aws}{AWS}, persistenza dei dati, osservabilità e CI/\glslink{quality-gate}{quality gate}.
-    \item \textbf{Sezione 3 - \glslink{api-application-programming-interface}{API}:} Descrive il contratto \glslink{rest-representational-state-transfer}{REST} esposto dal \glslink{backend}{backend}, organizzato per area funzionale (stato applicativo, \glslink{ai-assistant-generativo}{AI Assistant Generativo}, AI Co-Pilot).
-    \item \textbf{Sezione 4 - Architettura del Sistema:} Descrive il contesto di sistema, l'architettura applicativa e logica interna del \glslink{backend}{backend}, il dettaglio dei componenti, la distribuzione, la containerizzazione e lo stile architetturale complessivo.
-    \item \textbf{Sezione 5 - Descrizione architettura (\glslink{backend}{Backend}):} Scende al livello delle singole classi dei due domini di prodotto (Documents, Communications): \glslink{adapter}{adapter} primari, entità di dominio, casi d'uso applicativi e \glslink{adapter}{adapter} secondari.
-    \item \textbf{Sezione 6 - Architettura Frontend:} Descrive i principi di progettazione della \glslink{spa-single-page-application}{SPA} \glslink{angular}{Angular}, il pattern \glslink{mvvm-model-view-viewmodel}{MVVM} adottato, i modelli di dati, i servizi di comunicazione col \glslink{backend}{backend} e i componenti UI, micro e macro.
-    \item \textbf{Sezione 7 - Design Pattern:} Documenta i design pattern applicati esplicitamente nel \glslink{backend}{backend} e nel frontend, con l'intento di ciascuno, dove si trova nel codice e cosa succederebbe senza.
+    \item \textbf{Sezione 1 - Introduzione:} Presenta il contenuto e gli obiettivi del documento, il glossario dei termini e i riferimenti normativi e informativi adottati.
+    \item \textbf{Sezione 2 - Tecnologie:} Descrive lo stack tecnologico adottato, suddiviso per categoria: linguaggi, framework, librerie, ambiente locale, edge, servizi cloud AWS, persistenza dei dati, osservabilità e CI/quality gate.
+    \item \textbf{Sezione 3 - API:} Descrive il contratto REST esposto dal backend, organizzato per area funzionale (stato applicativo, AI Assistant Generativo, AI Co-Pilot).
+    \item \textbf{Sezione 4 - Architettura del Sistema:} Descrive il contesto di sistema, l'architettura applicativa e logica interna del backend, il dettaglio dei componenti, la distribuzione, la containerizzazione e lo stile architetturale complessivo.
+    \item \textbf{Sezione 5 - Descrizione architettura (Backend):} Scende al livello delle singole classi dei due domini di prodotto (Documents, Communications): adapter primari, entità di dominio, casi d'uso applicativi e adapter secondari.
+    \item \textbf{Sezione 6 - Architettura Frontend:} Descrive i principi di progettazione della SPA Angular, il pattern MVVM adottato, i modelli di dati, i servizi di comunicazione col backend e i componenti UI, micro e macro.
+    \item \textbf{Sezione 7 - Design Pattern:} Documenta i design pattern applicati esplicitamente nel backend e nel frontend, con l'intento di ciascuno, dove si trova nel codice e cosa succederebbe senza.
     \item \textbf{Sezione 8 - Database:} Descrive il modello dei dati del sistema: schema ER, schema relazionale e la descrizione di ciascuna tabella.
-    \item \textbf{Sezione 9 - \glslink{requisiti-funzionali}{Requisiti Funzionali} Soddisfatti:} Riporta lo stato di implementazione di ciascun requisito funzionale identificato nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}, verificato sul codice sorgente del sistema.
+    \item \textbf{Sezione 9 - Requisiti Funzionali Soddisfatti:} Riporta lo stato di implementazione di ciascun requisito funzionale identificato nell'Analisi dei Requisiti, verificato sul codice sorgente del sistema.
 \end{itemize}
 
 \subsection{Glossario}
 
-Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, i termini tecnici, gli acronimi e le parole con un significato specifico nel contesto del progetto sono contrassegnati nel testo con una ``G'' ad apice (es.\ parola\textsuperscript{\scriptsize G}). La loro definizione completa è consultabile nel documento esterno \textit{\glslink{glossario}{Glossario}}.
+Al fine di evitare ambiguità e garantire una comprensione uniforme della terminologia utilizzata, i termini tecnici, gli acronimi e le parole con un significato specifico nel contesto del progetto sono contrassegnati nel testo con una ``G'' ad apice (es.\ parola\textsuperscript{\scriptsize G}). La loro definizione completa è consultabile nel documento esterno \textit{Glossario}.
 
 \subsection{Riferimenti}
 
 \subsubsection{Riferimenti normativi}
 \begin{itemize}
-    \item \textbf{\glslink{capitolato}{Capitolato} d'appalto C5 - \glslink{nexum}{NEXUM} (Eggon S.r.l.):}\\
+    \item \textbf{Capitolato d'appalto C5 - NEXUM (Eggon S.r.l.):}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf}\\
-    \textit{Data Ultimo accesso: 09/07/2026}
+    \textit{Data Ultimo accesso: 02/09/2026}
 
-    \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto} v1.0.0:}\\
+    \item \textbf{Norme di Progetto v2.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative adottate nel progetto.\\
     \url{https://alittlebyte-19.github.io/Documentazione/RTB/Norme\%20di\%20Progetto/Norme\%20di\%20Progetto.pdf}\\
-    \textit{Data Ultimo accesso: 09/07/2026}
+    \textit{Data Ultimo accesso: 02/09/2026}
 
     \item \textbf{Regolamento del Progetto Didattico:}\\
     Anno accademico 2025/2026, Corso di Ingegneria del Software, Università di Padova.\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}\\
-    \textit{Data Ultimo accesso: 09/07/2026}
+    \textit{Data Ultimo accesso: 02/09/2026}
 \end{itemize}
 
 \subsubsection{Riferimenti informativi}
 \begin{itemize}
-    \item \textbf{\glslink{glossario}{Glossario} v2.0.0:}\\
+    \item \textbf{Glossario v2.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici e degli acronimi utilizzati nella documentazione.\\
     \url{https://alittlebyte-19.github.io/Documentazione/RTB/Glossario/Glossario.pdf}\\
-    \textit{Data Ultimo accesso: 09/07/2026}
+    \textit{Data Ultimo accesso: 02/09/2026}
 
-    \item \textbf{\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} v2.0.0:}\\
-    Documento interno del gruppo \textit{aLittleByte} contenente la descrizione dei \glslink{requisiti-funzionali}{requisiti funzionali} e non funzionali del sistema.\\
+    \item \textbf{Analisi dei Requisiti v3.0.0:}\\
+    Documento interno del gruppo \textit{aLittleByte} contenente la descrizione dei requisiti funzionali e non funzionali del sistema.\\
     \url{https://alittlebyte-19.github.io/Documentazione/RTB/Analisi\%20dei\%20Requisiti/Analisi\%20dei\%20Requisiti.pdf}\\
-    \textit{Data Ultimo accesso: 09/07/2026}
+    \textit{Data Ultimo accesso: 02/09/2026}
 
 \end{itemize}
 
