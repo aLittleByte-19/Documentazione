@@ -512,7 +512,7 @@ L'ambiente locale è progettato in modo che ogni membro del team lavori sulla st
     \hline
     Node.js & 22 & Runtime JavaScript utilizzato dagli strumenti di build e sviluppo del frontend (Angular CLI, npm, Orval, ESLint, Jest). Eseguito in un container dedicato, non richiede un'installazione locale sulla macchina dello sviluppatore. \\
     \hline
-    LocalStack & 4.5 & Emulatore locale dei servizi AWS. Riproduce in locale S3, SQS, Step Functions, SSM, Secrets Manager, KMS, IAM, EventBridge e SES, consentendo di testare la pipeline asincrona senza credenziali reali. Bedrock e Textract restano eccezione deliberata: parlano sempre con AWS reale (Sezione 2.7). \\
+    LocalStack & 4.5 & Emulatore locale dei servizi AWS. Riproduce in locale S3, SQS, Step Functions, SSM, Secrets Manager, KMS e IAM, consentendo di testare la pipeline asincrona senza credenziali reali. Bedrock e Textract restano eccezione deliberata: parlano sempre con AWS reale (Sezione 2.7). \\
     \hline
     Terraform & 1.10.5 & Strumento di Infrastructure as Code (IaC) per il provisioning dell'infrastruttura. Sostituisce gli script manuali con una descrizione dichiarativa e versionata, ricreabile a comando tramite \texttt{terraform apply}. \\
     \hline
@@ -562,7 +562,7 @@ Una richiesta HTTPS attraversa diversi livelli prima di raggiungere il codice ap
 
 Le funzionalità di intelligenza artificiale, l'elaborazione asincrona dei documenti e la protezione dei dati si basano su servizi gestiti AWS. L'adozione di servizi gestiti elimina la necessità di infrastrutture dedicate, garantendo scalabilità automatica e alta disponibilità.
 
-In locale, S3, SQS, Step Functions, SSM, Secrets Manager, KMS, IAM, EventBridge e SES sono emulati da LocalStack (Sezione 2.5); di EventBridge è provisionato un event bus con due regole che instradano verso le code SQS gli eventi terminali delle due pipeline. Bedrock e Textract restano invece un'eccezione deliberata: parlano sempre con AWS reale, anche in locale, perché LocalStack Community non offre un'emulazione dei modelli generativi utile ai fini del progetto, e condividono lo stesso insieme di credenziali AWS reali. Textract ha in più un interruttore dedicato (\texttt{TEXTRACT\_ENABLED}, default \texttt{false}): quando è disattivato il task di OCR termina come saltato senza persistere alcun testo, e il passo successivo della pipeline fallisce perché non trova il testo su cui lavorare, quindi il modulo Documents richiede comunque un Textract attivo per completare un'elaborazione. Bedrock non ha un interruttore equivalente nel codice.
+In locale, S3, SQS, Step Functions, SSM, Secrets Manager, KMS e IAM sono emulati da LocalStack (Sezione 2.5). Bedrock e Textract restano invece un'eccezione deliberata: parlano sempre con AWS reale, anche in locale, perché LocalStack Community non offre un'emulazione dei modelli generativi utile ai fini del progetto, e condividono lo stesso insieme di credenziali AWS reali. Textract ha in più un interruttore dedicato (\texttt{TEXTRACT\_ENABLED}, default \texttt{false}): quando è disattivato il task di OCR termina come saltato senza persistere alcun testo, e il passo successivo della pipeline fallisce perché non trova il testo su cui lavorare, quindi il modulo Documents richiede comunque un Textract attivo per completare un'elaborazione. Bedrock non ha un interruttore equivalente nel codice.
 
 \renewcommand{\arraystretch}{1.3}
 \rowcolors{2}{gray!8}{white}
