@@ -19,8 +19,8 @@
 \graphicspath{{./}{../../}}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 
 \geometry{
@@ -223,47 +223,47 @@ I termini tecnici, gli acronimi e le parole con un significato specifico all'int
 \begin{itemize}
     \item \textbf{\glslink{capitolato}{Capitolato} d'appalto C5 - \glslink{nexum}{NEXUM} (Eggon):}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C5.pdf} \\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \textit{Data Ultimo accesso: 01/09/2026}
 
     \item \textbf{\glslink{norme-di-progetto}{Norme di Progetto} v2.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte} che definisce le regole, i ruoli e le procedure operative.\\
-    \url{https://alittlebyte-19.github.io/Documentazione/PB/Norme%20di%20Progetto/Norme%20di%20Progetto.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \url{https://alittlebyte-19.github.io/Documentazione/PB/Documenti%20interni/Norme%20di%20Progetto/Norme%20di%20Progetto.pdf}\\
+    \textit{Data Ultimo accesso: 02/09/2026}
 
     \item \textbf{Regolamento del progetto didattico:}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \textit{Data Ultimo accesso: 03/09/2026}
 
-    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto} v2.1.0:}\\
+    \item \textbf{\glslink{piano-di-progetto}{Piano di Progetto} v3.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte}.\\
-    \url{https://alittlebyte-19.github.io/Documentazione/RTB/Piano%20di%20Progetto/Piano%20di%20Progetto.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \url{https://alittlebyte-19.github.io/Documentazione/PB/Documenti%20esterni/Piano%20di%20Progetto/Piano%20di%20Progetto.pdf}\\
+    \textit{Data Ultimo accesso: 04/09/2026}
 \end{itemize}
 
 \subsubsection{Riferimenti informativi}
 \begin{itemize}
-    \item \textbf{\glslink{glossario}{Glossario} v2.0.0:}\\
+    \item \textbf{\glslink{glossario}{Glossario} v3.0.0:}\\
     Documento interno del gruppo \textit{aLittleByte} contenente le definizioni dei termini tecnici.\\
-    \url{https://alittlebyte-19.github.io/Documentazione/RTB/Glossario/Glossario.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \url{https://alittlebyte-19.github.io/Documentazione/PB/Documenti%20interni/Glossario/Glossario.pdf}\\
+    \textit{Data Ultimo accesso: 05/09/2026}
 
     \item \textbf{Standard ISO/IEC 12207:1995:}\\
     \textit{Information technology -- Software life cycle processes}.\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2009/Approfondimenti/ISO_12207-1995.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \textit{Data Ultimo accesso: 06/09/2026}
 
     \item \textbf{Standard ISO/IEC 9126:}\\
     \textit{Software engineering -- Product quality}.\\
     \url{https://it.wikipedia.org/wiki/ISO/IEC_9126}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \textit{Data Ultimo accesso: 07/09/2026}
 
     \item \textbf{Slide T07 - Qualità del software:}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \textit{Data Ultimo accesso: 08/09/2026}
 
     \item \textbf{Slide T08 - Qualità del software:}\\
     \url{https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T08.pdf}\\
-    \textit{Data Ultimo accesso: 15/06/2026}
+    \textit{Data Ultimo accesso: 09/09/2026}
 \end{itemize}
 
 \section{Qualità di processo}
@@ -940,12 +940,6 @@ I \glslink{test-di-sistema}{test di sistema} verificano il corretto comportament
     \hline
     TS-V-015 & Verifica che la gestione di segreti e parametri avvenga tramite un servizio gestito cloud dedicato. & RVC15-OB & S \\
     \hline
-    TS-V-016 & Verifica che l'osservabilità del sistema si basi su strumentazione OpenTelemetry esportata verso un backend dedicato. & RVC16-OB & S \\
-    \hline
-    TS-V-017 & Verifica che l'autenticazione degli utenti avvenga tramite un identity provider con token JWT. & RVC17-OB & S \\
-    \hline
-    TS-V-018 & Verifica che il provisioning dell'infrastruttura cloud sia gestito tramite Infrastructure-as-Code. & RVC18-OB & S \\
-    \hline
     TS-V-019 & Verifica che l'invio di email e notifiche avvenga tramite un servizio cloud gestito dedicato (SES/SNS). & RVC19-OP & S \\
     \hline
 \end{longtable}
@@ -1195,11 +1189,7 @@ La tabella seguente riporta la corrispondenza tra i \glslink{test-di-sistema}{te
     \hline
     TS-V-013 & RVC13-OB & TS-V-014 & RVC14-OB \\
     \hline
-    TS-V-015 & RVC15-OB & TS-V-016 & RVC16-OB \\
-    \hline
-    TS-V-017 & RVC17-OB & TS-V-018 & RVC18-OB \\
-    \hline
-    TS-V-019 & RVC19-OP & & \\
+    TS-V-015 & RVC15-OB & TS-V-019 & RVC19-OP \\
     \hline
 \end{longtable}
 }
