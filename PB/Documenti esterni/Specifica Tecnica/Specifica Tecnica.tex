@@ -512,7 +512,7 @@ L'ambiente locale è progettato in modo che ogni membro del team lavori sulla st
     \hline
     Node.js & 22 & Runtime JavaScript utilizzato dagli strumenti di build e sviluppo del frontend (Angular CLI, npm, Orval, ESLint, Jest). Eseguito in un container dedicato, non richiede un'installazione locale sulla macchina dello sviluppatore. \\
     \hline
-    LocalStack & 4.5 & Emulatore locale dei servizi AWS. Riproduce in locale S3, SQS, Step Functions, SSM, Secrets Manager, KMS e IAM, consentendo di testare la pipeline asincrona senza credenziali reali. Bedrock e Textract restano eccezione deliberata: parlano sempre con AWS reale (Sezione 2.7). \\
+    LocalStack & 4.5 & Emulatore locale dei servizi AWS. Riproduce in locale S3, SQS, Step Functions, SSM, Secrets Manager, KMS, IAM, EventBridge e SES, consentendo di testare la pipeline asincrona senza credenziali reali. Bedrock e Textract restano eccezione deliberata: parlano sempre con AWS reale (Sezione 2.7). \\
     \hline
     Terraform & 1.10.5 & Strumento di Infrastructure as Code (IaC) per il provisioning dell'infrastruttura. Sostituisce gli script manuali con una descrizione dichiarativa e versionata, ricreabile a comando tramite \texttt{terraform apply}. \\
     \hline
@@ -527,7 +527,7 @@ L'ambiente locale è progettato in modo che ogni membro del team lavori sulla st
 % ── 2.6 ──────────────────────────────────────────────────────────────────────
 \subsection{Edge e web server}
 
-Una richiesta HTTPS attraversa diversi livelli prima di raggiungere il codice applicativo. Traefik opera come entry point TLS esterno; in locale un secondo Nginx (\textit{edge-cdn}) emula il ruolo di una CDN, servendo la SPA Angular direttamente da S3/LocalStack e inoltrando le richieste \texttt{/api}, \texttt{/health} e \texttt{/ready} all'Nginx applicativo, che a sua volta fa da proxy verso PHP-FPM e resta un'immagine dedicata esclusivamente a quel ruolo. Un deploy di produzione reale, con una CDN gestita al posto del container \textit{edge-cdn}, resta fuori dal perimetro dell'MVP.
+Una richiesta HTTPS attraversa diversi livelli prima di raggiungere il codice applicativo. Traefik opera come entry point TLS esterno; in locale un secondo Nginx (\textit{edge-cdn}) emula il ruolo di una CDN, servendo la SPA Angular direttamente da S3/LocalStack e inoltrando le richieste \texttt{/api}, \texttt{/health} e \texttt{/ready} all'Nginx applicativo, che a sua volta fa da proxy verso PHP-FPM. La stessa immagine di Nginx applicativo incorpora anche il bundle statico della SPA, compilato in una fase separata della propria build e servito con fallback su \texttt{index.html}. Un deploy di produzione reale, con una CDN gestita al posto del container \textit{edge-cdn}, resta fuori dal perimetro dell'MVP.
 
 \renewcommand{\arraystretch}{1.3}
 \rowcolors{2}{gray!8}{white}
@@ -547,7 +547,7 @@ Una richiesta HTTPS attraversa diversi livelli prima di raggiungere il codice ap
     \endhead
     Traefik & 3.4 & Reverse proxy posizionato davanti a tutti i servizi. Si occupa della terminazione TLS e dello smistamento delle richieste in base all'host. \\
     \hline
-    Nginx (applicativo) & 1.27 & Web server utilizzato come proxy per le chiamate \texttt{/api} verso PHP-FPM tramite FastCGI. Immagine di produzione, buildata e scansionata, che non conosce LocalStack. \\
+    Nginx (applicativo) & 1.27 & Web server che serve il bundle statico della SPA e fa da proxy per le chiamate \texttt{/api} verso PHP-FPM tramite FastCGI. Immagine di produzione, buildata e scansionata, che non conosce LocalStack. \\
     \hline
     Nginx (edge-cdn) & 1.29 & Secondo Nginx, presente solo in locale, che emula il ruolo di una CDN/edge davanti a S3-LocalStack per servire gli asset statici della SPA Angular. \\
     \hline
@@ -562,7 +562,7 @@ Una richiesta HTTPS attraversa diversi livelli prima di raggiungere il codice ap
 
 Le funzionalità di intelligenza artificiale, l'elaborazione asincrona dei documenti e la protezione dei dati si basano su servizi gestiti AWS. L'adozione di servizi gestiti elimina la necessità di infrastrutture dedicate, garantendo scalabilità automatica e alta disponibilità.
 
-In locale, S3, SQS, Step Functions, SSM, Secrets Manager, KMS e IAM sono emulati da LocalStack (Sezione 2.5). Bedrock e Textract restano invece un'eccezione deliberata: parlano sempre con AWS reale, anche in locale, perché LocalStack Community non offre un'emulazione dei modelli generativi utile ai fini del progetto, e condividono lo stesso insieme di credenziali AWS reali. Textract ha in più un interruttore dedicato (\texttt{TEXTRACT\_ENABLED}, default \texttt{false}): quando è disattivato il task di OCR termina come saltato senza persistere alcun testo, e il passo successivo della pipeline fallisce perché non trova il testo su cui lavorare, quindi il modulo Documents richiede comunque un Textract attivo per completare un'elaborazione. Bedrock non ha un interruttore equivalente nel codice.
+In locale, S3, SQS, Step Functions, SSM, Secrets Manager, KMS, IAM, EventBridge e SES sono emulati da LocalStack (Sezione 2.5); di EventBridge è provisionato un event bus con due regole che instradano verso le code SQS gli eventi terminali delle due pipeline. Bedrock e Textract restano invece un'eccezione deliberata: parlano sempre con AWS reale, anche in locale, perché LocalStack Community non offre un'emulazione dei modelli generativi utile ai fini del progetto, e condividono lo stesso insieme di credenziali AWS reali. Textract ha in più un interruttore dedicato (\texttt{TEXTRACT\_ENABLED}, default \texttt{false}): quando è disattivato il task di OCR termina come saltato senza persistere alcun testo, e il passo successivo della pipeline fallisce perché non trova il testo su cui lavorare, quindi il modulo Documents richiede comunque un Textract attivo per completare un'elaborazione. Bedrock non ha un interruttore equivalente nel codice.
 
 \renewcommand{\arraystretch}{1.3}
 \rowcolors{2}{gray!8}{white}
@@ -647,7 +647,7 @@ Le metriche mostrate agli utenti nei pannelli Angular (Assistant, Co-Pilot, Over
 % ── 2.10 ─────────────────────────────────────────────────────────────────────
 \subsection{CI e quality gate}
 
-Ogni modifica inviata al repository attiva la pipeline di integrazione continua su GitHub Actions, che ricostruisce le immagini e le pubblica su GHCR solo dopo che tutti i controlli automatici sono stati superati. I quality gate coprono stile del codice, analisi statica, test, sicurezza delle dipendenze e accessibilità.
+Ogni modifica inviata al repository attiva la pipeline di integrazione continua su GitHub Actions, che ricostruisce le immagini e le pubblica su GHCR. La pubblicazione avviene nel job \texttt{stack}, che è indipendente dagli esiti dei job \texttt{backend} e \texttt{frontend}: è subordinata ai soli controlli interni a quel job (validazione Terraform, scansione delle immagini, verifica HTTPS e accessibilità), non all'esito di stile, analisi statica e test. I quality gate coprono stile del codice, analisi statica, test, sicurezza delle dipendenze e accessibilità.
 
 \renewcommand{\arraystretch}{1.3}
 \rowcolors{2}{gray!8}{white}
@@ -665,7 +665,7 @@ Ogni modifica inviata al repository attiva la pipeline di integrazione continua 
     \textbf{Nome} & \textbf{Versione} & \textbf{Categoria} & \textbf{Descrizione} \\
     \hline
     \endhead
-    GitHub Actions & --- & CI/CD & Orchestratore della pipeline CI. Attivato da push e pull request, esegue in parallelo quattro job: \texttt{backend}, \texttt{frontend}, \texttt{coverage-diff} e \texttt{stack}. \\
+    GitHub Actions & --- & CI/CD & Orchestratore della pipeline CI. Attivato da push e pull request, esegue quattro job: \texttt{backend}, \texttt{frontend} e \texttt{stack} in parallelo, mentre \texttt{coverage-diff} attende il completamento dei primi due. \\
     \hline
     GHCR & --- & CI/CD & GitHub Container Registry: registro in cui vengono pubblicate le immagini Docker solo dopo il superamento di tutti i quality gate. \\
     \hline
@@ -704,9 +704,9 @@ Ogni modifica inviata al repository attiva la pipeline di integrazione continua 
 
 Il sistema espone un contratto REST versionato (\texttt{/api/v1}), definito tramite la specifica OpenAPI 3.1.1 in \texttt{openapi/v1/alittlebyte-mvp-api.yaml} e consumato dalla SPA Angular tramite il client generato con Orval. L'identità (\texttt{MvpIdentity}: attore e tenant) è risolta in due modalità alternative, selezionate da \texttt{MVP\_IDENTITY\_MODE}: in modalità \textit{local} (default, usata in sviluppo e nella MVP) l'identità è iniettata da configurazione e nessun header è richiesto; in modalità \textit{trusted\_headers} la richiesta deve portare \texttt{X-Mvp-User-Id} insieme a \texttt{X-Mvp-Tenant-Id} e agli altri header fidati, iniettati dal confine aziendale a monte dell'applicazione.
 
-Il rate limiting è granulare per gruppo di endpoint. Il limite di default è 60 richieste al minuto; scende a 20/minuto per le operazioni di generazione e scrittura più onerose (creazione bozze, rigenerazione, upload OCR, aggiornamento copertina, salvataggio configurazioni di prompt, salvataggio e scarto della bozza) e a 30/minuto per anteprima, export e valutazione delle comunicazioni (le rotte equivalenti sui documenti restano al limite di default). Sale invece a 120/minuto per la sola lettura della copertina già generata. Gli endpoint che restituiscono un PDF (anteprima ed export delle comunicazioni) supportano la cache HTTP tramite \texttt{ETag}/\texttt{If-None-Match}, evitando di rigenerare il documento se il client possiede già l'ultima versione.
+Il rate limiting è granulare per gruppo di endpoint. Il limite di default è 60 richieste al minuto; scende a 20/minuto per le operazioni di generazione e scrittura più onerose (creazione bozze, rigenerazione, upload OCR, aggiornamento copertina, salvataggio configurazioni di prompt, salvataggio e scarto della bozza) e a 30/minuto per anteprima, export e valutazione delle comunicazioni e per l'esportazione del report metriche dell'Assistant (le rotte equivalenti sui documenti restano al limite di default). Sale invece a 120/minuto per la sola lettura della copertina già generata. Gli endpoint che restituiscono un PDF (anteprima ed export delle comunicazioni) supportano la cache HTTP tramite \texttt{ETag}/\texttt{If-None-Match}, evitando di rigenerare il documento se il client possiede già l'ultima versione.
 
-L'avanzamento delle elaborazioni asincrone (generazione contenuti, pipeline documentale) è notificato alla SPA tramite un endpoint Server-Sent Events (SSE), senza dover interrogare ripetutamente il server. Le liste di comunicazioni e documenti supportano filtri lato server e paginazione.
+L'avanzamento delle elaborazioni asincrone (generazione contenuti, pipeline documentale) è notificato alla SPA tramite due endpoint Server-Sent Events (SSE), uno per dominio, senza dover interrogare ripetutamente il server. Le liste di comunicazioni e documenti supportano filtri lato server e paginazione.
 
 Le API sono organizzate in tre aree funzionali, corrispondenti ai tag della specifica OpenAPI: lo stato applicativo, l'AI Assistant Generativo (comunicazioni) e l'AI Co-Pilot (documenti).
 
@@ -855,7 +855,7 @@ Questo capitolo descrive l'architettura del sistema, dal generale al particolare
 % ── 4.1 ──────────────────────────────────────────────────────────────────────
 \subsection{Contesto di Sistema}
 
-L'utente finale interagisce con la piattaforma tramite browser, via HTTPS. Il sistema delega l'elaborazione intelligente dei contenuti a due servizi AWS esterni: l'AI Co-Pilot invia i documenti caricati ad AWS Textract per il riconoscimento ottico dei caratteri; l'AI Assistant Generativo invia i prompt ad AWS Bedrock per la generazione di testi e immagini. Le integrazioni con AWS avvengono esclusivamente lato backend; il browser comunica solo con il sistema.
+L'utente finale interagisce con la piattaforma tramite browser, via HTTPS. Il sistema delega l'elaborazione intelligente dei contenuti a due servizi AWS esterni: l'AI Co-Pilot invia i documenti caricati ad AWS Textract per il riconoscimento ottico dei caratteri e poi ad AWS Bedrock per lo split e l'estrazione dei campi; l'AI Assistant Generativo invia i prompt ad AWS Bedrock per la generazione di testi e immagini. Le integrazioni con AWS avvengono esclusivamente lato backend; il browser comunica solo con il sistema.
 
 \begin{figure}[H]
     \centering
@@ -867,7 +867,7 @@ L'utente finale interagisce con la piattaforma tramite browser, via HTTPS. Il si
 % ── 4.2 ──────────────────────────────────────────────────────────────────────
 \subsection{Architettura Applicativa}
 
-Il sistema si compone dei seguenti container principali. Il frontend è una Single Page Application in Angular 21. Il backend è un'API in Laravel 12 su PHP 8.4, servita da PHP-FPM e Nginx, che espone esclusivamente un contratto REST in formato JSON, senza rendering lato server. Le operazioni pesanti (OCR e invocazione dei modelli generativi) sono delegate in modo asincrono ad AWS Step Functions e Amazon SQS; due processi Worker separati dall'API, uno per pipeline, consumano i messaggi e coordinano l'esecuzione: la coda documentale è servita da un container dedicato, quella delle comunicazioni da un secondo container, così i due flussi non si contendono gli stessi consumatori. La persistenza è affidata a PostgreSQL per i dati applicativi e a Redis per cache, sessioni e rate limiting; nessuno dei due è utilizzato come coda, ruolo riservato a SQS.
+Il sistema si compone dei seguenti container principali. Il frontend è una Single Page Application in Angular 21. Il backend è un'API in Laravel 12 su PHP 8.4, servita da PHP-FPM e Nginx, che espone un contratto REST le cui risposte sono in formato JSON, con l'eccezione degli endpoint che restituiscono un documento PDF, l'immagine di copertina o un flusso di eventi. Non serve pagine HTML: le uniche viste renderizzate lato server sono i template usati per comporre i PDF. Le operazioni pesanti (OCR e invocazione dei modelli generativi) sono delegate in modo asincrono ad AWS Step Functions e Amazon SQS; due processi Worker separati dall'API, uno per pipeline, consumano i messaggi e coordinano l'esecuzione: la coda documentale è servita da un container dedicato, quella delle comunicazioni da un secondo container, così i due flussi non si contendono gli stessi consumatori. La persistenza è affidata a PostgreSQL per i dati applicativi e a Redis per cache e rate limiting; nessuno dei due è utilizzato come coda, ruolo riservato a SQS.
 
 \begin{figure}[H]
     \centering
@@ -945,7 +945,7 @@ La tabella seguente quantifica la composizione interna dei due domini: casi d'us
 \end{longtable}
 }
 
-I due domini condividono un piccolo numero di porte secondarie puramente infrastrutturali, comuni a entrambi perché non riguardano la logica di business: l'avvio di un'esecuzione Step Functions, la generazione di identificativi univoci, i confini transazionali sulle scritture pure sul database e la segnalazione di attività verso Step Functions durante le chiamate AI più lunghe. Ciascuna ha un solo adapter condiviso.
+I due domini condividono un piccolo numero di porte secondarie puramente infrastrutturali, comuni a entrambi perché non riguardano la logica di business: l'avvio di un'esecuzione Step Functions, la generazione di identificativi univoci e i confini transazionali sulle scritture pure sul database. A queste si aggiunge la segnalazione di attività verso Step Functions durante le chiamate AI più lunghe, dichiarata anch'essa nell'infrastruttura condivisa ma oggi usata dal solo dominio Documents. Ciascuna ha un solo adapter condiviso.
 
 La separazione fra i due domini è verificata automaticamente a ogni build della pipeline CI: uno script analizza il codice e blocca la build se un dominio referenzia direttamente il framework, l'SDK AWS o l'altro dominio, così i due moduli restano davvero indipendenti.
 
@@ -1198,7 +1198,7 @@ Metodi
 
 Entità di dominio che rappresenta il documento caricato dall'utente e il suo avanzamento nella pipeline di elaborazione. Non è una semplice proiezione dei dati salvati: governa da sé le proprie transizioni di stato, invece di lasciare a ogni caso d'uso il compito di scriverle correttamente a mano.
 
-\texttt{startProcessing()} e \texttt{fail()} consolidano in un unico posto la logica di transizione allo stato di fallimento, distinguendo sempre il messaggio pensato per l'operatore dal dettaglio tecnico usato per il troubleshooting. Non governa invece i campi restituiti dal riconoscimento ottico (testo, pagine, confidenza): non sono una transizione di stato, solo dati letti dal gateway OCR e scritti direttamente dal caso d'uso che li riceve.
+\texttt{startProcessing()} e \texttt{fail()} consolidano in un unico posto le transizioni di stato della lavorazione: la prima porta il documento in elaborazione registrando l'esecuzione avviata, la seconda lo porta a fallito distinguendo il messaggio pensato per l'operatore dal dettaglio tecnico usato per il troubleshooting. Non governa invece i campi restituiti dal riconoscimento ottico (testo, pagine, confidenza): non sono una transizione di stato, solo dati letti dal gateway OCR e scritti direttamente dal caso d'uso che li riceve.
 
 \begin{figure}[H]
     \centering
@@ -1480,7 +1480,7 @@ Metodi
 
 \paragraph{SendMessageService}
 
-Implementa \texttt{SendMessageUseCase}: compone il messaggio di invio precompilato a partire dai dati già estratti (nessuna generazione AI coinvolta) e ne orchestra anteprima, esportazione e correzione manuale. Destinatario, corpo e oggetto hanno un valore proposto di default, sovrascrivibile dall'operatore tramite le sovrascritture salvate sul sotto-documento; l'oggetto proposto nomina il tipo di documento e il suo periodo di riferimento (mese/anno, se dichiarati), non l'invio in sé, che a quel punto non è ancora avvenuto. Sia l'anteprima sia l'esportazione accodano al PDF composto anche il documento originale del destinatario (letto dallo storage tramite \texttt{DocumentStoragePort}, \texttt{SendMessageAttachmentUnavailableException} se assente): chi riceve il messaggio riceve anche il documento a cui si riferisce, non solo il testo.
+Implementa \texttt{SendMessageUseCase}: compone il messaggio di invio precompilato a partire dai dati già estratti (nessuna generazione AI coinvolta) e ne orchestra anteprima, esportazione e correzione manuale. Destinatario, corpo e oggetto hanno un valore proposto di default, sovrascrivibile dall'operatore tramite le sovrascritture salvate sul sotto-documento; l'oggetto proposto nomina il tipo di documento e il suo periodo di riferimento (mese/anno, se dichiarati), non l'invio in sé, che a quel punto non è ancora avvenuto. Sia l'anteprima sia l'esportazione accodano al PDF composto anche il sotto-documento del destinatario prodotto dallo split (letto dallo storage tramite \texttt{DocumentStoragePort}, \texttt{SendMessageAttachmentUnavailableException} se assente): chi riceve il messaggio riceve anche il documento a cui si riferisce, non solo il testo.
 
 Il download è vincolato a una revisione umana già avvenuta: \texttt{export()} rifiuta con \texttt{SendMessageNotConfirmedException} se il sotto-documento non è ancora \textit{ManuallyValidated}: il pannello tiene spento il comando finché non lo è, ma la API resterebbe altrimenti chiamabile anche senza passare dal pannello. Il recapito avviene fuori dalla piattaforma: poiché il sistema non può osservare l'invio reale, è proprio il download del PDF esportato a marcare lo stato come \textit{Sent}, in una transizione a senso unico: un secondo download non la ripete. Tutti e tre i metodi pubblici verificano l'autorizzazione tramite un metodo privato condiviso (\texttt{assertActorOwnsSubDocument()}), che solleva \texttt{DocumentNotAuthorizedException} in caso di tenant non corrispondente.
 
@@ -1506,7 +1506,7 @@ Metodi
 
 Due casi d'uso minimi, simmetrici ai rispettivi sul dominio Communications. \texttt{ListDocumentsService} implementa \texttt{ListDocumentsUseCase} e inoltra la paginazione al repository tramite \texttt{DocumentListFilters} (value object tipizzato), senza logica propria.
 
-\texttt{DeleteDocumentService} implementa \texttt{DeleteDocumentUseCase}: verifica che l'attore appartenga allo stesso tenant del documento originale (\texttt{DocumentNotAuthorizedException} altrimenti), elimina un sotto-documento e, se non resta alcun altro sotto-documento collegato allo stesso documento originale, elimina anche quest'ultimo insieme ai suoi task di workflow pendenti. In entrambi i casi il record resta rimosso dal database anche se la pulizia dello storage fallisce: un guasto di rete verso S3 non deve far fallire un'eliminazione già avvenuta dal punto di vista dell'utente, a costo di lasciare temporaneamente un file orfano.
+\texttt{DeleteDocumentService} implementa \texttt{DeleteDocumentUseCase}: verifica che l'attore appartenga allo stesso tenant del documento originale (\texttt{DocumentNotAuthorizedException} altrimenti), elimina un sotto-documento e, se non resta alcun altro sotto-documento collegato allo stesso documento originale, elimina anche quest'ultimo insieme a tutti i task di workflow che lo referenziano, indipendentemente dal loro stato. In entrambi i casi il record resta rimosso dal database anche se la pulizia dello storage fallisce: un guasto di rete verso S3 non deve far fallire un'eliminazione già avvenuta dal punto di vista dell'utente, a costo di lasciare temporaneamente un file orfano.
 
 \begin{figure}[H]
     \centering
@@ -1659,7 +1659,7 @@ Metodi
 % ── 5.2 ──────────────────────────────────────────────────────────────────────
 \subsection{Modulo Communications (AI Assistant Generativo)}
 
-Il modulo Communications è la componente del sistema dedicata alla generazione assistita di comunicazioni interne, dal titolo al testo fino all'immagine di copertina. Il suo obiettivo è offrire ai redattori aziendali uno strumento che produca contenuti coerenti con il tono e lo stile dell'organizzazione a partire da un semplice prompt, riducendo il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale: ogni bozza generata resta modificabile e rigenerabile finché non viene scartata, anche dopo l'approvazione, e valutabile una sola volta nell'intero suo ciclo di vita. Il modulo si integra con Amazon Bedrock sia per la generazione testuale sia per quella delle immagini di copertina, orchestrando la pipeline in modo asincrono tramite AWS Step Functions, sullo stesso schema del modulo Documents.
+Il modulo Communications è la componente del sistema dedicata alla generazione assistita di comunicazioni interne, dal titolo al testo fino all'immagine di copertina. Il suo obiettivo è offrire ai redattori aziendali uno strumento che produca contenuti coerenti con il tono e lo stile dell'organizzazione a partire da un semplice prompt, riducendo il tempo dedicato alla scrittura senza sottrarre all'utente il controllo editoriale: ogni bozza generata resta modificabile finché non viene scartata, anche dopo l'approvazione, rigenerabile alle stesse condizioni ma solo quando la generazione precedente si è conclusa (stato \textit{completed} o \textit{failed}), e valutabile una sola volta nell'intero suo ciclo di vita. Il modulo si integra con Amazon Bedrock sia per la generazione testuale sia per quella delle immagini di copertina, orchestrando la pipeline in modo asincrono tramite AWS Step Functions, sullo stesso schema del modulo Documents.
 
 \begin{figure}[H]
     \centering
@@ -1891,7 +1891,7 @@ Metodi
 
 Entità di dominio che governa l'intero ciclo di vita di una bozza di comunicazione, ed è la più estesa dei due domini perché accumula responsabilità distinte (preferiti, approvazione e scarto della bozza, valutazione a stelle, copertina manuale o generata dall'AI, l'intera pipeline di generazione fino alla rigenerazione) invece delle una o due tipiche di \texttt{SubDocument} e \texttt{OriginalDocument}.
 
-Verifica anche un'invariante propria: una copertina non può mai essere applicata prima che il testo sia stato generato, controllata ogni volta che l'entità riceve l'esito della generazione AI. Come le altre due entità, ogni metodo verifica la propria guardia (una comunicazione già scartata non può essere approvata, una valutazione già assegnata non può essere ripetuta) e accumula il proprio delta in un oggetto di modifiche interno, letto una sola volta dall'adapter di persistenza.
+Verifica anche un'invariante propria: una copertina non può mai essere applicata prima che il testo sia stato generato, controllata ogni volta che l'entità riceve l'esito della generazione AI. Come le altre due entità, i metodi che rappresentano un'azione dell'utente verificano la propria guardia (una comunicazione già scartata non può essere approvata, una valutazione già assegnata non può essere ripetuta), mentre quelli che registrano l'esito della pipeline si limitano ad applicarlo e accumula il proprio delta in un oggetto di modifiche interno, letto una sola volta dall'adapter di persistenza.
 
 \begin{figure}[H]
     \centering
@@ -1914,7 +1914,7 @@ Metodi
     \item \texttt{applyGeneratedText(generated: GeneratedCommunicationText): void}, \texttt{applyGeneratedCover(image: GeneratedCommunicationImage, path: string): void}, \texttt{degradeCover(warning: string): void}
     \item \texttt{startGeneration(executionArn: string, startedAt: DateTimeImmutable): void}, \texttt{failGeneration(errorMessage: string, technicalReason: ?string, failedAt: DateTimeImmutable): void}, \texttt{completeGeneration(completedAt: DateTimeImmutable): void}
     \item \texttt{regenerate(): void}
-    \item \texttt{hasGeneratedText(): bool}: l'invariante testo-prima-di-copertina descritta sopra: usato da \texttt{GenerateCommunicationCoverService} come guardia prima di generare la copertina.
+    \item \texttt{hasGeneratedText(): bool}: l'invariante testo-prima-di-copertina descritta sopra: usato da \texttt{GenerateCommunicationCoverService} come guardia prima di applicare e persistere la copertina, quindi dopo la chiamata al modello generativo, non prima.
     \item \texttt{isReadyForExport(): bool}, \texttt{isEditable(): bool}
     \item \texttt{pendingChanges(): CommunicationChanges}
 \end{itemize}
@@ -2210,7 +2210,7 @@ Metodi
 
 \paragraph{EloquentCommunicationRepository}
 
-Adapter secondario che implementa \texttt{CommunicationRepository} sopra Eloquent, equivalente concettuale dell'\texttt{EloquentDocumentRepository}: consuma i value object tipizzati del dominio (\texttt{NewCommunication}, \texttt{CommunicationChanges}) invece di array grezzi. È l'unico punto di scrittura dell'aggregato \texttt{Communication}, condiviso da tutti gli otto casi d'uso che lo modificano.
+Adapter secondario che implementa \texttt{CommunicationRepository} sopra Eloquent, equivalente concettuale dell'\texttt{EloquentDocumentRepository}: consuma i value object tipizzati del dominio (\texttt{NewCommunication}, \texttt{CommunicationChanges}) invece di array grezzi. È l'unico punto di scrittura dell'aggregato \texttt{Communication}, condiviso da tutti i casi d'uso che lo creano, lo modificano o lo eliminano.
 
 \begin{figure}[H]
     \centering
@@ -2280,9 +2280,9 @@ Metodi
 
 \paragraph{FlysystemCommunicationCoverAdapter, DompdfCommunicationPdfRenderer}
 
-Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemDocumentStorageAdapter} e \texttt{DompdfSendMessageRenderer} sul dominio Documents. \texttt{FlysystemCommunicationCoverAdapter} implementa \texttt{CommunicationCoverStoragePort} sopra Flysystem, registrando ogni fallimento di lettura/scrittura nel log applicativo.
+Due adapter secondari di supporto, equivalenti concettuali di \texttt{FlysystemDocumentStorageAdapter} e \texttt{DompdfSendMessageRenderer} sul dominio Documents. \texttt{FlysystemCommunicationCoverAdapter} implementa \texttt{CommunicationCoverStoragePort} sopra Flysystem, registrando nel log applicativo i fallimenti di scrittura e di cancellazione; un fallimento in lettura viene invece propagato al chiamante come errore, senza essere registrato.
 
-\texttt{DompdfCommunicationPdfRenderer} implementa \texttt{CommunicationPdfRendererPort} sopra Dompdf: prima di renderizzare calcola un'impronta SHA-1 del contenuto (titolo, corpo, stato e percorso della copertina) e, se un PDF con la stessa impronta è già stato materializzato su disco, lo restituisce direttamente invece di rigenerarlo; applica inoltre una filigrana diagonale (\textit{"Creato da AI Assistant"}) e lo stesso timbro di piè di pagina condiviso con \texttt{DompdfSendMessageRenderer}.
+\texttt{DompdfCommunicationPdfRenderer} implementa \texttt{CommunicationPdfRendererPort} sopra Dompdf: prima di renderizzare calcola un'impronta SHA-1 del contenuto (identificativo della comunicazione, titolo, corpo, stato, percorso e tipo della copertina, più una versione del renderer che permette di invalidare le impronte già materializzate quando il layout cambia) e, se un PDF con la stessa impronta è già stato materializzato su disco, lo restituisce direttamente invece di rigenerarlo; applica inoltre una filigrana diagonale (\textit{"Creato da AI Assistant"}) e lo stesso timbro di piè di pagina condiviso con \texttt{DompdfSendMessageRenderer}.
 
 \begin{figure}[H]
     \centering
@@ -2582,7 +2582,7 @@ Metodi
 % ── 6.1 ──────────────────────────────────────────────────────────────────────
 \subsection{Principi di progettazione}
 
-La SPA Angular è organizzata per feature (\texttt{features/assistant}, \texttt{features/copilot}, \texttt{features/overview}), affiancate da tre cartelle trasversali: \texttt{core} (stato applicativo, interceptor HTTP, osservabilità), \texttt{shared} (componenti UI riutilizzabili) e \texttt{layout} (guscio dell'applicazione, intestazioni, navigazione). Ogni feature raggruppa a sua volta una pagina (View), il proprio ViewModel, i propri componenti (\texttt{components/}) e i propri servizi/modelli (\texttt{data/}), rispecchiando la stessa separazione per dominio applicativo già adottata nel backend (Sezione 4.3).
+La SPA Angular è organizzata per feature (\texttt{features/assistant}, \texttt{features/copilot}, \texttt{features/overview}), affiancate da tre cartelle trasversali: \texttt{core} (stato applicativo, interceptor HTTP, osservabilità), \texttt{shared} (componenti UI riutilizzabili) e \texttt{layout} (guscio dell'applicazione, intestazioni, navigazione). Ogni feature raggruppa a sua volta una pagina (View) e il proprio ViewModel, affiancati dai propri componenti (\texttt{components/}) e dai propri servizi e modelli (\texttt{data/}) dove servono: \texttt{overview}, che si limita a comporre dati già presenti nello Store, non ha né gli uni né gli altri. La struttura rispecchia la stessa separazione per dominio applicativo già adottata nel backend (Sezione 4.3).
 
 Tutti i componenti sono standalone (nessun \texttt{NgModule}) e usano \texttt{ChangeDetectionStrategy.OnPush} con le API a segnali di Angular 21 (\texttt{signal}, \texttt{computed}, \texttt{input()}) al posto delle proprietà decorate con \texttt{@Input()}: un componente si ridisegna solo quando un segnale che consuma cambia valore, non a ogni ciclo di change detection globale.
 
@@ -2653,7 +2653,7 @@ Attributi
     \item \texttt{error: Signal<string | null>}, \texttt{loading: Signal<boolean>}: combinano \texttt{store.error()}/\texttt{store.loading()} con \texttt{store.filteredAssistantError()}/\texttt{store.filteredAssistantLoading()}, così il banner e lo spinner principali riflettono anche un fallimento o un caricamento della sola sezione Metriche filtrata, non solo dello stato condiviso.
     \item \texttt{metricsFilters: WritableSignal<AssistantMetricsFilters>}, \texttt{hasActiveMetricsFilters: Signal<boolean>}: filtri della sezione Metriche (tono, stile, intervallo di date, RF38-OB..RF41-OB), separati da \texttt{activeFilters} sotto: filtrare le metriche non deve filtrare anche lo storico, e viceversa.
     \item \texttt{metrics}: pass-through su \texttt{store.filteredAssistantState()?.metrics}, esclusa la voce \texttt{assistant.drafts} (le bozze da valutare sono una priorità e vivono nella Overview; qui sono già la parte "in bozza" di \texttt{draftComposition}, sotto). Legge dalla fetta filtrata dello Store, non da \texttt{store.assistantMetrics()}: quest'ultima resterebbe sempre sul totale non filtrato.
-    \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: per ciascuna delle quattro metriche mostrate (\texttt{assistant.total}, \texttt{assistant.prompt\_configurations}, \texttt{assistant.rated}, \texttt{assistant.rating\_average}: un andamento, un conteggio, una quota e una media a stelle, tutte a due celle), la forma della scheda e il suo ingombro nella griglia, letta da \texttt{MetricsPanelComponent} (Sezione 6.7).
+    \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: per ciascuna delle quattro metriche mostrate (\texttt{assistant.total}, \texttt{assistant.prompt\_configurations}, \texttt{assistant.rated}, \texttt{assistant.rating\_average}: due andamenti, una quota e una media a stelle, tutte a due celle), la forma della scheda e il suo ingombro nella griglia, letta da \texttt{MetricsPanelComponent} (Sezione 6.7).
     \item \texttt{recentFeedback: Signal<Communication[]>}: pass-through su \texttt{store.filteredAssistantState()?.recentFeedback} (UC-27.3), gli ultimi contenuti valutati con voto e commento testuale, ricalcolati secondo \texttt{metricsFilters} come il resto della sezione, non solo la media, che resta in \texttt{metricsPresentation} sopra.
     \item \texttt{metricsReportExportUrl: string}: URL statico del download del report riepilogativo delle metriche (\texttt{/api/v1/assistant/metrics/export}, RF34-OB), letto direttamente dal template come \texttt{href} del link di esportazione.
     \item \texttt{draftComposition: Signal<CompositionSlice[]>}: ripartizione delle comunicazioni fra "In bozza" e "Decise" (il totale meno le bozze), derivata dalla stessa fetta filtrata di \texttt{metrics} sopra.
@@ -2695,7 +2695,7 @@ Attributi
     \item \texttt{isUploading}, \texttt{uploadStatus}, \texttt{uploadPhase}, \texttt{isDeleting}, \texttt{isSavingReview}, \texttt{reviewError}, \texttt{reviewFieldErrors}, \texttt{isSavingSendMessage}, \texttt{sendMessageError}: segnali di stato per le rispettive azioni asincrone.
     \item \texttt{activeFilters}, \texttt{hasActiveFilters}, \texttt{filteredDocuments}, \texttt{documentsError}: segnali sullo storico documenti, scritti solo internamente da \texttt{reload()}.
     \item \texttt{currentPage: WritableSignal<number>} (default 1), \texttt{totalDocuments: WritableSignal<number>} (default 0), \texttt{pageSize}: paginazione dello storico, dieci righe a pagina.
-    \item \texttt{totalPages: Signal<number>}, \texttt{hasPreviousPage: Signal<boolean>}, \texttt{hasNextPage: Signal<boolean>}: segnali derivati da \texttt{currentPage}/\texttt{totalDocuments}, letti da \texttt{DocumentListComponent} per i controlli di paginazione.
+    \item \texttt{totalPages: Signal<number>}, \texttt{hasPreviousPage: Signal<boolean>}, \texttt{hasNextPage: Signal<boolean>}: segnali derivati da \texttt{currentPage}/\texttt{totalDocuments}. Alla View viene passato \texttt{totalPages}, da cui \texttt{DocumentListComponent} ricava da sé lo stato dei propri controlli di paginazione; \texttt{hasPreviousPage} e \texttt{hasNextPage} restano disponibili sul ViewModel ma nessun template li consuma.
     \item \texttt{error}, \texttt{loading}: pass-through su \texttt{store.error()}/\texttt{store.loading()}, così il template non legge mai lo Store direttamente.
     \item \texttt{metrics}: pass-through su \texttt{store.copilotMetrics()}, escluse le voci che il pannello non mostra come scheda a sé (\texttt{copilot.ocr\_confidence}, \texttt{copilot.validated}, \texttt{copilot.quarantined}, \texttt{copilot.sub\_documents}): \texttt{validated} e \texttt{quarantined} sono esiti di validazione, \texttt{quarantined} vive anche come priorità nella Overview; \texttt{sub\_documents} è il totale su cui si misurano le quote; \texttt{ocr\_confidence} non risponde a nessun caso d'uso UC-56, ma resta nel contratto perché la Overview la legge (\texttt{vm.copilotQuality()}, Sezione 6.2).
     \item \texttt{metricsPresentation: Signal<Record<string, MetricPresentation>>}: stesso ruolo di \texttt{AssistantPageViewModel.metricsPresentation}, per le cinque metriche mostrate (\texttt{copilot.documents}, \texttt{copilot.processing\_seconds} (due andamenti stretti) e tre quote larghe: \texttt{copilot.auto\_classified} per UC-56.2, \texttt{copilot.needs\_review} per UC-56.3, \texttt{copilot.recipient\_auto\_matched} per UC-56.4). L'ordine delle chiavi non è arbitrario: la griglia CSS non ricompone le righe per colmare i vuoti, quindi le due schede strette devono precedere le tre larghe perché le righe si chiudano senza celle vuote (due celle, poi sei, chiudono due righe da quattro).
@@ -2747,7 +2747,7 @@ Metodi
 
 \subsubsection{MvpStateStore (stato condiviso fra i ViewModel)}
 
-Sorgente unica dello stato applicativo (Assistant e Co-Pilot), condivisa da tutte le viste tramite i rispettivi ViewModel. Espone segnali di sola lettura derivati da un unico segnale privato, così che né i ViewModel né i componenti possano scrivere lo stato direttamente, ma solo tramite i metodi dedicati.
+Sorgente unica dello stato applicativo (Assistant e Co-Pilot), condivisa da tutte le viste tramite i rispettivi ViewModel. Espone esclusivamente segnali di sola lettura, derivati dai propri segnali privati (lo stato condiviso, i suoi indicatori di caricamento ed errore e la fetta filtrata delle metriche Assistant), così che né i ViewModel né i componenti possano scrivere lo stato direttamente, ma solo tramite i metodi dedicati.
 
 \begin{figure}[H]
     \centering
@@ -3038,7 +3038,7 @@ Metodi
 % ── 6.5 ──────────────────────────────────────────────────────────────────────
 \subsection{Interceptor HTTP e servizi trasversali}
 
-Tre \texttt{HttpInterceptorFn} registrati globalmente, eseguiti su ogni richiesta verso il backend, e tre servizi \texttt{providedIn: "root"} che li supportano.
+Tre \texttt{HttpInterceptorFn} registrati globalmente, eseguiti su ogni richiesta verso il backend, e tre servizi di supporto: due dichiarati \texttt{providedIn: "root"} e uno registrato esplicitamente come gestore degli errori dell'applicazione.
 
 \texttt{apiBaseUrlInterceptor} premette \texttt{environment.apiBaseUrl} alle sole richieste applicative (\texttt{/api}, \texttt{/health}, \texttt{/ready}) quando quella variabile è configurata; di default è vuota, quindi SPA e API condividono la stessa origine dietro il reverse proxy e l'interceptor è un no-op. Resta l'unico punto in cui puntare il frontend a un backend su un'origine diversa.
 
@@ -3083,7 +3083,7 @@ La serializzazione verso e dal backend è interamente generata: Orval crea, insi
 
 I componenti condivisi (\texttt{shared/components}) sono privi di logica di dominio: ricevono dati tramite segnali di input e riemettono eventi tramite \texttt{output()}, senza conoscere da quale feature vengono usati. Sono ventuno in tutto: \texttt{ButtonComponent}, \texttt{AlertComponent}, \texttt{ErrorStateComponent}, \texttt{EmptyStateComponent}, \texttt{LoadingStateComponent}, \texttt{StatusBadgeComponent}, \texttt{StatusDotComponent}, \texttt{AttentionNoteComponent}, \texttt{MetricCardComponent}, \texttt{MetricsPanelComponent}, \texttt{MetricShareComponent}, \texttt{MetricGaugeComponent}, \texttt{MetricStatusComponent}, \texttt{MetricBreakdownComponent}, \texttt{MetricStarsComponent}, \texttt{MetricCompositionComponent}, \texttt{StageProgressComponent}, \texttt{StarRating}, \texttt{SelectFieldComponent}, \texttt{TextAreaFieldComponent}, \texttt{FileDropzoneComponent}. La cartella \texttt{data-table} contiene solo un foglio di stile condiviso, non un componente: le tabelle restano markup HTML nativo nelle singole pagine, non un elemento riutilizzabile a sé.
 
-\texttt{MetricsPanelComponent} è un dispatcher con più componenti di presentazione dedicati, ciascuno la risposta visiva a un tipo diverso di domanda che una metrica può porre (un andamento, una quota, una posizione su scala, una ripartizione...): cinque forme dedicate oltre a quella di default (Sezione successiva). \texttt{StarRating} vive in \texttt{shared/components} con due punti di utilizzo: la scheda \texttt{assistant.rating\_average} nel pannello metriche dell'Assistant, e la valutazione della bozza in anteprima.
+\texttt{MetricsPanelComponent} è un dispatcher con più componenti di presentazione dedicati, ciascuno la risposta visiva a un tipo diverso di domanda che una metrica può porre (un andamento, una quota, una posizione su scala, una ripartizione...): cinque forme dedicate oltre a quella di default (Sezione successiva). \texttt{StarRating} vive in \texttt{shared/components} con due punti di utilizzo, entrambi nel modulo Assistant: la valutazione della bozza in anteprima e l'elenco delle bozze valutate di recente. La scheda \texttt{assistant.rating\_average} del pannello metriche usa invece \texttt{MetricStarsComponent}.
 
 \subsubsection{ButtonComponent}
 
@@ -3199,7 +3199,7 @@ Metodi
 
 \subsubsection{Le forme di scheda del pannello metriche}
 
-Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? Il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate esclusivamente da \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina. \texttt{copilot.processing\_seconds} è una singola media in secondi (kind \textit{trend}, come un conteggio qualunque): il modulo Communications non ha una metrica equivalente, la durata della generazione non è oggi esposta come voce del contratto \texttt{/api/v1/state}. Nessuna delle due pagine usa \texttt{MetricGaugeComponent} o \texttt{MetricStatusComponent} tramite il pannello: restano forme valide del dispatcher, e \texttt{MetricGaugeComponent} è montato direttamente da \texttt{OverviewPage} (Sezione 6.9) per la qualità del Co-Pilot.
+Le cinque forme di presentazione oltre a quella di default, ciascuna la risposta a un tipo diverso di domanda che una metrica può porre: \texttt{MetricShareComponent} (quanta parte di un totale, con l'anello che colora anche il residuo perché è quello il numero su cui agire), \texttt{MetricGaugeComponent} (dove cade un valore dentro una scala nota, con la tacca della soglia oltre la quale il sistema decide da solo), \texttt{MetricStatusComponent} (c'è qualcosa da guardare? Il verdetto prima del numero, perché un conteggio di guasti vale quasi sempre zero e uno zero grande quanto un totale chiederebbe di fermarsi a capire), \texttt{MetricBreakdownComponent} (come si divide un insieme fra gli stati in cui si trova, un anello a più colori invece della quota a due) e \texttt{MetricStarsComponent} (una media su una scala a stelle, con l'ultima riempita per la frazione reale e non arrotondata). Tutte condividono lo stesso stato di caricamento (\texttt{isLoading}, schede segnaposto) e lo stesso involucro visivo (\texttt{shared/styles/metric-shell.css}), montate dal dispatcher \texttt{MetricsPanelComponent} in base al \texttt{kind} dichiarato nella mappa \texttt{presentation} della pagina, oppure direttamente da una pagina che ne abbia bisogno fuori dal pannello. \texttt{copilot.processing\_seconds} è una singola media in secondi (kind \textit{trend}, come un conteggio qualunque): il modulo Communications non ha una metrica equivalente, la durata della generazione non è oggi esposta come voce del contratto \texttt{/api/v1/state}. Nessuna delle due pagine usa \texttt{MetricGaugeComponent}, \texttt{MetricStatusComponent} o \texttt{MetricBreakdownComponent} tramite il pannello: restano forme valide del dispatcher, e \texttt{MetricGaugeComponent} è montato direttamente da \texttt{OverviewPage} (Sezione 6.9) per la qualità del Co-Pilot, insieme a \texttt{MetricStarsComponent} per quella dell'Assistant.
 
 \begin{figure}[H]
     \centering
@@ -3212,7 +3212,7 @@ Attributi
     \item \texttt{MetricShareComponent}: \texttt{label}, \texttt{value: InputSignal<number | null>}, \texttt{total: InputSignal<number | null>} (obbligatori), \texttt{restTone: InputSignal<"alert" | "neutral">} (default \textit{alert}: distingue un residuo che chiede un intervento da uno che è solo il complemento di una misura), \texttt{restNoun}, \texttt{isLoading}.
     \item \texttt{MetricGaugeComponent}: \texttt{label}, \texttt{value: InputSignal<string>} (obbligatori, già formattato), \texttt{numeric: InputSignal<number | null>} (posiziona il riempimento), \texttt{max} (default 100), \texttt{threshold: InputSignal<number | null>}, \texttt{unit}, \texttt{tone}, \texttt{context}, \texttt{isLoading}.
     \item \texttt{MetricStatusComponent}: \texttt{label}, \texttt{value: InputSignal<number | null>} (obbligatori), \texttt{okLabel} (default \textit{"Nessun caso"}), \texttt{issueLabel} (default \textit{"da esaminare"}), \texttt{issueTone: InputSignal<"danger" | "warning">} (default \textit{danger}: un guasto blocca, un degrado no), \texttt{context}, \texttt{isLoading}.
-    \item \texttt{MetricBreakdownComponent}: \texttt{label: InputSignal<string>} (obbligatorio), \texttt{parts: InputSignal<MetricPart[] | undefined>}, \texttt{emptyLabel}, \texttt{isLoading}.
+    \item \texttt{MetricBreakdownComponent}: \texttt{label: InputSignal<string>} (obbligatorio), \texttt{parts: InputSignal<readonly MetricPart[] | undefined>}, \texttt{emptyLabel}, \texttt{isLoading}.
     \item \texttt{MetricStarsComponent}: \texttt{label}, \texttt{value: InputSignal<string>} (obbligatori, già formattato), \texttt{numeric: InputSignal<number | null>} (riempie le stelle), \texttt{max} (default 5), \texttt{context}, \texttt{isLoading}.
 \end{itemize}
 
@@ -3445,7 +3445,7 @@ Metodi
 % ── 6.9 ──────────────────────────────────────────────────────────────────────
 \subsection{Macro componenti UI (pagine)}
 
-Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha (i \texttt{FormGroup} reattivi dei filtri e l'\texttt{effect()} che li collega al ViewModel), oltre a poche azioni locali prive di logica di dominio (\texttt{resetFilters()}, su \texttt{AssistantPage} anche \texttt{resetMetricsFilters()} per il filtro separato della sezione Metriche, e su \texttt{CopilotPage} anche lo scorrimento verso il dettaglio in \texttt{selectDocument()}); nessuna chiamata HTTP e nessuna regola di business vive nella pagina.
+Le pagine sono i componenti radice di ciascuna feature, montati dal router: \texttt{OverviewPage} (cruscotto con le metriche di entrambi i moduli), \texttt{AssistantPage} (AI Assistant Generativo) e \texttt{CopilotPage} (AI Co-Pilot). Nel pattern MVVM descritto in Sezione 6.2 sono la View: si procurano con \texttt{inject()} le dipendenze Angular (Store, servizio di feature) e costruiscono il proprio ViewModel passandogliele nel costruttore, poi compongono i componenti di feature e quelli condivisi legando il template ai segnali e ai metodi esposti dal ViewModel. Sulla View restano solo gli aspetti che richiedono un injection context Angular che il ViewModel non ha (i \texttt{FormGroup} reattivi dei filtri, le sottoscrizioni che ne inoltrano le variazioni al ViewModel e gli \texttt{effect()} che reagiscono ai suoi segnali), oltre a poche azioni locali prive di logica di dominio (\texttt{resetFilters()}, su \texttt{AssistantPage} anche \texttt{resetMetricsFilters()} per il filtro separato della sezione Metriche, e su \texttt{CopilotPage} anche lo scorrimento verso il dettaglio in \texttt{selectDocument()}); nessuna chiamata HTTP e nessuna regola di business vive nella pagina.
 
 \subsubsection{AssistantPage}
 
@@ -3657,7 +3657,7 @@ class WorkflowTaskRunner
 
 Evita che l'adapter primario (un Controller HTTP o un handler di workflow) debba conoscere e orchestrare direttamente i singoli collaboratori necessari a soddisfare una richiesta applicativa, riducendo quella conoscenza a un solo metodo pubblico.
 
-Esempio nel progetto. Ogni caso d'uso applicativo (Sezione 5) è una Facade sulle proprie porte secondarie: \texttt{ProcessDocumentService} coordina repository, storage, gateway AI, dispatcher di eventi, heartbeat e generatore di identificativi dietro un solo metodo pubblico (\texttt{process()}); l'adapter primario che lo invoca (\texttt{DocumentController} o \texttt{DocumentWorkflowTaskHandler}) non deve sapere quanti collaboratori servono per soddisfare la richiesta. Senza questo pattern il Controller orchestrerebbe direttamente i dieci collaboratori del costruttore di \texttt{ProcessDocumentService}, la situazione esplicitamente evitata dalla separazione fra adapter primario e caso d'uso applicativo su cui si fonda tutta la Sezione 5.
+Esempio nel progetto. Ogni caso d'uso applicativo (Sezione 5) è una Facade sulle proprie porte secondarie: \texttt{ProcessDocumentService} coordina repository, storage, gateway AI, dispatcher di eventi, heartbeat e generatore di identificativi dietro un solo metodo pubblico (\texttt{process()}); l'adapter primario che lo invoca, in questo caso \texttt{DocumentWorkflowTaskHandler}, non deve sapere quanti collaboratori servono per soddisfare la richiesta. Senza questo pattern sarebbe l'adapter primario a orchestrare direttamente i dieci collaboratori del costruttore di \texttt{ProcessDocumentService}, la situazione esplicitamente evitata dalla separazione fra adapter primario e caso d'uso applicativo su cui si fonda tutta la Sezione 5.
 
 \begin{lstlisting}[style=phplisting, caption={ProcessDocumentService: Facade su repository, storage, gateway AI, eventi ed heartbeat dietro process()}]
 // app/Mvp/Documents/Application/UseCases/ProcessDocumentService.php
@@ -3919,7 +3919,7 @@ class DeleteDocumentService implements DeleteDocumentUseCase
 }
 \end{lstlisting}
 
-Nota di onestà: l'idea "un caso d'uso = una classe con un solo metodo pubblico" non regge alla lettera per le porte che raggruppano più transizioni sullo stesso aggregato: \texttt{CommunicationDraftUseCase} ne ha cinque (\texttt{favorite}/\texttt{unfavorite}/\texttt{update}/\texttt{save}/\texttt{discard}), \texttt{StartCommunicationWorkflowUseCase} e \texttt{UpdateCommunicationCoverUseCase} ne hanno due ciascuna. È una scelta esplicita (raggruppare transizioni correlate sullo stesso aggregato invece di una classe per transizione), non un Command puro: si applica a metà dei casi d'uso, non a tutti.
+Nota di onestà: l'idea "un caso d'uso = una classe con un solo metodo pubblico" non regge alla lettera per le porte che raggruppano più transizioni sullo stesso aggregato: \texttt{CommunicationDraftUseCase} ne ha cinque (\texttt{favorite}/\texttt{unfavorite}/\texttt{update}/\texttt{save}/\texttt{discard}), \texttt{StartCommunicationWorkflowUseCase} e \texttt{UpdateCommunicationCoverUseCase} ne hanno due ciascuna. È una scelta esplicita (raggruppare transizioni correlate sullo stesso aggregato invece di una classe per transizione), non un Command puro: si applica alla maggior parte dei casi d'uso, non a tutti: le porte che raggruppano più transizioni sono una decina, distribuite su entrambi i domini.
 
 \subsubsection{Pattern nativi del framework}
 
@@ -4028,7 +4028,7 @@ export class AssistantPageViewModel {
   readonly selectedDraftId: WritableSignal<number | null> = signal(null);
   readonly latestDraft: WritableSignal<GeneratedDraft | null> = signal(null);
 
-  // [...] altri ventotto signal/computed per storico, configurazioni,
+  // [...] altri trenta signal/computed per storico, configurazioni,
   // filtri, presentazione delle metriche, stati di caricamento delle
   // singole azioni.
 
@@ -4076,7 +4076,7 @@ Il sistema non ha una tabella \texttt{users}: l'identità (tenant, attore) è ri
 
 \subsection{Schema ER}
 
-Le relazioni con vincolo di integrità referenziale dichiarato sono solo due: lo split produce i sotto-documenti (\texttt{original\_documents} 1:N \texttt{sub\_documents}, \textit{on delete cascade}) e l'estrazione produce i dati strutturati (\texttt{sub\_documents} 1:1 \texttt{extracted\_data}, \textit{on delete cascade}). Le altre relazioni visibili nel diagramma sono polimorfiche e non vincolate a livello di database: \texttt{workflow\_tasks} si riferisce a un \texttt{original\_documents} o a una \texttt{communications} tramite la coppia \texttt{subject\_type}/\texttt{subject\_id} (Sezione 8.4), mentre \texttt{audit\_events} si riferisce a un \texttt{original\_documents}, una \texttt{communications}, un \texttt{sub\_documents} o una \texttt{prompt\_configurations} tramite \texttt{resource\_type}/\texttt{resource\_id} (i quattro soli valori usati dai listener che scrivono l'audit trail, Sezione 7.1.6): nessuna tabella di dominio è quindi realmente isolata dal resto: coerentemente con l'assenza di una tabella utenti (Sezione 8), ogni tabella resta comunque coperta dal proprio \texttt{tenant\_id}, non da una foreign key.
+Le relazioni con vincolo di integrità referenziale dichiarato sono solo due: lo split produce i sotto-documenti (\texttt{original\_documents} 1:N \texttt{sub\_documents}, \textit{on delete cascade}) e l'estrazione produce i dati strutturati (\texttt{sub\_documents} 1:1 \texttt{extracted\_data}, \textit{on delete cascade}). Le altre relazioni visibili nel diagramma sono polimorfiche e non vincolate a livello di database: \texttt{workflow\_tasks} si riferisce a un \texttt{original\_documents} o a una \texttt{communications} tramite la coppia \texttt{subject\_type}/\texttt{subject\_id} (Sezione 8.4), mentre \texttt{audit\_events} si riferisce a un \texttt{original\_documents}, una \texttt{communications}, un \texttt{sub\_documents} o una \texttt{prompt\_configurations} tramite \texttt{resource\_type}/\texttt{resource\_id} (i quattro soli valori usati da chi scrive l'audit trail, Sezione 7.1.6): nessuna tabella di dominio è quindi realmente isolata dal resto. Coerentemente con l'assenza di una tabella utenti (Sezione 8), l'appartenenza al tenant è registrata come colonna \texttt{tenant\_id} sulle sole tabelle radice (\texttt{communications}, \texttt{original\_documents}, \texttt{prompt\_configurations} e \texttt{audit\_events}), mai come foreign key: \texttt{sub\_documents}, \texttt{extracted\_data} e \texttt{workflow\_tasks} non hanno una colonna propria e ricadono nel tenant della radice a cui appartengono, verificato a livello applicativo da ogni caso d'uso (Sezione 4.7).
 
 \begin{figure}[H]
     \centering
@@ -4223,7 +4223,7 @@ Colonne
 
 \subsubsection{audit\_events}
 
-Log di audit trasversale a entrambi i domini, popolato dai listener degli eventi di dominio (Sezione 7.1.6, Observer) invece che da chiamate dirette sparse nei singoli casi d'uso. Ogni riga registra chi ha compiuto un'azione, su quale risorsa, correlata alla richiesta HTTP che l'ha generata.
+Log di audit trasversale a entrambi i domini, popolato in prevalenza dai listener degli eventi di dominio (Sezione 7.1.6, Observer) invece che da chiamate sparse nei singoli casi d'uso; restano due sole scritture dirette, dalla validazione dell'upload e dall'esecutore dei task di workflow. Ogni riga registra chi ha compiuto un'azione, su quale risorsa, correlata alla richiesta HTTP che l'ha generata.
 
 \begin{figure}[H]
     \centering
