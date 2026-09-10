@@ -20,10 +20,13 @@
       "aliases": []
     },
     {
-      "id": "ai-assistant-generativo",
-      "term": "AI Assistant Generativo",
+      "id": "ai-assistant-generativo-ai-assistant",
+      "term": "AI Assistant Generativo (AI Assistant)",
       "definition": "Modulo che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini) a partire da un prompt.",
-      "aliases": []
+      "aliases": [
+        "AI Assistant Generativo",
+        "AI Assistant"
+      ]
     },
     {
       "id": "ai-co-pilot-per-consulenti-del-lavoro-cdl",
@@ -155,15 +158,9 @@
       "aliases": []
     },
     {
-      "id": "aws-s3",
-      "term": "AWS S3",
-      "definition": "Nome del servizio AWS di object storage utilizzato per i file del sistema.",
-      "aliases": []
-    },
-    {
-      "id": "aws-sqs",
-      "term": "AWS SQS",
-      "definition": "Nome del servizio AWS di code di messaggi utilizzato per i task asincroni.",
+      "id": "axe",
+      "term": "axe",
+      "definition": "Strumento di testing automatico per l'accessibilità (a11y) dell'interfaccia utente, integrato nella pipeline",
       "aliases": []
     },
     {
@@ -391,7 +388,7 @@
     {
       "id": "emf",
       "term": "EMF",
-      "definition": "Eclipse Modeling Framework, un framework per la modellazione e la generazione di codice basato su modelli.",
+      "definition": "Embedded Metric Format, Specifica JSON utilizzata per generare metriche Amazon CloudWatch personalizzate in modo asincrono tramite eventi di log strutturati.",
       "aliases": []
     },
     {
@@ -521,6 +518,15 @@
       ]
     },
     {
+      "id": "iam-identity-and-access-management",
+      "term": "IAM(Identity and Access Management)",
+      "definition": "Framework di politiche, tecnologie e processi che permette di gestire le identità digitali e controllare l'accesso degli utenti alle risorse aziendali.",
+      "aliases": [
+        "IAM",
+        "Identity and Access Management"
+      ]
+    },
+    {
       "id": "idempotenza",
       "term": "Idempotenza",
       "definition": "Proprietà per cui ripetere un'operazione produce lo stesso effetto della sua prima esecuzione.",
@@ -548,6 +554,12 @@
       "id": "issue",
       "term": "Issue",
       "definition": "Strumento per tracciare task su GitHub.",
+      "aliases": []
+    },
+    {
+      "id": "jest",
+      "term": "Jest",
+      "definition": "è un popolare framework di testing JavaScript sviluppato per garantire la correttezza del codice.",
       "aliases": []
     },
     {
@@ -746,6 +758,12 @@
       "aliases": []
     },
     {
+      "id": "npm",
+      "term": "NPM",
+      "definition": "comando integrato in Node.js che analizza le dipendenze di un progetto alla ricerca di vulnerabilità di sicurezza note",
+      "aliases": []
+    },
+    {
       "id": "observable",
       "term": "Observable",
       "definition": "Astrazione RxJS che rappresenta una sequenza di valori prodotti nel tempo.",
@@ -800,6 +818,12 @@
       ]
     },
     {
+      "id": "pa11y",
+      "term": "pa11y",
+      "definition": "Strumenti gratuiti e open-source progettata per automatizzare i test di accessibilità delle pagine web",
+      "aliases": []
+    },
+    {
       "id": "pb-product-baseline",
       "term": "PB (Product Baseline)",
       "definition": "Fase finale del progetto per lo sviluppo e la consegna del prodotto.",
@@ -848,6 +872,12 @@
       "id": "piano-di-qualifica",
       "term": "Piano di Qualifica",
       "definition": "Documento con metriche, test e obiettivi di qualità.",
+      "aliases": []
+    },
+    {
+      "id": "playwright",
+      "term": "Playwright",
+      "definition": "Framework per l'automazione di un browser reale.",
       "aliases": []
     },
     {
@@ -968,6 +998,12 @@
       "id": "redis",
       "term": "Redis",
       "definition": "Sistema in-memory utilizzato per cache, sessioni e rate limiting; non gestisce la coda della pipeline.",
+      "aliases": []
+    },
+    {
+      "id": "redocly",
+      "term": "Redocly",
+      "definition": "Piattaforma di documentazione API e gestione del ciclo di vita delle API che aiuta i team di sviluppo a creare portali per sviluppatori professionali, validare specifiche e pubblicare guide interattive.",
       "aliases": []
     },
     {
@@ -1220,6 +1256,12 @@
       "id": "trigger",
       "term": "Trigger",
       "definition": "Evento che innesca un caso d'uso.",
+      "aliases": []
+    },
+    {
+      "id": "trivy",
+      "term": "Trivy",
+      "definition": "Scanner di sicurezza open source sviluppato da Aqua Security, semplice e veloce, progettato per trovare problemi di sicurezza nei sistemi cloud-native.",
       "aliases": []
     },
     {

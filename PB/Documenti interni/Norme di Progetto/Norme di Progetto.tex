@@ -197,7 +197,7 @@
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{4}
-\fancyfoot[R]{Norme di Progetto\hspace{0.8em}\thepage}
+\fancyfoot[R]{\glslink{norme-di-progetto}{Norme di Progetto}\hspace{0.8em}\thepage}
 
 \section{Introduzione}
 
@@ -266,10 +266,10 @@ Per rendere il presente capitolo effettivamente utilizzabile durante lo svolgime
     \item \textbf{Scopo:} il risultato che il processo deve produrre e la ragione per cui il gruppo lo applica.
     \item \textbf{Strumenti a supporto:} gli strumenti che devono essere impiegati nello svolgimento del processo.
     \item \textbf{Attività previste:} l'elenco delle attività in cui il processo si articola.
-    \item \textbf{Procedure operative:} per ciascuna attività, la sequenza numerata dei passi da eseguire, con indicazione del ruolo responsabile di ogni passo.
+    \item \textbf{Procedure operative:} per ciascuna attività, la sequenza numerata dei passi da eseguire, con indicazione del ruolo \glslink{responsabile}{responsabile} di ogni passo.
 \end{itemize}
 
-All'interno delle procedure, il ruolo indicato all'inizio di ogni passo è il responsabile della sua esecuzione. Le formulazioni con ``deve'' individuano obblighi vincolanti per tutti i membri del gruppo, mentre quelle con ``può'' individuano facoltà il cui esercizio è rimesso al giudizio del ruolo indicato.
+All'interno delle procedure, il ruolo indicato all'inizio di ogni passo è il \glslink{responsabile}{responsabile} della sua esecuzione. Le formulazioni con ``deve'' individuano obblighi vincolanti per tutti i membri del gruppo, mentre quelle con ``può'' individuano facoltà il cui esercizio è rimesso al giudizio del ruolo indicato.
 
 \subsection{Processi primari}
 In questa sezione viene descritto come nasce il software. I processi primari comprendono tutte le attività direttamente coinvolte nella creazione del prodotto e si articolano in fornitura e sviluppo.
@@ -282,7 +282,7 @@ Il processo di fornitura deve trasformare le necessità espresse nel \glslink{ca
 \paragraph{Strumenti a supporto}
 \begin{itemize}
     \item \textbf{\glslink{github}{GitHub}:} per il versionamento della documentazione di fornitura e per la conversione di ogni impegno assunto in una \textit{\glslink{issue}{Issue}} assegnata.
-    \item \textbf{\glslink{latex}{LaTeX}:} per la redazione dei documenti contrattuali e di pianificazione.
+    \item \textbf{\glslink{latex}{LaTeX}:} per la redazione dei documenti contrattuali e di \glslink{pianificazione}{pianificazione}.
     \item \textbf{Posta elettronica e Telegram:} per le comunicazioni formali e per i chiarimenti rapidi con il referente aziendale, secondo le regole definite nel paragrafo sulla comunicazione.
     \item \textbf{Google Meet:} per gli incontri periodici con la \glslink{committente-proponente}{proponente}.
 \end{itemize}
@@ -344,7 +344,7 @@ Il processo di sviluppo deve tradurre i requisiti concordati in un applicativo f
 
 \paragraph{Strumenti a supporto}
 \begin{itemize}
-    \item \textbf{\glslink{laravel}{Laravel} 12 e \glslink{filament}{Filament}:} per la realizzazione rispettivamente del backend applicativo e delle interfacce amministrative.
+    \item \textbf{\glslink{laravel}{Laravel} 12 e \glslink{filament}{Filament}:} per la realizzazione rispettivamente del \glslink{backend}{backend} applicativo e delle interfacce amministrative.
     \item \textbf{\glslink{amazon-bedrock}{Amazon Bedrock}:} per l'erogazione delle funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}.
     \item \textbf{\glslink{docker-compose}{Docker Compose}:} per l'esecuzione locale dello stack applicativo, nella stessa composizione impiegata per i \glslink{test-di-sistema}{test di sistema}.
     \item \textbf{\glslink{laravel}{Laravel} Pint, Larastan e \glslink{pest}{Pest} \glslink{php}{PHP}:} per la formattazione, l'\glslink{analisi-statica}{analisi statica} e i test del codice prodotto.
@@ -363,7 +363,7 @@ Il processo di sviluppo deve tradurre i requisiti concordati in un applicativo f
 \begin{enumerate}
     \item L'\glslink{analista}{Analista} separa i flussi di lavoro aziendali di creazione dei contenuti da quelli consulenziali di gestione documentale massiva, in modo che le due aree dell'applicativo restino indipendenti.
     \item L'\glslink{analista}{Analista} classifica gli attori del sistema in \glslink{utente-operativo}{utenti operativi} (\glslink{attore-primario}{primari}), ovvero gli utenti umani che innescano le operazioni (\glslink{amministratore}{Amministratore}, \glslink{redattore}{Redattore}, \glslink{analista-dati}{Analista dati}, \glslink{consulente-del-lavoro-cdl}{Consulente del lavoro}), e \glslink{moduli-esterni}{moduli esterni} (\glslink{attore-secondario}{secondari}), ovvero le entità di sistema chiamate in causa per completare l'operazione (\glslink{ai-post-generator}{AI Post Generator}, \glslink{ai-analyst}{AI Analyst}).
-    \item L'\glslink{analista}{Analista} identifica ogni caso d'uso con il codice \texttt{UC-[Numero]} e ne indica le scomposizioni logiche nella forma \texttt{[Caso Padre].[\glslink{sottocaso}{Sottocaso}]}, ad esempio \textit{UC-1.1} per un \glslink{sottocaso}{sottocaso} di \textit{UC-1}.
+    \item L'\glslink{analista}{Analista} identifica ogni \glslink{caso-d-uso-uc}{caso d'uso} con il codice \texttt{UC-[Numero]} e ne indica le scomposizioni logiche nella forma \texttt{[Caso Padre].[\glslink{sottocaso}{Sottocaso}]}, ad esempio \textit{UC-1.1} per un \glslink{sottocaso}{sottocaso} di \textit{UC-1}.
     \item L'\glslink{analista}{Analista} compila per ogni \glslink{caso-d-uso-uc}{caso d'uso} una scheda contenente attori coinvolti, \glslink{trigger}{trigger}, \glslink{precondizioni}{precondizioni} e \glslink{postcondizioni}{postcondizioni}, \glslink{scenario-principale}{scenario principale} in forma di sequenza numerata e \glslink{scenario-alternativo}{scenari alternativi}.
     \item L'\glslink{analista}{Analista} associa a ogni requisito il riferimento al \glslink{caso-d-uso-uc}{caso d'uso} e alla fonte da cui deriva, così che il tracciamento resti verificabile durante la validazione.
 \end{enumerate}
@@ -479,7 +479,7 @@ I diari di bordo sono diapositive realizzate per gli incontri con i docenti sull
 \end{itemize}
 
 \paragraph{Stato di un documento}\label{sec:stato-documento}
-Ogni documento attraversa una sequenza definita di stati, che rende immediatamente riconoscibile il grado di affidabilità del contenuto e la figura responsabile del passo successivo:
+Ogni documento attraversa una sequenza definita di stati, che rende immediatamente riconoscibile il grado di affidabilità del contenuto e la figura \glslink{responsabile}{responsabile} del passo successivo:
 
 \begin{itemize}
     \item \textbf{\glslink{bozza-draft}{Bozza}:} il documento è in stesura da parte del \glslink{redattore}{redattore} incaricato. Il contenuto è provvisorio, può essere incompleto e non deve essere considerato attendibile dagli altri membri né citato come riferimento in altri documenti. La relativa \textit{\glslink{issue}{Issue}} si trova nella colonna \textit{In Progress} della board Kanban.
@@ -514,7 +514,7 @@ Durante la stesura il \glslink{redattore}{redattore} deve attenersi alle seguent
     \item \textbf{Struttura dei periodi:} semplificare i periodi più densi, evitando frasi eccessivamente lunghe o ricche di incisi e separando le informazioni con funzioni diverse.
     \item \textbf{Terminologia tecnica:} demandare le definizioni e le spiegazioni dei concetti tecnici al \textit{\glslink{glossario}{Glossario}}, evitando di ripeterle nel corpo del documento.
     \item \textbf{Organizzazione logica:} separare visivamente, con paragrafi distinti o elenchi, le parti descrittive da quelle valutative, dalle motivazioni e dalle conseguenze.
-    \item \textbf{Stile prescrittivo:} nelle sezioni che normano un'attività, indicare il ruolo responsabile e l'azione richiesta anziché limitarsi a descrivere la prassi in corso.
+    \item \textbf{Stile prescrittivo:} nelle sezioni che normano un'attività, indicare il ruolo \glslink{responsabile}{responsabile} e l'azione richiesta anziché limitarsi a descrivere la prassi in corso.
 \end{itemize}
 
 \paragraph{Verifica e approvazione}
@@ -640,7 +640,7 @@ Il processo di accertamento della qualità deve verificare che i processi applic
 \paragraph{Strumenti a supporto}
 \begin{itemize}
     \item \textbf{\glslink{piano-di-qualifica}{Piano di Qualifica}:} contiene le soglie delle metriche e il cruscotto di valutazione con l'andamento storico delle misurazioni.
-    \item \textbf{\glslink{github}{GitHub} Projects:} fornisce i dati di avanzamento e di consuntivo necessari alla misurazione delle metriche di processo.
+    \item \textbf{\glslink{github}{GitHub} Projects:} fornisce i dati di avanzamento e di \glslink{consuntivo}{consuntivo} necessari alla misurazione delle metriche di processo.
     \item \textbf{Foglio di rendicontazione oraria:} fornisce i dati di impiego delle risorse per il calcolo delle metriche economiche.
 \end{itemize}
 
@@ -673,7 +673,7 @@ Il processo di verifica deve garantire l'assenza di difetti e l'aderenza di ogni
 \begin{itemize}
     \item \textbf{\textit{\glslink{pull-request}{Pull Request}} di \glslink{github}{GitHub}:} sede in cui vengono registrati i difetti rilevati e le relative correzioni.
     \item \textbf{Larastan e \glslink{laravel}{Laravel} Pint:} per l'\glslink{analisi-statica}{analisi statica} automatica e la verifica di conformità stilistica del codice.
-    \item \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}:} per la scrittura e l'esecuzione dei test di unità e di integrazione.
+    \item \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}:} per la scrittura e l'esecuzione dei \glslink{test-di-unita}{test di unità} e di integrazione.
     \item \textbf{\glslink{docker-compose}{Docker Compose}:} per l'esecuzione dei \glslink{test-di-sistema}{test di sistema} sull'ambiente completo.
 \end{itemize}
 
@@ -777,7 +777,7 @@ I processi organizzativi governano il modo in cui il gruppo lavora e si affianca
 \subsubsection{Gestione dei processi}
 
 \paragraph{Scopo}
-Il processo di gestione dei processi deve assicurare che gli obiettivi di progetto siano raggiunti nel rispetto dei vincoli di costo, delle tempistiche stimate e dei requisiti concordati con la \glslink{committente-proponente}{proponente}, attraverso la \glslink{pianificazione}{pianificazione} delle attività, il monitoraggio dell'avanzamento, la prevenzione dei rischi e l'assegnazione trasparente di ruoli e responsabilità.
+Il processo di gestione dei processi deve assicurare che gli obiettivi di progetto siano raggiunti nel rispetto dei vincoli di costo, delle tempistiche stimate e dei requisiti concordati con la \glslink{committente-proponente}{proponente}, attraverso la \glslink{pianificazione}{pianificazione} delle attività, il monitoraggio dell'avanzamento, la prevenzione \glslink{mitigazione-dei-rischi}{dei rischi} e l'assegnazione trasparente di ruoli e responsabilità.
 
 \paragraph{Strumenti a supporto}
 \begin{itemize}
@@ -812,7 +812,7 @@ Il gruppo adotta un approccio \glslink{agile}{iterativo}, suddividendo il ciclo 
     \item L'assegnatario sposta la propria \textit{\glslink{issue}{Issue}} nella colonna \textit{In Progress} nel momento in cui inizia a lavorarci.
     \item L'assegnatario svolge il \textit{task} seguendo la procedura del processo pertinente e, in caso di difficoltà, chiede chiarimenti nella sezione commenti della \textit{\glslink{issue}{Issue}}.
     \item L'assegnatario apre la \textit{\glslink{pull-request}{Pull Request}} al termine del lavoro e sposta la \textit{\glslink{issue}{Issue}} nella colonna \textit{In Review}.
-    \item Il \glslink{responsabile}{Responsabile} monitora l'avanzamento della board e ridistribuisce i \textit{task} qualora rilevi il rischio di superare le scadenze fissate.
+    \item Il \glslink{responsabile}{Responsabile} monitora l'avanzamento della board e ridistribuisce i \textit{task} qualora rilevi il \glslink{rischio}{rischio} di superare le scadenze fissate.
 \end{enumerate}
 
 \subparagraph{Gestione del flusso di lavoro tramite Kanban}
@@ -830,7 +830,7 @@ Per garantire un controllo visivo e immediato sullo stato di avanzamento delle \
     \item Il \glslink{responsabile}{Responsabile} confronta le ore preventivate con quelle consuntivate e motiva nel \glslink{piano-di-progetto}{Piano di Progetto} gli scostamenti principali, quali sottostime, attività impreviste e dipendenze esterne.
     \item Il \glslink{responsabile}{Responsabile} aggiorna le previsioni di costo a finire sulla base degli scostamenti rilevati.
     \item Il gruppo svolge la \glslink{sprint}{Sprint} Retrospective, individuando i punti di forza da mantenere e le inefficienze organizzative da correggere.
-    \item Il \glslink{responsabile}{Responsabile} revisiona il Registro dei Rischi documentando, per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi, la causa scatenante, l'impatto effettivo e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista, che deve essere assegnata a un membro.
+    \item Il \glslink{responsabile}{Responsabile} revisiona il Registro \glslink{mitigazione-dei-rischi}{dei Rischi} documentando, per ogni criticità emersa o \glslink{rischio}{rischio} inatteso manifestatosi, la causa scatenante, l'impatto effettivo e l'azione di \glslink{mitigazione-dei-rischi}{mitigazione} prevista, che deve essere assegnata a un membro.
 \end{enumerate}
 
 \paragraph{Conclusione dell'iterazione}
@@ -873,7 +873,7 @@ Il \glslink{programmatore}{Programmatore} deve tradurre l'architettura e le spec
 \end{itemize}
 
 \subparagraph{Progettista}
-Il \glslink{progettista}{Progettista} deve ideare l'architettura del sistema in modo che soddisfi i requisiti funzionali e di qualità concordati con la \glslink{committente-proponente}{proponente}. Nello specifico deve:
+Il \glslink{progettista}{Progettista} deve ideare l'architettura del sistema in modo che soddisfi i \glslink{requisiti-funzionali}{requisiti funzionali} e di qualità concordati con la \glslink{committente-proponente}{proponente}. Nello specifico deve:
 \begin{itemize}
     \item valutare e decidere linguaggi, \textit{framework} e strumenti tecnici più idonei alla realizzazione del progetto;
     \item definire la struttura del sistema individuando i macro-componenti e le modalità di comunicazione tra essi;
@@ -974,7 +974,7 @@ L'intera documentazione di progetto è ospitata nel \glslink{repository}{reposit
 \begin{itemize}
     \item \textbf{Ramo \texttt{main}:} contiene esclusivamente contenuti verificati e rappresenta la fonte di verità del progetto. È protetto: nessun membro può effettuare \textit{push} diretti e ogni modifica deve transitare da una \textit{\glslink{pull-request}{Pull Request}} approvata.
     \item \textbf{Ramo \texttt{develop}:} ramo di integrazione del codice del prodotto, su cui confluiscono i rami di lavoro dei singoli \glslink{programmatore}{programmatori} prima del consolidamento. L'allineamento periodico di questo ramo è un'attività pianificata e tracciata come qualsiasi altro \textit{task}.
-    \item \textbf{\glslink{issue}{Issue} e \glslink{pull-request}{Pull Request}:} costituiscono rispettivamente l'\textit{issue tracking system} e lo strumento di revisione del gruppo, secondo le modalità definite nel processo di gestione della configurazione.
+    \item \textbf{\glslink{issue}{Issue} e \glslink{pull-request}{Pull Request}:} costituiscono rispettivamente l'\textit{\glslink{issue}{issue} tracking system} e lo strumento di revisione del gruppo, secondo le modalità definite nel processo di gestione della configurazione.
     \item \textbf{\glslink{github}{GitHub} Projects:} la board ``aLittleByte - \glslink{dashboard}{Dashboard}'' raccoglie le \glslink{issue}{Issue} di progetto e ne governa il flusso Kanban.
 \end{itemize}
 
@@ -982,14 +982,14 @@ L'intera documentazione di progetto è ospitata nel \glslink{repository}{reposit
 \begin{itemize}
     \item \textbf{\glslink{latex}{LaTeX}:} tutti i documenti sono sorgenti \texttt{.tex} versionati insieme al resto del progetto. I loghi e gli asset grafici condivisi risiedono in \texttt{.\glslink{github}{github}/site-src/assets}, così che una modifica all'identità visiva si propaghi automaticamente a tutti i documenti alla successiva compilazione.
     \item \textbf{Python:} lo script \texttt{.\glslink{github}{github}/site-src/update\_index.py} genera la struttura statica del sito documentale a partire dall'alberatura del \glslink{repository}{repository}, evitando la manutenzione manuale delle pagine HTML; la generazione delle anteprime dei PDF si appoggia all'utilità \texttt{poppler-utils}.
-    \item \textbf{Applicazione del \glslink{glossario}{Glossario}:} il \glslink{glossario}{Glossario} è pubblicato anche come applicazione \glslink{angular}{Angular} contenuta in \texttt{.\glslink{github}{github}/glossary-app}, che ne consente la consultazione e la ricerca dal browser. I dati risiedono nel file \texttt{glossary.json} e sono sottoposti a validazione automatica prima di ogni rilascio, per impedire la pubblicazione di voci malformate o di ancore non risolvibili dai collegamenti presenti nei documenti.
+    \item \textbf{Applicazione del \glslink{glossario}{Glossario}:} il \glslink{glossario}{Glossario} è pubblicato anche come applicazione \glslink{angular}{Angular} contenuta in \texttt{.\glslink{github}{github}/glossary-app}, che ne consente la consultazione e la ricerca dal browser. I dati risiedono nel file \texttt{glossary.\glslink{json}{json}} e sono sottoposti a validazione automatica prima di ogni rilascio, per impedire la pubblicazione di voci malformate o di ancore non risolvibili dai collegamenti presenti nei documenti.
     \item \textbf{\glslink{github}{GitHub} Pages:} ospita il sito del gruppo, che rende disponibile agli \glslink{stakeholder}{stakeholder} l'ultima versione integrata di ogni documento.
 \end{itemize}
 
 \subparagraph{Infrastruttura di sviluppo}
 \begin{itemize}
     \item \textbf{Ambiente di esecuzione:} l'applicativo viene eseguito localmente tramite \glslink{docker-compose}{Docker Compose} con i servizi \glslink{nginx}{Nginx}, \glslink{php-fpm}{PHP-FPM}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis} e \glslink{minio}{MinIO}, nella stessa composizione utilizzata per i \glslink{test-di-sistema}{test di sistema}.
-    \item \textbf{Framework applicativi:} il backend è realizzato con \glslink{laravel}{Laravel} 12 e le interfacce amministrative con \glslink{filament}{Filament}; le funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} sono erogate tramite \glslink{amazon-bedrock}{Amazon Bedrock}.
+    \item \textbf{Framework applicativi:} il \glslink{backend}{backend} è realizzato con \glslink{laravel}{Laravel} 12 e le interfacce amministrative con \glslink{filament}{Filament}; le funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} sono erogate tramite \glslink{amazon-bedrock}{Amazon Bedrock}.
     \item \textbf{Strumenti di qualità:} \glslink{laravel}{Laravel} Pint, Larastan e \glslink{pest}{Pest} \glslink{php}{PHP}, secondo le soglie e le procedure fissate nel processo di verifica.
 \end{itemize}
 
@@ -1038,7 +1038,7 @@ A partire dai requisiti raccolti nell'\glslink{analisi-dei-requisiti-adr}{Analis
     \item \textbf{Documentazione e automazioni:} \glslink{latex}{LaTeX} per la stesura dei documenti, Python per gli script di generazione del sito, \glslink{angular}{Angular} per l'applicazione del \glslink{glossario}{Glossario}, \glslink{git}{Git} e \glslink{github}{GitHub} (\glslink{issue}{Issue}, \glslink{pull-request}{Pull Request}, Projects, Actions, Pages) per il versionamento e le automazioni.
     \item \textbf{Progettazione:} UML per i \glslink{diagramma-delle-classi-uml}{diagrammi delle classi} e dei casi d'uso, \glslink{modello-c4}{modello C4} per la descrizione dell'architettura su più livelli di astrazione.
     \item \textbf{Sviluppo:} \glslink{php}{PHP} con lo standard PSR-12, \glslink{laravel}{Laravel} 12 e \glslink{filament}{Filament} per l'applicativo, \glslink{postgresql}{PostgreSQL} per la persistenza, \glslink{redis}{Redis} per code e cache, \glslink{minio}{MinIO} come object storage e \glslink{docker-compose}{Docker Compose} per l'orchestrazione dell'ambiente locale.
-    \item \textbf{Verifica:} \glslink{pest}{Pest} \glslink{php}{PHP} per i test di unità e di integrazione, Larastan e \glslink{laravel}{Laravel} Pint per l'\glslink{analisi-statica}{analisi statica} e la formattazione.
+    \item \textbf{Verifica:} \glslink{pest}{Pest} \glslink{php}{PHP} per i \glslink{test-di-unita}{test di unità} e di integrazione, Larastan e \glslink{laravel}{Laravel} Pint per l'\glslink{analisi-statica}{analisi statica} e la formattazione.
     \item \textbf{Moduli di Intelligenza Artificiale:} \glslink{amazon-bedrock}{Amazon Bedrock} e i concetti relativi ai \glslink{llm-large-language-model}{Large Language Model}, alla costruzione dei \glslink{prompt}{prompt}, all'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e all'\glslink{entity-resolution}{Entity Resolution}, indispensabili per lo sviluppo dell'\glslink{ai-assistant-generativo}{AI Assistant Generativo} e dell'\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot}.
 \end{itemize}
 
@@ -1325,7 +1325,7 @@ La metrica seguente sintetizza l'esito delle attività di accertamento della qua
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Processi organizzativi --- Gestione dei processi}
-Le metriche seguenti misurano l'efficienza nell'impiego delle risorse e l'efficacia della previsione dei rischi, ovvero gli esiti delle attività di \glslink{pianificazione}{pianificazione} dell'iterazione e di revisione e valutazione del processo di gestione dei processi. I dati di ingresso sono il foglio di rendicontazione oraria e il Registro dei Rischi del \glslink{piano-di-progetto}{Piano di Progetto}.
+Le metriche seguenti misurano l'efficienza nell'impiego delle risorse e l'efficacia della previsione \glslink{mitigazione-dei-rischi}{dei rischi}, ovvero gli esiti delle attività di \glslink{pianificazione}{pianificazione} dell'iterazione e di revisione e valutazione del processo di gestione dei processi. I dati di ingresso sono il foglio di rendicontazione oraria e il Registro \glslink{mitigazione-dei-rischi}{dei Rischi} del \glslink{piano-di-progetto}{Piano di Progetto}.
 
 \paragraph{MPC-TE --- Time Efficiency}
 \begin{itemize}
@@ -1355,7 +1355,7 @@ Le metriche seguenti misurano l'efficienza nell'impiego delle risorse e l'effica
 \subsection{Metriche per la qualità di prodotto}
 Queste metriche misurano le proprietà interne ed esterne del software finale per garantire che il sistema rispetti i requisiti. Lo standard di riferimento è ISO/IEC 9126, adottato come base per la classificazione delle caratteristiche di qualità del prodotto.
 
-I raggruppamenti seguenti corrispondono alle sei caratteristiche di qualità del prodotto elencate nel capitolo sulla qualità del software, ovvero funzionalità, affidabilità, efficienza, usabilità, mantenibilità e portabilità. Tutte le metriche di prodotto sono rilevate dal \glslink{verificatore}{Verificatore} nell'ambito dell'attività di accertamento della qualità di prodotto e nessuna modifica può essere approvata se porta una di esse sotto la soglia accettabile fissata nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
+I raggruppamenti seguenti corrispondono alle sei caratteristiche di qualità del prodotto elencate nel capitolo sulla qualità del software, ovvero funzionalità, affidabilità, efficienza, usabilità, mantenibilità e portabilità. Tutte le metriche di prodotto sono rilevate dal \glslink{verificatore}{Verificatore} nell'ambito dell'attività di accertamento della qualità di prodotto e nessuna modifica può essere approvata se \glslink{porta}{porta} una di esse sotto la soglia accettabile fissata nel \glslink{piano-di-qualifica}{Piano di Qualifica}.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{Funzionalità}
