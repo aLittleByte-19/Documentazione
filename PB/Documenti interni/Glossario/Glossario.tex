@@ -13,8 +13,8 @@
 \usepackage{pgf-pie}
 
 \newcommand{\groupmail}{alittlebyte.swe@gmail.com}
-\newcommand{\grouplogo}{../../.github/site-src/assets/logo_alittlebyte.png}
-\newcommand{\groupsymbol}{../../.github/site-src/assets/solo_logo.png}
+\newcommand{\grouplogo}{../../../.github/site-src/assets/logo_alittlebyte.png}
+\newcommand{\groupsymbol}{../../../.github/site-src/assets/solo_logo.png}
 
 \geometry{
     left=2.5cm,
@@ -149,7 +149,7 @@ Modello di sviluppo basato su sprint bisettimanali, adottato dal team.
 \subsection{AI Analyst}
 Nucleo elaborativo del modulo AI Co-Pilot che esegue autonomamente classificazione documentale, OCR ed estrazione dati.
 
-\subsection{AI Assistant Generativo}
+\subsection{AI Assistant Generativo (AI Assistant)}
 Modulo che permette la creazione autonoma di contenuti aziendali (titolo, testo, immagini) a partire da un prompt.
 
 \subsection{AI Co-Pilot per Consulenti del Lavoro (CdL)}
@@ -194,12 +194,6 @@ Componente responsabile della registrazione degli eventi nel audit trail, garant
 \subsection{AWS}
 Fornitore di servizi cloud utilizzati dal sistema per AI, storage, code e orchestrazione.
 
-\subsection{AWS S3}
-Nome del servizio AWS di object storage utilizzato per i file del sistema.
-
-\subsection{AWS SQS}
-Nome del servizio AWS di code di messaggi utilizzato per i task asincroni.
-
 \subsection{Approccio Incrementale}
 Metodo di stesura e sviluppo in cui i documenti e il prodotto vengono costantemente aggiornati e affinati nel tempo.
 
@@ -211,6 +205,9 @@ L'utente umano o il sistema esterno che avvia attivamente un caso d'uso.
 
 \subsection{Attore Secondario}
 Entità o sistema terzo coinvolto passivamente nel processo.
+
+\subsection{axe}
+Strumento di testing automatico per l'accessibilità (a11y) dell'interfaccia utente, integrato nella pipeline 
 
 \section{B}
 \subsection{Bookmark}
@@ -328,7 +325,7 @@ Identificatore della versione di una risorsa HTTP usato per evitare trasferiment
 ORM di Laravel utilizzato per mappare modelli applicativi e tabelle del database.
 
 \subsection{EMF}
-Eclipse Modeling Framework, un framework per la modellazione e la generazione di codice basato su modelli.
+Embedded Metric Format, Specifica JSON utilizzata per generare metriche Amazon CloudWatch personalizzate in modo asincrono tramite eventi di log strutturati.
 
 \subsection{Entity}
 Oggetto di dominio dotato di identità e comportamento propri.
@@ -385,6 +382,10 @@ Approccio con revisione umana per casi a bassa confidenza dell'AI.
 Segnale periodico che indica a un orchestratore che un'elaborazione è ancora attiva.
 
 \section{I}
+
+\subsection{IAM(Identity and Access Management)}
+Framework di politiche, tecnologie e processi che permette di gestire le identità digitali e controllare l'accesso degli utenti alle risorse aziendali.
+
 \subsection{Indice di Gulpease (MPC-IG)}
 Indice di leggibilità per testi in italiano.
 
@@ -409,6 +410,9 @@ Tipo binario di PostgreSQL per memorizzare dati JSON semi-strutturati.
 \section{J}
 \subsection{JWT (JSON Web Token)}
 Token firmato utilizzato per rappresentare l'identità e autorizzare le richieste.
+
+\subsection{Jest}
+ è un popolare framework di testing JavaScript sviluppato per garantire la correttezza del codice.
 
 \section{K}
 \subsection{KLOC}
@@ -488,6 +492,9 @@ Piattaforma digitale di Eggon per comunicazione e gestione HR.
 \subsection{Norme di Progetto}
 Documento che definisce Way of Working, ruoli, strumenti e procedure.
 
+\subsection{NPM}
+comando integrato in Node.js che analizza le dipendenze di un progetto alla ricerca di vulnerabilità di sicurezza note
+
 \subsection{Nginx}
 Web server e reverse proxy utilizzato per servire la SPA e inoltrare le richieste a PHP-FPM.
 
@@ -517,6 +524,9 @@ Protocollo usato da OpenTelemetry per inviare segnali osservabili a un Collector
 \subsection{PB (Product Baseline)}
 Fase finale del progetto per lo sviluppo e la consegna del prodotto.
 
+\subsection{pa11y}
+Strumenti gratuiti e open-source progettata per automatizzare i test di accessibilità delle pagine web
+
 \subsection{Penpot}
 Strumento open source scelto per la progettazione di mockup.
 
@@ -532,6 +542,8 @@ Documento con pianificazione, rischi, preventivi e consuntivi.
 \subsection{Piano di Qualifica}
 Documento con metriche, test e obiettivi di qualità.
 
+\subsection{Playwright}
+Framework per l'automazione di un browser reale.
 
 \subsection{Postcondizioni}
 Stato finale del sistema dopo un caso d'uso.
@@ -547,9 +559,6 @@ Gestore di processi PHP che esegue l'applicazione Laravel tramite FastCGI.
 
 \subsection{PHP}
 Linguaggio utilizzato per lo sviluppo del backend Laravel.
-
-\subsection{SQL (Structured Query Language)}
-Linguaggio utilizzato per definire e interrogare i dati del database relazionale.
 
 \subsection{Prometheus}
 Sistema per la raccolta e l'archiviazione di metriche esposte dai servizi.
@@ -590,6 +599,9 @@ Controllo degli accessi basato sui ruoli.
 
 \subsection{Redattore}
 Utente che utilizza l'AI Assistant per creare comunicazioni.
+
+\subsection{Redocly}
+Piattaforma di documentazione API e gestione del ciclo di vita delle API che aiuta i team di sviluppo a creare portali per sviluppatori professionali, validare specifiche e pubblicare guide interattive.
 
 \subsection{Redis}
 Sistema in-memory utilizzato per cache, sessioni e rate limiting; non gestisce la coda della pipeline.
@@ -636,6 +648,9 @@ Scomposizione di un caso d'uso complesso.
 
 \subsection{Split Automatico}
 Suddivisione di documenti multi-destinatario.
+
+\subsection{SQL (Structured Query Language)}
+Linguaggio utilizzato per definire e interrogare i dati del database relazionale.
 
 \subsection{S3 (Simple Storage Service)}
 Servizio AWS di object storage per documenti, sotto-documenti e asset statici.
@@ -712,6 +727,9 @@ Proxy inverso e load balancer per microservizi, che gestisce automaticamente il 
 
 \subsection{Trigger}
 Evento che innesca un caso d'uso.
+
+\subsection{Trivy}
+Scanner di sicurezza open source sviluppato da Aqua Security, semplice e veloce, progettato per trovare problemi di sicurezza nei sistemi cloud-native.
 
 \section{U}
 \subsection{Utente Operativo}

@@ -292,7 +292,7 @@ Il certificato \glslink{tls-transport-layer-security}{TLS} locale è self-signed
 
 \subsection{Credenziali AI}
 
-La generazione dei testi, delle copertine e l'analisi documentale usano \glslink{amazon-bedrock}{Amazon Bedrock}. \glslink{localstack}{LocalStack} non emula Bedrock: anche in ambiente locale servono credenziali \glslink{aws}{AWS} reali con accesso ai modelli abilitato nella console della region configurata.
+La generazione dei testi, delle copertine e l'analisi documentale usano \glslink{amazon-bedrock}{Amazon Bedrock}. \glslink{localstack}{LocalStack} non emula Bedrock: anche in ambiente locale servono credenziali \glslink{aws}{AWS} reali con accesso \glslink{intelligenza-artificiale-ai}{ai} modelli abilitato nella console della region configurata.
 
 Senza un modello di testo raggiungibile la generazione della \glslink{bozza-draft}{bozza} fallisce e il sistema mostra un errore applicativo, senza contenuti sostitutivi. Senza un modello di immagini raggiungibile il testo viene comunque prodotto: la copertina risulta non disponibile, con un messaggio esplicito, e la \glslink{bozza-draft}{bozza} resta utilizzabile.
 
@@ -316,15 +316,15 @@ cd MVP
 Copiare il file \texttt{.env.example} in \texttt{.env} e compilare almeno le credenziali \glslink{aws}{AWS} reali usate da Bedrock:
 
 \begin{itemize}
-    \item \texttt{AWS\_REAL\_ACCESS\_KEY\_ID} e \texttt{AWS\_REAL\_SECRET\_ACCESS\_KEY};
-    \item \texttt{AWS\_REAL\_SESSION\_TOKEN}, solo se le credenziali sono temporanee;
+    \item \texttt{\glslink{aws}{AWS}\_REAL\_ACCESS\_KEY\_ID} e \texttt{\glslink{aws}{AWS}\_REAL\_SECRET\_ACCESS\_KEY};
+    \item \texttt{\glslink{aws}{AWS}\_REAL\_SESSION\_TOKEN}, solo se le credenziali sono temporanee;
     \item \texttt{BEDROCK\_REGION} e \texttt{BEDROCK\_MODEL\_ID} per il modello di testo\\
     (default: \texttt{amazon.nova-lite-v1:0});
     \item \texttt{BEDROCK\_IMAGE\_REGION} e \texttt{BEDROCK\_IMAGE\_MODEL\_ID} per le copertine.\\
     I modelli immagine vivono in region diverse da quelli testo.
 \end{itemize}
 
-Non inserire commenti sulla stessa riga di un valore: il file li tratterebbe come parte del valore. Dopo ogni modifica alle variabili \texttt{AWS\_REAL\_*} o Bedrock, una volta avviato lo stack, eseguire \texttt{make refresh-runtime} perché i nuovi valori arrivino ai processi.
+Non inserire commenti sulla stessa riga di un valore: il file li tratterebbe come parte del valore. Dopo ogni modifica alle variabili \texttt{\glslink{aws}{AWS}\_REAL\_*} o Bedrock, una volta avviato lo stack, eseguire \texttt{make refresh-runtime} perché i nuovi valori arrivino ai processi.
 
 I valori di default coprono \glslink{localstack}{LocalStack}, \glslink{postgresql}{PostgreSQL}, \glslink{redis}{Redis} e l'osservabilità. Non vanno modificati se non si sta cambiando deliberatamente l'ambiente.
 
@@ -362,7 +362,7 @@ Una risposta positiva indica che il \glslink{backend}{backend} è in ascolto. I 
 Tutte le viste condividono la stessa cornice.
 
 \begin{itemize}
-    \item \textbf{Barra laterale sinistra.} In alto il logo aLittleByte. Sotto, tre gruppi: \ui{Panoramica}, \ui{AI Assistant}, \ui{Co-Pilot \glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{CdL}}. Ogni gruppo ha una voce principale e dei collegamenti alle sezioni della pagina (evidenziati mentre si scorre).
+    \item \textbf{Barra laterale sinistra.} In alto il logo aLittleByte. Sotto, tre gruppi: \ui{Panoramica}, \ui{\glslink{ai-assistant-generativo-ai-assistant}{AI Assistant}}, \ui{Co-Pilot \glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{CdL}}. Ogni gruppo ha una voce principale e dei collegamenti alle sezioni della pagina (evidenziati mentre si scorre).
     \item \textbf{Intestazione.} L'etichetta \ui{\glslink{nexum}{NEXUM}} e il titolo della vista corrente (\ui{Overview operativa}, \ui{\glslink{ai-assistant-generativo}{AI Assistant Generativo}} o \ui{AI Co-Pilot per i \glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{CdL}}). A destra, il pulsante per passare dal tema chiaro a quello scuro e viceversa.
     \item \textbf{Area di lavoro.} Il contenuto della vista, organizzato in sezioni successive. Un pulsante \ui{Torna su} compare dopo aver sceso nella pagina.
 \end{itemize}
@@ -411,8 +411,8 @@ All'apertura si vede la console di sintesi. Non è una \glslink{dashboard}{dashb
 Il riquadro iniziale recita: \textit{``Gestione assistita di comunicazioni interne e documenti del personale.''} Due pulsanti scorciano i flussi:
 
 \begin{itemize}
-    \item \ui{Crea contenuto} porta alla sezione di generazione dell'Assistant.
-    \item \ui{Carica documenti} porta alla sezione di caricamento del Co-Pilot.
+    \item \ui{Crea contenuto} \glslink{porta}{porta} alla sezione di generazione dell'Assistant.
+    \item \ui{Carica documenti} \glslink{porta}{porta} alla sezione di caricamento del Co-Pilot.
 \end{itemize}
 
 Sotto, la sezione \ui{Da dove partire} riassume i tre punti d'ingresso: Assistant, Co-Pilot e metriche operative (queste ultime restano dentro le pagine degli strumenti, non in una vista analytics separata).
@@ -504,9 +504,9 @@ Quando la \glslink{bozza-draft}{bozza} è pronta si vedono, dall'alto:
     \item l'immagine di copertina, se presente. Durante la generazione compare \textit{``Generazione copertina in corso.''}; se manca o è stata tolta, \textit{``Nessuna copertina per questa \glslink{bozza-draft}{bozza}.''}; se la generazione dell'immagine è fallita, un avviso con il motivo;
     \item i pulsanti \ui{Cambia immagine} e \ui{Rimuovi immagine} (assenti se la \glslink{bozza-draft}{bozza} è stata scartata). L'immagine sostitutiva deve essere PNG, JPEG o WebP, massimo 5~MB;
     \item i campi \ui{Titolo} (massimo 255 caratteri) e \ui{Testo} (massimo 20\,000 caratteri), in sola lettura finché non si preme \ui{Modifica};
-    \item il blocco \ui{Documento finale}, visibile solo a generazione conclusa e se la \glslink{bozza-draft}{bozza} non è scartata: \ui{Apri anteprima} (nuova scheda) e \ui{Scarica PDF}. Ogni pagina del documento riporta il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} \textit{``Creato da AI Assistant''};
+    \item il blocco \ui{Documento finale}, visibile solo a generazione conclusa e se la \glslink{bozza-draft}{bozza} non è scartata: \ui{Apri anteprima} (nuova scheda) e \ui{Scarica PDF}. Ogni pagina del documento riporta il \glslink{marcatore-di-trasparenza}{marcatore di trasparenza} \textit{``Creato da \glslink{ai-assistant-generativo-ai-assistant}{AI Assistant}''};
     \item la valutazione a stelle (paragrafo successivo);
-    \item lo stato della \glslink{bozza-draft}{bozza} (\ui{\glslink{bozza-draft}{Bozza}}, \ui{Approvata} o \ui{Scartata}) e la dicitura \textit{``Creato da AI Assistant''};
+    \item lo stato della \glslink{bozza-draft}{bozza} (\ui{\glslink{bozza-draft}{Bozza}}, \ui{Approvata} o \ui{Scartata}) e la dicitura \textit{``Creato da \glslink{ai-assistant-generativo-ai-assistant}{AI Assistant}''};
     \item le azioni \ui{Salva nello storico}, \ui{Rigenera \glslink{bozza-draft}{bozza}} e \ui{Scarta \glslink{bozza-draft}{bozza}}.
 \end{itemize}
 
@@ -682,7 +682,7 @@ La sezione \ui{Carica nel \glslink{repository}{repository}} accetta un solo file
 
 \begin{itemize}
     \item \ui{Tipologia documento}: \ui{cedolino}, \ui{CU}, \ui{comunicazione}, \ui{documento da firmare}, \ui{lettera}, \ui{altro}. Un secondo clic sulla stessa tipologia la deseleziona.
-    \item \ui{Mese di riferimento}: elenco dei mesi, oppure \ui{Automatico (AI)}.
+    \item \ui{Mese di riferimento}: elenco dei mesi, oppure \ui{Automatico (\glslink{intelligenza-artificiale-ai}{AI})}.
     \item \ui{Anno di riferimento}: numero compreso fra 1900 e 2100.
     \item \ui{Azienda}: testo libero, massimo 500 caratteri.
 \end{itemize}
@@ -925,7 +925,7 @@ Non esiste una vista analytics con filtri temporali o grafici di accuratezza nel
 
 \section{Metriche dell'AI Assistant}
 
-Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{\glslink{ai-assistant-generativo}{AI Assistant}} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che porta alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di \glslink{prompt}{prompt} salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
+Nell'Overview, sotto \ui{Qualità degli strumenti}, il riquadro \ui{\glslink{ai-assistant-generativo}{AI Assistant}} mostra in forma compatta solo la \ui{Media stelle} (qualità percepita delle bozze) e il collegamento \ui{Vedi tutte le metriche}, che \glslink{porta}{porta} alla sezione \ui{Qualità della generazione} descritta in \ref{fig:assistant-metriche}: lì si trovano il totale dei contenuti generati, le configurazioni di \glslink{prompt}{prompt} salvate, la percentuale di bozze valutate, l'esito delle bozze e i feedback recenti, con filtro per tono, stile e intervallo di date. Il segnale di qualità percepita resta la valutazione 1--5, unica per generazione.
 
 \section{Problemi frequenti}
 
