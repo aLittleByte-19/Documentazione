@@ -357,7 +357,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
         \rowcolor{gray!20}
         \textbf{ID} & \textbf{Nome Metrica} & \textbf{Accettabile} & \textbf{Ottimo} \\
         \hline
-        MPC-CC & Code Coverage & Linee (backend) / statement (frontend) $\geq 80\%$; rami $\geq 70\%$ & $100\%$ \\
+        MPC-CC & Code Coverage & Linee (\glslink{backend}{backend}) / statement (frontend) $\geq 80\%$; rami $\geq 70\%$ & $100\%$ \\
         MPC-TSR & Test Success Rate & $100\%$ & $100\%$ \\
         \hline
     \end{tabularx}
@@ -515,7 +515,7 @@ In questo documento, tali misure vengono identificate tramite la sigla \textbf{M
 La presente sezione descrive le attività di testing adottate nel progetto e le metriche utilizzate per valutare l'efficacia del processo di verifica.
 Le attività di testing forniscono evidenza oggettiva del corretto funzionamento dell'intero sistema e supportano la valutazione delle metriche di qualità del prodotto discusse in questo documento.
 
-Ogni test ha un codice univoco e uno stato. Le colonne dipendono dal tipo di test: i test di sistema e di accettazione riportano il requisito o il \glslink{caso-d-uso-uc}{caso d'uso} di riferimento; i test di unità e di integrazione riportano l'unità o i moduli sotto test. I codici per descrivere gli stati dei test sono i seguenti:
+Ogni test ha un codice univoco e uno stato. Le colonne dipendono dal tipo di test: i \glslink{test-di-sistema}{test di sistema} e di accettazione riportano il requisito o il \glslink{caso-d-uso-uc}{caso d'uso} di riferimento; i \glslink{test-di-unita}{test di unità} e di integrazione riportano l'unità o i moduli sotto test. I codici per descrivere gli stati dei test sono i seguenti:
 \begin{itemize}
     \item \textbf{NI}: Non Implementato
     \item \textbf{I}: Implementato, ma non ancora verificato
@@ -523,20 +523,20 @@ Ogni test ha un codice univoco e uno stato. Le colonne dipendono dal tipo di tes
     \item \textbf{NS}: Non Superato, ovvero il test è stato eseguito ma ha restituito un esito negativo
 \end{itemize}
 
-Lo stato \textbf{S} dei test di sistema funzionali (TS-F) poggia sulla suite Feature \glslink{pest}{Pest} e sui test \glslink{jest}{Jest} del frontend, integrati dalla verifica manuale sullo stack completo. Lo stato \textbf{S} dei test di qualità e di vincolo (TS-Q, TS-V) poggia sui \glslink{quality-gate}{quality gate} della CI del \glslink{repository}{repository} MVP. I test di accettazione (TA) nello stesso perimetro poggiano sulla stessa evidenza automatica e sulla verifica manuale; non risulta un verbale di collaudo con la \glslink{committente-proponente}{proponente}.
+Lo stato \textbf{S} dei \glslink{test-di-sistema}{test di sistema} funzionali (TS-F) poggia sulla suite Feature \glslink{pest}{Pest} e sui test \glslink{jest}{Jest} del frontend, integrati dalla verifica manuale sullo stack completo. Lo stato \textbf{S} dei test di qualità e di vincolo (TS-Q, TS-V) poggia sui \glslink{quality-gate}{quality gate} della CI del \glslink{repository}{repository} \glslink{mvp-minimum-viable-product}{MVP}. I \glslink{test-di-accettazione}{test di accettazione} (TA) nello stesso perimetro poggiano sulla stessa evidenza automatica e sulla verifica manuale; non risulta un verbale di collaudo con la \glslink{committente-proponente}{proponente}.
 
 \subsection{Copertura del codice}
 La copertura del codice (Code Coverage) misura la percentuale di codice sorgente eseguita durante l'esecuzione dei test automatici. Tale metrica consente di valutare il grado di verifica del software ed è direttamente collegata alla metrica \textbf{MPC-CC}.
-I \glslink{quality-gate}{quality gate} sono definiti in \texttt{coverage-thresholds.json} del \glslink{repository}{repository} MVP e bloccano la CI: backend linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage sulle linee modificate $\geq 80\%$.
+I \glslink{quality-gate}{quality gate} sono definiti in \texttt{coverage-thresholds.\glslink{json}{json}} del \glslink{repository}{repository} \glslink{mvp-minimum-viable-product}{MVP} e bloccano la CI: \glslink{backend}{backend} linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage sulle linee modificate $\geq 80\%$.
 
 \subsection{Test unitari}
 I test unitari verificano il corretto funzionamento delle singole unità software in isolamento.
 
 \paragraph{Backend}
-L'attenzione è rivolta alle componenti critiche del \glslink{backend}{backend}: validazione e normalizzazione dell'output dei modelli \glslink{intelligenza-artificiale-ai}{AI} e casi d'uso dei domini Documents e Communications, senza bootstrap \glslink{laravel}{Laravel}, con fake in memoria. I test sono realizzati con il framework \glslink{pest}{Pest} e contribuiscono alle metriche \textbf{MPC-TSR} e \textbf{MPC-CC}. La tabella~\ref{tab:tu} raggruppa le unità coperte dalle suite \texttt{tests/Unit} e \texttt{tests/DomainUnit} (224 casi eseguiti, tutti superati). I servizi applicativi \texttt{UploadDocumentService}, \texttt{ProcessDocumentService} e \texttt{GenerateCommunicationService} non hanno test in \texttt{tests/Unit}: sono coperti dalla suite Feature. I \glslink{test-di-integrazione}{test di integrazione} HTTP e di contratto \glslink{openapi}{OpenAPI} restano nella suite Feature (271 test in 21 file) e costituiscono l'evidenza automatica dei TI, non un tracciamento requisito-per-requisito.
+L'attenzione è rivolta alle componenti critiche del \glslink{backend}{backend}: validazione e normalizzazione dell'output dei modelli \glslink{intelligenza-artificiale-ai}{AI} e casi d'uso dei domini Documents e Communications, senza \glslink{bootstrap}{bootstrap} \glslink{laravel}{Laravel}, con fake in memoria. I test sono realizzati con il framework \glslink{pest}{Pest} e contribuiscono alle metriche \textbf{MPC-TSR} e \textbf{MPC-CC}. La tabella~\ref{tab:tu} raggruppa le unità coperte dalle suite \texttt{tests/Unit} e \texttt{tests/DomainUnit} (224 casi eseguiti, tutti superati). I servizi applicativi \texttt{UploadDocumentService}, \texttt{ProcessDocumentService} e \texttt{GenerateCommunicationService} non hanno test in \texttt{tests/Unit}: sono coperti dalla suite Feature. I \glslink{test-di-integrazione}{test di integrazione} HTTP e di contratto \glslink{openapi}{OpenAPI} restano nella suite Feature (271 test in 21 file) e costituiscono l'evidenza automatica dei TI, non un tracciamento requisito-per-requisito.
 
 \paragraph{Frontend}
-I test unitari del frontend sono scritti con \glslink{jest}{Jest} 30 e \texttt{jest-preset-angular} (ambiente jsdom). La suite conta 510 test in 53 file, tutti superati sulla CI di \texttt{main} del 07/09/2026 (\texttt{31bc9a6}). Le soglie di copertura coincidono con \texttt{coverage-thresholds.json}.
+I test unitari del frontend sono scritti con \glslink{jest}{Jest} 30 e \texttt{jest-preset-\glslink{angular}{angular}} (ambiente jsdom). La suite conta 510 test in 53 file, tutti superati sulla CI di \texttt{main} del 07/09/2026 (\texttt{31bc9a6}). Le soglie di copertura coincidono con \texttt{coverage-thresholds.\glslink{json}{json}}.
 
 \renewcommand{\arraystretch}{1.15}
 \rowcolors{2}{gray!8}{white}
@@ -564,7 +564,7 @@ I test unitari del frontend sono scritti con \glslink{jest}{Jest} 30 e \texttt{j
     \hline
     TU-004 & Registrazione metriche in formato \glslink{emf}{EMF} sul canale dedicato. & Unit & S \\
     \hline
-    TU-005 & Provider di autenticazione: contratto \texttt{UserProvider} su \texttt{MvpUserProvider} e binding della guard \texttt{mvp}. & Unit & S \\
+    TU-005 & Provider di autenticazione: contratto \texttt{UserProvider} su \texttt{MvpUserProvider} e binding della guard \texttt{\glslink{mvp-minimum-viable-product}{mvp}}. & Unit & S \\
     \hline
     TU-006 & Identità utente applicativo e verifica dei ruoli. & Unit & S \\
     \hline
@@ -651,17 +651,17 @@ I \glslink{test-di-integrazione}{test di integrazione} verificano il corretto co
 \endfoot
     \hline
 \endlastfoot
-    TI-001 & Verifica dello scambio dati SPA $\leftrightarrow$ \glslink{laravel}{Laravel} tramite contratto \glslink{openapi}{OpenAPI}, rigenerazione del client Orval con diff in CI e smoke HTTPS/CSP dello stack. & UI (\glslink{spa-single-page-application}{SPA}) $\leftrightarrow$ \glslink{laravel}{Laravel} 12 & S \\
+    TI-001 & Verifica dello scambio dati \glslink{spa-single-page-application}{SPA} $\leftrightarrow$ \glslink{laravel}{Laravel} tramite contratto \glslink{openapi}{OpenAPI}, rigenerazione del client \glslink{orval}{Orval} con diff in CI e smoke HTTPS/CSP dello stack. & UI (\glslink{spa-single-page-application}{SPA}) $\leftrightarrow$ \glslink{laravel}{Laravel} 12 & S \\
     \hline
     TI-002 & Verifica della costruzione delle richieste e della gestione di risposte ed errori verso \glslink{amazon-bedrock}{Amazon Bedrock} con client simulato; la chiamata reale resta verifica manuale. & \glslink{backend}{Backend} $\leftrightarrow$ \glslink{amazon-bedrock}{Amazon Bedrock} & S \\
     \hline
     TI-003 & Verifica della persistenza su \glslink{postgresql}{PostgreSQL} 16 in \glslink{container}{container}; nei test automatici la persistenza gira su SQLite in memoria, con migrazioni e letture su Postgres nello smoke CI. & \glslink{backend}{Backend} $\leftrightarrow$ \glslink{postgresql}{PostgreSQL} 16 & S \\
     \hline
-    TI-004 & Verifica della pipeline documentale (\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} con \texttt{RunOcrService} e \texttt{TextractOcrAdapter}, classificazione con \texttt{ProcessDocumentService} e adapter \glslink{amazon-bedrock}{Bedrock}) con client simulati. & \glslink{backend}{Backend} $\leftrightarrow$ Amazon \glslink{textract}{Textract} / Bedrock & S \\
+    TI-004 & Verifica della pipeline documentale (\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} con \texttt{RunOcrService} e \texttt{TextractOcrAdapter}, classificazione con \texttt{ProcessDocumentService} e \glslink{adapter}{adapter} \glslink{amazon-bedrock}{Bedrock}) con client simulati. & \glslink{backend}{Backend} $\leftrightarrow$ Amazon \glslink{textract}{Textract} / Bedrock & S \\
     \hline
-    TI-005 & Verifica dello storage con disco simulato; \glslink{s3-simple-storage-service}{S3} LocalStack è esercitato nello stack CI. & \glslink{backend}{Backend} $\leftrightarrow$ \glslink{s3-simple-storage-service}{S3} / LocalStack & S \\
+    TI-005 & Verifica dello storage con disco simulato; \glslink{s3-simple-storage-service}{S3} \glslink{localstack}{LocalStack} è esercitato nello stack CI. & \glslink{backend}{Backend} $\leftrightarrow$ \glslink{s3-simple-storage-service}{S3} / \glslink{localstack}{LocalStack} & S \\
     \hline
-    TI-006 & Verifica del consumo task, callback, heartbeat e comandi DLQ con client simulati su \glslink{step-functions}{Step Functions} e \glslink{sqs-simple-queue-service}{SQS}. \glslink{redis}{Redis} non è usato come coda. & Worker $\leftrightarrow$ \glslink{step-functions}{Step Functions} / \glslink{sqs-simple-queue-service}{SQS} (+DLQ) & S \\
+    TI-006 & Verifica del consumo task, \glslink{callback}{callback}, \glslink{heartbeat}{heartbeat} e comandi \glslink{dlq-dead-letter-queue}{DLQ} con client simulati su \glslink{step-functions}{Step Functions} e \glslink{sqs-simple-queue-service}{SQS}. \glslink{redis}{Redis} non è usato come coda. & \glslink{worker}{Worker} $\leftrightarrow$ \glslink{step-functions}{Step Functions} / \glslink{sqs-simple-queue-service}{SQS} (+\glslink{dlq-dead-letter-queue}{DLQ}) & S \\
     \hline
 \end{longtable}
 
@@ -918,7 +918,7 @@ I \glslink{test-di-sistema}{test di sistema} verificano il comportamento comples
     \hline
     TS-Q-002 & Verifica che le pratiche di sviluppo siano conformi alle \glslink{norme-di-progetto}{Norme di Progetto} adottate dal gruppo. & RQ2-OB & S \\
     \hline
-    TS-Q-003 & Verifica che il prodotto superi i test automatizzati con copertura linee $\geq 80\%$ sul backend e statement $\geq 80\%$ sul frontend. & RQ3-OB & S \\
+    TS-Q-003 & Verifica che il prodotto superi i test automatizzati con copertura linee $\geq 80\%$ sul \glslink{backend}{backend} e statement $\geq 80\%$ sul frontend. & RQ3-OB & S \\
     \hline
     TS-Q-004 & Verifica che la documentazione del codice sorgente rispetti le convenzioni definite nelle \glslink{norme-di-progetto}{Norme di Progetto}. & RQ4-OB & S \\
     \hline
@@ -944,11 +944,11 @@ I \glslink{test-di-sistema}{test di sistema} verificano il comportamento comples
     \hline
     TS-V-004 & Verifica che il frontend sia realizzato come \glslink{spa-single-page-application}{Single Page Application} in \glslink{angular}{Angular} con \glslink{typescript}{TypeScript}, con build gestita tramite \glslink{angular}{Angular} CLI. & RVC4-OB & S \\
     \hline
-    TS-V-005 & Verifica che l'esecuzione del sistema sia riprodotta con \glslink{docker-compose}{Docker Compose}, LocalStack e \glslink{terraform}{Terraform} (topologia dell'\glslink{mvp-minimum-viable-product}{MVP}; deploy cloud reale fuori perimetro). & RVC5-OB & S \\
+    TS-V-005 & Verifica che l'esecuzione del sistema sia riprodotta con \glslink{docker-compose}{Docker Compose}, \glslink{localstack}{LocalStack} e \glslink{terraform}{Terraform} (topologia dell'\glslink{mvp-minimum-viable-product}{MVP}; deploy cloud reale fuori perimetro). & RVC5-OB & S \\
     \hline
-    TS-V-006 & Verifica che l'accesso al sistema avvenga in HTTPS tramite Traefik, controllato dallo smoke CI. & RVC6-OB & S \\
+    TS-V-006 & Verifica che l'accesso al sistema avvenga in HTTPS tramite \glslink{traefik}{Traefik}, controllato dallo smoke CI. & RVC6-OB & S \\
     \hline
-    TS-V-007 & Verifica che lo storage dei file caricati sia compatibile con le \glslink{api-application-programming-interface}{API} Amazon \glslink{s3-simple-storage-service}{S3}, verificato su LocalStack. & RVC7-OB & S \\
+    TS-V-007 & Verifica che lo storage dei file caricati sia compatibile con le \glslink{api-application-programming-interface}{API} Amazon \glslink{s3-simple-storage-service}{S3}, verificato su \glslink{localstack}{LocalStack}. & RVC7-OB & S \\
     \hline
     TS-V-008 & Verifica che le funzionalità \glslink{intelligenza-artificiale-ai}{AI} si basino su \glslink{amazon-bedrock}{Amazon Bedrock} e Amazon \glslink{textract}{Textract} erogati in cloud. & RVC8-OB & S \\
     \hline
@@ -958,13 +958,13 @@ I \glslink{test-di-sistema}{test di sistema} verificano il comportamento comples
     \hline
     TS-V-011 & Verifica che lo stack applicativo di esecuzione comprenda \glslink{backend}{backend} \glslink{laravel}{Laravel} 12 su \glslink{php}{PHP} 8.4, frontend \glslink{spa-single-page-application}{SPA} \glslink{angular}{Angular} 21/\glslink{typescript}{TypeScript}, \glslink{postgresql}{PostgreSQL} 16 e \glslink{redis}{Redis} 7 in \glslink{container}{container}, coda compatibile con le \glslink{api-application-programming-interface}{API} \glslink{sqs-simple-queue-service}{SQS} e object storage compatibile con le \glslink{api-application-programming-interface}{API} \glslink{s3-simple-storage-service}{S3}. & RVC11-OB & S \\
     \hline
-    TS-V-012 & Verifica che l'ambiente locale esponga il servizio in HTTPS attraverso Traefik (scalabilità orizzontale su cloud reale fuori perimetro \glslink{mvp-minimum-viable-product}{MVP}). & RVC12-OB & S \\
+    TS-V-012 & Verifica che l'ambiente locale esponga il servizio in HTTPS attraverso \glslink{traefik}{Traefik} (scalabilità orizzontale su cloud reale fuori perimetro \glslink{mvp-minimum-viable-product}{MVP}). & RVC12-OB & S \\
     \hline
     TS-V-013 & Verifica che l'utilizzo delle funzionalità \glslink{intelligenza-artificiale-ai}{AI} richieda credenziali valide del provider cloud e connettività outbound. & RVC13-OB & S \\
     \hline
-    TS-V-014 & Verifica che l'elaborazione asincrona dei job si appoggi a una coda compatibile con Amazon \glslink{sqs-simple-queue-service}{SQS}, verificata su LocalStack. & RVC14-OB & S \\
+    TS-V-014 & Verifica che l'elaborazione asincrona dei job si appoggi a una coda compatibile con Amazon \glslink{sqs-simple-queue-service}{SQS}, verificata su \glslink{localstack}{LocalStack}. & RVC14-OB & S \\
     \hline
-    TS-V-015 & Verifica che la gestione di segreti e parametri sia compatibile con Secrets Manager/SSM, verificata su LocalStack. & RVC15-OB & S \\
+    TS-V-015 & Verifica che la gestione di segreti e parametri sia compatibile con Secrets Manager/SSM, verificata su \glslink{localstack}{LocalStack}. & RVC15-OB & S \\
     \hline
     TS-V-016 & Verifica che l'osservabilità del sistema (metriche, tracing e log) si basi su strumentazione \glslink{opentelemetry-otel}{OpenTelemetry}, esportata verso un \glslink{backend}{backend} di osservabilità gestito. & RVC16-OP & NI \\
     \hline
@@ -1060,7 +1060,7 @@ I \glslink{test-di-accettazione}{test di accettazione} verificano che il sistema
 \end{longtable}
 
 \subsection{Tracciamento}
-Le tabelle seguenti riportano la corrispondenza tra i \glslink{test-di-sistema}{test di sistema} e i requisiti coperti, e tra i \glslink{test-di-accettazione}{test di accettazione} e i casi d'uso di riferimento. I TS coprono i 136 requisiti dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} (119 obbligatori e 17 opzionali); non risulta TS-V-017 perché RVC17 è stato eliminato. I test di unità e di integrazione non sono tracciati requisito per requisito: l'evidenza è la suite Feature e i file \glslink{jest}{Jest}, come dichiarato in apertura di sezione.
+Le tabelle seguenti riportano la corrispondenza tra i \glslink{test-di-sistema}{test di sistema} e i requisiti coperti, e tra i \glslink{test-di-accettazione}{test di accettazione} e i casi d'uso di riferimento. I TS coprono i 136 requisiti dell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti} (119 obbligatori e 17 opzionali); non risulta TS-V-017 perché RVC17 è stato eliminato. I \glslink{test-di-unita}{test di unità} e di integrazione non sono tracciati requisito per requisito: l'evidenza è la suite Feature e i file \glslink{jest}{Jest}, come dichiarato in apertura di sezione.
 
 {\footnotesize
 \renewcommand{\arraystretch}{1.1}
@@ -1566,7 +1566,7 @@ L'Estimate To Complete rappresenta la stima dei costi rimanenti al completamento
 
 \paragraph*{Requirements and Technology Baseline (RTB)} L'EAC proiettato si abbassa a S7 attestandosi a \EUR{13.151,00}, con scostamento dal BAC pari a $+4{,}6\%$, entro la \emph{soglia accettabile} $\pm 5\%$. L'ETC decresce regolarmente e rimane positivo (\emph{soglia accettabile} raggiunta). La decrescita dell'EAC evidenzia l'efficacia delle azioni correttive sui processi organizzativi.
 
-\paragraph*{Product Baseline (PB)} L'EAC continua a scendere in \glslink{pb-product-baseline}{PB} fino a \EUR{12.605,00} a S10 ($+0{,}2\%$ dal BAC, formula $\text{BAC}/\text{CPI}$), risale a \EUR{12.724,00} a S11 ($+1{,}2\%$) per effetto dello sforamento del periodo e chiude a \EUR{12.704,00} ($+1{,}0\%$ dal BAC): tutti i valori della fase restano entro la \emph{soglia accettabile} $\pm 5\%$. Il \glslink{preventivo}{preventivo} a finire del \glslink{piano-di-progetto}{Piano di Progetto}, calcolato sugli scostamenti orari per ruolo, è \EUR{12.690,00} a fine progetto. Le due proiezioni usano metodi diversi. A chiusura, l'AC effettivo è \EUR{11.830,00} ($-5{,}9\%$ sul BAC): EAC ed ETC della tabella restano proiezioni $\text{BAC}/\text{CPI}$ e non coincidono con il consuntivo; a progetto chiuso il costo a finire reale è nullo. L'ETC tabulato decresce fino a \EUR{869,00} all'ultimo \glslink{sprint}{sprint} e resta $\geq 0$ (\emph{soglia accettabile}).
+\paragraph*{Product Baseline (PB)} L'EAC continua a scendere in \glslink{pb-product-baseline}{PB} fino a \EUR{12.605,00} a S10 ($+0{,}2\%$ dal BAC, formula $\text{BAC}/\text{CPI}$), risale a \EUR{12.724,00} a S11 ($+1{,}2\%$) per effetto dello sforamento del periodo e chiude a \EUR{12.704,00} ($+1{,}0\%$ dal BAC): tutti i valori della fase restano entro la \emph{soglia accettabile} $\pm 5\%$. Il \glslink{preventivo}{preventivo} a finire del \glslink{piano-di-progetto}{Piano di Progetto}, calcolato sugli scostamenti orari per ruolo, è \EUR{12.690,00} a fine progetto. Le due proiezioni usano metodi diversi. A chiusura, l'AC effettivo è \EUR{11.830,00} ($-5{,}9\%$ sul BAC): EAC ed ETC della tabella restano proiezioni $\text{BAC}/\text{CPI}$ e non coincidono con il \glslink{consuntivo}{consuntivo}; a progetto chiuso il costo a finire reale è nullo. L'ETC tabulato decresce fino a \EUR{869,00} all'ultimo \glslink{sprint}{sprint} e resta $\geq 0$ (\emph{soglia accettabile}).
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsubsection{MPC-TEAC — Time Estimate At Completion}
@@ -1689,7 +1689,7 @@ Il Requirements Stability Index valuta la stabilità dei requisiti nel tempo. La
 
 \paragraph*{Requirements and Technology Baseline (RTB)} L'RSI a S6 si attesta all'87,8\%. Nonostante l'ampia attività di riscrittura formale e l'adeguamento della tassonomia del tracciamento, l'indice si mantiene ampiamente sopra la soglia minima accettabile del 70\% (\emph{soglia accettabile} raggiunta).
 
-\paragraph*{Product Baseline (PB)} Nella \glslink{pb-product-baseline}{PB} la baseline resta 135 voci fino a S10. Nello \glslink{sprint}{Sprint} 11 (AdR v2.1.0--2.3.0, 25--30/08/2026) si aggiungono RF108 e RF109, si elimina RVC17 e si modificano almeno 14 suffissi OB/OP: $\text{RSI} = (135-2-14-1)/135 = 87{,}4\%$, sopra la soglia accettabile del 70\%. A S12 la baseline consolidata è 136 requisiti (119 obbligatori e 17 opzionali) e l'RSI torna al 100\%. L'indice di fase non è quindi ottimale in ogni \glslink{sprint}{sprint}, ma resta accettabile.
+\paragraph*{Product Baseline (PB)} Nella \glslink{pb-product-baseline}{PB} la baseline resta 135 voci fino a S10. Nello \glslink{sprint}{Sprint} 11 (\glslink{analisi-dei-requisiti-adr}{AdR} v2.1.0--2.3.0, 25--30/08/2026) si aggiungono RF108 e RF109, si elimina RVC17 e si modificano almeno 14 suffissi OB/OP: $\text{RSI} = (135-2-14-1)/135 = 87{,}4\%$, sopra la soglia accettabile del 70\%. A S12 la baseline consolidata è 136 requisiti (119 obbligatori e 17 opzionali) e l'RSI torna al 100\%. L'indice di fase non è quindi ottimale in ogni \glslink{sprint}{sprint}, ma resta accettabile.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \subsection{Processi di supporto — Documentazione}
@@ -1830,9 +1830,9 @@ La verifica è stata condotta tramite estrazione del testo con \texttt{\glslink{
 
 \paragraph*{Requirements and Technology Baseline (RTB)} MPC-CC e MPC-TSR sulla suite \glslink{pest}{Pest} non sono applicabili in \glslink{rtb-requirements-and-technology-baseline}{RTB}: il codice del PoC è dimostrativo e non costituisce baseline di prodotto.
 
-\paragraph*{Product Baseline (PB)} Fonte: CI del \glslink{repository}{repository} MVP \texttt{aLittleByte-19/MVP}, ramo \texttt{main}, commit \texttt{31bc9a6} (07/09/2026). La suite \glslink{pest}{Pest} copre Unit, DomainUnit e Feature: 495 test, 495 superati, 1534 asserzioni. La suite \glslink{jest}{Jest} copre il frontend \glslink{angular}{Angular}: 510 test, 510 superati. $\text{TSR} = 1005/1005 = 100\%$.
+\paragraph*{Product Baseline (PB)} Fonte: CI del \glslink{repository}{repository} \glslink{mvp-minimum-viable-product}{MVP} \texttt{aLittleByte-19/\glslink{mvp-minimum-viable-product}{MVP}}, ramo \texttt{main}, commit \texttt{31bc9a6} (07/09/2026). La suite \glslink{pest}{Pest} copre Unit, DomainUnit e Feature: 495 test, 495 superati, 1534 asserzioni. La suite \glslink{jest}{Jest} copre il frontend \glslink{angular}{Angular}: 510 test, 510 superati. $\text{TSR} = 1005/1005 = 100\%$.
 
-I \glslink{quality-gate}{quality gate} di \texttt{coverage-thresholds.json} bloccano la CI: backend linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage sulle linee modificate $\geq 80\%$.
+I \glslink{quality-gate}{quality gate} di \texttt{coverage-thresholds.\glslink{json}{json}} bloccano la CI: \glslink{backend}{backend} linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage sulle linee modificate $\geq 80\%$.
 
 \begin{table}[H]
 \centering
@@ -1842,8 +1842,8 @@ I \glslink{quality-gate}{quality gate} di \texttt{coverage-thresholds.json} bloc
     \rowcolor{gray!35}
     \textbf{Metrica} & \textbf{Valore} & \textbf{Soglia accettabile} & \textbf{Esito} \\
     \hline
-    MPC-CC (backend, linee)  & 90,06\% & $\geq 80\%$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPC-CC (backend, rami)   & 82,85\% & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-CC (\glslink{backend}{backend}, linee)  & 90,06\% & $\geq 80\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPC-CC (\glslink{backend}{backend}, rami)   & 82,85\% & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-CC (frontend, statement) & 96,51\% & $\geq 80\%$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-CC (frontend, linee) & 96,74\% & $\geq 80\%$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPC-CC (frontend, rami)  & 88,62\% & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
@@ -1866,9 +1866,9 @@ Le altre MPD restano definite ma non misurate in \glslink{pb-product-baseline}{P
     \rowcolor{gray!35}
     \textbf{Metrica} & \textbf{Valore} & \textbf{Soglia accettabile} & \textbf{Esito} \\
     \hline
-    MPD01 & 100\% (119/119 obbligatori, vincoli cloud verificati su container/LocalStack/Traefik) & $100\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPD01 & 100\% (119/119 obbligatori, vincoli cloud verificati su \glslink{container}{container}/\glslink{localstack}{LocalStack}/\glslink{traefik}{Traefik}) & $100\%$ & \textcolor{green!60!black}{Soddisfatta} \\
     MPD02 & 64,7\% (11/17 opzionali; non implementati RF4, RF16, RF20, RF107, RVC16, RVC19) & $\geq 0\%$ & \textcolor{green!60!black}{Soddisfatta} \\
-    MPD04 & rami 82,85\% backend / 88,62\% frontend & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
+    MPD04 & rami 82,85\% \glslink{backend}{backend} / 88,62\% frontend & $\geq 70\%$ & \textcolor{green!60!black}{Soddisfatta} \\
     \hline
 \end{tabular}
 \caption{Metriche di prodotto misurate in PB}
@@ -2361,7 +2361,7 @@ La rendicontazione della \glslink{pb-product-baseline}{PB} collega le ore consun
 
 \subsection{Miglioramento della verifica e del testing}
 
-Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti test risultavano ancora NI o non pienamente misurabili, poiché la PoC ha avuto finalità dimostrativa. Nella fase \glslink{pb-product-baseline}{PB} la baseline di prodotto è lo stack adottato: \glslink{laravel}{Laravel} 12 con vista \glslink{spa-single-page-application}{SPA} \glslink{angular}{Angular} 21/\glslink{typescript}{TypeScript}; i servizi \glslink{aws}{AWS} sono emulati con LocalStack, a eccezione di \glslink{amazon-bedrock}{Amazon Bedrock} e Textract, invocati realmente.
+Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti test risultavano ancora NI o non pienamente misurabili, poiché la PoC ha avuto finalità dimostrativa. Nella fase \glslink{pb-product-baseline}{PB} la baseline di prodotto è lo stack adottato: \glslink{laravel}{Laravel} 12 con vista \glslink{spa-single-page-application}{SPA} \glslink{angular}{Angular} 21/\glslink{typescript}{TypeScript}; i servizi \glslink{aws}{AWS} sono emulati con \glslink{localstack}{LocalStack}, a eccezione di \glslink{amazon-bedrock}{Amazon Bedrock} e \glslink{textract}{Textract}, invocati realmente.
 
 \begin{table}[H]
     \centering
@@ -2376,11 +2376,11 @@ Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti te
         \hline
         Salvataggio documenti & Persistenza dei dati generati e recupero corretto delle informazioni associate. & Verifica di creazione, aggiornamento e recupero dei documenti salvati. \\
         \hline
-        Elaborazione asincrona & Esecuzione tramite \glslink{worker}{worker}, due state machine \glslink{step-functions}{Step Functions} e code \glslink{sqs-simple-queue-service}{SQS} con DLQ, con gestione degli stati intermedi. & Test sui passaggi di stato e sui casi di elaborazione fallita o ritentata. \\
+        Elaborazione asincrona & Esecuzione tramite \glslink{worker}{worker}, due \glslink{state-machine}{state machine} \glslink{step-functions}{Step Functions} e code \glslink{sqs-simple-queue-service}{SQS} con \glslink{dlq-dead-letter-queue}{DLQ}, con gestione degli stati intermedi. & Test sui passaggi di stato e sui casi di elaborazione fallita o ritentata. \\
         \hline
         Integrazione con \glslink{aws}{AWS} \glslink{s3-simple-storage-service}{S3} & Gestione dei file e coerenza tra \glslink{metadati}{metadati} applicativi e oggetti salvati. & Controlli su caricamento, lettura e assenza di riferimenti non validi. \\
         \hline
-        OCR documentale & Estrazione del testo dai PDF tramite Amazon Textract. & Verifica della pipeline OCR con client simulato e dello smoke su stack. \\
+        \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} documentale & Estrazione del testo dai PDF tramite Amazon \glslink{textract}{Textract}. & Verifica della pipeline \glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} con client simulato e dello smoke su stack. \\
         \hline
         Uso di \glslink{amazon-bedrock}{Amazon Bedrock} & Stabilità delle chiamate per generazione contenuti, classificazione, \glslink{split-automatico}{split automatico}, estrazione campi e copertine. & Verifica dei percorsi alternativi e della corretta segnalazione degli errori infrastrutturali. \\
         \hline
@@ -2390,13 +2390,13 @@ Durante la fase \glslink{rtb-requirements-and-technology-baseline}{RTB} molti te
     \caption{Flussi da consolidare nel processo di verifica PB}
 \end{table}
 
-Nella \glslink{pb-product-baseline}{PB} gli esiti della suite \glslink{pest}{Pest} e \glslink{jest}{Jest} e i \glslink{quality-gate}{quality gate} di copertura sono riportati nel cruscotto (MPC-TSR, MPC-CC). Il consolidamento riguarda i test sul comportamento applicativo e i controlli di integrazione con servizi \glslink{aws}{AWS} simulati; lo smoke su LocalStack è in CI, lo smoke su \glslink{aws}{AWS} reale è manuale.
+Nella \glslink{pb-product-baseline}{PB} gli esiti della suite \glslink{pest}{Pest} e \glslink{jest}{Jest} e i \glslink{quality-gate}{quality gate} di copertura sono riportati nel cruscotto (MPC-TSR, MPC-CC). Il consolidamento riguarda i test sul comportamento applicativo e i controlli di integrazione con servizi \glslink{aws}{AWS} simulati; lo smoke su \glslink{localstack}{LocalStack} è in CI, lo smoke su \glslink{aws}{AWS} reale è manuale.
 
 \paragraph*{Criticità rilevata:} MPC-CC e MPC-TSR non misurabili sul PoC della \glslink{rtb-requirements-and-technology-baseline}{RTB}.
 
 \paragraph*{Azione prevista:} Collegare \glslink{pest}{Pest} e \glslink{jest}{Jest} al \glslink{quality-gate}{quality gate} e riportare copertura e success rate nel cruscotto.
 
-\paragraph*{Esito in PB:} Pest 495/495 e Jest 510/510 (TSR 100\% su 1005 test); MPC-CC backend linee 90,06\% e rami 82,85\%, frontend statement 96,51\% e rami 88,62\%, sopra le soglie di \texttt{coverage-thresholds.json}.
+\paragraph*{Esito in PB:} \glslink{pest}{Pest} 495/495 e \glslink{jest}{Jest} 510/510 (TSR 100\% su 1005 test); MPC-CC \glslink{backend}{backend} linee 90,06\% e rami 82,85\%, frontend statement 96,51\% e rami 88,62\%, sopra le soglie di \texttt{coverage-thresholds.\glslink{json}{json}}.
 
 \paragraph*{Metriche monitorate:} MPC-CC e MPC-TSR.
 
