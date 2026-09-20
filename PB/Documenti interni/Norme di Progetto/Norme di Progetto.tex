@@ -346,7 +346,7 @@ Il processo di sviluppo deve tradurre i requisiti concordati in un applicativo f
 \begin{itemize}
     \item \textbf{\glslink{laravel}{Laravel} 12 e \glslink{angular}{Angular} 21:} per la realizzazione rispettivamente del \glslink{backend}{backend} applicativo e della \glslink{spa-single-page-application}{SPA} frontend in \glslink{typescript}{TypeScript}.
     \item \textbf{\glslink{amazon-bedrock}{Amazon Bedrock}:} per l'erogazione delle funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale}.
-    \item \textbf{\glslink{docker-compose}{Docker Compose} e \glslink{localstack}{LocalStack}:} per l'esecuzione locale dello stack applicativo (Traefik, nginx, app, worker, PostgreSQL 16, Redis 7, emulazione S3/SQS/Step Functions/Secrets).
+    \item \textbf{\glslink{docker-compose}{Docker Compose} e \glslink{localstack}{LocalStack}:} per l'esecuzione locale dello stack applicativo (\glslink{traefik}{Traefik}, \glslink{nginx}{nginx}, app, \glslink{worker}{worker}, \glslink{postgresql}{PostgreSQL} 16, \glslink{redis}{Redis} 7, emulazione \glslink{s3-simple-storage-service}{S3}/\glslink{sqs-simple-queue-service}{SQS}/\glslink{step-functions}{Step Functions}/Secrets).
     \item \textbf{\glslink{laravel}{Laravel} Pint, Larastan, \glslink{pest}{Pest} \glslink{php}{PHP} e \glslink{jest}{Jest}:} per la formattazione, l'\glslink{analisi-statica}{analisi statica} e i test del codice prodotto.
     \item \textbf{\glslink{github}{GitHub}:} per il versionamento del codice, la \glslink{code-review}{revisione tra pari} e l'esecuzione delle \glslink{workflow}{pipeline} di integrazione continua.
 \end{itemize}
@@ -394,7 +394,7 @@ Il processo di sviluppo deve tradurre i requisiti concordati in un applicativo f
 \end{itemize}
 
 \subparagraph{Standard stilistici}
-Il codice \glslink{php}{PHP} prodotto deve essere conforme allo standard \textbf{PSR-12} (\textit{\glslink{php}{PHP} Standards Recommendations 12}), seguito da \glslink{laravel}{Laravel} 12. La formattazione automatica è applicata da \glslink{laravel}{Laravel} Pint con il preset \texttt{laravel} (derivato da PSR-12). PSR-12 definisce regole su indentazione (4 spazi), apertura delle parentesi, dichiarazione dei tipi e struttura delle classi, garantendo uniformità in tutto il codebase indipendentemente dal membro che scrive il codice.
+Il codice \glslink{php}{PHP} prodotto deve essere conforme allo standard \textbf{PSR-12} (\textit{\glslink{php}{PHP} Standards Recommendations 12}), seguito da \glslink{laravel}{Laravel} 12. La formattazione automatica è applicata da \glslink{laravel}{Laravel} Pint con il preset \texttt{\glslink{laravel}{laravel}} (derivato da PSR-12). PSR-12 definisce regole su indentazione (4 spazi), apertura delle parentesi, dichiarazione dei tipi e struttura delle classi, garantendo uniformità in tutto il codebase indipendentemente dal membro che scrive il codice.
 
 \subparagraph{Documentazione del codice}
 Classi e metodi pubblici la cui firma non è autoesplicativa riportano un blocco di commento con scopo, parametri e valore di ritorno. Le annotazioni di tipo sono obbligatorie dove il tipo non è inferibile dalla firma e vengono validate dall'\glslink{analisi-statica}{analisi statica} in \textit{pipeline}.
@@ -408,12 +408,12 @@ Le convenzioni seguono gli standard \glslink{laravel}{Laravel} e PSR-12:
     \item \textbf{Costanti:} UPPER\_SNAKE\_CASE — es. \texttt{MAX\_RETRY\_COUNT}
     \item \textbf{Tabelle e colonne DB:} snake\_case, tabelle al plurale — es. \texttt{processed\_documents}, \texttt{document\_type}
     \item \textbf{File Blade:} kebab-case — es. \texttt{invoice-list.blade.\glslink{php}{php}}
-    \item \textbf{Variabili d'ambiente:} UPPER\_SNAKE\_CASE — es. \texttt{AWS\_BUCKET}, \texttt{DB\_CONNECTION}
+    \item \textbf{Variabili d'ambiente:} UPPER\_SNAKE\_CASE — es. \texttt{\glslink{aws}{AWS}\_BUCKET}, \texttt{DB\_CONNECTION}
 \end{itemize}
 
 \subparagraph{Strumenti di linting e formattazione}
 \begin{itemize}
-    \item \textbf{\glslink{laravel}{Laravel} Pint:} tool ufficiale di formattazione per \glslink{laravel}{Laravel}, basato su \glslink{php}{PHP} CS Fixer. In assenza di \texttt{pint.json} si applica il preset \texttt{laravel} (derivato da PSR-12). Il codice non conforme è bloccato dalla CI prima dell'integrazione nel \glslink{branch}{branch} principale.
+    \item \textbf{\glslink{laravel}{Laravel} Pint:} tool ufficiale di formattazione per \glslink{laravel}{Laravel}, basato su \glslink{php}{PHP} CS Fixer. In assenza di \texttt{pint.\glslink{json}{json}} si applica il preset \texttt{\glslink{laravel}{laravel}} (derivato da PSR-12). Il codice non conforme è bloccato dalla CI prima dell'integrazione nel \glslink{branch}{branch} principale.
     \item \textbf{Larastan:} estensione di PHPStan ottimizzata per \glslink{laravel}{Laravel}. Esegue l'\glslink{analisi-statica}{analisi statica} del codice per rilevare errori di tipo, chiamate a metodi inesistenti e potenziali bug a runtime, senza eseguire il codice. Il livello minimo di analisi adottato è il \textbf{livello 3} (paths \texttt{app}, \texttt{routes}, \texttt{config}).
 \end{itemize}
 
@@ -675,7 +675,7 @@ Il processo di verifica deve garantire l'assenza di difetti e l'aderenza di ogni
 \paragraph{Strumenti a supporto}
 \begin{itemize}
     \item \textbf{\textit{\glslink{pull-request}{Pull Request}} di \glslink{github}{GitHub}:} sede in cui vengono registrati i difetti rilevati e le relative correzioni.
-    \item \textbf{\glslink{github}{GitHub} Actions:} pipeline di Continuous Integration che esegue, tra gli altri, composer validate/audit, Larastan livello 3, \glslink{laravel}{Laravel} Pint, \glslink{pest}{Pest}, ESLint 9 con regole a11y sui template, typecheck, \glslink{jest}{Jest} 30, Redocly e Orval, diff-cover, Trivy, npm audit, terraform fmt/validate, axe e pa11y, smoke HTTPS/CSP dello stack.
+    \item \textbf{\glslink{github}{GitHub} Actions:} pipeline di Continuous Integration che esegue, tra gli altri, composer validate/audit, Larastan livello 3, \glslink{laravel}{Laravel} Pint, \glslink{pest}{Pest}, ESLint 9 con regole a11y sui template, typecheck, \glslink{jest}{Jest} 30, \glslink{redocly}{Redocly} e \glslink{orval}{Orval}, diff-cover, \glslink{trivy}{Trivy}, \glslink{npm}{npm} audit, \glslink{terraform}{terraform} fmt/validate, \glslink{axe}{axe} e \glslink{pa11y}{pa11y}, smoke HTTPS/CSP dello stack.
     \item \textbf{Larastan e \glslink{laravel}{Laravel} Pint:} per l'\glslink{analisi-statica}{analisi statica} automatica e la verifica di conformità stilistica del codice \glslink{php}{PHP}.
     \item \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}:} per i \glslink{test-di-unita}{test di unità} e di integrazione del \glslink{backend}{backend}.
     \item \textbf{\glslink{jest}{Jest}:} per i \glslink{test-di-unita}{test di unità} del frontend \glslink{angular}{Angular}.
@@ -723,24 +723,24 @@ La procedura che il \glslink{programmatore}{Programmatore} deve seguire prima di
 
 \begin{enumerate}
     \item Scrivere i \glslink{test-di-unita}{test di unità} e i \glslink{test-di-integrazione}{test di integrazione} che coprono la logica del codice prodotto.
-    \item Verificare che i test \glslink{pest}{Pest} pertinenti passino in locale con il comando \texttt{./vendor/bin/pest}; per il frontend, eseguire la suite \glslink{jest}{Jest}.
-    \item La copertura è misurata in CI rispetto a \texttt{coverage-thresholds.json}: backend linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage sulle linee modificate $\geq 80\%$. Il gate è globale sulla suite, non per singolo tipo di test.
+    \item Verificare che i test \glslink{pest}{Pest} pertinenti passino in locale con il comando \texttt{./vendor/bin/\glslink{pest}{pest}}; per il frontend, eseguire la suite \glslink{jest}{Jest}.
+    \item La copertura è misurata in CI rispetto a \texttt{coverage-thresholds.\glslink{json}{json}}: \glslink{backend}{backend} linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage sulle linee modificate $\geq 80\%$. Il gate è globale sulla suite, non per singolo tipo di test.
     \item Gli esiti (report di copertura, log dei job) restano negli artifact della CI, consultabili dalla \textit{\glslink{pull-request}{Pull Request}}.
 \end{enumerate}
 
 La pipeline di \textit{Continuous Integration} verifica automaticamente questi requisiti a ogni \textit{push}, sulle \textit{\glslink{pull-request}{Pull Request}}, sui tag \texttt{v*} e in esecuzione manuale. Una modifica non può essere integrata nei rami \texttt{main} e \texttt{develop} finché i job CI obbligatori non sono verdi (ruleset: una approvazione e quattro check).
 
 \subparagraph{Test di unità}
-I \glslink{test-di-unita}{test di unità} verificano in isolamento singole componenti software. Sul \glslink{backend}{backend} il framework è \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}: 86 casi in \texttt{tests/Unit/} e 138 in \texttt{tests/DomainUnit/}, senza bootstrap completo di \glslink{laravel}{Laravel} dove non necessario. Sul frontend i test unitari sono scritti con \textbf{\glslink{jest}{Jest}} 30 e \texttt{jest-preset-angular} (jsdom): 510 casi in 53 file.
+I \glslink{test-di-unita}{test di unità} verificano in isolamento singole componenti software. Sul \glslink{backend}{backend} il framework è \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}: 86 casi in \texttt{tests/Unit/} e 138 in \texttt{tests/DomainUnit/}, senza \glslink{bootstrap}{bootstrap} completo di \glslink{laravel}{Laravel} dove non necessario. Sul frontend i test unitari sono scritti con \textbf{\glslink{jest}{Jest}} 30 e \texttt{jest-preset-\glslink{angular}{angular}} (jsdom): 510 casi in 53 file.
 
 \subparagraph{Test di integrazione}
-I \glslink{test-di-integrazione}{test di integrazione} confermano che le componenti del software operino tra loro in modo sinergico e privo di errori. Sono scritti con \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}, risiedono in \texttt{tests/Feature/} (271 test in 21 file) e usano il kernel di test di \glslink{laravel}{Laravel} con database SQLite in memoria; i client \glslink{aws}{AWS} sono simulati. La copertura minima non è un gate per tipo di test: vale il \glslink{quality-gate}{quality gate} globale della suite backend.
+I \glslink{test-di-integrazione}{test di integrazione} confermano che le componenti del software operino tra loro in modo sinergico e privo di errori. Sono scritti con \textbf{\glslink{pest}{Pest} \glslink{php}{PHP}}, risiedono in \texttt{tests/Feature/} (271 test in 21 file) e usano il kernel di test di \glslink{laravel}{Laravel} con database SQLite in memoria; i client \glslink{aws}{AWS} sono simulati. La copertura minima non è un gate per tipo di test: vale il \glslink{quality-gate}{quality gate} globale della suite \glslink{backend}{backend}.
 
 \subparagraph{Test di sistema}
-I \glslink{test-di-sistema}{test di sistema} accertano che il comportamento globale del prodotto rispetti i requisiti stabiliti nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}. Non esiste una suite e2e automatica con asserzioni di scenario. In CI lo stack \glslink{docker-compose}{Docker Compose} (Traefik 3.4, nginx 1.29, app, worker, PostgreSQL 16, Redis 7, LocalStack 4.5) è esercitato da smoke HTTPS/CSP, da axe e da pa11y; i percorsi end-to-end di prodotto sono verificati manualmente. Ogni \glslink{test-di-sistema}{test di sistema} è tracciato nel \glslink{piano-di-qualifica}{Piano di Qualifica}. I \glslink{test-di-sistema}{test di sistema} e il collaudo appartengono al processo di validazione.
+I \glslink{test-di-sistema}{test di sistema} accertano che il comportamento globale del prodotto rispetti i requisiti stabiliti nell'\glslink{analisi-dei-requisiti-adr}{Analisi dei Requisiti}. Non esiste una suite e2e automatica con asserzioni di scenario. In CI lo stack \glslink{docker-compose}{Docker Compose} (\glslink{traefik}{Traefik} 3.4, \glslink{nginx}{nginx} 1.29, app, \glslink{worker}{worker}, \glslink{postgresql}{PostgreSQL} 16, \glslink{redis}{Redis} 7, \glslink{localstack}{LocalStack} 4.5) è esercitato da smoke HTTPS/CSP, da \glslink{axe}{axe} e da \glslink{pa11y}{pa11y}; i percorsi end-to-end di prodotto sono verificati manualmente. Ogni \glslink{test-di-sistema}{test di sistema} è tracciato nel \glslink{piano-di-qualifica}{Piano di Qualifica}. I \glslink{test-di-sistema}{test di sistema} e il collaudo appartengono al processo di validazione.
 
 \subparagraph{Test di regressione}
-I \glslink{test-di-regressione}{test di regressione} accertano che gli interventi correttivi o evolutivi non abbiano introdotto difetti nelle funzionalità già esistenti. Non richiedono la scrittura di test dedicati: sono garantiti dalla riesecuzione automatica dell'intera suite \glslink{pest}{Pest} e \glslink{jest}{Jest} (insieme a contratto OpenAPI, smoke e a11y) nella pipeline di \textit{Continuous Integration} a ogni \textit{push} o apertura di \textit{\glslink{pull-request}{Pull Request}}. Un test precedentemente superato che risulti fallito segnala una regressione e blocca l'integrazione fino alla risoluzione.
+I \glslink{test-di-regressione}{test di regressione} accertano che gli interventi correttivi o evolutivi non abbiano introdotto difetti nelle funzionalità già esistenti. Non richiedono la scrittura di test dedicati: sono garantiti dalla riesecuzione automatica dell'intera suite \glslink{pest}{Pest} e \glslink{jest}{Jest} (insieme a contratto \glslink{openapi}{OpenAPI}, smoke e a11y) nella pipeline di \textit{Continuous Integration} a ogni \textit{push} o apertura di \textit{\glslink{pull-request}{Pull Request}}. Un test precedentemente superato che risulti fallito segnala una regressione e blocca l'integrazione fino alla risoluzione.
 
 \subsubsection{Validazione}
 
@@ -997,9 +997,9 @@ L'intera documentazione di progetto è ospitata nel \glslink{repository}{reposit
 
 \subparagraph{Infrastruttura di sviluppo}
 \begin{itemize}
-    \item \textbf{Ambiente di esecuzione:} l'applicativo viene eseguito localmente tramite \glslink{docker-compose}{Docker Compose} con Traefik 3.4, nginx 1.29, app, worker, PostgreSQL 16, Redis 7 e LocalStack 4.5 (S3, SQS, Step Functions, Secrets Manager).
-    \item \textbf{Framework applicativi:} il \glslink{backend}{backend} è realizzato con \glslink{laravel}{Laravel} 12 e il frontend con una \glslink{spa-single-page-application}{SPA} \glslink{angular}{Angular} 21; le funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} sono erogate tramite \glslink{amazon-bedrock}{Amazon Bedrock} e l'OCR tramite Amazon Textract.
-    \item \textbf{Strumenti di qualità:} \glslink{laravel}{Laravel} Pint (preset laravel), Larastan livello 3, \glslink{pest}{Pest} \glslink{php}{PHP} e \glslink{jest}{Jest}, secondo le soglie e le procedure fissate nel processo di verifica.
+    \item \textbf{Ambiente di esecuzione:} l'applicativo viene eseguito localmente tramite \glslink{docker-compose}{Docker Compose} con \glslink{traefik}{Traefik} 3.4, \glslink{nginx}{nginx} 1.29, app, \glslink{worker}{worker}, \glslink{postgresql}{PostgreSQL} 16, \glslink{redis}{Redis} 7 e \glslink{localstack}{LocalStack} 4.5 (\glslink{s3-simple-storage-service}{S3}, \glslink{sqs-simple-queue-service}{SQS}, \glslink{step-functions}{Step Functions}, Secrets Manager).
+    \item \textbf{Framework applicativi:} il \glslink{backend}{backend} è realizzato con \glslink{laravel}{Laravel} 12 e il frontend con una \glslink{spa-single-page-application}{SPA} \glslink{angular}{Angular} 21; le funzionalità di \glslink{intelligenza-artificiale-ai}{Intelligenza Artificiale} sono erogate tramite \glslink{amazon-bedrock}{Amazon Bedrock} e l'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} tramite Amazon \glslink{textract}{Textract}.
+    \item \textbf{Strumenti di qualità:} \glslink{laravel}{Laravel} Pint (preset \glslink{laravel}{laravel}), Larastan livello 3, \glslink{pest}{Pest} \glslink{php}{PHP} e \glslink{jest}{Jest}, secondo le soglie e le procedure fissate nel processo di verifica.
 \end{itemize}
 
 \subparagraph{Infrastruttura di comunicazione}
@@ -1046,7 +1046,7 @@ A partire dai requisiti raccolti nell'\glslink{analisi-dei-requisiti-adr}{Analis
 \begin{itemize}
     \item \textbf{Documentazione e automazioni:} \glslink{latex}{LaTeX} per la stesura dei documenti, Python per gli script di generazione del sito, \glslink{angular}{Angular} per l'applicazione del \glslink{glossario}{Glossario}, \glslink{git}{Git} e \glslink{github}{GitHub} (\glslink{issue}{Issue}, \glslink{pull-request}{Pull Request}, Projects, Actions, Pages) per il versionamento e le automazioni.
     \item \textbf{Progettazione:} UML per i \glslink{diagramma-delle-classi-uml}{diagrammi delle classi} e dei casi d'uso, \glslink{modello-c4}{modello C4} per la descrizione dell'architettura su più livelli di astrazione.
-    \item \textbf{Sviluppo:} \glslink{php}{PHP} 8.4 con \glslink{laravel}{Laravel} 12 e Pint (preset laravel), \glslink{angular}{Angular} 21 e \glslink{typescript}{TypeScript} 5.9 per la \glslink{spa-single-page-application}{SPA}, \glslink{postgresql}{PostgreSQL} 16 per la persistenza, \glslink{redis}{Redis} per cache, sessioni e rate limiting, Amazon SQS per le code, LocalStack per l'emulazione dei servizi \glslink{aws}{AWS} e \glslink{docker-compose}{Docker Compose} per l'orchestrazione dell'ambiente locale.
+    \item \textbf{Sviluppo:} \glslink{php}{PHP} 8.4 con \glslink{laravel}{Laravel} 12 e Pint (preset \glslink{laravel}{laravel}), \glslink{angular}{Angular} 21 e \glslink{typescript}{TypeScript} 5.9 per la \glslink{spa-single-page-application}{SPA}, \glslink{postgresql}{PostgreSQL} 16 per la persistenza, \glslink{redis}{Redis} per cache, sessioni e rate limiting, Amazon \glslink{sqs-simple-queue-service}{SQS} per le code, \glslink{localstack}{LocalStack} per l'emulazione dei servizi \glslink{aws}{AWS} e \glslink{docker-compose}{Docker Compose} per l'orchestrazione dell'ambiente locale.
     \item \textbf{Verifica:} \glslink{pest}{Pest} \glslink{php}{PHP} e \glslink{jest}{Jest} per i test automatici, Larastan livello 3 e \glslink{laravel}{Laravel} Pint per l'\glslink{analisi-statica}{analisi statica} e la formattazione, più i \glslink{quality-gate}{quality gate} della CI.
     \item \textbf{Moduli di Intelligenza Artificiale:} \glslink{amazon-bedrock}{Amazon Bedrock} e i concetti relativi ai \glslink{llm-large-language-model}{Large Language Model}, alla costruzione dei \glslink{prompt}{prompt}, all'\glslink{ocr-riconoscimento-ottico-dei-caratteri}{OCR} e all'\glslink{entity-resolution}{Entity Resolution}, indispensabili per lo sviluppo dell'\glslink{ai-assistant-generativo}{AI Assistant Generativo} e dell'\glslink{ai-co-pilot-per-consulenti-del-lavoro-cdl}{AI Co-Pilot}.
 \end{itemize}
@@ -1059,7 +1059,7 @@ I riferimenti condivisi tra i membri del gruppo sono i seguenti:
     \item \textbf{\glslink{php}{PHP} e PSR-12:} \url{https://www.php.net/docs.php} e \url{https://www.php-fig.org/psr/psr-12/}
     \item \textbf{\glslink{pest}{Pest} \glslink{php}{PHP} e \glslink{jest}{Jest}:} \url{https://pestphp.com/docs/installation} e \url{https://jestjs.io/docs/getting-started}
     \item \textbf{\glslink{postgresql}{PostgreSQL} e \glslink{redis}{Redis}:} \url{https://www.postgresql.org/docs/} e \url{https://redis.io/docs/latest/}
-    \item \textbf{\glslink{docker-compose}{Docker Compose} e LocalStack:} \url{https://docs.docker.com/compose/} e \url{https://docs.localstack.cloud/}
+    \item \textbf{\glslink{docker-compose}{Docker Compose} e \glslink{localstack}{LocalStack}:} \url{https://docs.docker.com/compose/} e \url{https://docs.localstack.cloud/}
     \item \textbf{\glslink{amazon-bedrock}{Amazon Bedrock}:} \url{https://docs.aws.amazon.com/bedrock/}
     \item \textbf{\glslink{git}{Git} e \glslink{github}{GitHub}:} \url{https://git-scm.com/doc} e \url{https://docs.github.com/en}
     \item \textbf{\glslink{latex}{LaTeX} e \glslink{angular}{Angular}:} \url{https://www.latex-project.org/help/documentation/} e \url{https://angular.dev/overview}
@@ -1294,10 +1294,10 @@ Le metriche seguenti misurano l'estensione e l'esito dell'attività di \glslink{
 
 \paragraph{MPC-CC --- Code Coverage}
 \begin{itemize}
-    \item \textbf{Descrizione:} Percentuale di codice sorgente eseguita durante i test automatici, distinta per stack. Sul backend si misurano linee e rami (Pest, report Cobertura sul package \texttt{app/}); sul frontend si misurano statement, functions, rami e linee (Jest). Si misura inoltre la \textit{diff coverage}, cioè la percentuale di linee modificate coperte dai test. La metrica è applicabile in \glslink{pb-product-baseline}{PB} e i valori sono rilevati dalla CI. Le soglie che bloccano l'integrazione sono: backend linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage $\geq 80\%$.
+    \item \textbf{Descrizione:} Percentuale di codice sorgente eseguita durante i test automatici, distinta per stack. Sul \glslink{backend}{backend} si misurano linee e rami (\glslink{pest}{Pest}, report Cobertura sul package \texttt{app/}); sul frontend si misurano statement, functions, rami e linee (\glslink{jest}{Jest}). Si misura inoltre la \textit{diff coverage}, cioè la percentuale di linee modificate coperte dai test. La metrica è applicabile in \glslink{pb-product-baseline}{PB} e i valori sono rilevati dalla CI. Le soglie che bloccano l'integrazione sono: \glslink{backend}{backend} linee $\geq 80\%$ e rami $\geq 70\%$; frontend statements e functions $\geq 80\%$ e rami $\geq 70\%$; diff coverage $\geq 80\%$.
     \item \textbf{Formula:}
     $$\text{CC} = \frac{\text{Unità di codice eseguite dai test}}{\text{Unità di codice totali}} \times 100$$
-    dove l'unità è la linea (backend), lo statement o il ramo (frontend), secondo il report dello stack.
+    dove l'unità è la linea (\glslink{backend}{backend}), lo statement o il ramo (frontend), secondo il report dello stack.
     \item \textbf{Unità di misura:} percentuale (\%)
 \end{itemize}
 
